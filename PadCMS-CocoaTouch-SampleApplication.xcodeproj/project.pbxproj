@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6033A6E21590694B00158E1C /* embeddedPhotosButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DA1590694B00158E1C /* embeddedPhotosButton.png */; };
+		6033A6E31590694B00158E1C /* gallaryEnterButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DB1590694B00158E1C /* gallaryEnterButtonBackground.png */; };
+		6033A6E41590694B00158E1C /* gallaryPageControlItemNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DC1590694B00158E1C /* gallaryPageControlItemNormal.png */; };
+		6033A6E51590694B00158E1C /* gallaryPageControlItemSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DD1590694B00158E1C /* gallaryPageControlItemSelected.png */; };
+		6033A6E61590694B00158E1C /* gallaryReturnButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DE1590694B00158E1C /* gallaryReturnButtonBackground.png */; };
+		6033A6E71590694B00158E1C /* scrollControllBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6DF1590694B00158E1C /* scrollControllBackground.png */; };
+		6033A6E81590694B00158E1C /* sliderPageControlItemNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6E01590694B00158E1C /* sliderPageControlItemNormal.png */; };
+		6033A6E91590694B00158E1C /* tocMenuButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033A6E11590694B00158E1C /* tocMenuButtonBackground.png */; };
+		607F3DDE1588BD470097D960 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F3DDD1588BD470097D960 /* UIKit.framework */; };
+		607F3DE01588BD470097D960 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F3DDF1588BD470097D960 /* Foundation.framework */; };
+		607F3DE21588BD470097D960 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F3DE11588BD470097D960 /* CoreGraphics.framework */; };
+		607F3DE81588BD470097D960 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 607F3DE61588BD470097D960 /* InfoPlist.strings */; };
+		607F3DEA1588BD470097D960 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F3DE91588BD470097D960 /* main.m */; };
+		607F3DEE1588BD470097D960 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F3DED1588BD470097D960 /* AppDelegate.m */; };
+		607F3DFD1588BDDF0097D960 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F3DFB1588BDDF0097D960 /* MainViewController.m */; };
+		607F3DFE1588BDDF0097D960 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607F3DFC1588BDDF0097D960 /* MainViewController.xib */; };
+		607F3E0F1588C1490097D960 /* libPadCMS-CocoaTouch-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F3E0B1588C1140097D960 /* libPadCMS-CocoaTouch-Core.a */; };
+		607F46861589FD620097D960 /* KioskSubviewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F46851589FD620097D960 /* KioskSubviewsFactory.m */; };
+		607F46891589FD9D0097D960 /* KioskShelfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F46881589FD9D0097D960 /* KioskShelfView.m */; };
+		607F468C1589FDC40097D960 /* KioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F468B1589FDC40097D960 /* KioskGalleryView.m */; };
+		607F46A01589FF250097D960 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F469F1589FF250097D960 /* QuartzCore.framework */; };
+		607F46A3158A00840097D960 /* KioskControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F46A2158A00840097D960 /* KioskControlElement.m */; };
+		607F46A6158A00C30097D960 /* KioskGalleryControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 607F46A5158A00C30097D960 /* KioskGalleryControlElement.m */; };
+		607F46A8158A05330097D960 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46A7158A05320097D960 /* SystemConfiguration.framework */; };
+		607F46AC158A0ECD0097D960 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46AB158A0ECD0097D960 /* libsqlite3.dylib */; };
+		607F46AE158A0FA90097D960 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46AD158A0FA90097D960 /* ImageIO.framework */; };
+		607F46B0158A10010097D960 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46AF158A10010097D960 /* StoreKit.framework */; };
+		607F46B2158A101C0097D960 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46B1158A101C0097D960 /* libz.dylib */; };
+		607F46B4158A10420097D960 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46B3158A10420097D960 /* CFNetwork.framework */; };
+		607F46B6158A10680097D960 /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46B5158A10680097D960 /* NewsstandKit.framework */; };
+		607F46B8158A1BF50097D960 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46B7158A1BF50097D960 /* OpenGLES.framework */; };
+		607F46BA158A1C0E0097D960 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46B9158A1C0E0097D960 /* MediaPlayer.framework */; };
+		607F46BC158A1C270097D960 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46BB158A1C270097D960 /* AVFoundation.framework */; };
+		607F46BE158A1C3E0097D960 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46BD158A1C3E0097D960 /* AudioToolbox.framework */; };
+		607F46C0158A1C5B0097D960 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46BF158A1C5B0097D960 /* libxml2.2.dylib */; };
+		607F46C2158A1C740097D960 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46C1158A1C740097D960 /* OpenAL.framework */; };
+		607F46C4158A3CD60097D960 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46C3158A3CD60097D960 /* MessageUI.framework */; };
+		607F46C6158A3D2B0097D960 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F46C5158A3D2B0097D960 /* Twitter.framework */; };
+		60A5DCB0158B3C5F00E3E98A /* kiosk_button_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DCAC158B3C5F00E3E98A /* kiosk_button_cancel.png */; };
+		60A5DCB1158B3C5F00E3E98A /* kiosk_button_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DCAD158B3C5F00E3E98A /* kiosk_button_delete.png */; };
+		60A5DCB2158B3C5F00E3E98A /* kiosk_button_download.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DCAE158B3C5F00E3E98A /* kiosk_button_download.png */; };
+		60A5DCB3158B3C5F00E3E98A /* kiosk_button_read.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DCAF158B3C5F00E3E98A /* kiosk_button_read.png */; };
+		60A5DCE4158B7C4E00E3E98A /* PadCMS-CocoaTouch-Core-Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DCE3158B79FD00E3E98A /* PadCMS-CocoaTouch-Core-Resources.bundle */; };
+		60A5DD0E158F487A00E3E98A /* btnEmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD0A158F487A00E3E98A /* btnEmail.png */; };
+		60A5DD0F158F487A00E3E98A /* btnFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD0B158F487A00E3E98A /* btnFacebook.png */; };
+		60A5DD10158F487A00E3E98A /* btnTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD0C158F487A00E3E98A /* btnTwitter.png */; };
+		60A5DD11158F487A00E3E98A /* sharePopup.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD0D158F487A00E3E98A /* sharePopup.png */; };
+		60A5DD2C158F4F1D00E3E98A /* icon_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD2A158F4F1D00E3E98A /* icon_gallery.png */; };
+		60A5DD2D158F4F1D00E3E98A /* icon_shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A5DD2B158F4F1D00E3E98A /* icon_shelf.png */; };
+		C50E49AA15AEED1800222413 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C50E49AC15AEED1800222413 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		607F3E0A1588C1140097D960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60891D941587971300894531;
+			remoteInfo = "PadCMS-CocoaTouch-Core";
+		};
+		607F3E0D1588C1330097D960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 60891D931587971300894531;
+			remoteInfo = "PadCMS-CocoaTouch-Core";
+		};
+		60A5DCDF158B79FC00E3E98A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 60A5DCC7158B793F00E3E98A;
+			remoteInfo = "PadCMS-CocoaTouch-Core-Resources";
+		};
+		60A5DCE2158B79FD00E3E98A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60A5DCC8158B793F00E3E98A;
+			remoteInfo = "PadCMS-CocoaTouch-Core-Resources";
+		};
+		C50E49A815AEECDE00222413 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C50E498415AEA20E00222413;
+			remoteInfo = "PadCMS-CocoaTouch-Core-Tests";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6033A6DA1590694B00158E1C /* embeddedPhotosButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = embeddedPhotosButton.png; sourceTree = "<group>"; };
+		6033A6DB1590694B00158E1C /* gallaryEnterButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallaryEnterButtonBackground.png; sourceTree = "<group>"; };
+		6033A6DC1590694B00158E1C /* gallaryPageControlItemNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallaryPageControlItemNormal.png; sourceTree = "<group>"; };
+		6033A6DD1590694B00158E1C /* gallaryPageControlItemSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallaryPageControlItemSelected.png; sourceTree = "<group>"; };
+		6033A6DE1590694B00158E1C /* gallaryReturnButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallaryReturnButtonBackground.png; sourceTree = "<group>"; };
+		6033A6DF1590694B00158E1C /* scrollControllBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scrollControllBackground.png; sourceTree = "<group>"; };
+		6033A6E01590694B00158E1C /* sliderPageControlItemNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderPageControlItemNormal.png; sourceTree = "<group>"; };
+		6033A6E11590694B00158E1C /* tocMenuButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tocMenuButtonBackground.png; sourceTree = "<group>"; };
+		607F3DD91588BD460097D960 /* PadCMS-CocoaTouch-SampleApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PadCMS-CocoaTouch-SampleApplication.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607F3DDD1588BD470097D960 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		607F3DDF1588BD470097D960 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		607F3DE11588BD470097D960 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		607F3DE51588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PadCMS-CocoaTouch-SampleApplication-Info.plist"; sourceTree = "<group>"; };
+		607F3DE71588BD470097D960 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		607F3DE91588BD470097D960 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		607F3DEB1588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PadCMS-CocoaTouch-SampleApplication-Prefix.pch"; sourceTree = "<group>"; };
+		607F3DEC1588BD470097D960 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		607F3DED1588BD470097D960 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		607F3DFA1588BDDF0097D960 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		607F3DFB1588BDDF0097D960 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		607F3DFC1588BDDF0097D960 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "PadCMS-CocoaTouch-Core.xcodeproj"; path = "PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core.xcodeproj"; sourceTree = "<group>"; };
+		607F46841589FD620097D960 /* KioskSubviewsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KioskSubviewsFactory.h; path = Kiosk/KioskSubviewsFactory.h; sourceTree = "<group>"; };
+		607F46851589FD620097D960 /* KioskSubviewsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KioskSubviewsFactory.m; path = Kiosk/KioskSubviewsFactory.m; sourceTree = "<group>"; };
+		607F46871589FD9D0097D960 /* KioskShelfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KioskShelfView.h; path = Kiosk/KioskShelfView.h; sourceTree = "<group>"; };
+		607F46881589FD9D0097D960 /* KioskShelfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KioskShelfView.m; path = Kiosk/KioskShelfView.m; sourceTree = "<group>"; };
+		607F468A1589FDC40097D960 /* KioskGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KioskGalleryView.h; path = Kiosk/KioskGalleryView.h; sourceTree = "<group>"; };
+		607F468B1589FDC40097D960 /* KioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KioskGalleryView.m; path = Kiosk/KioskGalleryView.m; sourceTree = "<group>"; };
+		607F469F1589FF250097D960 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		607F46A1158A00840097D960 /* KioskControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KioskControlElement.h; path = Kiosk/KioskControlElement.h; sourceTree = "<group>"; };
+		607F46A2158A00840097D960 /* KioskControlElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KioskControlElement.m; path = Kiosk/KioskControlElement.m; sourceTree = "<group>"; };
+		607F46A4158A00C30097D960 /* KioskGalleryControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KioskGalleryControlElement.h; path = Kiosk/KioskGalleryControlElement.h; sourceTree = "<group>"; };
+		607F46A5158A00C30097D960 /* KioskGalleryControlElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KioskGalleryControlElement.m; path = Kiosk/KioskGalleryControlElement.m; sourceTree = "<group>"; };
+		607F46A7158A05320097D960 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		607F46AB158A0ECD0097D960 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		607F46AD158A0FA90097D960 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		607F46AF158A10010097D960 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		607F46B1158A101C0097D960 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		607F46B3158A10420097D960 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		607F46B5158A10680097D960 /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
+		607F46B7158A1BF50097D960 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		607F46B9158A1C0E0097D960 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		607F46BB158A1C270097D960 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		607F46BD158A1C3E0097D960 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		607F46BF158A1C5B0097D960 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		607F46C1158A1C740097D960 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		607F46C3158A3CD60097D960 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		607F46C5158A3D2B0097D960 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		60A5DCAC158B3C5F00E3E98A /* kiosk_button_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiosk_button_cancel.png; sourceTree = "<group>"; };
+		60A5DCAD158B3C5F00E3E98A /* kiosk_button_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiosk_button_delete.png; sourceTree = "<group>"; };
+		60A5DCAE158B3C5F00E3E98A /* kiosk_button_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiosk_button_download.png; sourceTree = "<group>"; };
+		60A5DCAF158B3C5F00E3E98A /* kiosk_button_read.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kiosk_button_read.png; sourceTree = "<group>"; };
+		60A5DD0A158F487A00E3E98A /* btnEmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnEmail.png; sourceTree = "<group>"; };
+		60A5DD0B158F487A00E3E98A /* btnFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnFacebook.png; sourceTree = "<group>"; };
+		60A5DD0C158F487A00E3E98A /* btnTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnTwitter.png; sourceTree = "<group>"; };
+		60A5DD0D158F487A00E3E98A /* sharePopup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharePopup.png; sourceTree = "<group>"; };
+		60A5DD2A158F4F1D00E3E98A /* icon_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_gallery.png; sourceTree = "<group>"; };
+		60A5DD2B158F4F1D00E3E98A /* icon_shelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_shelf.png; sourceTree = "<group>"; };
+		C50E49AB15AEED1800222413 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		607F3DD61588BD460097D960 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				607F46C6158A3D2B0097D960 /* Twitter.framework in Frameworks */,
+				607F46C4158A3CD60097D960 /* MessageUI.framework in Frameworks */,
+				607F46C2158A1C740097D960 /* OpenAL.framework in Frameworks */,
+				607F46C0158A1C5B0097D960 /* libxml2.2.dylib in Frameworks */,
+				607F46BE158A1C3E0097D960 /* AudioToolbox.framework in Frameworks */,
+				607F46BC158A1C270097D960 /* AVFoundation.framework in Frameworks */,
+				607F46BA158A1C0E0097D960 /* MediaPlayer.framework in Frameworks */,
+				607F46B8158A1BF50097D960 /* OpenGLES.framework in Frameworks */,
+				607F46B6158A10680097D960 /* NewsstandKit.framework in Frameworks */,
+				607F46B4158A10420097D960 /* CFNetwork.framework in Frameworks */,
+				607F46B2158A101C0097D960 /* libz.dylib in Frameworks */,
+				607F46B0158A10010097D960 /* StoreKit.framework in Frameworks */,
+				607F46AE158A0FA90097D960 /* ImageIO.framework in Frameworks */,
+				607F46AC158A0ECD0097D960 /* libsqlite3.dylib in Frameworks */,
+				607F46A8158A05330097D960 /* SystemConfiguration.framework in Frameworks */,
+				607F46A01589FF250097D960 /* QuartzCore.framework in Frameworks */,
+				607F3E0F1588C1490097D960 /* libPadCMS-CocoaTouch-Core.a in Frameworks */,
+				607F3DDE1588BD470097D960 /* UIKit.framework in Frameworks */,
+				607F3DE01588BD470097D960 /* Foundation.framework in Frameworks */,
+				607F3DE21588BD470097D960 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6033A6D91590694B00158E1C /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				6033A6DA1590694B00158E1C /* embeddedPhotosButton.png */,
+				6033A6DB1590694B00158E1C /* gallaryEnterButtonBackground.png */,
+				6033A6DC1590694B00158E1C /* gallaryPageControlItemNormal.png */,
+				6033A6DD1590694B00158E1C /* gallaryPageControlItemSelected.png */,
+				6033A6DE1590694B00158E1C /* gallaryReturnButtonBackground.png */,
+				6033A6DF1590694B00158E1C /* scrollControllBackground.png */,
+				6033A6E01590694B00158E1C /* sliderPageControlItemNormal.png */,
+				6033A6E11590694B00158E1C /* tocMenuButtonBackground.png */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		607F3DCE1588BD460097D960 = {
+			isa = PBXGroup;
+			children = (
+				607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */,
+				607F3DE31588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication */,
+				607F3DDC1588BD460097D960 /* Frameworks */,
+				607F3DDA1588BD460097D960 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		607F3DDA1588BD460097D960 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				607F3DD91588BD460097D960 /* PadCMS-CocoaTouch-SampleApplication.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		607F3DDC1588BD460097D960 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				607F46C5158A3D2B0097D960 /* Twitter.framework */,
+				607F46C3158A3CD60097D960 /* MessageUI.framework */,
+				607F46C1158A1C740097D960 /* OpenAL.framework */,
+				607F46BF158A1C5B0097D960 /* libxml2.2.dylib */,
+				607F46BD158A1C3E0097D960 /* AudioToolbox.framework */,
+				607F46BB158A1C270097D960 /* AVFoundation.framework */,
+				607F46B9158A1C0E0097D960 /* MediaPlayer.framework */,
+				607F46B7158A1BF50097D960 /* OpenGLES.framework */,
+				607F46B5158A10680097D960 /* NewsstandKit.framework */,
+				607F46B3158A10420097D960 /* CFNetwork.framework */,
+				607F46B1158A101C0097D960 /* libz.dylib */,
+				607F46AF158A10010097D960 /* StoreKit.framework */,
+				607F46AD158A0FA90097D960 /* ImageIO.framework */,
+				607F46AB158A0ECD0097D960 /* libsqlite3.dylib */,
+				607F46A7158A05320097D960 /* SystemConfiguration.framework */,
+				607F469F1589FF250097D960 /* QuartzCore.framework */,
+				607F3DDD1588BD470097D960 /* UIKit.framework */,
+				607F3DDF1588BD470097D960 /* Foundation.framework */,
+				607F3DE11588BD470097D960 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		607F3DE31588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication */ = {
+			isa = PBXGroup;
+			children = (
+				60A5DCA9158B3C5F00E3E98A /* Resources */,
+				607F46831589FD0B0097D960 /* Kiosk */,
+				607F3DEC1588BD470097D960 /* AppDelegate.h */,
+				607F3DED1588BD470097D960 /* AppDelegate.m */,
+				607F3DFA1588BDDF0097D960 /* MainViewController.h */,
+				607F3DFB1588BDDF0097D960 /* MainViewController.m */,
+				607F3DFC1588BDDF0097D960 /* MainViewController.xib */,
+				607F3DE41588BD470097D960 /* Supporting Files */,
+			);
+			path = "PadCMS-CocoaTouch-SampleApplication";
+			sourceTree = "<group>";
+		};
+		607F3DE41588BD470097D960 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				607F3DE51588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication-Info.plist */,
+				607F3DE61588BD470097D960 /* InfoPlist.strings */,
+				607F3DE91588BD470097D960 /* main.m */,
+				607F3DEB1588BD470097D960 /* PadCMS-CocoaTouch-SampleApplication-Prefix.pch */,
+				C50E49AC15AEED1800222413 /* Localizable.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		607F3E041588C1140097D960 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				607F3E0B1588C1140097D960 /* libPadCMS-CocoaTouch-Core.a */,
+				60A5DCE3158B79FD00E3E98A /* PadCMS-CocoaTouch-Core-Resources.bundle */,
+				C50E49A915AEECDE00222413 /* PadCMS-CocoaTouch-Core-Tests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		607F46831589FD0B0097D960 /* Kiosk */ = {
+			isa = PBXGroup;
+			children = (
+				607F46841589FD620097D960 /* KioskSubviewsFactory.h */,
+				607F46851589FD620097D960 /* KioskSubviewsFactory.m */,
+				607F46871589FD9D0097D960 /* KioskShelfView.h */,
+				607F46881589FD9D0097D960 /* KioskShelfView.m */,
+				607F468A1589FDC40097D960 /* KioskGalleryView.h */,
+				607F468B1589FDC40097D960 /* KioskGalleryView.m */,
+				607F46A1158A00840097D960 /* KioskControlElement.h */,
+				607F46A2158A00840097D960 /* KioskControlElement.m */,
+				607F46A4158A00C30097D960 /* KioskGalleryControlElement.h */,
+				607F46A5158A00C30097D960 /* KioskGalleryControlElement.m */,
+			);
+			name = Kiosk;
+			sourceTree = "<group>";
+		};
+		60A5DCA9158B3C5F00E3E98A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60A5DCAA158B3C5F00E3E98A /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		60A5DCAA158B3C5F00E3E98A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6033A6D91590694B00158E1C /* Magazine */,
+				60A5DD09158F487A00E3E98A /* sharing */,
+				60A5DCAB158B3C5F00E3E98A /* Kiosk */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		60A5DCAB158B3C5F00E3E98A /* Kiosk */ = {
+			isa = PBXGroup;
+			children = (
+				60A5DD2A158F4F1D00E3E98A /* icon_gallery.png */,
+				60A5DD2B158F4F1D00E3E98A /* icon_shelf.png */,
+				60A5DCAC158B3C5F00E3E98A /* kiosk_button_cancel.png */,
+				60A5DCAD158B3C5F00E3E98A /* kiosk_button_delete.png */,
+				60A5DCAE158B3C5F00E3E98A /* kiosk_button_download.png */,
+				60A5DCAF158B3C5F00E3E98A /* kiosk_button_read.png */,
+			);
+			path = Kiosk;
+			sourceTree = "<group>";
+		};
+		60A5DD09158F487A00E3E98A /* sharing */ = {
+			isa = PBXGroup;
+			children = (
+				60A5DD0A158F487A00E3E98A /* btnEmail.png */,
+				60A5DD0B158F487A00E3E98A /* btnFacebook.png */,
+				60A5DD0C158F487A00E3E98A /* btnTwitter.png */,
+				60A5DD0D158F487A00E3E98A /* sharePopup.png */,
+			);
+			path = sharing;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		607F3DD81588BD460097D960 /* PadCMS-CocoaTouch-SampleApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 607F3DF71588BD470097D960 /* Build configuration list for PBXNativeTarget "PadCMS-CocoaTouch-SampleApplication" */;
+			buildPhases = (
+				607F3DD51588BD460097D960 /* Sources */,
+				607F3DD61588BD460097D960 /* Frameworks */,
+				607F3DD71588BD460097D960 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60A5DCE0158B79FC00E3E98A /* PBXTargetDependency */,
+				607F3E0E1588C1330097D960 /* PBXTargetDependency */,
+			);
+			name = "PadCMS-CocoaTouch-SampleApplication";
+			productName = "PadCMS-CocoaTouch-SampleApplication";
+			productReference = 607F3DD91588BD460097D960 /* PadCMS-CocoaTouch-SampleApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		607F3DD01588BD460097D960 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Adyax;
+			};
+			buildConfigurationList = 607F3DD31588BD460097D960 /* Build configuration list for PBXProject "PadCMS-CocoaTouch-SampleApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"fr-FR",
+				ru,
+			);
+			mainGroup = 607F3DCE1588BD460097D960;
+			productRefGroup = 607F3DDA1588BD460097D960 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 607F3E041588C1140097D960 /* Products */;
+					ProjectRef = 607F3E031588C1140097D960 /* PadCMS-CocoaTouch-Core.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				607F3DD81588BD460097D960 /* PadCMS-CocoaTouch-SampleApplication */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		607F3E0B1588C1140097D960 /* libPadCMS-CocoaTouch-Core.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPadCMS-CocoaTouch-Core.a";
+			remoteRef = 607F3E0A1588C1140097D960 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		60A5DCE3158B79FD00E3E98A /* PadCMS-CocoaTouch-Core-Resources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "PadCMS-CocoaTouch-Core-Resources.bundle";
+			remoteRef = 60A5DCE2158B79FD00E3E98A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C50E49A915AEECDE00222413 /* PadCMS-CocoaTouch-Core-Tests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "PadCMS-CocoaTouch-Core-Tests.app";
+			remoteRef = C50E49A815AEECDE00222413 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		607F3DD71588BD460097D960 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				607F3DE81588BD470097D960 /* InfoPlist.strings in Resources */,
+				607F3DFE1588BDDF0097D960 /* MainViewController.xib in Resources */,
+				60A5DCB0158B3C5F00E3E98A /* kiosk_button_cancel.png in Resources */,
+				60A5DCB1158B3C5F00E3E98A /* kiosk_button_delete.png in Resources */,
+				60A5DCB2158B3C5F00E3E98A /* kiosk_button_download.png in Resources */,
+				60A5DCB3158B3C5F00E3E98A /* kiosk_button_read.png in Resources */,
+				60A5DCE4158B7C4E00E3E98A /* PadCMS-CocoaTouch-Core-Resources.bundle in Resources */,
+				60A5DD0E158F487A00E3E98A /* btnEmail.png in Resources */,
+				60A5DD0F158F487A00E3E98A /* btnFacebook.png in Resources */,
+				60A5DD10158F487A00E3E98A /* btnTwitter.png in Resources */,
+				60A5DD11158F487A00E3E98A /* sharePopup.png in Resources */,
+				60A5DD2C158F4F1D00E3E98A /* icon_gallery.png in Resources */,
+				60A5DD2D158F4F1D00E3E98A /* icon_shelf.png in Resources */,
+				6033A6E21590694B00158E1C /* embeddedPhotosButton.png in Resources */,
+				6033A6E31590694B00158E1C /* gallaryEnterButtonBackground.png in Resources */,
+				6033A6E41590694B00158E1C /* gallaryPageControlItemNormal.png in Resources */,
+				6033A6E51590694B00158E1C /* gallaryPageControlItemSelected.png in Resources */,
+				6033A6E61590694B00158E1C /* gallaryReturnButtonBackground.png in Resources */,
+				6033A6E71590694B00158E1C /* scrollControllBackground.png in Resources */,
+				6033A6E81590694B00158E1C /* sliderPageControlItemNormal.png in Resources */,
+				6033A6E91590694B00158E1C /* tocMenuButtonBackground.png in Resources */,
+				C50E49AA15AEED1800222413 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		607F3DD51588BD460097D960 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				607F3DEA1588BD470097D960 /* main.m in Sources */,
+				607F3DEE1588BD470097D960 /* AppDelegate.m in Sources */,
+				607F3DFD1588BDDF0097D960 /* MainViewController.m in Sources */,
+				607F46861589FD620097D960 /* KioskSubviewsFactory.m in Sources */,
+				607F46891589FD9D0097D960 /* KioskShelfView.m in Sources */,
+				607F468C1589FDC40097D960 /* KioskGalleryView.m in Sources */,
+				607F46A3158A00840097D960 /* KioskControlElement.m in Sources */,
+				607F46A6158A00C30097D960 /* KioskGalleryControlElement.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		607F3E0E1588C1330097D960 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PadCMS-CocoaTouch-Core";
+			targetProxy = 607F3E0D1588C1330097D960 /* PBXContainerItemProxy */;
+		};
+		60A5DCE0158B79FC00E3E98A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PadCMS-CocoaTouch-Core-Resources";
+			targetProxy = 60A5DCDF158B79FC00E3E98A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		607F3DE61588BD470097D960 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				607F3DE71588BD470097D960 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C50E49AC15AEED1800222413 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C50E49AB15AEED1800222413 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		607F3DF51588BD470097D960 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		607F3DF61588BD470097D960 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		607F3DF81588BD470097D960 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Prefix.pch";
+				INFOPLIST_FILE = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		607F3DF91588BD470097D960 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Prefix.pch";
+				INFOPLIST_FILE = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		607F3DD31588BD460097D960 /* Build configuration list for PBXProject "PadCMS-CocoaTouch-SampleApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607F3DF51588BD470097D960 /* Debug */,
+				607F3DF61588BD470097D960 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		607F3DF71588BD470097D960 /* Build configuration list for PBXNativeTarget "PadCMS-CocoaTouch-SampleApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607F3DF81588BD470097D960 /* Debug */,
+				607F3DF91588BD470097D960 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 607F3DD01588BD460097D960 /* Project object */;
+}
