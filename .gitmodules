@@ -1,0 +1,3 @@
+[submodule "PadCMS-CocoaTouch-Core"]
+	path = PadCMS-CocoaTouch-Core
+	url = git@git.adyax.com:padcms-rue89weekend-ios
