@@ -529,7 +529,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				SYMROOT = build;
 				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -548,22 +551,33 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				SYMROOT = build;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
 		607F3DF81588BD470097D960 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (8P4V92DTWF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (8P4V92DTWF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Prefix.pch";
 				INFOPLIST_FILE = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
+				SYMROOT = build;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/PadCMS-CocoaTouch-Core/**";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -571,14 +585,23 @@
 		607F3DF91588BD470097D960 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (8P4V92DTWF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (8P4V92DTWF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Prefix.pch";
 				INFOPLIST_FILE = "PadCMS-CocoaTouch-SampleApplication/PadCMS-CocoaTouch-SampleApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
+				SYMROOT = build;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/PadCMS-CocoaTouch-Core/**";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
