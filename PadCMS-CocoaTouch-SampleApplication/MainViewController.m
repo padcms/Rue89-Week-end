@@ -196,23 +196,29 @@
                 [alert release];
             } else {
                 NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
-                NSArray *keys = [applicationsList allKeys];
-
-                if ([keys count] > 0)
-                {
-                    NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
-                    currentApplication = [[PCApplication alloc] initWithParameters:applicationParameters
-                                                                     rootDirectory:[PCPathHelper pathForPrivateDocuments]];
+                
+                if ([applicationsList isKindOfClass:[NSDictionary class]]) {
+                    NSArray *keys = [applicationsList allKeys];
+                    
+                    if ([keys count] > 0)
+                    {
+                        NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
+                        currentApplication = [[PCApplication alloc] initWithParameters:applicationParameters
+                                                                         rootDirectory:[PCPathHelper pathForPrivateDocuments]];
+                    } else {
+                        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:magazinesNotAvailableTitle
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                                       value:@"OK"]
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        [alert release];
+                    }
                 } else {
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:magazinesNotAvailableTitle
-                                                                    message:nil
-                                                                   delegate:nil
-                                                          cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                                   value:@"OK"]
-                                                          otherButtonTitles:nil];
-                   [alert show];
-                   [alert release];
+                    NSLog(@"Application JSON parsing failed. Make sure you set PCConfigApplicationIdentifier correctly in info.plist file.");
                 }
+                
             }
     }
 }

@@ -1,0 +1,29 @@
+//
+// Prefix header for all source files of the 'the_reader' target in the 'the_reader' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+	#import <SystemConfiguration/SystemConfiguration.h>
+    #import "PCMacros.h"
+    #import "PCConsts.h"
+#endif
+
+//#define width(a) a.frame.size.width
+//#define height(a) a.frame.size.height
+//#define top(a) a.frame.origin.y
+//#define left(a) a.frame.origin.x
+//#define FrameReposition(a,x,y) a.frame = CGRectMake(x, y, width(a), height(a))
+//#define FrameResize(a,w,h) a.frame = CGRectMake(left(a), top(a), w, h)
+//#define FrameChangeHeight(a,h) a.frame = CGRectMake(left(a), top(a), width(a), h)
+//#define FrameChangeWidth(a,w) a.frame = CGRectMake(left(a), top(a), w, height(a))
+#define FrameMoveWithXOffset(a,dx) a.frame = CGRectOffset(a.frame, dx, 0)
+
+#ifdef MAG_AIR
+#define NEW_ICONS
+#endif
+
+#ifdef DCCV
+#define NEW_ICONS
+#endif

@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  Pad CMS
+
+  Created by Oleg Zhitnik on 25.07.12.
+  Copyright (c) 2012 Adyax. All rights reserved.
+*/
+"Disconnect" = "Disconnect";
+"Update" = "Update";
+"Account" = "Account";
+"Connected with:" = "Connected with:";
+"Ok, You are log" = "Ok, You are log";
+"My Apps" = "My Apps";
+"login" = "login";
+"password" = "password";
+"Back End url" = "Back End url";
+"Ask a demo account" = "Ask a demo account";
+"Sign In" = "Sign In";
+"You have your own Back End?" = "You have your own Back End?";
+"Login failure" = "Login failure";
+"Archived" = "Archived";
+"For review" = "For review";
+"Published" = "Published";
+"Work in progress" = "Work in progress";
+"PadCMS application" = "PadCMS application";
+"Privacy Policy" = "Privacy Policy";
+"Close" = "Close";
+"Contact Us" = "Contact Us";
+"My Apps" = "My Apps";
+"Account" = "Account";
