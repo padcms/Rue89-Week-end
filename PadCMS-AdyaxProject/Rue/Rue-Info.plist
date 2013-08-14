@@ -53,81 +53,8 @@
 	<string>MainWindow</string>
 	<key>PADCMSConfig</key>
 	<dict>
-		<key>PCTopBarViewStyle</key>
-		<dict>
-			<key>PCTopBarViewLogoImage</key>
-			<string>logo.png</string>
-			<key>PCTopBarViewSearchStyle</key>
-			<dict>
-				<key>PCTopBarViewSearchEnabled</key>
-				<false/>
-			</dict>
-			<key>PCTopBarViewHelpButtonStyle</key>
-			<dict>
-				<key>PCTopBarViewHelpButtonEnabled</key>
-				<true/>
-				<key>PCTopBarViewHelpButtonImage</key>
-				<string>button_answ.png</string>
-			</dict>
-			<key>PCTopBarViewShareButtonStyle</key>
-			<dict>
-				<key>PCTopBarViewShareButtonEnabled</key>
-				<true/>
-				<key>PCTopBarViewShareButtonImage</key>
-				<string>button_partager.png</string>
-			</dict>
-			<key>PCTopBarViewSubscriptionsButtonStyle</key>
-			<dict>
-				<key>PCTopBarViewSubscriptionsButtonEnabled</key>
-				<false/>
-				<key>PCTopBarViewSubscriptionsButtonImage</key>
-				<string>button_subscriptions.png</string>
-			</dict>
-			<key>PCTopBarViewBackButtonStyle</key>
-			<dict>
-				<key>PCTopBarViewBackButtonEnabled</key>
-				<true/>
-				<key>PCTopBarViewBackButtonImage</key>
-				<string>button_home.png</string>
-			</dict>
-			<key>PCTopBarViewSummaryButtonStyle</key>
-			<dict>
-				<key>PCTopBarViewSummaryButtonEnabled</key>
-				<false/>
-				<key>PCTopBarViewSummaryButtonImage</key>
-				<string>button_summary.png</string>
-			</dict>
-		</dict>
-		<key>PCTocViewStyle</key>
-		<dict>
-			<key>PCTocViewButtonStyle</key>
-			<dict>
-				<key>PCTocViewButtonStyleColor</key>
-				<string>#FF0000</string>
-				<key>PCTocViewButtonStyleBackgroundImageName</key>
-				<string>topTocMenuButtonBackground.png</string>
-			</dict>
-			<key>PCTocViewBackgroundStyle</key>
-			<dict>
-				<key>PCTocViewBackgroundStyleColor</key>
-				<string>#7FFF0000</string>
-			</dict>
-		</dict>
 		<key>PCConfigApplicationDefaultLanguage</key>
 		<string>fr</string>
-		<key>PCTableOfContents</key>
-		<dict>
-			<key>PCTableOfContentsTop</key>
-			<dict>
-				<key>Enabled</key>
-				<true/>
-			</dict>
-			<key>PCTableOfContentsBottom</key>
-			<dict>
-				<key>Enabled</key>
-				<false/>
-			</dict>
-		</dict>
 		<key>PCConfigApplicationIdentifier</key>
 		<integer>10</integer>
 		<key>PCConfigClientIdentifier</key>
@@ -156,19 +83,6 @@
 		<false/>
 		<key>PCStyleSheet</key>
 		<dict>
-			<key>PCTopTocButton</key>
-			<dict>
-				<key>PCButtonImages</key>
-				<dict>
-					<key>PCButtonImageNormal</key>
-					<dict>
-						<key>PCButtonBackgroundImageName</key>
-						<string>topTocMenuButtonBackground</string>
-						<key>PCButtonBackgroundUseColorTint</key>
-						<false/>
-					</dict>
-				</dict>
-			</dict>
 			<key>PCEmbeddedPhotosButton</key>
 			<dict>
 				<key>PCButtonImages</key>
@@ -302,8 +216,101 @@
 					</dict>
 				</dict>
 			</dict>
+			<key>PCTopTocButton</key>
+			<dict>
+				<key>PCButtonImages</key>
+				<dict>
+					<key>PCButtonImageNormal</key>
+					<dict>
+						<key>PCButtonBackgroundImageName</key>
+						<string>topTocMenuButtonBackground</string>
+						<key>PCButtonBackgroundUseColorTint</key>
+						<false/>
+					</dict>
+				</dict>
+			</dict>
+		</dict>
+		<key>PCTableOfContents</key>
+		<dict>
+			<key>PCTableOfContentsBottom</key>
+			<dict>
+				<key>Enabled</key>
+				<false/>
+			</dict>
+			<key>PCTableOfContentsTop</key>
+			<dict>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+		</dict>
+		<key>PCTocViewStyle</key>
+		<dict>
+			<key>PCTocViewBackgroundStyle</key>
+			<dict>
+				<key>PCTocViewBackgroundStyleColor</key>
+				<string>#7FFF0000</string>
+			</dict>
+			<key>PCTocViewButtonStyle</key>
+			<dict>
+				<key>PCTocViewButtonStyleBackgroundImageName</key>
+				<string>topTocMenuButtonBackground.png</string>
+				<key>PCTocViewButtonStyleColor</key>
+				<string>#FF0000</string>
+			</dict>
+		</dict>
+		<key>PCTopBarViewStyle</key>
+		<dict>
+			<key>PCTopBarViewBackButtonStyle</key>
+			<dict>
+				<key>PCTopBarViewBackButtonEnabled</key>
+				<true/>
+				<key>PCTopBarViewBackButtonImage</key>
+				<string>button_home.png</string>
+			</dict>
+			<key>PCTopBarViewHelpButtonStyle</key>
+			<dict>
+				<key>PCTopBarViewHelpButtonEnabled</key>
+				<true/>
+				<key>PCTopBarViewHelpButtonImage</key>
+				<string>button_answ.png</string>
+			</dict>
+			<key>PCTopBarViewLogoImage</key>
+			<string>logo.png</string>
+			<key>PCTopBarViewSearchStyle</key>
+			<dict>
+				<key>PCTopBarViewSearchEnabled</key>
+				<false/>
+			</dict>
+			<key>PCTopBarViewShareButtonStyle</key>
+			<dict>
+				<key>PCTopBarViewShareButtonEnabled</key>
+				<true/>
+				<key>PCTopBarViewShareButtonImage</key>
+				<string>button_partager.png</string>
+			</dict>
+			<key>PCTopBarViewSubscriptionsButtonStyle</key>
+			<dict>
+				<key>PCTopBarViewSubscriptionsButtonEnabled</key>
+				<false/>
+				<key>PCTopBarViewSubscriptionsButtonImage</key>
+				<string>button_subscriptions.png</string>
+			</dict>
+			<key>PCTopBarViewSummaryButtonStyle</key>
+			<dict>
+				<key>PCTopBarViewSummaryButtonEnabled</key>
+				<false/>
+				<key>PCTopBarViewSummaryButtonImage</key>
+				<string>button_summary.png</string>
+			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Interstate Bold.ttf</string>
+		<string>Interstate Black.ttf</string>
+		<string>Quicksand_Book.otf</string>
+		<string>Quicksand_Bold.otf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>newsstand-content</string>
@@ -320,8 +327,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

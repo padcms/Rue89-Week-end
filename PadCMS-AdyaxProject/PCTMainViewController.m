@@ -169,7 +169,7 @@
 		}
 	}*/
 	
-	[self.kiosk_req_v startAnimating]; 
+	[self.kiosk_req_v startAnimating];
 	[self.kiosk_req_h startAnimating];
 	
 //	[[VersionManager sharedManager] kioskTap];
