@@ -309,7 +309,7 @@
 		<string>Interstate Bold.ttf</string>
 		<string>Interstate Black.ttf</string>
 		<string>Quicksand_Book.otf</string>
-		<string>Quicksand_Bold.otf</string>
+		<string>Quicksand_Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

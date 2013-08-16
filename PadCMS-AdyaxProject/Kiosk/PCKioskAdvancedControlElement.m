@@ -26,6 +26,7 @@
 @property (nonatomic, retain) UIImageView * illustrationImageView;
 @property (nonatomic, retain) PCKioskAdvancedControlElementTitleLabel * titleLabel;
 @property (nonatomic, retain) UIImage * imageViewShadowImage;
+@property (nonatomic, retain) UIButton * showDetailsButton;
 
 @end
 
@@ -33,6 +34,10 @@
 
 -(void)dealloc
 {
+    [_imageViewShadowImage release];
+    [_showDetailsButton release];
+    [_titleLabel release];
+    [_illustrationImageView release];
 	[payButton release];
 	[super dealloc];
 }
@@ -107,6 +112,8 @@
 	[deleteButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DELETE"
                                                                   value:@"Delete"]
                   forState:UIControlStateNormal];
+    //[deleteButton setTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]]  forState:UIControlStateNormal];
+    //[deleteButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]] forState:UIControlStateNormal];
 	[deleteButton titleLabel].font = [UIFont fontWithName:@"QuicksandBold-Regular" size:17];
     [deleteButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
 	[deleteButton titleLabel].backgroundColor = [UIColor clearColor];
@@ -129,6 +136,17 @@
 	[payButton sizeToFit];
 	deleteButton.hidden = YES;
 	[self addSubview:payButton];
+    
+    UIImage * showDetailsButtonNormalBackgroundImage = [UIImage imageNamed:@"home_issue_details_button_bg_normal"];
+    self.showDetailsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.showDetailsButton setBackgroundImage:showDetailsButtonNormalBackgroundImage forState:UIControlStateNormal];
+    [self.showDetailsButton setBackgroundImage:[UIImage imageNamed:@"home_issue_details_button_bg_selected"] forState:UIControlStateHighlighted];
+     [self.showDetailsButton setBackgroundImage:[UIImage imageNamed:@"home_issue_details_button_bg_selected"] forState:UIControlStateSelected];
+    [self.showDetailsButton setImage:[UIImage imageNamed:@"home_issue_details_button_plus"] forState:UIControlStateNormal];
+    [self.showDetailsButton setImage:[UIImage imageNamed:@"home_issue_details_button_minus"] forState:UIControlStateSelected];
+    [self.showDetailsButton setFrame:CGRectMake(105, 243, showDetailsButtonNormalBackgroundImage.size.width, showDetailsButtonNormalBackgroundImage.size.height)];
+    [self.showDetailsButton setAdjustsImageWhenHighlighted:NO];
+    [self addSubview:self.showDetailsButton];
     
     //TODO: move this to settings like it was done before
     CGFloat buttonWidth = 140.0f;
@@ -179,6 +197,10 @@
     [payButton addTarget:self
                   action:@selector(payButtonTapped)
         forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.showDetailsButton addTarget:self
+                               action:@selector(showDetailsButtonTapped)
+                     forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) adjustElements
@@ -237,6 +259,10 @@
 - (void) payButtonTapped
 {
     [self.delegate purchaseButtonTappedWithRevisionIndex:self.revisionIndex];
+}
+
+- (void)showDetailsButtonTapped {
+    [self.showDetailsButton setSelected:![self.showDetailsButton isSelected]];
 }
 
 - (void) productDataRecieved:(NSNotification *) notification

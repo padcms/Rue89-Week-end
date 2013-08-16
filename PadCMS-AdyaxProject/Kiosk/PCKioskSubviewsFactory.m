@@ -28,8 +28,9 @@
     
     
     result = [NSArray arrayWithObjects:
-              gallerySubview,
+             // gallerySubview,
               shelfSubview,
+              gallerySubview,
               nil];
     
     return result;

@@ -22,6 +22,8 @@
 #import "PCKioskNavigationBar.h"
 #import "PCSearchViewController.h"
 #import "PadCMSCoder.h"
+#import "PCKioskHeaderView.h"
+#import "PCKioskFooterView.h"
 
 @class MagManager, PCRevisionViewController, PadCMSCoder, PCSubscriptionsMenuView;
 
@@ -72,6 +74,8 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 @property (nonatomic, retain) PCKioskNavigationBar *kioskNavigationBar;
 @property (nonatomic, retain) PadCMSCoder* padcmsCoder;
 @property (nonatomic, retain) PCSubscriptionsMenuView *subscriptionsMenu;
+@property (nonatomic, retain) PCKioskHeaderView * kioskHeaderView;
+@property (nonatomic, retain) PCKioskFooterView * kioskFooterView;
 
 //- (void) removeMainScroll;
 

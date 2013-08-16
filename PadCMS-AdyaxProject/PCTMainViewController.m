@@ -572,21 +572,41 @@
     self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
     self.kioskNavigationBar.delegate = self;
     
+    
+    //header
+    self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
+    [self.view addSubview:self.kioskHeaderView];
+    
+
+    //footer
+    self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
+    [self.view addSubview:self.kioskFooterView];
+    
+    NSInteger footerHeight = self.kioskFooterView.frame.size.height - 3;
+    
+    NSInteger headerHeight = 136;
+    
+    //gallery
     PCKioskSubviewsFactory      *factory = [[[PCKioskSubviewsFactory alloc] init] autorelease];
 
     self.kioskViewController = [[PCKioskViewController alloc] initWithKioskSubviewsFactory:factory
-                                                                                  andFrame:CGRectMake(0, kioskBarHeight, self.view.bounds.size.width, self.view.bounds.size.height-kioskBarHeight)
+                                                                                  andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
                                                                              andDataSource:self];
     
     self.kioskViewController.delegate = self;
     
     [self.view addSubview:self.kioskViewController.view];
-    [self.view addSubview:self.kioskNavigationBar];
     
-    [self.kioskNavigationBar initElements];
+    //[self.view addSubview:self.kioskNavigationBar];
+    //[self.kioskNavigationBar initElements];
+    //[self.view bringSubviewToFront:self.kioskNavigationBar];
     
-    [self.view bringSubviewToFront:self.kioskNavigationBar];
     [self.view bringSubviewToFront:self.kioskViewController.view];
+    
+    [self.view bringSubviewToFront:self.kioskHeaderView];
+    [self.view bringSubviewToFront:self.kioskFooterView];
+    
+    self.view.backgroundColor = [UIColor greenColor];
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
