@@ -13,6 +13,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *shareButton;
 @property (retain, nonatomic) IBOutlet UIButton *contactUsButton;
 @property (retain, nonatomic) IBOutlet UIButton *restorePurchasesButton;
+@property (retain, nonatomic) IBOutlet UIButton *subscribeButton;
 
 @property (retain, nonatomic) IBOutlet UILabel *subscribeButtonTopLabel;
 @property (retain, nonatomic) IBOutlet UILabel *subscribeButtonBottomLabel;
@@ -47,14 +48,38 @@
     [self.subscribeButtonBottomLabel setFont:[UIFont fontWithName:fontName size:13]];
 }
 
-- (IBAction)shareButton:(UIButton *)sender {
+#pragma mark - Button actions
+
+- (IBAction)shareButtonAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(shareButtonTapped)]) {
+        [self.delegate shareButtonTapped];
+    }
 }
+
+- (IBAction)contactUsButtonTapped:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(contactUsButtonTapped)]) {
+        [self.delegate contactUsButtonTapped];
+    }
+}
+
+- (IBAction)restorePurchasesButtonTapped:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(restorePurchasesButtonTapped:)]) {
+        [self.delegate restorePurchasesButtonTapped:YES];
+    }
+}
+- (IBAction)purchaseAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(subscribeButtonTapped)]) {
+        [self.delegate subscribeButtonTapped];
+    }
+}
+
 - (void)dealloc {
     [_shareButton release];
     [_contactUsButton release];
     [_restorePurchasesButton release];
     [_subscribeButtonTopLabel release];
     [_subscribeButtonBottomLabel release];
+    [_subscribeButton release];
     [super dealloc];
 }
 @end

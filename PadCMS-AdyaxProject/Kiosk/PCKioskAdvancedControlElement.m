@@ -68,7 +68,7 @@
 	downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[downloadButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
 	[downloadButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
-                                                                    value:@"Donwload"]
+                                                                    value:@"DOWNLOAD"]
                     forState:UIControlStateNormal];
 	[downloadButton titleLabel].font = [UIFont fontWithName:@"QuicksandBold-Regular" size:17];
     [downloadButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
@@ -82,7 +82,7 @@
 	readButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[readButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
 	[readButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_READ"
-                                                                value:@"Read"]
+                                                                value:@"READ"]
                 forState:UIControlStateNormal];
 	[readButton titleLabel].font = [UIFont fontWithName:@"QuicksandBold-Regular" size:17];
     [readButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
@@ -96,7 +96,7 @@
 	cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[cancelButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
 	[cancelButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL"
-                                                                  value:@"Cancel"]
+                                                                  value:@"CANCEL"]
                   forState:UIControlStateNormal];
 	[cancelButton titleLabel].font = [UIFont fontWithName:@"QuicksandBold-Regular" size:17];
     [cancelButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
@@ -110,7 +110,7 @@
 	deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[deleteButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
 	[deleteButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DELETE"
-                                                                  value:@"Delete"]
+                                                                  value:@"DELETE"]
                   forState:UIControlStateNormal];
     //[deleteButton setTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]]  forState:UIControlStateNormal];
     //[deleteButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]] forState:UIControlStateNormal];
@@ -126,7 +126,7 @@
 	payButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[payButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
 	[payButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_PAY"
-                                                               value:@"Pay"]
+                                                               value:@"PAY"]
                forState:UIControlStateNormal];
 	[payButton titleLabel].font = [UIFont fontWithName:@"QuicksandBold-Regular" size:17];
     [payButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];

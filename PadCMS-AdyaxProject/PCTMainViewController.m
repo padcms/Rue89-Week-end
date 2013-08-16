@@ -24,7 +24,7 @@
 #import "PCConfig.h"
 #import "PCSubscriptionsMenuView.h"
 
-@interface PCTMainViewController()
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate>
 
 - (void) initManager;
 - (void) showMagManagerView;
@@ -575,6 +575,7 @@
     
     //header
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
+    self.kioskHeaderView.delegate = self;
     [self.view addSubview:self.kioskHeaderView];
     
 
@@ -1009,6 +1010,23 @@
     subscriptionsMenu.alpha = subscriptionsMenu.hidden?0.0:1.0;
 }
 
+#pragma mark - PCKioskHeaderViewDelegate
+
+- (void)contactUsButtonTapped {
+    
+}
+
+- (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
+    [[InAppPurchases sharedInstance] renewSubscription:YES];
+}
+
+- (void)subscribeButtonTapped {
+    [[InAppPurchases sharedInstance] newSubscription];
+}
+
+- (void)shareButtonTapped {
+    
+}
 
 #pragma mark - PCSearchViewControllerDelegate
 

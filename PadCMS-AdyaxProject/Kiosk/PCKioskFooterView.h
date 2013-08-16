@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface PCKioskFooterView : UIView
 
 + (PCKioskFooterView *)footerViewForView:(UIView *)view;
