@@ -7,16 +7,14 @@
 //
 
 #import "PCKioskHeaderView.h"
+#import "PCKioskSubscribeButton.h"
 
 @interface PCKioskHeaderView()
 
 @property (retain, nonatomic) IBOutlet UIButton *shareButton;
 @property (retain, nonatomic) IBOutlet UIButton *contactUsButton;
 @property (retain, nonatomic) IBOutlet UIButton *restorePurchasesButton;
-@property (retain, nonatomic) IBOutlet UIButton *subscribeButton;
-
-@property (retain, nonatomic) IBOutlet UILabel *subscribeButtonTopLabel;
-@property (retain, nonatomic) IBOutlet UILabel *subscribeButtonBottomLabel;
+@property (retain, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
 
 @end
 
@@ -33,6 +31,8 @@
 
 - (void)awakeFromNib {
     
+    [super awakeFromNib];
+    
     NSString * fontName = @"QuicksandBold-Regular";
     UIEdgeInsets insets = UIEdgeInsetsMake(4, 0, 0, 0);
     
@@ -44,8 +44,17 @@
     [self.contactUsButton setTitleEdgeInsets:insets];
     [self.restorePurchasesButton setTitleEdgeInsets:insets];
     
-    [self.subscribeButtonTopLabel setFont:[UIFont fontWithName:fontName size:18.3]];
-    [self.subscribeButtonBottomLabel setFont:[UIFont fontWithName:fontName size:13]];
+    //subscribe button
+    
+    //remove placeholer
+    CGRect frame = self.subscribeButton.frame;
+    [self.subscribeButton removeFromSuperview];
+    
+    //set the right one
+    self.subscribeButton = [[[UINib nibWithNibName:@"PCKioskSubscribeButton" bundle:nil] instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    [self addSubview:self.subscribeButton];
+    self.subscribeButton.frame = frame;
+    [self.subscribeButton.button addTarget:self action:@selector(purchaseAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - Button actions
@@ -67,7 +76,7 @@
         [self.delegate restorePurchasesButtonTapped:YES];
     }
 }
-- (IBAction)purchaseAction:(UIButton *)sender {
+- (void)purchaseAction:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(subscribeButtonTapped)]) {
         [self.delegate subscribeButtonTapped];
     }
@@ -77,8 +86,6 @@
     [_shareButton release];
     [_contactUsButton release];
     [_restorePurchasesButton release];
-    [_subscribeButtonTopLabel release];
-    [_subscribeButtonBottomLabel release];
     [_subscribeButton release];
     [super dealloc];
 }
