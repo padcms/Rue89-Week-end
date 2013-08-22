@@ -7,14 +7,13 @@
 //
 
 #import "PCKioskHeaderView.h"
-#import "PCKioskSubscribeButton.h"
 
 @interface PCKioskHeaderView()
 
-@property (retain, nonatomic) IBOutlet UIButton *shareButton;
-@property (retain, nonatomic) IBOutlet UIButton *contactUsButton;
-@property (retain, nonatomic) IBOutlet UIButton *restorePurchasesButton;
-@property (retain, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UIButton *contactUsButton;
+@property (strong, nonatomic) IBOutlet UIButton *restorePurchasesButton;
+@property (strong, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
 
 @end
 
@@ -81,13 +80,5 @@
     if ([self.delegate respondsToSelector:@selector(subscribeButtonTapped)]) {
         [self.delegate subscribeButtonTapped];
     }
-}
-
-- (void)dealloc {
-    [_shareButton release];
-    [_contactUsButton release];
-    [_restorePurchasesButton release];
-    [_subscribeButton release];
-    [super dealloc];
 }
 @end

@@ -8,7 +8,7 @@
 
 #import "PCKioskPopupView.h"
 
-@interface PCKioskPopupView()
+@interface PCKioskPopupView() <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong, readonly) UIImage * shadowImage;
 @property (nonatomic, readonly) CGFloat shadowWidth;
@@ -36,7 +36,10 @@ const CGFloat kAnimationDuration = 0.4f;
     CGFloat aShadowWidth = 6;
     UIImage * aShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:aShadowWidth*2 topCapHeight:aShadowWidth*2];
     
-    CGRect frame = CGRectMake((view.frame.size.width - size.width - aShadowWidth*2)/2, (view.frame.size.height - size.height - aShadowWidth*2)/2, size.width + aShadowWidth*2, size.height + aShadowWidth*2);
+    CGRect frame = CGRectMake((view.frame.size.width - size.width - aShadowWidth*2)/2,
+                              (view.frame.size.height - size.height - aShadowWidth*2)/2 - 20,
+                              size.width + aShadowWidth*2,
+                              size.height + aShadowWidth*2);
     
     self = [super initWithFrame:frame];
     
@@ -75,6 +78,7 @@ const CGFloat kAnimationDuration = 0.4f;
     
     //tap
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
+    self.tapGesture.delegate = self;
     [self.blockingView addGestureRecognizer:self.tapGesture];
 }
 
@@ -97,10 +101,10 @@ const CGFloat kAnimationDuration = 0.4f;
 
 - (void)initCloseButton {
     
-    CGFloat closeButtonWidth = 50.0f;
+    CGSize closeButtonSize = CGSizeMake(60, 46);
     
     self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.closeButton.frame = CGRectMake(self.frame.size.width - _shadowWidth - closeButtonWidth, _shadowWidth, closeButtonWidth, closeButtonWidth);
+    self.closeButton.frame = CGRectMake(self.frame.size.width - _shadowWidth - closeButtonSize.width, _shadowWidth, closeButtonSize.width, closeButtonSize.height);
     [self.closeButton setImage:[UIImage imageNamed:@"popup_close_button"] forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeButton];
@@ -129,6 +133,17 @@ const CGFloat kAnimationDuration = 0.4f;
 - (void)tapGestureHandler:(UITapGestureRecognizer *)recognizer {
     self.closeButton.enabled = NO;
     [self hide];
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.view == self.blockingView) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 

@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PCKioskSubscribeButtonDelegate <NSObject>
+
+@required
+
+- (void)subscribeButtonTapped;
+
+@end
+
 @interface PCKioskSubscribeButton : UIView
 
-@property (retain, nonatomic) IBOutlet UIButton *button;
-@property (retain, nonatomic) IBOutlet UILabel *topLabel;
-@property (retain, nonatomic) IBOutlet UILabel *bottomLabel;
+@property (strong, nonatomic) IBOutlet UIButton *button;
+@property (strong, nonatomic) IBOutlet UILabel *topLabel;
+@property (strong, nonatomic) IBOutlet UILabel *bottomLabel;
 
 @end

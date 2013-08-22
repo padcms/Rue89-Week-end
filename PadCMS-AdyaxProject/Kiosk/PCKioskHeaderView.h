@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol PCKioskHeaderViewDelegate <NSObject>
+#import "PCKioskSubscribeButton.h"
+
+@protocol PCKioskHeaderViewDelegate <NSObject, PCKioskSubscribeButtonDelegate>
 
 @required
 
-- (void)subscribeButtonTapped;
 - (void)contactUsButtonTapped;
 - (void)restorePurchasesButtonTapped:(BOOL) needRenewIssues;
 - (void)shareButtonTapped;
@@ -21,6 +22,6 @@
 
 @interface PCKioskHeaderView : UIView
 
-@property (nonatomic, assign) id<PCKioskHeaderViewDelegate> delegate;
+@property (nonatomic, weak) id<PCKioskHeaderViewDelegate> delegate;
 
 @end

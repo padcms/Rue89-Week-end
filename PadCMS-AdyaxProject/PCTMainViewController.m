@@ -24,6 +24,7 @@
 #import "PCConfig.h"
 #import "PCSubscriptionsMenuView.h"
 #import "PCKioskSharePopupView.h"
+#import "PCKioskIntroPopupView.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate>
 
@@ -306,8 +307,7 @@
     //[self performSelectorInBackground:@selector(doBackgroundLoad) withObject:nil];
     
     [self bindNotifications];
-    
-    
+
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -323,6 +323,10 @@
     
     [self initManager];
     [self initKiosk];
+    
+    PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
+    introPopup.purchaseDelegate = self;
+    [introPopup show];
 }
 
 /*

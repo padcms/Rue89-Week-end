@@ -66,14 +66,4 @@
     [self.bottomLabel setTextColor:[UIColor whiteColor]];
 }
 
-
-#pragma mark - Memory management
-
-- (void)dealloc {
-    [_topLabel release];
-    [_bottomLabel release];
-    [_button release];
-    [super dealloc];
-}
-
 @end
