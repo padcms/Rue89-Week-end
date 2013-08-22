@@ -46,7 +46,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.1</string>
+	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
 	<key>NSMainNibFile~ipad</key>
@@ -310,6 +310,8 @@
 		<string>Interstate Black.ttf</string>
 		<string>Quicksand_Book.otf</string>
 		<string>Quicksand_Bold.ttf</string>
+		<string>Interstate Regular.ttf</string>
+		<string>Interstate Light.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

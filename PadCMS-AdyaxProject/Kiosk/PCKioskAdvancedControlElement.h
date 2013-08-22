@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
+
+@protocol PCKioskAdvancedControlElementHeightDelegate;
+
+
 #import "PCKioskBaseControlElement.h"
 
 /**
@@ -16,5 +20,14 @@
 @interface PCKioskAdvancedControlElement : PCKioskBaseControlElement {
     UIButton                *payButton;
 }
+
+@property (nonatomic, assign) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
+
+@end
+
+
+@protocol PCKioskAdvancedControlElementHeightDelegate <NSObject>
+
+- (void)setHeight:(CGFloat)height forCell:(PCKioskAdvancedControlElement *)cell;
 
 @end

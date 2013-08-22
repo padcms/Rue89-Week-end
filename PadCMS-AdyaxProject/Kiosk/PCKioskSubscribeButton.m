@@ -24,8 +24,8 @@
     [super awakeFromNib];
     NSString * fontName = @"QuicksandBold-Regular";
     
-    [self.topLabel setFont:[UIFont fontWithName:fontName size:18.3]];
-    [self.bottomLabel setFont:[UIFont fontWithName:fontName size:13]];
+    [self.topLabel setFont:[UIFont fontWithName:fontName size:20]];
+    [self.bottomLabel setFont:[UIFont fontWithName:fontName size:14.1]];
 }
 
 

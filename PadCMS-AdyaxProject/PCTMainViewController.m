@@ -23,6 +23,7 @@
 #import "PCLocalizationManager.h"
 #import "PCConfig.h"
 #import "PCSubscriptionsMenuView.h"
+#import "PCKioskPopupView.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate>
 
@@ -224,6 +225,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+        
+    return NO;
+    
+    
     if(_revisionViewController != nil && _revisionViewController.revision != nil) {
         
         PCRevision *revision = _revisionViewController.revision;
@@ -1025,7 +1030,8 @@
 }
 
 - (void)shareButtonTapped {
-    
+    PCKioskPopupView * sharePopup = [[PCKioskPopupView alloc] initWithSize:CGSizeMake(400, 300) viewToShowIn:self.view];
+    [sharePopup show];
 }
 
 #pragma mark - PCSearchViewControllerDelegate

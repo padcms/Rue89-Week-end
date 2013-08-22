@@ -8,6 +8,7 @@
 
 #import "PCKioskFooterView.h"
 #import "PCKioskShelfSettings.h"
+#import "PCFonts.h"
 
 @interface PCKioskFooterView()
 
@@ -81,7 +82,7 @@
     separatorLabel.backgroundColor = [UIColor clearColor];
     separatorLabel.text = @"|";
     separatorLabel.textColor = UIColorFromRGB(0xaeb2ce);
-    separatorLabel.font = [UIFont fontWithName:@"QuicksandBold-Regular" size:18];
+    separatorLabel.font = [UIFont fontWithName:PCFontQuicksandBold size:18];
     [separatorLabel sizeToFit];
     return separatorLabel;
 }
@@ -99,7 +100,7 @@
         button.frame = CGRectMake(previousButtonX, 4, 0, 0);
         button.backgroundColor = [UIColor clearColor];
         button.titleEdgeInsets = UIEdgeInsetsMake(4, 0, 0, 0);
-        button.titleLabel.font = [UIFont fontWithName:@"QuicksandBold-Regular" size:18];
+        button.titleLabel.font = [UIFont fontWithName:PCFontQuicksandBold size:18];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [button setTitleColor:UIColorFromRGB(0x91b4d7) forState:UIControlStateSelected];
         [button setTitle:buttonNames[i] forState:UIControlStateNormal];

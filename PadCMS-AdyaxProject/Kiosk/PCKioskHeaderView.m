@@ -35,10 +35,11 @@
     
     NSString * fontName = @"QuicksandBold-Regular";
     UIEdgeInsets insets = UIEdgeInsetsMake(4, 0, 0, 0);
+    CGFloat fontSize = 16.5;
     
-    [self.shareButton.titleLabel setFont:[UIFont fontWithName:fontName size:15]];
-    [self.contactUsButton.titleLabel setFont:[UIFont fontWithName:fontName size:15]];
-    [self.restorePurchasesButton.titleLabel setFont:[UIFont fontWithName:fontName size:15]];
+    [self.shareButton.titleLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
+    [self.contactUsButton.titleLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
+    [self.restorePurchasesButton.titleLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
     
     [self.shareButton setTitleEdgeInsets:insets];
     [self.contactUsButton setTitleEdgeInsets:insets];

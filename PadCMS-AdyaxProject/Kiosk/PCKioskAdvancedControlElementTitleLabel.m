@@ -35,6 +35,10 @@
                        value:(id)[self textColor].CGColor
                        range:NSMakeRange(0, [string length])];
         
+        [string addAttribute:(__bridge NSString *)kCTKernAttributeName
+                       value:@(-0.65f)
+                       range:NSMakeRange(0, [string length])];
+        
         CFRelease(aFont);
         
         // Highlight the text specified..
@@ -90,11 +94,11 @@
                         CGRect runBounds;
                         CGFloat ascent, descent;
                         
-                        runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL) + 7;
-                        runBounds.size.height = ascent + descent;
+                        runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL) + 14;
+                        runBounds.size.height = roundf(ascent + descent) + ((index == 0) ? 6 : 0);
                         
                         runBounds.origin.x = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
-                        runBounds.origin.y = origins[index].y - 7;/*self.frame.size.height - origins[lineCount - index].y - runBounds.size.height*/;
+                        runBounds.origin.y = roundf(origins[index].y) - 9;/*self.frame.size.height - origins[lineCount - index].y - runBounds.size.height*/;
                         
                         CGColorRef highlightColor = (_highlightColor) ? _highlightColor.CGColor : [UIColor yellowColor].CGColor;
                         CGContextSetFillColorWithColor(context, highlightColor);
