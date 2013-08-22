@@ -15,3 +15,4 @@ extern NSString * const PCFontInterstateBlack;
 
 extern NSString * const PCFontQuicksandBook;
 extern NSString * const PCFontQuicksandBold;
+extern NSString * const PCFontLeckerliOne;

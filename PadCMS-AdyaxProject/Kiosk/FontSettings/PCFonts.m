@@ -15,3 +15,5 @@ NSString * const PCFontInterstateBlack      = @"Interstate-Black";
 
 NSString * const PCFontQuicksandBook = @"QuicksandBook-Regular";
 NSString * const PCFontQuicksandBold = @"QuicksandBold-Regular";
+
+NSString * const PCFontLeckerliOne = @"LeckerliOne";

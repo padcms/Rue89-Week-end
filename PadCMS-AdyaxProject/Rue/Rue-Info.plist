@@ -306,6 +306,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>LeckerliOne-Regular.otf</string>
 		<string>Interstate Bold.ttf</string>
 		<string>Interstate Black.ttf</string>
 		<string>Quicksand_Book.otf</string>

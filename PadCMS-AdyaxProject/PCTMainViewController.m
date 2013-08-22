@@ -23,7 +23,7 @@
 #import "PCLocalizationManager.h"
 #import "PCConfig.h"
 #import "PCSubscriptionsMenuView.h"
-#import "PCKioskPopupView.h"
+#import "PCKioskSharePopupView.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate>
 
@@ -1030,7 +1030,7 @@
 }
 
 - (void)shareButtonTapped {
-    PCKioskPopupView * sharePopup = [[PCKioskPopupView alloc] initWithSize:CGSizeMake(400, 300) viewToShowIn:self.view];
+    PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     [sharePopup show];
 }
 

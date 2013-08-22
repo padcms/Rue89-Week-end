@@ -222,6 +222,16 @@ const CGFloat kDetailsHeight = 80.0f;
 }
 
 - (void)initLabels {
+    
+    NSArray *fontFamilies = [UIFont familyNames];
+    
+    for (int i = 0; i < [fontFamilies count]; i++)
+    {
+        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+        NSLog (@"%@: %@", fontFamily, fontNames);
+    }
+    
     //[super initLabels];
     NSString * text = @"hello Text! I am a big line\nof the text\ntest test test";
     self.titleLabel = [[PCKioskAdvancedControlElementTitleLabel alloc] initWithFrame:CGRectMake(0, 31, 400, 200)];

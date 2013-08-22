@@ -10,18 +10,12 @@
 
 @interface PCKioskPopupView()
 
-@property (nonatomic, strong) UIView * blockingView;
-@property (nonatomic, strong) UIView * contentView;
-@property (nonatomic, strong) UIButton * closeButton;
-@property (nonatomic, strong) UITapGestureRecognizer * tapGesture;
-@property (nonatomic, strong) UIView * viewToShowIn;
-@property (nonatomic, strong) UIImageView * shadowImageView;
 @property (nonatomic, strong, readonly) UIImage * shadowImage;
 @property (nonatomic, readonly) CGFloat shadowWidth;
 
 @end
 
-const CGFloat kAnimationDuration = 0.5f;
+const CGFloat kAnimationDuration = 0.4f;
 
 @implementation PCKioskPopupView
 
@@ -42,7 +36,7 @@ const CGFloat kAnimationDuration = 0.5f;
     CGFloat aShadowWidth = 6;
     UIImage * aShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:aShadowWidth*2 topCapHeight:aShadowWidth*2];
     
-    CGRect frame = CGRectMake((view.frame.size.width - size.width + aShadowWidth*2)/2, (view.frame.size.height - size.height + aShadowWidth*2)/2, size.width + aShadowWidth*2, size.height + aShadowWidth*2);
+    CGRect frame = CGRectMake((view.frame.size.width - size.width - aShadowWidth*2)/2, (view.frame.size.height - size.height - aShadowWidth*2)/2, size.width + aShadowWidth*2, size.height + aShadowWidth*2);
     
     self = [super initWithFrame:frame];
     
@@ -103,7 +97,7 @@ const CGFloat kAnimationDuration = 0.5f;
 
 - (void)initCloseButton {
     
-    CGFloat closeButtonWidth = 44.0f;
+    CGFloat closeButtonWidth = 50.0f;
     
     self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.closeButton.frame = CGRectMake(self.frame.size.width - _shadowWidth - closeButtonWidth, _shadowWidth, closeButtonWidth, closeButtonWidth);
