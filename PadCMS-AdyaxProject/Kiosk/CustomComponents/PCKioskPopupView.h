@@ -9,8 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "PCFonts.h"
 #import "PCKioskShelfSettings.h"
+#import "MTLabel.h"
+
+enum  {
+    PCKioskPopupPresentationStyleCenter = 1,
+    PCKioskPopupPresentationStyleFromBottom = 2,
+};
+
+typedef int PCKioskPopupPresentationStyle;
 
 @interface PCKioskPopupView : UIView
+
+/**
+ @brief Title label
+ */
+@property (nonatomic, strong) MTLabel * titleLabel;
+
+/**
+ @brief Description label
+ */
+@property (nonatomic, strong) MTLabel * descriptionLabel;
 
 /**
  @brief Semi transparent view that blocks other UI from touches.
@@ -43,9 +61,24 @@
 @property (nonatomic, strong) UIImageView * shadowImageView;
 
 /**
+ @brief Popup presentation style
+ */
+@property (nonatomic) PCKioskPopupPresentationStyle presentationStyle;
+
+/**
+ @brief Width of the popup shadow
+ */
+@property (nonatomic, readonly) CGFloat shadowWidth;
+
+/**
  @brief Designated initializer
  */
 - (id)initWithSize:(CGSize)size viewToShowIn:(UIView *)view;
+
+/**
+ @brief Override this method if you want your own labels. Call super to keep predefined stuff.
+ */
+- (void)loadContent;
 
 /**
  @brief Shows popup animated in viewToShowIn.

@@ -24,6 +24,13 @@
 		572C052E17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C052F17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C053017C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
+		572C053D17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C053E17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C054017C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C054117C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C054217C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		572C054317C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
 		57A4703D17B8F33700745732 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */; };
 		57A4703F17B8F33F00745732 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */; };
 		57A4708D17BAA56300745732 /* home_footer_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4707917BAA56300745732 /* home_footer_arrow.png */; };
@@ -1459,6 +1466,8 @@
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		572C052817C691B40075C859 /* PCKioskIntroPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskIntroPopupView.h; sourceTree = "<group>"; };
 		572C052917C691B40075C859 /* PCKioskIntroPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskIntroPopupView.m; sourceTree = "<group>"; };
+		572C053B17C744D60075C859 /* PCKioskNotificationPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskNotificationPopup.h; sourceTree = "<group>"; };
+		572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskNotificationPopup.m; sourceTree = "<group>"; };
 		57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		57A4707917BAA56300745732 /* home_footer_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_footer_arrow.png; sourceTree = "<group>"; };
@@ -2284,6 +2293,8 @@
 				57A474D417C667A800745732 /* PCKioskSharePopupView.m */,
 				572C052817C691B40075C859 /* PCKioskIntroPopupView.h */,
 				572C052917C691B40075C859 /* PCKioskIntroPopupView.m */,
+				572C053B17C744D60075C859 /* PCKioskNotificationPopup.h */,
+				572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -4338,6 +4349,7 @@
 				57A4749717C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474D517C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C053D17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4365,6 +4377,7 @@
 				57A4749D17C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474DB17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C053017C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C054317C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4392,6 +4405,7 @@
 				57A4749C17C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474DA17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052F17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C054217C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4419,6 +4433,7 @@
 				57A4749917C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4452,6 +4467,7 @@
 				57A4749A17C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474D817C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052D17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C054017C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4501,6 +4517,7 @@
 				57A4749B17C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474D917C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052E17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C054117C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4528,6 +4545,7 @@
 				57A4749817C5889E00745732 /* PCKioskPopupView.m in Sources */,
 				57A474D617C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				572C053E17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

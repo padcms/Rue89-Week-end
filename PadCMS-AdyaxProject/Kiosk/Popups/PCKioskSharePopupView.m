@@ -11,49 +11,23 @@
 
 @interface PCKioskSharePopupView()
 
-@property (nonatomic, strong) MTLabel * titleLabel;
-@property (nonatomic, strong) MTLabel * descriptionLabel;
-
 @end
 
 @implementation PCKioskSharePopupView
 
-- (id)initWithSize:(CGSize)size viewToShowIn:(UIView *)view
-{
-    self = [super initWithSize:size viewToShowIn:view];
-    if (self) {
-        [self initContent];
-    }
-    return self;
-}
-
-- (void)initContent {
-    [self initTitle];
-    [self initDescription];
-    [self initShareButtonsAndLabels];
-}
-
-- (void)initTitle {
+- (void)loadContent {
+    [super loadContent];
+    
     CGRect contentFrame = self.contentView.frame;
-    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake( 0, 20, contentFrame.size.width, 50)];
+    self.titleLabel.frame = CGRectMake( 0, 20, contentFrame.size.width, 50);
+    self.descriptionLabel.frame = CGRectMake(0, 90, contentFrame.size.width, 50);
+    
     self.titleLabel.text = @"Partagez Rue89 Week-end";
-    self.titleLabel.font = [UIFont fontWithName:PCFontLeckerliOne size:40];
-    self.titleLabel.textAlignment = MTLabelTextAlignmentCenter;
-    [self.titleLabel setCharacterSpacing:-0.8f];
-    [self.titleLabel setFontColor:UIColorFromRGB(0x34495e)];
-    [self.contentView addSubview:self.titleLabel];
-}
-
-- (void)initDescription {
-    CGRect contentFrame = self.contentView.frame;
-    self.descriptionLabel = [[MTLabel alloc] initWithFrame:CGRectMake(0, 90, contentFrame.size.width, 50)];
     self.descriptionLabel.text = @"Il n’y a pas d’amour, il n’y a que des preuves d’amour. Alors faites\ndécouvrir votre magazine tablettes préféré à tout votre réseau !";
-    self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateRegular size:15];
-    self.descriptionLabel.backgroundColor = [UIColor clearColor];
-    [self.descriptionLabel setCharacterSpacing:-0.5f];
-    [self.descriptionLabel setTextAlignment:MTLabelTextAlignmentCenter];
-    self.descriptionLabel.fontColor = UIColorFromRGB(0x34495e);
-    [self.contentView addSubview:self.descriptionLabel];
+    
+    self.descriptionLabel.textAlignment = MTLabelTextAlignmentCenter;
+    
+    [self initShareButtonsAndLabels];
 }
 
 - (MTLabel *)shareTitleLabel {
