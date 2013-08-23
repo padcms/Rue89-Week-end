@@ -145,9 +145,17 @@ const CGFloat kAnimationDuration = 0.4f;
 - (void)prepareForPresentation {
     if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
         self.frame = [self bottomHiddenFrame:YES];
-        self.blockingView.alpha = 1.0f;
-        self.blockingView.backgroundColor = [UIColor clearColor];
+        //self.blockingView.alpha = 1.0f;
+        self.blockingView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1f];
     }
+}
+
+#pragma mark - Presentation setter
+
+- (void)setPresentationStyle:(PCKioskPopupPresentationStyle)presentationStyle {
+    _presentationStyle = presentationStyle;
+    
+    [self prepareForPresentation];
 }
 
 #pragma mark - Show/Hide public actions
@@ -155,9 +163,11 @@ const CGFloat kAnimationDuration = 0.4f;
 - (void)show {
     
     [UIView animateWithDuration:kAnimationDuration animations:^{
+        self.blockingView.alpha = 1.0f;
         if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
-            self.blockingView.alpha = 1.0f;
+            
         } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
+            self.blockingView.alpha = 1.0f;
             self.frame = [self bottomHiddenFrame:NO];
         }
     }];
@@ -165,13 +175,20 @@ const CGFloat kAnimationDuration = 0.4f;
 
 - (void)hide {
     [UIView animateWithDuration:kAnimationDuration animations:^{
+        
+        self.blockingView.alpha = 0.0f;
+        
         if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
-            self.blockingView.alpha = 0.0f;
+            
         } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
             self.frame = [self bottomHiddenFrame:YES];
         }
     } completion:^(BOOL finished) {
         [self.blockingView removeFromSuperview];
+        
+        if ([self.delegate respondsToSelector:@selector(popupViewDidHide:)]) {
+            [self.delegate popupViewDidHide:self];
+        }
     }];
 }
 

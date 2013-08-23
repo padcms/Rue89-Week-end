@@ -26,6 +26,13 @@
 
 - (void)loadContent {
     [super loadContent];
+    self.titleLabel.textAlignment = MTLabelTextAlignmentLeft;
+    self.titleLabel.frame = CGRectMake(25, 15, 175, 50);
+    //self.titleLabel.text = @"Hello";
+    
+    self.titleLabel.font = [UIFont fontWithName:self.titleLabel.font.fontName size:25];
+    
+    self.descriptionLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame), 22, 500, 140);
 }
 
 @end

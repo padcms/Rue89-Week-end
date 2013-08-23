@@ -11,6 +11,14 @@
 #import "PCKioskShelfSettings.h"
 #import "MTLabel.h"
 
+@class PCKioskPopupView;
+
+@protocol PCKioskPopupViewDelegate <NSObject>
+
+- (void)popupViewDidHide:(PCKioskPopupView *)popupView;
+
+@end
+
 enum  {
     PCKioskPopupPresentationStyleCenter = 1,
     PCKioskPopupPresentationStyleFromBottom = 2,
@@ -71,6 +79,11 @@ typedef int PCKioskPopupPresentationStyle;
 @property (nonatomic, readonly) CGFloat shadowWidth;
 
 /**
+ @brief Delegate object
+ */
+@property (nonatomic, weak) id<PCKioskPopupViewDelegate> delegate;
+
+/**
  @brief Designated initializer
  */
 - (id)initWithSize:(CGSize)size viewToShowIn:(UIView *)view;
@@ -86,7 +99,7 @@ typedef int PCKioskPopupPresentationStyle;
 - (void)show;
 
 /**
- @brief Hides popup animated in viewToShowIn.
+ @brief Hides popup animated.
  */
 - (void)hide;
 

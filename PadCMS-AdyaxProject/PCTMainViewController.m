@@ -25,8 +25,9 @@
 #import "PCSubscriptionsMenuView.h"
 #import "PCKioskSharePopupView.h"
 #import "PCKioskIntroPopupView.h"
+#import "PCKioskNotificationPopup.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate>
 
 - (void) initManager;
 - (void) showMagManagerView;
@@ -326,6 +327,7 @@
     
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
     introPopup.purchaseDelegate = self;
+    introPopup.delegate = self;
     [introPopup show];
 }
 
@@ -1065,6 +1067,17 @@
             self.mainView = _revisionViewController.view;
             self.mainView.tag = 100;
         }
+    }
+}
+
+#pragma mark - PCKioskPopupViewDelegate
+
+- (void)popupViewDidHide:(PCKioskPopupView *)popupView {
+    if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
+        PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
+        popup.titleLabel.text = @"À nos lecteurs";
+        popup.descriptionLabel.text = @"L'inné et l'acquis sont dans un bateau, et l'inné tombe à l'eau. Que reste-t-il ? C'est la question que pose le parcours de deux “nés sous X” dans le récit que nous vous proposons cette semaine.  Au rayon bug : le problème d'accès aux articles pour les abonnés en fin de période d’essai est réglé. Toutes nos excuses pour la dérange.";
+        [popup show];
     }
 }
 
