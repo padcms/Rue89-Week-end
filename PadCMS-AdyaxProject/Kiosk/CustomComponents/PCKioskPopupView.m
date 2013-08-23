@@ -144,6 +144,9 @@ const CGFloat kAnimationDuration = 0.4f;
 
 - (void)prepareForPresentation {
     if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
+        
+        self.blockingView.frame = CGRectMake(self.blockingView.frame.origin.x, self.viewToShowIn.frame.size.height - self.frame.size.height, self.blockingView.frame.size.width, self.frame.size.height);
+        
         self.frame = [self bottomHiddenFrame:YES];
         //self.blockingView.alpha = 1.0f;
         self.blockingView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1f];
