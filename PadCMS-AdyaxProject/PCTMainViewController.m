@@ -623,9 +623,9 @@
     
     //page control
     PCKioskPageControl * pageControl = [PCKioskPageControl pageControl];
-    pageControl.center = CGPointMake(self.view.frame.size.width/2, 500);
-    pageControl.backgroundColor = [UIColor orangeColor];
-    pageControl.pagesCount = 8;
+    pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
+    pageControl.backgroundColor = [UIColor clearColor];
+    pageControl.pagesCount = 15;
     pageControl.currentPage = 4;
     [self.view addSubview:pageControl];
 }
@@ -778,7 +778,7 @@
     return revision.issue.imageLargeURL;
 }
 
-- (NSString *)issueImageSmallWithIndex:(NSInteger)index {
+- (NSString *)issueImageSmallURLWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
     return revision.issue.imageSmallURL;
 }
@@ -786,6 +786,17 @@
 - (NSInteger)issueWordsCountWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
     return revision.issue.wordsCount;
+}
+
+
+- (NSString *)issueCategoryWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.category;
+}
+
+- (NSDate *)revisionDateWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.createDate;
 }
 
 #pragma mark - PCKioskViewControllerDelegateProtocol

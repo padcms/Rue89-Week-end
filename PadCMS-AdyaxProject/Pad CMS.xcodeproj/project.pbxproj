@@ -39,6 +39,13 @@
 		5789896317CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
 		5789896417CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
 		5789896517CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
+		578989A017CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578989A117CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578989A217CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		578989A317CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578989A417CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578989A517CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578989A617CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
 		57A4703D17B8F33700745732 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */; };
 		57A4703F17B8F33F00745732 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */; };
 		57A4708D17BAA56300745732 /* home_footer_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4707917BAA56300745732 /* home_footer_arrow.png */; };
@@ -1478,6 +1485,8 @@
 		572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskNotificationPopup.m; sourceTree = "<group>"; };
 		5789895D17CE0A3000572BAC /* PCKioskPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskPageControl.h; sourceTree = "<group>"; };
 		5789895E17CE0A3000572BAC /* PCKioskPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskPageControl.m; sourceTree = "<group>"; };
+		5789899E17CF90C800572BAC /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
+		5789899F17CF90C800572BAC /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		57A4707917BAA56300745732 /* home_footer_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_footer_arrow.png; sourceTree = "<group>"; };
@@ -2162,6 +2171,15 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		5789899D17CF90C800572BAC /* RTLabel */ = {
+			isa = PBXGroup;
+			children = (
+				5789899E17CF90C800572BAC /* RTLabel.h */,
+				5789899F17CF90C800572BAC /* RTLabel.m */,
+			);
+			path = RTLabel;
+			sourceTree = "<group>";
+		};
 		57A4707617BAA21A00745732 /* Rue89 New Design */ = {
 			isa = PBXGroup;
 			children = (
@@ -2240,6 +2258,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5789899D17CF90C800572BAC /* RTLabel */,
 				57A4747317C4AF9300745732 /* MTLabel */,
 				57A4742817C485FC00745732 /* EGOTextView */,
 			);
@@ -4372,6 +4391,7 @@
 				572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C053D17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789895F17CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A017CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4401,6 +4421,7 @@
 				572C053017C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C054317C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896517CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A617CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4430,6 +4451,7 @@
 				572C052F17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C054217C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896417CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A517CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4459,6 +4481,7 @@
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4494,6 +4517,7 @@
 				572C052D17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C054017C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896217CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A317CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4545,6 +4569,7 @@
 				572C052E17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C054117C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896317CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A417CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4574,6 +4599,7 @@
 				572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C053E17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896017CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				578989A117CF90C800572BAC /* RTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

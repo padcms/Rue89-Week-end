@@ -8,11 +8,16 @@
 
 #import "PCKioskPageControl.h"
 #import "PCFonts.h"
+#import "PCKioskSHelfSettings.h"
 
-const CGFloat kElementWidth = 44.0f;
-const CGFloat kElementHeight = 44.0f;
+#import <QuartzCore/QuartzCore.h>
 
-const CGFloat kSeparatorWidth = 30.0f;
+const CGFloat kElementWidth = 46.0f;
+const CGFloat kElementHeight = 40.0f;
+
+const CGFloat kSeparatorWidth = 15.0f;
+
+const CGFloat kPadding = 2.0f;
 
 enum {
     SeparatorTypeLeft = 1,
@@ -48,21 +53,39 @@ typedef int SeparatorType;
 #pragma mark - Helpers
 
 - (UIButton *)pageControlElementWithNumber:(NSInteger)number {
-    UIButton * element = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton * element = [UIButton buttonWithType:UIButtonTypeCustom];
     element.tag = number;
-    element.titleEdgeInsets = UIEdgeInsetsMake(4, 0, 0, 0);
-    [element setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+    element.titleEdgeInsets = UIEdgeInsetsMake(5, 0, 0, 0);
+    [element setTitleColor:UIColorFromRGB(0xaeb2ce) forState:UIControlStateNormal];
+    [element setTitleColor:UIColorFromRGB(0xf6f8fa) forState:UIControlStateSelected];
     [element setTitle:[NSString stringWithFormat:@"%d", number] forState:UIControlStateNormal];
     [element addTarget:self action:@selector(elementTapped:) forControlEvents:UIControlEventTouchUpInside];
     [element.titleLabel setFont:[UIFont fontWithName:PCFontQuicksandBold size:32.5f]];
+    
+    element.backgroundColor = UIColorFromRGB(0xf6f8fa);
+    
+    CALayer * layer = element.layer;
+    layer.borderColor = UIColorFromRGB(0xaeb2ce).CGColor;
+    layer.borderWidth = 2.5f;
+    layer.cornerRadius = 6.0f;
+    layer.shadowColor = [UIColor blackColor].CGColor;
+    layer.shadowOpacity = 0.2f;
+    layer.shadowRadius = 2.0f;
+    layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    layer.shadowOffset = CGSizeMake(0, 0);
+    layer.shouldRasterize = YES;
+    
+    
+    
     return element;
 }
 
 - (UIButton *)separatorElement {
-    UIButton * element = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton * element = [UIButton buttonWithType:UIButtonTypeCustom];
     element.titleEdgeInsets = UIEdgeInsetsMake(4, 0, 0, 0);
     [element setTitle:@"..." forState:UIControlStateNormal];
     [element.titleLabel setFont:[UIFont fontWithName:PCFontQuicksandBold size:20]];
+    [element setTitleColor:UIColorFromRGB(0xaeb2ce) forState:UIControlStateNormal];
     element.enabled = NO;
     element.adjustsImageWhenDisabled = NO;
     return element;
@@ -74,19 +97,19 @@ typedef int SeparatorType;
     if (_pagesCount > 5) {
         //1,2, last - 1, last
         if ((page <= 2) || (page >= _pagesCount-1)) {
-            return kElementWidth * 4 + kSeparatorWidth;
+            return kElementWidth * 4 + kSeparatorWidth + kPadding * 4;
         }
         
         else
             
             //3, last - 2
             if ((page == 3) || (page == _pagesCount-2)) {
-                return kElementWidth * 5 + kSeparatorWidth;
+                return kElementWidth * 5 + kSeparatorWidth+ kPadding * 5;
             }
         
         //bigger than 3, less than last - 2
             else {
-                return kElementWidth * 5 + kSeparatorWidth * 2;
+                return kElementWidth * 5 + kSeparatorWidth * 2 + kPadding * 6;
             }
     } else {
         return kElementWidth * _pagesCount;
@@ -158,10 +181,10 @@ typedef int SeparatorType;
 //                x+= kElementWidth;
 //            }
         } else {
-            CGFloat x = CGRectGetMaxX(firstElement.frame);
+            CGFloat x = CGRectGetMaxX(firstElement.frame) + kPadding;
             
             if ([self shouldShowSeparator:SeparatorTypeLeft]) {
-                x += kSeparatorWidth;
+                x += kSeparatorWidth + kPadding;
             }
             
             NSInteger startPage = _currentPage - 1;
@@ -205,7 +228,7 @@ typedef int SeparatorType;
         button.frame = CGRectMake(x, 0, kElementWidth, kElementHeight);
         [self addSubview:button];
         [elements addObject:button];
-        x+= kElementWidth;
+        x+= kElementWidth + kPadding;
     }
 }
 
@@ -214,14 +237,14 @@ typedef int SeparatorType;
     
     if ([self shouldShowSeparator:SeparatorTypeLeft]) {
         UIButton * leftSeparator = [self separatorElement];
-        leftSeparator.frame = CGRectMake([self centeredX] + kElementWidth, 0, kSeparatorWidth, kElementHeight);
+        leftSeparator.frame = CGRectMake([self centeredX] + kElementWidth + kPadding, 0, kSeparatorWidth, kElementHeight);
         [self addSubview:leftSeparator];
         [elements addObject:leftSeparator];
     }
     
     if ([self shouldShowSeparator:SeparatorTypeRight]) {
         UIButton * rightSeparator = [self separatorElement];
-        rightSeparator.frame = CGRectMake([self centeredX] + [self totalElementsWidthForPage:_currentPage]  - kElementWidth - kSeparatorWidth, 0, kSeparatorWidth, kElementHeight);
+        rightSeparator.frame = CGRectMake([self centeredX] + [self totalElementsWidthForPage:_currentPage]  - kElementWidth - kSeparatorWidth - kPadding, 0, kSeparatorWidth, kElementHeight);
         [self addSubview:rightSeparator];
         [elements addObject:rightSeparator];
     }
@@ -231,6 +254,7 @@ typedef int SeparatorType;
     for (UIButton * button in elements) {
         if (button.tag == _currentPage) {
             button.selected = YES;
+            button.backgroundColor = UIColorFromRGB(0xaeb2ce);
         }
     }
 }

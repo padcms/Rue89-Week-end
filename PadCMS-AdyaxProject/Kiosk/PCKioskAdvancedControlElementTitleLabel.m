@@ -60,7 +60,7 @@
         CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)string);
         
         CGMutablePathRef path = CGPathCreateMutable();
-        CGPathAddRect(path, NULL, CGRectMake(6, 0, /*self.bounds.size.width*/300 - 6, self.bounds.size.height));
+        CGPathAddRect(path, NULL, CGRectMake(6, 0, /*self.bounds.size.width*/600 - 6, self.bounds.size.height));
         
         CTFrameRef totalFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         
@@ -85,7 +85,7 @@
                 CFArrayRef glyphRuns = CTLineGetGlyphRuns(line);
                 CFIndex glyphCount = CFArrayGetCount(glyphRuns);
                 
-                for (int i = 0; i < glyphCount; ++i)    {
+                for (int i = 0; i < 1; ++i)    {
                     CTRunRef run = CFArrayGetValueAtIndex(glyphRuns, i);
                     
                     NSDictionary *attributes = (__bridge NSDictionary*)CTRunGetAttributes(run);
@@ -94,8 +94,8 @@
                         CGRect runBounds;
                         CGFloat ascent, descent;
                         
-                        runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL) + 14;
-                        runBounds.size.height = roundf(ascent + descent) + ((index == 0) ? 6 : 0);
+                        runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL)+14;
+                        runBounds.size.height = 36 + (((index == lineCount-1) && (index != 0)) ? -2 : 0) ;//roundf(ascent + descent) + ((index == 0) ? 6 : 0);
                         
                         runBounds.origin.x = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
                         runBounds.origin.y = roundf(origins[index].y) - 9;/*self.frame.size.height - origins[lineCount - index].y - runBounds.size.height*/;
@@ -119,6 +119,9 @@
 }
 
 - (void)setText:(NSString *)text {
+    
+    text = [text stringByReplacingOccurrencesOfString:@"|" withString:@"\n"];
+    
     [super setText:text];
     [self setHighlightText:text];
 }

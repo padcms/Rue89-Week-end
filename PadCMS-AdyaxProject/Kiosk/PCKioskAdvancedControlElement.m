@@ -15,6 +15,8 @@
 #import "PCKioskControlElementDetailsView.h"
 #import "PCFonts.h"
 #import "MTLabel.h"
+#import "UIImageView+AFNetworking.h"
+#import "PCConfig.h"
 
 @interface PCKioskAdvancedControlElement() {
     NSString * testText;
@@ -188,6 +190,12 @@ const CGFloat kDetailsHeight = 80.0f;
     self.illustrationImageView.backgroundColor = UIColorFromRGB(0xf6f8fa);
     [self addSubview:self.illustrationImageView];
     
+    NSString * illustrationURLString = [self.dataSource issueImageSmallURLWithIndex:self.revisionIndex];
+    NSString * serverURLString = [PCConfig serverURLString];
+    
+    NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
+    [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
+    
     //self.imageViewShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:12 topCapHeight:12];
     
     //shadow
@@ -216,8 +224,17 @@ const CGFloat kDetailsHeight = 80.0f;
     detailsFrameHidden = CGRectMake(imageRect.origin.x, CGRectGetMaxY(imageRect) - kDetailsHeight, imageRect.size.width, kDetailsHeight);
     detailsFrameShown = detailsFrameHidden;
     detailsFrameShown.origin.y += kDetailsHeight;
+    
     self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:detailsFrameHidden];
     [self insertSubview:self.detailsView belowSubview:self.illustrationImageView];
+    
+    NSString * excerptString = [self.dataSource issueExcerptWithIndex:self.revisionIndex];
+    NSString * authors = [self.dataSource issueAuthorWithIndex:self.revisionIndex];
+    NSInteger wordsCount = [self.dataSource issueWordsCountWithIndex:self.revisionIndex];
+    
+    [self.detailsView setExcerptString:excerptString];
+    [self.detailsView setAuthorsString:authors];
+    [self.detailsView setNumberOfWords:wordsCount];
     
     //self.detailsView.descriptionTextView.text = self.dataSource
     
@@ -226,7 +243,7 @@ const CGFloat kDetailsHeight = 80.0f;
 - (void)initLabels {
     
 //    NSArray *fontFamilies = [UIFont familyNames];
-//    
+//
 //    for (int i = 0; i < [fontFamilies count]; i++)
 //    {
 //        NSString *fontFamily = [fontFamilies objectAtIndex:i];
@@ -270,6 +287,8 @@ const CGFloat kDetailsHeight = 80.0f;
     [self.categoryLabel setFontColor:UIColorFromRGB(0x91b4d7)];
     [self addSubview:self.categoryLabel];
     
+    NSString * category = [self.dataSource issueCategoryWithIndex:self.revisionIndex];
+    self.categoryLabel.text = category;
     //[self.dateLabel setBackgroundColor:[UIColor redColor]];
 }
 
@@ -323,10 +342,10 @@ const CGFloat kDetailsHeight = 80.0f;
     //if(revisionCoverView)
     //{
     
-    if (self.revisionIndex != 1) {
-        UIImage         *coverImage = [self.dataSource revisionCoverImageWithIndex:self.revisionIndex andDelegate:self];
-        self.illustrationImageView.image = coverImage;
-    }
+//    if (self.revisionIndex != 1) {
+//        UIImage         *coverImage = [self.dataSource revisionCoverImageWithIndex:self.revisionIndex andDelegate:self];
+//        self.illustrationImageView.image = coverImage;
+//    }
 
 //        
 //        [self assignCoverImage:coverImage];
@@ -376,17 +395,17 @@ const CGFloat kDetailsHeight = 80.0f;
         self.detailsShadowImageView.alpha = shadowAlpha;
         
         //show textview'
-        if (!descriptionHidden) {
-            self.detailsView.descriptionTextView.hidden = NO;
-        }
+//        if (!descriptionHidden) {
+//            self.detailsView.descriptionTextView.hidden = NO;
+//        }
         
         
         //setting details frame
         self.detailsView.frame = detailsFrame;
     } completion:^(BOOL finished) {
-        if (descriptionHidden) {
-            self.detailsView.descriptionTextView.hidden = YES;
-        }
+//        if (descriptionHidden) {
+//            self.detailsView.descriptionTextView.hidden = YES;
+//        }
     }];
 }
 
