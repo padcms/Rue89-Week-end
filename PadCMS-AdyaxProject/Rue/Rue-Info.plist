@@ -56,13 +56,13 @@
 		<key>PCConfigApplicationDefaultLanguage</key>
 		<string>fr</string>
 		<key>PCConfigApplicationIdentifier</key>
-		<integer>10</integer>
+		<integer>43</integer>
 		<key>PCConfigClientIdentifier</key>
 		<integer>10</integer>
 		<key>PCConfigFacebookId</key>
 		<string>444744805552998</string>
 		<key>PCConfigServerURL</key>
-		<string>http://new.padcms.adyax.com</string>
+		<string>http://pp.padcms.adyax.com</string>
 		<key>PCConfigSharedSecretKey</key>
 		<string>f9103179a4044887ba078217e4a0cd76</string>
 		<key>PCConfigSubscriptions</key>

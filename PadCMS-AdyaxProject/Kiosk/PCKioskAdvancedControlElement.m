@@ -219,18 +219,20 @@ const CGFloat kDetailsHeight = 80.0f;
     self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:detailsFrameHidden];
     [self insertSubview:self.detailsView belowSubview:self.illustrationImageView];
     
+    //self.detailsView.descriptionTextView.text = self.dataSource
+    
 }
 
 - (void)initLabels {
     
-    NSArray *fontFamilies = [UIFont familyNames];
-    
-    for (int i = 0; i < [fontFamilies count]; i++)
-    {
-        NSString *fontFamily = [fontFamilies objectAtIndex:i];
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
-        NSLog (@"%@: %@", fontFamily, fontNames);
-    }
+//    NSArray *fontFamilies = [UIFont familyNames];
+//    
+//    for (int i = 0; i < [fontFamilies count]; i++)
+//    {
+//        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+//        NSLog (@"%@: %@", fontFamily, fontNames);
+//    }
     
     //[super initLabels];
     NSString * text = @"hello Text! I am a big line\nof the text\ntest test test";

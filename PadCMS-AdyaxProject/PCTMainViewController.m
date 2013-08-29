@@ -26,6 +26,7 @@
 #import "PCKioskSharePopupView.h"
 #import "PCKioskIntroPopupView.h"
 #import "PCKioskNotificationPopup.h"
+#import "PCKioskPageControl.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate>
 
@@ -619,6 +620,14 @@
     [self.view bringSubviewToFront:self.kioskFooterView];
     
     self.view.backgroundColor = [UIColor greenColor];
+    
+    //page control
+    PCKioskPageControl * pageControl = [PCKioskPageControl pageControl];
+    pageControl.center = CGPointMake(self.view.frame.size.width/2, 500);
+    pageControl.backgroundColor = [UIColor orangeColor];
+    pageControl.pagesCount = 8;
+    pageControl.currentPage = 4;
+    [self.view addSubview:pageControl];
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
@@ -719,6 +728,7 @@
 
  -(BOOL)isRevisionPaidWithIndex:(NSInteger)index
 {
+    
 	PCRevision *revision = [self revisionWithIndex:index];
     
     if (revision.issue)
@@ -751,6 +761,31 @@
 {
 	PCRevision *revision = [self revisionWithIndex:index];
     return revision.issue.productIdentifier;
+}
+
+- (NSString *)issueAuthorWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.author;
+}
+
+- (NSString *)issueExcerptWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.excerpt;
+}
+
+- (NSString *)issueImageLargeURLWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.imageLargeURL;
+}
+
+- (NSString *)issueImageSmallWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.imageSmallURL;
+}
+
+- (NSInteger)issueWordsCountWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    return revision.issue.wordsCount;
 }
 
 #pragma mark - PCKioskViewControllerDelegateProtocol
@@ -885,6 +920,17 @@
 
 - (void) updateRevisionWithIndex:(NSInteger) index
 {
+}
+
+
+#pragma mark - I don't Know what is this.
+
+- (void)previewRevisionWithIndex:(NSInteger)index {
+    
+}
+
+- (BOOL)previewAvailableForRevisionWithIndex:(NSInteger)index {
+    return NO;
 }
 
 #pragma mark - Download flow
