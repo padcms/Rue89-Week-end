@@ -626,7 +626,7 @@
     pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
     pageControl.backgroundColor = [UIColor clearColor];
     pageControl.pagesCount = 15;
-    pageControl.currentPage = 4;
+    pageControl.currentPage = 1;
     [self.view addSubview:pageControl];
 }
 

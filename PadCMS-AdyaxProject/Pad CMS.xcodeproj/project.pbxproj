@@ -5176,8 +5176,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (8P4V92DTWF)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (8P4V92DTWF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
@@ -5200,8 +5200,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = RUE;
-				PROVISIONING_PROFILE = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5D9B144D-E10C-4730-8153-FD948E3CDC8B";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
