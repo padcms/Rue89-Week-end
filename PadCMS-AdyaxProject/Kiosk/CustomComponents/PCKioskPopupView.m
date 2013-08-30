@@ -10,6 +10,7 @@
 
 @interface PCKioskPopupView() <UIGestureRecognizerDelegate>
 
+
 @property (nonatomic, strong, readonly) UIImage * shadowImage;
 
 @end
@@ -148,8 +149,8 @@ const CGFloat kAnimationDuration = 0.4f;
         self.blockingView.frame = CGRectMake(self.blockingView.frame.origin.x, self.viewToShowIn.frame.size.height - self.frame.size.height, self.blockingView.frame.size.width, self.frame.size.height);
         
         self.frame = [self bottomHiddenFrame:YES];
-        //self.blockingView.alpha = 1.0f;
-        self.blockingView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1f];
+        self.blockingView.alpha = 1.0f;
+        self.blockingView.backgroundColor = [UIColor clearColor];
     }
 }
 
@@ -179,13 +180,8 @@ const CGFloat kAnimationDuration = 0.4f;
 - (void)hide {
     [UIView animateWithDuration:kAnimationDuration animations:^{
         
-        self.blockingView.alpha = 0.0f;
+        [self hideAnimationActions];
         
-        if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
-            
-        } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
-            self.frame = [self bottomHiddenFrame:YES];
-        }
     } completion:^(BOOL finished) {
         [self.blockingView removeFromSuperview];
         
@@ -193,6 +189,16 @@ const CGFloat kAnimationDuration = 0.4f;
             [self.delegate popupViewDidHide:self];
         }
     }];
+}
+
+- (void)hideAnimationActions {
+    self.blockingView.alpha = 0.0f;
+    
+    if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
+        
+    } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
+        self.frame = [self bottomHiddenFrame:YES];
+    }
 }
 
 #pragma mark - Frame helpers

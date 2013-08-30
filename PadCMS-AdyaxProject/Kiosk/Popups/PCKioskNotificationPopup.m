@@ -35,4 +35,23 @@
     self.descriptionLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame), 22, 500, 140);
 }
 
+- (void)sizeToFitDescriptionLabelText {
+    
+    CGSize textSize = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.descriptionLabel.frame.size.width, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGFloat newHeight = textSize.height + self.descriptionLabel.frame.origin.y*2 + 10;
+    
+    CGRect frame = self.frame;
+    frame.size.height = newHeight;
+    self.frame = frame;
+    
+    self.blockingView.frame = CGRectMake(self.blockingView.frame.origin.x, self.viewToShowIn.frame.size.height - newHeight, self.blockingView.frame.size.width, newHeight);
+    
+    self.frame = [self bottomHiddenFrame:YES];
+}
+
+- (void)hideAnimationActions {
+    self.frame = [self bottomHiddenFrame:YES];
+}
+
 @end

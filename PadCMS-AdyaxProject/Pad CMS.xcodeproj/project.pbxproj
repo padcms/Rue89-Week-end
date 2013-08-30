@@ -540,6 +540,13 @@
 		57B30AAE17C66E8800F66090 /* popup_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B30A8D17C66E8800F66090 /* popup_close_button.png */; };
 		57B30AAF17C66E8800F66090 /* popup_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B30A8D17C66E8800F66090 /* popup_close_button.png */; };
 		57B30AB017C66E8800F66090 /* popup_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B30A8D17C66E8800F66090 /* popup_close_button.png */; };
+		57B442FC17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
+		57B442FD17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
+		57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		57B442FF17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
+		57B4430017D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
+		57B4430117D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
+		57B4430217D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */; };
 		600E459C15C013FD008ACADC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 600E459E15C013FD008ACADC /* Localizable.strings */; };
 		6030878A1541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 603087891541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m */; };
 		60332C46154062E800DDFF3D /* PCPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60332C44154062E800DDFF3D /* PCPrivacyPolicyViewController.m */; };
@@ -1574,6 +1581,8 @@
 		57B30A8B17C66E8800F66090 /* share_google_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_google_plus.png; sourceTree = "<group>"; };
 		57B30A8C17C66E8800F66090 /* share_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_facebook.png; sourceTree = "<group>"; };
 		57B30A8D17C66E8800F66090 /* popup_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_close_button.png; sourceTree = "<group>"; };
+		57B442FA17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskAdvancedControlElementDateLabel.h; sourceTree = "<group>"; };
+		57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskAdvancedControlElementDateLabel.m; sourceTree = "<group>"; };
 		6005387715011C23008021DA /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		600E459D15C013FD008ACADC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		603087881541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNavigationControllerWithDismissableKeyboard.h; sourceTree = "<group>"; };
@@ -2413,6 +2422,8 @@
 				57A473CC17C2770300745732 /* PCKioskSubscribeButton.xib */,
 				57A4740417C37AE000745732 /* PCKioskControlElementDetailsView.h */,
 				57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */,
+				57B442FA17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.h */,
+				57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -4392,6 +4403,7 @@
 				572C053D17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789895F17CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A017CF90C800572BAC /* RTLabel.m in Sources */,
+				57B442FC17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4422,6 +4434,7 @@
 				572C054317C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896517CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A617CF90C800572BAC /* RTLabel.m in Sources */,
+				57B4430217D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4452,6 +4465,7 @@
 				572C054217C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896417CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A517CF90C800572BAC /* RTLabel.m in Sources */,
+				57B4430117D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4482,6 +4496,7 @@
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
+				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4518,6 +4533,7 @@
 				572C054017C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896217CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A317CF90C800572BAC /* RTLabel.m in Sources */,
+				57B442FF17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4570,6 +4586,7 @@
 				572C054117C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896317CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A417CF90C800572BAC /* RTLabel.m in Sources */,
+				57B4430017D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4600,6 +4617,7 @@
 				572C053E17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896017CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A117CF90C800572BAC /* RTLabel.m in Sources */,
+				57B442FD17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

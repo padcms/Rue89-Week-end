@@ -17,6 +17,7 @@
 #import "MTLabel.h"
 #import "UIImageView+AFNetworking.h"
 #import "PCConfig.h"
+#import "PCKioskAdvancedControlElementDateLabel.h"
 
 @interface PCKioskAdvancedControlElement() {
     NSString * testText;
@@ -38,7 +39,7 @@
 @property (nonatomic, retain) UIImage * imageViewShadowImage;
 @property (nonatomic, retain) UIButton * showDetailsButton;
 @property (nonatomic, retain) PCKioskControlElementDetailsView * detailsView;
-@property (nonatomic, retain) MTLabel * dateLabel;
+@property (nonatomic, retain) PCKioskAdvancedControlElementDateLabel * dateLabel;
 @property (nonatomic, retain) MTLabel * categoryLabel;
 
 @end
@@ -267,16 +268,13 @@ const CGFloat kDetailsHeight = 80.0f;
     
     CGRect imageFrame = self.illustrationImageView.frame;
     CGFloat dateLabelPaddingLeft = 8.0f;
-    self.dateLabel = [[MTLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 100)];
-    [self.dateLabel setText:@"11\nDEC\n2013"];
-    [self.dateLabel setFont:[UIFont fontWithName:PCFontInterstateRegular size:21.5f]];
-    [self.dateLabel setBackgroundColor:[UIColor clearColor]];
-    [self.dateLabel setFontColor:UIColorFromRGB(0x91b4d7)];
-    [self.dateLabel setLineHeight:18];
-    [self.dateLabel setCharacterSpacing:-1.0f];
-    [self.dateLabel setNumberOfLines:3];
-    [self.dateLabel sizeToFit];
+    self.dateLabel = [[PCKioskAdvancedControlElementDateLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 100)];
     [self addSubview:self.dateLabel];
+    
+    NSDate * date = [self.dataSource revisionDateWithIndex:self.revisionIndex];
+    
+    self.dateLabel.date = date;
+    
     
     self.categoryLabel = [[MTLabel alloc] initWithFrame:CGRectMake(0, imageFrame.origin.y + 4, imageFrame.origin.x, 20)];
     [self.categoryLabel setText:@"Category"];

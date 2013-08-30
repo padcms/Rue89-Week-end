@@ -17,7 +17,7 @@ const CGFloat kElementHeight = 40.0f;
 
 const CGFloat kSeparatorWidth = 15.0f;
 
-const CGFloat kPadding = 2.0f;
+const CGFloat kPadding = 3.0f;
 
 enum {
     SeparatorTypeLeft = 1,
@@ -112,7 +112,7 @@ typedef int SeparatorType;
                 return kElementWidth * 5 + kSeparatorWidth * 2 + kPadding * 6;
             }
     } else {
-        return kElementWidth * _pagesCount;
+        return kElementWidth * _pagesCount + kPadding * (_pagesCount-1);
     }
 }
 
@@ -170,6 +170,7 @@ typedef int SeparatorType;
         if ((_pagesCount <= 5)) {
             
             CGFloat x = CGRectGetMaxX(firstElement.frame);
+            x+=kPadding;
             NSInteger startPage = 2;
             NSRange range = NSMakeRange(startPage, _pagesCount - startPage);
             [self createElementsWithRange:range startX:x];
@@ -273,6 +274,10 @@ typedef int SeparatorType;
     _currentPage = currentPage;
     
     [self createViewsForPage:currentPage];
+    
+    if ([self.delegate respondsToSelector:@selector(kioskPageControl:didChangePage:)]) {
+        [self.delegate kioskPageControl:self didChangePage:_currentPage];
+    }
 }
 
 - (void)setPagesCount:(NSInteger)pagesCount {

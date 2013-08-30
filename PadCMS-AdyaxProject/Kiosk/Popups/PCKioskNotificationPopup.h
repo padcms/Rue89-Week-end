@@ -10,4 +10,6 @@
 
 @interface PCKioskNotificationPopup : PCKioskPopupView
 
+- (void)sizeToFitDescriptionLabelText;
+
 @end

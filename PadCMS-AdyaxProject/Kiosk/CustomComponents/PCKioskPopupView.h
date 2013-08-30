@@ -103,4 +103,13 @@ typedef int PCKioskPopupPresentationStyle;
  */
 - (void)hide;
 
+
+- (CGRect)bottomHiddenFrame:(BOOL)hidden;
+
+
+/**
+ @brief Override if you want your own hide animation actions
+ */
+- (void)hideAnimationActions;
+
 @end

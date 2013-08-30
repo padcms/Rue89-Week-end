@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class PCKioskPageControl;
+
+@protocol PCKioskPageControlDelegate <NSObject>
+
+- (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page;
+
+@end
+
+
 @interface PCKioskPageControl : UIView
 
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic) NSInteger pagesCount;
+@property (nonatomic, weak) id<PCKioskPageControlDelegate> delegate;
 
 + (PCKioskPageControl *)pageControl;
 

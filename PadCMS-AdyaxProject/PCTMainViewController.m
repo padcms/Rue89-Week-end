@@ -28,7 +28,7 @@
 #import "PCKioskNotificationPopup.h"
 #import "PCKioskPageControl.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate>
 
 - (void) initManager;
 - (void) showMagManagerView;
@@ -621,11 +621,14 @@
     
     self.view.backgroundColor = [UIColor greenColor];
     
+    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+    
     //page control
     PCKioskPageControl * pageControl = [PCKioskPageControl pageControl];
     pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
     pageControl.backgroundColor = [UIColor clearColor];
-    pageControl.pagesCount = 15;
+    pageControl.pagesCount = shelfView.totalPages;
+    pageControl.delegate = shelfView;
     pageControl.currentPage = 1;
     [self.view addSubview:pageControl];
 }
@@ -1094,6 +1097,11 @@
 
 - (void)shareButtonTapped {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
+    sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
+    sharePopup.facebookMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
+    sharePopup.twitterMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
+    sharePopup.descriptionLabel.text = currentApplication.shareMessage;
+    sharePopup.delegate = self;
     [sharePopup show];
 }
 
@@ -1133,7 +1141,10 @@
     if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
         PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
         popup.titleLabel.text = @"À nos lecteurs";
-        popup.descriptionLabel.text = @"L'inné et l'acquis sont dans un bateau, et l'inné tombe à l'eau. Que reste-t-il ? C'est la question que pose le parcours de deux “nés sous X” dans le récit que nous vous proposons cette semaine.  Au rayon bug : le problème d'accès aux articles pour les abonnés en fin de période d’essai est réglé. Toutes nos excuses pour la dérange.";
+        popup.descriptionLabel.text = currentApplication.messageForReaders;
+        //popup.descriptionLabel.text = @"L'inné et l'acquis sont dans un bateau, et l'inné tombe à l'eau. Que reste-t-il ? C'est la question que pose le parcours de deux “nés sous X” dans le récit que nous vous proposons cette semaine.  Au rayon bug : le problème d'accès aux articles pour les abonnés en fin de période d’essai est réglé. Toutes nos excuses pour la dérange.";
+        
+        [popup sizeToFitDescriptionLabelText];
         [popup show];
     }
 }
@@ -1224,5 +1235,58 @@
         }
     }
 }
+
+#pragma mark PCEmailControllerDelegate methods
+
+- (void)dismissPCEmailController:(MFMailComposeViewController *)currentPCEmailController
+{
+    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
+- (void)showPCEmailController:(MFMailComposeViewController *)emailControllerToShow
+{
+    if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
+    {
+        [self presentViewController:emailControllerToShow animated:YES completion:nil];
+    }
+    else
+    {
+        [self presentModalViewController:emailControllerToShow animated:YES];
+    }
+}
+
+#pragma mark TwitterNewControllerDelegate methods
+
+- (void)dismissPCNewTwitterController:(TWTweetComposeViewController *)currentPCTwitterNewController
+{
+    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
+- (void)showPCNewTwitterController:(TWTweetComposeViewController *)tweetController
+{
+    if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
+    {
+        [self presentViewController:tweetController animated:YES completion:nil];
+    }
+    else
+    {
+        [self presentModalViewController:tweetController animated:YES];
+    }
+}
+
 
 @end

@@ -8,8 +8,15 @@
 
 #import "PCKioskSharePopupView.h"
 #import "MTLabel.h"
+#import "PCApplication.h"
+#import "PCEmailController.h"
+#import "PCFacebookViewController.h"
+#import "PCTwitterNewController.h"
 
 @interface PCKioskSharePopupView()
+
+@property (nonatomic, strong) PCEmailController * emailController;
+@property (nonatomic, strong) PCFacebookViewController * facebookViewController;
 
 @end
 
@@ -50,12 +57,14 @@
     UIButton * facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [facebookButton setImage:[UIImage imageNamed:@"share_facebook"] forState:UIControlStateNormal];
     [facebookButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
+    [facebookButton addTarget:self action:@selector(facebookShow) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:facebookButton];
     
     //twitter button
     UIButton * twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [twitterButton setImage:[UIImage imageNamed:@"share_twitter"] forState:UIControlStateNormal];
     [twitterButton setFrame:CGRectMake(center.x + padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
+    [twitterButton addTarget:self action:@selector(twitterShow) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:twitterButton];
     
     //google button
@@ -68,6 +77,7 @@
     UIButton * mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mailButton setImage:[UIImage imageNamed:@"share_mail"] forState:UIControlStateNormal];
     [mailButton setFrame:CGRectMake(center.x + padding, center.y + padding, buttonSize.width, buttonSize.height)];
+    [mailButton addTarget:self action:@selector(emailShow) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:mailButton];
     
     
@@ -102,6 +112,43 @@
     emailLabel.frame = CGRectMake(CGRectGetMaxX(mailButton.frame), mailButton.frame.origin.y + labelTopPadding, labelWidth, labelHeight);
     emailLabel.fontColor = UIColorFromRGB(0xabadbe);
     [self.contentView addSubview:emailLabel];
+}
+
+- (void)emailShow
+{
+
+    //[shareMenu removeFromSuperview];
+    if (!self.emailController)
+    {
+        //NSDictionary *emailMessage = [self.revision.issue.application.notifications objectForKey:PCEmailNotificationType];
+        self.emailController = [[PCEmailController alloc] initWithMessage:self.emailMessage];
+    }
+    self.emailController.delegate = self.delegate;
+    [self.emailController emailShow];
+}
+
+- (void)facebookShow
+{
+    if (!_facebookViewController)
+    {
+        //NSString *facebookMessage = [[self.revision.issue.application.notifications objectForKey:PCFacebookNotificationType]objectForKey:PCApplicationNotificationMessageKey];
+        _facebookViewController = [[PCFacebookViewController alloc] initWithMessage:self.facebookMessage];
+    }
+    [_facebookViewController initFacebookSharer];
+}
+
+- (void)twitterShow
+{
+    //Twitter Controller show
+    //[self hideMenus];
+    //[shareMenu removeFromSuperview];
+   // NSString *twitterMessage = [[self.revision.issue.application.notifications objectForKey:PCTwitterNotificationType]objectForKey:PCApplicationNotificationMessageKey];
+    if (isOS5())
+    {
+        PCTwitterNewController *twitterController = [[PCTwitterNewController alloc] initWithMessage:self.twitterMessage];
+        twitterController.delegate = self.delegate;
+        [twitterController showTwitterController];
+    }
 }
 
 @end

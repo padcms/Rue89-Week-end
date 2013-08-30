@@ -17,30 +17,80 @@
 
 @implementation PCKioskShelfView
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        _numberOfRevisionsPerPage = 5;
+        _currentPage = 1;
+
+    }
+    
+    return self;
+}
+
+- (void)setDataSource:(id<PCKioskDataSourceProtocol>)dataSource {
+    [super setDataSource:dataSource];
+    
+    _totalNumberOfRevisions = [self.dataSource numberOfRevisions];
+    _totalPages = ceilf((float)_totalNumberOfRevisions / (float)_numberOfRevisionsPerPage);
+    
+}
+
 - (PCKioskAbstractControlElement*) newCellWithFrame:(CGRect) frame;
 {
     return [[PCKioskAdvancedControlElement alloc] initWithFrame:frame];
+}
+
+- (void)setCurrentPage:(NSInteger)currentPage {
+    _currentPage = currentPage;
+    
+    [self createCells];
+}
+
+- (void)setNumberOfRevisionsPerPage:(NSInteger)numberOfRevisionsPerPage {
+    _numberOfRevisionsPerPage = numberOfRevisionsPerPage;
+    
+    [self createCells];
 }
 
 #pragma mark - Overrides
 
 - (void) createCells
 {
-    NSInteger       numberOfRevisions = [self.dataSource numberOfRevisions];
-    mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP);
+    
+    NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
+    if (_currentPage == _totalPages) {
+        numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
+    }
+    
+    NSInteger startRevisionIndex = (_currentPage - 1) * _numberOfRevisionsPerPage;
+    
+    
+    
+            CGFloat paginationHeight = 57.0f;
+    mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
+    
+    for (UIView * view in cells) {
+        [view removeFromSuperview];
+    }
+    
+    [cells removeAllObjects];
+    [cells release];
     
     cells = [[NSMutableArray alloc] initWithCapacity:numberOfRevisions];
     
     //CGFloat         middle = self.bounds.size.width / 2.0f;
     
-    for(int i=0; i<numberOfRevisions; i++)
+    int counter = 0;
+    for(int i = startRevisionIndex; i < startRevisionIndex + numberOfRevisions; i++)
     {
         CGRect                   cellFrame;
         
 
         cellFrame.origin.x = KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT;
 
-        cellFrame.origin.y = (i * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
+        cellFrame.origin.y = (counter * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
         cellFrame.size.width = self.bounds.size.width - KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT*2;
         cellFrame.size.height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
         
@@ -69,7 +119,14 @@
 //        [self performSelector:@selector(testSetHeight) withObject:nil afterDelay:2.0f];
 //        [self performSelector:@selector(testSetHeight2) withObject:nil afterDelay:3.0f];
 //        [self performSelector:@selector(testSetHeight3) withObject:nil afterDelay:4.0f];
+        
+        counter++;
     }
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [mainScrollView setContentOffset:CGPointMake(0, 0)];
+    }];
+    
 }
 
 //- (void)testSetHeight {
@@ -115,6 +172,12 @@
         }
         mainScrollView.contentSize = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.contentSize.height + heightDelta);
     }
+}
+
+#pragma mark - PCKioskPageControlDelegate
+
+- (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page {
+    [self setCurrentPage:page];
 }
 
 @end

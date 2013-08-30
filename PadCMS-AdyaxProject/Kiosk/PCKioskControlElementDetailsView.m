@@ -105,7 +105,11 @@
 - (void)setExcerptString:(NSString *)excerptString {
     //self.descriptionTextView.text = excerptString;
     
-    excerptString = [[@"<font kern=-0.5>" stringByAppendingString:excerptString] stringByAppendingString:@"</font>"];
+    if (excerptString) {
+        excerptString = [[@"<font kern=-0.5>" stringByAppendingString:excerptString] stringByAppendingString:@"</font>"];
+    }
+    
+    
     
     self.excerptLabel.text = excerptString;
     //[self.excerptLabel a]
