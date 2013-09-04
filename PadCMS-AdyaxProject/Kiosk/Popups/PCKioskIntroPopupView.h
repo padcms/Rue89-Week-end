@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
-#import "PCKioskPopupView.h"
+#import "PCKioskTitledPopupView.h"
 #import "PCKioskSubscribeButton.h"
 
-@interface PCKioskIntroPopupView : PCKioskPopupView
+@interface PCKioskIntroPopupView : PCKioskTitledPopupView
 
 @property (nonatomic, weak) id<PCKioskSubscribeButtonDelegate> purchaseDelegate;
 

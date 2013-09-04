@@ -26,12 +26,19 @@
     gallerySubview.tag = [PCKioskGalleryView subviewTag];
     gallerySubview.hidden = YES;
     
-    
+#ifdef RUE
     result = [NSArray arrayWithObjects:
              // gallerySubview,
               shelfSubview,
               gallerySubview,
               nil];
+#else
+    result = [NSArray arrayWithObjects:
+              // gallerySubview,
+              gallerySubview,
+              shelfSubview,
+              nil];
+#endif
     
     return result;
 }

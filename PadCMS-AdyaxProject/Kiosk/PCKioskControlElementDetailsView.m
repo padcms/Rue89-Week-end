@@ -107,11 +107,12 @@
     
     if (excerptString) {
         excerptString = [[@"<font kern=-0.5>" stringByAppendingString:excerptString] stringByAppendingString:@"</font>"];
+        self.excerptLabel.text = excerptString;
     }
     
     
     
-    self.excerptLabel.text = excerptString;
+    
     //[self.excerptLabel a]
 }
 

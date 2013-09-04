@@ -27,8 +27,13 @@
 #import "PCKioskIntroPopupView.h"
 #import "PCKioskNotificationPopup.h"
 #import "PCKioskPageControl.h"
+#import "TestFlight.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
+
+@property (nonatomic, retain) NSMutableArray * allRevisions;
+@property (nonatomic, retain) PCTag * selectedTag;
+@property (nonatomic, retain) PCKioskPageControl * pageControl;
 
 - (void) initManager;
 - (void) showMagManagerView;
@@ -90,6 +95,7 @@
     }
     return nil;
 }
+
 /*
 - (void) doBackgroundLoad
 {
@@ -287,6 +293,9 @@
 
 - (void) viewDidLoad
 {
+    
+    [TestFlight takeOff:@"e22c706b-4282-4628-8dd4-9f6624fd2f16"];
+    
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;
 
@@ -325,11 +334,13 @@
     
     [self initManager];
     [self initKiosk];
-    
+
+#ifdef RUE
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
     [introPopup show];
+#endif
 }
 
 /*
@@ -579,12 +590,23 @@
 - (void) initKiosk
 {
 	if (!currentApplication) return;
+    
+    
+    //load all revisions
+    self.allRevisions = [NSMutableArray new];
+    
+    NSArray *issues = [self getApplication].issues;
+    for (PCIssue *issue in issues)
+    {
+        [self.allRevisions addObjectsFromArray:issue.revisions];
+    }
+    
     NSInteger           kioskBarHeight = 34.0;
     
     self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
     self.kioskNavigationBar.delegate = self;
     
-    
+#ifdef RUE
     //header
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
     self.kioskHeaderView.delegate = self;
@@ -593,29 +615,29 @@
 
     //footer
     self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
+    self.kioskFooterView.delegate = self;
+    self.kioskFooterView.tags = currentApplication.tags;
     [self.view addSubview:self.kioskFooterView];
     
     NSInteger footerHeight = self.kioskFooterView.frame.size.height - 3;
-    
     NSInteger headerHeight = 136;
+#else
+    NSInteger footerHeight = 0;
+    NSInteger headerHeight = 34;
+#endif
+    
+
     
     //gallery
     PCKioskSubviewsFactory      *factory = [[[PCKioskSubviewsFactory alloc] init] autorelease];
-
     self.kioskViewController = [[PCKioskViewController alloc] initWithKioskSubviewsFactory:factory
                                                                                   andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
                                                                              andDataSource:self];
-    
     self.kioskViewController.delegate = self;
-    
     [self.view addSubview:self.kioskViewController.view];
-    
-    //[self.view addSubview:self.kioskNavigationBar];
-    //[self.kioskNavigationBar initElements];
-    //[self.view bringSubviewToFront:self.kioskNavigationBar];
-    
     [self.view bringSubviewToFront:self.kioskViewController.view];
     
+#ifdef RUE
     [self.view bringSubviewToFront:self.kioskHeaderView];
     [self.view bringSubviewToFront:self.kioskFooterView];
     
@@ -624,28 +646,33 @@
     PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
     
     //page control
-    PCKioskPageControl * pageControl = [PCKioskPageControl pageControl];
-    pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
-    pageControl.backgroundColor = [UIColor clearColor];
-    pageControl.pagesCount = shelfView.totalPages;
-    pageControl.delegate = shelfView;
-    pageControl.currentPage = 1;
-    [self.view addSubview:pageControl];
+    self.pageControl = [PCKioskPageControl pageControl];
+    self.pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
+    self.pageControl.backgroundColor = [UIColor clearColor];
+    self.pageControl.pagesCount = shelfView.totalPages;
+    self.pageControl.delegate = shelfView;
+    self.pageControl.currentPage = 1;
+    [self.view addSubview:self.pageControl];
+#else 
+    [self.view addSubview:self.kioskNavigationBar];
+    [self.kioskNavigationBar initElements];
+    [self.view bringSubviewToFront:self.kioskNavigationBar];
+#endif
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
 {
-    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
+//    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
+//    
+//    NSArray *issues = [self getApplication].issues;
+//    for (PCIssue *issue in issues)
+//    {
+//        [allRevisions addObjectsFromArray:issue.revisions];
+//    }
     
-    NSArray *issues = [self getApplication].issues;
-    for (PCIssue *issue in issues)
+    if (index>=0 && index<[self.allRevisions count])
     {
-        [allRevisions addObjectsFromArray:issue.revisions];
-    }
-    
-    if (index>=0 && index<[allRevisions count])
-    {
-        PCRevision *revision = [allRevisions objectAtIndex:index];
+        PCRevision *revision = [self.allRevisions objectAtIndex:index];
         return revision;
     }
     
@@ -654,15 +681,15 @@
 
 - (PCRevision*) revisionWithIdentifier:(NSInteger)identifier
 {
-    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
+//    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
+//    
+//    NSArray *issues = [self getApplication].issues;
+//    for (PCIssue *issue in issues)
+//    {
+//        [allRevisions addObjectsFromArray:issue.revisions];
+//    }
     
-    NSArray *issues = [self getApplication].issues;
-    for (PCIssue *issue in issues)
-    {
-        [allRevisions addObjectsFromArray:issue.revisions];
-    }
-    
-    for(PCRevision *currentRevision in allRevisions)
+    for(PCRevision *currentRevision in self.allRevisions)
     {
         if(currentRevision.identifier == identifier) return currentRevision;
     }
@@ -674,15 +701,15 @@
 
 - (NSInteger)numberOfRevisions
 {
-    NSInteger revisionsCount = 0;
+//    NSInteger revisionsCount = 0;
+//    
+//    NSArray *issues = [self getApplication].issues;
+//    for (PCIssue *issue in issues)
+//    {
+//        revisionsCount += [issue.revisions count];
+//    }
     
-    NSArray *issues = [self getApplication].issues;
-    for (PCIssue *issue in issues)
-    {
-        revisionsCount += [issue.revisions count];
-    }
-    
-    return revisionsCount;
+    return [self.allRevisions count];
 }
 
 - (NSString *)issueTitleWithIndex:(NSInteger)index
@@ -800,6 +827,28 @@
 - (NSDate *)revisionDateWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
     return revision.createDate;
+}
+
+- (NSArray *)allSortedRevisions {
+    
+    NSArray * allSortedRevisions = self.allRevisions;
+    
+    if (self.selectedTag) {
+        
+       NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
+            for (PCTag * tag in revision.issue.tags) {
+                if (tag.tagId == self.selectedTag.tagId) {
+                    return YES;
+                }
+            }
+            return NO;
+        }];
+        
+        allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
+    }
+    
+    
+    return allSortedRevisions;
 }
 
 #pragma mark - PCKioskViewControllerDelegateProtocol
@@ -1103,6 +1152,23 @@
     sharePopup.descriptionLabel.text = currentApplication.shareMessage;
     sharePopup.delegate = self;
     [sharePopup show];
+}
+
+#pragma mark - PCKioskFooterViewDelegate
+
+- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag {
+    
+    if (tag.tagId == TAG_ID_MAIN || tag.tagId == TAG_ID_FREE) {
+        self.selectedTag = nil;
+    } else {
+        self.selectedTag = tag;
+    }
+    
+    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+    //shelfView.currentPage = 1;
+    //[shelfView reload];
+    self.pageControl.currentPage = 1;
+    self.pageControl.pagesCount = shelfView.totalPages;
 }
 
 #pragma mark - PCSearchViewControllerDelegate

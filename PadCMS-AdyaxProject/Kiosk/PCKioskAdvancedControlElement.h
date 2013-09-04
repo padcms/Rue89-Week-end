@@ -11,6 +11,7 @@
 
 
 #import "PCKioskBaseControlElement.h"
+#import "PCRevision.h"
 
 /**
  @class PCKioskAdvancedControlElement
@@ -22,6 +23,7 @@
 }
 
 @property (nonatomic, assign) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
+@property (nonatomic, retain) PCRevision * revision;
 
 @end
 

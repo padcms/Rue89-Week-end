@@ -13,6 +13,8 @@
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
+@property (nonatomic, retain) NSArray * revisions;
+
 @end
 
 @implementation PCKioskShelfView
@@ -21,7 +23,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        _numberOfRevisionsPerPage = 5;
+        _numberOfRevisionsPerPage = 10;
         _currentPage = 1;
 
     }
@@ -29,17 +31,33 @@
     return self;
 }
 
-- (void)setDataSource:(id<PCKioskDataSourceProtocol>)dataSource {
-    [super setDataSource:dataSource];
-    
-    _totalNumberOfRevisions = [self.dataSource numberOfRevisions];
-    _totalPages = ceilf((float)_totalNumberOfRevisions / (float)_numberOfRevisionsPerPage);
-    
+//- (void)setDataSource:(id<PCKioskDataSourceProtocol>)dataSource {
+//    [super setDataSource:dataSource];
+//    
+//    self.revisions = [self.dataSource allSortedRevisions];
+//    
+//    self.totalNumberOfRevisions =  [self.revisions count];
+//}
+
+- (void)reload {
+    [self createCells];
 }
+
+#ifdef RUE
+- (void)createView {
+    [super createView];
+    
+    self.backgroundColor = UIColorFromRGB(0xf6f8fa);
+}
+#endif
 
 - (PCKioskAbstractControlElement*) newCellWithFrame:(CGRect) frame;
 {
-    return [[PCKioskAdvancedControlElement alloc] initWithFrame:frame];
+#ifdef RUE
+    return [[[PCKioskAdvancedControlElement alloc] initWithFrame:frame] autorelease];
+#else
+    return [[PCKioskControlElement alloc] initWithFrame:frame];
+#endif
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage {
@@ -54,14 +72,33 @@
     [self createCells];
 }
 
+- (void)setTotalNumberOfRevisions:(NSInteger)totalNumberOfRevisions {
+    _totalNumberOfRevisions = totalNumberOfRevisions;
+    
+    _totalPages = ceilf((float)_totalNumberOfRevisions / (float)_numberOfRevisionsPerPage);
+}
+
 #pragma mark - Overrides
 
+#ifdef RUE
 - (void) createCells
 {
+
+    
+    self.revisions = [self.dataSource allSortedRevisions];
+    self.totalNumberOfRevisions =  [self.revisions count];
+    
+    if (_currentPage >_totalPages) {
+        _currentPage = 1;
+    }
     
     NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
-    if (_currentPage == _totalPages) {
+    if ((_currentPage == _totalPages) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
         numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
+    }
+    
+    if (_totalNumberOfRevisions == 0) {
+        numberOfRevisions = 0;
     }
     
     NSInteger startRevisionIndex = (_currentPage - 1) * _numberOfRevisionsPerPage;
@@ -71,8 +108,15 @@
             CGFloat paginationHeight = 57.0f;
     mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
     
+    //remove old first
     for (UIView * view in cells) {
-        [view removeFromSuperview];
+        [UIView animateWithDuration:0.5f animations:^{
+            view.alpha = 0.0f;
+            view.userInteractionEnabled = NO;
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+        
     }
     
     [cells removeAllObjects];
@@ -100,10 +144,12 @@
 
         newCell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         
+        
         newCell.revisionIndex = i;
         newCell.dataSource = self.dataSource;
         newCell.delegate = self;
         newCell.heightDelegate = self;
+        newCell.revision = [self.revisions objectAtIndex:i];
         
         
         
@@ -111,6 +157,12 @@
         [mainScrollView addSubview:newCell];
         
         [newCell load];
+        
+        newCell.alpha = 0.0f;
+        
+        [UIView animateWithDuration:0.5f animations:^{
+            newCell.alpha = 1.0f;
+        }];
         
         //newCell.backgroundColor = [UIColor orangeColor];
         
@@ -128,6 +180,7 @@
     }];
     
 }
+#endif
 
 //- (void)testSetHeight {
 //    [self setHeight:400 forCellAtIndex:0];
@@ -171,6 +224,23 @@
             }
         }
         mainScrollView.contentSize = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.contentSize.height + heightDelta);
+        
+        
+        BOOL isLastCell = (index == (cells.count - 1));
+        
+        if (isLastCell) {
+            CGFloat y = mainScrollView.contentOffset.y;
+            CGFloat height = mainScrollView.frame.size.height;
+            CGFloat contentHeight = mainScrollView.contentSize.height;
+            CGFloat treshOld = 100.0f;
+            BOOL isContentSizeBiggerThanSize = (contentHeight > height);
+            
+            
+            
+            if (isContentSizeBiggerThanSize && ((y + height) > (contentHeight - treshOld))) {
+                mainScrollView.contentOffset = CGPointMake(0, contentHeight - height);
+            }
+        }
     }
 }
 

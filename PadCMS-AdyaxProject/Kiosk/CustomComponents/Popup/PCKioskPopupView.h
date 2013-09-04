@@ -29,16 +29,6 @@ typedef int PCKioskPopupPresentationStyle;
 @interface PCKioskPopupView : UIView
 
 /**
- @brief Title label
- */
-@property (nonatomic, strong) MTLabel * titleLabel;
-
-/**
- @brief Description label
- */
-@property (nonatomic, strong) MTLabel * descriptionLabel;
-
-/**
  @brief Semi transparent view that blocks other UI from touches.
  */
 @property (nonatomic, strong) UIView * blockingView;

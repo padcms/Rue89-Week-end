@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
-#import "PCKioskPopupView.h"
+#import "PCKioskTitledPopupView.h"
 
-@interface PCKioskNotificationPopup : PCKioskPopupView
+@interface PCKioskNotificationPopup : PCKioskTitledPopupView
 
 - (void)sizeToFitDescriptionLabelText;
 

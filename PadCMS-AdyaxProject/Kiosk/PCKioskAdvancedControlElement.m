@@ -18,6 +18,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "PCConfig.h"
 #import "PCKioskAdvancedControlElementDateLabel.h"
+#import "PCIssue.h"
 
 @interface PCKioskAdvancedControlElement() {
     NSString * testText;
@@ -50,12 +51,7 @@ const CGFloat kDetailsHeight = 80.0f;
 
 -(void)dealloc
 {
-    [_imageViewShadowImage release];
-    [_showDetailsButton release];
-    [_titleLabel release];
-    [_illustrationImageView release];
-	[payButton release];
-	[super dealloc];
+
 }
 
 - (void) initDownloadingProgressComponents
@@ -63,10 +59,11 @@ const CGFloat kDetailsHeight = 80.0f;
 	[super initDownloadingProgressComponents];
     
     //TODO: Move these vars to the settings.
-    CGFloat progressViewWidth = 200.0f;
-    CGFloat progressViewY = 200.0f;
+    CGFloat progressViewWidth = 135.0f;
+    CGFloat progressViewY = 282.0f;
     
-    downloadingProgressView.frame = CGRectMake((self.bounds.size.width - progressViewWidth) /2, progressViewY, progressViewWidth, 7);
+    downloadingProgressView.frame = CGRectMake((self.bounds.size.width - progressViewWidth), progressViewY, progressViewWidth, 7);
+    downloadingProgressView.progressTintColor = [UIColor whiteColor];
     
     CGRect labelFrame = downloadingProgressView.frame;
     labelFrame.origin.y += 16;
@@ -191,7 +188,7 @@ const CGFloat kDetailsHeight = 80.0f;
     self.illustrationImageView.backgroundColor = UIColorFromRGB(0xf6f8fa);
     [self addSubview:self.illustrationImageView];
     
-    NSString * illustrationURLString = [self.dataSource issueImageSmallURLWithIndex:self.revisionIndex];
+    NSString * illustrationURLString = self.revision.issue.imageSmallURL; //[self.dataSource issueImageSmallURLWithIndex:self.revisionIndex];
     NSString * serverURLString = [PCConfig serverURLString];
     
     NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
@@ -227,11 +224,12 @@ const CGFloat kDetailsHeight = 80.0f;
     detailsFrameShown.origin.y += kDetailsHeight;
     
     self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:detailsFrameHidden];
+    self.detailsView.hidden = YES;
     [self insertSubview:self.detailsView belowSubview:self.illustrationImageView];
     
-    NSString * excerptString = [self.dataSource issueExcerptWithIndex:self.revisionIndex];
-    NSString * authors = [self.dataSource issueAuthorWithIndex:self.revisionIndex];
-    NSInteger wordsCount = [self.dataSource issueWordsCountWithIndex:self.revisionIndex];
+    NSString * excerptString = self.revision.issue.excerpt;//[self.dataSource issueExcerptWithIndex:self.revisionIndex];
+    NSString * authors = self.revision.issue.author;//[self.dataSource issueAuthorWithIndex:self.revisionIndex];
+    NSInteger wordsCount = self.revision.issue.wordsCount;//[self.dataSource issueWordsCountWithIndex:self.revisionIndex];
     
     [self.detailsView setExcerptString:excerptString];
     [self.detailsView setAuthorsString:authors];
@@ -271,7 +269,7 @@ const CGFloat kDetailsHeight = 80.0f;
     self.dateLabel = [[PCKioskAdvancedControlElementDateLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 100)];
     [self addSubview:self.dateLabel];
     
-    NSDate * date = [self.dataSource revisionDateWithIndex:self.revisionIndex];
+    NSDate * date = self.revision.createDate;//[self.dataSource revisionDateWithIndex:self.revisionIndex];
     
     self.dateLabel.date = date;
     
@@ -285,7 +283,7 @@ const CGFloat kDetailsHeight = 80.0f;
     [self.categoryLabel setFontColor:UIColorFromRGB(0x91b4d7)];
     [self addSubview:self.categoryLabel];
     
-    NSString * category = [self.dataSource issueCategoryWithIndex:self.revisionIndex];
+    NSString * category = self.revision.issue.category;[self.dataSource issueCategoryWithIndex:self.revisionIndex];
     self.categoryLabel.text = category;
     //[self.dateLabel setBackgroundColor:[UIColor redColor]];
 }
@@ -307,7 +305,7 @@ const CGFloat kDetailsHeight = 80.0f;
 {
     
     [super adjustElements];
-    if([self.dataSource isRevisionPaidWithIndex:self.revisionIndex])
+    if(self.revision.issue.paid/*[self.dataSource isRevisionPaidWithIndex:self.revisionIndex]*/)
     {
 		
 		payButton.hidden = YES;
@@ -317,7 +315,7 @@ const CGFloat kDetailsHeight = 80.0f;
 		readButton.hidden = YES;
 		cancelButton.hidden = YES;
 		deleteButton.hidden = YES;
-		NSString* price = [self.dataSource priceWithIndex:self.revisionIndex];
+		NSString* price = self.revision.issue.price;// [self.dataSource priceWithIndex:self.revisionIndex];
 		if (price ) {
 			[payButton setTitle:price forState:UIControlStateNormal];
 			payButton.hidden = NO;
@@ -327,7 +325,7 @@ const CGFloat kDetailsHeight = 80.0f;
 													 selector:@selector(productDataRecieved:)
 														 name:kInAppPurchaseManagerProductsFetchedNotification
 													   object:nil];
-			NSString* productIdentifier = [self.dataSource productIdentifierWithIndex:self.revisionIndex];
+			NSString* productIdentifier = self.revision.issue.productIdentifier;//[self.dataSource productIdentifierWithIndex:self.revisionIndex];
 			[[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
 		}
 		
@@ -348,7 +346,7 @@ const CGFloat kDetailsHeight = 80.0f;
 //        
 //        [self assignCoverImage:coverImage];
    //}
-    self.titleLabel.text = [self.dataSource issueTitleWithIndex:self.revisionIndex];
+    self.titleLabel.text = self.revision.issue.title;//[self.dataSource issueTitleWithIndex:self.revisionIndex];
     //revisionTitleLabel.text = [self.dataSource revisionTitleWithIndex:self.revisionIndex];
     //revisionStateLabel.text = [self.dataSource revisionStateWithIndex:self.revisionIndex];
     [self adjustElements];
@@ -393,23 +391,23 @@ const CGFloat kDetailsHeight = 80.0f;
         self.detailsShadowImageView.alpha = shadowAlpha;
         
         //show textview'
-//        if (!descriptionHidden) {
-//            self.detailsView.descriptionTextView.hidden = NO;
-//        }
+        if (!descriptionHidden) {
+            self.detailsView.hidden = NO;
+        }
         
         
         //setting details frame
         self.detailsView.frame = detailsFrame;
     } completion:^(BOOL finished) {
-//        if (descriptionHidden) {
-//            self.detailsView.descriptionTextView.hidden = YES;
-//        }
+        if (descriptionHidden) {
+            self.detailsView.hidden = YES;
+        }
     }];
 }
 
 - (void) productDataRecieved:(NSNotification *) notification
 {
-	if([[(NSDictionary *)[notification object] objectForKey:@"productIdentifier"] isEqualToString:[self.dataSource productIdentifierWithIndex:self.revisionIndex]])
+	if([[(NSDictionary *)[notification object] objectForKey:@"productIdentifier"] isEqualToString:self.revision.issue.productIdentifier]/*[self.dataSource productIdentifierWithIndex:self.revisionIndex]]*/)
 	{
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:kInAppPurchaseManagerProductsFetchedNotification object:nil];
 		

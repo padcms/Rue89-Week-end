@@ -150,11 +150,15 @@ typedef int SeparatorType;
     
     [self removeAllElements];
     
-    //first element
-    UIButton * firstElement = [self pageControlElementWithNumber:1];
-    firstElement.frame = CGRectMake([self centeredX], 0, kElementWidth, kElementHeight);
-    [self addSubview:firstElement];
-    [elements addObject:firstElement];
+    UIButton * firstElement;
+    if (_pagesCount > 0) {
+        //first element
+        firstElement = [self pageControlElementWithNumber:1];
+        firstElement.frame = CGRectMake([self centeredX], 0, kElementWidth, kElementHeight);
+        [self addSubview:firstElement];
+        [elements addObject:firstElement];
+    }
+
     
     if (_pagesCount > 1) {
         //last element

@@ -9,6 +9,7 @@
 #import "PCKioskFooterView.h"
 #import "PCKioskShelfSettings.h"
 #import "PCFonts.h"
+#import "PCTag.h"
 
 @interface PCKioskFooterView()
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) NSMutableArray * buttonsArray;
 @property (nonatomic, strong) UIButton * selectedButton;
+@property (nonatomic, strong) NSArray * allTags;
 
 @end
 
@@ -35,6 +37,31 @@
         [self initInterface];
     }
     return self;
+}
+
+- (void)setTags:(NSArray *)tags {
+    _tags = tags;
+    [self initButtons];
+}
+
+- (NSMutableArray *)staticTags {
+    NSMutableArray * staticTags = [NSMutableArray new];
+    
+    PCTag * tag1 = [[PCTag alloc] init];
+    tag1.tagId = TAG_ID_MAIN;
+    tag1.tagTitle = @"TOUT";
+    
+    PCTag * tag2 = [[PCTag alloc] init];
+    tag2.tagId = TAG_ID_ARCHIVES;
+    tag2.tagTitle = @"ARCHIVES";
+    
+    PCTag * tag3 = [[PCTag alloc] init];
+    tag3.tagId = TAG_ID_FREE;
+    tag3.tagTitle = @"GRATUIT";
+    
+    [staticTags addObjectsFromArray:@[tag1, tag2, tag3]];
+    
+    return staticTags;
 }
 
 - (void)initInterface {
@@ -89,13 +116,23 @@
 
 - (void)initButtons {
     
-    NSArray * buttonNames = @[@"TOUT", @"ARCHIVÉS", @"GRATUIT", @"PHOTO", @"BD", @"VIDÉO", @"COURT", @"REPORTAGES"];
+    //NSArray * buttonNames = @[@"TOUT", @"ARCHIVÉS", @"GRATUIT", @"PHOTO", @"BD", @"VIDÉO", @"COURT", @"REPORTAGES"];
+   
+    
+    self.allTags = [[self staticTags] arrayByAddingObjectsFromArray:self.tags];
+    
+    //remove old first
+    for (UIView * view in self.buttonsArray) {
+        [view removeFromSuperview];
+    }
+    [self.buttonsArray removeAllObjects];
+    
     
     int i = 0;
     CGFloat buttonHeight = 44;
     CGFloat previousButtonX = 0;
-    int buttonsCount = buttonNames.count;
-    for (NSString * buttonName in buttonNames) {
+    int buttonsCount = self.allTags.count;
+    for (PCTag * tag in self.allTags) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];        
         button.frame = CGRectMake(previousButtonX, 4, 0, 0);
         button.backgroundColor = [UIColor clearColor];
@@ -103,7 +140,7 @@
         button.titleLabel.font = [UIFont fontWithName:PCFontQuicksandBold size:18];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [button setTitleColor:UIColorFromRGB(0x91b4d7) forState:UIControlStateSelected];
-        [button setTitle:buttonNames[i] forState:UIControlStateNormal];
+        [button setTitle:tag.tagTitle forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         //button.backgroundColor = [UIColor orangeColor];
         [self.scrollView addSubview:button];
@@ -138,6 +175,7 @@
         if (i == 0) {
             button.selected = YES;
             self.selectedButton = button;
+            button.userInteractionEnabled = NO;
         }
         
         
@@ -153,8 +191,21 @@
 - (void)buttonAction:(UIButton *)sender {
     
     sender.selected = YES;
+    sender.userInteractionEnabled = NO;
     self.selectedButton.selected = NO;
+    self.selectedButton.userInteractionEnabled = YES;
     self.selectedButton = sender;
+    
+    if([self.delegate respondsToSelector:@selector(kioskFooterView:didSelectTag:)]) {
+        NSString * tagString = [self.selectedButton titleForState:UIControlStateNormal];
+        
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"tagTitle LIKE %@", tagString];
+        
+        PCTag * tag = [[self.allTags filteredArrayUsingPredicate:predicate] lastObject];
+        
+        
+        [self.delegate kioskFooterView:self didSelectTag:tag];
+    }
 }
 
 @end

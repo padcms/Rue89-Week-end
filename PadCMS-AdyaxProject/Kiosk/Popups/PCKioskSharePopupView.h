@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
-#import "PCKioskPopupView.h"
+#import "PCKioskTitledPopupView.h"
 #import "PCEmailController.h"
 #import "PCTwitterNewController.h"
 
@@ -14,7 +14,7 @@
 
 @end
 
-@interface PCKioskSharePopupView : PCKioskPopupView
+@interface PCKioskSharePopupView : PCKioskTitledPopupView
 
 @property (nonatomic, copy) NSDictionary * emailMessage;
 @property (nonatomic, copy) NSString * twitterMessage;

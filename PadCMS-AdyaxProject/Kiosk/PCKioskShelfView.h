@@ -16,9 +16,12 @@
  */
 @interface PCKioskShelfView : PCKioskBaseShelfView <PCKioskPageControlDelegate>
 
+
 @property (nonatomic) NSInteger numberOfRevisionsPerPage;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic, readonly) NSInteger totalPages;
 @property (nonatomic, readonly) NSInteger totalNumberOfRevisions;
+
+- (void)reload;
 
 @end
