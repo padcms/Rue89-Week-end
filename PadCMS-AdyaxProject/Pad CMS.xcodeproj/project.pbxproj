@@ -17,6 +17,9 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
+		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; };
+		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; };
+		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; };
 		572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -646,6 +649,7 @@
 		57B443A217D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
 		57B443A317D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
 		57B443A417D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
+		57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		600E459C15C013FD008ACADC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 600E459E15C013FD008ACADC /* Localizable.strings */; };
 		6030878A1541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 603087891541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m */; };
 		60332C46154062E800DDFF3D /* PCPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60332C44154062E800DDFF3D /* PCPrivacyPolicyViewController.m */; };
@@ -1585,6 +1589,12 @@
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		57231D8517D8C5BD00712185 /* EasyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTableView.h; sourceTree = "<group>"; };
+		57231D8617D8C5BD00712185 /* EasyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTableView.m; sourceTree = "<group>"; };
+		57231DBF17D8CFAB00712185 /* PCRevisionSummaryPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryPopup.h; sourceTree = "<group>"; };
+		57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRevisionSummaryPopup.m; sourceTree = "<group>"; };
+		57231DC217D8D02A00712185 /* PCRevisionSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryCell.h; sourceTree = "<group>"; };
+		57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRevisionSummaryCell.m; sourceTree = "<group>"; };
 		572C052817C691B40075C859 /* PCKioskIntroPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskIntroPopupView.h; sourceTree = "<group>"; };
 		572C052917C691B40075C859 /* PCKioskIntroPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskIntroPopupView.m; sourceTree = "<group>"; };
 		572C053B17C744D60075C859 /* PCKioskNotificationPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskNotificationPopup.h; sourceTree = "<group>"; };
@@ -1700,6 +1710,8 @@
 		57B4435C17D78B5000FCFA87 /* summary_separator_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "summary_separator_left@2x.png"; sourceTree = "<group>"; };
 		57B4435D17D78B5000FCFA87 /* summary_separator_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = summary_separator_right.png; sourceTree = "<group>"; };
 		57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "summary_separator_right@2x.png"; sourceTree = "<group>"; };
+		57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRevisionViewController.h; sourceTree = "<group>"; };
+		57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRevisionViewController.m; sourceTree = "<group>"; };
 		6005387715011C23008021DA /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		600E459D15C013FD008ACADC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		603087881541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNavigationControllerWithDismissableKeyboard.h; sourceTree = "<group>"; };
@@ -2297,6 +2309,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		57231D8417D8C5BD00712185 /* EasyTableView */ = {
+			isa = PBXGroup;
+			children = (
+				57231D8517D8C5BD00712185 /* EasyTableView.h */,
+				57231D8617D8C5BD00712185 /* EasyTableView.m */,
+			);
+			path = EasyTableView;
+			sourceTree = "<group>";
+		};
+		57231DBE17D8CFAB00712185 /* SummaryPopup */ = {
+			isa = PBXGroup;
+			children = (
+				57231DBF17D8CFAB00712185 /* PCRevisionSummaryPopup.h */,
+				57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */,
+				57231DC217D8D02A00712185 /* PCRevisionSummaryCell.h */,
+				57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */,
+			);
+			path = SummaryPopup;
+			sourceTree = "<group>";
+		};
 		5789895217CE090A00572BAC /* PageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2394,6 +2426,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				57231D8417D8C5BD00712185 /* EasyTableView */,
 				5789899D17CF90C800572BAC /* RTLabel */,
 				57A4747317C4AF9300745732 /* MTLabel */,
 				57A4742817C485FC00745732 /* EGOTextView */,
@@ -2466,6 +2499,7 @@
 		57A474D217C6678100745732 /* Popups */ = {
 			isa = PBXGroup;
 			children = (
+				57231DBE17D8CFAB00712185 /* SummaryPopup */,
 				57A474D317C667A800745732 /* PCKioskSharePopupView.h */,
 				57A474D417C667A800745732 /* PCKioskSharePopupView.m */,
 				572C052817C691B40075C859 /* PCKioskIntroPopupView.h */,
@@ -2591,6 +2625,8 @@
 				57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */,
 				57B442FA17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.h */,
 				57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */,
+				57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */,
+				57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -4752,6 +4788,10 @@
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
+				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
+				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
+				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

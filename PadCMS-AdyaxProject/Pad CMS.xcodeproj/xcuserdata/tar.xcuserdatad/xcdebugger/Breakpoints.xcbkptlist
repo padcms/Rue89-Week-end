@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Controllers/Magazine/PCRevisionViewController.m"
-         timestampString = "399300830.41242"
+         timestampString = "400069605.586206"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "637"
-         endingLineNumber = "637"
+         startingLineNumber = "640"
+         endingLineNumber = "640"
          landmarkName = "-_old_createTableOfContents"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Controllers/Magazine/PCRevisionViewController.m"
-         timestampString = "399300830.41242"
+         timestampString = "400069605.586206"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
          landmarkName = "-_old_createHorizontalSummary"
          landmarkType = "5">
       </FileBreakpoint>

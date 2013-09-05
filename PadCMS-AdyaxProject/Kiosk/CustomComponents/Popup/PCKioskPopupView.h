@@ -22,6 +22,7 @@
 enum  {
     PCKioskPopupPresentationStyleCenter = 1,
     PCKioskPopupPresentationStyleFromBottom = 2,
+    PCKioskPopupPresentationStyleFromTop = 3,
 };
 
 typedef int PCKioskPopupPresentationStyle;
@@ -73,6 +74,8 @@ typedef int PCKioskPopupPresentationStyle;
  */
 @property (nonatomic, weak) id<PCKioskPopupViewDelegate> delegate;
 
+@property (nonatomic) BOOL isShown;
+
 /**
  @brief Designated initializer
  */
@@ -95,11 +98,16 @@ typedef int PCKioskPopupPresentationStyle;
 
 
 - (CGRect)bottomHiddenFrame:(BOOL)hidden;
-
+- (void)prepareForPresentation;
 
 /**
- @brief Override if you want your own hide animation actions
+ @brief Override if you want your own show/hide animation actions
  */
+- (void)showAnimationActions;
 - (void)hideAnimationActions;
+
+- (void)hideAnimationCompletionActions;
+
+
 
 @end

@@ -28,6 +28,7 @@
 #import "PCKioskNotificationPopup.h"
 #import "PCKioskPageControl.h"
 #import "TestFlight.h"
+#import "PCRueRevisionViewController.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
@@ -670,9 +671,11 @@
 //        [allRevisions addObjectsFromArray:issue.revisions];
 //    }
     
-    if (index>=0 && index<[self.allRevisions count])
+    NSArray * sortedRevisions = [self allSortedRevisions];
+    
+    if (index>=0 && index<[sortedRevisions count])
     {
-        PCRevision *revision = [self.allRevisions objectAtIndex:index];
+        PCRevision *revision = [sortedRevisions objectAtIndex:index];
         return revision;
     }
     
@@ -872,9 +875,15 @@
         if (_revisionViewController == nil)
         {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-            _revisionViewController = [[PCRevisionViewController alloc] 
+#ifdef RUE
+            _revisionViewController = [[PCRueRevisionViewController alloc]
                                        initWithNibName:@"PCRevisionViewController"
                                        bundle:bundle];
+#else
+            _revisionViewController = [[PCRevisionViewController alloc]
+                                       initWithNibName:@"PCRevisionViewController"
+                                       bundle:bundle];
+#endif
         
             [_revisionViewController setRevision:currentRevision];
             _revisionViewController.mainViewController = (PCMainViewController *)self;

@@ -129,6 +129,11 @@ const CGFloat kAnimationDuration = 0.4f;
         self.blockingView.alpha = 1.0f;
         self.blockingView.backgroundColor = [UIColor clearColor];
     }
+    
+//    else if (self.presentationStyle == PCKioskPopupPresentationStyleFromTop) {
+//        NSLog(@"PCKioskPopupView: prepareForPresentation for top style is Not implemented");
+//        //self.blockingView.frame = CGRectMake(self.blockingView.frame.origin.x, 0, self.blockingView.frame.size.width, self.frame.size.height);
+//    }
 }
 
 #pragma mark - Presentation setter
@@ -142,15 +147,9 @@ const CGFloat kAnimationDuration = 0.4f;
 #pragma mark - Show/Hide public actions
 
 - (void)show {
-    
+    self.isShown = YES;
     [UIView animateWithDuration:kAnimationDuration animations:^{
-        self.blockingView.alpha = 1.0f;
-        if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
-            
-        } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
-            self.blockingView.alpha = 1.0f;
-            self.frame = [self bottomHiddenFrame:NO];
-        }
+        [self showAnimationActions];
     }];
 }
 
@@ -160,21 +159,37 @@ const CGFloat kAnimationDuration = 0.4f;
         [self hideAnimationActions];
         
     } completion:^(BOOL finished) {
-        [self.blockingView removeFromSuperview];
-        
-        if ([self.delegate respondsToSelector:@selector(popupViewDidHide:)]) {
-            [self.delegate popupViewDidHide:self];
-        }
+        self.isShown = NO;
+        [self hideAnimationCompletionActions];
     }];
 }
 
-- (void)hideAnimationActions {
-    self.blockingView.alpha = 0.0f;
-    
+- (void)showAnimationActions {
+    self.blockingView.alpha = 1.0f;
     if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
         
     } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
+        self.blockingView.alpha = 1.0f;
+        self.frame = [self bottomHiddenFrame:NO];
+    }
+}
+
+- (void)hideAnimationActions {
+    
+    
+    if (self.presentationStyle == PCKioskPopupPresentationStyleCenter) {
+        self.blockingView.alpha = 0.0f;
+    } else if (self.presentationStyle == PCKioskPopupPresentationStyleFromBottom) {
+        self.blockingView.alpha = 0.0f;
         self.frame = [self bottomHiddenFrame:YES];
+    }
+}
+
+- (void)hideAnimationCompletionActions {
+    [self.blockingView removeFromSuperview];
+    
+    if ([self.delegate respondsToSelector:@selector(popupViewDidHide:)]) {
+        [self.delegate popupViewDidHide:self];
     }
 }
 
