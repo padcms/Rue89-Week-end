@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTLabel.h"
 
 @interface PCRevisionSummaryCell : UIView
+
+@property (nonatomic, strong) MTLabel * titleLabel;
+@property (nonatomic, strong) MTLabel * descriptionLabel;
 
 @end

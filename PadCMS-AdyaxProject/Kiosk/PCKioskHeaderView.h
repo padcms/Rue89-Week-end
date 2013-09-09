@@ -13,10 +13,11 @@
 @protocol PCKioskHeaderViewDelegate <NSObject, PCKioskSubscribeButtonDelegate>
 
 @required
-
+@optional
 - (void)contactUsButtonTapped;
 - (void)restorePurchasesButtonTapped:(BOOL) needRenewIssues;
 - (void)shareButtonTapped;
+- (void)logoButtonTapped;
 
 @end
 

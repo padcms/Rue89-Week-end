@@ -1163,6 +1163,15 @@
     [sharePopup show];
 }
 
+- (void)logoButtonTapped {
+    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+    
+    if ([shelfView respondsToSelector:@selector(logoButtonTapped)]) {
+        [shelfView logoButtonTapped];
+    }
+    
+}
+
 #pragma mark - PCKioskFooterViewDelegate
 
 - (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag {

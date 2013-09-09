@@ -8,8 +8,11 @@
 
 #import "PCRevisionSummaryPopup.h"
 #import "PCRevisionSummaryCell.h"
+#import "PCTocItem.h"
 
 @interface PCRevisionSummaryPopup() <EasyTableViewDelegate>
+
+@property (nonatomic, strong) NSArray * tocItems;
 
 @end
 
@@ -17,12 +20,28 @@ const float kButtonsHeight = 40.0f;
 
 @implementation PCRevisionSummaryPopup
 
+- (id)initWithSize:(CGSize)size viewToShowIn:(UIView *)view tocItems:(NSArray *)aTocItems {
+    self = [super initWithSize:size viewToShowIn:view];
+    
+    if (self) {
+        self.tocItems = aTocItems;
+        
+        [self loadContent2];
+    }
+    
+    return self;
+}
+
 - (void)loadContent {
     [super loadContent];
     
+
+}
+
+- (void)loadContent2 {
     CGRect tableViewFrame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     
-    self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:5 ofWidth:250];
+    self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:self.tocItems.count ofWidth:250];
     self.tableView.delegate = self;
     self.tableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableView.separatorColor = [UIColor clearColor];
@@ -74,8 +93,25 @@ const float kButtonsHeight = 40.0f;
 
 - (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath {
     //view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3f];
+    
+    PCRevisionSummaryCell * cell = (PCRevisionSummaryCell *)view;
+    
+    PCTocItem * tocItem = self.tocItems[indexPath.row];
+    
+    
+    cell.titleLabel.text = tocItem.title;
+    cell.descriptionLabel.text = tocItem.tocItemDescription;
+    
+    [cell layoutSubviews];
+    [cell setNeedsDisplay];
 }
 
+- (void)easyTableView:(EasyTableView *)easyTableView selectedView:(UIView *)selectedView atIndexPath:(NSIndexPath *)indexPath deselectedView:(UIView *)deselectedView {
+    
+    if ([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectIndex:)]) {
+        [self.delegate revisionSummaryPopup:self didSelectIndex:indexPath.row];
+    }
+}
 
 #pragma mark - Popup Override stuff
 

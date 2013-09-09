@@ -15,10 +15,13 @@
 
 - (void)revisionSummaryPopupDidTapHomeButton:(PCRevisionSummaryPopup *)popup;
 - (void)revisionSummaryPopupDidTapMenuButton:(PCRevisionSummaryPopup *)popup;
+- (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectIndex:(NSInteger)index;
 
 @end
 
 @interface PCRevisionSummaryPopup : PCKioskPopupView
+
+- (id)initWithSize:(CGSize)size viewToShowIn:(UIView *)view tocItems:(NSArray *)aTocItems;
 
 @property (nonatomic, strong) EasyTableView * tableView;
 @property (nonatomic, weak) id<PCRevisionSummaryPopupDelegate> delegate;

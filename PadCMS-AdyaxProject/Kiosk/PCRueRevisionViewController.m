@@ -36,7 +36,10 @@
 #pragma mark - HUD (top summary view for Rue) Overrides
 
 - (void)createHUDView {
-    self.summaryPopup = [[PCRevisionSummaryPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 145) viewToShowIn:self.view];
+    
+    NSLog(@"TOC %@", self.revision.toc);
+    
+    self.summaryPopup = [[PCRevisionSummaryPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 146) viewToShowIn:self.view tocItems:self.revision.toc];
     [self.summaryPopup setPresentationStyle:PCKioskPopupPresentationStyleFromTop];
     [self.summaryPopup setDelegate:self];
 }
@@ -68,6 +71,10 @@
     } else {
         [self.summaryPopup hide];
     }
+}
+
+- (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectIndex:(NSInteger)index {
+    [self hudView:nil didSelectIndex:index];
 }
 
 @end

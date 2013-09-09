@@ -17,9 +17,9 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
-		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; };
-		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; };
-		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; };
+		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2231,7 +2231,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				57A4710717BB663100745732 /* CoreText.framework */,
 				60F0221C1590D7B70046FA44 /* PadCMS-CocoaTouch-Core.xcodeproj */,
 				4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */,
 				60F022581590DEEC0046FA44 /* Kiosk */,
@@ -2275,6 +2274,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57A4710717BB663100745732 /* CoreText.framework */,
 				57B4431217D737EC00FCFA87 /* TestflightSDK */,
 				C589AA841574AFF9001876FE /* AudioToolbox.framework */,
 				C589AA801574AFE5001876FE /* OpenAL.framework */,

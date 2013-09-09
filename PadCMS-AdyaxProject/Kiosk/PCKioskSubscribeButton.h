@@ -11,7 +11,6 @@
 @protocol PCKioskSubscribeButtonDelegate <NSObject>
 
 @required
-
 - (void)subscribeButtonTapped;
 
 @end

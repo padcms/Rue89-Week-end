@@ -9,12 +9,13 @@
 
 #import "PCKioskBaseShelfView.h"
 #import "PCKioskPageControl.h"
+#import "PCKioskHeaderView.h"
 
 /**
  @class PCKioskShelfView
  @brief Class for kiosk book shelf subview
  */
-@interface PCKioskShelfView : PCKioskBaseShelfView <PCKioskPageControlDelegate>
+@interface PCKioskShelfView : PCKioskBaseShelfView <PCKioskPageControlDelegate, PCKioskHeaderViewDelegate>
 
 
 @property (nonatomic) NSInteger numberOfRevisionsPerPage;

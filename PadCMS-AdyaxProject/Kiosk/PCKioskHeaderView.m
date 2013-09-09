@@ -81,4 +81,9 @@
         [self.delegate subscribeButtonTapped];
     }
 }
+- (IBAction)logoButtonTapped:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(logoButtonTapped)]) {
+        [self.delegate logoButtonTapped];
+    }
+}
 @end

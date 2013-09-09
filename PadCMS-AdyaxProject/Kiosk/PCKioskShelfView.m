@@ -11,6 +11,7 @@
 #import "PCKioskAdvancedControlElement.h"
 #import "PCKioskShelfSettings.h"
 
+
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
 @property (nonatomic, retain) NSArray * revisions;
@@ -23,7 +24,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        _numberOfRevisionsPerPage = 10;
+        _numberOfRevisionsPerPage = 20;
         _currentPage = 1;
 
     }
@@ -248,6 +249,17 @@
 
 - (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page {
     [self setCurrentPage:page];
+}
+
+
+#pragma mark - PCKioskHeaderViewDelegate
+
+- (void)logoButtonTapped {
+    [mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (void)subscribeButtonTapped {
+    //nothing
 }
 
 @end
