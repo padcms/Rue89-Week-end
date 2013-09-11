@@ -10,11 +10,14 @@
 #import "PCKioskControlElement.h"
 #import "PCKioskAdvancedControlElement.h"
 #import "PCKioskShelfSettings.h"
+#import "PCKioskSubHeaderView.h"
 
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
 @property (nonatomic, retain) NSArray * revisions;
+@property (nonatomic, retain) PCKioskSubHeaderView * subHeaderView;
+@property (nonatomic) BOOL isSubheaderShown;
 
 @end
 
@@ -32,16 +35,38 @@
     return self;
 }
 
-//- (void)setDataSource:(id<PCKioskDataSourceProtocol>)dataSource {
-//    [super setDataSource:dataSource];
-//    
-//    self.revisions = [self.dataSource allSortedRevisions];
-//    
-//    self.totalNumberOfRevisions =  [self.revisions count];
-//}
-
 - (void)reload {
     [self createCells];
+}
+
+- (void)reloadWithScrollingToTop {
+    self.shouldScrollToTopAfterReload = YES;
+    [self reload];
+}
+
+- (void)showSubHeader:(BOOL)show {
+    
+    if ((show && !self.isSubheaderShown) || (!show && self.isSubheaderShown)) {
+        self.isSubheaderShown = show;
+        
+        CGFloat width = self.subHeaderView.frame.size.width;
+        CGFloat height = self.subHeaderView.frame.size.height;
+        
+        CGRect frame = CGRectMake(0, (show ? 0 : - height), width, height);
+        
+        UIEdgeInsets insets = UIEdgeInsetsMake(show ? 30 : 0, 0, 0, 0);
+        
+        mainScrollView.contentInset = insets;
+        CGPoint offset = CGPointMake(0, -insets.top);
+        
+        [UIView animateWithDuration:0.5f animations:^{
+            self.subHeaderView.frame = frame;
+            
+            mainScrollView.contentOffset = offset;
+            
+            
+        }];
+    }
 }
 
 #ifdef RUE
@@ -49,6 +74,11 @@
     [super createView];
     
     self.backgroundColor = UIColorFromRGB(0xf6f8fa);
+    
+    self.subHeaderView = [[PCKioskSubHeaderView alloc] initWithFrame:CGRectMake(0, -40, self.bounds.size.width, 40)];
+    [self addSubview:self.subHeaderView];
+    
+
 }
 #endif
 
@@ -104,10 +134,12 @@
     
     NSInteger startRevisionIndex = (_currentPage - 1) * _numberOfRevisionsPerPage;
     
-    
+    CGSize previousContentSize = mainScrollView.contentSize;
     
             CGFloat paginationHeight = 57.0f;
-    mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
+    [UIView animateWithDuration:0.5f animations:^{
+        mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
+    }];
     
     //remove old first
     for (UIView * view in cells) {
@@ -176,9 +208,17 @@
         counter++;
     }
     
+    
+    
     [UIView animateWithDuration:0.5f animations:^{
-        [mainScrollView setContentOffset:CGPointMake(0, 0)];
+        //mainScrollView.contentOffset = mainScrollView.contentOffset;
+        if (self.shouldScrollToTopAfterReload) {
+            self.shouldScrollToTopAfterReload = NO;
+            [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
+        }
     }];
+    
+
     
 }
 #endif
@@ -248,6 +288,7 @@
 #pragma mark - PCKioskPageControlDelegate
 
 - (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page {
+    self.shouldScrollToTopAfterReload = YES;
     [self setCurrentPage:page];
 }
 

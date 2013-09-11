@@ -29,6 +29,7 @@
 #import "PCKioskPageControl.h"
 #import "TestFlight.h"
 #import "PCRueRevisionViewController.h"
+#import "PCKioskSubHeaderView.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
@@ -588,6 +589,10 @@
 
 #pragma mark - New kiosk implementation
 
+- (PCKioskShelfView *)shelfView {
+    return (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+}
+
 - (void) initKiosk
 {
 	if (!currentApplication) return;
@@ -612,13 +617,17 @@
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
     self.kioskHeaderView.delegate = self;
     [self.view addSubview:self.kioskHeaderView];
-    
 
     //footer
     self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
     self.kioskFooterView.delegate = self;
     self.kioskFooterView.tags = currentApplication.tags;
     [self.view addSubview:self.kioskFooterView];
+    
+    if (self.kioskFooterView.staticTags.count) {
+        self.selectedTag = [self.kioskFooterView.staticTags[0] retain];
+    }
+    
     
     NSInteger footerHeight = self.kioskFooterView.frame.size.height - 3;
     NSInteger headerHeight = 136;
@@ -639,12 +648,14 @@
     [self.view bringSubviewToFront:self.kioskViewController.view];
     
 #ifdef RUE
+    //[self.view bringSubviewToFront:self.subHeaderView];
     [self.view bringSubviewToFront:self.kioskHeaderView];
     [self.view bringSubviewToFront:self.kioskFooterView];
     
+    
     self.view.backgroundColor = [UIColor greenColor];
     
-    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+    PCKioskShelfView * shelfView = [self shelfView];
     
     //page control
     self.pageControl = [PCKioskPageControl pageControl];
@@ -838,14 +849,49 @@
     
     if (self.selectedTag) {
         
-       NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-            for (PCTag * tag in revision.issue.tags) {
-                if (tag.tagId == self.selectedTag.tagId) {
+        NSArray * staticTagIds = [[self.kioskFooterView staticTags] valueForKey:@"tagId"];
+        
+        NSPredicate * predicate;
+        
+        if (![staticTagIds containsObject:@(self.selectedTag.tagId)]) {
+            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
+                if (revision.state != PCRevisionStateArchived) {
+                    for (PCTag * tag in revision.issue.tags) {
+                        if (tag.tagId == self.selectedTag.tagId) {
+                            return YES;
+                        }
+                    }
+                }
+
+                return NO;
+            }];
+        } else if (self.selectedTag.tagId == TAG_ID_ARCHIVES) {
+            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
+                if (revision.state == PCRevisionStateArchived) {
                     return YES;
                 }
-            }
-            return NO;
-        }];
+                
+                return NO;
+            }];
+        } else if (self.selectedTag.tagId == TAG_ID_FREE) {
+            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
+                if (revision.issue.isPaid && (revision.state != PCRevisionStateArchived)) {
+                    return YES;
+                }
+                
+                return NO;
+            }];
+        } else if (self.selectedTag.tagId == TAG_ID_MAIN) {
+            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
+                if (revision.state != PCRevisionStateArchived) {
+                    return YES;
+                }
+                
+                return NO;
+            }];
+        }
+        
+
         
         allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
     }
@@ -988,6 +1034,24 @@
 
 	}
 	
+}
+
+- (void) archiveRevisionWithIndex:(NSInteger)index {
+    
+    PCRevision *revision = [self revisionWithIndex:index];
+    revision.state = PCRevisionStateArchived;
+    
+    [[self shelfView] reload];
+    self.pageControl.pagesCount = [self shelfView].totalPages;
+    
+}
+
+- (void)restoreRevisionWithIndex:(NSInteger)index {
+    PCRevision *revision = [self revisionWithIndex:index];
+    revision.state = PCRevisionStatePublished;
+    
+    [[self shelfView] reload];
+    self.pageControl.pagesCount = [self shelfView].totalPages;
 }
 
 - (void) updateRevisionWithIndex:(NSInteger) index
@@ -1164,10 +1228,9 @@
 }
 
 - (void)logoButtonTapped {
-    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
     
-    if ([shelfView respondsToSelector:@selector(logoButtonTapped)]) {
-        [shelfView logoButtonTapped];
+    if ([[self shelfView] respondsToSelector:@selector(logoButtonTapped)]) {
+        [[self shelfView] logoButtonTapped];
     }
     
 }
@@ -1176,15 +1239,20 @@
 
 - (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag {
     
-    if (tag.tagId == TAG_ID_MAIN || tag.tagId == TAG_ID_FREE) {
-        self.selectedTag = nil;
+    self.selectedTag = tag;
+    
+    PCKioskShelfView * shelfView = [self shelfView];
+    
+    if (tag.tagId == TAG_ID_ARCHIVES) {
+        [shelfView showSubHeader:YES];
     } else {
-        self.selectedTag = tag;
+        [shelfView showSubHeader:NO];
     }
     
-    PCKioskShelfView * shelfView = (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
+    
     //shelfView.currentPage = 1;
     //[shelfView reload];
+    shelfView.shouldScrollToTopAfterReload = YES;
     self.pageControl.currentPage = 1;
     self.pageControl.pagesCount = shelfView.totalPages;
 }
@@ -1253,7 +1321,12 @@
             if (revision)
             {
                 [revision deleteContent];
+                revision.state = PCRevisionStatePublished;
                 [self.kioskViewController updateRevisionWithIndex:index];
+                
+                [[self shelfView] reload];
+                self.pageControl.pagesCount = [self shelfView].totalPages;
+                
             }
         }
 	}

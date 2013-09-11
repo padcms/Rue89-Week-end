@@ -287,7 +287,11 @@ typedef int SeparatorType;
 - (void)setPagesCount:(NSInteger)pagesCount {
     _pagesCount = pagesCount;
     
-    [self createViewsForPage:_currentPage];
+    if (_currentPage > _pagesCount) {
+        [self setCurrentPage:_pagesCount];
+    } else {
+        [self createViewsForPage:_currentPage];
+    }
 }
 
 @end

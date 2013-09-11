@@ -49,6 +49,13 @@
 		578989A417CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578989A517CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
 		578989A617CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		57A2591F17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2592017DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2592117DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2592217DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
 		57A4703D17B8F33700745732 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */; };
 		57A4703F17B8F33F00745732 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */; };
 		57A4708D17BAA56300745732 /* home_footer_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4707917BAA56300745732 /* home_footer_arrow.png */; };
@@ -1603,6 +1610,8 @@
 		5789895E17CE0A3000572BAC /* PCKioskPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskPageControl.m; sourceTree = "<group>"; };
 		5789899E17CF90C800572BAC /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		5789899F17CF90C800572BAC /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		57A2591A17DF3EEA008D576F /* PCKioskSubHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskSubHeaderView.h; sourceTree = "<group>"; };
+		57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskSubHeaderView.m; sourceTree = "<group>"; };
 		57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		57A4703E17B8F33F00745732 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		57A4707917BAA56300745732 /* home_footer_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_footer_arrow.png; sourceTree = "<group>"; };
@@ -2627,6 +2636,8 @@
 				57B442FB17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m */,
 				57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */,
 				57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */,
+				57A2591A17DF3EEA008D576F /* PCKioskSubHeaderView.h */,
+				57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -4692,6 +4703,7 @@
 				57B442FC17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434617D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434D17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4724,6 +4736,7 @@
 				57B4430217D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434C17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435317D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2592217DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4756,6 +4769,7 @@
 				57B4430117D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434B17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435217D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2592117DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4792,6 +4806,7 @@
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
+				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4830,6 +4845,7 @@
 				57B442FF17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434917D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435017D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2591F17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4884,6 +4900,7 @@
 				57B4430017D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434A17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435117D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2592017DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4916,6 +4933,7 @@
 				57B442FD17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434717D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434E17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

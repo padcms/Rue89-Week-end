@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Kiosk/PCKioskAdvancedControlElement.m"
-         timestampString = "399997289.970908"
+         timestampString = "400607907.672242"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
          landmarkName = "-initLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -118,6 +118,32 @@
          startingLineNumber = "484"
          endingLineNumber = "484"
          landmarkName = "-drawRect:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Kiosk/Popups/SummaryPopup/PCRevisionSummaryPopup.m"
+         timestampString = "400442309.650919"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "-showAnimationActions"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Kiosk/Popups/SummaryPopup/PCRevisionSummaryPopup.m"
+         timestampString = "400442309.650919"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-hideAnimationActions"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

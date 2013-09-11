@@ -20,10 +20,13 @@
 
 @interface PCKioskAdvancedControlElement : PCKioskBaseControlElement {
     UIButton                *payButton;
+    
 }
 
 @property (nonatomic, assign) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
 @property (nonatomic, retain) PCRevision * revision;
+@property (nonatomic, retain) UIButton * archiveButton;
+@property (nonatomic, retain) UIButton * restoreButton;
 
 @end
 

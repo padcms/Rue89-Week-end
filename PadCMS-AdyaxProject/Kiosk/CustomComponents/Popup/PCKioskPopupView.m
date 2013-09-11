@@ -207,7 +207,10 @@ const CGFloat kAnimationDuration = 0.4f;
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)recognizer {
     self.closeButton.enabled = NO;
-    [self hide];
+    if (self.isShown) {
+        [self hide];
+    }
+
 }
 
 

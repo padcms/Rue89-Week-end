@@ -44,24 +44,26 @@
     [self initButtons];
 }
 
-- (NSMutableArray *)staticTags {
-    NSMutableArray * staticTags = [NSMutableArray new];
+- (NSArray *)staticTags {
+    if (!_staticTags) {
+        
+        PCTag * tag1 = [[PCTag alloc] init];
+        tag1.tagId = TAG_ID_MAIN;
+        tag1.tagTitle = @"TOUT";
+        
+        PCTag * tag2 = [[PCTag alloc] init];
+        tag2.tagId = TAG_ID_ARCHIVES;
+        tag2.tagTitle = @"ARCHIVES";
+        
+        PCTag * tag3 = [[PCTag alloc] init];
+        tag3.tagId = TAG_ID_FREE;
+        tag3.tagTitle = @"GRATUIT";
+        
+        _staticTags = @[tag1, tag2, tag3];
+    }
+
     
-    PCTag * tag1 = [[PCTag alloc] init];
-    tag1.tagId = TAG_ID_MAIN;
-    tag1.tagTitle = @"TOUT";
-    
-    PCTag * tag2 = [[PCTag alloc] init];
-    tag2.tagId = TAG_ID_ARCHIVES;
-    tag2.tagTitle = @"ARCHIVES";
-    
-    PCTag * tag3 = [[PCTag alloc] init];
-    tag3.tagId = TAG_ID_FREE;
-    tag3.tagTitle = @"GRATUIT";
-    
-    [staticTags addObjectsFromArray:@[tag1, tag2, tag3]];
-    
-    return staticTags;
+    return _staticTags;
 }
 
 - (void)initInterface {

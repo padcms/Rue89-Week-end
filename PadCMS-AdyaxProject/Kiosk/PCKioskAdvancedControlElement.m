@@ -75,82 +75,47 @@ const CGFloat kDetailsHeight = 80.0f;
 	//downloadingInfoLabel.frame = CGRectMake(downloadingProgressView.frame.origin.x,downloadingProgressView.frame.origin.y+downloadingProgressView.frame.size.height,downloadingProgressView.frame.size.width,30);
 }
 
+- (UIButton *)buttonWithTitle:(NSString *)title {
+   
+    CGFloat fontSize = 16.5;
+
+	UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+	[button setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
+	[button setTitle:[title uppercaseString]
+                    forState:UIControlStateNormal];
+	[button titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
+	[button titleLabel].backgroundColor = [UIColor clearColor];
+	[button titleLabel].textAlignment = UITextAlignmentCenter;
+	[button titleLabel].textColor = [UIColor whiteColor];
+	[button sizeToFit];
+	button.hidden = YES;
+    [self addSubview:button];
+    return button;
+}
+
 -(void)initButtons
 {
+	downloadButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
+                                                                                  value:@"DOWNLOAD"]];
+	
+	readButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_READ"
+                                                                              value:@"READ"]];
+	
+	cancelButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL"
+                                                                                value:@"CANCEL"]];
+	
+	deleteButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DELETE"
+                                                                                value:@"DELETE"]];
+	
+	payButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_PAY"
+                                                                             value:@"PAY"]];
     
-    CGFloat fontSize = 16.5;
-    // [super initButtons];
-	downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[downloadButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
-	[downloadButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
-                                                                    value:@"DOWNLOAD"]
-                    forState:UIControlStateNormal];
-	[downloadButton titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
-    [downloadButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
-	[downloadButton titleLabel].backgroundColor = [UIColor clearColor];
-	[downloadButton titleLabel].textAlignment = UITextAlignmentCenter;
-	[downloadButton titleLabel].textColor = [UIColor whiteColor];
-	[downloadButton sizeToFit];
-	downloadButton.hidden = YES;
-	[self addSubview:downloadButton];
-	
-	readButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[readButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
-	[readButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_READ"
-                                                                value:@"READ"]
-                forState:UIControlStateNormal];
-	[readButton titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
-    [readButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
-	[readButton titleLabel].backgroundColor = [UIColor clearColor];
-	[readButton titleLabel].textAlignment = UITextAlignmentCenter;
-	[readButton titleLabel].textColor = [UIColor whiteColor];
-	[readButton sizeToFit];
-	readButton.hidden = YES;
-	[self addSubview:readButton];
-	
-	cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[cancelButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
-	[cancelButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL"
-                                                                  value:@"CANCEL"]
-                  forState:UIControlStateNormal];
-	[cancelButton titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
-    [cancelButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
-	[cancelButton titleLabel].backgroundColor = [UIColor clearColor];
-	[cancelButton titleLabel].textAlignment = UITextAlignmentCenter;
-	[cancelButton titleLabel].textColor = [UIColor whiteColor];
-	[cancelButton sizeToFit];
-	cancelButton.hidden = YES;
-	[self addSubview:cancelButton];
-	
-	deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[deleteButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
-	[deleteButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DELETE"
-                                                                  value:@"DELETE"]
-                  forState:UIControlStateNormal];
-    //[deleteButton setTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]]  forState:UIControlStateNormal];
-    //[deleteButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[deleteButton titleForState:UIControlStateNormal]] forState:UIControlStateNormal];
-	[deleteButton titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
-    [deleteButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
-	[deleteButton titleLabel].backgroundColor = [UIColor clearColor];
-	[deleteButton titleLabel].textAlignment = UITextAlignmentCenter;
-	[deleteButton titleLabel].textColor = [UIColor whiteColor];
-	[deleteButton sizeToFit];
-	deleteButton.hidden = YES;
-	[self addSubview:deleteButton];
-	
-	payButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[payButton setBackgroundImage:[[UIImage imageNamed:@"home_issue_button_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:16] forState:UIControlStateNormal];
-	[payButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_PAY"
-                                                               value:@"PAY"]
-               forState:UIControlStateNormal];
-	[payButton titleLabel].font = [UIFont fontWithName:PCFontQuicksandBold size:fontSize];
-    [payButton setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
-	[payButton titleLabel].backgroundColor = [UIColor clearColor];
-	[payButton titleLabel].textAlignment = UITextAlignmentCenter;
-	[payButton titleLabel].textColor = [UIColor whiteColor];
-	[payButton sizeToFit];
-	deleteButton.hidden = YES;
-	[self addSubview:payButton];
+    _archiveButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_ARCHIVE"
+                                                                                   value:@"ARCHIVE"]];
+    
+    _restoreButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_RESTORE"
+                                                                                  value:@"RESTORE"]];
     
     UIImage * showDetailsButtonNormalBackgroundImage = [UIImage imageNamed:@"home_issue_details_button_bg_normal"];
     self.showDetailsButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -171,11 +136,16 @@ const CGFloat kDetailsHeight = 80.0f;
     CGFloat buttonY1 = self.bounds.size.height - buttonHeight - 30.0f;
     CGFloat buttonY2 = buttonY1 - buttonHeight - 10.0f;
     
-	downloadButton.frame = CGRectMake(buttonX, buttonY1, buttonWidth, buttonHeight);
-	cancelButton.frame = downloadButton.frame;
-	readButton.frame = CGRectMake(buttonX, buttonY1, buttonWidth, buttonHeight);
-	deleteButton.frame = CGRectMake(buttonX, buttonY2, buttonWidth, buttonHeight);
-	payButton.frame = CGRectMake(buttonX, buttonY1, buttonWidth, buttonHeight);
+    CGRect topButtonRect = CGRectMake(buttonX, buttonY2, buttonWidth, buttonHeight);
+    CGRect bottomButtonRect = CGRectMake(buttonX, buttonY1, buttonWidth, buttonHeight);
+    
+	downloadButton.frame = bottomButtonRect;
+	cancelButton.frame = bottomButtonRect;
+	readButton.frame = topButtonRect;
+	deleteButton.frame = bottomButtonRect;
+	payButton.frame = bottomButtonRect;
+    _archiveButton.frame = bottomButtonRect;
+    _restoreButton.frame = topButtonRect;
 }
 
 - (void)initCover {
@@ -299,6 +269,14 @@ const CGFloat kDetailsHeight = 80.0f;
     [self.showDetailsButton addTarget:self
                                action:@selector(showDetailsButtonTapped)
                      forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.archiveButton addTarget:self
+                           action:@selector(archiveButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.restoreButton addTarget:self
+                           action:@selector(restoreButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) adjustElements
@@ -330,6 +308,27 @@ const CGFloat kDetailsHeight = 80.0f;
 		}
 		
 	}
+    
+    if (self.revision.isDownloaded) {
+        deleteButton.hidden = YES;
+        _archiveButton.hidden = NO;
+    }
+    
+    if (self.revision.state == PCRevisionStateArchived) {
+        if (self.revision.isDownloaded) {
+            deleteButton.hidden = NO;
+            _restoreButton.hidden = NO;
+            _archiveButton.hidden = YES;
+            readButton.hidden = YES;
+        }
+    } else {
+        if (self.revision.isDownloaded) {
+            deleteButton.hidden = YES;
+            _archiveButton.hidden = NO;
+            _restoreButton.hidden = YES;
+        }
+
+    }
 	
 }
 
@@ -357,6 +356,17 @@ const CGFloat kDetailsHeight = 80.0f;
 - (void) payButtonTapped
 {
     [self.delegate purchaseButtonTappedWithRevisionIndex:self.revisionIndex];
+}
+
+- (void)archiveButtonTapped {
+//    self.revision.state = PCRevisionStateArchived;
+//    [self adjustElements];
+    
+    [self.delegate archiveButtonTappedWithRevisionIndex:self.revisionIndex];
+}
+
+- (void)restoreButtonTapped {
+    [self.delegate restoreButtonTappedWithRevisionIndex:self.revisionIndex];
 }
 
 - (void)showDetailsButtonTapped {

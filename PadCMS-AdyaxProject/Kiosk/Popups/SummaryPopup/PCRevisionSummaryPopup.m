@@ -39,6 +39,7 @@ const float kButtonsHeight = 40.0f;
 }
 
 - (void)loadContent2 {
+    
     CGRect tableViewFrame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     
     self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:self.tocItems.count ofWidth:250];
@@ -47,13 +48,17 @@ const float kButtonsHeight = 40.0f;
     self.tableView.tableView.separatorColor = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];
     
+    CGRect frame = self.frame;
+    frame.size.height += kButtonsHeight;
+    self.frame = frame;
+    
     UIImage * homeButtonImage = [UIImage imageNamed:@"summary_home_button"];
     
     UIButton * homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [homeButton setImage:homeButtonImage forState:UIControlStateNormal];
     homeButton.frame = CGRectMake(560, 146, homeButtonImage.size.width, homeButtonImage.size.height);
     [homeButton addTarget:self action:@selector(homeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.blockingView insertSubview:homeButton atIndex:0];
+    [self insertSubview:homeButton atIndex:0];
     
     
     UIImage * menuButtonImage = [UIImage imageNamed:@"summary_menu_button"];
@@ -62,7 +67,9 @@ const float kButtonsHeight = 40.0f;
     [menuButton setImage:menuButtonImage forState:UIControlStateNormal];
     menuButton.frame = CGRectMake(622, 146, menuButtonImage.size.width, menuButtonImage.size.height);
     [menuButton addTarget:self action:@selector(menuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.blockingView insertSubview:menuButton atIndex:0];
+    [self insertSubview:menuButton atIndex:0];
+    
+
 }
 
 
@@ -121,11 +128,15 @@ const float kButtonsHeight = 40.0f;
     if (self.presentationStyle == PCKioskPopupPresentationStyleFromTop) {
         //self.blockingView.frame = CGRectMake(self.blockingView.frame.origin.x, 0, self.blockingView.frame.size.width, self.frame.size.height + kButtonsHeight);
         
-        self.blockingView.frame = [self blockingViewTopHiddenFrame:YES];
+        //self.blockingView.frame = [self blockingViewTopHiddenFrame:YES];
         
-        self.frame = [self topHiddenFrame:NO];
-        self.blockingView.alpha = 1.0f;
-        self.blockingView.backgroundColor = [UIColor clearColor];
+        [self removeFromSuperview];
+        
+        [self.blockingView.superview addSubview:self];
+        
+        self.frame = [self topHiddenFrame:YES];
+        self.blockingView.alpha = 0.0f;
+        self.blockingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
         self.closeButton.hidden = YES;
     }
 }
@@ -133,7 +144,7 @@ const float kButtonsHeight = 40.0f;
 - (CGRect)topHiddenFrame:(BOOL)hidden{
     
     return CGRectMake(-self.shadowWidth,
-                      (hidden ?  -self.frame.size.height + self.shadowWidth -  0 : - self.shadowWidth),
+                      (hidden ?  -self.frame.size.height + self.shadowWidth + kButtonsHeight : - self.shadowWidth),
                       self.frame.size.width
                       , self.frame.size.height);
 }
@@ -151,7 +162,7 @@ const float kButtonsHeight = 40.0f;
     
     if (self.presentationStyle == PCKioskPopupPresentationStyleFromTop) {
         self.blockingView.alpha = 1.0f;
-        self.blockingView.frame = [self blockingViewTopHiddenFrame:NO];
+        self.frame = [self topHiddenFrame:NO];
     }
 }
 
@@ -159,13 +170,24 @@ const float kButtonsHeight = 40.0f;
     [super hideAnimationActions];
     
     if (self.presentationStyle == PCKioskPopupPresentationStyleFromTop) {
-        self.blockingView.frame = [self blockingViewTopHiddenFrame:YES];
-        
+        self.frame = [self topHiddenFrame:YES];
+        self.blockingView.alpha = 0.0f;
     }
 }
 
 - (void)hideAnimationCompletionActions {
     
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView * subview = [super hitTest:point withEvent:event];
+    
+    
+    if (subview == self) {
+        return nil;
+    }
+    
+    return subview;
 }
 
 @end
