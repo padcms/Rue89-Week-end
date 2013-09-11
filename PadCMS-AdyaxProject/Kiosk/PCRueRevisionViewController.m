@@ -50,6 +50,12 @@
 
 }
 
+#pragma mark - Transition
+
+- (void)switchToKiosk {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 #pragma mark - tap handler
 

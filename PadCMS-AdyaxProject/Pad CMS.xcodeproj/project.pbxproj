@@ -49,6 +49,20 @@
 		578989A417CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578989A517CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
 		578989A617CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
+		578CB9AA17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9AB17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		578CB9AD17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9AE17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9AF17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9B017E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9B317E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B417E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B617E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B717E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B817E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B917E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
 		57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
 		57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
 		57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1610,6 +1624,10 @@
 		5789895E17CE0A3000572BAC /* PCKioskPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskPageControl.m; sourceTree = "<group>"; };
 		5789899E17CF90C800572BAC /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		5789899F17CF90C800572BAC /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		578CB9A817E0CE620014C897 /* ArchivingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchivingDataSource.h; sourceTree = "<group>"; };
+		578CB9A917E0CE620014C897 /* ArchivingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchivingDataSource.m; sourceTree = "<group>"; };
+		578CB9B117E101C90014C897 /* PCRueKioskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueKioskViewController.h; sourceTree = "<group>"; };
+		578CB9B217E101C90014C897 /* PCRueKioskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueKioskViewController.m; sourceTree = "<group>"; };
 		57A2591A17DF3EEA008D576F /* PCKioskSubHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskSubHeaderView.h; sourceTree = "<group>"; };
 		57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskSubHeaderView.m; sourceTree = "<group>"; };
 		57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
@@ -2356,6 +2374,15 @@
 			path = RTLabel;
 			sourceTree = "<group>";
 		};
+		578CB9A617E0CE430014C897 /* Archiving */ = {
+			isa = PBXGroup;
+			children = (
+				578CB9A817E0CE620014C897 /* ArchivingDataSource.h */,
+				578CB9A917E0CE620014C897 /* ArchivingDataSource.m */,
+			);
+			path = Archiving;
+			sourceTree = "<group>";
+		};
 		57A4707617BAA21A00745732 /* Rue89 New Design */ = {
 			isa = PBXGroup;
 			children = (
@@ -2602,6 +2629,7 @@
 		60F022581590DEEC0046FA44 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				578CB9A617E0CE430014C897 /* Archiving */,
 				57A474D217C6678100745732 /* Popups */,
 				57A4749417C5887E00745732 /* CustomComponents */,
 				57A4742717C485FA00745732 /* ThirdParty */,
@@ -2638,6 +2666,8 @@
 				57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */,
 				57A2591A17DF3EEA008D576F /* PCKioskSubHeaderView.h */,
 				57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */,
+				578CB9B117E101C90014C897 /* PCRueKioskViewController.h */,
+				578CB9B217E101C90014C897 /* PCRueKioskViewController.m */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -4704,6 +4734,8 @@
 				57B4434617D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434D17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AA17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B317E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4737,6 +4769,8 @@
 				57B4434C17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435317D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2592217DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9B017E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B917E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4770,6 +4804,8 @@
 				57B4434B17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435217D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2592117DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AF17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B817E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4807,6 +4843,8 @@
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4846,6 +4884,8 @@
 				57B4434917D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435017D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591F17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AD17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B617E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4901,6 +4941,8 @@
 				57B4434A17D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4435117D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2592017DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AE17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B717E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4934,6 +4976,8 @@
 				57B4434717D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434E17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
+				578CB9AB17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				578CB9B417E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

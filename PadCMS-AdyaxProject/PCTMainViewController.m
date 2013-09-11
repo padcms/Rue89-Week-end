@@ -30,6 +30,8 @@
 #import "TestFlight.h"
 #import "PCRueRevisionViewController.h"
 #import "PCKioskSubHeaderView.h"
+#import "ArchivingDataSource.h"
+#import "PCRueKioskViewController.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
@@ -409,10 +411,15 @@
     {
         [self btnUnloadTap:self];
         mainView = nil;
-        
+#ifdef RUE
+        [_revisionViewController dismissModalViewControllerAnimated:YES];
+        _revisionViewController = nil;
+#else
         [_revisionViewController.view removeFromSuperview];
         [_revisionViewController release];
         _revisionViewController = nil;
+#endif
+
         //[self restart];
     }
 }
@@ -593,6 +600,17 @@
     return (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
 }
 
+- (void)setArchivedRevisionStates {
+    
+    NSArray * archivedRevisionIds = [ArchivingDataSource allArchivedRevisionIds];
+    
+    for (PCRevision * revision in self.allRevisions) {
+        if ([archivedRevisionIds containsObject:@(revision.identifier)]) {
+            revision.state = PCRevisionStateArchived;
+        }
+    }
+}
+
 - (void) initKiosk
 {
 	if (!currentApplication) return;
@@ -607,10 +625,14 @@
         [self.allRevisions addObjectsFromArray:issue.revisions];
     }
     
+    [self setArchivedRevisionStates];
+    
     NSInteger           kioskBarHeight = 34.0;
     
     self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
     self.kioskNavigationBar.delegate = self;
+    
+    Class kioskClass;
     
 #ifdef RUE
     //header
@@ -631,16 +653,20 @@
     
     NSInteger footerHeight = self.kioskFooterView.frame.size.height - 3;
     NSInteger headerHeight = 136;
+    
+    kioskClass = [PCRueKioskViewController class];
 #else
     NSInteger footerHeight = 0;
     NSInteger headerHeight = 34;
+    
+    kioskClass = [PCKioskViewController class];
 #endif
     
 
     
     //gallery
     PCKioskSubviewsFactory      *factory = [[[PCKioskSubviewsFactory alloc] init] autorelease];
-    self.kioskViewController = [[PCKioskViewController alloc] initWithKioskSubviewsFactory:factory
+    self.kioskViewController = [[kioskClass alloc] initWithKioskSubviewsFactory:factory
                                                                                   andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
                                                                              andDataSource:self];
     self.kioskViewController.delegate = self;
@@ -653,7 +679,7 @@
     [self.view bringSubviewToFront:self.kioskFooterView];
     
     
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     PCKioskShelfView * shelfView = [self shelfView];
     
@@ -934,7 +960,18 @@
             [_revisionViewController setRevision:currentRevision];
             _revisionViewController.mainViewController = (PCMainViewController *)self;
             _revisionViewController.initialPageIndex = 0;
+            
+#ifdef RUE
+            [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+            [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+            [self presentViewController:_revisionViewController animated:YES completion:^{}];
+            [_revisionViewController release];
+#else
             [self.view addSubview:_revisionViewController.view];
+#endif
+            
+
+            
             self.mainView = _revisionViewController.view;
             self.mainView.tag = 100;
             
@@ -1044,6 +1081,9 @@
     [[self shelfView] reload];
     self.pageControl.pagesCount = [self shelfView].totalPages;
     
+    [ArchivingDataSource addId:revision.identifier];
+    
+    
 }
 
 - (void)restoreRevisionWithIndex:(NSInteger)index {
@@ -1052,6 +1092,8 @@
     
     [[self shelfView] reload];
     self.pageControl.pagesCount = [self shelfView].totalPages;
+    
+    [ArchivingDataSource removeId:revision.identifier];
 }
 
 - (void) updateRevisionWithIndex:(NSInteger) index
@@ -1206,7 +1248,12 @@
 #pragma mark - PCKioskHeaderViewDelegate
 
 - (void)contactUsButtonTapped {
-    
+    NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"Subject", PCApplicationNotificationMessageKey : @"Message"};
+    PCEmailController * emailController = [[PCEmailController alloc] initWithMessage:emailParams];
+    [emailController.emailViewController setToRecipients:@[@"email@example.com"]];
+
+    emailController.delegate = self;
+    [emailController emailShow];
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
@@ -1322,6 +1369,7 @@
             {
                 [revision deleteContent];
                 revision.state = PCRevisionStatePublished;
+                [ArchivingDataSource removeId:revision.identifier];
                 [self.kioskViewController updateRevisionWithIndex:index];
                 
                 [[self shelfView] reload];

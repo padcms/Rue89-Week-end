@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Kiosk/PCKioskAdvancedControlElement.m"
-         timestampString = "400607907.672242"
+         timestampString = "400619759.454057"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "241"
-         endingLineNumber = "241"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
          landmarkName = "-initLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -124,26 +124,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Kiosk/Popups/SummaryPopup/PCRevisionSummaryPopup.m"
-         timestampString = "400442309.650919"
+         filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Controllers/Magazine/PCRevisionViewController.m"
+         timestampString = "400621064.372721"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "-showAnimationActions"
+         startingLineNumber = "1071"
+         endingLineNumber = "1071"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Kiosk/Popups/SummaryPopup/PCRevisionSummaryPopup.m"
-         timestampString = "400442309.650919"
+         filePath = "PCTMainViewController.m"
+         timestampString = "400622705.119865"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "-hideAnimationActions"
+         startingLineNumber = "576"
+         endingLineNumber = "576"
+         landmarkName = "-updateApplicationData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
@@ -156,7 +156,7 @@
          stopOnStyle = "0">
       </ExceptionBreakpoint>
       <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "0"

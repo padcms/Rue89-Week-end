@@ -205,8 +205,6 @@ const CGFloat kDetailsHeight = 80.0f;
     [self.detailsView setAuthorsString:authors];
     [self.detailsView setNumberOfWords:wordsCount];
     
-    //self.detailsView.descriptionTextView.text = self.dataSource
-    
 }
 
 - (void)initLabels {
@@ -222,14 +220,12 @@ const CGFloat kDetailsHeight = 80.0f;
     
     //[super initLabels];
     NSString * text = @"hello Text! I am a big line\nof the text\ntest test test";
-    self.titleLabel = [[PCKioskAdvancedControlElementTitleLabel alloc] initWithFrame:CGRectMake(0, 31, 400, 200)];
+    self.titleLabel = [[PCKioskAdvancedControlElementTitleLabel alloc] initWithFrame:CGRectMake(0, 31, 600, 210)];
+    
     [_titleLabel setFont:[UIFont fontWithName:PCFontInterstateBlack size:29.5f]];
     [_titleLabel setText:text];
     [_titleLabel setHighlightText:text];
-    //[_titleLabel sizeToFit];
     [_titleLabel setBackgroundColor:[UIColor clearColor]];
-    
-    //[_titleLabel setNeedsDisplay];
     [_titleLabel setTextColor:[UIColor whiteColor]];
     [_titleLabel setHighlightColor:[[UIColor blackColor] colorWithAlphaComponent:0.8f]];
     [self addSubview:_titleLabel];
