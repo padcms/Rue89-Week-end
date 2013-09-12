@@ -11,13 +11,19 @@
 #import "PCFonts.h"
 #import "PCTag.h"
 
-@interface PCKioskFooterView()
+@interface PCKioskFooterView() <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView * backgroundImageView;
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) NSMutableArray * buttonsArray;
 @property (nonatomic, strong) UIButton * selectedButton;
 @property (nonatomic, strong) NSArray * allTags;
+
+@property (nonatomic, strong) UIImageView * rightFadeImageView;
+@property (nonatomic, strong) UIImageView * leftFadeImageView;
+
+@property (nonatomic, strong) UIButton * leftArrowButton;
+@property (nonatomic, strong) UIButton * rightArrowButton;
 
 @end
 
@@ -85,6 +91,7 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:fullFrame];
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.delegate = self;
     [self addSubview:self.scrollView];
     
     //buttons
@@ -93,16 +100,44 @@
     
     //fade
     UIImage * footerFadeImage = [UIImage imageNamed:@"home_footer_fade"];
-    UIImageView * fadeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - footerFadeImage.size.width, self.frame.size.height - footerFadeImage.size.height, footerFadeImage.size.width, footerFadeImage.size.height)];
-    fadeImageView.image = footerFadeImage;
-    [self addSubview:fadeImageView];
+    
+    _rightFadeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - footerFadeImage.size.width, self.frame.size.height - footerFadeImage.size.height, footerFadeImage.size.width, footerFadeImage.size.height)];
+    _rightFadeImageView.image = footerFadeImage;
+    _rightFadeImageView.userInteractionEnabled = YES;
+    [self addSubview:_rightFadeImageView];
+    
+    _leftFadeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - footerFadeImage.size.height, footerFadeImage.size.width, footerFadeImage.size.height)];
+    _leftFadeImageView.image = footerFadeImage;
+    _leftFadeImageView.transform = CGAffineTransformMakeScale(-1, 1);
+    _leftFadeImageView.userInteractionEnabled = YES;
+    [self addSubview:_leftFadeImageView];
     
     
     //arrow
     UIImage * arrowImage = [UIImage imageNamed:@"home_footer_arrow"];
-    UIImageView * arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - arrowImage.size.width - 8, 16, arrowImage.size.width, arrowImage.size.height)];
-    arrowImageView.image = arrowImage;
-    [self addSubview:arrowImageView];
+    
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 10, 4, 0);
+    
+    _leftArrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftArrowButton.frame = CGRectMake(0, 0, footerFadeImage.size.width, footerFadeImage.size.height);
+    [_leftArrowButton setImage:arrowImage forState:UIControlStateNormal];
+    _leftArrowButton.imageEdgeInsets = insets;
+    [_leftArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_leftFadeImageView addSubview:_leftArrowButton];
+    
+    _leftFadeImageView.alpha = 0.0f;
+    
+    _rightArrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rightArrowButton.frame = CGRectMake(0, 0, footerFadeImage.size.width, footerFadeImage.size.height);
+    [_rightArrowButton setImage:arrowImage forState:UIControlStateNormal];
+    _rightArrowButton.imageEdgeInsets = insets;
+    [_rightArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_rightFadeImageView addSubview:_rightArrowButton];
+    
+    
+//    UIImageView * arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - arrowImage.size.width - 8, 16, arrowImage.size.width, arrowImage.size.height)];
+//    arrowImageView.image = arrowImage;
+//    [self addSubview:arrowImageView];
     
 }
 
@@ -185,10 +220,17 @@
     }
     
     UIButton * lastButton = [self.buttonsArray lastObject];
-    self.scrollView.contentSize = CGSizeMake(lastButton.frame.origin.x  + lastButton.frame.size.width + 30, self.scrollView.contentSize.height);
+    self.scrollView.contentSize = CGSizeMake(lastButton.frame.origin.x  + lastButton.frame.size.width, self.scrollView.contentSize.height);
 }
 
 #pragma mark - Actions
+
+- (void)selectFirstTag {
+    if (self.buttonsArray.count) {
+        UIButton * button = self.buttonsArray[0];
+        [self buttonAction:button];
+    }
+}
 
 - (void)buttonAction:(UIButton *)sender {
     
@@ -208,6 +250,48 @@
         
         [self.delegate kioskFooterView:self didSelectTag:tag];
     }
+}
+
+- (void)arrowAction:(UIButton *)sender {
+    
+    CGFloat minOffset = 0;
+    CGFloat maxOffset = self.scrollView.contentSize.width - self.scrollView.bounds.size.width;
+    
+    CGFloat scrollViewWidth = self.scrollView.bounds.size.width;
+    
+    CGFloat offsetX = self.scrollView.contentOffset.x;
+    
+    if ([sender isEqual:self.leftArrowButton]) {
+        
+        offsetX -= scrollViewWidth;
+        
+        
+    } else if ([sender isEqual:self.rightArrowButton]) {
+        offsetX += scrollViewWidth;
+    }
+    
+    offsetX = MAX (MIN(maxOffset, offsetX), minOffset);
+    
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat buttonWidth = 50.0f;
+    CGFloat contentOffsetXLeft = scrollView.contentOffset.x;
+    
+    contentOffsetXLeft = MIN(MAX(0, contentOffsetXLeft), buttonWidth);
+    CGFloat leftAlpha = contentOffsetXLeft / buttonWidth;
+    self.leftFadeImageView.alpha = leftAlpha;
+    
+    CGFloat contentOffsetXRight = scrollView.contentSize.width - scrollView.contentOffset.x - scrollView.bounds.size.width;
+    
+    contentOffsetXRight = MIN(MAX(0, contentOffsetXRight), buttonWidth);
+    CGFloat rightAlpha = contentOffsetXRight / buttonWidth;
+    self.rightFadeImageView.alpha = rightAlpha;
+    
+    
 }
 
 @end

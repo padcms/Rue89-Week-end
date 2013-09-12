@@ -40,4 +40,6 @@
 
 + (PCKioskFooterView *)footerViewForView:(UIView *)view;
 
+- (void)selectFirstTag;
+
 @end

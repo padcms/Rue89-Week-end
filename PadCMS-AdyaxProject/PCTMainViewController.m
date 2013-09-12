@@ -27,7 +27,6 @@
 #import "PCKioskIntroPopupView.h"
 #import "PCKioskNotificationPopup.h"
 #import "PCKioskPageControl.h"
-#import "TestFlight.h"
 #import "PCRueRevisionViewController.h"
 #import "PCKioskSubHeaderView.h"
 #import "ArchivingDataSource.h"
@@ -298,8 +297,6 @@
 - (void) viewDidLoad
 {
     
-    [TestFlight takeOff:@"e22c706b-4282-4628-8dd4-9f6624fd2f16"];
-    
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;
 
@@ -412,7 +409,7 @@
         [self btnUnloadTap:self];
         mainView = nil;
 #ifdef RUE
-        [_revisionViewController dismissModalViewControllerAnimated:YES];
+        [self.navigationController  popViewControllerAnimated:YES];
         _revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
@@ -964,7 +961,9 @@
 #ifdef RUE
             [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
             [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-            [self presentViewController:_revisionViewController animated:YES completion:^{}];
+            
+            [[self navigationController] pushViewController:_revisionViewController animated:YES];
+            //[self presentViewController:_revisionViewController animated:YES completion:^{}];
             [_revisionViewController release];
 #else
             [self.view addSubview:_revisionViewController.view];
@@ -1250,7 +1249,7 @@
 - (void)contactUsButtonTapped {
     NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"Subject", PCApplicationNotificationMessageKey : @"Message"};
     PCEmailController * emailController = [[PCEmailController alloc] initWithMessage:emailParams];
-    [emailController.emailViewController setToRecipients:@[@"email@example.com"]];
+    [emailController.emailViewController setToRecipients:@[@"xxxxxxxxx@adyax.com"]];
 
     emailController.delegate = self;
     [emailController emailShow];
@@ -1275,11 +1274,13 @@
 }
 
 - (void)logoButtonTapped {
-    
-    if ([[self shelfView] respondsToSelector:@selector(logoButtonTapped)]) {
-        [[self shelfView] logoButtonTapped];
+    if (self.selectedTag.tagId != TAG_ID_MAIN) {
+        [self.kioskFooterView selectFirstTag];
+    } else {
+        if ([[self shelfView] respondsToSelector:@selector(logoButtonTapped)]) {
+            [[self shelfView] logoButtonTapped];
+        }
     }
-    
 }
 
 #pragma mark - PCKioskFooterViewDelegate

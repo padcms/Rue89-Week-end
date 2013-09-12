@@ -15,7 +15,8 @@
 #import "PCKioskControlElementDetailsView.h"
 #import "PCFonts.h"
 #import "MTLabel.h"
-#import "UIImageView+AFNetworking.h"
+//#import "UIImageView+AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "PCConfig.h"
 #import "PCKioskAdvancedControlElementDateLabel.h"
 #import "PCIssue.h"
@@ -162,6 +163,7 @@ const CGFloat kDetailsHeight = 80.0f;
     NSString * serverURLString = [PCConfig serverURLString];
     
     NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
+    
     [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
     
     //self.imageViewShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:12 topCapHeight:12];

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AB813794152224E50038EC7B"
-               BuildableName = "RUE.app"
+               BuildableName = "Rue89 Week-end.app"
                BlueprintName = "RUE"
                ReferencedContainer = "container:Pad CMS.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB813794152224E50038EC7B"
-            BuildableName = "RUE.app"
+            BuildableName = "Rue89 Week-end.app"
             BlueprintName = "RUE"
             ReferencedContainer = "container:Pad CMS.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB813794152224E50038EC7B"
-            BuildableName = "RUE.app"
+            BuildableName = "Rue89 Week-end.app"
             BlueprintName = "RUE"
             ReferencedContainer = "container:Pad CMS.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB813794152224E50038EC7B"
-            BuildableName = "RUE.app"
+            BuildableName = "Rue89 Week-end.app"
             BlueprintName = "RUE"
             ReferencedContainer = "container:Pad CMS.xcodeproj">
          </BuildableReference>

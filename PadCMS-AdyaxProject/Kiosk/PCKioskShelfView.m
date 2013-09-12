@@ -241,7 +241,7 @@
 
 - (void)setHeight:(CGFloat)height forCell:(PCKioskAdvancedControlElement *)cell {
     
-    NSInteger index = cell.revisionIndex;
+    NSInteger index = [cells indexOfObject:cell];
     
     NSInteger count = [cells count];
     
