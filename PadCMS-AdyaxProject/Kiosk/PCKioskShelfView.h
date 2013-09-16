@@ -23,7 +23,7 @@
 //@property (nonatomic, readonly) NSInteger totalPages;
 @property (nonatomic, readonly) NSInteger totalNumberOfRevisions;
 @property (nonatomic) BOOL shouldScrollToTopAfterReload;
-@property (nonatomic, retain) PCKioskPageControl * pageControl;
+@property (nonatomic, strong) PCKioskPageControl * pageControl;
 
 - (void)reload;
 - (void)reloadWithScrollingToTop;

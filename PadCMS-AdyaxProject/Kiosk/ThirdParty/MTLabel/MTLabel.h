@@ -42,7 +42,7 @@ typedef enum {
     BOOL _limitToNumberOfLines;
     BOOL _shouldResizeToFit;
     MTLabelTextAlignment _textAlignment;
-    id<MTLabelDelegate> delegate;
+    //id<MTLabelDelegate> delegate;
     BOOL adjustSizeToFit;    
 }
 
@@ -50,14 +50,14 @@ typedef enum {
 @property (nonatomic, readwrite, setter = setLineHeight:, getter = lineHeight) CGFloat _lineHeight;
 @property (nonatomic, readonly) CGFloat _textHeight;
 @property (nonatomic, readwrite, setter = setMinimumFontSize:, getter = minimumFontSize) CGFloat _minimumFontSize;
-@property (nonatomic, retain, setter = setText:, getter = text) NSString *_text;
-@property (nonatomic, retain, setter = setFontColor:, getter = fontColor) UIColor *_fontColor;
-@property (nonatomic, retain, setter = setFontHighlightColor:, getter = fontHighlightColor) UIColor *_fontHighlightColor;
-@property (nonatomic, retain, setter = setFont:, getter = font) UIFont *_font;
+@property (nonatomic, strong, setter = setText:, getter = text) NSString *_text;
+@property (nonatomic, strong, setter = setFontColor:, getter = fontColor) UIColor *_fontColor;
+@property (nonatomic, strong, setter = setFontHighlightColor:, getter = fontHighlightColor) UIColor *_fontHighlightColor;
+@property (nonatomic, strong, setter = setFont:, getter = font) UIFont *_font;
 @property (nonatomic, readwrite, setter = setLimitToNumberOfLines:, getter = limitToNumberOfLines) BOOL _limitToNumberOfLines;
 @property (nonatomic, readwrite, setter = setResizeToFitText:, getter = resizeToFitText) BOOL _shouldResizeToFit;
 @property (nonatomic, readwrite, setter = setTextAlignment:, getter = textAlignment) MTLabelTextAlignment _textAlignment;
-@property (nonatomic, assign) id<MTLabelDelegate> delegate;
+@property (nonatomic, weak) id<MTLabelDelegate> delegate;
 @property (nonatomic, readwrite, setter = setAdjustSizeToFit:, getter = adjustSizeToFit) BOOL _adjustSizeToFit;
 @property (nonatomic, readwrite) CGFloat characterSpacing;
 

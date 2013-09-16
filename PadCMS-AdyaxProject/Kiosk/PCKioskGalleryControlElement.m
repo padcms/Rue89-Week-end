@@ -53,7 +53,6 @@
 		line.center = CGPointMake(self.bounds.size.width/2, issueTitleLabel.frame.size.height+5);
 		[line sizeToFit];
 		[self addSubview:line];
-		[line release];
 	}
 	
 

@@ -49,7 +49,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 @synthesize _fontColor, _fontHighlightColor;
 @synthesize _limitToNumberOfLines, _shouldResizeToFit;
 @synthesize _textAlignment;
-@synthesize delegate;
+@synthesize delegate = _delegate;
 @synthesize _adjustSizeToFit;
 @synthesize shadowOffset;
 
@@ -83,11 +83,11 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         
         if (_text) {
             
-            [_text release];
+            //[_text release];
             _text = nil;
         }
         
-        _text = [text retain];
+        _text = text;
         [self setNeedsDisplay];
 
     }
@@ -97,15 +97,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 -(void)setFont:(UIFont *)font {
 
     if (font != _font) {
-        
-        if (_font) {
-            
-            [_font release];
-            _font = nil;
-            
-        }
-        
-        _font = [font retain];
+        _font = font;
         self._lineHeight = _font.lineHeight;
         [self setNeedsDisplay];
         
@@ -116,26 +108,15 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 -(void)setFontColor:(UIColor *)fontColor {
     
     if (fontColor != _fontColor) {
-        
-        if (_fontColor) {
-            
-            [_fontColor release];
-            _fontColor = nil;
-            
-        }
-        
-        _fontColor = [fontColor retain];
+        _fontColor = fontColor;
         [self setNeedsDisplay];
     }
     
 }
 - (void)setFontHighlightColor:(UIColor *)fontHighlightColor {
     if (fontHighlightColor != _fontHighlightColor) {
-        if (_fontHighlightColor) {
-            [_fontHighlightColor release];
-            _fontHighlightColor = nil;
-        }
-        _fontHighlightColor = [fontHighlightColor retain];
+
+        _fontHighlightColor = fontHighlightColor;
         [self setNeedsDisplay];
     }
 }
@@ -288,20 +269,20 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 
 +(id)label {
 
-    return [[[MTLabel alloc] init] autorelease];
+    return [[MTLabel alloc] init];
 
 }
 
 +(id)labelWithFrame:(CGRect)frame andText:(NSString *)text {
     
-    return [[[MTLabel alloc] initWithFrame:frame andText:text] autorelease];
+    return [[MTLabel alloc] initWithFrame:frame andText:text];
     
 }
 
 
 +(id)labelWithText:(NSString *)text {
     
-    return [[[MTLabel alloc] initWithText:text] autorelease];
+    return [[MTLabel alloc] initWithText:text];
     
 }
 
@@ -355,14 +336,14 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     
     //Setup the attributes dictionary with font and color
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                (id)font, (id)kCTFontAttributeName,
+                                (__bridge id)font, (id)kCTFontAttributeName,
                                 _fontColor.CGColor, kCTForegroundColorAttributeName,
                                 @(_characterSpacing), kCTKernAttributeName,
                                 nil];
     
-    NSAttributedString *attributedString = [[[NSAttributedString alloc] 
+    NSAttributedString *attributedString = [[NSAttributedString alloc]
                                              initWithString:_text 
-                                             attributes:attributes] autorelease];
+                                             attributes:attributes];
     
     CFRelease(font);
     
@@ -490,7 +471,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
                                   _textHeight)];
         
         // Notify delegate that we did change frame
-        [delegate labelDidChangeFrame:self.frame];
+        [_delegate labelDidChangeFrame:self.frame];
         
         // Ugly hack to avoid content being stretched
         [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.0001];
@@ -504,12 +485,8 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 
 - (void)dealloc {
     
-    [_text release]; _text = nil;
-    [_fontColor release]; _fontColor = nil;
-    [_fontHighlightColor release], _fontHighlightColor = nil;
-    [_font release]; _font = nil;
-    
-    [super dealloc];
+     _fontColor = nil;
+    _fontHighlightColor = nil;
 }
 
 @end

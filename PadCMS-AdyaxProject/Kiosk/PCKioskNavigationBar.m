@@ -46,15 +46,6 @@
     return self;
 }
 
--(void) dealloc {
-	[subscribeBtn release];
-    [switchKioskViewButton release];
-    if(kioskTitleImageView)[kioskTitleImageView release];
-    if(kioskTitleLabel)[kioskTitleLabel release];
-    self.searchTextField = nil;
-	
-	[super dealloc];
-}
 
 - (void) initElements
 {
@@ -130,7 +121,7 @@
 
 - (void) initSearchTextField
 {
-    self.searchTextField = [[[UITextField alloc] init] autorelease];
+    self.searchTextField = [[UITextField alloc] init];
     self.searchTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.searchTextField.textColor = [UIColor blackColor];
     self.searchTextField.font = [UIFont systemFontOfSize:14.0];

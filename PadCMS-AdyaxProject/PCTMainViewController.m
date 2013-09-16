@@ -33,8 +33,8 @@
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
-@property (nonatomic, retain) NSMutableArray * allRevisions;
-@property (nonatomic, retain) PCTag * selectedTag;
+@property (nonatomic, strong) NSMutableArray * allRevisions;
+@property (nonatomic, strong) PCTag * selectedTag;
 
 - (void) initManager;
 - (void) bindNotifications;
@@ -220,7 +220,6 @@
         _revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
-        [_revisionViewController release];
         _revisionViewController = nil;
 #endif
 
@@ -237,13 +236,6 @@
     [super viewDidUnload];
 }
 
-- (void) dealloc
-{
-    [currentApplication release];
-    [_revisionViewController release];
-	[_padcmsCoder release], _padcmsCoder = nil;
-    [super dealloc];
-}
 
 - (PCApplication*) getApplication
 {
@@ -275,7 +267,6 @@
 		else {
 			PadCMSCoder *padCMSCoder = [[PadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
-			[padCMSCoder release];
 			if (![self.padcmsCoder syncServerPlistDownload])
 			{
 				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
@@ -284,7 +275,6 @@
                                                       cancelButtonTitle:alertCancelButtonTitle
                                                       otherButtonTitles:nil];
 				[alert show];
-				[alert release];
 			}
 		}
 
@@ -299,7 +289,6 @@
                                                   cancelButtonTitle:alertCancelButtonTitle
                                                   otherButtonTitles:nil];
 			[alert show];
-			[alert release];
 
 		}
 		else if([plistContent count]==0)
@@ -310,7 +299,6 @@
                                                   cancelButtonTitle:alertCancelButtonTitle
                                                   otherButtonTitles:nil];
 			[alert show];	
-			[alert release];
 		}
 		else
 		{
@@ -331,7 +319,6 @@
                                                       cancelButtonTitle:alertCancelButtonTitle
                                                       otherButtonTitles:nil];
 				[alert show];		
-				[alert release];
 			}
 
 		}
@@ -340,7 +327,7 @@
 
 -(void)restartApplication
 {
-	[currentApplication release], currentApplication = nil;
+	currentApplication = nil;
 	self.padcmsCoder = nil;
 	[self initManager];
 	[self initKiosk];
@@ -444,7 +431,7 @@
     [self.view addSubview:self.kioskFooterView];
     
     if (self.kioskFooterView.staticTags.count) {
-        self.selectedTag = [self.kioskFooterView.staticTags[0] retain];
+        self.selectedTag = self.kioskFooterView.staticTags[0];
     }
     
     
@@ -462,7 +449,7 @@
 
     
     //gallery
-    PCKioskSubviewsFactory      *factory = [[[PCKioskSubviewsFactory alloc] init] autorelease];
+    PCKioskSubviewsFactory      *factory = [[PCKioskSubviewsFactory alloc] init];
     self.kioskViewController = [[kioskClass alloc] initWithKioskSubviewsFactory:factory
                                                                                   andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
                                                                              andDataSource:self];
@@ -728,7 +715,6 @@
             [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
             
             [[self navigationController] pushViewController:_revisionViewController animated:YES];
-            [_revisionViewController release];
 #else
             [self.view addSubview:_revisionViewController.view];
 #endif
@@ -763,7 +749,6 @@
 	alert.delegate = self;
     alert.tag = index;
 	[alert show];
-	[alert release];
 }
 
 - (void) downloadRevisionWithIndex:(NSInteger)index
@@ -784,7 +769,6 @@
                                                                                                            value:@"OK"]
                                                   otherButtonTitles:nil];
 			[alert show];
-			[alert release];
 			return;
 			
 		}
@@ -828,7 +812,6 @@
                                                                                                            value:@"OK"]
                                                   otherButtonTitles:nil];
 			[alert show];
-			[alert release];
 		}
 
 	}
@@ -875,35 +858,35 @@
 
 - (void)doDownloadRevisionWithIndex:(NSNumber *)index
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     
-    PCRevision          *revision = [self revisionWithIndex:[index integerValue]];
+        PCRevision          *revision = [self revisionWithIndex:[index integerValue]];
+        
+        if(revision)
+        {
+            [revision download:^{
+                [self performSelectorOnMainThread:@selector(downloadRevisionFinishedWithIndex:)
+                                       withObject:index
+                                    waitUntilDone:NO];
+            } failed:^(NSError *error) {
+                [self performSelectorOnMainThread:@selector(downloadRevisionFailedWithIndex:)
+                                       withObject:index
+                                    waitUntilDone:NO];
+            } canceled:^{
+                [self performSelectorOnMainThread:@selector(downloadRevisionCanceledWithIndex:)
+                                       withObject:index
+                                    waitUntilDone:NO];
+            } progress:^(float progress) {
+                NSDictionary        *info = [NSDictionary dictionaryWithObjectsAndKeys:index, @"index", [NSNumber numberWithFloat:progress], @"progress", nil];
+                
+                [self performSelectorOnMainThread:@selector(downloadingRevisionProgressUpdate:)
+                                       withObject:info
+                                    waitUntilDone:NO];
+            }];
+        }
     
-    if(revision)
-    {
-        [revision download:^{
-            [self performSelectorOnMainThread:@selector(downloadRevisionFinishedWithIndex:)
-                                   withObject:index
-                                waitUntilDone:NO];
-        } failed:^(NSError *error) {
-            [self performSelectorOnMainThread:@selector(downloadRevisionFailedWithIndex:)
-                                   withObject:index
-                                waitUntilDone:NO];
-        } canceled:^{
-            [self performSelectorOnMainThread:@selector(downloadRevisionCanceledWithIndex:)
-                                   withObject:index
-                                waitUntilDone:NO];
-        } progress:^(float progress) {
-            NSDictionary        *info = [NSDictionary dictionaryWithObjectsAndKeys:index, @"index", [NSNumber numberWithFloat:progress], @"progress", nil];
-            
-            [self performSelectorOnMainThread:@selector(downloadingRevisionProgressUpdate:)
-                                   withObject:info
-                                waitUntilDone:NO];
-        }];
+    
     }
-    
-    
-    [pool release];
 }
 
 - (void)downloadRevisionCanceledWithIndex:(NSNumber*)index
@@ -939,7 +922,6 @@
                                 otherButtonTitles:nil];
     
     [errorAllert show];
-    [errorAllert release];
     
     PCRevision      *revision = [self revisionWithIndex:[index integerValue]];
     if(revision)
@@ -988,7 +970,6 @@
     {
         [self presentModalViewController:searchViewController animated:YES];   
     }
-    [searchViewController release];
 }
 
 - (void) showSubscriptionsPopupInRect:(CGRect)rect

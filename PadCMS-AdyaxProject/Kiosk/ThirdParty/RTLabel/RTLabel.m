@@ -39,7 +39,7 @@
 
 @interface RTLabelButton : UIButton
 @property (nonatomic, assign) int componentIndex;
-@property (nonatomic) NSURL *url;
+@property (weak, nonatomic) NSURL *url;
 @end
 
 @implementation RTLabelButton

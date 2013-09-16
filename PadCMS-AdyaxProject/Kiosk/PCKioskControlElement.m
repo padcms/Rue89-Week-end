@@ -13,11 +13,6 @@
 
 @implementation PCKioskControlElement
 
--(void)dealloc
-{
-	[payButton release];
-	[super dealloc];
-}
 
 - (void) initDownloadingProgressComponents
 {

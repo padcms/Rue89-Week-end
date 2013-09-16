@@ -54,25 +54,25 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 	BOOL                         IsNotificationsBinded;
 }
 
-@property (nonatomic, retain) PCRevisionViewController *revisionViewController;
+@property (nonatomic, strong) PCRevisionViewController *revisionViewController;
 @property (nonatomic, assign) BOOL currentTemplateLandscapeEnable;
 @property (nonatomic, assign) BOOL magManagerExist;
-@property (nonatomic, retain) NSTimer* barTimer;
-@property (nonatomic, retain) IBOutlet UIView* airTopMenu;
-@property (nonatomic, retain) IBOutlet UIView* airTopSummary;
-@property (nonatomic, retain) UIView* mainView;
+@property (nonatomic, strong) NSTimer* barTimer;
+@property (nonatomic, strong) IBOutlet UIView* airTopMenu;
+@property (nonatomic, strong) IBOutlet UIView* airTopSummary;
+@property (nonatomic, strong) UIView* mainView;
 @property (nonatomic, assign) BOOL firstOrientLandscape;
 @property (nonatomic, assign) BOOL alreadyInit;
 
-@property (nonatomic, retain) UILabel* issueLabel_h;
-@property (nonatomic, retain) IBOutlet UILabel* issueLabel_v;
+@property (nonatomic, strong) UILabel* issueLabel_h;
+@property (nonatomic, strong) IBOutlet UILabel* issueLabel_v;
 
-@property (nonatomic, retain) PCKioskViewController *kioskViewController;
-@property (nonatomic, retain) PCKioskNavigationBar *kioskNavigationBar;
-@property (nonatomic, retain) PadCMSCoder* padcmsCoder;
-@property (nonatomic, retain) PCSubscriptionsMenuView *subscriptionsMenu;
-@property (nonatomic, retain) PCKioskHeaderView * kioskHeaderView;
-@property (nonatomic, retain) PCKioskFooterView * kioskFooterView;
+@property (nonatomic, strong) PCKioskViewController *kioskViewController;
+@property (nonatomic, strong) PCKioskNavigationBar *kioskNavigationBar;
+@property (nonatomic, strong) PadCMSCoder* padcmsCoder;
+@property (nonatomic, strong) PCSubscriptionsMenuView *subscriptionsMenu;
+@property (nonatomic, strong) PCKioskHeaderView * kioskHeaderView;
+@property (nonatomic, strong) PCKioskFooterView * kioskFooterView;
 
 - (void) startBarTimer;
 - (void) stopBarTimer;

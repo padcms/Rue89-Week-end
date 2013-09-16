@@ -33,9 +33,9 @@
  */
 @interface PCKioskFooterView : UIView
 
-@property (nonatomic, assign) id<PCKioskFooterViewDelegate> delegate;
+@property (nonatomic, weak) id<PCKioskFooterViewDelegate> delegate;
 
-@property (nonatomic, retain) NSArray * tags;
+@property (nonatomic, strong) NSArray * tags;
 @property (nonatomic, strong) NSArray * staticTags;
 
 + (PCKioskFooterView *)footerViewForView:(UIView *)view;

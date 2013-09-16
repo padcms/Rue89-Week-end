@@ -36,15 +36,15 @@
     
 }
 
-@property (nonatomic, retain) UIImageView * illustrationImageView;
-@property (nonatomic, retain) UIImageView * shadowImageView;
-@property (nonatomic, retain) UIImageView * detailsShadowImageView;
-@property (nonatomic, retain) PCKioskAdvancedControlElementTitleLabel * titleLabel;
-@property (nonatomic, retain) UIImage * imageViewShadowImage;
-@property (nonatomic, retain) UIButton * showDetailsButton;
-@property (nonatomic, retain) PCKioskControlElementDetailsView * detailsView;
-@property (nonatomic, retain) PCKioskAdvancedControlElementDateLabel * dateLabel;
-@property (nonatomic, retain) MTLabel * categoryLabel;
+@property (nonatomic, strong) UIImageView * illustrationImageView;
+@property (nonatomic, strong) UIImageView * shadowImageView;
+@property (nonatomic, strong) UIImageView * detailsShadowImageView;
+@property (nonatomic, strong) PCKioskAdvancedControlElementTitleLabel * titleLabel;
+@property (nonatomic, strong) UIImage * imageViewShadowImage;
+@property (nonatomic, strong) UIButton * showDetailsButton;
+@property (nonatomic, strong) PCKioskControlElementDetailsView * detailsView;
+@property (nonatomic, strong) PCKioskAdvancedControlElementDateLabel * dateLabel;
+@property (nonatomic, strong) MTLabel * categoryLabel;
 
 @end
 
@@ -52,10 +52,6 @@ const CGFloat kDetailsHeight = 80.0f;
 
 @implementation PCKioskAdvancedControlElement
 
--(void)dealloc
-{
-
-}
 
 - (void) initDownloadingProgressComponents
 {

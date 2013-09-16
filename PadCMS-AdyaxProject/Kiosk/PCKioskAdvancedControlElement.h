@@ -23,10 +23,10 @@
     
 }
 
-@property (nonatomic, assign) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
-@property (nonatomic, retain) PCRevision * revision;
-@property (nonatomic, retain) UIButton * archiveButton;
-@property (nonatomic, retain) UIButton * restoreButton;
+@property (nonatomic, weak) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
+@property (nonatomic, strong) PCRevision * revision;
+@property (nonatomic, strong) UIButton * archiveButton;
+@property (nonatomic, strong) UIButton * restoreButton;
 
 @end
 

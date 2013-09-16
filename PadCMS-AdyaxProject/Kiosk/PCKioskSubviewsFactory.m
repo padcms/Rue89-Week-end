@@ -16,12 +16,12 @@
 {
     NSArray     *result = nil;
     
-    PCKioskShelfView     *shelfSubview = [[[PCKioskShelfView alloc] initWithFrame:frame] autorelease];
+    PCKioskShelfView     *shelfSubview = [[PCKioskShelfView alloc] initWithFrame:frame];
     
     shelfSubview.tag = [PCKioskShelfView subviewTag];
     shelfSubview.hidden = YES;
     
-    PCKioskGalleryView     *gallerySubview = [[[PCKioskGalleryView alloc] initWithFrame:frame] autorelease];
+    PCKioskGalleryView     *gallerySubview = [[PCKioskGalleryView alloc] initWithFrame:frame];
     
     gallerySubview.tag = [PCKioskGalleryView subviewTag];
     gallerySubview.hidden = YES;

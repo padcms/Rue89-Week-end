@@ -35,12 +35,12 @@
 /**
  @brief Delegate for processing navigation bar events
  */
-@property (nonatomic, assign) id<PCKioskNavigationBarDelegate> delegate;
+@property (nonatomic, weak) id<PCKioskNavigationBarDelegate> delegate;
 
 /**
  @brief Input field for search in revisions
  */
-@property (nonatomic, retain) UITextField *searchTextField;
+@property (nonatomic, strong) UITextField *searchTextField;
 
 /**
  @brief Init navigation bar elements

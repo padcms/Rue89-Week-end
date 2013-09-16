@@ -10,14 +10,14 @@
 
 int main(int argc, char *argv[]) 
 {    
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 
 #ifdef PADCMS
     int retVal = UIApplicationMain(argc, argv, nil, @"PCAppDelegate");
 #else
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
+        int retVal = UIApplicationMain(argc, argv, nil, nil);
 #endif
 	
-    [pool release];
-    return retVal;
+        return retVal;
+    }
 }

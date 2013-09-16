@@ -15,8 +15,8 @@
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
-@property (nonatomic, retain) NSArray * revisions;
-@property (nonatomic, retain) PCKioskSubHeaderView * subHeaderView;
+@property (nonatomic, strong) NSArray * revisions;
+@property (nonatomic, strong) PCKioskSubHeaderView * subHeaderView;
 @property (nonatomic) BOOL isSubheaderShown;
 
 @end
@@ -48,9 +48,11 @@
     return _pageControl;
 }
 
+#ifdef RUE
 - (void)reload {
     [self createCells];
 }
+#endif
 
 - (void)reloadWithScrollingToTop {
     self.shouldScrollToTopAfterReload = YES;
@@ -98,7 +100,7 @@
 - (PCKioskAbstractControlElement*) newCellWithFrame:(CGRect) frame;
 {
 #ifdef RUE
-    return [[[PCKioskAdvancedControlElement alloc] initWithFrame:frame] autorelease];
+    return [[PCKioskAdvancedControlElement alloc] initWithFrame:frame]; //autorelease
 #else
     return [[PCKioskControlElement alloc] initWithFrame:frame];
 #endif
@@ -152,7 +154,7 @@
     }
     
     [cells removeAllObjects];
-    [cells release];
+    //[cells release];
     
     cells = [[NSMutableArray alloc] initWithCapacity:numberOfRevisions];
     
