@@ -83,7 +83,7 @@
                 CTLineRef line = CFArrayGetValueAtIndex((CFArrayRef)lines, index);
                 
                 CFArrayRef glyphRuns = CTLineGetGlyphRuns(line);
-                CFIndex glyphCount = CFArrayGetCount(glyphRuns);
+                //CFIndex glyphCount = CFArrayGetCount(glyphRuns);
                 
                 for (int i = 0; i < 1; ++i)    {
                     CTRunRef run = CFArrayGetValueAtIndex(glyphRuns, i);

@@ -135,8 +135,6 @@
     
     NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
     
-    CGSize previousContentSize = mainScrollView.contentSize;
-    
             CGFloat paginationHeight = 57.0f;
     [UIView animateWithDuration:0.5f animations:^{
         mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);

@@ -15,6 +15,7 @@
 
 @protocol PCKioskPopupViewDelegate <NSObject>
 
+@optional
 - (void)popupViewDidHide:(PCKioskPopupView *)popupView;
 
 @end

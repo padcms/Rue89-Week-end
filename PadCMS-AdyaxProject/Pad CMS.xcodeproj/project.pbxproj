@@ -34,6 +34,12 @@
 		572C054117C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		572C054217C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
 		572C054317C744D60075C859 /* PCKioskNotificationPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */; };
+		5733797C17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		5733797D17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
+		5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		5733797F17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
+		5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
+		5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		5789895F17CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5789896017CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
@@ -49,22 +55,21 @@
 		578989A417CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578989A517CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
 		578989A617CF90C800572BAC /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789899F17CF90C800572BAC /* RTLabel.m */; };
-		578CB9AA17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
+		578CB9AA17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578CB9AB17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
 		578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578CB9AD17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
 		578CB9AE17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
 		578CB9AF17E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
 		578CB9B017E0CE620014C897 /* ArchivingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9A917E0CE620014C897 /* ArchivingDataSource.m */; };
-		578CB9B317E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
+		578CB9B317E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578CB9B417E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
 		578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		578CB9B617E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
 		578CB9B717E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
 		578CB9B817E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
 		578CB9B917E101C90014C897 /* PCRueKioskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9B217E101C90014C897 /* PCRueKioskViewController.m */; };
-		578CB9BE17E1E8CE0014C897 /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 578CB9BD17E1E8CE0014C897 /* PCRueAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
+		57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
 		57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A2591F17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */; };
@@ -194,7 +199,7 @@
 		57A4710317BAA56300745732 /* subscribe_button_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4708C17BAA56300745732 /* subscribe_button_bg@2x.png */; };
 		57A4710417BAA56300745732 /* subscribe_button_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4708C17BAA56300745732 /* subscribe_button_bg@2x.png */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
-		57A4710C17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4710B17BB984000745732 /* PCKioskAdvancedControlElement.m */; };
+		57A4710C17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4710B17BB984000745732 /* PCKioskAdvancedControlElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4710D17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4710B17BB984000745732 /* PCKioskAdvancedControlElement.m */; };
 		57A4710E17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4710B17BB984000745732 /* PCKioskAdvancedControlElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4710F17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4710B17BB984000745732 /* PCKioskAdvancedControlElement.m */; };
@@ -229,7 +234,7 @@
 		57A4713017BB9F2000745732 /* home_illustration_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4711D17BB9F2000745732 /* home_illustration_test@2x.png */; };
 		57A4713117BB9F2000745732 /* home_illustration_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4711D17BB9F2000745732 /* home_illustration_test@2x.png */; };
 		57A4713217BB9F2000745732 /* home_illustration_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A4711D17BB9F2000745732 /* home_illustration_test@2x.png */; };
-		57A4713517BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4713417BBA44A00745732 /* PCKioskAdvancedControlElementTitleLabel.m */; };
+		57A4713517BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4713417BBA44A00745732 /* PCKioskAdvancedControlElementTitleLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4713617BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4713417BBA44A00745732 /* PCKioskAdvancedControlElementTitleLabel.m */; };
 		57A4713717BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4713417BBA44A00745732 /* PCKioskAdvancedControlElementTitleLabel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4713817BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4713417BBA44A00745732 /* PCKioskAdvancedControlElementTitleLabel.m */; };
@@ -348,7 +353,7 @@
 		57A472A017BE505800745732 /* PCKioskFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4729B17BE505800745732 /* PCKioskFooterView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A472A117BE505800745732 /* PCKioskFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4729B17BE505800745732 /* PCKioskFooterView.m */; };
 		57A472A217BE505800745732 /* PCKioskFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4729B17BE505800745732 /* PCKioskFooterView.m */; };
-		57A473C417C2769800745732 /* PCKioskSubscribeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A473C317C2769800745732 /* PCKioskSubscribeButton.m */; };
+		57A473C417C2769800745732 /* PCKioskSubscribeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A473C317C2769800745732 /* PCKioskSubscribeButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A473C517C2769800745732 /* PCKioskSubscribeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A473C317C2769800745732 /* PCKioskSubscribeButton.m */; };
 		57A473C617C2769800745732 /* PCKioskSubscribeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A473C317C2769800745732 /* PCKioskSubscribeButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A473C717C2769800745732 /* PCKioskSubscribeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A473C317C2769800745732 /* PCKioskSubscribeButton.m */; };
@@ -376,7 +381,7 @@
 		57A4740117C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A473F517C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png */; };
 		57A4740217C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A473F517C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png */; };
 		57A4740317C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A473F517C3758E00745732 /* home_issue_details_top_shadow_6px@2x.png */; };
-		57A4740617C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */; };
+		57A4740617C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4740717C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */; };
 		57A4740817C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4740917C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4740517C37AE100745732 /* PCKioskControlElementDetailsView.m */; };
@@ -397,7 +402,7 @@
 		57A4741A17C477EB00745732 /* Interstate Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57A4741517C477EA00745732 /* Interstate Light.ttf */; };
 		57A4741B17C477EB00745732 /* Interstate Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57A4741517C477EA00745732 /* Interstate Light.ttf */; };
 		57A4741C17C477EB00745732 /* Interstate Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57A4741517C477EA00745732 /* Interstate Light.ttf */; };
-		57A4742017C478BB00745732 /* PCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4741F17C478BB00745732 /* PCFonts.m */; };
+		57A4742017C478BB00745732 /* PCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4741F17C478BB00745732 /* PCFonts.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4742117C478BB00745732 /* PCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4741F17C478BB00745732 /* PCFonts.m */; };
 		57A4742217C478BB00745732 /* PCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4741F17C478BB00745732 /* PCFonts.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		57A4742317C478BB00745732 /* PCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4741F17C478BB00745732 /* PCFonts.m */; };
@@ -1622,6 +1627,8 @@
 		572C052917C691B40075C859 /* PCKioskIntroPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskIntroPopupView.m; sourceTree = "<group>"; };
 		572C053B17C744D60075C859 /* PCKioskNotificationPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskNotificationPopup.h; sourceTree = "<group>"; };
 		572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskNotificationPopup.m; sourceTree = "<group>"; };
+		5733797A17E791890049F15B /* PCRueAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueAppDelegate.m; sourceTree = "<group>"; };
+		5733797B17E791890049F15B /* PCRueAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueAppDelegate.h; sourceTree = "<group>"; };
 		5789895D17CE0A3000572BAC /* PCKioskPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskPageControl.h; sourceTree = "<group>"; };
 		5789895E17CE0A3000572BAC /* PCKioskPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskPageControl.m; sourceTree = "<group>"; };
 		5789899E17CF90C800572BAC /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
@@ -1630,8 +1637,6 @@
 		578CB9A917E0CE620014C897 /* ArchivingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchivingDataSource.m; sourceTree = "<group>"; };
 		578CB9B117E101C90014C897 /* PCRueKioskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueKioskViewController.h; sourceTree = "<group>"; };
 		578CB9B217E101C90014C897 /* PCRueKioskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueKioskViewController.m; sourceTree = "<group>"; };
-		578CB9BC17E1E8CE0014C897 /* PCRueAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueAppDelegate.h; sourceTree = "<group>"; };
-		578CB9BD17E1E8CE0014C897 /* PCRueAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueAppDelegate.m; sourceTree = "<group>"; };
 		57A2591A17DF3EEA008D576F /* PCKioskSubHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskSubHeaderView.h; sourceTree = "<group>"; };
 		57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskSubHeaderView.m; sourceTree = "<group>"; };
 		57A4703C17B8F33700745732 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
@@ -2285,12 +2290,12 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5733797A17E791890049F15B /* PCRueAppDelegate.m */,
+				5733797B17E791890049F15B /* PCRueAppDelegate.h */,
 				60F022A21590E3000046FA44 /* PCTMainViewController.h */,
 				60F022A31590E3000046FA44 /* PCTMainViewController.m */,
 				32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				578CB9BC17E1E8CE0014C897 /* PCRueAppDelegate.h */,
-				578CB9BD17E1E8CE0014C897 /* PCRueAppDelegate.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -3566,7 +3571,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Adyax;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Pad CMS" */;
@@ -4733,6 +4738,7 @@
 				57A4740617C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742017C478BB00745732 /* PCFonts.m in Sources */,
 				57A4743417C485FC00745732 /* EGOTextView.m in Sources */,
+				5733797C17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747617C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D517C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
@@ -4768,6 +4774,7 @@
 				57A4740C17C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742617C478BB00745732 /* PCFonts.m in Sources */,
 				57A4743A17C485FC00745732 /* EGOTextView.m in Sources */,
+				5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747C17C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474DB17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C053017C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
@@ -4803,6 +4810,7 @@
 				57A4740B17C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742517C478BB00745732 /* PCFonts.m in Sources */,
 				57A4743917C485FC00745732 /* EGOTextView.m in Sources */,
+				5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747B17C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474DA17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052F17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
@@ -4835,6 +4843,7 @@
 				57A4728D17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
 				57A4729E17BE505800745732 /* PCKioskFooterView.m in Sources */,
 				57A473C617C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
+				5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4740817C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742217C478BB00745732 /* PCFonts.m in Sources */,
 				57A4743617C485FC00745732 /* EGOTextView.m in Sources */,
@@ -4854,7 +4863,6 @@
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
-				578CB9BE17E1E8CE0014C897 /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4888,6 +4896,7 @@
 				57A474D817C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052D17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				572C054017C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
+				5733797F17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				5789896217CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A317CF90C800572BAC /* RTLabel.m in Sources */,
 				57B442FF17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
@@ -4976,6 +4985,7 @@
 				57A4740717C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742117C478BB00745732 /* PCFonts.m in Sources */,
 				57A4743517C485FC00745732 /* EGOTextView.m in Sources */,
+				5733797D17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747717C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D617C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
@@ -5201,14 +5211,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";
@@ -5498,7 +5507,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5539,7 +5547,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5581,7 +5588,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5738,7 +5744,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
@@ -5747,7 +5752,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";
 				SDKROOT = iphoneos;
@@ -5759,14 +5765,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maxim Pervushin (J86PVXFHEM)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADA10880-5E04-4A83-8AD7-FDAD7C1829E8";

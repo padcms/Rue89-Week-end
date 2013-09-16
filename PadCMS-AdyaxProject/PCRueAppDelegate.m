@@ -11,6 +11,8 @@
 
 @implementation PCRueAppDelegate
 
+#ifdef RUE
+
 - (void)initTrackers {
     [super initTrackers];
     
@@ -27,5 +29,7 @@
     self.window.rootViewController = navigationController;
     
 }
+
+#endif
 
 @end

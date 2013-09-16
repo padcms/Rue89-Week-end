@@ -37,9 +37,7 @@
 @property (nonatomic, retain) PCTag * selectedTag;
 
 - (void) initManager;
-- (void) showMagManagerView;
 - (void) bindNotifications;
-- (void) SearchResultSelectedNotification:(NSNotification *) notification;
 - (void) updateApplicationData;
 
 - (void) initKiosk;
@@ -53,7 +51,6 @@
 
 - (void)rotateToPortraitOrientation;
 - (void)rotateToLandscapeOrientation;
-- (void)rotateInterfaceIfNeedWithRevision:(PCRevision*)revision;
 
 @end
 
@@ -68,8 +65,6 @@
 @synthesize issueLabel_h;
 @synthesize issueLabel_v;
 @synthesize magManagerExist;
-@synthesize kiosk_req_v;
-@synthesize kiosk_req_h;
 @synthesize currentTemplateLandscapeEnable;
 @synthesize alreadyInit;
 @synthesize subscriptionsMenu;
@@ -96,97 +91,7 @@
     return nil;
 }
 
-/*
-- (void) doBackgroundLoad
-{
-	NSAutoreleasePool   *pool = [[NSAutoreleasePool alloc] init];
-    
-	NSUserDefaults      *userDefaults = [NSUserDefaults standardUserDefaults];
-    int                 revision = [Helper getInternalRevision];
-	NSString            *zipFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.zip", revision]];
-	NSFileManager       *fileManager = [NSFileManager defaultManager];
-	NSDate              *packageModificationDate = nil;
-	NSDictionary        *zipFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:zipFilePath
-                                                                                  error:nil];
-	BOOL                skipUnpacking = NO;
 
-    
-	if (zipFileAttributes != nil)
-    {
-		packageModificationDate = [zipFileAttributes fileModificationDate];
-		NSLog(@"FILE MODIFICATION DATE: %@", [packageModificationDate description]);
-	}
-    
-	NSDate              *currentFileModificationDate = [userDefaults objectForKey:@"current_content"];
-	NSLog(@"current MODIFICATION DATE: %@", [currentFileModificationDate description]);
-    
-    
-	if ([fileManager fileExistsAtPath:[[Helper getIssueDirectory] stringByAppendingPathComponent:@"manifest.xml"]])
-    {
-		if ((currentFileModificationDate != nil) && [currentFileModificationDate isEqualToDate:packageModificationDate])
-        {
-			skipUnpacking = YES;
-			NSLog(@"\n\nskipUnpacking\n\n");
-		}
-	}
-
-	if (!skipUnpacking)
-    {
-        
-        ZipArchive      *zipArchive = [[ZipArchive alloc] init];
-        BOOL            zipResult = [zipArchive UnzipOpenFile:zipFilePath];
-        
-        NSLog(@"%@", zipFilePath);
-
-        if (zipResult)
-        {
-            [zipArchive UnzipFileTo:[Helper getIssueDirectory]
-                     overWrite:YES];				
-        }
-        
-        [zipArchive UnzipCloseFile];
-        [zipArchive release];
-		
-		[userDefaults setObject:packageModificationDate
-                         forKey:@"current_content"];
-        
-		[userDefaults synchronize];
-	}	
-    
- 	//[self performSelectorOnMainThread:@selector(doFinishLoad) withObject:nil waitUntilDone:NO];
-    [self viewDidLoadStuff];
-    
-	[pool release];
-}*/
-
-- (IBAction) btnUnloadTap:(id) sender//??!!
-{
-	/*
-	if([[VersionManager sharedManager].items count] == 1)
-	{
-		NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
-		if(remoteHostStatus == NotReachable) 
-		{
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Vous devez être connecté à Internet."
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-
-			[alert show];
-			[alert release];		
-			return;		
-		}
-	}*/
-	
-	[self.kiosk_req_v startAnimating];
-	[self.kiosk_req_h startAnimating];
-	
-//	[[VersionManager sharedManager] kioskTap];
-	
-	[self.kiosk_req_v stopAnimating]; 
-	[self.kiosk_req_h stopAnimating];
-}
 
 #pragma mark Timer Methods
 
@@ -309,7 +214,6 @@
 	[[PCDownloadManager sharedManager] cancelAllOperations];
     if(_revisionViewController)
     {
-        [self btnUnloadTap:self];
         mainView = nil;
 #ifdef RUE
         [self.navigationController  popViewControllerAnimated:YES];
@@ -321,6 +225,11 @@
 #endif
 
     }
+}
+
+
+- (void)subscribe {
+    //method is not used, just removing a warning
 }
 
 - (void) viewDidUnload
@@ -1175,7 +1084,7 @@
                                        bundle:bundle];
          
             [_revisionViewController setRevision:currentRevision];
-            _revisionViewController.mainViewController = self;
+            _revisionViewController.mainViewController = (PCMainViewController *)self;
             _revisionViewController.initialPageIndex = pageIndex;
             [self.view addSubview:_revisionViewController.view];
             self.mainView = _revisionViewController.view;

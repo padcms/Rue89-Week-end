@@ -16,7 +16,9 @@
 #import "PCFonts.h"
 #import "MTLabel.h"
 //#import "UIImageView+AFNetworking.h"
+#ifdef RUE
 #import <SDWebImage/UIImageView+WebCache.h>
+#endif
 #import "PCConfig.h"
 #import "PCKioskAdvancedControlElementDateLabel.h"
 #import "PCIssue.h"

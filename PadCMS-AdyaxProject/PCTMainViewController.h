@@ -66,9 +66,6 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 
 @property (nonatomic, retain) UILabel* issueLabel_h;
 @property (nonatomic, retain) IBOutlet UILabel* issueLabel_v;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* kiosk_req_v;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* kiosk_req_h;
-//@property (nonatomic, retain) WiredNavigator* navigator;
 
 @property (nonatomic, retain) PCKioskViewController *kioskViewController;
 @property (nonatomic, retain) PCKioskNavigationBar *kioskNavigationBar;
@@ -77,16 +74,10 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 @property (nonatomic, retain) PCKioskHeaderView * kioskHeaderView;
 @property (nonatomic, retain) PCKioskFooterView * kioskFooterView;
 
-//- (void) removeMainScroll;
-
-- (IBAction) btnUnloadTap:(id) sender;
-
 - (void) startBarTimer;
 - (void) stopBarTimer;
-//- (void) hideBars;
 
 - (void) restart;
-//- (void) viewDidLoadStuff;
 - (PCApplication*) getApplication;
 - (void) switchToKiosk;
 
