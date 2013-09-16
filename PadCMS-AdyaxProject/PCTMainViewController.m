@@ -70,7 +70,6 @@
 @synthesize magManagerExist;
 @synthesize kiosk_req_v;
 @synthesize kiosk_req_h;
-//@synthesize navigator = _navigator;
 @synthesize currentTemplateLandscapeEnable;
 @synthesize alreadyInit;
 @synthesize subscriptionsMenu;
@@ -210,28 +209,6 @@
 		self.barTimer = nil;
 	}	
 }
-/*
-- (void) hideBars
-{
-//	if (mm.baseAppViewType == 1)
-//	{
-//		[self toggleBottomMenu:NO animated:YES];
-//		[self toggleTopMenu:NO animated:YES];
-//	}
-//	else
-//	{
-//		[self toggleTopMenu:NO animated:YES];
-//	}
-}*/
-
-#pragma mark logical 
-/*
-- (void) removeMainScroll
-{
-	self.mainView.hidden = YES;
-	self.firstOrientLandscape = YES;
-	self.view.hidden = NO;
-}*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -268,32 +245,16 @@
 
 #pragma mark Rotate Methods
 
-/*
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-//	[self.navigator willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}*/
-
-//- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//	if(!self.magManagerExist) return NO;
-//	
-//	if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
-//	{
-//		return YES;
-//	}
-//	else
-//	{
-//		return currentTemplateLandscapeEnable;
-//	}
-//	
-//	return NO;
-//}
 
 #pragma mark ViewController Methods
 
 - (void) viewDidLoad
 {
+    
+    //iOS 7 status bar fix
+    if (!(NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_6_1)) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
     
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;
@@ -311,7 +272,7 @@
 	issueLabel_h.text = [Helper getIssueText];
 	issueLabel_v.text = [Helper getIssueText];
     
-  
+    
     
     //TODO !!!!!!!!!!!!!!!!!!!!!NOT FOR KIOSQUE
     //[self performSelectorInBackground:@selector(doBackgroundLoad) withObject:nil];
@@ -327,8 +288,7 @@
 	if(notFirstRun) return;
 	
 	[VersionManager sharedManager];	
-//	[[VersionManager sharedManager] performSelectorInBackground:@selector(navigatorShouldAppear)
-//                                                     withObject:nil];		
+	
 	notFirstRun = YES;
     
     [self initManager];
@@ -342,61 +302,6 @@
 #endif
 }
 
-/*
-- (void) viewDidLoadStuff//??
-{
-	[self performSelectorOnMainThread:@selector(doFinishLoad)
-                           withObject:nil
-                        waitUntilDone:NO];
-	alreadyInit = YES;
-}
-
-- (void) doFinishLoad//??
-{
-	[self initManager];
-	
-	
-	[[VersionManager sharedManager] appLoaded];
-	
-  
-	[self showMagManagerView];
-}
-
-- (void) showMagManagerView//?
-{
-    NSInteger revisionID = [Helper getInternalRevision];
-    if (revisionID < 0) return;
-//    [self updateApplicationData];
-//    PCIssue* currentMagazine = [currentApplication issueForRevisionWithId:revisionID];
-//    
-
-    PCIssue *currentIssue = [currentApplication.issues objectAtIndex:0];
-    
-    if (currentIssue == nil) return;
-    
-    PCRevision *currentRevision = [[currentIssue revisions] objectAtIndex:0];
-    
-    if (currentRevision)
-    {
-        [self rotateInterfaceIfNeedWithRevision:currentRevision];
-        
-        [PCDownloadManager sharedManager].revision = currentRevision;
-        [[PCDownloadManager sharedManager] startDownloading];
-      
-        if (_revisionViewController == nil)
-        {
-            _revisionViewController = [[PCRevisionViewController alloc] 
-                                      initWithNibName:@"PCRevisionViewController"
-                                      bundle:nil];
-            [_revisionViewController setRevision:currentRevision];
-            _revisionViewController.mainViewController = self;
-            _revisionViewController.initialPageIndex = [Helper getInternalPageIndex];
-            [self.view addSubview:_revisionViewController.view];
-            self.mainView = _revisionViewController.view;
-            self.mainView.tag = 100;
-        }
-    }
-}*/
 
 - (void) switchToKiosk
 {
@@ -415,7 +320,6 @@
         _revisionViewController = nil;
 #endif
 
-        //[self restart];
     }
 }
 
@@ -451,7 +355,7 @@
     if (currentApplication == nil)
     {
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-	//	NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
+
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
 		{
 	/*		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Vous devez être connecté à Internet." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -576,17 +480,6 @@
     NSDictionary *applicationParameters = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     [currentApplication initWithParameters:applicationParameters 
                              rootDirectory:[PCPathHelper pathForPrivateDocuments]];
-    
-////    NSString* path = [[PCPathHelper issuesFolder] stringByAppendingPathComponent:@"server.plist"];
-//    NSString* path = [[PCPathHelper pathForIssueWithId:magazineViewController.magazine.identifier 
-//                                         applicationId:magazineViewController.magazine.application.identifier] 
-//                      stringByAppendingPathComponent:@"server.plist"];
-//
-//    NSLog(@"path: %@", path);
-//    
-//    NSDictionary* dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-//    [PCSQLLiteModelBuilder updateApplication:currentApplication withDictionary:dictionary];
-//    //    [[NSNotificationCenter defaultCenter] postNotificationName:PCApplicationDataWillUpdate object:nil];
 }
 
 #pragma mark - New kiosk implementation
@@ -684,14 +577,6 @@
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
 {
-//    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
-//    
-//    NSArray *issues = [self getApplication].issues;
-//    for (PCIssue *issue in issues)
-//    {
-//        [allRevisions addObjectsFromArray:issue.revisions];
-//    }
-    
     NSArray * sortedRevisions = [self allSortedRevisions];
     
     if (index>=0 && index<[sortedRevisions count])
@@ -705,14 +590,6 @@
 
 - (PCRevision*) revisionWithIdentifier:(NSInteger)identifier
 {
-//    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
-//    
-//    NSArray *issues = [self getApplication].issues;
-//    for (PCIssue *issue in issues)
-//    {
-//        [allRevisions addObjectsFromArray:issue.revisions];
-//    }
-    
     for(PCRevision *currentRevision in self.allRevisions)
     {
         if(currentRevision.identifier == identifier) return currentRevision;
@@ -725,14 +602,6 @@
 
 - (NSInteger)numberOfRevisions
 {
-//    NSInteger revisionsCount = 0;
-//    
-//    NSArray *issues = [self getApplication].issues;
-//    for (PCIssue *issue in issues)
-//    {
-//        revisionsCount += [issue.revisions count];
-//    }
-    
     return [self.allRevisions count];
 }
 
@@ -950,7 +819,6 @@
             [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
             
             [[self navigationController] pushViewController:_revisionViewController animated:YES];
-            //[self presentViewController:_revisionViewController animated:YES completion:^{}];
             [_revisionViewController release];
 #else
             [self.view addSubview:_revisionViewController.view];
@@ -997,7 +865,6 @@
     {
 		
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-	//	NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
@@ -1324,8 +1191,6 @@
         PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
         popup.titleLabel.text = @"À nos lecteurs";
         popup.descriptionLabel.text = currentApplication.messageForReaders;
-        //popup.descriptionLabel.text = @"L'inné et l'acquis sont dans un bateau, et l'inné tombe à l'eau. Que reste-t-il ? C'est la question que pose le parcours de deux “nés sous X” dans le récit que nous vous proposons cette semaine.  Au rayon bug : le problème d'accès aux articles pour les abonnés en fin de période d’essai est réglé. Toutes nos excuses pour la dérange.";
-        
         [popup sizeToFitDescriptionLabelText];
         [popup show];
     }
