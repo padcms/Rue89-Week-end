@@ -28,11 +28,24 @@
     
     if (self) {
         _numberOfRevisionsPerPage = 20;
-        _currentPage = 1;
 
     }
     
     return self;
+}
+
+- (PCKioskPageControl *)pageControl {
+    if (!_pageControl) {
+        _pageControl = [PCKioskPageControl pageControl];
+        _pageControl.center = CGPointMake(self.frame.size.width/2, 500);
+        _pageControl.backgroundColor = [UIColor clearColor];
+        _pageControl.pagesCount = 1;
+        _pageControl.delegate = self;
+        _pageControl.currentPage = 1;
+        [mainScrollView addSubview:_pageControl];
+    }
+    
+    return _pageControl;
 }
 
 - (void)reload {
@@ -91,22 +104,10 @@
 #endif
 }
 
-- (void)setCurrentPage:(NSInteger)currentPage {
-    _currentPage = currentPage;
-    
-    [self createCells];
-}
-
-- (void)setNumberOfRevisionsPerPage:(NSInteger)numberOfRevisionsPerPage {
-    _numberOfRevisionsPerPage = numberOfRevisionsPerPage;
-    
-    [self createCells];
-}
-
 - (void)setTotalNumberOfRevisions:(NSInteger)totalNumberOfRevisions {
     _totalNumberOfRevisions = totalNumberOfRevisions;
     
-    _totalPages = ceilf((float)_totalNumberOfRevisions / (float)_numberOfRevisionsPerPage);
+    self.pageControl.pagesCount = ceilf((float)_totalNumberOfRevisions / (float)_numberOfRevisionsPerPage);
 }
 
 #pragma mark - Overrides
@@ -114,17 +115,16 @@
 #ifdef RUE
 - (void) createCells
 {
-
     
     self.revisions = [self.dataSource allSortedRevisions];
     self.totalNumberOfRevisions =  [self.revisions count];
     
-    if (_currentPage >_totalPages) {
-        _currentPage = 1;
+    if (self.pageControl.currentPage > self.pageControl.pagesCount) {
+        self.pageControl.currentPage = 1;
     }
     
     NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
-    if ((_currentPage == _totalPages) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
+    if ((self.pageControl.currentPage == self.pageControl.pagesCount) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
         numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
     }
     
@@ -132,7 +132,8 @@
         numberOfRevisions = 0;
     }
     
-    NSInteger startRevisionIndex = (_currentPage - 1) * _numberOfRevisionsPerPage;
+    
+    NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
     
     CGSize previousContentSize = mainScrollView.contentSize;
     
@@ -201,40 +202,33 @@
         
         [cells addObject:newCell];
         
-//        [self performSelector:@selector(testSetHeight) withObject:nil afterDelay:2.0f];
-//        [self performSelector:@selector(testSetHeight2) withObject:nil afterDelay:3.0f];
-//        [self performSelector:@selector(testSetHeight3) withObject:nil afterDelay:4.0f];
-        
         counter++;
     }
     
     
-    
+    self.pageControl.alpha = 0.0f;
     [UIView animateWithDuration:0.5f animations:^{
-        //mainScrollView.contentOffset = mainScrollView.contentOffset;
         if (self.shouldScrollToTopAfterReload) {
             self.shouldScrollToTopAfterReload = NO;
             [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
         }
+        
+        CGRect frame = self.pageControl.frame;
+        frame.origin.y = mainScrollView.contentSize.height - frame.size.height - 12;
+        self.pageControl.frame = frame;
+        
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.pageControl.alpha = 1.0f;
+        }];
     }];
     
-
+    
+    [mainScrollView bringSubviewToFront:self.pageControl];
+    
     
 }
 #endif
-
-//- (void)testSetHeight {
-//    [self setHeight:400 forCellAtIndex:0];
-//}
-//
-//- (void)testSetHeight2 {
-//    [self setHeight:400 forCellAtIndex:1];
-//}
-//
-//- (void)testSetHeight3 {
-//    [self setHeight:320 forCellAtIndex:0];
-//}
-
 
 
 #pragma mark - PCKioskAdvancedControlElementHeightDelegate
@@ -289,7 +283,7 @@
 
 - (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page {
     self.shouldScrollToTopAfterReload = YES;
-    [self setCurrentPage:page];
+    [self reload];
 }
 
 

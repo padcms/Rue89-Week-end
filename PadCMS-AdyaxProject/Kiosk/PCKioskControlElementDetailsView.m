@@ -97,7 +97,7 @@
     
     self.numberOfWordsLabel.frame = [self wordsLabelRectForAuthorsRect:authorsLabelRect];
     
-    NSLog(@"number frame %@", NSStringFromCGRect(self.numberOfWordsLabel.frame));
+    //NSLog(@"number frame %@", NSStringFromCGRect(self.numberOfWordsLabel.frame));
     
     [self.numberOfWordsLabel sizeToFit];
 }

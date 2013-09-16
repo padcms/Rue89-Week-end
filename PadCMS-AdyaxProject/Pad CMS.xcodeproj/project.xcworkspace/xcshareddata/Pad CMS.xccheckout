@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A3AC939E-9E76-49A3-B08C-B5454CD1DBD4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Pad CMS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5DAF5447-DB0B-45EE-97A2-56CB7B92F6E2</key>
+		<string>ssh://git.adyax.com/padcms-rue89weekend-ios</string>
+		<key>BD17F5FA-36B5-409F-9883-49DB3D5A492B</key>
+		<string>ssh://git.adyax.com/padcms-rue89weekend-ios-sample</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PadCMS-AdyaxProject/Pad CMS.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5DAF5447-DB0B-45EE-97A2-56CB7B92F6E2</key>
+		<string>../../../PadCMS-CocoaTouch-Core</string>
+		<key>BD17F5FA-36B5-409F-9883-49DB3D5A492B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://git.adyax.com/padcms-rue89weekend-ios-sample</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BD17F5FA-36B5-409F-9883-49DB3D5A492B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5DAF5447-DB0B-45EE-97A2-56CB7B92F6E2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PadCMS-CocoaTouch-Core</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD17F5FA-36B5-409F-9883-49DB3D5A492B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>padcms-rue89weekend-ios-sample</string>
+		</dict>
+	</array>
+</dict>
+</plist>

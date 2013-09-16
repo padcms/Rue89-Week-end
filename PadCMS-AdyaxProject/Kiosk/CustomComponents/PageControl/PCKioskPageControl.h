@@ -24,5 +24,6 @@
 @property (nonatomic, weak) id<PCKioskPageControlDelegate> delegate;
 
 + (PCKioskPageControl *)pageControl;
++ (NSUInteger)subviewTag;
 
 @end

@@ -40,12 +40,17 @@ typedef int SeparatorType;
     return pageControl;
 }
 
++ (NSUInteger)subviewTag {
+    return 2000;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         _currentPage = 1;
         elements = [NSMutableArray array];
+        self.tag = [PCKioskPageControl subviewTag];
     }
     return self;
 }

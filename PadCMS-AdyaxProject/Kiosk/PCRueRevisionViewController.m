@@ -9,7 +9,7 @@
 #import "PCRueRevisionViewController.h"
 #import "PCRevisionSummaryPopup.h"
 
-@interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate>
+@interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PCRevisionSummaryPopup * summaryPopup;
 
@@ -26,11 +26,29 @@
 //    return self;
 //}
 
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//	
-//}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+    [self addLeftSwipeToBackGesture];
+}
+
+- (void)addLeftSwipeToBackGesture {
+    UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandler:)];
+    [swipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    swipe.delegate = self;
+    [self.view addGestureRecognizer:swipe];
+}
+
+#pragma mark - Gesture recognizer delagete
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (((UIScrollView *)self.mainScrollView).contentOffset.x > 0) {
+        return NO;
+    }
+    
+    return YES;
+}
 
 
 #pragma mark - HUD (top summary view for Rue) Overrides
@@ -63,6 +81,12 @@
     if (self.summaryPopup.isShown) {
         [self.summaryPopup hide];
     }
+}
+
+#pragma mark - Left swipe handler
+
+- (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer {
+    [self topBarView:nil backButtonTapped:nil];
 }
 
 #pragma mark - PCRevisionSummaryPopupDelegate

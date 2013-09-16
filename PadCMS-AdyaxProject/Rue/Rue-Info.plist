@@ -76,7 +76,7 @@
 		<key>PCDisableSearching</key>
 		<true/>
 		<key>PCScrollViewScrollButtonsDisabled</key>
-		<false/>
+		<true/>
 		<key>PCScrollingPageHorizontalScrollButtonsDisabled</key>
 		<false/>
 		<key>PCScrollingPageVerticalScrollButtonsDisabled</key>

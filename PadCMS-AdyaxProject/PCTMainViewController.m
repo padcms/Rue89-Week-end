@@ -26,7 +26,6 @@
 #import "PCKioskSharePopupView.h"
 #import "PCKioskIntroPopupView.h"
 #import "PCKioskNotificationPopup.h"
-#import "PCKioskPageControl.h"
 #import "PCRueRevisionViewController.h"
 #import "PCKioskSubHeaderView.h"
 #import "ArchivingDataSource.h"
@@ -36,7 +35,6 @@
 
 @property (nonatomic, retain) NSMutableArray * allRevisions;
 @property (nonatomic, retain) PCTag * selectedTag;
-@property (nonatomic, retain) PCKioskPageControl * pageControl;
 
 - (void) initManager;
 - (void) showMagManagerView;
@@ -677,18 +675,7 @@
     
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    PCKioskShelfView * shelfView = [self shelfView];
-    
-    //page control
-    self.pageControl = [PCKioskPageControl pageControl];
-    self.pageControl.center = CGPointMake(self.view.frame.size.width/2, 948);
-    self.pageControl.backgroundColor = [UIColor clearColor];
-    self.pageControl.pagesCount = shelfView.totalPages;
-    self.pageControl.delegate = shelfView;
-    self.pageControl.currentPage = 1;
-    [self.view addSubview:self.pageControl];
-#else 
+#else
     [self.view addSubview:self.kioskNavigationBar];
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
@@ -1078,7 +1065,6 @@
     revision.state = PCRevisionStateArchived;
     
     [[self shelfView] reload];
-    self.pageControl.pagesCount = [self shelfView].totalPages;
     
     [ArchivingDataSource addId:revision.identifier];
     
@@ -1090,7 +1076,6 @@
     revision.state = PCRevisionStatePublished;
     
     [[self shelfView] reload];
-    self.pageControl.pagesCount = [self shelfView].totalPages;
     
     [ArchivingDataSource removeId:revision.identifier];
 }
@@ -1298,11 +1283,8 @@
     }
     
     
-    //shelfView.currentPage = 1;
-    //[shelfView reload];
     shelfView.shouldScrollToTopAfterReload = YES;
-    self.pageControl.currentPage = 1;
-    self.pageControl.pagesCount = shelfView.totalPages;
+    [self shelfView].pageControl.currentPage = 1;
 }
 
 #pragma mark - PCSearchViewControllerDelegate
@@ -1374,8 +1356,6 @@
                 [self.kioskViewController updateRevisionWithIndex:index];
                 
                 [[self shelfView] reload];
-                self.pageControl.pagesCount = [self shelfView].totalPages;
-                
             }
         }
 	}
