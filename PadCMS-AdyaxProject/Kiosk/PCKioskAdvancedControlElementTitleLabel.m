@@ -9,6 +9,12 @@
 #import "PCKioskAdvancedControlElementTitleLabel.h"
 #import <CoreText/CoreText.h>
 
+@interface PCKioskAdvancedControlElementTitleLabel()
+
+@property (nonatomic) CGSize textSize;
+
+@end
+
 @implementation PCKioskAdvancedControlElementTitleLabel
 
 - (id)initWithFrame:(CGRect)frame
@@ -60,7 +66,8 @@
         CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)string);
         
         CGMutablePathRef path = CGPathCreateMutable();
-        CGPathAddRect(path, NULL, CGRectMake(6, 0, /*self.bounds.size.width*/600 - 6, self.bounds.size.height));
+        CGRect textRect = CGRectMake(6, 0, self.bounds.size.width, self.bounds.size.height);
+        CGPathAddRect(path, NULL, textRect);
         
         CTFrameRef totalFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         
@@ -118,6 +125,18 @@
         
         CTFrameDraw(totalFrame, context);
         
+        
+        CGFloat widthConstraint = textRect.size.width; // Your width constraint, using 500 as an example
+        CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
+                                                                            framesetter,
+                                                                            CFRangeMake(0, string.length),
+                                                                            NULL, /* Frame attributes */
+                                                                            CGSizeMake(widthConstraint, CGFLOAT_MAX), /* Constraints (CGFLOAT_MAX indicates unconstrained) */
+                                                                            NULL /* Gives the range of string that fits into the constraints, doesn't matter in your situation */
+                                                                            );
+        self.textSize = CGSizeMake(ceilf(suggestedSize.width + 20), ceilf(suggestedSize.height + 10));
+        [self performSelector:@selector(sizeToFit) withObject:nil afterDelay:0.0f];
+        
         CFRelease(totalFrame);
         CGPathRelease(path);
         CFRelease(framesetter);
@@ -135,6 +154,14 @@
 - (void)setHighlightText:(NSString *)highlightText {
     _highlightText = highlightText;
     [self setNeedsDisplay];
+}
+
+- (void)sizeToFit {
+    if ((self.textSize.width > 0) && (self.textSize.height > 0)) {
+        CGRect frame = self.frame;
+        frame.size = CGSizeMake(self.textSize.width, self.textSize.height);
+        self.frame = frame;
+    }
 }
 
 @end

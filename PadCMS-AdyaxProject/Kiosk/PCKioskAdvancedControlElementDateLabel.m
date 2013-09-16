@@ -20,6 +20,7 @@
         [self setBackgroundColor:[UIColor clearColor]];
         [self setFontColor:UIColorFromRGB(0x91b4d7)];
         [self setLineHeight:18];
+        [self setResizeToFitText:YES];
         [self setCharacterSpacing:-1.0f];
         [self setNumberOfLines:3];
         [self sizeToFit];
@@ -66,6 +67,8 @@
     NSString * dateStringWithMonth = [NSString stringWithFormat:@"%@\n%@\n%@", dayString, convertedMonth, yearString];
     
     self.text = dateStringWithMonth;
+    
+    [self sizeToFit];
     
 }
 

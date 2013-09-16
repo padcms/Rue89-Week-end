@@ -36,8 +36,8 @@ const CGFloat kAnimationDuration = 0.4f;
     CGFloat aShadowWidth = 6;
     UIImage * aShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:aShadowWidth*2 topCapHeight:aShadowWidth*2];
     
-    CGRect frame = CGRectMake((view.frame.size.width - size.width - aShadowWidth*2)/2,
-                              (view.frame.size.height - size.height - aShadowWidth*2)/2 - 20,
+    CGRect frame = CGRectMake(roundf((view.frame.size.width - size.width - aShadowWidth*2)/2),
+                              roundf((view.frame.size.height - size.height - aShadowWidth*2)/2) - 20,
                               size.width + aShadowWidth*2,
                               size.height + aShadowWidth*2);
     

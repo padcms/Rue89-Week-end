@@ -50,7 +50,7 @@
     
     //setup variables
     CGFloat padding = 7;
-    CGPoint center = CGPointMake(self.contentView.frame.size.width/2, self.contentView.frame.size.height/2 + 50);
+    CGPoint center = CGPointMake(roundf(self.contentView.frame.size.width/2), roundf(self.contentView.frame.size.height/2) + 50);
     CGSize buttonSize = CGSizeMake(75, 75);
     
     //facebook button

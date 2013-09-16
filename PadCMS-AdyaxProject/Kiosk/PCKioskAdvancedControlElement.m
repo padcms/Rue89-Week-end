@@ -219,12 +219,10 @@ const CGFloat kDetailsHeight = 80.0f;
 //    }
     
     //[super initLabels];
-    NSString * text = @"hello Text! I am a big line\nof the text\ntest test test";
+
     self.titleLabel = [[PCKioskAdvancedControlElementTitleLabel alloc] initWithFrame:CGRectMake(0, 31, 600, 210)];
     
     [_titleLabel setFont:[UIFont fontWithName:PCFontInterstateBlack size:29.5f]];
-    [_titleLabel setText:text];
-    [_titleLabel setHighlightText:text];
     [_titleLabel setBackgroundColor:[UIColor clearColor]];
     [_titleLabel setTextColor:[UIColor whiteColor]];
     [_titleLabel setHighlightColor:[[UIColor blackColor] colorWithAlphaComponent:0.8f]];
@@ -232,7 +230,7 @@ const CGFloat kDetailsHeight = 80.0f;
     
     CGRect imageFrame = self.illustrationImageView.frame;
     CGFloat dateLabelPaddingLeft = 8.0f;
-    self.dateLabel = [[PCKioskAdvancedControlElementDateLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 100)];
+    self.dateLabel = [[PCKioskAdvancedControlElementDateLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 65)];
     [self addSubview:self.dateLabel];
     
     NSDate * date = self.revision.createDate;//[self.dataSource revisionDateWithIndex:self.revisionIndex];
@@ -341,7 +339,8 @@ const CGFloat kDetailsHeight = 80.0f;
 //        
 //        [self assignCoverImage:coverImage];
    //}
-    self.titleLabel.text = self.revision.issue.title;//[self.dataSource issueTitleWithIndex:self.revisionIndex];
+    self.titleLabel.text = self.revision.issue.title;
+    //[self.dataSource issueTitleWithIndex:self.revisionIndex];
     //revisionTitleLabel.text = [self.dataSource revisionTitleWithIndex:self.revisionIndex];
     //revisionStateLabel.text = [self.dataSource revisionStateWithIndex:self.revisionIndex];
     [self adjustElements];
