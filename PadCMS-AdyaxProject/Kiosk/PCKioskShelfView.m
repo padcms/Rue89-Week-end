@@ -11,6 +11,7 @@
 #import "PCKioskAdvancedControlElement.h"
 #import "PCKioskShelfSettings.h"
 #import "PCKioskSubHeaderView.h"
+#import "PCKioskShelfViewCell.h"
 
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
@@ -18,8 +19,20 @@
 @property (nonatomic, strong) NSArray * revisions;
 @property (nonatomic, strong) PCKioskSubHeaderView * subHeaderView;
 @property (nonatomic) BOOL isSubheaderShown;
+@property (nonatomic) NSInteger numberOfRevisionsForCurrentpage;
+
 
 @end
+
+#ifdef RUE
+
+@interface PCKioskShelfView() <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView * tableView;
+
+@end
+
+#endif
 
 @implementation PCKioskShelfView
 
@@ -28,7 +41,6 @@
     
     if (self) {
         _numberOfRevisionsPerPage = 20;
-
     }
     
     return self;
@@ -42,6 +54,10 @@
         _pageControl.pagesCount = 1;
         _pageControl.delegate = self;
         _pageControl.currentPage = 1;
+        
+    }
+    
+    if (!_pageControl.superview) {
         [mainScrollView addSubview:_pageControl];
     }
     
@@ -49,10 +65,39 @@
 }
 
 #ifdef RUE
-- (void)reload {
-    [self createCells];
+
+- (void)setDataSource:(id<PCKioskDataSourceProtocol>)dataSource {
+    [super setDataSource:dataSource];
+    
+    [self reload];
 }
-#endif
+
+- (void)reload {
+     self.revisions = [self.dataSource allSortedRevisions];
+    [self calculateNumberOfRevisionsForCurrentPage];
+    
+    
+    
+    /* Animate the table view reload */
+    [UIView transitionWithView: mainScrollView
+                      duration: 0.35f
+                       options: UIViewAnimationOptionTransitionCrossDissolve
+                    animations: ^(void)
+     {
+         //[self.tableView reloadData];
+         [self createCells];
+     }
+                    completion: ^(BOOL isFinished)
+     {
+         
+     }];
+    
+    [self layoutPageControl];
+    
+    
+    
+}
+
 
 - (void)reloadWithScrollingToTop {
     self.shouldScrollToTopAfterReload = YES;
@@ -71,12 +116,13 @@
         
         UIEdgeInsets insets = UIEdgeInsetsMake(show ? 30 : 0, 0, 0, 0);
         
-        mainScrollView.contentInset = insets;
+        
         CGPoint offset = CGPointMake(0, -insets.top);
         
         [UIView animateWithDuration:0.5f animations:^{
             self.subHeaderView.frame = frame;
             
+            mainScrollView.contentInset = insets;
             mainScrollView.contentOffset = offset;
             
             
@@ -84,7 +130,6 @@
     }
 }
 
-#ifdef RUE
 - (void)createView {
     [super createView];
     
@@ -93,8 +138,22 @@
     self.subHeaderView = [[PCKioskSubHeaderView alloc] initWithFrame:CGRectMake(0, -40, self.bounds.size.width, 40)];
     [self addSubview:self.subHeaderView];
     
+    [self createPrecomputedCells];
 
+    //[self initTableView];
 }
+
+- (void)initTableView {
+    
+    [self createPrecomputedTableViewCells];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height) style:UITableViewCellStyleDefault];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self addSubview:_tableView];
+}
+
 #endif
 
 - (PCKioskAbstractControlElement*) newCellWithFrame:(CGRect) frame;
@@ -115,97 +174,205 @@
 #pragma mark - Overrides
 
 #ifdef RUE
-- (void) createCells
-{
+
+- (void)removeCells {
     
-    self.revisions = [self.dataSource allSortedRevisions];
+}
+
+- (CGRect)cellFrameForIndex:(NSInteger)index {
+    CGRect cellFrame;
+    cellFrame.origin.x = KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT;
+    cellFrame.origin.y = (index * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
+    cellFrame.size.width = self.bounds.size.width - KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT*2;
+    cellFrame.size.height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
+    
+    return cellFrame;
+}
+
+- (void)calculateNumberOfRevisionsForCurrentPage {
+    
     self.totalNumberOfRevisions =  [self.revisions count];
     
     if (self.pageControl.currentPage > self.pageControl.pagesCount) {
         self.pageControl.currentPage = 1;
     }
     
-    NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
-    if ((self.pageControl.currentPage == self.pageControl.pagesCount) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
-        numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
+    _numberOfRevisionsForCurrentpage = _numberOfRevisionsPerPage;
+    if ((self.pageControl.currentPage == self.pageControl.pagesCount) && (_totalNumberOfRevisions % _numberOfRevisionsForCurrentpage != 0)) {
+        _numberOfRevisionsForCurrentpage = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
     }
     
     if (_totalNumberOfRevisions == 0) {
-        numberOfRevisions = 0;
+        _numberOfRevisionsForCurrentpage = 0;
     }
+}
+
+- (NSInteger)revisionIndexForRow:(NSInteger)row {
+    NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
+    NSInteger revisionIndex = startRevisionIndex + row;
+    return revisionIndex;
+}
+
+- (void)createPrecomputedCells {
+    if (!cells) {
+        cells = [[NSMutableArray alloc] initWithCapacity:_numberOfRevisionsPerPage*2];
+        
+        for (int i = 0; i < _numberOfRevisionsPerPage*2;i++) {
+            //[cells addObject:[NSNull null]];
+            
+            //if ([cell isEqual:[NSNull null]]) {
+            CGRect cellFrame = [self cellFrameForIndex:i];
+            
+            PCKioskAdvancedControlElement        *cell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
+            
+            //setting delegates
+            cell.dataSource = self.dataSource;
+            cell.delegate = self;
+            cell.heightDelegate = self;
+            
+            //allocation UI elements
+            [cell load];
+            
+            [cells addObject:cell];
+            //}
+        }
+    }
+}
+
+- (void) createCells
+{
     
+//    if (!cells) {
+//        cells = [[NSMutableArray alloc] initWithCapacity:_numberOfRevisionsPerPage*2];
+//        
+//        for (int i = 0; i < _numberOfRevisionsPerPage*2;i++) {
+//            //[cells addObject:[NSNull null]];
+//            
+//            //if ([cell isEqual:[NSNull null]]) {
+//            CGRect cellFrame = [self cellFrameForIndex:i];
+//            
+//                PCKioskAdvancedControlElement        *cell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
+//                
+//                //setting delegates
+//                cell.dataSource = self.dataSource;
+//                cell.delegate = self;
+//                cell.heightDelegate = self;
+//                
+//                //allocation UI elements
+//                [cell load];
+//                
+//                [cells addObject:cell];
+//            //}
+//        }
+//    }
+//    
+//    
+//    /////////calculating all the stuff
+//    self.totalNumberOfRevisions =  [self.revisions count];
+//    
+//    if (self.pageControl.currentPage > self.pageControl.pagesCount) {
+//        self.pageControl.currentPage = 1;
+//    }
+//    
+//    NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
+//    if ((self.pageControl.currentPage == self.pageControl.pagesCount) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
+//        numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
+//    }
+//    
+//    if (_totalNumberOfRevisions == 0) {
+//        numberOfRevisions = 0;
+//    }
     
     NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
     
-            CGFloat paginationHeight = 57.0f;
+    //hardcoded pagination size
+    CGFloat paginationHeight = 57.0f;
+    
+    //animate scroll view content size change
     [UIView animateWithDuration:0.5f animations:^{
-        mainScrollView.contentSize = CGSizeMake(self.frame.size.width, numberOfRevisions*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
+        NSInteger multiplier = MAX(_numberOfRevisionsForCurrentpage, 1);
+        
+        mainScrollView.contentSize = CGSizeMake(self.frame.size.width, multiplier*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
     }];
     
-    //remove old first
-    for (UIView * view in cells) {
-        [UIView animateWithDuration:0.5f animations:^{
-            view.alpha = 0.0f;
-            view.userInteractionEnabled = NO;
-        } completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
-        
-    }
+    //[cells removeAllObjects];
     
-    [cells removeAllObjects];
-    //[cells release];
-    
-    cells = [[NSMutableArray alloc] initWithCapacity:numberOfRevisions];
-    
-    //CGFloat         middle = self.bounds.size.width / 2.0f;
-    
+    //creating/updating new cells
     int counter = 0;
-    for(int i = startRevisionIndex; i < startRevisionIndex + numberOfRevisions; i++)
+    for(int i = startRevisionIndex; i < startRevisionIndex + _numberOfRevisionsForCurrentpage; i++)
     {
-        CGRect                   cellFrame;
+        
+        PCKioskAdvancedControlElement        *cell = [cells objectAtIndex:counter];
+        
+//        if ([cell isEqual:[NSNull null]]) {
+//            CGRect cellFrame;
+//            cellFrame.origin.x = KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT;
+//            cellFrame.origin.y = (counter * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
+//            cellFrame.size.width = self.bounds.size.width - KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT*2;
+//            cellFrame.size.height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
+//            
+//            cell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
+//            
+//            //setting delegates
+//            cell.dataSource = self.dataSource;
+//            cell.delegate = self;
+//            cell.heightDelegate = self;
+//            
+//            //allocation UI elements
+//            [cell load];
+//            
+//            [cells replaceObjectAtIndex:counter withObject:cell];
+//        }
+        
+        //and properties
+        cell.revisionIndex = i;
+        cell.revision = [self.revisions objectAtIndex:i];
+        
+        //reloading cell data
+        [cell update];
         
 
-        cellFrame.origin.x = KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT;
+        if (!cell.superview) {
+            ////cell.alpha = 0.0f;
+            [mainScrollView addSubview:cell];
+            
+//            [UIView animateWithDuration:0.5f animations:^{
+//                cell.alpha = 1.0f;
+//            }];
+            cell.userInteractionEnabled = YES;
+        }
 
-        cellFrame.origin.y = (counter * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
-        cellFrame.size.width = self.bounds.size.width - KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT*2;
-        cellFrame.size.height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
-        
-        PCKioskAdvancedControlElement        *newCell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
-        
-        newCell.autoresizesSubviews = YES;
-
-        newCell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-        
-        
-        newCell.revisionIndex = i;
-        newCell.dataSource = self.dataSource;
-        newCell.delegate = self;
-        newCell.heightDelegate = self;
-        newCell.revision = [self.revisions objectAtIndex:i];
-        
-        
-        
-        
-        [mainScrollView addSubview:newCell];
-        
-        [newCell load];
-        
-        newCell.alpha = 0.0f;
-        
-        [UIView animateWithDuration:0.5f animations:^{
-            newCell.alpha = 1.0f;
-        }];
         
         //newCell.backgroundColor = [UIColor orangeColor];
         
-        [cells addObject:newCell];
-        
         counter++;
+        //NSLog(@"SHELF VIEW CREATED");
     }
     
+    //remove other cells
+    for (int i = counter; i<_numberOfRevisionsPerPage; i++) {
+        UIView * view = [cells objectAtIndex:i];
+        if (![view isEqual:[NSNull null]]) {
+//            [UIView animateWithDuration:0.5f animations:^{
+//                view.alpha = 0.0f;
+//                view.userInteractionEnabled = NO;
+//            } completion:^(BOOL finished) {
+                [view removeFromSuperview];
+//            }];
+        }
+    }
     
+    //[self layoutPageControl];
+    
+    [mainScrollView bringSubviewToFront:self.pageControl];
+    
+    NSLog(@"ALL SHELF VIEWS CREATED");
+    
+}
+
+- (void)layoutPageControl {
+    
+    //updating page control alignment
     self.pageControl.alpha = 0.0f;
     [UIView animateWithDuration:0.5f animations:^{
         if (self.shouldScrollToTopAfterReload) {
@@ -222,12 +389,8 @@
             self.pageControl.alpha = 1.0f;
         }];
     }];
-    
-    
-    [mainScrollView bringSubviewToFront:self.pageControl];
-    
-    
 }
+
 #endif
 
 
@@ -237,7 +400,14 @@
     
     NSInteger index = [cells indexOfObject:cell];
     
-    NSInteger count = [cells count];
+    NSInteger count = 0;
+    for (NSObject * object in cells) {
+        if (![object isEqual:[NSNull null]]) {
+            count++;
+        }
+    }
+    
+    //NSInteger count = [cells count];
     
     if (index < count) {
         
@@ -261,7 +431,7 @@
         mainScrollView.contentSize = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.contentSize.height + heightDelta);
         
         
-        BOOL isLastCell = (index == (cells.count - 1));
+        BOOL isLastCell = (index == (count - 1));
         
         if (isLastCell) {
             CGFloat y = mainScrollView.contentOffset.y;
@@ -296,5 +466,70 @@
 - (void)subscribeButtonTapped {
     //nothing
 }
+
+#ifdef RUE
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _numberOfRevisionsForCurrentpage;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //static NSString * reuseIdentifier = @"ShelfCell";
+    
+    PCKioskShelfViewCell * cell = [cells objectAtIndex:indexPath.row];
+    //[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    if (cell == nil) {
+//        cell = [[PCKioskShelfViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+//        
+//        cell.controlElement.dataSource = self.dataSource;
+//        cell.controlElement.delegate = self;
+//        cell.controlElement.heightDelegate = self;
+//
+//        //allocation of UI elements
+//        [cell.controlElement load];
+    }
+    
+    NSInteger index = [self revisionIndexForRow:indexPath.row];
+    
+    cell.controlElement.revisionIndex = index;
+    cell.controlElement.revision = [self.revisions objectAtIndex:index];
+    
+    [cell.controlElement update];
+    
+    return cell;
+}
+
+- (void)createPrecomputedTableViewCells {
+    if (!cells) {
+        cells = [NSMutableArray array];
+        
+        for (int i = 0; i < _numberOfRevisionsPerPage; i++) {
+            PCKioskShelfViewCell * cell = [[PCKioskShelfViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            cell.controlElement.dataSource = self.dataSource;
+            cell.controlElement.delegate = self;
+            cell.controlElement.heightDelegate = self;
+            
+            //allocation of UI elements
+            [cell.controlElement load];
+            [cells addObject:cell];
+        }
+    }
+}
+
+
+#endif
 
 @end

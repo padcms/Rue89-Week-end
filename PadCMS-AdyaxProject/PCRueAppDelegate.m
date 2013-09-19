@@ -8,6 +8,7 @@
 
 #import "PCRueAppDelegate.h"
 #import "TestFlight.h"
+#import "PCRueNavigationController.h"
 
 @implementation PCRueAppDelegate
 
@@ -23,7 +24,7 @@
     
     self.window.rootViewController = nil;
     
-    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:(UIViewController *)self.viewController];
+    PCRueNavigationController * navigationController = [[PCRueNavigationController alloc] initWithRootViewController:(UIViewController *)self.viewController];
     navigationController.navigationBarHidden = YES;
     
     self.window.rootViewController = navigationController;

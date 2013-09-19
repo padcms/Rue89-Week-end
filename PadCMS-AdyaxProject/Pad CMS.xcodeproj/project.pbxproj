@@ -17,9 +17,22 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
+		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E0E17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E0F17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E1017EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E1117EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
+		57189E1417EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		57189E1517EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		57189E1717EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		57189E1817EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		57189E1917EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
 		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; };
 		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; };
 		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; };
+		572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 572B490717EB480200C02D42 /* PCRueNavigationController.m */; };
 		572C052A17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C052B17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
 		572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 572C052917C691B40075C859 /* PCKioskIntroPopupView.m */; };
@@ -1554,12 +1567,18 @@
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		57189E0A17EA19E5008834EA /* NullSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullSafe.h; sourceTree = "<group>"; };
+		57189E0B17EA19E5008834EA /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		57189E1217EA2D84008834EA /* PCKioskShelfViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskShelfViewCell.h; sourceTree = "<group>"; };
+		57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskShelfViewCell.m; sourceTree = "<group>"; };
 		57231D8517D8C5BD00712185 /* EasyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTableView.h; sourceTree = "<group>"; };
 		57231D8617D8C5BD00712185 /* EasyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTableView.m; sourceTree = "<group>"; };
 		57231DBF17D8CFAB00712185 /* PCRevisionSummaryPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryPopup.h; sourceTree = "<group>"; };
 		57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRevisionSummaryPopup.m; sourceTree = "<group>"; };
 		57231DC217D8D02A00712185 /* PCRevisionSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryCell.h; sourceTree = "<group>"; };
 		57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRevisionSummaryCell.m; sourceTree = "<group>"; };
+		572B490617EB480200C02D42 /* PCRueNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueNavigationController.h; sourceTree = "<group>"; };
+		572B490717EB480200C02D42 /* PCRueNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueNavigationController.m; sourceTree = "<group>"; };
 		572C052817C691B40075C859 /* PCKioskIntroPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskIntroPopupView.h; sourceTree = "<group>"; };
 		572C052917C691B40075C859 /* PCKioskIntroPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskIntroPopupView.m; sourceTree = "<group>"; };
 		572C053B17C744D60075C859 /* PCKioskNotificationPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskNotificationPopup.h; sourceTree = "<group>"; };
@@ -2223,6 +2242,8 @@
 				60F022A31590E3000046FA44 /* PCTMainViewController.m */,
 				32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				572B490617EB480200C02D42 /* PCRueNavigationController.h */,
+				572B490717EB480200C02D42 /* PCRueNavigationController.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -2275,6 +2296,15 @@
 				4D7B7368128B322B0066291A /* libOAuthConsumer_iPhone.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		57189E0017EA194C008834EA /* NSNull */ = {
+			isa = PBXGroup;
+			children = (
+				57189E0A17EA19E5008834EA /* NullSafe.h */,
+				57189E0B17EA19E5008834EA /* NullSafe.m */,
+			);
+			path = NSNull;
 			sourceTree = "<group>";
 		};
 		57231D8417D8C5BD00712185 /* EasyTableView */ = {
@@ -2403,6 +2433,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				57189E0017EA194C008834EA /* NSNull */,
 				57231D8417D8C5BD00712185 /* EasyTableView */,
 				5789899D17CF90C800572BAC /* RTLabel */,
 				57A4747317C4AF9300745732 /* MTLabel */,
@@ -2583,6 +2614,8 @@
 				57A2591B17DF3EEA008D576F /* PCKioskSubHeaderView.m */,
 				578CB9B117E101C90014C897 /* PCRueKioskViewController.h */,
 				578CB9B217E101C90014C897 /* PCRueKioskViewController.m */,
+				57189E1217EA2D84008834EA /* PCKioskShelfViewCell.h */,
+				57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -4575,6 +4608,7 @@
 				60F022811590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F022881590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				57189E0C17EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4710C17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713517BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4728B17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
@@ -4582,6 +4616,7 @@
 				57A473C417C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				57A4740617C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742017C478BB00745732 /* PCFonts.m in Sources */,
+				57189E1417EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				5733797C17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747617C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D517C667A800745732 /* PCKioskSharePopupView.m in Sources */,
@@ -4610,6 +4645,7 @@
 				60F022871590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228E1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022AA1590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				57189E1117EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4711217BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713B17BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4729117BD95A400745732 /* PCKioskHeaderView.m in Sources */,
@@ -4617,6 +4653,7 @@
 				57A473CA17C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				57A4740C17C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742617C478BB00745732 /* PCFonts.m in Sources */,
+				57189E1917EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747C17C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474DB17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
@@ -4645,6 +4682,7 @@
 				60F022861590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228D1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				57189E1017EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4711117BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713A17BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4729017BD95A400745732 /* PCKioskHeaderView.m in Sources */,
@@ -4652,6 +4690,7 @@
 				57A473C917C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				57A4740B17C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742517C478BB00745732 /* PCFonts.m in Sources */,
+				57189E1817EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747B17C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474DA17C667A800745732 /* PCKioskSharePopupView.m in Sources */,
@@ -4683,6 +4722,7 @@
 				57A4710E17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713717BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4728D17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
+				57189E0E17EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4729E17BE505800745732 /* PCKioskFooterView.m in Sources */,
 				57A473C617C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */,
@@ -4691,9 +4731,11 @@
 				57A4747817C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
+				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
@@ -4723,6 +4765,7 @@
 				60F022761590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227D1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022841590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
+				57189E0F17EA19E5008834EA /* NullSafe.m in Sources */,
 				60F0228B1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A71590E3000046FA44 /* PCTMainViewController.m in Sources */,
 				57A4710F17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
@@ -4744,6 +4787,7 @@
 				57B4435017D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591F17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AD17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				57189E1717EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				578CB9B617E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4816,6 +4860,7 @@
 				60F022821590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F022891590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				57189E0D17EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4710D17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713617BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4728C17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
@@ -4823,6 +4868,7 @@
 				57A473C517C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				57A4740717C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742117C478BB00745732 /* PCFonts.m in Sources */,
+				57189E1517EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				5733797D17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				57A4747717C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D617C667A800745732 /* PCKioskSharePopupView.m in Sources */,

@@ -148,6 +148,7 @@ const CGFloat kDetailsHeight = 80.0f;
 }
 
 - (void)initCover {
+    
     //illustration
     UIImage * placeholderImage = [UIImage imageNamed:@"home_illustration_placeholder"];
     self.illustrationImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.bounds.size.width - placeholderImage.size.width) /2, (self.bounds.size.height - placeholderImage.size.height) /2, placeholderImage.size.width, placeholderImage.size.height)];
@@ -156,13 +157,6 @@ const CGFloat kDetailsHeight = 80.0f;
     self.illustrationImageView.clipsToBounds = YES;
     self.illustrationImageView.backgroundColor = UIColorFromRGB(0xf6f8fa);
     [self addSubview:self.illustrationImageView];
-    
-    NSString * illustrationURLString = self.revision.issue.imageSmallURL; //[self.dataSource issueImageSmallURLWithIndex:self.revisionIndex];
-    NSString * serverURLString = [PCConfig serverURLString];
-    
-    NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
-    
-    [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
     
     //self.imageViewShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:12 topCapHeight:12];
     
@@ -196,15 +190,6 @@ const CGFloat kDetailsHeight = 80.0f;
     self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:detailsFrameHidden];
     self.detailsView.hidden = YES;
     [self insertSubview:self.detailsView belowSubview:self.illustrationImageView];
-    
-    NSString * excerptString = self.revision.issue.excerpt;//[self.dataSource issueExcerptWithIndex:self.revisionIndex];
-    NSString * authors = self.revision.issue.author;//[self.dataSource issueAuthorWithIndex:self.revisionIndex];
-    NSInteger wordsCount = self.revision.issue.wordsCount;//[self.dataSource issueWordsCountWithIndex:self.revisionIndex];
-    
-    [self.detailsView setExcerptString:excerptString];
-    [self.detailsView setAuthorsString:authors];
-    [self.detailsView setNumberOfWords:wordsCount];
-    
 }
 
 - (void)initLabels {
@@ -233,10 +218,6 @@ const CGFloat kDetailsHeight = 80.0f;
     self.dateLabel = [[PCKioskAdvancedControlElementDateLabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageFrame) + dateLabelPaddingLeft, imageFrame.origin.y - 2, 100, 65)];
     [self addSubview:self.dateLabel];
     
-    NSDate * date = self.revision.createDate;//[self.dataSource revisionDateWithIndex:self.revisionIndex];
-    
-    self.dateLabel.date = date;
-    
     
     self.categoryLabel = [[MTLabel alloc] initWithFrame:CGRectMake(0, imageFrame.origin.y + 4, imageFrame.origin.x, 20)];
     [self.categoryLabel setText:@"Category"];
@@ -247,8 +228,6 @@ const CGFloat kDetailsHeight = 80.0f;
     [self.categoryLabel setFontColor:UIColorFromRGB(0x91b4d7)];
     [self addSubview:self.categoryLabel];
     
-    NSString * category = self.revision.issue.category;[self.dataSource issueCategoryWithIndex:self.revisionIndex];
-    self.categoryLabel.text = category;
     //[self.dateLabel setBackgroundColor:[UIColor redColor]];
 }
 
@@ -306,6 +285,7 @@ const CGFloat kDetailsHeight = 80.0f;
     if (self.revision.isDownloaded) {
         deleteButton.hidden = YES;
         _archiveButton.hidden = NO;
+        downloadButton.hidden = YES;
     }
     
     if (self.revision.state == PCRevisionStateArchived) {
@@ -314,13 +294,18 @@ const CGFloat kDetailsHeight = 80.0f;
             _restoreButton.hidden = NO;
             _archiveButton.hidden = YES;
             readButton.hidden = YES;
+        } else {
+            _restoreButton.hidden = YES;
         }
     } else {
         if (self.revision.isDownloaded) {
             deleteButton.hidden = YES;
             _archiveButton.hidden = NO;
-            _restoreButton.hidden = YES;
+        } else {
+            _archiveButton.hidden = YES;
         }
+        
+        _restoreButton.hidden = YES;
 
     }
 	
@@ -328,22 +313,48 @@ const CGFloat kDetailsHeight = 80.0f;
 
 - (void) update
 {
-    //if(revisionCoverView)
-    //{
-    
-//    if (self.revisionIndex != 1) {
-//        UIImage         *coverImage = [self.dataSource revisionCoverImageWithIndex:self.revisionIndex andDelegate:self];
-//        self.illustrationImageView.image = coverImage;
-//    }
-
-//        
-//        [self assignCoverImage:coverImage];
-   //}
+   //NSDate *methodStart = [NSDate date];
+    //title
     self.titleLabel.text = self.revision.issue.title;
-    //[self.dataSource issueTitleWithIndex:self.revisionIndex];
-    //revisionTitleLabel.text = [self.dataSource revisionTitleWithIndex:self.revisionIndex];
-    //revisionStateLabel.text = [self.dataSource revisionStateWithIndex:self.revisionIndex];
+    
+    //details
+    NSString * excerptString = self.revision.issue.excerpt;
+    NSString * authors = self.revision.issue.author;
+    NSInteger wordsCount = self.revision.issue.wordsCount;
+    
+    [self.detailsView setExcerptString:excerptString];
+    [self.detailsView setAuthorsString:authors];
+    [self.detailsView setNumberOfWords:wordsCount];
+    
+    //date
+    NSDate * date = self.revision.createDate;
+    self.dateLabel.date = date;
+    
+    //category
+    NSString * category = self.revision.issue.category;[self.dataSource issueCategoryWithIndex:self.revisionIndex];
+    self.categoryLabel.text = category;
+    
+    //illustration
+    UIImage * placeholderImage = [UIImage imageNamed:@"home_illustration_placeholder"];
+    NSString * illustrationURLString = self.revision.issue.imageSmallURL;
+    NSString * serverURLString = [PCConfig serverURLString];
+    NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
+    
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    //[self.illustrationImageView setImage:placeholderImage];
+        [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
+    //});
+    
+    
     [self adjustElements];
+    
+    //NSDate *methodFinish = [NSDate date];
+    //NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
+    
+    //if (executionTime > 0.05) {
+         //NSLog(@"UPDATE executionTime = %f", executionTime);
+    //}
+   
 }
 
 #pragma mark - Buttons actions

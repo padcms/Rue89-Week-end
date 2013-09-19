@@ -35,6 +35,7 @@
 
 @property (nonatomic, strong) NSMutableArray * allRevisions;
 @property (nonatomic, strong) PCTag * selectedTag;
+@property (nonatomic, strong) PCEmailController * emailController;
 
 - (void) initManager;
 - (void) bindNotifications;
@@ -118,7 +119,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
         
-    return NO;
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation);
     
     
     if(_revisionViewController != nil && _revisionViewController.revision != nil) {
@@ -990,11 +991,11 @@
 
 - (void)contactUsButtonTapped {
     NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"Subject", PCApplicationNotificationMessageKey : @"Message"};
-    PCEmailController * emailController = [[PCEmailController alloc] initWithMessage:emailParams];
-    [emailController.emailViewController setToRecipients:@[@"xxxxxxxxx@adyax.com"]];
+    self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
+    [self.emailController.emailViewController setToRecipients:@[@"xxxxxxxxx@adyax.com"]];
 
-    emailController.delegate = self;
-    [emailController emailShow];
+    self.emailController.delegate = self;
+    [self.emailController emailShow];
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {

@@ -27,6 +27,7 @@ typedef int SeparatorType;
 
 @interface PCKioskPageControl() {
     NSMutableArray * elements;
+    BOOL shouldSkipDelegateUpdate;
 }
 
 @end
@@ -284,15 +285,21 @@ typedef int SeparatorType;
     
     [self createViewsForPage:currentPage];
     
-    if ([self.delegate respondsToSelector:@selector(kioskPageControl:didChangePage:)]) {
-        [self.delegate kioskPageControl:self didChangePage:_currentPage];
+    if (!shouldSkipDelegateUpdate) {
+        if ([self.delegate respondsToSelector:@selector(kioskPageControl:didChangePage:)]) {
+            [self.delegate kioskPageControl:self didChangePage:_currentPage];
+        }
+    } else {
+        shouldSkipDelegateUpdate = NO;
     }
+
 }
 
 - (void)setPagesCount:(NSInteger)pagesCount {
     _pagesCount = pagesCount;
     
     if (_currentPage > _pagesCount) {
+        shouldSkipDelegateUpdate = YES;
         [self setCurrentPage:_pagesCount];
     } else {
         [self createViewsForPage:_currentPage];

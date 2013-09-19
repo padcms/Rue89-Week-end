@@ -135,7 +135,7 @@
                                                                             NULL /* Gives the range of string that fits into the constraints, doesn't matter in your situation */
                                                                             );
         self.textSize = CGSizeMake(ceilf(suggestedSize.width + 20), ceilf(suggestedSize.height + 10));
-        [self performSelector:@selector(sizeToFit) withObject:nil afterDelay:0.0f];
+        //[self performSelector:@selector(sizeToFit) withObject:nil afterDelay:0.0f];
         
         CFRelease(totalFrame);
         CGPathRelease(path);

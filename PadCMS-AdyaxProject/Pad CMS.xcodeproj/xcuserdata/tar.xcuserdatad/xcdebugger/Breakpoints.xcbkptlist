@@ -130,7 +130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "571"
          endingLineNumber = "571"
-         landmarkName = "-updateApplicationData"
+         landmarkName = "-revisionCoverImageWithIndex:andDelegate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
