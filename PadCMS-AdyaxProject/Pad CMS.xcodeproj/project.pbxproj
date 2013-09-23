@@ -628,6 +628,10 @@
 		57B443A417D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
 		57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */; };
 		57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BBD81617E1F7F4001F7653 /* SDWebImage.framework */; };
+		57FE3F3717F032FA00705EF0 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */; };
+		57FE3F3817F032FB00705EF0 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */; };
+		57FE3F3917F032FB00705EF0 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3617F032FA00705EF0 /* GooglePlus.framework */; };
+		57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3A17F0332000705EF0 /* Security.framework */; };
 		600E459C15C013FD008ACADC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 600E459E15C013FD008ACADC /* Localizable.strings */; };
 		6030878A1541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 603087891541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m */; };
 		60332C46154062E800DDFF3D /* PCPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60332C44154062E800DDFF3D /* PCPrivacyPolicyViewController.m */; };
@@ -1695,6 +1699,10 @@
 		57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRevisionViewController.h; sourceTree = "<group>"; };
 		57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRevisionViewController.m; sourceTree = "<group>"; };
 		57BBD81617E1F7F4001F7653 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		57FE3F3617F032FA00705EF0 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		57FE3F3A17F0332000705EF0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6005387715011C23008021DA /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		600E459D15C013FD008ACADC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		603087881541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNavigationControllerWithDismissableKeyboard.h; sourceTree = "<group>"; };
@@ -2080,16 +2088,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */,
 				57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */,
 				57A4710817BB663100745732 /* CoreText.framework in Frameworks */,
 				C52044F51591A91200FEF170 /* libPadCMS-CocoaTouch-Core.a in Frameworks */,
 				8418FCDF1523176A00EA4288 /* NewsstandKit.framework in Frameworks */,
 				AB813870152224E50038EC7B /* MediaPlayer.framework in Frameworks */,
+				57FE3F3917F032FB00705EF0 /* GooglePlus.framework in Frameworks */,
 				AB813871152224E50038EC7B /* Twitter.framework in Frameworks */,
 				AB813872152224E50038EC7B /* MobileCoreServices.framework in Frameworks */,
 				AB813873152224E50038EC7B /* ImageIO.framework in Frameworks */,
 				AB813874152224E50038EC7B /* libxml2.2.dylib in Frameworks */,
 				AB813876152224E50038EC7B /* Foundation.framework in Frameworks */,
+				57FE3F3717F032FA00705EF0 /* GoogleOpenSource.framework in Frameworks */,
 				AB813877152224E50038EC7B /* UIKit.framework in Frameworks */,
 				AB813878152224E50038EC7B /* CoreGraphics.framework in Frameworks */,
 				AB813879152224E50038EC7B /* libz.dylib in Frameworks */,
@@ -2262,6 +2273,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57FE3F3A17F0332000705EF0 /* Security.framework */,
 				57BBD81617E1F7F4001F7653 /* SDWebImage.framework */,
 				57A4710717BB663100745732 /* CoreText.framework */,
 				57B4431217D737EC00FCFA87 /* TestflightSDK */,
@@ -2433,6 +2445,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				57FE3F3317F032FA00705EF0 /* GooglePlus */,
 				57189E0017EA194C008834EA /* NSNull */,
 				57231D8417D8C5BD00712185 /* EasyTableView */,
 				5789899D17CF90C800572BAC /* RTLabel */,
@@ -2529,6 +2542,16 @@
 				57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */,
 			);
 			path = IssueScreen;
+			sourceTree = "<group>";
+		};
+		57FE3F3317F032FA00705EF0 /* GooglePlus */ = {
+			isa = PBXGroup;
+			children = (
+				57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */,
+				57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */,
+				57FE3F3617F032FA00705EF0 /* GooglePlus.framework */,
+			);
+			path = GooglePlus;
 			sourceTree = "<group>";
 		};
 		60371C491557C3D90001814C /* Privacy policy and Contact Us */ = {
@@ -4090,6 +4113,7 @@
 				57A4711617BB9F1100745732 /* home_illustration_placeholder.png in Resources */,
 				57A4712017BB9F2000745732 /* home_illustration_placeholder@2x.png in Resources */,
 				57A4712717BB9F2000745732 /* home_illustration_test.png in Resources */,
+				57FE3F3817F032FB00705EF0 /* GooglePlus.bundle in Resources */,
 				57A4712E17BB9F2000745732 /* home_illustration_test@2x.png in Resources */,
 				57A4714017BBBF6700745732 /* Interstate Bold.ttf in Resources */,
 				57A4714817BBC0D500745732 /* Quicksand_Book.otf in Resources */,
@@ -5401,7 +5425,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5442,7 +5467,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
@@ -5484,7 +5510,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
