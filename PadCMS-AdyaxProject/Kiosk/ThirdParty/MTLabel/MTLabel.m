@@ -330,7 +330,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     }
     
     //Create a CoreText font object with name and size from the UIKit one
-    CTFontRef font = CTFontCreateWithName((CFStringRef)_font.fontName , 
+    CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)_font.fontName ,
                                           _font.pointSize, 
                                           NULL);
     
@@ -348,7 +348,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     CFRelease(font);
     
     //Create a TypeSetter object with the attributed text created earlier on
-    CTTypesetterRef typeSetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
+    CTTypesetterRef typeSetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
     
     //Start drawing from the upper side of view (the context is flipped, so we need to grab the height to do so)
     CGFloat y = self.bounds.origin.y + self.bounds.size.height - _font.ascender;

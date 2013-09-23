@@ -23,10 +23,14 @@
     
 }
 
+
 @property (nonatomic, weak) id<PCKioskAdvancedControlElementHeightDelegate> heightDelegate;
 @property (nonatomic, strong) PCRevision * revision;
 @property (nonatomic, strong) UIButton * archiveButton;
 @property (nonatomic, strong) UIButton * restoreButton;
+
+- (void)showDescription:(BOOL)show animated:(BOOL)animated;
+- (void)showDescription:(BOOL)show animated:(BOOL)animated notifyDelegate:(BOOL)notify;
 
 @end
 

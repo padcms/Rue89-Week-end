@@ -156,11 +156,15 @@
 
 - (void) viewDidLoad
 {
-    
+
+#ifdef  NSFoundationVersionNumber_iOS_6_1
     //iOS 7 status bar fix
     if (!(NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_6_1)) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
+#else
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+#endif
     
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;

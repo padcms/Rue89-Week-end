@@ -76,7 +76,7 @@
      self.revisions = [self.dataSource allSortedRevisions];
     [self calculateNumberOfRevisionsForCurrentPage];
     
-    
+    self.pageControl.alpha = 0.0f;
     
     /* Animate the table view reload */
     [UIView transitionWithView: mainScrollView
@@ -89,10 +89,10 @@
      }
                     completion: ^(BOOL isFinished)
      {
-         
+         [self layoutPageControl];
      }];
     
-    [self layoutPageControl];
+    
     
     
     
@@ -324,6 +324,9 @@
 //            [cells replaceObjectAtIndex:counter withObject:cell];
 //        }
         
+        [cell showDescription:NO animated:NO notifyDelegate:NO];
+        [cell setFrame:[self cellFrameForIndex:counter]];
+        
         //and properties
         cell.revisionIndex = i;
         cell.revision = [self.revisions objectAtIndex:i];
@@ -364,6 +367,13 @@
     
     //[self layoutPageControl];
     
+    [UIView animateWithDuration:0.5f animations:^{
+        if (self.shouldScrollToTopAfterReload) {
+            self.shouldScrollToTopAfterReload = NO;
+            [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
+        }
+    }];
+    
     [mainScrollView bringSubviewToFront:self.pageControl];
     
     NSLog(@"ALL SHELF VIEWS CREATED");
@@ -374,12 +384,7 @@
     
     //updating page control alignment
     self.pageControl.alpha = 0.0f;
-    [UIView animateWithDuration:0.5f animations:^{
-        if (self.shouldScrollToTopAfterReload) {
-            self.shouldScrollToTopAfterReload = NO;
-            [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
-        }
-        
+    [UIView animateWithDuration:0.0f animations:^{
         CGRect frame = self.pageControl.frame;
         frame.origin.y = mainScrollView.contentSize.height - frame.size.height - 12;
         self.pageControl.frame = frame;
@@ -400,14 +405,16 @@
     
     NSInteger index = [cells indexOfObject:cell];
     
-    NSInteger count = 0;
-    for (NSObject * object in cells) {
-        if (![object isEqual:[NSNull null]]) {
-            count++;
-        }
-    }
+//    NSInteger count = 0;
+//    for (NSObject * object in cells) {
+//        if (![object isEqual:[NSNull null]]) {
+//            count++;
+//        }
+//    }
     
     //NSInteger count = [cells count];
+    
+    NSInteger count = _numberOfRevisionsForCurrentpage;
     
     if (index < count) {
         
@@ -447,6 +454,8 @@
             }
         }
     }
+    
+    [self layoutPageControl];
 }
 
 #pragma mark - PCKioskPageControlDelegate
@@ -501,12 +510,15 @@
 //        [cell.controlElement load];
     }
     
+    
     NSInteger index = [self revisionIndexForRow:indexPath.row];
     
     cell.controlElement.revisionIndex = index;
     cell.controlElement.revision = [self.revisions objectAtIndex:index];
     
     [cell.controlElement update];
+    
+    
     
     return cell;
 }

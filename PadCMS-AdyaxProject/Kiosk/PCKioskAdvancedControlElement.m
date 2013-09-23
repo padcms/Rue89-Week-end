@@ -313,6 +313,7 @@ const CGFloat kDetailsHeight = 80.0f;
 
 - (void) update
 {
+    
    //NSDate *methodStart = [NSDate date];
     //title
     self.titleLabel.text = self.revision.issue.title;
@@ -354,6 +355,8 @@ const CGFloat kDetailsHeight = 80.0f;
     //if (executionTime > 0.05) {
          //NSLog(@"UPDATE executionTime = %f", executionTime);
     //}
+    
+
    
 }
 
@@ -376,27 +379,40 @@ const CGFloat kDetailsHeight = 80.0f;
 }
 
 - (void)showDetailsButtonTapped {
-    [self.showDetailsButton setSelected:![self.showDetailsButton isSelected]];
+    [self showDescription:!self.showDetailsButton.isSelected animated:YES];
+}
+
+- (void)showDescription:(BOOL)show animated:(BOOL)animated {
+    [self showDescription:show animated:animated notifyDelegate:YES];
+}
+
+- (void)showDescription:(BOOL)show animated:(BOOL)animated notifyDelegate:(BOOL)notify {
+    
+    [self.showDetailsButton setSelected:show];
     
     CGFloat height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
     CGFloat shadowHeight = shadowInitialHeight;
     CGFloat shadowAlpha = 0;
     CGRect detailsFrame = detailsFrameHidden;
-    BOOL descriptionHidden = YES;
     
-    if (self.showDetailsButton.selected) {
+    if (show) {
         height += kDetailsHeight;
         shadowHeight += kDetailsHeight;
         shadowAlpha = 0.3f;
         detailsFrame = detailsFrameShown;
-        descriptionHidden = NO;
     }
-
-    [UIView animateWithDuration:0.3f animations:^{
+    
+    float animationDuration = animated ? 0.3f : 0.0f;
+    
+    [UIView animateWithDuration:animationDuration animations:^{
         //setting frame of current cell and other cells
-        if([self.heightDelegate respondsToSelector:@selector(setHeight:forCell:)]) {
-            [self.heightDelegate setHeight:height forCell:self];
+        
+        if (notify) {
+            if([self.heightDelegate respondsToSelector:@selector(setHeight:forCell:)]) {
+                [self.heightDelegate setHeight:height forCell:self];
+            }
         }
+
         
         //setting shadow frame
         CGRect shadowFrame = self.shadowImageView.frame;
@@ -407,7 +423,7 @@ const CGFloat kDetailsHeight = 80.0f;
         self.detailsShadowImageView.alpha = shadowAlpha;
         
         //show textview'
-        if (!descriptionHidden) {
+        if (show) {
             self.detailsView.hidden = NO;
         }
         
@@ -415,10 +431,11 @@ const CGFloat kDetailsHeight = 80.0f;
         //setting details frame
         self.detailsView.frame = detailsFrame;
     } completion:^(BOOL finished) {
-        if (descriptionHidden) {
+        if (!show) {
             self.detailsView.hidden = YES;
         }
     }];
+
 }
 
 - (void) productDataRecieved:(NSNotification *) notification
