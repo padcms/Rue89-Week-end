@@ -628,9 +628,6 @@
 		57B443A417D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
 		57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */; };
 		57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BBD81617E1F7F4001F7653 /* SDWebImage.framework */; };
-		57FE3F3717F032FA00705EF0 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */; };
-		57FE3F3817F032FB00705EF0 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */; };
-		57FE3F3917F032FB00705EF0 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3617F032FA00705EF0 /* GooglePlus.framework */; };
 		57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3A17F0332000705EF0 /* Security.framework */; };
 		600E459C15C013FD008ACADC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 600E459E15C013FD008ACADC /* Localizable.strings */; };
 		6030878A1541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 603087891541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m */; };
@@ -698,6 +695,9 @@
 		60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022AA1590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022AB1590E6570046FA44 /* libPadCMS-CocoaTouch-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F022251590D7B90046FA44 /* libPadCMS-CocoaTouch-Core.a */; };
+		63C23E4917F06F55004C55BC /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */; };
+		63C23E4A17F06F55004C55BC /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63C23E4717F06F55004C55BC /* GooglePlus.bundle */; };
+		63C23E4B17F06F55004C55BC /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C23E4817F06F55004C55BC /* GooglePlus.framework */; };
 		711144E814EEB58D000588E2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD0E9E14EBE7960083B53E /* libsqlite3.dylib */; };
 		7148DADB151C97690067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADA151C97690067EB2B /* flashButtonBackground.png */; };
 		7148DADD151C97830067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADC151C97830067EB2B /* flashButtonBackground.png */; };
@@ -1699,9 +1699,6 @@
 		57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRevisionViewController.h; sourceTree = "<group>"; };
 		57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRevisionViewController.m; sourceTree = "<group>"; };
 		57BBD81617E1F7F4001F7653 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
-		57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
-		57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
-		57FE3F3617F032FA00705EF0 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		57FE3F3A17F0332000705EF0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6005387715011C23008021DA /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		600E459D15C013FD008ACADC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1737,6 +1734,9 @@
 		60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskSubviewsFactory.m; sourceTree = "<group>"; };
 		60F022A21590E3000046FA44 /* PCTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTMainViewController.h; sourceTree = "<group>"; };
 		60F022A31590E3000046FA44 /* PCTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTMainViewController.m; sourceTree = "<group>"; };
+		63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		63C23E4717F06F55004C55BC /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		63C23E4817F06F55004C55BC /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		7148DADA151C97690067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7148DADC151C97830067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7177326C14F64C2F0087507C /* sliderPageControlItemSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderPageControlItemSelected.png; sourceTree = "<group>"; };
@@ -2094,13 +2094,11 @@
 				C52044F51591A91200FEF170 /* libPadCMS-CocoaTouch-Core.a in Frameworks */,
 				8418FCDF1523176A00EA4288 /* NewsstandKit.framework in Frameworks */,
 				AB813870152224E50038EC7B /* MediaPlayer.framework in Frameworks */,
-				57FE3F3917F032FB00705EF0 /* GooglePlus.framework in Frameworks */,
 				AB813871152224E50038EC7B /* Twitter.framework in Frameworks */,
 				AB813872152224E50038EC7B /* MobileCoreServices.framework in Frameworks */,
 				AB813873152224E50038EC7B /* ImageIO.framework in Frameworks */,
 				AB813874152224E50038EC7B /* libxml2.2.dylib in Frameworks */,
 				AB813876152224E50038EC7B /* Foundation.framework in Frameworks */,
-				57FE3F3717F032FA00705EF0 /* GoogleOpenSource.framework in Frameworks */,
 				AB813877152224E50038EC7B /* UIKit.framework in Frameworks */,
 				AB813878152224E50038EC7B /* CoreGraphics.framework in Frameworks */,
 				AB813879152224E50038EC7B /* libz.dylib in Frameworks */,
@@ -2115,6 +2113,8 @@
 				C5CFF3741574CE5300F2235B /* OpenAL.framework in Frameworks */,
 				C5CFF3751574CE5300F2235B /* OpenGLES.framework in Frameworks */,
 				57B4431917D737EC00FCFA87 /* libTestFlight.a in Frameworks */,
+				63C23E4917F06F55004C55BC /* GoogleOpenSource.framework in Frameworks */,
+				63C23E4B17F06F55004C55BC /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2445,7 +2445,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				57FE3F3317F032FA00705EF0 /* GooglePlus */,
+				63C23E4517F06F55004C55BC /* GooglePlus */,
 				57189E0017EA194C008834EA /* NSNull */,
 				57231D8417D8C5BD00712185 /* EasyTableView */,
 				5789899D17CF90C800572BAC /* RTLabel */,
@@ -2544,16 +2544,6 @@
 			path = IssueScreen;
 			sourceTree = "<group>";
 		};
-		57FE3F3317F032FA00705EF0 /* GooglePlus */ = {
-			isa = PBXGroup;
-			children = (
-				57FE3F3417F032FA00705EF0 /* GoogleOpenSource.framework */,
-				57FE3F3517F032FA00705EF0 /* GooglePlus.bundle */,
-				57FE3F3617F032FA00705EF0 /* GooglePlus.framework */,
-			);
-			path = GooglePlus;
-			sourceTree = "<group>";
-		};
 		60371C491557C3D90001814C /* Privacy policy and Contact Us */ = {
 			isa = PBXGroup;
 			children = (
@@ -2641,6 +2631,16 @@
 				57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */,
 			);
 			path = Kiosk;
+			sourceTree = "<group>";
+		};
+		63C23E4517F06F55004C55BC /* GooglePlus */ = {
+			isa = PBXGroup;
+			children = (
+				63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */,
+				63C23E4717F06F55004C55BC /* GooglePlus.bundle */,
+				63C23E4817F06F55004C55BC /* GooglePlus.framework */,
+			);
+			path = GooglePlus;
 			sourceTree = "<group>";
 		};
 		719A8B0714F52B7200F01F23 /* AIR */ = {
@@ -4113,7 +4113,6 @@
 				57A4711617BB9F1100745732 /* home_illustration_placeholder.png in Resources */,
 				57A4712017BB9F2000745732 /* home_illustration_placeholder@2x.png in Resources */,
 				57A4712717BB9F2000745732 /* home_illustration_test.png in Resources */,
-				57FE3F3817F032FB00705EF0 /* GooglePlus.bundle in Resources */,
 				57A4712E17BB9F2000745732 /* home_illustration_test@2x.png in Resources */,
 				57A4714017BBBF6700745732 /* Interstate Bold.ttf in Resources */,
 				57A4714817BBC0D500745732 /* Quicksand_Book.otf in Resources */,
@@ -4157,6 +4156,7 @@
 				57B4439217D78B5000FCFA87 /* summary_separator_left@2x.png in Resources */,
 				57B4439917D78B5000FCFA87 /* summary_separator_right.png in Resources */,
 				57B443A017D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */,
+				63C23E4A17F06F55004C55BC /* GooglePlus.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5427,6 +5427,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
+					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5469,6 +5470,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
+					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
@@ -5512,6 +5514,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
+					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
