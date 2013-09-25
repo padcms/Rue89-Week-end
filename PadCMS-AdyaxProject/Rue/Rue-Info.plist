@@ -56,7 +56,7 @@
 		<key>PCConfigApplicationDefaultLanguage</key>
 		<string>fr</string>
 		<key>PCConfigApplicationIdentifier</key>
-		<integer>10</integer>
+		<integer>104</integer>
 		<key>PCConfigClientIdentifier</key>
 		<integer>10</integer>
 		<key>PCConfigFacebookId</key>
@@ -313,6 +313,7 @@
 		<string>Quicksand_Bold.ttf</string>
 		<string>Interstate Regular.ttf</string>
 		<string>Interstate Light.ttf</string>
+		<string>Interstate Italic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
