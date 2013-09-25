@@ -13,10 +13,14 @@
 #import "PCFacebookViewController.h"
 #import "PCTwitterNewController.h"
 
+#import "PCGooglePlusController.h"
+
 @interface PCKioskSharePopupView()
 
 @property (nonatomic, strong) PCEmailController * emailController;
 @property (nonatomic, strong) PCFacebookViewController * facebookViewController;
+
+@property (nonatomic, strong) PCGooglePlusController* googleController;
 
 @end
 
@@ -71,6 +75,7 @@
     UIButton * googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [googlePlusButton setImage:[UIImage imageNamed:@"share_google_plus"] forState:UIControlStateNormal];
     [googlePlusButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y + padding, buttonSize.width, buttonSize.height)];
+    [googlePlusButton addTarget:self action:@selector(googlePlusShareButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:googlePlusButton];
     
     //google button
@@ -149,6 +154,51 @@
         twitterController.delegate = self.delegate;
         [twitterController showTwitterController];
     }
+}
+
+- (void) googlePlusShareButtonPresed:(UIButton*)sender
+{
+    self.googleController = [[PCGooglePlusController alloc]init];
+    
+    CGRect oldFrame = self.frame;
+    
+    [self.googleController shareWithDialog:^(UIView *dialogView) {
+        
+        //UIWindow* window = [[UIApplication sharedApplication].windows lastObject];
+        
+        CGRect startRect = [self convertRect:sender.frame fromView:sender.superview];
+        
+        dialogView.frame = startRect;
+        [self addSubview:dialogView];
+        
+        CGRect finalFrame = self.bounds;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            dialogView.frame = finalFrame;
+        }];
+        
+    } authorizationComplete:^(UIView *dialogView) {
+        
+        float screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGRect newFrameForPopup = self.frame;
+        newFrameForPopup.origin.x = 0;
+        newFrameForPopup.size.width = screenWidth;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            self.frame = newFrameForPopup;
+            dialogView.frame = self.bounds;
+        }];
+        
+    } complete:^(UIView *dialogView) {
+        
+        self.frame = oldFrame;
+        
+        [dialogView removeFromSuperview];
+    }];
+    
+    
 }
 
 @end
