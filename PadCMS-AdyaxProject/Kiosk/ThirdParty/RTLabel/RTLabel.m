@@ -36,6 +36,7 @@
  */
 
 #import "RTLabel.h"
+#import "RTLabel+Kern.h"
 
 @interface RTLabelButton : UIButton
 @property (nonatomic, assign) int componentIndex;
@@ -773,6 +774,11 @@
 - (void)setText:(NSString *)text
 {
 	_text = [text stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n"];
+    
+    if (self.kernValue != 0) {
+        _text = [self string:_text kernedToValue:self.kernValue];
+    }
+    
 	RTLabelExtractedComponent *component = [RTLabel extractTextStyleFromText:_text paragraphReplacement:self.paragraphReplacement];
     [self setTextComponents:component.textComponents];
     [self setPlainText:component.plainText];

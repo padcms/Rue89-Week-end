@@ -50,6 +50,13 @@
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (CGRectContainsPoint(self.summaryPopup.contentView.frame, [touch locationInView:self.summaryPopup.contentView])) {
+        return NO;
+    }
+    
+    return YES;
+}
 
 #pragma mark - HUD (top summary view for Rue) Overrides
 

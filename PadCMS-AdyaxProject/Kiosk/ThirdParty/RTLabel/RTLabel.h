@@ -63,7 +63,7 @@ typedef enum
 @property (nonatomic, assign) int componentIndex;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *tagLabel;
-@property (weak, nonatomic) NSMutableDictionary *attributes;
+@property (strong, nonatomic) NSMutableDictionary *attributes;
 @property (nonatomic, assign) int position;
 
 - (id)initWithString:(NSString*)aText tag:(NSString*)aTagLabel attributes:(NSMutableDictionary*)theAttributes;
@@ -95,6 +95,7 @@ typedef enum
 @property (nonatomic, assign) int currentSelectedButtonComponentIndex;
 @property (nonatomic, assign) CFRange visibleRange;
 @property (nonatomic, assign) BOOL highlighted;
+@property (nonatomic, assign) CGFloat kernValue;
 
 // set text
 - (void)setText:(NSString*)text;

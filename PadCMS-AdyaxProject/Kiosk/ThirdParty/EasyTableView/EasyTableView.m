@@ -325,7 +325,6 @@
 	return indexPath;
 }
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	if ([delegate respondsToSelector:@selector(easyTableView:scrolledToOffset:)])
 		[delegate easyTableView:self scrolledToOffset:self.contentOffset];
@@ -396,7 +395,13 @@
 	[self setCell:cell boundsForOrientation:_orientation];
 	
 	[self setDataForRotatedView:[cell.contentView viewWithTag:ROTATED_CELL_VIEW_TAG] forIndexPath:indexPath];
+    
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell setNeedsLayout];
 }
 
 

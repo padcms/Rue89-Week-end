@@ -67,6 +67,8 @@ const CGFloat kLabelPadding = 30.0f;
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
     [self.descriptionLabel setCharacterSpacing:-0.5f];
     self.descriptionLabel.fontColor = UIColorFromRGB(0x969696);
+    self.descriptionLabel.contentMode = UIViewContentModeRedraw;
+    self.descriptionLabel.delegate = self;
     [self addSubview:self.descriptionLabel];
 }
 
@@ -79,6 +81,10 @@ const CGFloat kLabelPadding = 30.0f;
 - (void)layoutLabels {
     self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 50);
     self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 110);
+}
+
+- (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
+    [label setNeedsDisplay];
 }
 
 @end

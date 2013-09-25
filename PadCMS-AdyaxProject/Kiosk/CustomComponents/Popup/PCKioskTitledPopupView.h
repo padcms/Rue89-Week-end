@@ -7,6 +7,8 @@
 //
 
 #import "PCKioskPopupView.h"
+#import "MTLabel.h"
+#import "RTLabel.h"
 
 @interface PCKioskTitledPopupView : PCKioskPopupView
 
@@ -18,7 +20,7 @@
 /**
  @brief Description label
  */
-@property (nonatomic, strong) MTLabel * descriptionLabel;
+@property (nonatomic, strong) RTLabel * descriptionLabel;
 
 
 /**

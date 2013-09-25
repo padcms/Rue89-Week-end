@@ -26,6 +26,8 @@
 
 -(void)drawTransparentBackground;
 
+@property (nonatomic, strong) NSTimer * redrawTimer;
+
 @end
 
 CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
@@ -88,9 +90,29 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         }
         
         _text = text;
+        
+        [self setNeedsDisplayHacked];
+        
         [self setNeedsDisplay];
 
     }
+}
+
+- (void)setNeedsDisplayHacked {
+    if (!self.redrawTimer) {
+        self.redrawTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(doRedraw) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.redrawTimer forMode:NSRunLoopCommonModes];
+    }
+}
+
+- (void)doRedraw {
+    Class cellClass =  NSClassFromString(@"PCRevisionSummaryCell");
+    
+    if ([self.superview isKindOfClass:cellClass]) {
+            NSLog(@"REDRAW");
+        [self setNeedsDisplay];
+    }
+
 }
 
 
@@ -447,38 +469,42 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 }
 - (void)drawRect:(CGRect)rect {
 
-    CGContextRef context = UIGraphicsGetCurrentContext();    
+    [self render];
+}
 
+- (void)render {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
     //Grab the drawing context and flip it to prevent drawing upside-down
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
     
     CGContextSaveGState(context);
-
+    
     CGColorRef colorRef = CGColorCreate(CGColorSpaceCreateDeviceRGB(), CGColorGetComponents([_fontColor CGColor]));
     //CGContextSetShadowWithColor(context, CGSizeMake(self.shadowOffset, self.shadowOffset), 5, colorRef);
     CGColorRelease(colorRef);
 	
-    [self drawTextInRect:rect inContext:context];
+    [self drawTextInRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) inContext:context];
     
     
-    if (_shouldResizeToFit && self.frame.size.height < _textHeight) {
+    if (_shouldResizeToFit /*&& self.frame.size.height != _textHeight*/) {
         
-        [self setFrame:CGRectMake(self.frame.origin.x, 
-                                  self.frame.origin.y, 
-                                  self.frame.size.width, 
+        [self setFrame:CGRectMake(self.frame.origin.x,
+                                  self.frame.origin.y,
+                                  self.frame.size.width,
                                   _textHeight)];
         
         // Notify delegate that we did change frame
-        [_delegate labelDidChangeFrame:self.frame];
+        [_delegate label:self didChangeFrame:self.frame];
         
         // Ugly hack to avoid content being stretched
-        [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.0001];
+        [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.001f];
     }
     CGContextRestoreGState(context);
-    [super drawRect:self.bounds];
-} 
+    [super drawRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+}
 
 
 #pragma mark - Memory managment

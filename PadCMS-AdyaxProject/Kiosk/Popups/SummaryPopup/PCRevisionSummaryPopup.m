@@ -108,9 +108,8 @@ const float kButtonsHeight = 40.0f;
     
     cell.titleLabel.text = tocItem.title;
     cell.descriptionLabel.text = tocItem.tocItemDescription;
-    
-    [cell layoutSubviews];
-    [cell setNeedsDisplay];
+
+    [cell.descriptionLabel setNeedsDisplayHacked];
 }
 
 - (void)easyTableView:(EasyTableView *)easyTableView selectedView:(UIView *)selectedView atIndexPath:(NSIndexPath *)indexPath deselectedView:(UIView *)deselectedView {

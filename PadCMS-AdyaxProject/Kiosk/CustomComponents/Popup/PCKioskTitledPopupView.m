@@ -39,12 +39,12 @@
 
 - (void)initDescription {
     CGRect contentFrame = self.contentView.frame;
-    self.descriptionLabel = [[MTLabel alloc] initWithFrame:CGRectMake(0, 90, contentFrame.size.width, 50)];
+    self.descriptionLabel = [[RTLabel alloc] initWithFrame:CGRectMake(0, 90, contentFrame.size.width, 50)];
     self.descriptionLabel.text = @"Description";
     self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateRegular size:15];
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
-    [self.descriptionLabel setCharacterSpacing:-0.5f];
-    self.descriptionLabel.fontColor = UIColorFromRGB(0x34495e);
+    [self.descriptionLabel setKernValue:-0.5f];
+    self.descriptionLabel.textColor = UIColorFromRGB(0x34495e);
     [self.contentView addSubview:self.descriptionLabel];
 }
 

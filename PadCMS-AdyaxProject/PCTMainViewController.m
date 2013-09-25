@@ -1085,7 +1085,8 @@
     if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
         PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
         popup.titleLabel.text = @"À nos lecteurs";
-        popup.descriptionLabel.text = currentApplication.messageForReaders;
+        //popup.descriptionLabel.text = currentApplication.messageForReaders;
+        popup.descriptionLabel.text = @"Some test";
         [popup sizeToFitDescriptionLabelText];
         [popup show];
     }

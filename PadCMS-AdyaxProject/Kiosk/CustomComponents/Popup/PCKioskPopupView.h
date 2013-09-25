@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PCFonts.h"
 #import "PCKioskShelfSettings.h"
-#import "MTLabel.h"
 
 @class PCKioskPopupView;
 
