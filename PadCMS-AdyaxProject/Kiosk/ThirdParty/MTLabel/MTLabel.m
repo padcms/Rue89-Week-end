@@ -230,6 +230,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     self._lineHeight = _font.lineHeight;
     self._textAlignment = MTLabelTextAlignmentLeft;      
     [self setOpaque:NO];
+    self.userInteractionEnabled = NO;
 }
 -(id)init {
     

@@ -161,6 +161,8 @@
 	_lineSpacing = 3;
 	_currentSelectedButtonComponentIndex = -1;
 	_paragraphReplacement = @"\n";
+    
+    self.userInteractionEnabled = NO;
 	
 	[self setMultipleTouchEnabled:YES];
 }

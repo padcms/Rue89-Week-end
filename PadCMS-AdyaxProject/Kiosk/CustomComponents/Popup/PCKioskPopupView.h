@@ -35,11 +35,6 @@ typedef int PCKioskPopupPresentationStyle;
 @property (nonatomic, strong) UIView * blockingView;
 
 /**
- @brief View to add content such as labels, imageViews etc.
- */
-@property (nonatomic, strong) UIView * contentView;
-
-/**
  @brief Button that hides popup.
  */
 @property (nonatomic, strong) UIButton * closeButton;

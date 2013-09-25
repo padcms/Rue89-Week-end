@@ -29,7 +29,7 @@
 - (void)loadContent {
     [super loadContent];
     
-    CGRect contentFrame = self.contentView.frame;
+    CGRect contentFrame = self.frame;
     self.titleLabel.frame = CGRectMake( 0, 20, contentFrame.size.width, 50);
     self.descriptionLabel.frame = CGRectMake(0, 90, contentFrame.size.width, 50);
     
@@ -54,7 +54,7 @@
     
     //setup variables
     CGFloat padding = 7;
-    CGPoint center = CGPointMake(roundf(self.contentView.frame.size.width/2), roundf(self.contentView.frame.size.height/2) + 50);
+    CGPoint center = CGPointMake(roundf(self.frame.size.width/2), roundf(self.frame.size.height/2) + 50);
     CGSize buttonSize = CGSizeMake(75, 75);
     
     //facebook button
@@ -62,28 +62,28 @@
     [facebookButton setImage:[UIImage imageNamed:@"share_facebook"] forState:UIControlStateNormal];
     [facebookButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
     [facebookButton addTarget:self action:@selector(facebookShow) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:facebookButton];
+    [self addSubview:facebookButton];
     
     //twitter button
     UIButton * twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [twitterButton setImage:[UIImage imageNamed:@"share_twitter"] forState:UIControlStateNormal];
     [twitterButton setFrame:CGRectMake(center.x + padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
     [twitterButton addTarget:self action:@selector(twitterShow) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:twitterButton];
+    [self addSubview:twitterButton];
     
     //google button
     UIButton * googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [googlePlusButton setImage:[UIImage imageNamed:@"share_google_plus"] forState:UIControlStateNormal];
     [googlePlusButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y + padding, buttonSize.width, buttonSize.height)];
     [googlePlusButton addTarget:self action:@selector(googlePlusShareButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:googlePlusButton];
+    [self addSubview:googlePlusButton];
     
     //google button
     UIButton * mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mailButton setImage:[UIImage imageNamed:@"share_mail"] forState:UIControlStateNormal];
     [mailButton setFrame:CGRectMake(center.x + padding, center.y + padding, buttonSize.width, buttonSize.height)];
     [mailButton addTarget:self action:@selector(emailShow) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:mailButton];
+    [self addSubview:mailButton];
     
     
     
@@ -97,26 +97,26 @@
     facebookLabel.text = @"SUR\nFACEBOOK";
     facebookLabel.frame = CGRectMake(facebookButton.frame.origin.x - labelWidth, facebookButton.frame.origin.y + labelTopPadding, labelWidth, labelHeight);
     facebookLabel.fontColor = UIColorFromRGB(0x3160bf);
-    [self.contentView addSubview:facebookLabel];
+    [self addSubview:facebookLabel];
     //facebookLabel.backgroundColor = [UIColor orangeColor];
     
     MTLabel * googlePlusLabel = [self shareTitleLabel];
     googlePlusLabel.text = @"SUR\nGOOGLE+";
     googlePlusLabel.frame = CGRectMake(googlePlusButton.frame.origin.x - labelWidth, googlePlusButton.frame.origin.y + labelTopPadding, labelWidth, labelHeight);
     googlePlusLabel.fontColor = UIColorFromRGB(0xbf4031);
-    [self.contentView addSubview:googlePlusLabel];
+    [self addSubview:googlePlusLabel];
     
     MTLabel * twitterLabel = [self shareTitleLabel];
     twitterLabel.text = @"SUR\nTWITTER";
     twitterLabel.frame = CGRectMake(CGRectGetMaxX(twitterButton.frame), twitterButton.frame.origin.y + labelTopPadding, labelWidth, labelHeight);
     twitterLabel.fontColor = UIColorFromRGB(0x32bde6);
-    [self.contentView addSubview:twitterLabel];
+    [self addSubview:twitterLabel];
     
     MTLabel * emailLabel = [self shareTitleLabel];
     emailLabel.text = @"PAR\nE-MAIL";
     emailLabel.frame = CGRectMake(CGRectGetMaxX(mailButton.frame), mailButton.frame.origin.y + labelTopPadding, labelWidth, labelHeight);
     emailLabel.fontColor = UIColorFromRGB(0xabadbe);
-    [self.contentView addSubview:emailLabel];
+    [self addSubview:emailLabel];
 }
 
 - (void)emailShow

@@ -51,7 +51,7 @@
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if (CGRectContainsPoint(self.summaryPopup.contentView.frame, [touch locationInView:self.summaryPopup.contentView])) {
+    if (CGRectContainsPoint(self.summaryPopup.frame, [touch locationInView:self.summaryPopup])) {
         return NO;
     }
     
