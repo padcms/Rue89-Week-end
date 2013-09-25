@@ -13,10 +13,14 @@
 #import "PCFacebookViewController.h"
 #import "PCTwitterNewController.h"
 
+#import "PCGooglePlusController.h"
+
 @interface PCKioskSharePopupView()
 
 @property (nonatomic, strong) PCEmailController * emailController;
 @property (nonatomic, strong) PCFacebookViewController * facebookViewController;
+
+@property (nonatomic, strong) PCGooglePlusController* googleController;
 
 @end
 
@@ -71,6 +75,7 @@
     UIButton * googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [googlePlusButton setImage:[UIImage imageNamed:@"share_google_plus"] forState:UIControlStateNormal];
     [googlePlusButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y + padding, buttonSize.width, buttonSize.height)];
+    [googlePlusButton addTarget:self action:@selector(googlePlusShareButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:googlePlusButton];
     
     //google button
@@ -149,6 +154,30 @@
         twitterController.delegate = self.delegate;
         [twitterController showTwitterController];
     }
+}
+
+- (void) googlePlusShareButtonPresed:(UIButton*)sender
+{
+    self.googleController = [[PCGooglePlusController alloc]init];
+    
+    [self.googleController shareWithDialog:^(UIView *dialogView) {
+        
+        dialogView.frame = sender.frame;        
+        [self addSubview:dialogView];
+        
+        CGRect finalFrame = self.bounds;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            dialogView.frame = finalFrame;
+        }];
+        
+    } complete:^(UIView *dialogView) {
+        
+        [dialogView removeFromSuperview];
+    }];
+    
+    
 }
 
 @end

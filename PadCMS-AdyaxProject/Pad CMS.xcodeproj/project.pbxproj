@@ -695,9 +695,8 @@
 		60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022AA1590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022AB1590E6570046FA44 /* libPadCMS-CocoaTouch-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F022251590D7B90046FA44 /* libPadCMS-CocoaTouch-Core.a */; };
-		63C23E4917F06F55004C55BC /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */; };
-		63C23E4A17F06F55004C55BC /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63C23E4717F06F55004C55BC /* GooglePlus.bundle */; };
-		63C23E4B17F06F55004C55BC /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C23E4817F06F55004C55BC /* GooglePlus.framework */; };
+		63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C23E4D17F07AC6004C55BC /* PCGooglePlusController.m */; };
+		63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */; };
 		711144E814EEB58D000588E2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD0E9E14EBE7960083B53E /* libsqlite3.dylib */; };
 		7148DADB151C97690067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADA151C97690067EB2B /* flashButtonBackground.png */; };
 		7148DADD151C97830067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADC151C97830067EB2B /* flashButtonBackground.png */; };
@@ -1734,9 +1733,10 @@
 		60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskSubviewsFactory.m; sourceTree = "<group>"; };
 		60F022A21590E3000046FA44 /* PCTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTMainViewController.h; sourceTree = "<group>"; };
 		60F022A31590E3000046FA44 /* PCTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTMainViewController.m; sourceTree = "<group>"; };
-		63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
-		63C23E4717F06F55004C55BC /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
-		63C23E4817F06F55004C55BC /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		63C23E4C17F07AC6004C55BC /* PCGooglePlusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCGooglePlusController.h; sourceTree = "<group>"; };
+		63C23E4D17F07AC6004C55BC /* PCGooglePlusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCGooglePlusController.m; sourceTree = "<group>"; };
+		63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyFrame.h"; sourceTree = "<group>"; };
+		63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyFrame.m"; sourceTree = "<group>"; };
 		7148DADA151C97690067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7148DADC151C97830067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7177326C14F64C2F0087507C /* sliderPageControlItemSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderPageControlItemSelected.png; sourceTree = "<group>"; };
@@ -2113,8 +2113,6 @@
 				C5CFF3741574CE5300F2235B /* OpenAL.framework in Frameworks */,
 				C5CFF3751574CE5300F2235B /* OpenGLES.framework in Frameworks */,
 				57B4431917D737EC00FCFA87 /* libTestFlight.a in Frameworks */,
-				63C23E4917F06F55004C55BC /* GoogleOpenSource.framework in Frameworks */,
-				63C23E4B17F06F55004C55BC /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2445,6 +2443,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				63C23E5517F1D95B004C55BC /* Helpers */,
 				63C23E4517F06F55004C55BC /* GooglePlus */,
 				57189E0017EA194C008834EA /* NSNull */,
 				57231D8417D8C5BD00712185 /* EasyTableView */,
@@ -2636,11 +2635,19 @@
 		63C23E4517F06F55004C55BC /* GooglePlus */ = {
 			isa = PBXGroup;
 			children = (
-				63C23E4617F06F55004C55BC /* GoogleOpenSource.framework */,
-				63C23E4717F06F55004C55BC /* GooglePlus.bundle */,
-				63C23E4817F06F55004C55BC /* GooglePlus.framework */,
+				63C23E4C17F07AC6004C55BC /* PCGooglePlusController.h */,
+				63C23E4D17F07AC6004C55BC /* PCGooglePlusController.m */,
 			);
 			path = GooglePlus;
+			sourceTree = "<group>";
+		};
+		63C23E5517F1D95B004C55BC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */,
+				63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		719A8B0714F52B7200F01F23 /* AIR */ = {
@@ -4156,7 +4163,6 @@
 				57B4439217D78B5000FCFA87 /* summary_separator_left@2x.png in Resources */,
 				57B4439917D78B5000FCFA87 /* summary_separator_right.png in Resources */,
 				57B443A017D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */,
-				63C23E4A17F06F55004C55BC /* GooglePlus.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4770,6 +4776,8 @@
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
+				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
+				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
