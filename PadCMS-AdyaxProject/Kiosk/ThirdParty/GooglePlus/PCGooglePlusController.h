@@ -10,6 +10,6 @@
 
 @interface PCGooglePlusController : NSObject
 
-- (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock complete:(void(^)(UIView* dialogView))completionBlock;
+- (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock authorizationComplete:(void(^)(UIView* dialogView))authComplBlock complete:(void(^)(UIView* dialogView))completionBlock;
 
 @end

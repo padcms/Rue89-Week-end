@@ -160,9 +160,15 @@
 {
     self.googleController = [[PCGooglePlusController alloc]init];
     
+    CGRect oldFrame = self.frame;
+    
     [self.googleController shareWithDialog:^(UIView *dialogView) {
         
-        dialogView.frame = sender.frame;        
+        //UIWindow* window = [[UIApplication sharedApplication].windows lastObject];
+        
+        CGRect startRect = [self convertRect:sender.frame fromView:sender.superview];
+        
+        dialogView.frame = startRect;
         [self addSubview:dialogView];
         
         CGRect finalFrame = self.bounds;
@@ -172,7 +178,22 @@
             dialogView.frame = finalFrame;
         }];
         
+    } authorizationComplete:^(UIView *dialogView) {
+        
+        float screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGRect newFrameForPopup = self.frame;
+        newFrameForPopup.origin.x = 0;
+        newFrameForPopup.size.width = screenWidth;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            self.frame = newFrameForPopup;
+            dialogView.frame = self.bounds;
+        }];
+        
     } complete:^(UIView *dialogView) {
+        
+        self.frame = oldFrame;
         
         [dialogView removeFromSuperview];
     }];

@@ -697,6 +697,7 @@
 		60F022AB1590E6570046FA44 /* libPadCMS-CocoaTouch-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F022251590D7B90046FA44 /* libPadCMS-CocoaTouch-Core.a */; };
 		63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C23E4D17F07AC6004C55BC /* PCGooglePlusController.m */; };
 		63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */; };
+		63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C23E5A17F1E01B004C55BC /* NSURL+Fragments.m */; };
 		711144E814EEB58D000588E2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AD0E9E14EBE7960083B53E /* libsqlite3.dylib */; };
 		7148DADB151C97690067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADA151C97690067EB2B /* flashButtonBackground.png */; };
 		7148DADD151C97830067EB2B /* flashButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7148DADC151C97830067EB2B /* flashButtonBackground.png */; };
@@ -1737,6 +1738,8 @@
 		63C23E4D17F07AC6004C55BC /* PCGooglePlusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCGooglePlusController.m; sourceTree = "<group>"; };
 		63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyFrame.h"; sourceTree = "<group>"; };
 		63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyFrame.m"; sourceTree = "<group>"; };
+		63C23E5917F1E01A004C55BC /* NSURL+Fragments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Fragments.h"; sourceTree = "<group>"; };
+		63C23E5A17F1E01B004C55BC /* NSURL+Fragments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Fragments.m"; sourceTree = "<group>"; };
 		7148DADA151C97690067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7148DADC151C97830067EB2B /* flashButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashButtonBackground.png; sourceTree = "<group>"; };
 		7177326C14F64C2F0087507C /* sliderPageControlItemSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderPageControlItemSelected.png; sourceTree = "<group>"; };
@@ -2644,6 +2647,8 @@
 		63C23E5517F1D95B004C55BC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				63C23E5917F1E01A004C55BC /* NSURL+Fragments.h */,
+				63C23E5A17F1E01B004C55BC /* NSURL+Fragments.m */,
 				63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */,
 				63C23E5717F1D971004C55BC /* UIView+EasyFrame.m */,
 			);
@@ -4778,6 +4783,7 @@
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
 				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
+				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

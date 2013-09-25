@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, copy) void(^comleteShareBlock)(UIView* dialogView);
+@property (nonatomic, copy) void(^comleteAuthorizationBlock)(UIView* dialogView);
 
 @end
 
@@ -46,12 +47,17 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
 
 
 
-- (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock complete:(void(^)(UIView* dialogView))completionBlock
+- (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock authorizationComplete:(void(^)(UIView* dialogView))authComplBlock complete:(void(^)(UIView* dialogView))completionBlock
 {
     self.webView = [[UIWebView alloc]init];
+    self.webView.clipsToBounds = YES;
     self.webView.delegate = self;
+    self.webView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    self.webView.scrollView.showsVerticalScrollIndicator = NO;
+    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
     
     self.comleteShareBlock = completionBlock;
+    self.comleteAuthorizationBlock = authComplBlock;
     
     [self cleareCookie];
     
@@ -62,7 +68,7 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
     //login_hint
     //page, popup, touch, and wap.
     
-    NSString* params = [NSString stringWithFormat:@"redirect_uri=%@&response_type=token&client_id=%@&state=authorization&scope=%@&display=touch", authorization_redirect_uri, google_client_id, scope];
+    NSString* params = [NSString stringWithFormat:@"redirect_uri=%@&response_type=code&client_id=%@&state=authorization&scope=%@", authorization_redirect_uri, google_client_id, scope];
     
     [urlString appendFormat:@"?%@", params];
     NSURL* requestUrl = [[NSURL alloc]initWithString:urlString];
@@ -79,20 +85,32 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
 {
     NSLog(@"Token is : %@", token);
     
-    NSMutableString* urlString = [NSMutableString stringWithString:@"https://plus.google.com/share"];
-    
-    //NSString* url = @"m.facebook.com";
-    
-    NSString* params = [NSString stringWithFormat:@"continue=%@&client_id=%@&text=gg&access_token=%@&display=wap", share_redirect_uri, google_client_id, token];
-    
-    [urlString appendFormat:@"?%@", params];
-    NSURL* requestUrl = [[NSURL alloc]initWithString:urlString];
-    NSURLRequest* request = [[NSURLRequest alloc]initWithURL:requestUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
-    
-    [self.webView loadRequest:request];
-    
-    
-    
+    if(token)
+    {
+        NSMutableString* urlString = [NSMutableString stringWithString:@"https://plus.google.com/share"];
+        
+        //NSString* url = @"m.facebook.com";
+        
+        NSString* params = [NSString stringWithFormat:@"continue=%@&client_id=%@&text=gg&access_token=%@&display=wap", share_redirect_uri, google_client_id, token];
+        
+        [urlString appendFormat:@"?%@", params];
+        NSURL* requestUrl = [[NSURL alloc]initWithString:urlString];
+        NSURLRequest* request = [[NSURLRequest alloc]initWithURL:requestUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
+        
+        [self.webView loadRequest:request];
+        
+        if(self.comleteAuthorizationBlock)
+        {
+            self.comleteAuthorizationBlock(self.webView);
+        }
+    }
+    else
+    {
+        if(self.comleteShareBlock)
+        {
+            self.comleteShareBlock(self.webView);
+        }
+    }
 }
 
 - (void) getUserInfoWithToken:(NSString*)token
