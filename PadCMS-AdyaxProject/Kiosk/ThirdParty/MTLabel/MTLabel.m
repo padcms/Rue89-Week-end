@@ -91,30 +91,10 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         
         _text = text;
         
-        [self setNeedsDisplayHacked];
-        
-        [self setNeedsDisplay];
+        [self sizeToFit];
 
     }
 }
-
-- (void)setNeedsDisplayHacked {
-    if (!self.redrawTimer) {
-        self.redrawTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(doRedraw) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:self.redrawTimer forMode:NSRunLoopCommonModes];
-    }
-}
-
-- (void)doRedraw {
-    Class cellClass =  NSClassFromString(@"PCRevisionSummaryCell");
-    
-    if ([self.superview isKindOfClass:cellClass]) {
-            NSLog(@"REDRAW");
-        [self setNeedsDisplay];
-    }
-
-}
-
 
 -(void)setFont:(UIFont *)font {
 
@@ -164,6 +144,17 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         [self setNeedsDisplay];
     }
     
+}
+
+- (void)sizeToFit {
+    
+    CGSize stringSize = [self sizeOfAttributedString:[self attributedStringForString:_text]];
+    
+    CGRect frame = self.frame;
+    frame.size.height = stringSize.height;
+    self.frame = frame;
+    
+    [self setNeedsDisplay];
 }
 
 
@@ -345,29 +336,61 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 
     return x;
 }
+
+- (CGSize)sizeOfAttributedString:(NSAttributedString *)string {
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)string);
+    
+    CGFloat widthConstraint = self.bounds.size.width; // Your width constraint, using 500 as an example
+    CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
+                                                                        framesetter, /* Framesetter */
+                                                                        CFRangeMake(0, string.length), /* String range (entire string) */
+                                                                        NULL, /* Frame attributes */
+                                                                        CGSizeMake(widthConstraint, CGFLOAT_MAX), /* Constraints (CGFLOAT_MAX indicates unconstrained) */
+                                                                        NULL /* Gives the range of string that fits into the constraints, doesn't matter in your situation */
+                                                                        );
+    //CGFloat suggestedHeight = suggestedSize.height;
+    
+    CGSize ceiledSize = CGSizeMake(ceilf(suggestedSize.width + 1), ceilf(suggestedSize.height + 1));
+    
+    return ceiledSize;
+}
+
+- (NSAttributedString *)attributedStringForString:(NSString *)string {
+    
+    NSAttributedString *attributedString = nil;
+    
+    if (string) {
+        //Create a CoreText font object with name and size from the UIKit one
+        CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)_font.fontName ,
+                                              _font.pointSize,
+                                              NULL);
+        
+        //Setup the attributes dictionary with font and color
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    (__bridge id)font, (id)kCTFontAttributeName,
+                                    _fontColor.CGColor, kCTForegroundColorAttributeName,
+                                    @(_characterSpacing), kCTKernAttributeName,
+                                    nil];
+        
+        attributedString = [[NSAttributedString alloc]
+                                                initWithString:_text
+                                                attributes:attributes];
+        
+        CFRelease(font);
+    }
+
+    
+    return attributedString;
+}
+
 - (void)drawTextInRect:(CGRect)rect inContext:(CGContextRef)context {
     
     if (!_text) {
         return;
     }
     
-    //Create a CoreText font object with name and size from the UIKit one
-    CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)_font.fontName ,
-                                          _font.pointSize, 
-                                          NULL);
-    
-    //Setup the attributes dictionary with font and color
-    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                (__bridge id)font, (id)kCTFontAttributeName,
-                                _fontColor.CGColor, kCTForegroundColorAttributeName,
-                                @(_characterSpacing), kCTKernAttributeName,
-                                nil];
-    
-    NSAttributedString *attributedString = [[NSAttributedString alloc]
-                                             initWithString:_text 
-                                             attributes:attributes];
-    
-    CFRelease(font);
+    NSAttributedString * attributedString = [self attributedStringForString:_text];
     
     //Create a TypeSetter object with the attributed text created earlier on
     CTTypesetterRef typeSetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
@@ -469,10 +492,6 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
 }
 - (void)drawRect:(CGRect)rect {
 
-    [self render];
-}
-
-- (void)render {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     //Grab the drawing context and flip it to prevent drawing upside-down
@@ -489,7 +508,7 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     [self drawTextInRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) inContext:context];
     
     
-    if (_shouldResizeToFit /*&& self.frame.size.height != _textHeight*/) {
+    if (_shouldResizeToFit && self.frame.size.height < _textHeight) {
         
         [self setFrame:CGRectMake(self.frame.origin.x,
                                   self.frame.origin.y,
@@ -503,9 +522,8 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         [self performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.001f];
     }
     CGContextRestoreGState(context);
-    [super drawRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+    [super drawRect:self.bounds];
 }
-
 
 #pragma mark - Memory managment
 

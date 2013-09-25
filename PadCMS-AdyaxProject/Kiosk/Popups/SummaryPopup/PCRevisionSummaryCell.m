@@ -60,7 +60,7 @@ const CGFloat kLabelPadding = 30.0f;
 - (void)initDescription {
     CGRect contentFrame = self.frame;
     self.descriptionLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 90, contentFrame.size.width - kLabelPadding*2, 1)];
-    [self.descriptionLabel setResizeToFitText:YES];
+    //[self.descriptionLabel setResizeToFitText:YES];
     self.descriptionLabel.text = @"Description";
     self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateLight size:15];
     self.descriptionLabel.textAlignment = MTLabelTextAlignmentCenter;

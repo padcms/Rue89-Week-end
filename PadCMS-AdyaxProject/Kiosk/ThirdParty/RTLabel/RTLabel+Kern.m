@@ -12,12 +12,19 @@
 
 - (NSString *)string:(NSString *)string kernedToValue:(CGFloat)aKernValue {
     
-    NSString * kernTag =@"font";
-    NSString * kernOpenTag = [NSString stringWithFormat:@"<%@ kern=%f>", kernTag, aKernValue];
-    NSString * kernCloseTag = [NSString stringWithFormat:@"</%@>", kernTag];
+    NSString * kernedString = nil;
     
-    NSString * kernedString = [[kernOpenTag stringByAppendingString:string] stringByAppendingString:kernCloseTag];
+    if (string) {
+        NSString * kernTag =@"font";
+        NSString * kernOpenTag = [NSString stringWithFormat:@"<%@ kern=%f>", kernTag, aKernValue];
+        NSString * kernCloseTag = [NSString stringWithFormat:@"</%@>", kernTag];
+        
+        kernedString = [[kernOpenTag stringByAppendingString:string] stringByAppendingString:kernCloseTag];
+        
+    }
+
     return kernedString;
+    
 }
 
 @end
