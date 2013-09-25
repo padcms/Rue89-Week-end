@@ -68,8 +68,6 @@ static NSString* post_url = @"http://facebook.com";
 
 - (void) authorizationTokenTaken:(NSString*)token
 {
-    //NSLog(@"Token is : %@", token);
-    
     if(token)
     {
         NSMutableString* urlString = [NSMutableString stringWithString:@"https://plus.google.com/share"];
@@ -151,24 +149,7 @@ static NSString* post_url = @"http://facebook.com";
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
-    //webView.frameWidth = webView.scrollView.contentSize.width;
     
-    /*if(webView == self.sendMessageWebView)
-    {
-        if(self.sendMessageDialogBlock)
-        {
-            self.sendMessageDialogBlock(webView, nil);
-            self.sendMessageDialogBlock = nil;
-        }
-    }
-    else
-    {
-        if(self.getAccountDialogBlock)
-        {
-            self.getAccountDialogBlock(webView);
-            self.getAccountDialogBlock = nil;
-        }
-    }*/
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
