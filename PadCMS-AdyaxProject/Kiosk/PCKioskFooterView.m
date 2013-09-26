@@ -126,6 +126,7 @@
     _leftArrowButton.imageEdgeInsets = insets;
     [_leftArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchDown];
     [_leftFadeImageView addSubview:_leftArrowButton];
+    _leftArrowButton.exclusiveTouch = YES;
     
     _leftFadeImageView.alpha = 0.0f;
     
@@ -135,6 +136,7 @@
     _rightArrowButton.imageEdgeInsets = insets;
     [_rightArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchDown];
     [_rightFadeImageView addSubview:_rightArrowButton];
+    _rightArrowButton.exclusiveTouch = YES;
     
     
 //    UIImageView * arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - arrowImage.size.width - 8, 16, arrowImage.size.width, arrowImage.size.height)];
@@ -172,7 +174,8 @@
     CGFloat previousButtonX = 0;
     int buttonsCount = self.allTags.count;
     for (PCTag * tag in self.allTags) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.exclusiveTouch = YES;
         button.frame = CGRectMake(previousButtonX, 4, 0, 0);
         button.backgroundColor = [UIColor clearColor];
         button.titleEdgeInsets = UIEdgeInsetsMake(4, 0, 0, 0);
