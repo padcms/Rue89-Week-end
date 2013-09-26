@@ -29,6 +29,24 @@
 		57189E1717EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
 		57189E1817EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
 		57189E1917EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */; };
+		571B7E0417F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E0517F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E0617F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E0717F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E0817F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E0917F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */; };
+		571B7E1117F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1217F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1317F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1417F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1517F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1617F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */; };
+		571B7E1B17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E1C17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E1D17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E1E17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E1F17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E2017F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
 		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; };
 		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; };
 		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; };
@@ -1575,6 +1593,11 @@
 		57189E0B17EA19E5008834EA /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		57189E1217EA2D84008834EA /* PCKioskShelfViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskShelfViewCell.h; sourceTree = "<group>"; };
 		57189E1317EA2D84008834EA /* PCKioskShelfViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskShelfViewCell.m; sourceTree = "<group>"; };
+		571B7E0217F1FC1A00B77DBA /* RTLabel+Kern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTLabel+Kern.h"; sourceTree = "<group>"; };
+		571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTLabel+Kern.m"; sourceTree = "<group>"; };
+		571B7E0F17F3756300B77DBA /* RTLabel+CustomFontAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTLabel+CustomFontAttributes.h"; sourceTree = "<group>"; };
+		571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTLabel+CustomFontAttributes.m"; sourceTree = "<group>"; };
+		571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate Italic.ttf"; sourceTree = "<group>"; };
 		57231D8517D8C5BD00712185 /* EasyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTableView.h; sourceTree = "<group>"; };
 		57231D8617D8C5BD00712185 /* EasyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTableView.m; sourceTree = "<group>"; };
 		57231DBF17D8CFAB00712185 /* PCRevisionSummaryPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryPopup.h; sourceTree = "<group>"; };
@@ -2354,6 +2377,10 @@
 			children = (
 				5789899E17CF90C800572BAC /* RTLabel.h */,
 				5789899F17CF90C800572BAC /* RTLabel.m */,
+				571B7E0217F1FC1A00B77DBA /* RTLabel+Kern.h */,
+				571B7E0317F1FC1A00B77DBA /* RTLabel+Kern.m */,
+				571B7E0F17F3756300B77DBA /* RTLabel+CustomFontAttributes.h */,
+				571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */,
 			);
 			path = RTLabel;
 			sourceTree = "<group>";
@@ -2421,6 +2448,7 @@
 		57A4713C17BBBF6700745732 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */,
 				57A474C917C6669100745732 /* LeckerliOne-Regular.otf */,
 				57A4741517C477EA00745732 /* Interstate Light.ttf */,
 				57A4740D17C4732500745732 /* Interstate Regular.ttf */,
@@ -3686,6 +3714,7 @@
 				C59D6024157F8E97002EDD76 /* scroll-right-button-foreground.png in Resources */,
 				C59D602B157F8E97002EDD76 /* scroll-up-button-background.png in Resources */,
 				C59D6032157F8E97002EDD76 /* scroll-up-button-foreground.png in Resources */,
+				571B7E1B17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				840B752915B4440E0001E0C5 /* subscriptionsPopup.png in Resources */,
 				57A4708D17BAA56300745732 /* home_footer_arrow.png in Resources */,
 				57A4709317BAA56300745732 /* home_footer_arrow@2x.png in Resources */,
@@ -3767,6 +3796,7 @@
 				AB17A53E1576393A00DF9A05 /* Default-Portrait.png in Resources */,
 				AB17A53F1576393A00DF9A05 /* wired_button0.png in Resources */,
 				AB17A5401576393A00DF9A05 /* wired_button1.png in Resources */,
+				571B7E2017F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				AB17A5411576393A00DF9A05 /* wired_button2.png in Resources */,
 				AB17A5421576393A00DF9A05 /* wired_button3.png in Resources */,
 				AB17A5431576393A00DF9A05 /* aFlow.png in Resources */,
@@ -3969,6 +3999,7 @@
 				C5FD044115C123F60088F51E /* topTocMenuButtonBackground.png in Resources */,
 				57A4709117BAA56300745732 /* home_footer_arrow.png in Resources */,
 				57A4709717BAA56300745732 /* home_footer_arrow@2x.png in Resources */,
+				571B7E1F17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				57A4709D17BAA56300745732 /* home_footer_bg.png in Resources */,
 				57A470A317BAA56300745732 /* home_footer_bg@2x.png in Resources */,
 				57A470A917BAA56300745732 /* home_footer_fade.png in Resources */,
@@ -4089,6 +4120,7 @@
 				AB8137CF152224E50038EC7B /* flashButtonBackground.png in Resources */,
 				AB813894152234DD0038EC7B /* icon.png in Resources */,
 				AB813896152234EF0038EC7B /* icon_newsstand.png in Resources */,
+				571B7E1D17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				AB8138B515224D1E0038EC7B /* logo.png in Resources */,
 				C59D6003157F8E97002EDD76 /* scroll-down-button-background.png in Resources */,
 				C59D600A157F8E97002EDD76 /* scroll-down-button-foreground.png in Resources */,
@@ -4241,6 +4273,7 @@
 				AB813B161528FF3B0038EC7B /* cb_green_on.png in Resources */,
 				AB813B171528FF3B0038EC7B /* cb_green_on@2x.png in Resources */,
 				AB813B181528FF3B0038EC7B /* cb_mono_off.png in Resources */,
+				571B7E1E17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				AB813B191528FF3B0038EC7B /* cb_mono_off@2x.png in Resources */,
 				AB813B1A1528FF3B0038EC7B /* cb_mono_on.png in Resources */,
 				AB813B1B1528FF3B0038EC7B /* cb_mono_on@2x.png in Resources */,
@@ -4588,6 +4621,7 @@
 				57A4714F17BBC1C300745732 /* Quicksand_Bold.otf in Resources */,
 				57A4715717BBC5F100745732 /* Interstate Black.ttf in Resources */,
 				57A4716117BD7BBA00745732 /* Quicksand_Bold.ttf in Resources */,
+				571B7E1C17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */,
 				57A4725217BD8C4200745732 /* home_issue_details_button_bg_normal@2x.png in Resources */,
 				57A4725917BD8C4200745732 /* home_issue_details_button_bg_selected@2x.png in Resources */,
 				57A4726017BD8C4200745732 /* home_issue_details_button_minus@2x.png in Resources */,
@@ -4638,6 +4672,7 @@
 				2282A6C41223DE5E0059BAFD /* main.m in Sources */,
 				60F022651590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226C1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				571B7E1117F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022731590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227A1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022811590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
@@ -4664,6 +4699,7 @@
 				57B4434D17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591C17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AA17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				571B7E0417F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				578CB9B317E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4675,6 +4711,7 @@
 				AB17A57C1576393A00DF9A05 /* main.m in Sources */,
 				60F0226B1590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F022721590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				571B7E1617F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022791590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F022801590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022871590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
@@ -4701,6 +4738,7 @@
 				57B4435317D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2592217DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9B017E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				571B7E0917F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				578CB9B917E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4712,6 +4750,7 @@
 				AB6BBF4A156BA85500F9D6F7 /* main.m in Sources */,
 				60F0226A1590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F022711590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				571B7E1517F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022781590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227F1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022861590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
@@ -4738,6 +4777,7 @@
 				57B4435217D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2592117DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AF17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				571B7E0817F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				578CB9B817E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4756,6 +4796,8 @@
 				60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */,
 				57A4710E17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
 				57A4713717BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
+				571B7E0617F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
+				571B7E1317F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				57A4728D17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
 				57189E0E17EA19E5008834EA /* NullSafe.m in Sources */,
 				57A4729E17BE505800745732 /* PCKioskFooterView.m in Sources */,
@@ -4810,7 +4852,9 @@
 				57A4713817BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				57A4728E17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
 				57A4729F17BE505800745732 /* PCKioskFooterView.m in Sources */,
+				571B7E0717F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				57A473C717C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
+				571B7E1417F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				57A4740917C37AE100745732 /* PCKioskControlElementDetailsView.m in Sources */,
 				57A4742317C478BB00745732 /* PCFonts.m in Sources */,
 				57A4747917C4AF9400745732 /* MTLabel.m in Sources */,
@@ -4893,6 +4937,7 @@
 				CED37F5A14974D4400D71E8B /* main.m in Sources */,
 				60F022661590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226D1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				571B7E1217F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022741590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227B1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022821590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
@@ -4919,6 +4964,7 @@
 				57B4434E17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57A2591D17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AB17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
+				571B7E0517F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				578CB9B417E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

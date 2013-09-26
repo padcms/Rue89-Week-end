@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MTLabel.h"
 
-@interface PCRevisionSummaryCell : UIView
+@interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
 
 @property (nonatomic, strong) MTLabel * titleLabel;
 @property (nonatomic, strong) MTLabel * descriptionLabel;
+
+- (void)setNeedsDisplayHacked;
 
 @end

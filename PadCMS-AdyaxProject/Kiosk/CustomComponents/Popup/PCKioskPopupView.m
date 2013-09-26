@@ -36,10 +36,10 @@ const CGFloat kAnimationDuration = 0.4f;
     CGFloat aShadowWidth = 6;
     UIImage * aShadowImage = [[UIImage imageNamed:@"home_issue_bg_shadow_6px"] stretchableImageWithLeftCapWidth:aShadowWidth*2 topCapHeight:aShadowWidth*2];
     
-    CGRect frame = CGRectMake(roundf((view.frame.size.width - size.width - aShadowWidth*2)/2),
-                              roundf((view.frame.size.height - size.height - aShadowWidth*2)/2) - 20,
-                              size.width + aShadowWidth*2,
-                              size.height + aShadowWidth*2);
+    CGRect frame = CGRectMake(roundf((view.frame.size.width - size.width)/2),
+                              roundf((view.frame.size.height - size.height)/2) - 20,
+                              size.width,
+                              size.height);
     
     self = [super initWithFrame:frame];
     
@@ -61,9 +61,11 @@ const CGFloat kAnimationDuration = 0.4f;
     
     self.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin);
     
+    self.backgroundColor = [UIColor whiteColor];
+    
     [self initBlockingView];
     
-    [self initContentView];
+    [self initShadow];
     
     [self initCloseButton];
     
@@ -89,23 +91,18 @@ const CGFloat kAnimationDuration = 0.4f;
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
     self.tapGesture.delegate = self;
     [self.blockingView addGestureRecognizer:self.tapGesture];
-}
-
-- (void)initContentView {
-    
-    //shadow image view
-    self.shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    self.shadowImageView.image = self.shadowImage;
-    [self addSubview:self.shadowImageView];
-    
-    //content view
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(_shadowWidth, _shadowWidth, self.frame.size.width - _shadowWidth*2, self.frame.size.height - _shadowWidth*2)];
-    [self.contentView setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:self.contentView];
     
     [self.blockingView addSubview:self];
     
     self.blockingView.alpha = 0.0f;
+}
+
+- (void)initShadow {
+    
+    //shadow image view
+    self.shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(-_shadowWidth, -_shadowWidth, self.frame.size.width + _shadowWidth*2, self.frame.size.height + _shadowWidth*2)];
+    self.shadowImageView.image = self.shadowImage;
+    [self addSubview:self.shadowImageView];
 }
 
 - (void)initCloseButton {
@@ -113,10 +110,12 @@ const CGFloat kAnimationDuration = 0.4f;
     CGSize closeButtonSize = CGSizeMake(60, 46);
     
     self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.closeButton.frame = CGRectMake(self.frame.size.width - _shadowWidth - closeButtonSize.width, _shadowWidth, closeButtonSize.width, closeButtonSize.height);
+    self.closeButton.frame = CGRectMake(self.frame.size.width - closeButtonSize.width, 0, closeButtonSize.width, closeButtonSize.height);
     [self.closeButton setImage:[UIImage imageNamed:@"popup_close_button"] forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeButton];
+    
+    [self.closeButton setBackgroundColor:[UIColor greenColor]];
     
 }
 
@@ -197,7 +196,7 @@ const CGFloat kAnimationDuration = 0.4f;
 
 - (CGRect)bottomHiddenFrame:(BOOL)hidden {
     return CGRectMake(self.frame.origin.x,
-                      self.blockingView.frame.size.height + (hidden ?  0 : -self.frame.size.height + _shadowWidth),
+                      self.blockingView.frame.size.height + (hidden ?  0 : -self.frame.size.height),
                       self.frame.size.width
                       , self.frame.size.height);
 }

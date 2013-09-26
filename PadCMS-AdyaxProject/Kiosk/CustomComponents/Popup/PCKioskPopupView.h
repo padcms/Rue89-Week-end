@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PCFonts.h"
 #import "PCKioskShelfSettings.h"
-#import "MTLabel.h"
 
 @class PCKioskPopupView;
 
@@ -34,11 +33,6 @@ typedef int PCKioskPopupPresentationStyle;
  @brief Semi transparent view that blocks other UI from touches.
  */
 @property (nonatomic, strong) UIView * blockingView;
-
-/**
- @brief View to add content such as labels, imageViews etc.
- */
-@property (nonatomic, strong) UIView * contentView;
 
 /**
  @brief Button that hides popup.

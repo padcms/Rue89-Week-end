@@ -12,6 +12,7 @@ NSString * const PCFontInterstateLight      = @"Interstate-Light";
 NSString * const PCFontInterstateRegular    = @"Interstate-Regular";
 NSString * const PCFontInterstateBold       = @"Interstate-Bold";
 NSString * const PCFontInterstateBlack      = @"Interstate-Black";
+NSString * const PCFontInterstateItalic     = @"Interstate-Italic";
 
 NSString * const PCFontQuicksandBook = @"QuicksandBook-Regular";
 NSString * const PCFontQuicksandBold = @"QuicksandBold-Regular";

@@ -35,18 +35,19 @@ const float kButtonsHeight = 40.0f;
 - (void)loadContent {
     [super loadContent];
     
+    self.backgroundColor = [UIColor clearColor];
 
 }
 
 - (void)loadContent2 {
     
-    CGRect tableViewFrame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+    CGRect tableViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
     self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:self.tocItems.count ofWidth:250];
     self.tableView.delegate = self;
     self.tableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableView.separatorColor = [UIColor clearColor];
-    [self.contentView addSubview:self.tableView];
+    [self addSubview:self.tableView];
     
     CGRect frame = self.frame;
     frame.size.height += kButtonsHeight;
@@ -105,12 +106,12 @@ const float kButtonsHeight = 40.0f;
     
     PCTocItem * tocItem = self.tocItems[indexPath.row];
     
-    
+
     cell.titleLabel.text = tocItem.title;
+    
     cell.descriptionLabel.text = tocItem.tocItemDescription;
     
-    [cell layoutSubviews];
-    [cell setNeedsDisplay];
+    [cell.descriptionLabel sizeToFit];
 }
 
 - (void)easyTableView:(EasyTableView *)easyTableView selectedView:(UIView *)selectedView atIndexPath:(NSIndexPath *)indexPath deselectedView:(UIView *)deselectedView {
@@ -143,8 +144,8 @@ const float kButtonsHeight = 40.0f;
 
 - (CGRect)topHiddenFrame:(BOOL)hidden{
     
-    return CGRectMake(-self.shadowWidth,
-                      (hidden ?  -self.frame.size.height + self.shadowWidth + kButtonsHeight : - self.shadowWidth),
+    return CGRectMake(0,
+                      (hidden ?  -self.frame.size.height + kButtonsHeight : 0),
                       self.frame.size.width
                       , self.frame.size.height);
 }
@@ -152,7 +153,7 @@ const float kButtonsHeight = 40.0f;
 - (CGRect)blockingViewTopHiddenFrame:(BOOL)hidden {
     
     return CGRectMake(0,
-                      (hidden ?  -self.frame.size.height + self.shadowWidth : 0),
+                      (hidden ?  -self.frame.size.height : 0),
                       self.blockingView.frame.size.width
                       , self.frame.size.height + kButtonsHeight);
 }

@@ -17,8 +17,11 @@
 //  limitations under the License.
 
 #import <UIKit/UIKit.h>
+
+@class MTLabel;
+
 @protocol MTLabelDelegate
-- (void)labelDidChangeFrame:(CGRect)frame;
+- (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame;
 @end
 
 typedef enum {
@@ -84,6 +87,7 @@ typedef enum {
 -(BOOL)limitToNumberOfLines;
 -(BOOL)resizeToFitText;
 -(MTLabelTextAlignment)textAlignment;
+- (void)setNeedsDisplayHacked;
 
 
 @end

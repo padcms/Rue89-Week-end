@@ -36,6 +36,8 @@
  */
 
 #import "RTLabel.h"
+#import "RTLabel+Kern.h"
+#import "RTLabel+CustomFontAttributes.m"
 
 @interface RTLabelButton : UIButton
 @property (nonatomic, assign) int componentIndex;
@@ -160,6 +162,8 @@
 	_lineSpacing = 3;
 	_currentSelectedButtonComponentIndex = -1;
 	_paragraphReplacement = @"\n";
+    
+    self.userInteractionEnabled = NO;
 	
 	[self setMultipleTouchEnabled:YES];
 }
@@ -240,7 +244,7 @@
 			// make font italic
 			[self applyItalicStyleToText:attrString atPosition:component.position withLength:[component.text length]];
 		}
-		else if ([component.tagLabel caseInsensitiveCompare:@"b"] == NSOrderedSame)
+		else if ([component.tagLabel caseInsensitiveCompare:@"b"] == NSOrderedSame || [component.tagLabel caseInsensitiveCompare:@"strong"] == NSOrderedSame)
 		{
 			// make font bold
 			[self applyBoldStyleToText:attrString atPosition:component.position withLength:[component.text length]];
@@ -552,7 +556,16 @@
 - (void)applyItalicStyleToText:(CFMutableAttributedStringRef)text atPosition:(int)position withLength:(int)length
 {
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
+    
+    
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+    CGFloat fontSize =  CTFontGetSize(actualFontRef);
+    CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
+    CTFontRef italicFontRef = [self italicFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];
+#else
     CTFontRef italicFontRef = CTFontCreateCopyWithSymbolicTraits(actualFontRef, 0.0, NULL, kCTFontItalicTrait, kCTFontItalicTrait);
+#endif
+    
     if (!italicFontRef) {
         //fallback to system italic font
         UIFont *font = [UIFont italicSystemFontOfSize:CTFontGetSize(actualFontRef)];
@@ -634,11 +647,19 @@
 - (void)applyBoldStyleToText:(CFMutableAttributedStringRef)text atPosition:(int)position withLength:(int)length
 {
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
+    
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+    CGFloat fontSize =  CTFontGetSize(actualFontRef);
+    CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
+    CTFontRef boldFontRef = [self boldFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];
+#else
     CTFontRef boldFontRef = CTFontCreateCopyWithSymbolicTraits(actualFontRef, 0.0, NULL, kCTFontBoldTrait, kCTFontBoldTrait);
+#endif
+    
     if (!boldFontRef) {
         //fallback to system bold font
         UIFont *font = [UIFont boldSystemFontOfSize:CTFontGetSize(actualFontRef)];
-        boldFontRef = CTFontCreateWithName ((__bridge CFStringRef)[font fontName], [font pointSize], NULL);
+        boldFontRef = CTFontCreateWithName ((__bridge CFStringRef)([font fontName]), [font pointSize], NULL);
     }
     CFAttributedStringSetAttribute(text, CFRangeMake(position, length), kCTFontAttributeName, boldFontRef);
     CFRelease(boldFontRef);
@@ -773,6 +794,11 @@
 - (void)setText:(NSString *)text
 {
 	_text = [text stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n"];
+    
+    if (self.kernValue != 0) {
+        _text = [self string:_text kernedToValue:self.kernValue];
+    }
+    
 	RTLabelExtractedComponent *component = [RTLabel extractTextStyleFromText:_text paragraphReplacement:self.paragraphReplacement];
     [self setTextComponents:component.textComponents];
     [self setPlainText:component.plainText];

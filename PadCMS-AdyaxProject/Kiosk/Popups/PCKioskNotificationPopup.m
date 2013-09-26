@@ -7,7 +7,6 @@
 //
 
 #import "PCKioskNotificationPopup.h"
-#import "MTLabel.h"
 
 @interface PCKioskNotificationPopup()
 
