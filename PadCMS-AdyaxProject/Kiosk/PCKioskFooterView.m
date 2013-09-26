@@ -12,7 +12,9 @@
 #import "PCTag.h"
 
 @interface PCKioskFooterView() <UIScrollViewDelegate>
-
+{
+    NSTimer* _scrollingTimer;
+}
 @property (nonatomic, strong) UIImageView * backgroundImageView;
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) NSMutableArray * buttonsArray;
@@ -122,7 +124,7 @@
     _leftArrowButton.frame = CGRectMake(0, 0, footerFadeImage.size.width, footerFadeImage.size.height);
     [_leftArrowButton setImage:arrowImage forState:UIControlStateNormal];
     _leftArrowButton.imageEdgeInsets = insets;
-    [_leftArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_leftArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchDown];
     [_leftFadeImageView addSubview:_leftArrowButton];
     
     _leftFadeImageView.alpha = 0.0f;
@@ -131,7 +133,7 @@
     _rightArrowButton.frame = CGRectMake(0, 0, footerFadeImage.size.width, footerFadeImage.size.height);
     [_rightArrowButton setImage:arrowImage forState:UIControlStateNormal];
     _rightArrowButton.imageEdgeInsets = insets;
-    [_rightArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_rightArrowButton addTarget:self action:@selector(arrowAction:) forControlEvents:UIControlEventTouchDown];
     [_rightFadeImageView addSubview:_rightArrowButton];
     
     
@@ -252,27 +254,42 @@
     }
 }
 
-- (void)arrowAction:(UIButton *)sender {
+- (void)arrowAction:(UIButton *)sender
+{
+    self.scrollView.userInteractionEnabled = NO;
     
-    CGFloat minOffset = 0;
-    CGFloat maxOffset = self.scrollView.contentSize.width - self.scrollView.bounds.size.width;
+    NSTimeInterval tickInteval = 0.01;
+    BOOL isDirectionLeft = (sender == self.rightArrowButton);
     
-    CGFloat scrollViewWidth = self.scrollView.bounds.size.width;
+    [NSTimer scheduledTimerWithTimeInterval:tickInteval target:self selector:@selector(scrollingTimerTick:) userInfo:@{@"isDirectionLeft" :[NSNumber numberWithBool:isDirectionLeft]} repeats:YES];
     
-    CGFloat offsetX = self.scrollView.contentOffset.x;
+}
+
+- (void) scrollingTimerTick:(NSTimer*)timer
+{
+    static const float speedPicsPerSec = 500;
     
-    if ([sender isEqual:self.leftArrowButton]) {
+    BOOL directionIsLeft = [timer.userInfo[@"isDirectionLeft"] boolValue];
+    BOOL shouldContinue = (directionIsLeft ? _rightArrowButton.isHighlighted : _leftArrowButton.isHighlighted);
+    
+    if(shouldContinue)
+    {
+        float stepLength = speedPicsPerSec * timer.timeInterval;
         
-        offsetX -= scrollViewWidth;
+        float leftOffset = self.scrollView.contentOffset.x;
+        float rightOffset = self.scrollView.contentSize.width - leftOffset - self.scrollView.bounds.size.width;
         
+        float maxPossibleStep = directionIsLeft ? rightOffset : leftOffset;
         
-    } else if ([sender isEqual:self.rightArrowButton]) {
-        offsetX += scrollViewWidth;
+        stepLength = stepLength > maxPossibleStep ? maxPossibleStep : stepLength;
+        
+        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x + (directionIsLeft ? stepLength : -stepLength), self.scrollView.contentOffset.y)];
     }
-    
-    offsetX = MAX (MIN(maxOffset, offsetX), minOffset);
-    
-    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    else
+    {
+        self.scrollView.userInteractionEnabled = YES;
+        [timer invalidate];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -291,7 +308,14 @@
     CGFloat rightAlpha = contentOffsetXRight / buttonWidth;
     self.rightFadeImageView.alpha = rightAlpha;
     
-    
+    if(_leftArrowButton.isHighlighted || _rightArrowButton.isHighlighted)
+    {
+        
+    }
+    else
+    {
+        [scrollView setContentOffset:scrollView.contentOffset];
+    }
 }
 
 @end
