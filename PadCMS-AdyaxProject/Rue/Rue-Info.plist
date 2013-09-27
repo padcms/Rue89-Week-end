@@ -34,7 +34,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.mobile.rue89</string>
+	<string>com.dbbest.rue89</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -67,7 +67,7 @@
 		<string>f9103179a4044887ba078217e4a0cd76</string>
 		<key>PCConfigSubscriptions</key>
 		<array>
-			<string>com.mobile.rue89.3months</string>
+			<string>com.dbbest.rue89.3months</string>
 		</array>
 		<key>PCConfigUseNewsstand</key>
 		<true/>

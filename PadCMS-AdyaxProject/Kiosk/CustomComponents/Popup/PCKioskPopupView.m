@@ -115,8 +115,6 @@ const CGFloat kAnimationDuration = 0.4f;
     [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeButton];
     
-    [self.closeButton setBackgroundColor:[UIColor greenColor]];
-    
 }
 
 - (void)prepareForPresentation {
