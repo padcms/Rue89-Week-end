@@ -558,7 +558,7 @@
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
     
     
-#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES1
     CGFloat fontSize =  CTFontGetSize(actualFontRef);
     CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
     CTFontRef italicFontRef = [self italicFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];
@@ -648,7 +648,7 @@
 {
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
     
-#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES1
     CGFloat fontSize =  CTFontGetSize(actualFontRef);
     CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
     CTFontRef boldFontRef = [self boldFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];

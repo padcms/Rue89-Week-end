@@ -16,7 +16,7 @@
 
 @end
 
-const float kButtonsHeight = 40.0f;
+const float kButtonsHeight = 60.0f;
 
 @implementation PCRevisionSummaryPopup
 
@@ -53,11 +53,19 @@ const float kButtonsHeight = 40.0f;
     frame.size.height += kButtonsHeight;
     self.frame = frame;
     
+    CGFloat insetSize = 30;
+    CGFloat rightInset = 5;
+    
+    UIEdgeInsets homeInsets = UIEdgeInsetsMake(0, insetSize, insetSize, rightInset);
+    UIEdgeInsets menuInsets = UIEdgeInsetsMake(0, rightInset, insetSize, insetSize);
+    
     UIImage * homeButtonImage = [UIImage imageNamed:@"summary_home_button"];
+    
     
     UIButton * homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [homeButton setImage:homeButtonImage forState:UIControlStateNormal];
-    homeButton.frame = CGRectMake(560, 146, homeButtonImage.size.width, homeButtonImage.size.height);
+    [homeButton setContentEdgeInsets:homeInsets];
+    homeButton.frame = CGRectMake(560 - insetSize, 146, homeButtonImage.size.width + insetSize + rightInset, homeButtonImage.size.height + insetSize);
     [homeButton addTarget:self action:@selector(homeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:homeButton atIndex:0];
     
@@ -66,7 +74,8 @@ const float kButtonsHeight = 40.0f;
     
     UIButton * menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuButton setImage:menuButtonImage forState:UIControlStateNormal];
-    menuButton.frame = CGRectMake(622, 146, menuButtonImage.size.width, menuButtonImage.size.height);
+    [menuButton setContentEdgeInsets:menuInsets];
+    menuButton.frame = CGRectMake(622 - rightInset, 146, menuButtonImage.size.width + insetSize + rightInset, menuButtonImage.size.height + insetSize);
     [menuButton addTarget:self action:@selector(menuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:menuButton atIndex:0];
     
@@ -165,6 +174,7 @@ const float kButtonsHeight = 40.0f;
         self.blockingView.alpha = 1.0f;
         self.frame = [self topHiddenFrame:NO];
     }
+
 }
 
 - (void)hideAnimationActions {
