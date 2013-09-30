@@ -17,6 +17,8 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
+		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
+		2D8B784817F481BA004D9E30 /* UIView+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8B784717F481BA004D9E30 /* UIView+Log.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0E17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -1586,6 +1588,9 @@
 		2899E5210DE3E06400AC0155 /* PCMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PCMainViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManager.h; sourceTree = "<group>"; };
+		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
+		2D8B784717F481BA004D9E30 /* UIView+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Log.m"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2271,8 +2276,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5733797A17E791890049F15B /* PCRueAppDelegate.m */,
 				5733797B17E791890049F15B /* PCRueAppDelegate.h */,
+				5733797A17E791890049F15B /* PCRueAppDelegate.m */,
 				60F022A21590E3000046FA44 /* PCTMainViewController.h */,
 				60F022A31590E3000046FA44 /* PCTMainViewController.m */,
 				32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */,
@@ -2324,6 +2329,15 @@
 				CE8D7584133CD56D00FE4800 /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D6DEB1917F9971700133D9A /* DataManagment */ = {
+			isa = PBXGroup;
+			children = (
+				2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */,
+				2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */,
+			);
+			path = DataManagment;
 			sourceTree = "<group>";
 		};
 		4D7B7361128B322B0066291A /* Products */ = {
@@ -2618,6 +2632,7 @@
 		60F022581590DEEC0046FA44 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				2D6DEB1917F9971700133D9A /* DataManagment */,
 				578CB9A617E0CE430014C897 /* Archiving */,
 				57A474D217C6678100745732 /* Popups */,
 				57A4749417C5887E00745732 /* CustomComponents */,
@@ -2675,6 +2690,7 @@
 		63C23E5517F1D95B004C55BC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2D8B784717F481BA004D9E30 /* UIView+Log.m */,
 				63C23E5917F1E01A004C55BC /* NSURL+Fragments.h */,
 				63C23E5A17F1E01B004C55BC /* NSURL+Fragments.m */,
 				63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */,
@@ -4826,6 +4842,8 @@
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
 				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
 				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
+				2D8B784817F481BA004D9E30 /* UIView+Log.m in Sources */,
+				2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
