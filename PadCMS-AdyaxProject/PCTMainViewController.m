@@ -32,6 +32,8 @@
 #import "PCRueKioskViewController.h"
 #import "MKStoreManager.h"
 
+#import "RueDownloadManager.h"
+
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * allRevisions;
@@ -724,8 +726,8 @@
     {
         [self checkInterfaceOrientationForRevision:currentRevision];
 
-        [PCDownloadManager sharedManager].revision = currentRevision;
-        [[PCDownloadManager sharedManager] startDownloading];
+        //[PCDownloadManager sharedManager].revision = currentRevision;
+        //[[PCDownloadManager sharedManager] startDownloading];
         
         if (_revisionViewController == nil)
         {
@@ -938,6 +940,13 @@
 - (void)downloadRevisionFinishedWithIndex:(NSNumber*)index
 {
     [self.kioskViewController downloadFinishedWithRevisionIndex:[index integerValue]];
+    
+    PCRevision *revision = [self revisionWithIndex:[index integerValue]];
+    
+    [RueDownloadManager startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
+        
+        return YES;
+    }];
     
 }
 
