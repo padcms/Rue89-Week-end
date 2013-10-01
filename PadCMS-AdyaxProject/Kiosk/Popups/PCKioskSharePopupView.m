@@ -31,12 +31,12 @@
     
     CGRect contentFrame = self.frame;
     self.titleLabel.frame = CGRectMake( 0, 20, contentFrame.size.width, 50);
-    self.descriptionLabel.frame = CGRectMake(0, 90, contentFrame.size.width, 50);
+    self.descriptionLabel.frame = CGRectMake(0, 90, contentFrame.size.width, 60);
     
     self.titleLabel.text = @"Partagez Rue89 Week-end";
-    self.descriptionLabel.text = @"Il n’y a pas d’amour, il n’y a que des preuves d’amour. Alors faites\ndécouvrir votre magazine tablettes préféré à tout votre réseau !";
+    //self.descriptionLabel.text = @"Il n’y a pas d’amour, il n’y a que des preuves d’amour. Alors faites\ndécouvrir votre magazine tablettes préféré à tout votre réseau !";
     
-    self.descriptionLabel.textAlignment = MTLabelTextAlignmentCenter;
+    [self.descriptionLabel setTextAlignment:RTTextAlignmentCenter];
     
     [self initShareButtonsAndLabels];
 }

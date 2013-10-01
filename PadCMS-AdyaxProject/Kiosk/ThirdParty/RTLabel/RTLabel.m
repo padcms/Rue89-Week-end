@@ -39,6 +39,8 @@
 #import "RTLabel+Kern.h"
 #import "RTLabel+CustomFontAttributes.m"
 
+const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"CustomStrikeThrough";
+
 @interface RTLabelButton : UIButton
 @property (nonatomic, assign) int componentIndex;
 @property (weak, nonatomic) NSURL *url;
@@ -239,7 +241,7 @@
 		int index = [textComponents indexOfObject:component];
 		component.componentIndex = index;
 		
-		if ([component.tagLabel caseInsensitiveCompare:@"i"] == NSOrderedSame)
+		if ([component.tagLabel caseInsensitiveCompare:@"i"] == NSOrderedSame || [component.tagLabel caseInsensitiveCompare:@"em"] == NSOrderedSame)
 		{
 			// make font italic
 			[self applyItalicStyleToText:attrString atPosition:component.position withLength:[component.text length]];
@@ -315,7 +317,9 @@
 		else if ([component.tagLabel caseInsensitiveCompare:@"center"] == NSOrderedSame)
 		{
 			[self applyCenterStyleToText:attrString attributes:component.attributes atPosition:component.position withLength:[component.text length]];
-		}
+		} else if ([component.tagLabel caseInsensitiveCompare:@"s"] == NSOrderedSame) {
+            [self applyStrikethroughtAttribute:attrString atPosition:component.position withLength:[component.text length]];
+        }
 	}
     
     // Create the framesetter with the attributed string.
@@ -382,6 +386,8 @@
 			}
 		}
 	}
+    
+    [self renderStrikeThroughForFrame:frame context:context];
 	
 	self.visibleRange = CTFrameGetVisibleStringRange(frame);
 
@@ -392,6 +398,78 @@
 	CFRelease(framesetter);
 	CTFrameDraw(frame, context);
     CFRelease(frame);
+}
+
+- (void)renderStrikeThroughForFrame:(CTFrameRef)leftFrame context:(CGContextRef)context {
+    
+    // get lines
+    CFArrayRef leftLines = CTFrameGetLines(leftFrame);
+    CGPoint *origins = malloc(sizeof(CGPoint)*[(__bridge NSArray *)leftLines count]);
+    CTFrameGetLineOrigins(leftFrame,
+                          CFRangeMake(0, 0), origins);
+    NSInteger lineIndex = 0;
+    
+    for (id oneLine in (__bridge NSArray *)leftLines)
+    {
+        CFArrayRef runs = CTLineGetGlyphRuns((CTLineRef)oneLine);
+        CGRect lineBounds = CTLineGetImageBounds((CTLineRef)oneLine, context);
+        
+        lineBounds.origin.x += origins[lineIndex].x;
+        lineBounds.origin.y += origins[lineIndex].y;
+        lineIndex++;
+        CGFloat offset = 0;
+        
+        for (id oneRun in (__bridge NSArray *)runs)
+        {
+            CGFloat ascent = 0;
+            CGFloat descent = 0;
+            
+            CGFloat width = CTRunGetTypographicBounds((CTRunRef) oneRun,
+                                                      CFRangeMake(0, 0),
+                                                      &ascent,
+                                                      &descent, NULL);
+            
+            NSDictionary *attributes = (NSDictionary *)CTRunGetAttributes((CTRunRef) oneRun);
+            
+            BOOL strikeOut = [[attributes objectForKey:(__bridge NSString *)kCustomStrikeThroughAttributeName] boolValue];
+            
+            if (strikeOut)
+            {
+                CGRect bounds = CGRectMake(lineBounds.origin.x + offset,
+                                           lineBounds.origin.y,
+                                           width, ascent + descent);
+                
+                // don't draw too far to the right
+                if (bounds.origin.x + bounds.size.width > CGRectGetMaxX(lineBounds))
+                {
+                    bounds.size.width = CGRectGetMaxX(lineBounds) - bounds.origin.x;
+                }
+                
+                // get text color or use black
+                id color = [attributes objectForKey:(id)kCTForegroundColorAttributeName];
+                
+                if (color)
+                {
+                    CGContextSetStrokeColorWithColor(context, (CGColorRef)color);
+                }
+                else
+                {
+                    CGContextSetGrayStrokeColor(context, 0, 1.0);
+                }
+                
+                CGFloat y = roundf(bounds.origin.y + bounds.size.height / 2.0 - 1);
+                CGContextMoveToPoint(context, bounds.origin.x, y);
+                CGContextAddLineToPoint(context, bounds.origin.x + bounds.size.width, y);
+                
+                CGContextStrokePath(context);
+            }
+            
+            offset += width;
+        }
+    }
+    
+    // cleanup
+    free(origins);
 }
 
 #pragma mark -
@@ -548,6 +626,12 @@
 	CFAttributedStringSetAttribute(text, CFRangeMake(position, length), kCTUnderlineStyleAttributeName,  (__bridge CFNumberRef)[NSNumber numberWithInt:kCTUnderlineStyleSingle]);
 }
 
+- (void)applyStrikethroughtAttribute:(CFMutableAttributedStringRef)text atPosition:(int)position withLength:(int)length
+{
+    
+    CFAttributedStringSetAttribute(text, CFRangeMake(position, length), kCustomStrikeThroughAttributeName,  (__bridge CFNumberRef)[NSNumber numberWithInt:kCTUnderlineStyleSingle]);
+}
+
 - (void)applyDoubleUnderlineText:(CFMutableAttributedStringRef)text atPosition:(int)position withLength:(int)length
 {
 	CFAttributedStringSetAttribute(text, CFRangeMake(position, length), kCTUnderlineStyleAttributeName,  (__bridge CFNumberRef)[NSNumber numberWithInt:kCTUnderlineStyleDouble]);
@@ -558,7 +642,7 @@
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
     
     
-#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES1
     CGFloat fontSize =  CTFontGetSize(actualFontRef);
     CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
     CTFontRef italicFontRef = [self italicFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];
@@ -648,7 +732,7 @@
 {
     CFTypeRef actualFontRef = CFAttributedStringGetAttribute(text, position, kCTFontAttributeName, NULL);
     
-#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES
+#ifdef    RTLABEL_CUSTOM_FONT_ATTRIBUTES1
     CGFloat fontSize =  CTFontGetSize(actualFontRef);
     CFStringRef fontName = CTFontCopyPostScriptName(actualFontRef);
     CTFontRef boldFontRef = [self boldFontRefForFontName:(__bridge NSString *)(fontName) size:fontSize];

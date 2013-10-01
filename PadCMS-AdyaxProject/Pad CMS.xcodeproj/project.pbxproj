@@ -18,7 +18,6 @@
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
-		2D8B784817F481BA004D9E30 /* UIView+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8B784717F481BA004D9E30 /* UIView+Log.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0E17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -49,6 +48,13 @@
 		571B7E1E17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
 		571B7E1F17F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
 		571B7E2017F37B4A00B77DBA /* Interstate Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */; };
+		571B7E3617F4ADF900B77DBA /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E2917F4ADF900B77DBA /* NSData+MKBase64.m */; };
+		571B7E3717F4ADF900B77DBA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E2B17F4ADF900B77DBA /* SFHFKeychainUtils.m */; };
+		571B7E3817F4ADF900B77DBA /* MKSKProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E2D17F4ADF900B77DBA /* MKSKProduct.m */; };
+		571B7E3917F4ADF900B77DBA /* MKSKSubscriptionProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E2F17F4ADF900B77DBA /* MKSKSubscriptionProduct.m */; };
+		571B7E3A17F4ADF900B77DBA /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 571B7E3117F4ADF900B77DBA /* MKStoreKitConfigs.plist */; };
+		571B7E3B17F4ADF900B77DBA /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E3317F4ADF900B77DBA /* MKStoreManager.m */; };
+		571B7E3C17F4ADF900B77DBA /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 571B7E3517F4ADF900B77DBA /* VerificationController.m */; };
 		57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231D8617D8C5BD00712185 /* EasyTableView.m */; };
 		57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC017D8CFAB00712185 /* PCRevisionSummaryPopup.m */; };
 		57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57231DC317D8D02A00712185 /* PCRevisionSummaryCell.m */; };
@@ -1590,7 +1596,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManager.h; sourceTree = "<group>"; };
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
-		2D8B784717F481BA004D9E30 /* UIView+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Log.m"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -1603,6 +1608,20 @@
 		571B7E0F17F3756300B77DBA /* RTLabel+CustomFontAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTLabel+CustomFontAttributes.h"; sourceTree = "<group>"; };
 		571B7E1017F3756300B77DBA /* RTLabel+CustomFontAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTLabel+CustomFontAttributes.m"; sourceTree = "<group>"; };
 		571B7E1A17F37B4A00B77DBA /* Interstate Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate Italic.ttf"; sourceTree = "<group>"; };
+		571B7E2817F4ADF900B77DBA /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
+		571B7E2917F4ADF900B77DBA /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		571B7E2A17F4ADF900B77DBA /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		571B7E2B17F4ADF900B77DBA /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		571B7E2C17F4ADF900B77DBA /* MKSKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKProduct.h; sourceTree = "<group>"; };
+		571B7E2D17F4ADF900B77DBA /* MKSKProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKProduct.m; sourceTree = "<group>"; };
+		571B7E2E17F4ADF900B77DBA /* MKSKSubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKSubscriptionProduct.h; sourceTree = "<group>"; };
+		571B7E2F17F4ADF900B77DBA /* MKSKSubscriptionProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKSubscriptionProduct.m; sourceTree = "<group>"; };
+		571B7E3017F4ADF900B77DBA /* MKStoreKitConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreKitConfigs.h; sourceTree = "<group>"; };
+		571B7E3117F4ADF900B77DBA /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MKStoreKitConfigs.plist; sourceTree = "<group>"; };
+		571B7E3217F4ADF900B77DBA /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
+		571B7E3317F4ADF900B77DBA /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
+		571B7E3417F4ADF900B77DBA /* VerificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationController.h; sourceTree = "<group>"; };
+		571B7E3517F4ADF900B77DBA /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 		57231D8517D8C5BD00712185 /* EasyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTableView.h; sourceTree = "<group>"; };
 		57231D8617D8C5BD00712185 /* EasyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTableView.m; sourceTree = "<group>"; };
 		57231DBF17D8CFAB00712185 /* PCRevisionSummaryPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRevisionSummaryPopup.h; sourceTree = "<group>"; };
@@ -2357,6 +2376,35 @@
 			path = NSNull;
 			sourceTree = "<group>";
 		};
+		571B7E2617F4ADF900B77DBA /* MKStoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				571B7E2717F4ADF900B77DBA /* Externals */,
+				571B7E2C17F4ADF900B77DBA /* MKSKProduct.h */,
+				571B7E2D17F4ADF900B77DBA /* MKSKProduct.m */,
+				571B7E2E17F4ADF900B77DBA /* MKSKSubscriptionProduct.h */,
+				571B7E2F17F4ADF900B77DBA /* MKSKSubscriptionProduct.m */,
+				571B7E3017F4ADF900B77DBA /* MKStoreKitConfigs.h */,
+				571B7E3117F4ADF900B77DBA /* MKStoreKitConfigs.plist */,
+				571B7E3217F4ADF900B77DBA /* MKStoreManager.h */,
+				571B7E3317F4ADF900B77DBA /* MKStoreManager.m */,
+				571B7E3417F4ADF900B77DBA /* VerificationController.h */,
+				571B7E3517F4ADF900B77DBA /* VerificationController.m */,
+			);
+			path = MKStoreKit;
+			sourceTree = "<group>";
+		};
+		571B7E2717F4ADF900B77DBA /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				571B7E2817F4ADF900B77DBA /* NSData+MKBase64.h */,
+				571B7E2917F4ADF900B77DBA /* NSData+MKBase64.m */,
+				571B7E2A17F4ADF900B77DBA /* SFHFKeychainUtils.h */,
+				571B7E2B17F4ADF900B77DBA /* SFHFKeychainUtils.m */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
 		57231D8417D8C5BD00712185 /* EasyTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2488,6 +2536,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				571B7E2617F4ADF900B77DBA /* MKStoreKit */,
 				63C23E5517F1D95B004C55BC /* Helpers */,
 				63C23E4517F06F55004C55BC /* GooglePlus */,
 				57189E0017EA194C008834EA /* NSNull */,
@@ -2690,7 +2739,6 @@
 		63C23E5517F1D95B004C55BC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2D8B784717F481BA004D9E30 /* UIView+Log.m */,
 				63C23E5917F1E01A004C55BC /* NSURL+Fragments.h */,
 				63C23E5A17F1E01B004C55BC /* NSURL+Fragments.m */,
 				63C23E5617F1D971004C55BC /* UIView+EasyFrame.h */,
@@ -3586,6 +3634,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Adyax;
+				TargetAttributes = {
+					AB813794152224E50038EC7B = {
+						DevelopmentTeam = RB2CCW5865;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Pad CMS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -4112,6 +4165,7 @@
 				AB8137AF152224E50038EC7B /* btnFacebook.png in Resources */,
 				AB8137B0152224E50038EC7B /* btnFacebookSubmit.png in Resources */,
 				AB8137B1152224E50038EC7B /* btnTwitter.png in Resources */,
+				571B7E3A17F4ADF900B77DBA /* MKStoreKitConfigs.plist in Resources */,
 				AB8137B2152224E50038EC7B /* facebook.png in Resources */,
 				AB8137B3152224E50038EC7B /* sharePopup.png in Resources */,
 				AB8137B4152224E50038EC7B /* twitter.png in Resources */,
@@ -4810,7 +4864,9 @@
 				60F022831590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228A1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				571B7E3617F4ADF900B77DBA /* NSData+MKBase64.m in Sources */,
 				57A4710E17BB984100745732 /* PCKioskAdvancedControlElement.m in Sources */,
+				571B7E3817F4ADF900B77DBA /* MKSKProduct.m in Sources */,
 				57A4713717BBA44B00745732 /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				571B7E0617F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				571B7E1317F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
@@ -4831,18 +4887,21 @@
 				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
+				571B7E3B17F4ADF900B77DBA /* MKStoreManager.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				571B7E3917F4ADF900B77DBA /* MKSKSubscriptionProduct.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
+				571B7E3C17F4ADF900B77DBA /* VerificationController.m in Sources */,
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
+				571B7E3717F4ADF900B77DBA /* SFHFKeychainUtils.m in Sources */,
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
 				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
 				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
-				2D8B784817F481BA004D9E30 /* UIView+Log.m in Sources */,
 				2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5498,8 +5557,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5528,8 +5587,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -5541,8 +5600,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5572,8 +5631,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5585,8 +5644,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5616,8 +5675,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

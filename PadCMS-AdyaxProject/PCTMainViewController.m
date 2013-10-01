@@ -30,6 +30,7 @@
 #import "PCKioskSubHeaderView.h"
 #import "ArchivingDataSource.h"
 #import "PCRueKioskViewController.h"
+#import "MKStoreManager.h"
 
 #import "RueDownloadManager.h"
 
@@ -207,12 +208,20 @@
     [self initKiosk];
 
 #ifdef RUE
+    //[self showIntroPopup];
+    
+    [self performSelector:@selector(showIntroPopup) withObject:nil afterDelay:0.1f];
+#endif
+}
+
+#ifdef RUE
+- (void)showIntroPopup {
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
     [introPopup show];
-#endif
 }
+#endif
 
 
 - (void) switchToKiosk
@@ -334,10 +343,18 @@
 
 -(void)restartApplication
 {
-	currentApplication = nil;
+    
+    //what? restart? This just means that we are successfully subscribed to the app. Taras.
+    
+#ifdef RUE
+    //make all paid (except individually paid) revisions free
+    [[self shelfView] reload];
+#else
+    currentApplication = nil;
 	self.padcmsCoder = nil;
 	[self initManager];
 	[self initKiosk];
+#endif
 	
 }
 
@@ -555,11 +572,31 @@
  -(BOOL)isRevisionPaidWithIndex:(NSInteger)index
 {
     
+
+    
 	PCRevision *revision = [self revisionWithIndex:index];
     
     if (revision.issue)
     {
-        return  revision.issue.paid;
+        
+        BOOL isIssuePaid = revision.issue.paid;
+        
+#warning Check here for individual payment
+
+#warning HARDCODE!
+        BOOL isRevisionIndividuallyPaid = NO;
+#warning HARDCODE!
+        
+        if (isRevisionIndividuallyPaid) {
+            return  isIssuePaid;
+        }
+        
+        //REturn that PAID when we are already subscribed to whole magazine
+        if ([[InAppPurchases sharedInstance] isSubscribed]) {
+            return YES;
+        }
+        
+        return isIssuePaid;
     }
     
     return NO;
@@ -768,14 +805,14 @@
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
 		{
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                           value:@"You must be connected to the Internet."]
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                           value:@"OK"]
-                                                  otherButtonTitles:nil];
-			[alert show];
+//			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+//                                                                                                           value:@"You must be connected to the Internet."]
+//                                                            message:nil
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+//                                                                                                           value:@"OK"]
+//                                                  otherButtonTitles:nil];
+//			[alert show];
 			return;
 			
 		}
@@ -1012,11 +1049,20 @@
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
-    [[InAppPurchases sharedInstance] renewSubscription:YES];
+    //[[InAppPurchases sharedInstance] renewSubscription:YES];
 }
 
 - (void)subscribeButtonTapped {
-    [[InAppPurchases sharedInstance] newSubscription];
+    //[[InAppPurchases sharedInstance] newSubscription];
+    
+    NSString * featureId = [[PCConfig subscriptions] lastObject];
+    
+    [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+        NSLog(@"Purchase completed.");
+    } onCancelled:^{
+        NSLog(@"Purchase cancelled.");
+    }];
+    
 }
 
 - (void)shareButtonTapped {

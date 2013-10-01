@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kiosk/ThirdParty/RTLabel/RTLabel.m"
-            timestampString = "401832611.045547"
+            timestampString = "402329281.705646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "844"
-            endingLineNumber = "844"
+            startingLineNumber = "928"
+            endingLineNumber = "928"
             landmarkName = "-components"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kiosk/ThirdParty/RTLabel/RTLabel.m"
-            timestampString = "401832611.045547"
+            timestampString = "402329281.705646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "983"
-            endingLineNumber = "983"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
             landmarkName = "-parse:valid_tags:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kiosk/ThirdParty/RTLabel/RTLabel.m"
-            timestampString = "401832611.045547"
+            timestampString = "402329281.705646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1075"
-            endingLineNumber = "1075"
+            startingLineNumber = "1159"
+            endingLineNumber = "1159"
             landmarkName = "-colorForHex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -196,11 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PCTMainViewController.m"
-            timestampString = "401833174.755046"
+            timestampString = "402324378.181711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1197"
-            endingLineNumber = "1197"
+            startingLineNumber = "1243"
+            endingLineNumber = "1243"
             landmarkName = "-dismissPCEmailController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -308,28 +308,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kiosk/ThirdParty/RTLabel/RTLabel.m"
-            timestampString = "401832611.045547"
+            timestampString = "402329281.705646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "662"
+            endingLineNumber = "662"
             landmarkName = "-applyFontAttributes:toText:atPosition:withLength:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Networking/PCDownloadManager.m"
-            timestampString = "401902766.219149"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "-launchTocDownloading"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -384,55 +368,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Model/ModelBilder/PCSQLLiteModelBuilder.m"
-            timestampString = "401903497.165377"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "+addPagesFromSQLiteBaseWithPath:toRevision:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Model/ModelBilder/PCSQLLiteModelBuilder.m"
-            timestampString = "401903619.32067"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
-            landmarkName = "+addPagesFromSQLiteBaseWithPath:toRevision:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910254.233096"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-productsRequest:didReceiveResponse:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
@@ -451,13 +387,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910327.518901"
+            filePath = "Kiosk/ThirdParty/MKStoreKit/MKStoreManager.m"
+            timestampString = "401917505.617885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-finishTransaction:"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
+            landmarkName = "-buyFeature:onComplete:onCancelled:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -467,61 +403,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910428.635698"
+            filePath = "Kiosk/ThirdParty/MKStoreKit/MKStoreManager.m"
+            timestampString = "401917524.106115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "-paymentQueue:removedTransactions:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910429.489264"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "-paymentQueue:restoreCompletedTransactionsFailedWithError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910431.986831"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "-paymentQueueRestoreCompletedTransactionsFinished:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PadCMS-CocoaTouch-Core/PadCMS-CocoaTouch-Core/Classes/Versioning/InAppPurchases.m"
-            timestampString = "401910513.067321"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "-paymentQueue:updatedTransactions:"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
+            landmarkName = "-addToQueue:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
