@@ -7,6 +7,8 @@
 //
 
 #import "PCRueKioskViewController.h"
+#import "PCKioskSubview.h"
+#import "PCKioskShelfView.h"
 
 @interface PCRueKioskViewController ()
 
@@ -22,5 +24,30 @@
         [super reloadSubviewsOnViewWillAppear];
     }
 }
+
+#pragma mark - Downloading flow
+
+- (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index
+{
+    for(PCKioskSubview *subview in self.kioskSubviews)
+    {
+        if([subview isMemberOfClass:[PCKioskShelfView class]])
+        {
+            [(PCKioskShelfView*)subview downloadingContentStartedWithRevisionIndex:index];
+        }
+    }
+}
+
+- (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index
+{
+    for(PCKioskSubview *subview in self.kioskSubviews)
+    {
+        if([subview isMemberOfClass:[PCKioskShelfView class]])
+        {
+            [(PCKioskShelfView*)subview downloadingContentFinishedWithRevisionIndex:index];
+        }
+    }
+}
+
 
 @end

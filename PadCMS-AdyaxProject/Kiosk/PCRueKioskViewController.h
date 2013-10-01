@@ -10,4 +10,7 @@
 
 @interface PCRueKioskViewController : PCKioskViewController
 
+- (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index;
+- (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index;
+
 @end
