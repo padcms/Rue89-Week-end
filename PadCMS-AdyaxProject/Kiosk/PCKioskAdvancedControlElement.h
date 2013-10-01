@@ -32,6 +32,9 @@
 - (void)showDescription:(BOOL)show animated:(BOOL)animated;
 - (void)showDescription:(BOOL)show animated:(BOOL)animated notifyDelegate:(BOOL)notify;
 
+- (void) downloadContentStarted;
+- (void) downloadContentFinished;
+
 @end
 
 

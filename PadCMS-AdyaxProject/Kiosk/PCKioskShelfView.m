@@ -544,4 +544,38 @@
 
 #endif
 
+#pragma mark - Download Progress
+
+- (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index
+{
+    PCKioskAbstractControlElement *cell = [self cellWithRevisionIndex:index];
+    
+    if(cell && [cell isMemberOfClass:[PCKioskAdvancedControlElement class]])
+    {
+        [(PCKioskAdvancedControlElement*)cell downloadContentStarted];
+    }
+}
+
+- (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index
+{
+    PCKioskAbstractControlElement *cell = [self cellWithRevisionIndex:index];
+    
+    if(cell && [cell isMemberOfClass:[PCKioskAdvancedControlElement class]])
+    {
+        [(PCKioskAdvancedControlElement*)cell downloadContentFinished];
+    }
+}
+
+- (PCKioskAbstractControlElement*) cellWithRevisionIndex:(NSInteger) index
+{
+    for(PCKioskAbstractControlElement *cell in cells)
+    {
+        if(cell.revisionIndex==index)
+        {
+            return cell;
+        }
+    }
+    return nil;
+}
+
 @end

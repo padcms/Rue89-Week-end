@@ -951,9 +951,22 @@
     
     PCRevision *revision = [self revisionWithIndex:[index integerValue]];
     
+    [(PCRueKioskViewController*)self.kioskViewController downloadingContentStartedWithRevisionIndex:[index integerValue]];
+    
     [RueDownloadManager startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
         
-        return YES;
+        if(progress < 1)
+        {
+            [self.kioskViewController downloadingProgressChangedWithRevisionIndex:[index integerValue]
+                                                                   andProgess:progress];
+            return YES;
+        }
+        else
+        {
+            [(PCRueKioskViewController*)self.kioskViewController downloadingContentFinishedWithRevisionIndex:[index integerValue]];
+            return NO;
+        }
+        
     }];
     
 }

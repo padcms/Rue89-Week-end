@@ -29,4 +29,7 @@
 - (void)reloadWithScrollingToTop;
 - (void)showSubHeader:(BOOL)show;
 
+- (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index;
+- (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index;
+
 @end

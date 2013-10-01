@@ -62,7 +62,7 @@ static NSMutableDictionary* active_dovnloaders;
     
     if(_startOperationsCount)
     {
-        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(progressTimerTick:) userInfo:nil repeats:YES];
+        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.75 target:self selector:@selector(progressTimerTick:) userInfo:nil repeats:YES];
     }
     else
     {
@@ -81,7 +81,30 @@ static NSMutableDictionary* active_dovnloaders;
         {
             count += operationsArray.count;
         }
+        NSDictionary* secondaryOperations = obj[@"secondaryKey"];
+        if(secondaryOperations)
+        {
+            count += secondaryOperations.count;
+        }
+        
     }];
+    
+    if(self.portraiteTocOperations)
+    {
+        count += self.portraiteTocOperations.count;
+    }
+    if(self.helpOperations)
+    {
+        count += self.helpOperations.count;
+    }
+    if(self.horizontalPageOperations)
+    {
+        count += self.horizontalPageOperations.count;
+    }
+    if(self.horizontalTocOperations)
+    {
+        count += self.horizontalTocOperations.count;
+    }
     
     return count;
 }

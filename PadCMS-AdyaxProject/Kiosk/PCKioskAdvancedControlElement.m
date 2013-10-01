@@ -23,7 +23,17 @@
 #import "PCKioskAdvancedControlElementDateLabel.h"
 #import "PCIssue.h"
 
-@interface PCKioskAdvancedControlElement() {
+typedef enum {
+    ElementsStateNotDownloaded,
+    ElementsStateInfoIsDownloading,
+    ElementsStateInfoDownloaded,
+    ElementsStateArchived,
+    ElementsStatePay,
+    ElementsStateContentDownloading
+}ElementsState;
+
+@interface PCKioskAdvancedControlElement()
+{
     NSString * testText;
     NSString * testHighlightedText; 
     UIFont * testFont;
@@ -34,6 +44,7 @@
     CGRect detailsFrameShown;
     CGRect detailsFrameHidden;
     
+    BOOL _isContentDownloading;
 }
 
 @property (nonatomic, strong) UIImageView * illustrationImageView;
@@ -254,61 +265,112 @@ const CGFloat kDetailsHeight = 80.0f;
 
 - (void) adjustElements
 {
+    BOOL previewAvailable = NO;
+    if ([self.dataSource respondsToSelector:@selector(previewAvailableForRevisionWithIndex:)]) {
+        previewAvailable = [self.dataSource previewAvailableForRevisionWithIndex:self.revisionIndex];
+    }
     
-    [super adjustElements];
-    if(self.revision.issue.paid/*[self.dataSource isRevisionPaidWithIndex:self.revisionIndex]*/)
+    if ([self.dataSource isRevisionDownloadedWithIndex:self.revisionIndex])
     {
-		
-		payButton.hidden = YES;
+        if (self.revision.state == PCRevisionStateArchived)
+        {
+            [self setElementsState:ElementsStateArchived];
+        }
+        else if(_isContentDownloading)
+        {
+            [self setElementsState:ElementsStateContentDownloading];
+        }
+        else
+        {
+            [self setElementsState:ElementsStateInfoDownloaded];
+        }
     }
-	else {
-		downloadButton.hidden = YES;
-		readButton.hidden = YES;
-		cancelButton.hidden = YES;
-		deleteButton.hidden = YES;
-		NSString* price = self.revision.issue.price;// [self.dataSource priceWithIndex:self.revisionIndex];
-		if (price ) {
-			[payButton setTitle:price forState:UIControlStateNormal];
-			payButton.hidden = NO;
-		}
-		else {
-			[[NSNotificationCenter defaultCenter] addObserver:self
-													 selector:@selector(productDataRecieved:)
-														 name:kInAppPurchaseManagerProductsFetchedNotification
-													   object:nil];
-			NSString* productIdentifier = self.revision.issue.productIdentifier;//[self.dataSource productIdentifierWithIndex:self.revisionIndex];
-			[[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
-		}
-		
-	}
-    
-    if (self.revision.isDownloaded) {
-        deleteButton.hidden = YES;
-        _archiveButton.hidden = NO;
-        downloadButton.hidden = YES;
+    else
+    {
+        if (self.downloadInProgress)
+        {
+            [self setElementsState:ElementsStateInfoIsDownloading];
+        }
+        else
+        {
+            if(self.revision.issue.paid == NO/*[self.dataSource isRevisionPaidWithIndex:self.revisionIndex]*/)
+            {
+                [self setElementsState:ElementsStatePay];
+            }
+            else
+            {
+                [self setElementsState:ElementsStateNotDownloaded];
+                previewButton.hidden = previewAvailable ? NO : YES;
+            }
+        }
     }
+}
+
+- (void) setElementsState:(ElementsState)state
+{
+    downloadButton.hidden = cancelButton.hidden = readButton.hidden = downloadingInfoLabel.hidden = downloadingProgressView.hidden = deleteButton.hidden = previewButton.hidden = _archiveButton.hidden = payButton.hidden = _restoreButton.hidden = YES;
+    downloadButton.enabled = YES;
     
-    if (self.revision.state == PCRevisionStateArchived) {
-        if (self.revision.isDownloaded) {
+    switch (state)
+    {
+        case ElementsStateNotDownloaded:
+            
+            downloadButton.hidden = NO;
+            
+            break;
+            
+        case ElementsStateInfoIsDownloading:
+            
+            cancelButton.hidden = NO;
+            downloadingInfoLabel.hidden = NO;
+            downloadingProgressView.hidden = NO;
+            
+            break;
+            
+        case ElementsStateInfoDownloaded:
+            
+            readButton.hidden = NO;
+            _archiveButton.hidden = NO;
+            
+            break;
+            
+        case ElementsStatePay:
+        {
+            NSString* price = self.revision.issue.price;
+            if (price )
+            {
+                [payButton setTitle:price forState:UIControlStateNormal];
+                payButton.hidden = NO;
+            }
+            else
+            {
+                [[NSNotificationCenter defaultCenter] addObserver:self
+                                                         selector:@selector(productDataRecieved:)
+                                                             name:kInAppPurchaseManagerProductsFetchedNotification
+                                                           object:nil];
+                NSString* productIdentifier = self.revision.issue.productIdentifier;//[self.dataSource productIdentifierWithIndex:self.revisionIndex];
+                [[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
+            }
+        }
+        break;
+            
+        case ElementsStateArchived:
+            
             deleteButton.hidden = NO;
             _restoreButton.hidden = NO;
-            _archiveButton.hidden = YES;
-            readButton.hidden = YES;
-        } else {
-            _restoreButton.hidden = YES;
-        }
-    } else {
-        if (self.revision.isDownloaded) {
-            deleteButton.hidden = YES;
-            _archiveButton.hidden = NO;
-        } else {
-            _archiveButton.hidden = YES;
-        }
-        
-        _restoreButton.hidden = YES;
-
+            
+            break;
+            
+        case ElementsStateContentDownloading:
+            
+            readButton.hidden = NO;
+            downloadingInfoLabel.hidden = NO;
+            downloadingProgressView.hidden = NO;
+            downloadButton.hidden = NO;
+            downloadButton.enabled = NO;
+            
+            break;
     }
-	
 }
 
 - (void) update
@@ -466,5 +528,19 @@ const CGFloat kDetailsHeight = 80.0f;
 //    CGRect shadowRect = CGRectMake(imageRect.origin.x - shadowWidth, imageRect.origin.y - shadowWidth, imageRect.size.width + shadowWidth*2, imageRect.size.height + shadowWidth*2);
 //    [self.imageViewShadowImage drawInRect:shadowRect];
 //}
+
+- (void) downloadContentStarted
+{
+    self.downloadInProgress = YES;
+    _isContentDownloading = YES;
+    [self adjustElements];
+}
+
+- (void) downloadContentFinished
+{
+    _isContentDownloading = NO;
+    self.downloadInProgress = FALSE;
+    [self adjustElements];
+}
 
 @end
