@@ -17,7 +17,7 @@
 //#import "WiredNavigator.h"
 
 #import "PCRevisionViewController.h"
-#import "PCApplication.h"
+#import "PCRueApplication.h"
 #import "PCKioskViewController.h"
 #import "PCKioskNavigationBar.h"
 #import "PCSearchViewController.h"
@@ -33,7 +33,7 @@ PCKioskViewControllerDelegateProtocol, PCKioskDataSourceProtocol,
 PCKioskNavigationBarDelegate,
 PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 {
-    PCApplication* currentApplication;
+    PCRueApplication* currentApplication;
     
 	UIView                      *mainView;
 	

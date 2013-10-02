@@ -333,7 +333,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 			if ([keys count] > 0)
 			{
 				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
-				currentApplication = [[PCApplication alloc] initWithParameters:applicationParameters 
+				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
 																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
 			}
 			else {
@@ -1140,8 +1140,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 - (void)shareButtonTapped {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
-    sharePopup.facebookMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
-    sharePopup.twitterMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
+    sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.twitterMessage = currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.googleMessage = currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.descriptionLabel.text = currentApplication.shareMessage;
     sharePopup.delegate = self;
     [sharePopup show];

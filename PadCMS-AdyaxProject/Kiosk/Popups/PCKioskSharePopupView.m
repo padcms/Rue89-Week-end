@@ -158,7 +158,7 @@
 
 - (void) googlePlusShareButtonPresed:(UIButton*)sender
 {
-    self.googleController = [[PCGooglePlusController alloc]init];
+    self.googleController = [[PCGooglePlusController alloc]initWithMessage:self.googleMessage postUrl:self.googlePostUrl];
     
     CGRect oldFrame = self.frame;
     
