@@ -411,8 +411,8 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
     
     for (id oneLine in (__bridge NSArray *)leftLines)
     {
-        CFArrayRef runs = CTLineGetGlyphRuns((CTLineRef)oneLine);
-        CGRect lineBounds = CTLineGetImageBounds((CTLineRef)oneLine, context);
+        CFArrayRef runs = CTLineGetGlyphRuns((__bridge CTLineRef)oneLine);
+        CGRect lineBounds = CTLineGetImageBounds((__bridge CTLineRef)oneLine, context);
         
         lineBounds.origin.x += origins[lineIndex].x;
         lineBounds.origin.y += origins[lineIndex].y;
@@ -424,12 +424,12 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
             CGFloat ascent = 0;
             CGFloat descent = 0;
             
-            CGFloat width = CTRunGetTypographicBounds((CTRunRef) oneRun,
+            CGFloat width = CTRunGetTypographicBounds((__bridge CTRunRef) oneRun,
                                                       CFRangeMake(0, 0),
                                                       &ascent,
                                                       &descent, NULL);
             
-            NSDictionary *attributes = (NSDictionary *)CTRunGetAttributes((CTRunRef) oneRun);
+            NSDictionary *attributes = (__bridge NSDictionary *)CTRunGetAttributes((__bridge CTRunRef) oneRun);
             
             BOOL strikeOut = [[attributes objectForKey:(__bridge NSString *)kCustomStrikeThroughAttributeName] boolValue];
             
@@ -450,7 +450,7 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
                 
                 if (color)
                 {
-                    CGContextSetStrokeColorWithColor(context, (CGColorRef)color);
+                    CGContextSetStrokeColorWithColor(context, (__bridge CGColorRef)color);
                 }
                 else
                 {
