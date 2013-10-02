@@ -386,8 +386,8 @@
     
 }
 
-- (void)layoutPageControl {
-    
+- (void)layoutPageControl
+{
     //updating page control alignment
     self.pageControl.alpha = 0.0f;
     [UIView animateWithDuration:0.0f animations:^{
@@ -396,9 +396,12 @@
         self.pageControl.frame = frame;
         
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3f animations:^{
-            self.pageControl.alpha = 1.0f;
-        }];
+        if(self.pageControl.pagesCount > 1)
+        {
+            [UIView animateWithDuration:0.3f animations:^{
+                self.pageControl.alpha = 1.0f;
+            }];
+        }
     }];
 }
 
