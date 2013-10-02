@@ -29,8 +29,13 @@
     _titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(37, 6, self.frame.size.width - 10, 30)];
     _titleLabel.font = [UIFont fontWithName:PCFontInterstateLight size:21.5];
     _titleLabel.fontColor = [UIColor whiteColor];
-    _titleLabel.text = @"> ARTICLES ARCHIVÉS";
+    //_titleLabel.text = @"> ARTICLES ARCHIVÉS";
     [self addSubview:_titleLabel];
+}
+
+- (void) setTitle:(NSString*)titleText
+{
+    _titleLabel.text = [NSString stringWithFormat:@"> ARTICLES %@", titleText];
 }
 
 @end

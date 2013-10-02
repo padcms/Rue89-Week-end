@@ -15,6 +15,9 @@
 @property (nonatomic, copy) void(^comleteShareBlock)(UIView* dialogView);
 @property (nonatomic, copy) void(^comleteAuthorizationBlock)(UIView* dialogView);
 
+@property (nonatomic, strong) NSString* postMessage;
+@property (nonatomic, strong) NSString* postUrl;
+
 @end
 
 
@@ -28,10 +31,27 @@ static NSString* authorization_end_point = @"https://accounts.google.com/o/oauth
 static NSString* authorization_redirect_uri = @"https://complete.com/login_complete";
 static NSString* share_redirect_uri = @"https://complete.com/share_complete";
 
-static NSString* post_text = @"Good app.";
-static NSString* post_url = @"http://facebook.com";
+//static NSString* post_text = @"Good app.";
+//static NSString* post_url = @"http://facebook.com";
 
-
+- (id) initWithMessage:(NSString*)postMessage postUrl:(NSString*)urlPath
+{
+    self = [super init];
+    if(self)
+    {
+        self.postMessage = @"";
+        if(postMessage && [postMessage isKindOfClass:[NSString class]] && postMessage.length)
+        {
+            self.postMessage = postMessage;
+        }
+        self.postUrl = @"http://google.com";
+        if(urlPath && [urlPath isKindOfClass:[NSString class]] && urlPath.length)
+        {
+            self.postUrl = urlPath;
+        }
+    }
+    return self;
+}
 
 - (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock authorizationComplete:(void(^)(UIView* dialogView))authComplBlock complete:(void(^)(UIView* dialogView))completionBlock
 {
@@ -72,7 +92,7 @@ static NSString* post_url = @"http://facebook.com";
     {
         NSMutableString* urlString = [NSMutableString stringWithString:@"https://plus.google.com/share"];
         
-        NSString* params = [NSString stringWithFormat:@"continue=%@&client_id=%@&text=%@&url=%@&access_token=%@", share_redirect_uri, google_client_id, [post_text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [post_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], token];
+        NSString* params = [NSString stringWithFormat:@"continue=%@&client_id=%@&text=%@&url=%@&access_token=%@", share_redirect_uri, google_client_id, [self.postMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [self.postUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], token];
         
         [urlString appendFormat:@"?%@", params];
         NSURL* requestUrl = [[NSURL alloc]initWithString:urlString];

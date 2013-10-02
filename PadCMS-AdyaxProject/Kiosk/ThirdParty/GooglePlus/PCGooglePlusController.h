@@ -10,6 +10,8 @@
 
 @interface PCGooglePlusController : NSObject
 
+- (id) initWithMessage:(NSString*)postMessage postUrl:(NSString*)urlPath;
+
 - (void) shareWithDialog:(void(^)(UIView* dialogView))dialogBlock authorizationComplete:(void(^)(UIView* dialogView))authComplBlock complete:(void(^)(UIView* dialogView))completionBlock;
 
 @end

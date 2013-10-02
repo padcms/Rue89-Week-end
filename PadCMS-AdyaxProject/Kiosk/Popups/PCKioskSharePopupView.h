@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSDictionary * emailMessage;
 @property (nonatomic, copy) NSString * twitterMessage;
 @property (nonatomic, copy) NSString * facebookMessage;
+@property (nonatomic, copy) NSString * googleMessage;
+@property (nonatomic, copy) NSString * googlePostUrl;
 @property (nonatomic, weak) id<PCKioskSharePopupViewDelegate> delegate;
 
 @end

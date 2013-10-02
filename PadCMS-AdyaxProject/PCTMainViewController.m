@@ -60,6 +60,8 @@
 
 @implementation PCTMainViewController
 
+static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
+
 @synthesize revisionViewController = _revisionViewController;
 @synthesize airTopMenu;
 @synthesize airTopSummary;
@@ -233,7 +235,7 @@
         mainView = nil;
 #ifdef RUE
         [self.navigationController  popViewControllerAnimated:YES];
-        _revisionViewController = nil;
+        //_revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
         _revisionViewController = nil;
@@ -271,6 +273,10 @@
     
     if (currentApplication == nil)
     {
+        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
+        
+        NSDictionary *previousPlistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
 
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
@@ -280,7 +286,8 @@
 			[alert release];*/
 		
 		}
-		else {
+		else
+        {
 			PadCMSCoder *padCMSCoder = [[PadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
 			if (![self.padcmsCoder syncServerPlistDownload])
@@ -293,10 +300,9 @@
 				[alert show];
 			}
 		}
-
-		        
-        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
+        
         NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        
 		if(plistContent == nil)
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
@@ -318,13 +324,16 @@
 		}
 		else
 		{
+            [self changeNewsstanfFromServerPlistContent:previousPlistContent toContent:plistContent];
+            
 			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
+            
 			NSArray *keys = [applicationsList allKeys];
 			
 			if ([keys count] > 0)
 			{
 				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
-				currentApplication = [[PCApplication alloc] initWithParameters:applicationParameters 
+				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
 																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
 			}
 			else {
@@ -339,6 +348,41 @@
 
 		}
 	}
+}
+
+- (void) changeNewsstanfFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
+{
+    NSDictionary *prevApplicationsList = [previousContent objectForKey:PCJSONApplicationsKey];
+    NSDictionary *newApplicationsList = [newContent objectForKey:PCJSONApplicationsKey];
+    
+    NSString* oldPath = nil;
+    if(prevApplicationsList && prevApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [prevApplicationsList objectForKey:[[prevApplicationsList allKeys] objectAtIndex:0]];
+        oldPath = [settingsDict objectForKey:newsstand_cover_key];
+    }
+    NSString* newPath = nil;
+    if(newApplicationsList && newApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
+        newPath = [settingsDict objectForKey:newsstand_cover_key];
+    }
+    
+    if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
+    {
+        NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPath]];
+        
+        if(newImageData && newImageData.length)
+        {
+            UIImage* newImage = [UIImage imageWithData:newImageData];
+            
+            if(newImage)
+            {
+                NSString* newstandPath = [[NSBundle mainBundle] pathForResource:@"icon_newsstand" ofType:@"png"];
+                [newImageData writeToFile:newstandPath atomically:YES];
+            }
+        }
+    }
 }
 
 -(void)restartApplication
@@ -480,6 +524,10 @@
     self.kioskViewController.delegate = self;
     [self.view addSubview:self.kioskViewController.view];
     [self.view bringSubviewToFront:self.kioskViewController.view];
+    
+    UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.kioskViewController.view addGestureRecognizer:recognizer];
     
 #ifdef RUE
     //[self.view bringSubviewToFront:self.subHeaderView];
@@ -737,8 +785,8 @@
         //[PCDownloadManager sharedManager].revision = currentRevision;
         //[[PCDownloadManager sharedManager] startDownloading];
         
-        if (_revisionViewController == nil)
-        {
+//        if (_revisionViewController == nil)
+//        {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
 #ifdef RUE
             _revisionViewController = [[PCRueRevisionViewController alloc]
@@ -751,25 +799,36 @@
 #endif
         
             [_revisionViewController setRevision:currentRevision];
-            _revisionViewController.mainViewController = (PCMainViewController *)self;
-            _revisionViewController.initialPageIndex = 0;
             
-#ifdef RUE
-            [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-            [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+            [self showRevisioViewController];
             
-            [[self navigationController] pushViewController:_revisionViewController animated:YES];
-#else
-            [self.view addSubview:_revisionViewController.view];
-#endif
-            
+//        }
+    }
+}
 
-            
-            self.mainView = _revisionViewController.view;
-            self.mainView.tag = 100;
-            
-            
-        }
+- (void) showRevisioViewController
+{
+    _revisionViewController.mainViewController = (PCMainViewController *)self;
+    _revisionViewController.initialPageIndex = 0;
+    
+#ifdef RUE
+    [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    [[self navigationController] pushViewController:_revisionViewController animated:YES];
+#else
+    [self.view addSubview:_revisionViewController.view];
+#endif
+    
+    self.mainView = _revisionViewController.view;
+    self.mainView.tag = 100;
+}
+
+- (void) swipeLeft:(UISwipeGestureRecognizer*)recognizer
+{
+    if(_revisionViewController)
+    {
+        [self showRevisioViewController];
     }
 }
 
@@ -1094,8 +1153,9 @@
 - (void)shareButtonTapped {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
-    sharePopup.facebookMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
-    sharePopup.twitterMessage = [currentApplication.notifications objectForKey:PCApplicationNotificationMessageKey];
+    sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.twitterMessage = currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.googleMessage = currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.descriptionLabel.text = currentApplication.shareMessage;
     sharePopup.delegate = self;
     [sharePopup show];
@@ -1113,18 +1173,23 @@
 
 #pragma mark - PCKioskFooterViewDelegate
 
-- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag {
+- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag
+{
+    
+    NSLog(@"title : %@, id : %i", tag.tagTitle, tag.tagId);
     
     self.selectedTag = tag;
     
     PCKioskShelfView * shelfView = [self shelfView];
     
-    if (tag.tagId == TAG_ID_ARCHIVES) {
-        [shelfView showSubHeader:YES];
-    } else {
-        [shelfView showSubHeader:NO];
+    if (tag.tagId == TAG_ID_MAIN)
+    {
+        [shelfView showSubHeader:NO withTitle:nil];
     }
-    
+    else
+    {
+        [shelfView showSubHeader:YES withTitle:tag.tagTitle];
+    }
     
     shelfView.shouldScrollToTopAfterReload = YES;
     [self shelfView].pageControl.currentPage = 1;
