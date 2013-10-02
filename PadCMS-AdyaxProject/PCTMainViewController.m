@@ -235,7 +235,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         mainView = nil;
 #ifdef RUE
         [self.navigationController  popViewControllerAnimated:YES];
-        _revisionViewController = nil;
+        //_revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
         _revisionViewController = nil;
@@ -525,6 +525,10 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     [self.view addSubview:self.kioskViewController.view];
     [self.view bringSubviewToFront:self.kioskViewController.view];
     
+    UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.kioskViewController.view addGestureRecognizer:recognizer];
+    
 #ifdef RUE
     //[self.view bringSubviewToFront:self.subHeaderView];
     [self.view bringSubviewToFront:self.kioskHeaderView];
@@ -781,8 +785,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         //[PCDownloadManager sharedManager].revision = currentRevision;
         //[[PCDownloadManager sharedManager] startDownloading];
         
-        if (_revisionViewController == nil)
-        {
+//        if (_revisionViewController == nil)
+//        {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
 #ifdef RUE
             _revisionViewController = [[PCRueRevisionViewController alloc]
@@ -795,25 +799,36 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 #endif
         
             [_revisionViewController setRevision:currentRevision];
-            _revisionViewController.mainViewController = (PCMainViewController *)self;
-            _revisionViewController.initialPageIndex = 0;
             
-#ifdef RUE
-            [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-            [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+            [self showRevisioViewController];
             
-            [[self navigationController] pushViewController:_revisionViewController animated:YES];
-#else
-            [self.view addSubview:_revisionViewController.view];
-#endif
-            
+//        }
+    }
+}
 
-            
-            self.mainView = _revisionViewController.view;
-            self.mainView.tag = 100;
-            
-            
-        }
+- (void) showRevisioViewController
+{
+    _revisionViewController.mainViewController = (PCMainViewController *)self;
+    _revisionViewController.initialPageIndex = 0;
+    
+#ifdef RUE
+    [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    [[self navigationController] pushViewController:_revisionViewController animated:YES];
+#else
+    [self.view addSubview:_revisionViewController.view];
+#endif
+    
+    self.mainView = _revisionViewController.view;
+    self.mainView.tag = 100;
+}
+
+- (void) swipeLeft:(UISwipeGestureRecognizer*)recognizer
+{
+    if(_revisionViewController)
+    {
+        [self showRevisioViewController];
     }
 }
 

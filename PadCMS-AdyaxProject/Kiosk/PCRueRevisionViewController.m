@@ -26,6 +26,11 @@
 //    return self;
 //}
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
