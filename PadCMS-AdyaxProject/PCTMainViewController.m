@@ -368,7 +368,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         newPath = [settingsDict objectForKey:newsstand_cover_key];
     }
     
-    if(oldPath && newPath && [newPath isEqualToString:oldPath] == NO)
+    if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
     {
         NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPath]];
         
