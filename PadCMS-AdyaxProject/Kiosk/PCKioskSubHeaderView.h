@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) MTLabel * titleLabel;
 
+- (void) setTitle:(NSString*)titleText;
+
 @end

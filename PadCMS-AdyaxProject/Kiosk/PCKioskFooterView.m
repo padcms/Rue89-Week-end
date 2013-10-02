@@ -252,7 +252,6 @@
         
         PCTag * tag = [[self.allTags filteredArrayUsingPredicate:predicate] lastObject];
         
-        
         [self.delegate kioskFooterView:self didSelectTag:tag];
     }
 }

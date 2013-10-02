@@ -27,7 +27,7 @@
 
 - (void)reload;
 - (void)reloadWithScrollingToTop;
-- (void)showSubHeader:(BOOL)show;
+- (void)showSubHeader:(BOOL)show withTitle:(NSString*)title;
 
 - (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index;
 - (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index;

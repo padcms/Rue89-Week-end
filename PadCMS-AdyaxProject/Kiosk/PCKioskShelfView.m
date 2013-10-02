@@ -104,9 +104,15 @@
     [self reload];
 }
 
-- (void)showSubHeader:(BOOL)show {
+- (void)showSubHeader:(BOOL)show withTitle:(NSString*)title
+{
+    if(title)
+    {
+        [self.subHeaderView setTitle:title];
+    }
     
-    if ((show && !self.isSubheaderShown) || (!show && self.isSubheaderShown)) {
+    if ((show && !self.isSubheaderShown) || (!show && self.isSubheaderShown))
+    {
         self.isSubheaderShown = show;
         
         CGFloat width = self.subHeaderView.frame.size.width;

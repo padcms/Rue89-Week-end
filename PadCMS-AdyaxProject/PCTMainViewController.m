@@ -1144,18 +1144,23 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 #pragma mark - PCKioskFooterViewDelegate
 
-- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag {
+- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag
+{
+    
+    NSLog(@"title : %@, id : %i", tag.tagTitle, tag.tagId);
     
     self.selectedTag = tag;
     
     PCKioskShelfView * shelfView = [self shelfView];
     
-    if (tag.tagId == TAG_ID_ARCHIVES) {
-        [shelfView showSubHeader:YES];
-    } else {
-        [shelfView showSubHeader:NO];
+    if (tag.tagId == TAG_ID_MAIN)
+    {
+        [shelfView showSubHeader:NO withTitle:nil];
     }
-    
+    else
+    {
+        [shelfView showSubHeader:YES withTitle:tag.tagTitle];
+    }
     
     shelfView.shouldScrollToTopAfterReload = YES;
     [self shelfView].pageControl.currentPage = 1;
