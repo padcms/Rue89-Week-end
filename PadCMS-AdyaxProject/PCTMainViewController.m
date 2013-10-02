@@ -60,6 +60,8 @@
 
 @implementation PCTMainViewController
 
+static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
+
 @synthesize revisionViewController = _revisionViewController;
 @synthesize airTopMenu;
 @synthesize airTopSummary;
@@ -271,6 +273,10 @@
     
     if (currentApplication == nil)
     {
+        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
+        
+        NSDictionary *previousPlistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
 
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
@@ -280,7 +286,8 @@
 			[alert release];*/
 		
 		}
-		else {
+		else
+        {
 			PadCMSCoder *padCMSCoder = [[PadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
 			if (![self.padcmsCoder syncServerPlistDownload])
@@ -293,10 +300,9 @@
 				[alert show];
 			}
 		}
-
-		        
-        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
+        
         NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        
 		if(plistContent == nil)
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
@@ -318,7 +324,10 @@
 		}
 		else
 		{
+            [self changeNewsstanfFromServerPlistContent:previousPlistContent toContent:plistContent];
+            
 			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
+            
 			NSArray *keys = [applicationsList allKeys];
 			
 			if ([keys count] > 0)
@@ -339,6 +348,41 @@
 
 		}
 	}
+}
+
+- (void) changeNewsstanfFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
+{
+    NSDictionary *prevApplicationsList = [previousContent objectForKey:PCJSONApplicationsKey];
+    NSDictionary *newApplicationsList = [newContent objectForKey:PCJSONApplicationsKey];
+    
+    NSString* oldPath = nil;
+    if(prevApplicationsList && prevApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [prevApplicationsList objectForKey:[[prevApplicationsList allKeys] objectAtIndex:0]];
+        oldPath = [settingsDict objectForKey:newsstand_cover_key];
+    }
+    NSString* newPath = nil;
+    if(newApplicationsList && newApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
+        newPath = [settingsDict objectForKey:newsstand_cover_key];
+    }
+    
+    if(oldPath && newPath && [newPath isEqualToString:oldPath] == NO)
+    {
+        NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPath]];
+        
+        if(newImageData && newImageData.length)
+        {
+            UIImage* newImage = [UIImage imageWithData:newImageData];
+            
+            if(newImage)
+            {
+                NSString* newstandPath = [[NSBundle mainBundle] pathForResource:@"icon_newsstand" ofType:@"png"];
+                [newImageData writeToFile:newstandPath atomically:YES];
+            }
+        }
+    }
 }
 
 -(void)restartApplication
