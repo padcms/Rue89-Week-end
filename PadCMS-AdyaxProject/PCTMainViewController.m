@@ -1150,7 +1150,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
-    //[[InAppPurchases sharedInstance] renewSubscription:YES];
+//    [[InAppPurchases sharedInstance] renewSubscription:YES];
 }
 
 - (void)subscribeButtonTapped {
@@ -1158,11 +1158,24 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     NSString * featureId = [[PCConfig subscriptions] lastObject];
     
-    [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
-        NSLog(@"Purchase completed.");
-    } onCancelled:^{
-        NSLog(@"Purchase cancelled.");
-    }];
+    //[MKStoreManager sharedManager]
+    
+    if (![MKStoreManager isFeaturePurchased:featureId]) {
+        [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+            NSLog(@"Purchase completed.");
+        } onCancelled:^{
+            NSLog(@"Purchase cancelled.");
+        }];
+    } else {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:@"Subscription is already active"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        [alert show];
+    }
+    
+
     
 }
 

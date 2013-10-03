@@ -47,7 +47,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.9.6</string>
+	<string>1.9.7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
 	<key>NSMainNibFile~ipad</key>
@@ -68,7 +68,7 @@
 		<string>f9103179a4044887ba078217e4a0cd76</string>
 		<key>PCConfigSubscriptions</key>
 		<array>
-			<string>com.dbbest.rue89.3month</string>
+			<string>com.mobile.rue89.3months</string>
 		</array>
 		<key>PCConfigUseNewsstand</key>
 		<true/>

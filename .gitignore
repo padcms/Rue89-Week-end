@@ -2,6 +2,8 @@
 */xcuserdata/*
 .DS_Store
 build/*
+*.xccheckout
+*.xcuserstate
 PadCMS-AdyaxProject/Pad CMS.xcodeproj/project.xcworkspace/xcuserdata/macuser.xcuserdatad/UserInterfaceState.xcuserstate
 PadCMS-AdyaxProject/Pad CMS.xcodeproj/xcuserdata/macuser.xcuserdatad/xcschemes/AIR.xcscheme
 PadCMS-AdyaxProject/Pad CMS.xcodeproj/xcuserdata/macuser.xcuserdatad/xcschemes/DCCV.xcscheme

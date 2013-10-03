@@ -3652,7 +3652,7 @@
 				ORGANIZATIONNAME = Adyax;
 				TargetAttributes = {
 					AB813794152224E50038EC7B = {
-						DevelopmentTeam = RB2CCW5865;
+						DevelopmentTeam = V65ZXH67NM;
 					};
 				};
 			};
@@ -5577,8 +5577,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5607,8 +5607,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				PROVISIONING_PROFILE = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -5620,8 +5620,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5651,8 +5651,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				PROVISIONING_PROFILE = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5664,8 +5664,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Irena Balin (SXL7447WB3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Irena Balin (SXL7447WB3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5695,8 +5695,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "AE589B9A-679F-4083-AA80-E09915BAD402";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE589B9A-679F-4083-AA80-E09915BAD402";
+				PROVISIONING_PROFILE = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F5C79364-CE58-4BF6-A135-F4233E6FF750";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
