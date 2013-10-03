@@ -33,6 +33,7 @@
 #import "MKStoreManager.h"
 
 #import "RueDownloadManager.h"
+#import "PCRevision+DataOfDownload.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
@@ -558,6 +559,43 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 #pragma mark - PCKioskDataSourceProtocol
+
+- (NSArray*) allDownloadedRevisions
+{
+    NSMutableArray* sortedRevisions = [[NSMutableArray alloc]init];
+    
+    NSMutableArray* sortedDates = [[NSMutableArray alloc]init];
+    
+    NSArray* revisionsArray = self.allRevisions;
+    NSLog(@"revisions count : %i", revisionsArray.count);
+    
+    for (PCRevision* revision in revisionsArray)
+    {
+        NSDate* downloadedDate = revision.dateOfDownload;
+        
+        if(downloadedDate)
+        {
+            int index = 0;
+            
+            for(int i = 0; i < sortedDates.count; ++i)
+            {
+                NSDate* currDate = [sortedDates objectAtIndex:i];
+                if([downloadedDate compare:currDate] == NSOrderedAscending)
+                {
+                    index++;
+                    continue;
+                }
+                else break;
+            }
+            
+            [sortedDates insertObject:downloadedDate atIndex:index];
+            [sortedRevisions insertObject:revision atIndex:index];
+            
+        }
+    }
+    
+    return [NSArray arrayWithArray:sortedRevisions];
+}
 
 - (NSInteger)numberOfRevisions
 {

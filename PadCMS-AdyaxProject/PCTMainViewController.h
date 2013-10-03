@@ -81,4 +81,6 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 - (PCApplication*) getApplication;
 - (void) switchToKiosk;
 
+- (NSArray*) allDownloadedRevisions;
+
 @end

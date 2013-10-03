@@ -26,4 +26,6 @@
 @property (nonatomic, strong) EasyTableView * tableView;
 @property (nonatomic, weak) id<PCRevisionSummaryPopupDelegate> delegate;
 
+- (void) setRevisionsList:(NSArray*)revisions;
+
 @end
