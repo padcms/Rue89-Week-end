@@ -12,7 +12,7 @@
 
 - (NSDate*) dateOfDownload
 {
-    //NSString *databasePath = [self.contentDirectory stringByAppendingPathComponent:@"sqlite.db"];
+    NSString *databasePath = [self.contentDirectory stringByAppendingPathComponent:@"sqlite.db"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:databasePath])
     {
