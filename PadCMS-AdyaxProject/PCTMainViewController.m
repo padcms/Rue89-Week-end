@@ -292,18 +292,18 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 			self.padcmsCoder = padCMSCoder;
 			if (![self.padcmsCoder syncServerPlistDownload])
 			{
-				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
+				/*UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                                 message:nil
                                                                delegate:nil
                                                       cancelButtonTitle:alertCancelButtonTitle
                                                       otherButtonTitles:nil];
-				[alert show];
+				[alert show];*/
 			}
 		}
         
         NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         
-		if(plistContent == nil)
+		if(plistContent == nil || [plistContent count] == 0)
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                             message:nil
@@ -312,15 +312,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                                                   otherButtonTitles:nil];
 			[alert show];
 
-		}
-		else if([plistContent count]==0)
-		{
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:alertCancelButtonTitle
-                                                  otherButtonTitles:nil];
-			[alert show];	
 		}
 		else
 		{
