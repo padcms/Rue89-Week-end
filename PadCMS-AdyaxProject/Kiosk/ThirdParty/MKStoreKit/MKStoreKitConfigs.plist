@@ -9,7 +9,7 @@
 	<key>Subscriptions</key>
 	<dict>
 		<key>com.mobile.rue89.3months</key>
-		<string></string>
+		<integer>90</integer>
 	</dict>
 </dict>
 </plist>

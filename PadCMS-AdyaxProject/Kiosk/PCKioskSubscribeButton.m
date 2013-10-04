@@ -26,6 +26,8 @@
     
     [self.topLabel setFont:[UIFont fontWithName:fontName size:20]];
     [self.bottomLabel setFont:[UIFont fontWithName:fontName size:14.1]];
+    
+    [self.subscribedLabel setFont:[UIFont fontWithName:@"QuicksandBold-Regular" size:18]];
 }
 
 
@@ -66,4 +68,13 @@
     [self.bottomLabel setTextColor:[UIColor whiteColor]];
 }
 
+- (void)setIsSubscribedState:(BOOL)isSubscribedState {
+    _isSubscribedState = isSubscribedState;
+    
+    self.subscribedLabel.hidden = !isSubscribedState;
+    self.topLabel.hidden = isSubscribedState;
+    self.bottomLabel.hidden = isSubscribedState;
+    
+    self.button.enabled = !isSubscribedState;
+}
 @end

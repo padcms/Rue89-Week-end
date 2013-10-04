@@ -482,6 +482,12 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
     self.kioskHeaderView.delegate = self;
     [self.view addSubview:self.kioskHeaderView];
+    
+    //subscription notification
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsFetched:) name:kProductFetchedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
 
     //footer
     self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
@@ -532,6 +538,28 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
 #endif
+}
+
+
+- (void)productsFetched:(NSNotification *)notification {
+//    
+//    NSString * featureId = [[PCConfig subscriptions] lastObject];
+//    
+//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
+//    
+//    NSLog(@"IS SUBSCRIBED productsFetched: %d", isSubscriptionActive);
+//    
+//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
+}
+
+- (void)subscriptionsPurchased:(NSNotification *)notification {
+//    NSString * featureId = [[PCConfig subscriptions] lastObject];
+//    
+//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
+//    
+//    NSLog(@"IS SUBSCRIBED subscriptionsPurchasedNotification: %d", isSubscriptionActive);
+//    
+//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
@@ -1113,17 +1141,30 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
+    [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
+        
+    } onError:^(NSError *error) {
+        
+    }];
 }
 
 - (void)subscribeButtonTapped {
-    //[[InAppPurchases sharedInstance] newSubscription];
+    
+    //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+//    [[InAppPurchases sharedInstance] newSubscription];
     
     NSString * featureId = [[PCConfig subscriptions] lastObject];
     
     //[MKStoreManager sharedManager]
     
-    if (![MKStoreManager isFeaturePurchased:featureId]) {
+    NSLog(@"IS PURCHASED: %d", [MKStoreManager isFeaturePurchased:featureId]);
+    
+    NSLog(@"IS SUBSCRIBED: %d", [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
+    
+    if (![[MKStoreManager sharedManager] isSubscriptionActive:featureId]) {
         [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+            
+            self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
             NSLog(@"Purchase completed.");
         } onCancelled:^{
             NSLog(@"Purchase cancelled.");

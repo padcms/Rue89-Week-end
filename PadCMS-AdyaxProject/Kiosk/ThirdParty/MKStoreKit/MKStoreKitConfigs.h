@@ -55,5 +55,6 @@
 
 #warning Shared Secret Missing Ignore this warning if you don't use auto-renewable subscriptions
 #ifndef kSharedSecret
-    #define kSharedSecret @"<FILL IN YOUR SHARED SECRET HERE>"
+    #import "PCConfig.h"
+    #define kSharedSecret [PCConfig sharedSecretKey] //@"<FILL IN YOUR SHARED SECRET HERE>"
 #endif
