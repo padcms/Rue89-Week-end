@@ -83,12 +83,6 @@ const float kButtonsHeight = 60.0f;
 
 - (void) setRevisionsList:(NSArray*)revisions
 {
-    for (PCRevision* rev in revisions)
-    {
-         NSLog(@"revis %i date %@", rev.identifier, rev.dateOfDownload);
-    }
-   
-    
     _revisionsList = revisions;
     [self.tableView.tableView reloadData];
 }
@@ -128,30 +122,34 @@ const float kButtonsHeight = 60.0f;
 
 - (NSUInteger)numberOfCellsForEasyTableView:(EasyTableView *)view inSection:(NSInteger)section
 {
-    return self.revisionsList.count;
+    return self.revisionsList.count + 1;
 }
 
-- (UIView *)easyTableView:(EasyTableView *)easyTableView viewForRect:(CGRect)rect {
-    
+- (UIView *)easyTableView:(EasyTableView *)easyTableView viewForRect:(CGRect)rect
+{
     PCRevisionSummaryCell * cell = [[PCRevisionSummaryCell alloc] initWithFrame:rect];
     //cell.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
     return cell;
 }
 
-- (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath {
-    //view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3f];
-    
+- (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath
+{
     PCRevisionSummaryCell * cell = (PCRevisionSummaryCell *)view;
     
-    //PCTocItem * tocItem = self.tocItems[indexPath.row];
-    PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
-
-    cell.titleLabel.text = revision.issue.title;
-    
-    cell.descriptionLabel.text = revision.issue.excerpt;
-    
-    [cell.descriptionLabel sizeToFit];
+    if(indexPath.row >= self.revisionsList.count)
+    {
+        //help view cell
+        [cell setTitle:nil];
+    }
+    else
+    {
+        //PCTocItem * tocItem = self.tocItems[indexPath.row];
+        PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
+        
+        [cell setTitle:revision.issue.title];
+        [cell setDescription:revision.issue.excerpt];
+    }
 }
 
 - (void)easyTableView:(EasyTableView *)easyTableView selectedView:(UIView *)selectedView atIndexPath:(NSIndexPath *)indexPath deselectedView:(UIView *)deselectedView {
@@ -159,9 +157,14 @@ const float kButtonsHeight = 60.0f;
     /*if ([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectIndex:)]) {
         [self.delegate revisionSummaryPopup:self didSelectIndex:indexPath.row];
     }*/
-    
-    
-    
+    if(indexPath.row >= self.revisionsList.count)
+    {
+        //help view cell presed
+    }
+    else if([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectRevision:)])
+    {
+        [self.delegate revisionSummaryPopup:self didSelectRevision:[self.revisionsList objectAtIndex:indexPath.row]];
+    }
 }
 
 #pragma mark - Popup Override stuff

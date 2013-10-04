@@ -26,8 +26,9 @@
         }
         else
         {
+            //NSLog(@"path : %@", databasePath);
             //NSLog(@"attr : %@", fileAttributes.debugDescription);
-            NSDate *fileModificationDate = [fileAttributes objectForKey:NSFileCreationDate];
+            NSDate *fileModificationDate = [fileAttributes objectForKey:NSFileModificationDate];
             return fileModificationDate;
         }
     }

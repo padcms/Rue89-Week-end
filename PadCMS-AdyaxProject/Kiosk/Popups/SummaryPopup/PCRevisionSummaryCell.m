@@ -8,6 +8,13 @@
 
 #import "PCRevisionSummaryCell.h"
 #import "PCFonts.h"
+#import "HelpSummaryPopupView.h"
+
+@interface PCRevisionSummaryCell ()
+
+@property (nonatomic, strong) HelpSummaryPopupView* helpView;
+
+@end
 
 @implementation PCRevisionSummaryCell
 
@@ -25,6 +32,20 @@
     
     [self initTitle];
     [self initDescription];
+    
+}
+
+- (void) addHelpView
+{
+    self.helpView = [HelpSummaryPopupView helpView];
+    self.helpView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    [self addSubview:self.helpView];
+}
+
+- (void) removeHelpView
+{
+    [self.helpView removeFromSuperview];
+    self.helpView = nil;
 }
 
 - (void)initSeparators {
@@ -57,18 +78,17 @@ const CGFloat kLabelPadding = 30.0f;
     [self addSubview:self.titleLabel];
 }
 
-- (void)initDescription {
+- (void)initDescription
+{
     CGRect contentFrame = self.frame;
-    self.descriptionLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 90, contentFrame.size.width - kLabelPadding*2, 1)];
-    //[self.descriptionLabel setResizeToFitText:YES];
-    self.descriptionLabel.text = @"No description";
+    
+    self.descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLabelPadding, 110, contentFrame.size.width - kLabelPadding*2, 40)];
     self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateLight size:15];
-    self.descriptionLabel.textAlignment = MTLabelTextAlignmentCenter;
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
-    [self.descriptionLabel setCharacterSpacing:-0.5f];
-    self.descriptionLabel.fontColor = UIColorFromRGB(0x969696);
-    self.descriptionLabel.contentMode = UIViewContentModeRedraw;
-    self.descriptionLabel.delegate = self;
+    self.descriptionLabel.textColor = UIColorFromRGB(0x969696);
+    self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
+    self.descriptionLabel.numberOfLines = 2;
+    
     [self addSubview:self.descriptionLabel];
 }
 
@@ -85,6 +105,32 @@ const CGFloat kLabelPadding = 30.0f;
 
 - (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
     [label setNeedsDisplay];
+}
+
+- (void) setTitle:(NSString*)title
+{
+    if(title)
+    {
+        if(self.helpView)
+        {
+            [self removeHelpView];
+        }
+        self.titleLabel.text = title;
+    }
+    else
+    {
+        if(self.helpView == nil)
+        {
+            [self addHelpView];
+        }
+        self.titleLabel.text = nil;
+        self.descriptionLabel.text = nil;
+    }
+}
+
+- (void) setDescription:(NSString*)description
+{
+    self.descriptionLabel.text = description;
 }
 
 @end

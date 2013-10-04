@@ -34,6 +34,7 @@
 
 #import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
+#import "NSObject+Block.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
 
@@ -245,6 +246,40 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     }
 }
 
+- (void) switchToRevision:(PCRevision*)revisionToPresent
+{
+    void (^showRevision)(PCRevision*) = ^(PCRevision* revision){
+        
+        NSUInteger index = [self.allRevisions indexOfObject:revisionToPresent];
+        if(index != NSNotFound)
+        {
+            [self readRevisionWithIndex:index];
+        }
+    };
+    
+    if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
+    {
+        self.navigationController.view.userInteractionEnabled = NO;
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [self performBlock:^{
+            
+            showRevision(revisionToPresent);
+            
+            [self performBlock:^{
+                
+                self.navigationController.view.userInteractionEnabled = YES;
+                
+            } afterDealay:0.5];
+            
+        } afterDealay:0.5];
+    }
+    else
+    {
+        showRevision(revisionToPresent);
+    }
+}
 
 - (void)subscribe {
     //method is not used, just removing a warning

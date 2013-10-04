@@ -9,6 +9,7 @@
 #import "PCKioskPopupView.h"
 #import "EasyTableView.h"
 
+@class PCRevision;
 @class PCRevisionSummaryPopup;
 
 @protocol PCRevisionSummaryPopupDelegate <NSObject, PCKioskPopupViewDelegate>
@@ -16,6 +17,9 @@
 - (void)revisionSummaryPopupDidTapHomeButton:(PCRevisionSummaryPopup *)popup;
 - (void)revisionSummaryPopupDidTapMenuButton:(PCRevisionSummaryPopup *)popup;
 - (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectIndex:(NSInteger)index;
+
+@optional
+- (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectRevision:(PCRevision*)revision;
 
 @end
 

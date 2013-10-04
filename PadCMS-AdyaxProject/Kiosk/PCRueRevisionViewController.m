@@ -97,7 +97,8 @@
 
 #pragma mark - tap handler
 
-- (void)tapGesture:(UIGestureRecognizer *)recognizer {
+- (void)tapGesture:(UIGestureRecognizer *)recognizer
+{
     if (self.summaryPopup.isShown) {
         [self.summaryPopup hide];
     }
@@ -105,13 +106,21 @@
 
 #pragma mark - Left swipe handler
 
-- (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer {
+- (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer
+{
+    if (self.summaryPopup.isShown) {
+        [self.summaryPopup hide];
+    }
     [self topBarView:nil backButtonTapped:nil];
 }
 
 #pragma mark - PCRevisionSummaryPopupDelegate
 
 - (void)revisionSummaryPopupDidTapHomeButton:(PCRevisionSummaryPopup *)popup {
+    if (self.summaryPopup.isShown)
+    {
+        [self.summaryPopup hide];
+    }
     [self topBarView:nil backButtonTapped:nil];
 }
 
@@ -130,6 +139,12 @@
 
 - (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectIndex:(NSInteger)index {
     [self hudView:nil didSelectIndex:index];
+}
+
+- (void) revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectRevision:(PCRevision *)revision
+{
+    [popup hide];
+    [(PCTMainViewController*)self.mainViewController switchToRevision:revision];
 }
 
 @end
