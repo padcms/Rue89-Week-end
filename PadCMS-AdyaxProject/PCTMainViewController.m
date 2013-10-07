@@ -33,6 +33,8 @@
 #import "MKStoreManager.h"
 
 #import "RueDownloadManager.h"
+#import "PCRevision+DataOfDownload.h"
+#import "NSObject+Block.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, MKStoreManagerDataSource>
 
@@ -244,6 +246,40 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     }
 }
 
+- (void) switchToRevision:(PCRevision*)revisionToPresent
+{
+    void (^showRevision)(PCRevision*) = ^(PCRevision* revision){
+        
+        NSUInteger index = [self.allRevisions indexOfObject:revisionToPresent];
+        if(index != NSNotFound)
+        {
+            [self readRevisionWithIndex:index];
+        }
+    };
+    
+    if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
+    {
+        self.navigationController.view.userInteractionEnabled = NO;
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [self performBlock:^{
+            
+            showRevision(revisionToPresent);
+            
+            [self performBlock:^{
+                
+                self.navigationController.view.userInteractionEnabled = YES;
+                
+            } afterDealay:0.5];
+            
+        } afterDealay:0.5];
+    }
+    else
+    {
+        showRevision(revisionToPresent);
+    }
+}
 
 - (void)subscribe {
     //method is not used, just removing a warning
@@ -472,6 +508,31 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     [self setArchivedRevisionStates];
     
+    self.allRevisions = [NSMutableArray arrayWithArray:[self.allRevisions sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        PCRevision* rev1 = obj1;
+        PCRevision* rev2 = obj2;
+        NSDate* date1 = rev1.updateDate ? rev1.updateDate : rev1.createDate;
+        NSDate* date2 = rev2.updateDate ? rev2.updateDate : rev2.createDate;
+        
+        NSComparisonResult result = [date1 compare:date2];
+        
+        switch (result)
+        {
+            case NSOrderedAscending:
+                
+                return NSOrderedDescending;
+                
+            case NSOrderedSame:
+                
+                return NSOrderedDescending;
+                
+            case NSOrderedDescending:
+                
+                return NSOrderedAscending;
+        }
+    }]];
+    
     NSInteger           kioskBarHeight = 34.0;
     
     self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
@@ -588,6 +649,43 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 #pragma mark - PCKioskDataSourceProtocol
+
+- (NSArray*) allDownloadedRevisions
+{
+    NSMutableArray* sortedRevisions = [[NSMutableArray alloc]init];
+    
+    NSMutableArray* sortedDates = [[NSMutableArray alloc]init];
+    
+    NSArray* revisionsArray = self.allRevisions;
+    NSLog(@"revisions count : %i", revisionsArray.count);
+    
+    for (PCRevision* revision in revisionsArray)
+    {
+        NSDate* downloadedDate = revision.dateOfDownload;
+        
+        if(downloadedDate)
+        {
+            int index = 0;
+            
+            for(int i = 0; i < sortedDates.count; ++i)
+            {
+                NSDate* currDate = [sortedDates objectAtIndex:i];
+                if([downloadedDate compare:currDate] == NSOrderedAscending)
+                {
+                    index++;
+                    continue;
+                }
+                else break;
+            }
+            
+            [sortedDates insertObject:downloadedDate atIndex:index];
+            [sortedRevisions insertObject:revision atIndex:index];
+            
+        }
+    }
+    
+    return [NSArray arrayWithArray:sortedRevisions];
+}
 
 - (NSInteger)numberOfRevisions
 {
@@ -789,6 +887,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         
         allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
     }
+    
     
     
     return allSortedRevisions;

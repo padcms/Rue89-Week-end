@@ -12,8 +12,11 @@
 @interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
 
 @property (nonatomic, strong) MTLabel * titleLabel;
-@property (nonatomic, strong) MTLabel * descriptionLabel;
+@property (nonatomic, strong) UILabel * descriptionLabel;
 
 - (void)setNeedsDisplayHacked;
+
+- (void) setTitle:(NSString*)title;
+- (void) setDescription:(NSString*)description;
 
 @end

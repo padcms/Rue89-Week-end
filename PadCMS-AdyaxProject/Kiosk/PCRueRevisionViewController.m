@@ -8,6 +8,7 @@
 
 #import "PCRueRevisionViewController.h"
 #import "PCRevisionSummaryPopup.h"
+#import "PCTMainViewController.h"
 
 @interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
@@ -26,9 +27,16 @@
 //    return self;
 //}
 
+- (NSArray*) sortedListOfAllDownloadedRevisions
+{
+    NSMutableArray* allRev = [NSMutableArray arrayWithArray:[(PCTMainViewController*)self.mainViewController allDownloadedRevisions]];
+    [allRev removeObject:self.revision];
+    return [NSArray arrayWithArray:allRev];
+}
+
 - (void) viewDidDisappear:(BOOL)animated
 {
-    
+    //owerrided for keeping controller alive
 }
 
 - (void)viewDidLoad
@@ -89,7 +97,8 @@
 
 #pragma mark - tap handler
 
-- (void)tapGesture:(UIGestureRecognizer *)recognizer {
+- (void)tapGesture:(UIGestureRecognizer *)recognizer
+{
     if (self.summaryPopup.isShown) {
         [self.summaryPopup hide];
     }
@@ -97,26 +106,45 @@
 
 #pragma mark - Left swipe handler
 
-- (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer {
+- (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer
+{
+    if (self.summaryPopup.isShown) {
+        [self.summaryPopup hide];
+    }
     [self topBarView:nil backButtonTapped:nil];
 }
 
 #pragma mark - PCRevisionSummaryPopupDelegate
 
 - (void)revisionSummaryPopupDidTapHomeButton:(PCRevisionSummaryPopup *)popup {
+    if (self.summaryPopup.isShown)
+    {
+        [self.summaryPopup hide];
+    }
     [self topBarView:nil backButtonTapped:nil];
 }
 
-- (void)revisionSummaryPopupDidTapMenuButton:(PCRevisionSummaryPopup *)popup {
-    if (!self.summaryPopup.isShown) {
+- (void)revisionSummaryPopupDidTapMenuButton:(PCRevisionSummaryPopup *)popup
+{
+    if (!self.summaryPopup.isShown)
+    {
+        [self.summaryPopup setRevisionsList:[self sortedListOfAllDownloadedRevisions]];
         [self.summaryPopup show];
-    } else {
+    }
+    else
+    {
         [self.summaryPopup hide];
     }
 }
 
 - (void)revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectIndex:(NSInteger)index {
     [self hudView:nil didSelectIndex:index];
+}
+
+- (void) revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectRevision:(PCRevision *)revision
+{
+    [popup hide];
+    [(PCTMainViewController*)self.mainViewController switchToRevision:revision];
 }
 
 @end

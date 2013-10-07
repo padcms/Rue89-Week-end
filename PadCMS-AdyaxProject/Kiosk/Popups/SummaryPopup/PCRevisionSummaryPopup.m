@@ -9,10 +9,15 @@
 #import "PCRevisionSummaryPopup.h"
 #import "PCRevisionSummaryCell.h"
 #import "PCTocItem.h"
+#import "PCRevision.h"
+#import "PCIssue.h"
+
+#import "PCRevision+DataOfDownload.h"
 
 @interface PCRevisionSummaryPopup() <EasyTableViewDelegate>
 
 @property (nonatomic, strong) NSArray * tocItems;
+@property (nonatomic, strong) NSArray* revisionsList;
 
 @end
 
@@ -41,13 +46,7 @@ const float kButtonsHeight = 60.0f;
 
 - (void)loadContent2 {
     
-    CGRect tableViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    
-    self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:self.tocItems.count ofWidth:250];
-    self.tableView.delegate = self;
-    self.tableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableView.separatorColor = [UIColor clearColor];
-    [self addSubview:self.tableView];
+    [self loadTableView];
     
     CGRect frame = self.frame;
     frame.size.height += kButtonsHeight;
@@ -82,6 +81,27 @@ const float kButtonsHeight = 60.0f;
 
 }
 
+- (void) setRevisionsList:(NSArray*)revisions
+{
+    _revisionsList = revisions;
+    [self.tableView.tableView reloadData];
+}
+
+- (void) loadTableView
+{
+    if(self.tableView)
+    {
+        [self.tableView removeFromSuperview];
+    }
+    
+    CGRect tableViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    
+    self.tableView = [[EasyTableView  alloc] initWithFrame:tableViewFrame numberOfColumns:0 ofWidth:250];
+    self.tableView.delegate = self;
+    self.tableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableView.separatorColor = [UIColor clearColor];
+    [self addSubview:self.tableView];
+}
 
 #pragma mark - Button actions
 
@@ -100,33 +120,50 @@ const float kButtonsHeight = 60.0f;
 
 #pragma mark - EasyTableViewDelegate
 
-- (UIView *)easyTableView:(EasyTableView *)easyTableView viewForRect:(CGRect)rect {
-    
+- (NSUInteger)numberOfCellsForEasyTableView:(EasyTableView *)view inSection:(NSInteger)section
+{
+    return self.revisionsList.count + 1;
+}
+
+- (UIView *)easyTableView:(EasyTableView *)easyTableView viewForRect:(CGRect)rect
+{
     PCRevisionSummaryCell * cell = [[PCRevisionSummaryCell alloc] initWithFrame:rect];
     //cell.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
     return cell;
 }
 
-- (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath {
-    //view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3f];
-    
+- (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath
+{
     PCRevisionSummaryCell * cell = (PCRevisionSummaryCell *)view;
     
-    PCTocItem * tocItem = self.tocItems[indexPath.row];
-    
-
-    cell.titleLabel.text = tocItem.title;
-    
-    cell.descriptionLabel.text = tocItem.tocItemDescription;
-    
-    [cell.descriptionLabel sizeToFit];
+    if(indexPath.row >= self.revisionsList.count)
+    {
+        //help view cell
+        [cell setTitle:nil];
+    }
+    else
+    {
+        //PCTocItem * tocItem = self.tocItems[indexPath.row];
+        PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
+        
+        [cell setTitle:revision.issue.title];
+        [cell setDescription:revision.issue.excerpt];
+    }
 }
 
 - (void)easyTableView:(EasyTableView *)easyTableView selectedView:(UIView *)selectedView atIndexPath:(NSIndexPath *)indexPath deselectedView:(UIView *)deselectedView {
     
-    if ([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectIndex:)]) {
+    /*if ([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectIndex:)]) {
         [self.delegate revisionSummaryPopup:self didSelectIndex:indexPath.row];
+    }*/
+    if(indexPath.row >= self.revisionsList.count)
+    {
+        //help view cell presed
+    }
+    else if([self.delegate respondsToSelector:@selector(revisionSummaryPopup:didSelectRevision:)])
+    {
+        [self.delegate revisionSummaryPopup:self didSelectRevision:[self.revisionsList objectAtIndex:indexPath.row]];
     }
 }
 

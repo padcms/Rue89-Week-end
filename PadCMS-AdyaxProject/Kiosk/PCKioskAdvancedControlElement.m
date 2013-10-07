@@ -41,8 +41,8 @@ typedef enum {
     UIColor * testHighlightingColor;
     CGFloat  shadowInitialHeight;
     
-    CGRect detailsFrameShown;
-    CGRect detailsFrameHidden;
+//    CGRect detailsFrameShown;
+//    CGRect detailsFrameHidden;
     
     BOOL _isContentDownloading;
 }
@@ -59,10 +59,9 @@ typedef enum {
 
 @end
 
-const CGFloat kDetailsHeight = 80.0f;
+//const CGFloat kDetailsHeight = 80.0f;
 
 @implementation PCKioskAdvancedControlElement
-
 
 - (void) initDownloadingProgressComponents
 {
@@ -185,26 +184,24 @@ const CGFloat kDetailsHeight = 80.0f;
     
     shadowInitialHeight = self.shadowImageView.frame.size.height;
     
+    [self initDetailsView];
+
+}
+
+- (void)initDetailsView
+{
     //details shadow
+    CGRect imageRect = self.illustrationImageView.frame;
+    CGFloat  shadowWidth = 6.0f;
     UIImage * detailsShadowImage = [UIImage imageNamed:@"home_issue_details_top_shadow_6px"];
     self.detailsShadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageRect.origin.x, CGRectGetMaxY(imageRect), imageRect.size.width, shadowWidth)];
     self.detailsShadowImageView.image = detailsShadowImage;
     self.detailsShadowImageView.alpha = 0;
     [self addSubview:self.detailsShadowImageView];
     
-    [self initDetailsView];
-
-}
-
-- (void)initDetailsView {
-    CGRect imageRect = self.illustrationImageView.frame;
-    detailsFrameHidden = CGRectMake(imageRect.origin.x, CGRectGetMaxY(imageRect) - kDetailsHeight, imageRect.size.width, kDetailsHeight);
-    detailsFrameShown = detailsFrameHidden;
-    detailsFrameShown.origin.y += kDetailsHeight;
-    
-    self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:detailsFrameHidden];
+    self.detailsView = [[PCKioskControlElementDetailsView alloc] initWithFrame:CGRectMake(imageRect.origin.x, CGRectGetMaxY(imageRect), imageRect.size.width, 0)];
     self.detailsView.hidden = YES;
-    [self insertSubview:self.detailsView belowSubview:self.illustrationImageView];
+    [self addSubview:self.detailsView];
 }
 
 - (void)initLabels {
@@ -379,19 +376,13 @@ const CGFloat kDetailsHeight = 80.0f;
 
 - (void) update
 {
-    
    //NSDate *methodStart = [NSDate date];
     //title
     self.titleLabel.text = self.revision.issue.title;
     
     //details
-    NSString * excerptString = self.revision.issue.excerpt;
-    NSString * authors = self.revision.issue.author;
-    NSInteger wordsCount = self.revision.issue.wordsCount;
     
-    [self.detailsView setExcerptString:excerptString];
-    [self.detailsView setAuthorsString:authors];
-    [self.detailsView setNumberOfWords:wordsCount];
+    [self.detailsView setupForRevision:self.revision];
     
     //date
     NSDate * date = self.revision.createDate;
@@ -421,9 +412,6 @@ const CGFloat kDetailsHeight = 80.0f;
     //if (executionTime > 0.05) {
          //NSLog(@"UPDATE executionTime = %f", executionTime);
     //}
-    
-
-   
 }
 
 #pragma mark - Buttons actions
@@ -459,13 +447,15 @@ const CGFloat kDetailsHeight = 80.0f;
     CGFloat height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
     CGFloat shadowHeight = shadowInitialHeight;
     CGFloat shadowAlpha = 0;
-    CGRect detailsFrame = detailsFrameHidden;
+    CGRect detailsFrame = self.detailsView.frame;
+    detailsFrame.size.height = 0;
     
-    if (show) {
-        height += kDetailsHeight;
-        shadowHeight += kDetailsHeight;
+    if (show)
+    {
+        detailsFrame.size.height = self.detailsView.openedHeight;
+        height += detailsFrame.size.height;
+        shadowHeight += detailsFrame.size.height;
         shadowAlpha = 0.3f;
-        detailsFrame = detailsFrameShown;
     }
     
     float animationDuration = animated ? 0.3f : 0.0f;
@@ -520,7 +510,7 @@ const CGFloat kDetailsHeight = 80.0f;
 	}
 }
 
-//#pragma mark - Drawing
+/*//#pragma mark - Drawing
 //
 //- (void)drawRect:(CGRect)rect {
 //    
@@ -531,7 +521,7 @@ const CGFloat kDetailsHeight = 80.0f;
 //    CGFloat  shadowWidth = 6.0f;
 //    CGRect shadowRect = CGRectMake(imageRect.origin.x - shadowWidth, imageRect.origin.y - shadowWidth, imageRect.size.width + shadowWidth*2, imageRect.size.height + shadowWidth*2);
 //    [self.imageViewShadowImage drawInRect:shadowRect];
-//}
+//}*/
 
 - (void) downloadContentStarted
 {
