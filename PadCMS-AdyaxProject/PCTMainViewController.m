@@ -827,6 +827,30 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
     }
     
+    allSortedRevisions = [allSortedRevisions sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        PCRevision* rev1 = obj1;
+        PCRevision* rev2 = obj2;
+        NSDate* date1 = rev1.updateDate ? rev1.updateDate : rev1.createDate;
+        NSDate* date2 = rev2.updateDate ? rev2.updateDate : rev2.createDate;
+        
+        NSComparisonResult result = [date2 compare:date1];
+        
+        switch (result)
+        {
+            case NSOrderedAscending:
+                
+                return NSOrderedDescending;
+                
+            case NSOrderedSame:
+                
+                return NSOrderedDescending;
+                
+            case NSOrderedDescending:
+                
+                return NSOrderedAscending;
+        }
+    }];
     
     return allSortedRevisions;
 }
