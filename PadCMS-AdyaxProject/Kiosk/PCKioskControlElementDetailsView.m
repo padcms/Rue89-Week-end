@@ -42,6 +42,7 @@ static const CGFloat padding_top = 12.0f;
     self.excerptLabel.font = [UIFont fontWithName:PCFontInterstateRegular size:15.0f];
     self.excerptLabel.textColor = UIColorFromRGB(0x34495e);
     self.excerptLabel.lineSpacing = 1.25;
+    self.excerptLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:self.excerptLabel];
     
     
@@ -62,6 +63,7 @@ static const CGFloat padding_top = 12.0f;
     [self addSubview:self.autorsLabel];
     [self.autorsLabel setNumberOfLines:2];
     [self.autorsLabel sizeToFit];
+    self.autorsLabel.backgroundColor = [UIColor clearColor];
     authorsLabelRect = self.autorsLabel.frame;
     
     self.numberOfWordsLabel = [[UILabel alloc] initWithFrame:[self wordsLabelRectForAuthorsRect:authorsLabelRect]];
@@ -69,6 +71,7 @@ static const CGFloat padding_top = 12.0f;
     self.numberOfWordsLabel.font = [UIFont fontWithName:PCFontInterstateLight size:11.0f];
     self.numberOfWordsLabel.textColor = UIColorFromRGB(0x34495e);
     [self addSubview:self.numberOfWordsLabel];
+    self.numberOfWordsLabel.backgroundColor = [UIColor clearColor];
     
     self.numberOfWordsLabel.text = @"1 500 mots";
     [self.numberOfWordsLabel sizeToFit];
