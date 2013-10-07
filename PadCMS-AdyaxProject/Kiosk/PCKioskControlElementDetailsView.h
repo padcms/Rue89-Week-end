@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "RTLabel.h"
 
+@class PCRevision;
+
 @interface PCKioskControlElementDetailsView : UIView
 
+@property (nonatomic, readonly) float openedHeight;
 //@property (nonatomic, strong) UITextView * descriptionTextView;
-@property (nonatomic, strong) RTLabel * excerptLabel;
-@property (nonatomic, strong) UILabel * autorsLabel;
-@property (nonatomic, strong) UILabel * numberOfWordsLabel;
 
 - (void)setExcerptString:(NSString *)excerptString;
 - (void)setAuthorsString:(NSString *)authorsString;
 - (void)setNumberOfWords:(NSInteger)numberOfWords;
+
+- (void) setupForRevision:(PCRevision*)revision;
 
 @end

@@ -9,8 +9,22 @@
 #import "PCKioskControlElementDetailsView.h"
 #import "PCKioskShelfSettings.h"
 #import "PCFonts.h"
+#import "PCRevision.h"
+#import "PCIssue.h"
+#import "UIView+EasyFrame.h"
+
+@interface PCKioskControlElementDetailsView ()
+
+@property (nonatomic, strong) RTLabel * excerptLabel;
+@property (nonatomic, strong) UILabel * autorsLabel;
+@property (nonatomic, strong) UILabel * numberOfWordsLabel;
+
+@end
 
 @implementation PCKioskControlElementDetailsView
+
+static const CGFloat padding_left = 10.0f;
+static const CGFloat padding_top = 12.0f;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,19 +35,15 @@
     return self;
 }
 
-- (void)initialize {
-    self.backgroundColor = [UIColor whiteColor];
-    
-    CGFloat paddingLeft = 5.0f;
-    CGFloat paddingTop = 6.0f;
-    
-    
-    CGRect excerptRect = CGRectMake(paddingLeft + 8, paddingTop + 8, 380, self.frame.size.height - paddingLeft*2);
+- (void)initialize
+{
+    CGRect excerptRect = CGRectMake(padding_left, self.frameHeight - padding_left, 380, 0);
     self.excerptLabel = [[RTLabel alloc] initWithFrame:excerptRect];
     self.excerptLabel.font = [UIFont fontWithName:PCFontInterstateRegular size:15.0f];
     self.excerptLabel.textColor = UIColorFromRGB(0x34495e);
     self.excerptLabel.lineSpacing = 1.25;
     [self addSubview:self.excerptLabel];
+    
     
     //[self setExcerptString:@"<font kern=-0.5>De passage à Paris, le président islandais nous a raconté comment son pays avait vaincu la crise, et il nous a glissé quelques conseils valables pour la France au passage.</font>"];
     //self.descriptionTextView.text = @"De passage à Paris, le président islandais nous a raconté comment son pays avait vaincu la crise, et il nous a glissé quelques conseils valables pour la France au passage.";
@@ -62,13 +72,19 @@
     
     self.numberOfWordsLabel.text = @"1 500 mots";
     [self.numberOfWordsLabel sizeToFit];
+    
+    self.numberOfWordsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    self.autorsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    self.excerptLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    self.autoresizesSubviews = YES;
+    self.clipsToBounds = YES;
 }
 
 - (CGRect)wordsLabelRectForAuthorsRect:(CGRect)authorsLabelRect {
     return CGRectMake(authorsLabelRect.origin.x, CGRectGetMaxY(authorsLabelRect), authorsLabelRect.size.width, 30);
 }
 
-//- (void)fixTextViewKerning {
+/*//- (void)fixTextViewKerning {
 //    NSString *css = @"*{text-rendering: optimizeLegibility; line-height:125%; letter-spacing:-0.5px;}";
 //    NSString * text = self.descriptionTextView.text;
 //    NSString *html = [NSString stringWithFormat:@"<html><head><style>%@</style></head><body>%@</body></html>", css, text];
@@ -82,9 +98,10 @@
 //    @catch (NSException *exception) {
 //        // html+css could not be applied to text view, so no kerning
 //    }
-//}
+//}*/
 
-- (void)layoutSubviews {
+/*- (void)layoutSubviews
+{
     [super layoutSubviews];
     
     [self.autorsLabel sizeToFit];
@@ -94,31 +111,55 @@
     authorsLabelRect.size = textSize;
     self.autorsLabel.frame = authorsLabelRect;
     
-    
     self.numberOfWordsLabel.frame = [self wordsLabelRectForAuthorsRect:authorsLabelRect];
     
-    //NSLog(@"number frame %@", NSStringFromCGRect(self.numberOfWordsLabel.frame));
-    
     [self.numberOfWordsLabel sizeToFit];
-}
+}*/
 
-- (void)setExcerptString:(NSString *)excerptString {
-    //self.descriptionTextView.text = excerptString;
+- (void)setExcerptString:(NSString *)excerptString
+{
+    CGSize excerptTextSize = {0, 0};;
     
-    if (excerptString) {
+    if (excerptString)
+    {
+        excerptTextSize = [stringWithoutTagsFromString(excerptString) sizeWithFont:self.excerptLabel.font constrainedToSize:CGSizeMake(self.excerptLabel.frameWidth, 9999) lineBreakMode:self.excerptLabel.lineBreakMode];
         excerptString = [[@"<font kern=-0.5>" stringByAppendingString:excerptString] stringByAppendingString:@"</font>"];
         self.excerptLabel.text = excerptString;
     }
+    excerptTextSize.height += 6;
+    self.excerptLabel.frameHeight = excerptTextSize.height;
+}
+
+- (void) setupForRevision:(PCRevision*)revision
+{
+    NSString * excerptString = revision.issue.excerpt;
+    NSString * authors = revision.issue.author;
+    NSInteger wordsCount = revision.issue.wordsCount;
     
+    [self setAuthorsString:authors];
+    [self setNumberOfWords:wordsCount];
+    [self setExcerptString:excerptString];
     
+    CGRect authorsLabelRect = self.autorsLabel.frame;
+    CGSize textSize = [[self.autorsLabel text] sizeWithFont:[self.autorsLabel font] constrainedToSize:CGSizeMake(120, 9999) lineBreakMode:UILineBreakModeWordWrap];
+    authorsLabelRect.size = textSize;
+    self.autorsLabel.frame = authorsLabelRect;
+    self.numberOfWordsLabel.frame = [self wordsLabelRectForAuthorsRect:authorsLabelRect];
+    [self.numberOfWordsLabel sizeToFit];
     
+    float minHeight = self.numberOfWordsLabel.frameHeight + self.autorsLabel.frameHeight + padding_top + padding_left;
+    _openedHeight = self.excerptLabel.frameHeight + padding_top + padding_left;
+    if(_openedHeight < minHeight)
+    {
+        _openedHeight = minHeight;
+    }
     
-    //[self.excerptLabel a]
+    self.autorsLabel.frameY = self.excerptLabel.frameY = self.frameHeight - _openedHeight + padding_top;
+    self.numberOfWordsLabel.frameY = self.autorsLabel.frameY + self.autorsLabel.frameHeight;
 }
 
 - (void)setAuthorsString:(NSString *)authorsString {
     self.autorsLabel.text = authorsString;
-    [self layoutSubviews];
 }
 
 - (void)setNumberOfWords:(NSInteger)numberOfWords {
@@ -131,7 +172,22 @@
     
     self.numberOfWordsLabel.text = [NSString stringWithFormat:@"%@ %@", numberString, (numberOfWords > 1) ? @"mots" : @"mot"];
     
-    [self layoutSubviews];
+}
+
+NSString* stringWithoutTagsFromString(NSString* str)
+{
+    NSRange firstTagOpenRange = [str rangeOfString:@"<"];
+    NSRange firstTagCloseRange = [str rangeOfString:@">"];
+    if(firstTagOpenRange.location != NSNotFound && firstTagCloseRange.location != NSNotFound)
+    {
+        NSRange tagRange = {firstTagOpenRange.location, firstTagCloseRange.location - firstTagOpenRange.location + 1};
+        NSString* newStr = [str stringByReplacingCharactersInRange:tagRange withString:@""];
+        return stringWithoutTagsFromString(newStr);
+    }
+    else
+    {
+        return str;
+    }
 }
 
 @end
