@@ -657,6 +657,12 @@
 		57B443A417D78B5100FCFA87 /* summary_separator_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */; };
 		57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */; };
 		57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BBD81617E1F7F4001F7653 /* SDWebImage.framework */; };
+		57EADAFC180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
+		57EADAFD180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
+		57EADAFE180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
+		57EADAFF180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
+		57EADB00180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
+		57EADB01180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */; };
 		57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FE3F3A17F0332000705EF0 /* Security.framework */; };
 		600E459C15C013FD008ACADC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 600E459E15C013FD008ACADC /* Localizable.strings */; };
 		6030878A1541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 603087891541AFB500CC1F15 /* PCNavigationControllerWithDismissableKeyboard.m */; };
@@ -1752,6 +1758,8 @@
 		57B443A717D89B3600FCFA87 /* PCRueRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRevisionViewController.h; sourceTree = "<group>"; };
 		57B443A817D89B3600FCFA87 /* PCRueRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRevisionViewController.m; sourceTree = "<group>"; };
 		57BBD81617E1F7F4001F7653 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		57EADAFA180306A800EEA1F5 /* MKStoreKit+PadCMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKStoreKit+PadCMS.h"; sourceTree = "<group>"; };
+		57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKStoreKit+PadCMS.m"; sourceTree = "<group>"; };
 		57FE3F3A17F0332000705EF0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6005387715011C23008021DA /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		600E459D15C013FD008ACADC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2386,6 +2394,7 @@
 		571B7E2617F4ADF900B77DBA /* MKStoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				57EADAF81803066900EEA1F5 /* Extensions */,
 				571B7E2717F4ADF900B77DBA /* Externals */,
 				571B7E2C17F4ADF900B77DBA /* MKSKProduct.h */,
 				571B7E2D17F4ADF900B77DBA /* MKSKProduct.m */,
@@ -2642,6 +2651,15 @@
 				57B4435E17D78B5000FCFA87 /* summary_separator_right@2x.png */,
 			);
 			path = IssueScreen;
+			sourceTree = "<group>";
+		};
+		57EADAF81803066900EEA1F5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				57EADAFA180306A800EEA1F5 /* MKStoreKit+PadCMS.h */,
+				57EADAFB180306A800EEA1F5 /* MKStoreKit+PadCMS.m */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		60371C491557C3D90001814C /* Privacy policy and Contact Us */ = {
@@ -4751,6 +4769,7 @@
 				2282A6C41223DE5E0059BAFD /* main.m in Sources */,
 				60F022651590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226C1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				57EADAFC180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				571B7E1117F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022731590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227A1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
@@ -4790,6 +4809,7 @@
 				AB17A57C1576393A00DF9A05 /* main.m in Sources */,
 				60F0226B1590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F022721590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				57EADB01180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				571B7E1617F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022791590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F022801590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
@@ -4829,6 +4849,7 @@
 				AB6BBF4A156BA85500F9D6F7 /* main.m in Sources */,
 				60F0226A1590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F022711590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				57EADB00180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				571B7E1517F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022781590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227F1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
@@ -4870,6 +4891,7 @@
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
+				57EADAFE180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				60F022831590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228A1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */,
@@ -4926,6 +4948,7 @@
 				AB813B1C1528FF3B0038EC7B /* UIHelpers.m in Sources */,
 				AB813B1D1528FF3B0038EC7B /* SSCheckBoxView.m in Sources */,
 				AB813B1E1528FF3B0038EC7B /* SSLineView.m in Sources */,
+				57EADAFF180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				AB813B221528FF870038EC7B /* AFUniEditionsApiClient.m in Sources */,
 				60F022681590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226F1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
@@ -5024,6 +5047,7 @@
 				CED37F5A14974D4400D71E8B /* main.m in Sources */,
 				60F022661590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226D1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				57EADAFD180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
 				571B7E1217F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
 				60F022741590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227B1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,

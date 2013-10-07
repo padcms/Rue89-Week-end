@@ -47,6 +47,8 @@
 #error "MKStoreKit uses features (NSJSONSerialization) only available in iOS SDK  and later."
 #endif
 
+#import "PCApplication.h"
+
 
 @interface MKStoreManager () //private methods and properties
 
@@ -182,7 +184,7 @@ static MKStoreManager* _sharedStoreManager;
 #ifdef __IPHONE_6_0
       _sharedStoreManager.hostedContents = [NSMutableArray array];
 #endif
-      [_sharedStoreManager requestProductData];
+      //[_sharedStoreManager requestProductData];
       [[SKPaymentQueue defaultQueue] addTransactionObserver:_sharedStoreManager];
       [_sharedStoreManager startVerifyingSubscriptionReceipts];
     });
@@ -196,6 +198,12 @@ static MKStoreManager* _sharedStoreManager;
     
   }
   return _sharedStoreManager;
+}
+
+- (void)setDataSource:(id<MKStoreManagerDataSource>)dataSource {
+    _dataSource = dataSource;
+    
+    [self requestProductData];
 }
 
 #pragma mark Internal MKStoreKit functions
@@ -236,10 +244,13 @@ static MKStoreManager* _sharedStoreManager;
   NSArray *consumables = [[[MKStoreManager storeKitItems] objectForKey:@"Consumables"] allKeys];
   NSArray *nonConsumables = [[MKStoreManager storeKitItems] objectForKey:@"Non-Consumables"];
   NSArray *subscriptions = [[[MKStoreManager storeKitItems] objectForKey:@"Subscriptions"] allKeys];
+    
+    NSArray * serverProducts = [self.dataSource serverProductIdsForMKStoreManager:self];
   
   [productsArray addObjectsFromArray:consumables];
   [productsArray addObjectsFromArray:nonConsumables];
   [productsArray addObjectsFromArray:subscriptions];
+    [productsArray addObjectsFromArray:serverProducts];
   
 	self.productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:productsArray]];
 	self.productsRequest.delegate = self;
@@ -253,11 +264,14 @@ static MKStoreManager* _sharedStoreManager;
   NSArray *consumableNames = [self allConsumableNames];
   NSArray *nonConsumables = [[self storeKitItems] objectForKey:@"Non-Consumables"];
   NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
+    
+    NSArray * serverProducts = [[MKStoreManager sharedManager].dataSource serverProductIdsForMKStoreManager:[MKStoreManager sharedManager]];
   
   [productsArray addObjectsFromArray:consumables];
   [productsArray addObjectsFromArray:consumableNames];
   [productsArray addObjectsFromArray:nonConsumables];
   [productsArray addObjectsFromArray:subscriptions];
+    [productsArray addObjectsFromArray:serverProducts];
   
   return productsArray;
 }

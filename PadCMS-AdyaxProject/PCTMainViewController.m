@@ -34,7 +34,7 @@
 
 #import "RueDownloadManager.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, MKStoreManagerDataSource>
 
 @property (nonatomic, strong) NSMutableArray * allRevisions;
 @property (nonatomic, strong) PCTag * selectedTag;
@@ -379,7 +379,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 -(void)restartApplication
 {
     
-    //what? restart? This just means that we are successfully subscribed to the app. Taras.
+    //what? restart? This just means that we are successfully subscribed to the app/purchased some item. Taras.
     
 #ifdef RUE
     //make all paid (except individually paid) revisions free
@@ -457,6 +457,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 - (void) initKiosk
 {
 	if (!currentApplication) return;
+    
+    [[MKStoreManager sharedManager] setDataSource:self];
     
     
     //load all revisions
@@ -646,7 +648,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     if (revision.issue)
     {
         
-        BOOL isIssuePaid = revision.issue.paid;
+        //BOOL isIssuePaid = revision.issue.paid;
+        
+        BOOL isIssuePaid = [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
         
 #warning Check here for individual payment
 
@@ -659,7 +663,11 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         }
         
         //REturn that PAID when we are already subscribed to whole magazine
-        if ([[InAppPurchases sharedInstance] isSubscribed]) {
+        
+        NSString * featureId = [[PCConfig subscriptions] lastObject];
+        BOOL subscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
+        
+        if (subscriptionActive) {
             return YES;
         }
         
@@ -912,31 +920,44 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 -(void) purchaseRevisionWithIndex:(NSInteger)index
 {
     PCRevision *revision = [self revisionWithIndex:index];
-	if (revision)
-	{
-		NSLog(@"doPay");
-		
-		NSLog(@"productId: %@", revision.issue.productIdentifier);
-
-		if([[InAppPurchases sharedInstance] canMakePurchases])
-		{
-			
-			[[InAppPurchases sharedInstance] purchaseForProductId:revision.issue.productIdentifier];
-			
-		}
-		else
-		{
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"ALERT_TITLE_CANT_MAKE_PURCHASE"
-                                                                                                           value:@"You can't make the purchase"]
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                           value:@"OK"]
-                                                  otherButtonTitles:nil];
-			[alert show];
-		}
-
-	}
+    
+//	if (revision)
+//	{
+//		NSLog(@"doPay");
+//		
+//		NSLog(@"productId: %@", revision.issue.productIdentifier);
+//
+//		if([[InAppPurchases sharedInstance] canMakePurchases])
+//		{
+//			
+//			[[InAppPurchases sharedInstance] purchaseForProductId:revision.issue.productIdentifier];
+//			
+//		}
+//		else
+//		{
+//			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"ALERT_TITLE_CANT_MAKE_PURCHASE"
+//                                                                                                           value:@"You can't make the purchase"]
+//                                                            message:nil
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+//                                                                                                           value:@"OK"]
+//                                                  otherButtonTitles:nil];
+//			[alert show];
+//		}
+//
+//	}
+    
+    [[MKStoreManager sharedManager] buyFeature:revision.issue.productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+        NSLog(@"Successfully bought product with id %@!", revision.issue.productIdentifier);
+        
+        revision.issue.paid = YES;
+        
+        [[self shelfView] reload];
+    } onCancelled:^{
+        NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
+    }];
+    
+    
 	
 }
 
@@ -1142,7 +1163,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
-        
+        [[self shelfView] reload];
     } onError:^(NSError *error) {
         
     }];
@@ -1165,6 +1186,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
             
             self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+            [[self shelfView] reload];
             NSLog(@"Purchase completed.");
         } onCancelled:^{
             NSLog(@"Purchase cancelled.");
@@ -1410,6 +1432,24 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     {
         [self presentModalViewController:tweetController animated:YES];
     }
+}
+
+
+#pragma mark - MKStoreManagerDataSource
+
+- (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager {
+    
+    NSMutableArray * allIdentifiers = [NSMutableArray new];
+    
+    NSArray * issues = [self getApplication].issues;
+    
+    for (PCIssue * issue in issues) {
+        if (issue.productIdentifier.length > 0) {
+            [allIdentifiers addObject:issue.productIdentifier];
+        }
+    }
+    
+    return [NSArray arrayWithArray:allIdentifiers];
 }
 
 

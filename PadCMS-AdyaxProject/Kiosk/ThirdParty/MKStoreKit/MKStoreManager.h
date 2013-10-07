@@ -49,6 +49,16 @@
 #define kSubscriptionsPurchasedNotification @"MKStoreKitSubscriptionsPurchased"
 #define kSubscriptionsInvalidNotification @"MKStoreKitSubscriptionsInvalid"
 
+@class MKStoreManager;
+
+
+@protocol MKStoreManagerDataSource <NSObject>
+
+- (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager;
+
+@end
+
+
 @interface MKStoreManager : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 // These are the methods you will be using in your app
@@ -59,6 +69,7 @@
 
 @property (nonatomic, strong) NSMutableArray *purchasableObjects;
 @property (nonatomic, strong) NSMutableDictionary *subscriptionProducts;
+@property (nonatomic, weak) id<MKStoreManagerDataSource> dataSource;
 #ifdef __IPHONE_6_0
 @property (strong, nonatomic) NSMutableArray *hostedContents;
 @property (nonatomic, copy) void (^hostedContentDownloadStatusChangedHandler)(NSArray* hostedContent);

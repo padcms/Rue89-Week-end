@@ -106,6 +106,10 @@ const CGFloat kDetailsHeight = 80.0f;
 
 -(void)initButtons
 {
+    
+    NSString * downloadButtonTitle = [PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
+                                                                            value:@"DOWNLOAD"];
+    
 	downloadButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
                                                                                   value:@"DOWNLOAD"]];
 	
@@ -293,7 +297,7 @@ const CGFloat kDetailsHeight = 80.0f;
         }
         else
         {
-            if(self.revision.issue.paid == NO/*[self.dataSource isRevisionPaidWithIndex:self.revisionIndex]*/)
+            if([self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == NO)
             {
                 [self setElementsState:ElementsStatePay];
             }
