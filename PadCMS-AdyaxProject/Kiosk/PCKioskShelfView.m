@@ -12,7 +12,7 @@
 #import "PCKioskShelfSettings.h"
 #import "PCKioskSubHeaderView.h"
 #import "PCKioskShelfViewCell.h"
-
+#import "PCTMainViewController.h"
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
@@ -91,11 +91,6 @@
      {
          [self layoutPageControl];
      }];
-    
-    
-    
-    
-    
 }
 
 
@@ -334,8 +329,8 @@
         [cell setFrame:[self cellFrameForIndex:counter]];
         
         //and properties
-        cell.revisionIndex = i;
         cell.revision = [self.revisions objectAtIndex:i];
+        cell.revisionIndex = [(PCTMainViewController*)self.dataSource indexForRevision:cell.revision];
         
         //reloading cell data
         [cell update];

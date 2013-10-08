@@ -12,4 +12,6 @@
 
 - (NSDate*) dateOfDownload;
 
+- (BOOL) isContentDownloading;
+
 @end

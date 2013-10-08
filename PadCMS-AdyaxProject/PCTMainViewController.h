@@ -85,4 +85,6 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 
 - (NSArray*) allDownloadedRevisions;
 
+- (NSUInteger) indexForRevision:(PCRevision*)revision;
+
 @end

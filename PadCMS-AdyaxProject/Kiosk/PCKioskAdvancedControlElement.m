@@ -23,6 +23,8 @@
 #import "PCKioskAdvancedControlElementDateLabel.h"
 #import "PCIssue.h"
 
+#import "PCRevision+DataOfDownload.h"
+
 typedef enum {
     ElementsStateNotDownloaded,
     ElementsStateInfoIsDownloading,
@@ -267,14 +269,15 @@ typedef enum {
         previewAvailable = [self.dataSource previewAvailableForRevisionWithIndex:self.revisionIndex];
     }
     
-    if ([self.dataSource isRevisionDownloadedWithIndex:self.revisionIndex])
+    if (self.revision.isDownloaded)
     {
         if (self.revision.state == PCRevisionStateArchived)
         {
             [self setElementsState:ElementsStateArchived];
         }
-        else if(_isContentDownloading)
+        else if(self.revision.isContentDownloading)
         {
+            self.downloadInProgress = YES;
             [self setElementsState:ElementsStateContentDownloading];
         }
         else
@@ -301,6 +304,7 @@ typedef enum {
             }
         }
     }
+    self.downloadInProgress = NO;
 }
 
 - (void) setElementsState:(ElementsState)state
@@ -372,6 +376,7 @@ typedef enum {
 
 - (void) update
 {
+    self.downloadInProgress = NO;
    //NSDate *methodStart = [NSDate date];
     //title
     self.titleLabel.text = self.revision.issue.title;
@@ -411,6 +416,14 @@ typedef enum {
 }
 
 #pragma mark - Buttons actions
+
+- (void) downloadButtonTapped
+{
+    if ([self.delegate respondsToSelector:@selector(downloadButtonTappedWithRevisionIndex:)])
+    {
+        [self.delegate downloadButtonTappedWithRevisionIndex:self.revisionIndex];
+    }
+}
 
 - (void) payButtonTapped
 {

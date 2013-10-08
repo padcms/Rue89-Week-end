@@ -14,7 +14,7 @@
     int _startOperationsCount;
     NSTimer* _progressTimer;
 }
-
+@property (nonatomic, assign) BOOL isDownloadComplete;
 @property (nonatomic, strong) NSMutableArray* progressBlocks;
 
 @end
@@ -35,6 +35,7 @@ static NSMutableDictionary* active_dovnloaders;
     if(manager == nil)
     {
         manager = [[self alloc]init];
+        manager.isDownloadComplete = NO;
         manager.revision = revision;
         [active_dovnloaders setObject:manager forKey:[NSString stringWithFormat:@"%i", revision.identifier]];
     }
@@ -47,6 +48,20 @@ static NSMutableDictionary* active_dovnloaders;
     [manager.progressBlocks addObject:[progressBlock copy]];
     
     [manager startDownloading];
+}
+
++ (BOOL) isRevisionContentDownloading:(PCRevision*)revision
+{
+    RueDownloadManager* manager = [active_dovnloaders valueForKey:[NSString stringWithFormat:@"%i", revision.identifier]];
+    
+    if(manager && manager.isDownloadComplete == NO)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 - (void) startDownloading
@@ -123,6 +138,11 @@ static NSMutableDictionary* active_dovnloaders;
 - (void) startProgressBlocksWithProgress:(float)progress
 {
     NSLog(@"Revision : %i downloaded : %.2f%%", self.revision.identifier, progress * 100);
+    
+    if(progress == 1)
+    {
+        _isDownloadComplete = YES;
+    }
     
     for (RueDownloadManagerProgressBlock block in self.progressBlocks)
     {

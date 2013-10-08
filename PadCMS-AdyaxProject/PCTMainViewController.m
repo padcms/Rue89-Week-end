@@ -597,6 +597,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
 {
+    return [self.allRevisions objectAtIndex:index];
     NSArray * sortedRevisions = [self allSortedRevisions];
     
     if (index>=0 && index<[sortedRevisions count])
@@ -619,6 +620,24 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 #pragma mark - PCKioskDataSourceProtocol
+
+- (NSUInteger) indexForRevision:(PCRevision*)revision
+{
+    return [self.allRevisions indexOfObject:revision];
+}
+
+- (BOOL)isRevisionDownloadedWithIndex:(NSInteger)index
+{
+    PCRevision *revision = [self revisionWithIndex:index];
+    
+    if (revision)
+    {
+        return  [revision isDownloaded];
+    }
+    
+    return NO;
+}
+
 
 - (NSArray*) allDownloadedRevisions
 {
@@ -692,18 +711,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 -(NSString*) revisionStateWithIndex:(NSInteger) index
 {
     return @"";
-}
-
-- (BOOL)isRevisionDownloadedWithIndex:(NSInteger)index
-{
-    PCRevision *revision = [self revisionWithIndex:index];
-    
-    if (revision)
-    {
-        return  [revision isDownloaded];
-    }
-    
-    return NO;
 }
 
  -(BOOL)isRevisionPaidWithIndex:(NSInteger)index
@@ -866,7 +873,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) readRevisionWithIndex:(NSInteger)index
 {
-    PCRevision *currentRevision = [self revisionWithIndex:index];
+    PCRevision *currentRevision = [self.allRevisions objectAtIndex:index];//[self revisionWithIndex:index];
 
     if (currentRevision)
     {
@@ -946,7 +953,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) downloadRevisionWithIndex:(NSInteger)index
 {
-    PCRevision *revision = [self revisionWithIndex:index];
+    PCRevision *revision = [self.allRevisions objectAtIndex:index];//[self revisionWithIndex:index];
     
     if(revision)
     {
@@ -1100,8 +1107,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     PCRevision *revision = [self revisionWithIndex:[index integerValue]];
     
-    [(PCRueKioskViewController*)self.kioskViewController downloadingContentStartedWithRevisionIndex:[index integerValue]];
-    
     [RueDownloadManager startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
         
         if(progress < 1)
@@ -1117,6 +1122,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         }
         
     }];
+    
+    [(PCRueKioskViewController*)self.kioskViewController downloadingContentStartedWithRevisionIndex:[index integerValue]];
     
 }
 

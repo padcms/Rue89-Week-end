@@ -8,6 +8,8 @@
 
 #import "PCRevision+DataOfDownload.h"
 
+#import "RueDownloadManager.h"
+
 @implementation PCRevision (DataOfDownload)
 
 - (NSDate*) dateOfDownload
@@ -36,6 +38,11 @@
     {
         return nil;
     }
+}
+
+- (BOOL) isContentDownloading
+{
+    return [RueDownloadManager isRevisionContentDownloading:self];
 }
 
 @end
