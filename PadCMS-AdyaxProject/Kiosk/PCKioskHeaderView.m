@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIButton *contactUsButton;
 @property (strong, nonatomic) IBOutlet UIButton *restorePurchasesButton;
-@property (strong, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
+
 
 @end
 

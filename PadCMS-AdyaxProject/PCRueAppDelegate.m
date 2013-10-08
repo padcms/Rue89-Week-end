@@ -9,6 +9,7 @@
 #import "PCRueAppDelegate.h"
 #import "TestFlight.h"
 #import "PCRueNavigationController.h"
+#import "MKStoreManager.h"
 
 @implementation PCRueAppDelegate
 
@@ -18,6 +19,8 @@
     [super initTrackers];
     
     [TestFlight takeOff:@"e22c706b-4282-4628-8dd4-9f6624fd2f16"];
+    
+    [MKStoreManager sharedManager];
 }
 
 - (void)showMainViewController {

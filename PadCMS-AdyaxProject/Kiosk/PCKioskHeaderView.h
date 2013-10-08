@@ -25,4 +25,6 @@
 
 @property (nonatomic, weak) id<PCKioskHeaderViewDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
+
 @end

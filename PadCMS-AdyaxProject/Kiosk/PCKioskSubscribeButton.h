@@ -20,5 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *button;
 @property (strong, nonatomic) IBOutlet UILabel *topLabel;
 @property (strong, nonatomic) IBOutlet UILabel *bottomLabel;
+@property (retain, nonatomic) IBOutlet UILabel *subscribedLabel;
+
+@property (nonatomic) BOOL isSubscribedState;
 
 @end
