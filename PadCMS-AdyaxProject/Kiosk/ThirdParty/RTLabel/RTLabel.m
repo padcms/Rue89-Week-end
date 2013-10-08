@@ -187,6 +187,11 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	[self render];
 }
 
+- (void) applyDefaultParagraphStyleToText:(CFMutableAttributedStringRef)text
+{
+    [self applyParagraphStyleToText:text attributes:nil atPosition:0 withLength:CFAttributedStringGetLength(text)];
+}
+
 - (void)render
 {
 	if (self.currentSelectedButtonComponentIndex==-1)
@@ -225,7 +230,9 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	
 	CFMutableDictionaryRef styleDict = ( CFDictionaryCreateMutable( (0), 0, (0), (0) ) );
 	
-	[self applyParagraphStyleToText:attrString attributes:nil atPosition:0 withLength:CFAttributedStringGetLength(attrString)];
+    
+    [self applyDefaultParagraphStyleToText:attrString];
+	//[self applyParagraphStyleToText:attrString attributes:nil atPosition:0 withLength:CFAttributedStringGetLength(attrString)];
 	
 	
 	CTFontRef thisFont = CTFontCreateWithName ((__bridge CFStringRef)[self.font fontName], [self.font pointSize], NULL); 

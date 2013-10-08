@@ -628,6 +628,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 - (PCRevision*) revisionWithIndex:(NSInteger)index
 {
     return [self.allRevisions objectAtIndex:index];
+    
     NSArray * sortedRevisions = [self allSortedRevisions];
     
     if (index>=0 && index<[sortedRevisions count])
@@ -915,7 +916,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) readRevisionWithIndex:(NSInteger)index
 {
-    PCRevision *currentRevision = [self.allRevisions objectAtIndex:index];//[self revisionWithIndex:index];
+    PCRevision *currentRevision = [self revisionWithIndex:index];
 
     if (currentRevision)
     {

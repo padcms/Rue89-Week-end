@@ -91,14 +91,14 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         
         _text = text;
         
-        if(_shouldResizeToFit)
-        {
+//        if(_shouldResizeToFit)
+//        {
             [self sizeToFit];
-        }
-        else
-        {
-            [self setNeedsDisplay];
-        }
+//        }
+//        else
+//        {
+//            [self setNeedsDisplay];
+//        }
     }
 }
 

@@ -69,7 +69,7 @@ const CGFloat kLabelPadding = 30.0f;
 - (void)initTitle
 {
     CGRect contentFrame = self.frame;
-    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 95)];
+    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 0)];//95)];
     [self.titleLabel setResizeToFitText:YES];
     self.titleLabel.text = @"No title";
     self.titleLabel.font = [UIFont fontWithName:PCFontInterstateLight size:26.5];
@@ -79,8 +79,8 @@ const CGFloat kLabelPadding = 30.0f;
     
     self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.2];
     
-    self.titleLabel.limitToNumberOfLines = YES;
-    [self.titleLabel setNumberOfLines:3];
+//    self.titleLabel.limitToNumberOfLines = YES;
+//    [self.titleLabel setNumberOfLines:3];
     
     
     [self addSubview:self.titleLabel];
@@ -90,13 +90,16 @@ const CGFloat kLabelPadding = 30.0f;
 {
     CGRect contentFrame = self.frame;
     
-    self.descriptionLabel = [[RTLabel alloc]initWithFrame:CGRectMake(kLabelPadding, 110, contentFrame.size.width - kLabelPadding*2, 40)];
+    self.descriptionLabel = [[RTLabelWithWordWrap alloc]initWithFrame:CGRectMake(kLabelPadding, 110, contentFrame.size.width - kLabelPadding*2, 40)];
     self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateLight size:15];
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
     self.descriptionLabel.textColor = UIColorFromRGB(0x969696);
     self.descriptionLabel.textAlignment = kCTCenterTextAlignment;
     
     self.descriptionLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
+    
+    
+    self.descriptionLabel.lineBreakMode = RTTextLineBreakModeTruncatingTail;
     
     [self addSubview:self.descriptionLabel];
 }

@@ -41,7 +41,7 @@
 
 - (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
     [label setNeedsDisplay];
-    
+    //NSLog(@"resizes with height : %f", label.frame.size.height);
 }
 
 @end

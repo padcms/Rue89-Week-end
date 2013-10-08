@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MTLabel.h"
-#import "RTLabel.h"
+#import "RTLabelWithWordWrap.h"
 
 @interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
 
