@@ -748,7 +748,13 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         
         //BOOL isIssuePaid = revision.issue.paid;
         
-        BOOL isIssuePaid = [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
+        BOOL isIssuePaid = NO;
+        if (revision.issue.productIdentifier.length < 1) {
+            isIssuePaid = YES;
+        } else {
+            isIssuePaid = [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
+        }
+        
         
 #warning Check here for individual payment
 
