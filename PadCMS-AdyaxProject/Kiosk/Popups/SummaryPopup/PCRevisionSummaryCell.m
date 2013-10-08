@@ -66,15 +66,23 @@
 
 const CGFloat kLabelPadding = 30.0f;
 
-- (void)initTitle {
+- (void)initTitle
+{
     CGRect contentFrame = self.frame;
-    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 1)];
+    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 95)];
     [self.titleLabel setResizeToFitText:YES];
     self.titleLabel.text = @"No title";
     self.titleLabel.font = [UIFont fontWithName:PCFontInterstateLight size:26.5];
     self.titleLabel.textAlignment = MTLabelTextAlignmentCenter;
     [self.titleLabel setCharacterSpacing:-1.15f];
     [self.titleLabel setFontColor:UIColorFromRGB(0x34495e)];
+    
+    self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.2];
+    
+    self.titleLabel.limitToNumberOfLines = YES;
+    [self.titleLabel setNumberOfLines:3];
+    
+    
     [self addSubview:self.titleLabel];
 }
 
@@ -82,12 +90,13 @@ const CGFloat kLabelPadding = 30.0f;
 {
     CGRect contentFrame = self.frame;
     
-    self.descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLabelPadding, 110, contentFrame.size.width - kLabelPadding*2, 40)];
+    self.descriptionLabel = [[RTLabel alloc]initWithFrame:CGRectMake(kLabelPadding, 110, contentFrame.size.width - kLabelPadding*2, 40)];
     self.descriptionLabel.font = [UIFont fontWithName:PCFontInterstateLight size:15];
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
     self.descriptionLabel.textColor = UIColorFromRGB(0x969696);
-    self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
-    self.descriptionLabel.numberOfLines = 2;
+    self.descriptionLabel.textAlignment = kCTCenterTextAlignment;
+    
+    self.descriptionLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
     
     [self addSubview:self.descriptionLabel];
 }
@@ -99,8 +108,8 @@ const CGFloat kLabelPadding = 30.0f;
 }
 
 - (void)layoutLabels {
-    self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 46);
-    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 110);
+    self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 51);
+    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 119);
 }
 
 - (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
@@ -130,6 +139,7 @@ const CGFloat kLabelPadding = 30.0f;
 
 - (void) setDescription:(NSString*)description
 {
+    description = [[@"<font kern=-0.5>" stringByAppendingString:description] stringByAppendingString:@"</font>"];
     self.descriptionLabel.text = description;
 }
 

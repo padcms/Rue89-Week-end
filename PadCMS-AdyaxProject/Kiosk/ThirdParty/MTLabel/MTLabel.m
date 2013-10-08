@@ -91,8 +91,14 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         
         _text = text;
         
-        [self sizeToFit];
-
+        if(_shouldResizeToFit)
+        {
+            [self sizeToFit];
+        }
+        else
+        {
+            [self setNeedsDisplay];
+        }
     }
 }
 
@@ -450,8 +456,8 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
         CTLineDraw(line, context);
                 
         //Check to see if our index didn't exceed the text, and if should limit to number of lines
-        if ((currentIndex + lineLength >= [_text length]) &&
-            !(_limitToNumberOfLines && count < _numberOfLines-1) )    {    
+        if ((currentIndex + lineLength >= [_text length]) && !(_limitToNumberOfLines && count < _numberOfLines-1) )
+        {
             shouldDrawAlong = NO;
             
         }
@@ -502,15 +508,15 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     
     CGContextSaveGState(context);
     
-    CGColorRef colorRef = CGColorCreate(CGColorSpaceCreateDeviceRGB(), CGColorGetComponents([_fontColor CGColor]));
+    //CGColorRef colorRef = CGColorCreate(CGColorSpaceCreateDeviceRGB(), CGColorGetComponents([_fontColor CGColor]));
     //CGContextSetShadowWithColor(context, CGSizeMake(self.shadowOffset, self.shadowOffset), 5, colorRef);
-    CGColorRelease(colorRef);
+    //CGColorRelease(colorRef);
 	
     [self drawTextInRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) inContext:context];
     
     
-    if (_shouldResizeToFit && self.frame.size.height < _textHeight) {
-        
+    if (_shouldResizeToFit && self.frame.size.height < _textHeight)
+    {
         [self setFrame:CGRectMake(self.frame.origin.x,
                                   self.frame.origin.y,
                                   self.frame.size.width,

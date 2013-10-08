@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MTLabel.h"
+#import "RTLabel.h"
 
 @interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
 
 @property (nonatomic, strong) MTLabel * titleLabel;
-@property (nonatomic, strong) UILabel * descriptionLabel;
+@property (nonatomic, strong) RTLabel * descriptionLabel;
 
 - (void)setNeedsDisplayHacked;
 

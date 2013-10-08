@@ -492,6 +492,10 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	CGFloat paragraphSpacingBefore = 0.0;
 	CTTextAlignment textAlignment = (CTTextAlignment)_textAlignment;
 	CTLineBreakMode lineBreakMode = (CTLineBreakMode)_lineBreakMode;
+//    if(self.plainText.length != position + length)
+//    {
+//        lineBreakMode = kCTLineBreakByWordWrapping;
+//    }
 	CGFloat lineSpacing = _lineSpacing;
 	
 	for (NSUInteger i=0; i<[[attributes allKeys] count]; i++)
@@ -594,6 +598,10 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	int textAlignment = _textAlignment;
 	int lineBreakMode = _lineBreakMode;
 	int lineSpacing = (int)_lineSpacing;
+//    if(self.plainText.length != position + length)
+//    {
+//        lineBreakMode = kCTLineBreakByWordWrapping;
+//    }
 
     textAlignment = kCTCenterTextAlignment;
 	
