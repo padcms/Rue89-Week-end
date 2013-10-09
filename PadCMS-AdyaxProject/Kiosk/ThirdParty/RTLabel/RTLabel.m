@@ -230,10 +230,7 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	
 	CFMutableDictionaryRef styleDict = ( CFDictionaryCreateMutable( (0), 0, (0), (0) ) );
 	
-    
-    [self applyDefaultParagraphStyleToText:attrString];
 	//[self applyParagraphStyleToText:attrString attributes:nil atPosition:0 withLength:CFAttributedStringGetLength(attrString)];
-	
 	
 	CTFontRef thisFont = CTFontCreateWithName ((__bridge CFStringRef)[self.font fontName], [self.font pointSize], NULL); 
 	CFAttributedStringSetAttribute(attrString, CFRangeMake(0, CFAttributedStringGetLength(attrString)), kCTFontAttributeName, thisFont);
@@ -328,6 +325,8 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
             [self applyStrikethroughtAttribute:attrString atPosition:component.position withLength:[component.text length]];
         }
 	}
+    
+    [self applyDefaultParagraphStyleToText:attrString];
     
     // Create the framesetter with the attributed string.
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrString);

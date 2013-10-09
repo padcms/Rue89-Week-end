@@ -148,7 +148,7 @@ const float kButtonsHeight = 60.0f;
         PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
         
         [cell setTitle:revision.issue.title];
-        [cell setDescription:revision.issue.excerpt];
+        [cell setDescription:revision.issue.shortIntro];
     }
 }
 

@@ -8,17 +8,149 @@
 
 #import "RTLabelWithWordWrap.h"
 
+@interface RTLabelWithWordWrap ()
+{
+    
+}
+@end
+
 @implementation RTLabelWithWordWrap
+
+- (void)setText:(NSString *)text
+{
+    [super setText:text];
+    if(self.shouldResizeHeightToFit)
+    {
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.optimumSize.height);
+    }
+}
+
 
 - (void) applyDefaultParagraphStyleToText:(CFMutableAttributedStringRef)text
 {
+//    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString(text);
+//    
+//    double width = self.frame.size.width;
+//    CFIndex lineStartIndex = 0;
+//    
+//    CFIndex lineLength = CTTypesetterSuggestLineBreak(typesetter, lineStartIndex, width);
+//    
+//    NSMutableDictionary* attributes = nil;
+//    
+//    attributes = [NSMutableDictionary dictionaryWithObject:@"wordwrap" forKey:@"linebreakmode"];
+//    
+//    [self applyParagraphStyleToText:text attributes:attributes atPosition:lineStartIndex withLength:lineLength];
+//    
+//    lineStartIndex = lineStartIndex + lineLength;
+//    
+//    lineLength = CFAttributedStringGetLength(text) - lineStartIndex;
+//    
+//    attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"truncatingtail", @"linebreakmode", nil];
+//    
+//    [self applyParagraphStyleToText:text attributes:attributes atPosition:lineStartIndex withLength:lineLength];
+//    
+//    NSLog(@"sel : %@", text);
+//    
+//    return;
+    
+    
+    
+    
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(text);
+    
+    //CTFramesetterSuggestFrameSizeWithConstraints(<#CTFramesetterRef framesetter#>, <#CFRange stringRange#>, <#CFDictionaryRef frameAttributes#>, <#CGSize constraints#>, <#CFRange *fitRange#>)
+    
+	//CGSize constraint = CGSizeMake(self.frame.size.width, CGFLOAT_MAX);
+	//CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, [self.plainText length]), nil, constraint, nil);
 	
+    
+    int limitOfLines = self.linesNumber;
+    BOOL needResize = self.shouldResizeHeightToFit;
+    
+    BOOL needTruncation = NO;
+    
+    CFIndex textLength = CFAttributedStringGetLength(text);
+    
+    if(limitOfLines)
+    {
+        if(needResize)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    else
+    {
+        if(needResize)
+        {
+            [self applyParagraphStyleToText:text attributes:nil atPosition:0 withLength:textLength];
+        }
+        else
+        {
+            CGMutablePathRef pathFromBounds = CGPathCreateMutable();
+            CGRect bounds = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+            CGPathAddRect(pathFromBounds, NULL, bounds);
+            
+            CTFrameRef frame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, textLength), pathFromBounds, NULL);
+            
+            needTruncation = CTFrameGetVisibleStringRange(frame).length < textLength;
+            
+            if(needTruncation)
+            {
+                CFArrayRef frameLines = CTFrameGetLines(frame);
+                for (CFIndex i = 0;  i< CFArrayGetCount(frameLines); i++)
+                {
+                    CTLineRef line = (CTLineRef)CFArrayGetValueAtIndex(frameLines, i);
+                    CFRange lineRange = CTLineGetStringRange(line);
+                    
+                    NSMutableDictionary* attributes = nil;
+                    int strPosition = lineRange.location;
+                    int strLength = lineRange.length;
+                    
+                    if(i == (CFArrayGetCount(frameLines) - 1))
+                    {
+                        attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"truncatingtail", @"linebreakmode", nil];
+                        int fullLength = CFAttributedStringGetLength(text);
+                        strLength = fullLength - strPosition;
+                    }
+                    else
+                    {
+                        attributes = [NSMutableDictionary dictionaryWithObject:@"wordwrap" forKey:@"linebreakmode"];
+                    }
+                    
+                    [self applyParagraphStyleToText:text attributes:attributes atPosition:strPosition withLength:strLength];
+                }
+            }
+            else
+            {
+                [self applyParagraphStyleToText:text attributes:nil atPosition:0 withLength:textLength];
+            }
+            
+            CFRelease(pathFromBounds);
+            CFRelease(frame);
+        }
+    }
+    
+    CFRelease(framesetter);
+    
+    //NSLog(@"limit : %i\nresize : %@\nneed truncation : %@\ntext : %@", limitOfLines, needResize?@"YES":@"NO", needTruncation?@"YES":@"NO", text);
+    
+    return;
+    
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGRect bounds = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
 	CGPathAddRect(path, NULL, bounds);
+    
+    CGMutablePathRef maxPath = CGPathCreateMutable();
+	CGRect max_bounds = CGRectMake(0.0, 0.0, self.frame.size.width, CGFLOAT_MAX);
+	CGPathAddRect(maxPath, NULL, max_bounds);
 	
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, 0), path, NULL);
+    
+    
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0, CFAttributedStringGetLength(text)), path, NULL);
 	
     CFArrayRef frameLines = CTFrameGetLines(frame);
     for (CFIndex i=0; i<CFArrayGetCount(frameLines); i++)
@@ -27,24 +159,30 @@
         CFRange lineRange = CTLineGetStringRange(line);
         
         NSMutableDictionary* attributes = nil;
+        int strPosition = lineRange.location;
+        int strLength = lineRange.length;
         
-        if(self.lineBreakMode == kCTLineBreakByTruncatingTail)
-        {
+//        if(self.lineBreakMode == kCTLineBreakByTruncatingTail)
+//        {
             if(i == (CFArrayGetCount(frameLines) - 1))
             {
-                attributes = [NSMutableDictionary dictionaryWithObject:@"truncatingtail" forKey:@"linebreakmode"];
+                attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"truncatingtail", @"linebreakmode", nil];
+                int fullLength = CFAttributedStringGetLength(text);
+                strLength = fullLength - strPosition;
             }
             else
             {
                 attributes = [NSMutableDictionary dictionaryWithObject:@"wordwrap" forKey:@"linebreakmode"];
             }
-        }
+//        }
         
-        [self applyParagraphStyleToText:text attributes:attributes atPosition:lineRange.location withLength:lineRange.length];
+        [self applyParagraphStyleToText:text attributes:attributes atPosition:strPosition withLength:strLength];
+        
     }
+//    NSLog(@"sel : %@", text);
 }
 
-- (void)renderStrikeThroughForFrame:(CTFrameRef)leftFrame context:(CGContextRef)context
+/*- (void)renderStrikeThroughForFrame:(CTFrameRef)leftFrame context:(CGContextRef)context
 {
  
     // get lines
@@ -59,11 +197,51 @@
     {
         
         CTLineRef startLine = (__bridge CTLineRef)(oneLine);
-        CTLineRef newLine = CTLineCreateTruncatedLine(startLine, 50, kCTLineTruncationEnd, NULL);
-        //startLine = newLine;
         
-        CFArrayRef runs = CTLineGetGlyphRuns(newLine);//(__bridge CTLineRef)oneLine);
-        CGRect lineBounds = CTLineGetImageBounds(newLine, context);//(__bridge CTLineRef)oneLine, context);
+        
+        if([(__bridge NSArray *)leftLines indexOfObject:oneLine] == [(__bridge NSArray *)leftLines count] - 1)
+        {
+        
+            CFStringRef string = (__bridge CFStringRef)self.plainText;
+            CFMutableAttributedStringRef attrString = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+            CFAttributedStringReplaceString (attrString, CFRangeMake(0, 0), string);
+            
+            CFRange effectiveRange;
+            CFDictionaryRef stringAttrs = CFAttributedStringGetAttributes(attrString, 0, &effectiveRange);
+            
+            CFAttributedStringRef truncationString = CFAttributedStringCreate(NULL, CFSTR("\u2026"), stringAttrs);
+            CTLineRef truncationToken = CTLineCreateWithAttributedString(truncationString);
+            CFRelease(truncationString);
+            
+            // now create the truncated line -- need to grab extra characters from the source string,
+            // or else the system will see the line as already fitting within the given width and
+            // will not truncate it.
+            
+            // range to cover everything from the start of lastLine to the end of the string
+            CFRange rng = CFRangeMake(CTLineGetStringRange(startLine).location, 0);
+            rng.length = CFAttributedStringGetLength(attrString) - rng.location;
+            
+            // substring with that range
+            CFAttributedStringRef longString = CFAttributedStringCreateWithSubstring(NULL, attrString, rng);
+            // line for that string
+            CTLineRef longLine = CTLineCreateWithAttributedString(longString);
+            CFRelease(longString);
+            
+            CTLineRef truncated = CTLineCreateTruncatedLine(longLine, self.frame.size.width - 50, kCTLineTruncationEnd, truncationToken);
+            CFRelease(longLine);
+            CFRelease(truncationToken);
+            
+            // if 'truncated' is NULL, then no truncation was required to fit it
+            if (truncated == NULL)
+                truncated = (CTLineRef)CFRetain(startLine);
+            
+            //CTLineRef newLine = CTLineCreateTruncatedLine(startLine, 50, kCTLineTruncationEnd, NULL);
+            startLine = truncated;
+            
+        }
+        
+        CFArrayRef runs = CTLineGetGlyphRuns(startLine);//(__bridge CTLineRef)oneLine);
+        CGRect lineBounds = CTLineGetImageBounds(startLine, context);//(__bridge CTLineRef)oneLine, context);
         
         lineBounds.origin.x += origins[lineIndex].x;
         lineBounds.origin.y += origins[lineIndex].y;
@@ -123,7 +301,7 @@
     
     // cleanup
     free(origins);
-}
+}*/
 
 - (void)applyParagraphStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(int)position withLength:(int)length
 {

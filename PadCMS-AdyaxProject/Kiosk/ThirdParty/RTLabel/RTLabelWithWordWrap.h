@@ -12,4 +12,7 @@
 
 @interface RTLabelWithWordWrap : RTLabel
 
+@property (nonatomic, assign) int linesNumber;
+@property (nonatomic, assign) BOOL shouldResizeHeightToFit;
+
 @end

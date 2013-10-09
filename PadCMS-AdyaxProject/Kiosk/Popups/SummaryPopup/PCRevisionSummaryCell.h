@@ -13,7 +13,7 @@
 @interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
 
 @property (nonatomic, strong) MTLabel * titleLabel;
-@property (nonatomic, strong) RTLabel * descriptionLabel;
+@property (nonatomic, strong) RTLabelWithWordWrap * descriptionLabel;
 
 - (void)setNeedsDisplayHacked;
 

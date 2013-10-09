@@ -7,14 +7,14 @@
 //
 
 #import "HelpSummaryPopupView.h"
-#import "MTLabel.h"
+#import "RTLabelWithWordWrap.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PCFonts.h"
 
-@interface HelpSummaryPopupView () <MTLabelDelegate>
+@interface HelpSummaryPopupView ()// <MTLabelDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton* infoButton;
-@property (nonatomic, strong) IBOutlet MTLabel* label;
+@property (nonatomic, strong) IBOutlet RTLabelWithWordWrap* label;
 
 @end
 
@@ -29,19 +29,11 @@
 {
     self.infoButton.layer.affineTransform = CGAffineTransformMakeScale(1.5, 1.5);
     
-    [self.label setResizeToFitText:YES];
-    self.label.text = @"LES ARTICLES\nDEJA TELECHARGES\nS'AFFICHENT\nDANS CE MENU";
+    self.label.text = @"<font kern=-0.5>LES ARTICLES\nDEJA TELECHARGES\nS'AFFICHENT\nDANS CE MENU</font>";
     self.label.font = [UIFont fontWithName:PCFontInterstateLight size:15];
-    self.label.textAlignment = MTLabelTextAlignmentCenter;
-    [self.label setCharacterSpacing:-0.5f];
-    [self.label setFontColor:UIColorFromRGB(0x969696)];
-    self.label.contentMode = UIViewContentModeRedraw;
-    self.label.delegate = self;
+    self.label.textAlignment = RTTextAlignmentCenter;
+    self.label.textColor = UIColorFromRGB(0x969696);
 }
 
-- (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
-    [label setNeedsDisplay];
-    //NSLog(@"resizes with height : %f", label.frame.size.height);
-}
 
 @end
