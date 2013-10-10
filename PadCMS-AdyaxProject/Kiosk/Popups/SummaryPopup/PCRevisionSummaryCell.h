@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTLabel.h"
 #import "RTLabelWithWordWrap.h"
 
-@interface PCRevisionSummaryCell : UIView <MTLabelDelegate>
+@interface PCRevisionSummaryCell : UIView
 
-@property (nonatomic, strong) MTLabel * titleLabel;
+@property (nonatomic, strong) RTLabelWithWordWrap * titleLabel;
 @property (nonatomic, strong) RTLabelWithWordWrap * descriptionLabel;
-
-- (void)setNeedsDisplayHacked;
 
 - (void) setTitle:(NSString*)title;
 - (void) setDescription:(NSString*)description;

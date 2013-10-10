@@ -69,24 +69,17 @@ const CGFloat kLabelPadding = 30.0f;
 - (void)initTitle
 {
     CGRect contentFrame = self.frame;
-    self.titleLabel = [[MTLabel alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 0)];//95)];
-    [self.titleLabel setResizeToFitText:YES];
+    
+    self.titleLabel = [[RTLabelWithWordWrap alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 95)];
     self.titleLabel.text = @"No title";
     self.titleLabel.font = [UIFont fontWithName:PCFontInterstateLight size:26.5];
-    self.titleLabel.textAlignment = MTLabelTextAlignmentCenter;
-    [self.titleLabel setCharacterSpacing:-1.15f];
-    [self.titleLabel setFontColor:UIColorFromRGB(0x34495e)];
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.textAlignment = kCTCenterTextAlignment;
+    self.titleLabel.kernValue = -1.15;
+    self.titleLabel.textColor = UIColorFromRGB(0x34495e);
     
-    self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.2];
-    
-//        self.titleLabel = [[RTLabelWithWordWrap alloc] initWithFrame:CGRectMake(kLabelPadding, 30, contentFrame.size.width - kLabelPadding*2, 95)];
-//        self.titleLabel.text = @"No title";
-//        self.titleLabel.font = [UIFont fontWithName:PCFontInterstateLight size:26.5];
-//        self.titleLabel.textAlignment = MTLabelTextAlignmentCenter;
-//        [self.titleLabel setCharacterSpacing:-1.15f];
-//        [self.titleLabel setFontColor:UIColorFromRGB(0x34495e)];
-//    
-//        self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.2];
+    self.titleLabel.shouldResizeHeightToFit = YES;
+    self.titleLabel.maximumLinesNumber = 3;
     
     [self addSubview:self.titleLabel];
 }
@@ -100,12 +93,10 @@ const CGFloat kLabelPadding = 30.0f;
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
     self.descriptionLabel.textColor = UIColorFromRGB(0x969696);
     self.descriptionLabel.textAlignment = kCTCenterTextAlignment;
-    
-    self.descriptionLabel.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
-    
+    self.descriptionLabel.kernValue = -0.5;
     
     self.descriptionLabel.shouldResizeHeightToFit = YES;
-    
+    self.descriptionLabel.maximumLinesNumber = 2;
     
     [self addSubview:self.descriptionLabel];
 }
@@ -119,10 +110,6 @@ const CGFloat kLabelPadding = 30.0f;
 - (void)layoutLabels {
     self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 51);
     self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 119);
-}
-
-- (void)label:(MTLabel *)label didChangeFrame:(CGRect)frame {
-    [label setNeedsDisplay];
 }
 
 - (void) setTitle:(NSString*)title
@@ -148,10 +135,6 @@ const CGFloat kLabelPadding = 30.0f;
 
 - (void) setDescription:(NSString*)description
 {
-    if(description)
-    {
-        description = [[@"<font kern=-0.5>" stringByAppendingString:description] stringByAppendingString:@"</font>"];
-    }
     self.descriptionLabel.text = description;
 }
 

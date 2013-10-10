@@ -112,6 +112,7 @@ typedef enum
 - (void)setText:(NSString *)text extractedTextStyle:(NSDictionary*)extractTextStyle __attribute__((deprecated));
 + (NSDictionary*)preExtractTextStyle:(NSString*)data __attribute__((deprecated));
 
-
+//For inheritance
+- (void)applyParagraphStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(int)position withLength:(int)length;
 
 @end
