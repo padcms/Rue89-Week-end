@@ -17,4 +17,7 @@
 - (void) showProgress;
 - (void) hideProgress;
 
+- (void) showPatience;
+- (void) hidePatience;
+
 @end

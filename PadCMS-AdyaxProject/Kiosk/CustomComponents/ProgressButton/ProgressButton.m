@@ -19,8 +19,6 @@
 
 @implementation ProgressButton
 
-static NSString* downloading_title_appendix = @"\u2026";
-
 + (ProgressButton*) progressButtonWithTitle:(NSString*)title
 {
     ProgressButton * button = [ProgressButton buttonWithType:UIButtonTypeCustom];
@@ -37,6 +35,8 @@ static NSString* downloading_title_appendix = @"\u2026";
     [button titleLabel].textColor = [UIColor whiteColor];
     [button sizeToFit];
     button.hidden = YES;
+    
+    [button setTitle:@"PATIENCE\u2026" forState:UIControlStateSelected];
     
     return button;
 }
@@ -74,7 +74,6 @@ static NSString* downloading_title_appendix = @"\u2026";
     {
         self.progressView.progress = 0;
         self.progressView.hidden = NO;
-        [self setTitle:[self.titleLabel.text stringByAppendingString:downloading_title_appendix] forState:UIControlStateNormal];
         [self setNeedsLayout];
     }
 }
@@ -84,9 +83,18 @@ static NSString* downloading_title_appendix = @"\u2026";
     if(self.progressView.hidden == NO)
     {
         self.progressView.hidden = YES;
-        [self setTitle:[self.titleLabel.text stringByReplacingOccurrencesOfString:downloading_title_appendix withString:@""] forState:UIControlStateNormal];
         [self setNeedsLayout];
     }
+}
+
+- (void) showPatience
+{
+    [self setSelected:YES];
+}
+
+- (void) hidePatience
+{
+    [self setSelected:NO];
 }
 
 @end

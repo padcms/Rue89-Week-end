@@ -112,7 +112,7 @@ typedef enum {
 -(void)initButtons
 {
     
-    NSString * downloadButtonTitle = @"PATIENCE";//[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
+    NSString * downloadButtonTitle = [PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
     
     downloadButton = [ProgressButton progressButtonWithTitle:downloadButtonTitle];
     [self addSubview:downloadButton];
@@ -319,6 +319,7 @@ typedef enum {
     downloadButton.hidden = cancelButton.hidden = readButton.hidden = downloadingInfoLabel.hidden = downloadingProgressView.hidden = deleteButton.hidden = previewButton.hidden = _archiveButton.hidden = payButton.hidden = _restoreButton.hidden = YES;
     downloadButton.enabled = YES;
     downloadButton.userInteractionEnabled = YES;
+    [(ProgressButton*)downloadButton hidePatience];
     [(ProgressButton*)downloadButton hideProgress];
     
     switch (state)
@@ -378,6 +379,7 @@ typedef enum {
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;
             [(ProgressButton*)downloadButton showProgress];
+            [(ProgressButton*)downloadButton showPatience];
             downloadButton.userInteractionEnabled = NO;
             
             break;
