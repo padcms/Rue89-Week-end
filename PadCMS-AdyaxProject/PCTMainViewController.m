@@ -1424,6 +1424,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
             if (revision)
             {
                 [revision deleteContent];
+                [revision deleteFromDownloadManager];
                 revision.state = PCRevisionStatePublished;
                 [ArchivingDataSource removeId:revision.identifier];
                 [self.kioskViewController updateRevisionWithIndex:index];

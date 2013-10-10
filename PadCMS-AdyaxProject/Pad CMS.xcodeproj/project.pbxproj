@@ -20,6 +20,8 @@
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
+		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
+		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
@@ -1613,6 +1615,10 @@
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
+		2D88C7351806D43F003CCF58 /* ProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressButton.h; sourceTree = "<group>"; };
+		2D88C7361806D43F003CCF58 /* ProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressButton.m; sourceTree = "<group>"; };
+		2D88C73A1806DD6B003CCF58 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
+		2D88C73B1806DD6B003CCF58 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
 		2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Block.m"; sourceTree = "<group>"; };
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
@@ -2390,6 +2396,17 @@
 			path = DataManagment;
 			sourceTree = "<group>";
 		};
+		2D88C7341806D426003CCF58 /* ProgressButton */ = {
+			isa = PBXGroup;
+			children = (
+				2D88C7351806D43F003CCF58 /* ProgressButton.h */,
+				2D88C7361806D43F003CCF58 /* ProgressButton.m */,
+				2D88C73A1806DD6B003CCF58 /* ProgressView.h */,
+				2D88C73B1806DD6B003CCF58 /* ProgressView.m */,
+			);
+			path = ProgressButton;
+			sourceTree = "<group>";
+		};
 		4D7B7361128B322B0066291A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2596,6 +2613,7 @@
 		57A4749417C5887E00745732 /* CustomComponents */ = {
 			isa = PBXGroup;
 			children = (
+				2D88C7341806D426003CCF58 /* ProgressButton */,
 				57B4434117D785D800FCFA87 /* Popup */,
 				5789895217CE090A00572BAC /* PageControl */,
 			);
@@ -4963,6 +4981,8 @@
 				2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
+				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
+				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

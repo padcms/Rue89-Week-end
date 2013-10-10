@@ -24,6 +24,7 @@
 #import "PCIssue.h"
 
 #import "PCRevision+DataOfDownload.h"
+#import "ProgressButton.h"
 
 typedef enum {
     ElementsStateNotDownloaded,
@@ -83,6 +84,8 @@ typedef enum {
     
     downloadingInfoLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     
+    downloadingProgressView.alpha = 0.6;
+    
 	//downloadingInfoLabel.frame = CGRectMake(downloadingProgressView.frame.origin.x,downloadingProgressView.frame.origin.y+downloadingProgressView.frame.size.height,downloadingProgressView.frame.size.width,30);
 }
 
@@ -101,6 +104,7 @@ typedef enum {
 	[button titleLabel].textColor = [UIColor whiteColor];
 	[button sizeToFit];
 	button.hidden = YES;
+    
     [self addSubview:button];
     return button;
 }
@@ -108,11 +112,10 @@ typedef enum {
 -(void)initButtons
 {
     
-    NSString * downloadButtonTitle = [PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
-                                                                            value:@"DOWNLOAD"];
+    NSString * downloadButtonTitle = @"PATIENCE";//[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
     
-	downloadButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD"
-                                                                                  value:@"DOWNLOAD"]];
+    downloadButton = [ProgressButton progressButtonWithTitle:downloadButtonTitle];
+    [self addSubview:downloadButton];
 	
 	readButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_READ"
                                                                               value:@"READ"]];
@@ -315,6 +318,8 @@ typedef enum {
 {
     downloadButton.hidden = cancelButton.hidden = readButton.hidden = downloadingInfoLabel.hidden = downloadingProgressView.hidden = deleteButton.hidden = previewButton.hidden = _archiveButton.hidden = payButton.hidden = _restoreButton.hidden = YES;
     downloadButton.enabled = YES;
+    downloadButton.userInteractionEnabled = YES;
+    [(ProgressButton*)downloadButton hideProgress];
     
     switch (state)
     {
@@ -372,9 +377,25 @@ typedef enum {
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;
-            downloadButton.enabled = NO;
+            [(ProgressButton*)downloadButton showProgress];
+            downloadButton.userInteractionEnabled = NO;
             
             break;
+    }
+}
+
+- (void) downloadProgressUpdatedWithProgress:(float)progress andRemainingTime:(NSString *)time
+{
+    self.downloadInProgress = YES; //not sure if it will not bring any bugs
+    downloadingProgressView.progress = progress;
+    
+    [(ProgressButton*)downloadButton setProgress:progress];
+    
+    if(time)
+    {
+        downloadingInfoLabel.text = [NSString stringWithFormat:@"%3.0f %% %@",progress*100, time];
+    } else {
+        downloadingInfoLabel.text = [NSString stringWithFormat:@"%3.0f %%", progress*100];
     }
 }
 

@@ -45,4 +45,9 @@
     return [RueDownloadManager isRevisionContentDownloading:self];
 }
 
+- (void) deleteFromDownloadManager
+{
+    [RueDownloadManager removeRevision:self];
+}
+
 @end

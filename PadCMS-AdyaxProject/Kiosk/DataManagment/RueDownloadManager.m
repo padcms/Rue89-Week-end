@@ -64,6 +64,11 @@ static NSMutableDictionary* active_dovnloaders;
     }
 }
 
++ (void) removeRevision:(PCRevision*)revision
+{
+    [active_dovnloaders removeObjectForKey:[NSString stringWithFormat:@"%i", revision.identifier]];
+}
+
 - (void) startDownloading
 {
     if(_progressTimer)
