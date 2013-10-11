@@ -84,7 +84,7 @@ typedef enum {
     
     downloadingInfoLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     
-    downloadingProgressView.alpha = 0.6;
+    downloadingProgressView.alpha = 0.0;
     
 	//downloadingInfoLabel.frame = CGRectMake(downloadingProgressView.frame.origin.x,downloadingProgressView.frame.origin.y+downloadingProgressView.frame.size.height,downloadingProgressView.frame.size.width,30);
 }
@@ -120,8 +120,10 @@ typedef enum {
 	readButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_READ"
                                                                               value:@"READ"]];
 	
-	cancelButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL"
-                                                                                value:@"CANCEL"]];
+//	cancelButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL" value:@"CANCEL"]];
+    cancelButton = [ProgressButton progressButtonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_CANCEL" value:@"CANCEL"]];
+    [self addSubview:cancelButton];
+    [(ProgressButton*)cancelButton showProgress];
 	
 	deleteButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DELETE"
                                                                                 value:@"DELETE"]];
@@ -392,6 +394,7 @@ typedef enum {
     downloadingProgressView.progress = progress;
     
     [(ProgressButton*)downloadButton setProgress:progress];
+    [(ProgressButton*)cancelButton setProgress:progress];
     
     if(time)
     {
