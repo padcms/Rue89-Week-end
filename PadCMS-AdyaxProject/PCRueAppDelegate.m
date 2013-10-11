@@ -10,6 +10,7 @@
 #import "TestFlight.h"
 #import "PCRueNavigationController.h"
 #import "MKStoreManager.h"
+#import "BoxCarController.h"
 
 @implementation PCRueAppDelegate
 
@@ -36,4 +37,58 @@
 
 #endif
 
+#pragma mark - Boxcar support
+
+- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [BoxCarController launchWithOptions:launchOptions];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void) applicationWillEnterForeground:(UIApplication *)application
+{
+    if([super respondsToSelector:@selector(applicationWillEnterForeground:)])
+    {
+        [super applicationWillEnterForeground:application];
+    }
+    [BoxCarController applicationDidEnterForeground];
+}
+
+- (void) applicationDidBecomeActive:(UIApplication *)application
+{
+    if([super respondsToSelector:@selector(applicationDidBecomeActive:)])
+    {
+        [super applicationDidBecomeActive:application];
+    }
+    [BoxCarController applicationDidBecomeActive];
+}
+
+- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    if([super respondsToSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:)])
+    {
+        [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    }
+    [BoxCarController applicationDidRegisterForNotificationWithToken:deviceToken];
+}
+
+- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    if([super respondsToSelector:@selector(application:didFailToRegisterForRemoteNotificationsWithError:)])
+    {
+        [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
+    }
+    [BoxCarController applicationDidFailToRegisterForRemoteNotificationsWithError:error];
+}
+
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if([super respondsToSelector:@selector(application:didReceiveRemoteNotification:)])
+    {
+        [super application:application didReceiveRemoteNotification:userInfo];
+    }
+    [BoxCarController application:application didReceiveRemoteNotification:userInfo];
+}
+
+#pragma mark -
 @end
