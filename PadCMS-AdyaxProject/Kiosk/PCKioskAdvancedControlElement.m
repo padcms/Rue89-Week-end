@@ -129,7 +129,7 @@ typedef enum {
                                                                                 value:@"DELETE"]];
 	
 	payButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_PAY"
-                                                                             value:@"PAY"]];
+                                                                             value:@"BUY"]];
     
     _archiveButton = [self buttonWithTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_ARCHIVE"
                                                                                    value:@"ARCHIVE"]];
@@ -357,6 +357,7 @@ typedef enum {
             }
             else
             {
+                payButton.hidden = NO;
                 [[NSNotificationCenter defaultCenter] addObserver:self
                                                          selector:@selector(productDataRecieved:)
                                                              name:kInAppPurchaseManagerProductsFetchedNotification

@@ -35,8 +35,15 @@
     //set the right one
     self.subscribeButton = [[[UINib nibWithNibName:@"PCKioskSubscribeButton" bundle:nil] instantiateWithOwner:nil options:nil] objectAtIndex:0];
     [self addSubview:self.subscribeButton];
-    //self.subscribeButton.frame = CGRectMake(0, 0, 143, 55);
+    
+    //blur fix
+    CGRect frame = self.subscribeButton.frame;
+    frame.size.width += 1;
+    frame.size.height += 1;
+    self.subscribeButton.frame = frame;
+    
     self.subscribeButton.center = CGPointMake(self.frame.size.width/2, 420);
+    
     [self.subscribeButton.button addTarget:self action:@selector(purchaseAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.subscribeButton.layer.shadowColor = [UIColor blackColor].CGColor;
