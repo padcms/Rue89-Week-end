@@ -14,4 +14,6 @@
 
 - (BOOL) isContentDownloading;
 
+- (void) deleteFromDownloadManager;
+
 @end

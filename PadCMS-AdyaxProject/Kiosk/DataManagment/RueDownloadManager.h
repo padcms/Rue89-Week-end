@@ -16,4 +16,6 @@ typedef BOOL(^RueDownloadManagerProgressBlock)(float progress);//return YES to c
 
 + (BOOL) isRevisionContentDownloading:(PCRevision*)revision;
 
++ (void) removeRevision:(PCRevision*)revision;
+
 @end

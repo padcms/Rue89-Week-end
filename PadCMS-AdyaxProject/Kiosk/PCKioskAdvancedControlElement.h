@@ -35,6 +35,8 @@
 - (void) downloadContentStarted;
 - (void) downloadContentFinished;
 
+- (void) hideDateLabel;
+
 @end
 
 
