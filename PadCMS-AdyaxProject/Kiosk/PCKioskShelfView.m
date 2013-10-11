@@ -242,48 +242,6 @@
 
 - (void) createCells
 {
-    
-//    if (!cells) {
-//        cells = [[NSMutableArray alloc] initWithCapacity:_numberOfRevisionsPerPage*2];
-//        
-//        for (int i = 0; i < _numberOfRevisionsPerPage*2;i++) {
-//            //[cells addObject:[NSNull null]];
-//            
-//            //if ([cell isEqual:[NSNull null]]) {
-//            CGRect cellFrame = [self cellFrameForIndex:i];
-//            
-//                PCKioskAdvancedControlElement        *cell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
-//                
-//                //setting delegates
-//                cell.dataSource = self.dataSource;
-//                cell.delegate = self;
-//                cell.heightDelegate = self;
-//                
-//                //allocation UI elements
-//                [cell load];
-//                
-//                [cells addObject:cell];
-//            //}
-//        }
-//    }
-//    
-//    
-//    /////////calculating all the stuff
-//    self.totalNumberOfRevisions =  [self.revisions count];
-//    
-//    if (self.pageControl.currentPage > self.pageControl.pagesCount) {
-//        self.pageControl.currentPage = 1;
-//    }
-//    
-//    NSInteger numberOfRevisions = _numberOfRevisionsPerPage;
-//    if ((self.pageControl.currentPage == self.pageControl.pagesCount) && (_totalNumberOfRevisions % numberOfRevisions != 0)) {
-//        numberOfRevisions = _totalNumberOfRevisions % _numberOfRevisionsPerPage;
-//    }
-//    
-//    if (_totalNumberOfRevisions == 0) {
-//        numberOfRevisions = 0;
-//    }
-    
     NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
     
     //hardcoded pagination size
@@ -305,26 +263,6 @@
         
         PCKioskAdvancedControlElement        *cell = [cells objectAtIndex:counter];
         
-//        if ([cell isEqual:[NSNull null]]) {
-//            CGRect cellFrame;
-//            cellFrame.origin.x = KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT;
-//            cellFrame.origin.y = (counter * (KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN)) + KIOSK_ADVANCED_SHELF_MARGIN_TOP;
-//            cellFrame.size.width = self.bounds.size.width - KIOSK_ADVANCED_SHELF_COLUMN_MARGIN_LEFT*2;
-//            cellFrame.size.height = KIOSK_ADVANCED_SHELF_ROW_HEIGHT;
-//            
-//            cell = (PCKioskAdvancedControlElement *)[self newCellWithFrame:cellFrame];
-//            
-//            //setting delegates
-//            cell.dataSource = self.dataSource;
-//            cell.delegate = self;
-//            cell.heightDelegate = self;
-//            
-//            //allocation UI elements
-//            [cell load];
-//            
-//            [cells replaceObjectAtIndex:counter withObject:cell];
-//        }
-        
         [cell showDescription:NO animated:NO notifyDelegate:NO];
         [cell setFrame:[self cellFrameForIndex:counter]];
         
@@ -335,6 +273,18 @@
         //reloading cell data
         [cell update];
         
+        if(counter > 0)
+        {
+            PCKioskAdvancedControlElement *prevCell = [cells objectAtIndex:counter - 1];
+            NSDate* prevDate = prevCell.revision.createDate;
+            NSDate* newDate = cell.revision.createDate;
+            
+            if([newDate compare:prevDate] == NSOrderedSame)
+            {
+                [cell hideDateLabel];
+            }
+            
+        }
 
         if (!cell.superview) {
             ////cell.alpha = 0.0f;

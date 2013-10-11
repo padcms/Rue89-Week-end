@@ -418,6 +418,7 @@ typedef enum {
     //date
     NSDate * date = self.revision.createDate;
     self.dateLabel.date = date;
+    self.dateLabel.hidden = NO;
     
     //category
     NSString * category = self.revision.issue.category;[self.dataSource issueCategoryWithIndex:self.revisionIndex];
@@ -443,6 +444,11 @@ typedef enum {
     //if (executionTime > 0.05) {
          //NSLog(@"UPDATE executionTime = %f", executionTime);
     //}
+}
+
+- (void) hideDateLabel
+{
+    self.dateLabel.hidden = YES;
 }
 
 #pragma mark - Buttons actions
