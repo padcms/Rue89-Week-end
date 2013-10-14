@@ -10,6 +10,8 @@
 
 @interface BoxCarController : NSObject
 
++ (void) registerForNotifications;
+
 //AppDelegate events
 + (void) launchWithOptions:(NSDictionary*)launchOptions;
 + (void) applicationDidEnterForeground;

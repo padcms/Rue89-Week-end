@@ -9,7 +9,7 @@
 #import "BoxCarController.h"
 #import <Boxcar/Boxcar.h>
 
-#define SANDBOX
+#define SANDBOX //Commit this line for thr release
 
 @implementation BoxCarController
 
@@ -55,13 +55,16 @@ static NSString* PUSH_MODE;
     [[Boxcar sharedInstance] trackNotification:remoteNotif];
     
     [[Boxcar sharedInstance] cleanNotificationsAndBadge];
-    
-    //[[Boxcar sharedInstance] registerDevice];
-    
+        
     if(remoteNotif)
     {
         [self wasLaunchedWithNotification:remoteNotif];
     }
+}
+
++ (void) registerForNotifications
+{
+    [[Boxcar sharedInstance] registerDevice];
 }
 
 + (void) wasLaunchedWithNotification:(NSDictionary*)notificationUserInfo
@@ -110,6 +113,7 @@ static NSString* PUSH_MODE;
 {
     [[Boxcar sharedInstance] trackNotification:userInfo forApplication:application];
     [[Boxcar sharedInstance] cleanNotificationsAndBadge];
+    [self didReceiveNotification:userInfo];
 }
 
 #pragma mark -

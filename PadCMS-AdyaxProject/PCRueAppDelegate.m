@@ -41,8 +41,9 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    BOOL handeled = [super application:application didFinishLaunchingWithOptions:launchOptions];
     [BoxCarController launchWithOptions:launchOptions];
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    return handeled;
 }
 
 - (void) applicationWillEnterForeground:(UIApplication *)application
