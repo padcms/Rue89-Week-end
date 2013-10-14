@@ -12,7 +12,7 @@
 
 #import "RTLabelWithWordWrap.h"
 
-@interface PCKioskIntroPopupView()
+@interface PCKioskIntroPopupView() <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PCKioskSubscribeButton * subscribeButton;
 @property (nonatomic, strong) RTLabelWithWordWrap* labelAfterSubscriptionButton;
@@ -35,6 +35,11 @@
     self.descriptionLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec dui ligula. Cras lacus enim, condimentum et massa ac, iaculis tincidunt tortor. Ut velit neque, rutrum at nunc vel, vehicula tempus velit. Cras a orci sapien. Sed nibh magna, bibendum at facilisis eget, accumsan vitae neque.\n\nAenean vehicula, magna in elementum suscipit, augue risus dapibus eros, sit amet elementum enim sem in massa. In hac habitasse platea dictumst.Integer sem nibh, imperdiet ac sapien at, venenatis eleifend felis. Nulla commodo libero eget libero iaculis, et dignissim quam auctor. Vestibulum mauris neque, consectetur at mi ut, ornare fermentum nunc.\n\nVestibulum semper feugiat ligula et suscipit. Curabitur egestas commodo augue, non lobortis eros sagittis eget.";
     
     self.labelAfterSubscriptionButton.text = @"Je suis déjà qbonné ou je ux d'qbord voir à auoi something else wrote here but i do not known what.";
+    
+    UIButton* aboveLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [aboveLabelButton addTarget:self action:@selector(tapLabel:) forControlEvents:UIControlEventTouchUpInside];
+    aboveLabelButton.frame = self.labelAfterSubscriptionButton.frame;
+    [self addSubview:aboveLabelButton];
 }
 
 - (void) initAfterSubscriptionLabel
@@ -48,6 +53,16 @@
     self.labelAfterSubscriptionButton.textColor = UIColorFromRGB(0x34495e);
     self.labelAfterSubscriptionButton.textAlignment = RTTextAlignmentCenter;
     [self addSubview:self.labelAfterSubscriptionButton];
+}
+
+- (void)tapLabel:(UIButton *)button
+{
+    button.userInteractionEnabled = NO;
+    self.closeButton.enabled = NO;
+    if (self.isShown)
+    {
+        [self hide];
+    }
 }
 
 - (void)initSubscribeButton {
