@@ -20,6 +20,7 @@
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
+		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
@@ -1618,6 +1619,8 @@
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
+		2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
+		2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
 		2D88C7351806D43F003CCF58 /* ProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressButton.h; sourceTree = "<group>"; };
 		2D88C7361806D43F003CCF58 /* ProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressButton.m; sourceTree = "<group>"; };
 		2D88C73A1806DD6B003CCF58 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
@@ -2347,6 +2350,8 @@
 				572B490717EB480200C02D42 /* PCRueNavigationController.m */,
 				2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */,
 				2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */,
+				2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */,
+				2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -5005,6 +5010,7 @@
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
+				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
