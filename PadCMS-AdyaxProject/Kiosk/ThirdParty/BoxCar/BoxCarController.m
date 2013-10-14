@@ -9,7 +9,7 @@
 #import "BoxCarController.h"
 #import <Boxcar/Boxcar.h>
 
-#define SANDBOX //Commit this line for thr release
+#define SANDBOX //Comment this line for thr release
 
 @implementation BoxCarController
 
@@ -36,6 +36,7 @@ static NSString* PUSH_MODE;
 
 + (void) launchWithOptions:(NSDictionary*)launchOptions
 {
+    return;
     NSDictionary *boxcarOptions = @{kBXC_CLIENT_KEY : CLIENT_KEY,
                                     kBXC_CLIENT_SECRET : CLIENT_SECRET,
                                     kBXC_API_URL : API_URL,
