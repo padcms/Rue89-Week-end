@@ -269,7 +269,7 @@
 
 - (void) scrollingTimerTick:(NSTimer*)timer
 {
-    static const float speedPicsPerSec = 500;
+    static const float speedPicsPerSec = 300;
     
     BOOL directionIsLeft = [timer.userInfo[@"isDirectionLeft"] boolValue];
     BOOL shouldContinue = (directionIsLeft ? _rightArrowButton.isHighlighted : _leftArrowButton.isHighlighted);
