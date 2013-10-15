@@ -12,7 +12,7 @@
 
 #import "RTLabelWithWordWrap.h"
 
-@interface PCKioskIntroPopupView() <UIGestureRecognizerDelegate>
+@interface PCKioskIntroPopupView()
 
 @property (nonatomic, strong) PCKioskSubscribeButton * subscribeButton;
 @property (nonatomic, strong) RTLabelWithWordWrap* labelAfterSubscriptionButton;
