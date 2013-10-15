@@ -147,8 +147,23 @@ const float kButtonsHeight = 60.0f;
         //PCTocItem * tocItem = self.tocItems[indexPath.row];
         PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
         
-        [cell setTitle:revision.issue.title];
-        [cell setDescription:revision.issue.shortIntro];
+        if(revision.issue.titleShort && [revision.issue.titleShort isKindOfClass:[NSString class]] && revision.issue.titleShort.length)
+        {
+            [cell setTitle:revision.issue.titleShort];
+        }
+        else
+        {
+            [cell setTitle:revision.issue.title];
+        }
+        
+        if(revision.issue.shortIntro && [revision.issue.shortIntro isKindOfClass:[NSString class]] && revision.issue.shortIntro.length)
+        {
+            [cell setDescription:revision.issue.shortIntro];
+        }
+        else
+        {
+            [cell setDescription:revision.issue.excerpt];
+        }
     }
 }
 

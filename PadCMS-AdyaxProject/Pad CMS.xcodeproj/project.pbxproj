@@ -20,8 +20,12 @@
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
+		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
+		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
+		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
+		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
@@ -1615,10 +1619,16 @@
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
+		2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
+		2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
 		2D88C7351806D43F003CCF58 /* ProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressButton.h; sourceTree = "<group>"; };
 		2D88C7361806D43F003CCF58 /* ProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressButton.m; sourceTree = "<group>"; };
 		2D88C73A1806DD6B003CCF58 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		2D88C73B1806DD6B003CCF58 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
+		2D926A9C18082646003B2FA8 /* BoxCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCarController.h; sourceTree = "<group>"; };
+		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
+		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
 		2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Block.m"; sourceTree = "<group>"; };
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
@@ -2171,6 +2181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */,
 				57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */,
 				57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */,
 				57A4710817BB663100745732 /* CoreText.framework in Frameworks */,
@@ -2196,6 +2207,7 @@
 				C5CFF3741574CE5300F2235B /* OpenAL.framework in Frameworks */,
 				C5CFF3751574CE5300F2235B /* OpenGLES.framework in Frameworks */,
 				57B4431917D737EC00FCFA87 /* libTestFlight.a in Frameworks */,
+				2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2338,6 +2350,8 @@
 				572B490717EB480200C02D42 /* PCRueNavigationController.m */,
 				2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */,
 				2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */,
+				2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */,
+				2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -2356,6 +2370,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D926AA2180853CE003B2FA8 /* Boxcar.framework */,
+				2D926A9F180826FF003B2FA8 /* AdSupport.framework */,
 				57FE3F3A17F0332000705EF0 /* Security.framework */,
 				57BBD81617E1F7F4001F7653 /* SDWebImage.framework */,
 				57A4710717BB663100745732 /* CoreText.framework */,
@@ -2405,6 +2421,15 @@
 				2D88C73B1806DD6B003CCF58 /* ProgressView.m */,
 			);
 			path = ProgressButton;
+			sourceTree = "<group>";
+		};
+		2D926A9B18082627003B2FA8 /* BoxCar */ = {
+			isa = PBXGroup;
+			children = (
+				2D926A9C18082646003B2FA8 /* BoxCarController.h */,
+				2D926A9D18082646003B2FA8 /* BoxCarController.m */,
+			);
+			path = BoxCar;
 			sourceTree = "<group>";
 		};
 		4D7B7361128B322B0066291A /* Products */ = {
@@ -2590,6 +2615,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2D926A9B18082627003B2FA8 /* BoxCar */,
 				571B7E2617F4ADF900B77DBA /* MKStoreKit */,
 				63C23E5517F1D95B004C55BC /* Helpers */,
 				63C23E4517F06F55004C55BC /* GooglePlus */,
@@ -4983,6 +5009,8 @@
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
+				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
+				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
