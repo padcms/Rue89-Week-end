@@ -353,6 +353,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 		{
             [self changeNewsstanfFromServerPlistContent:previousPlistContent toContent:plistContent];
             
+            
 			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
             
 			NSArray *keys = [applicationsList allKeys];
@@ -362,6 +363,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
 				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
 																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
+                //[self changeShareMessageFromServerPlistContent:previousPlistContent toContent:plistContent];
 			}
 			else {
 				
@@ -375,6 +377,38 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 		}
 	}
+}
+
+- (void) changeShareMessageFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
+{
+    NSDictionary *prevApplicationsList = [previousContent objectForKey:PCJSONApplicationsKey];
+    NSDictionary *newApplicationsList = [newContent objectForKey:PCJSONApplicationsKey];
+    
+    NSString* prevMessage = nil;
+    if(prevApplicationsList && prevApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [prevApplicationsList objectForKey:[[prevApplicationsList allKeys] objectAtIndex:0]];
+        prevMessage = [settingsDict objectForKey:PCJSONApplicationShareMessageKey];
+    }
+    NSString* newMessage = nil;
+    if(newApplicationsList && newApplicationsList.count)
+    {
+        NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
+        newMessage = [settingsDict objectForKey:PCJSONApplicationShareMessageKey];
+    }
+    
+    if(stringExists(newMessage))
+    {
+        if(stringExists(prevMessage) && [newMessage isEqualToString:prevMessage] == NO)
+        {
+            currentApplication.shareMessage = prevMessage;
+        }
+    }
+}
+
+BOOL stringExists(NSString* str)
+{
+    return (str && [str isKindOfClass:[NSString class]] && str.length);
 }
 
 - (void) changeNewsstanfFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
@@ -394,9 +428,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
         newPath = [settingsDict objectForKey:newsstand_cover_key];
     }
-    
-    if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
-    {
+#warning newsstand cover update
+//    if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
+//    {
         NSString* fullPath = [[[PCConfig serverURLString]stringByAppendingPathComponent:newPath]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fullPath]];
@@ -411,7 +445,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                 [newImageData writeToFile:newstandPath atomically:YES];
             }
         }
-    }
+//    }
 }
 
 -(void)restartApplication
