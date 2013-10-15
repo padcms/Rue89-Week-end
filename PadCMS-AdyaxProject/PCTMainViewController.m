@@ -397,7 +397,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
     {
-        NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPath]];
+        NSString* fullPath = [[[PCConfig serverURLString]stringByAppendingPathComponent:newPath]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fullPath]];
         
         if(newImageData && newImageData.length)
         {
