@@ -9,6 +9,7 @@
 #import "PCRevisionSummaryCell.h"
 #import "PCFonts.h"
 #import "HelpSummaryPopupView.h"
+#import "UIView+EasyFrame.h"
 
 @interface PCRevisionSummaryCell ()
 
@@ -98,6 +99,8 @@ const CGFloat kLabelPadding = 30.0f;
     self.descriptionLabel.shouldResizeHeightToFit = YES;
     self.descriptionLabel.maximumLinesNumber = 2;
     
+    //self.descriptionLabel.contentMode = UIViewContentModeRedraw;
+    
     [self addSubview:self.descriptionLabel];
 }
 
@@ -108,8 +111,8 @@ const CGFloat kLabelPadding = 30.0f;
 }
 
 - (void)layoutLabels {
-    self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 51);
-    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 119);
+    self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, ((int)self.titleLabel.frameHeight % 2) ? 51.5 : 51);
+    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, ((int)self.descriptionLabel.frameHeight % 2) ? 118.5 : 119);
 }
 
 - (void) setTitle:(NSString*)title
@@ -121,6 +124,7 @@ const CGFloat kLabelPadding = 30.0f;
             [self removeHelpView];
         }
         self.titleLabel.text = title;
+        self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, 51);
     }
     else
     {
@@ -131,11 +135,14 @@ const CGFloat kLabelPadding = 30.0f;
         self.titleLabel.text = nil;
         self.descriptionLabel.text = nil;
     }
+    [self setNeedsLayout];
 }
 
 - (void) setDescription:(NSString*)description
 {
     self.descriptionLabel.text = description;
+    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, 119);
+    [self setNeedsLayout];
 }
 
 @end
