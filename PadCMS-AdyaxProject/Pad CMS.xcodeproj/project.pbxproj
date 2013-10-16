@@ -20,6 +20,7 @@
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
+		2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF22180EA59600459330 /* PCRueTwitterController.m */; };
 		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
@@ -1619,6 +1620,8 @@
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
+		2D85DF21180EA59600459330 /* PCRueTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueTwitterController.h; sourceTree = "<group>"; };
+		2D85DF22180EA59600459330 /* PCRueTwitterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueTwitterController.m; sourceTree = "<group>"; };
 		2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
 		2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
 		2D88C7351806D43F003CCF58 /* ProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressButton.h; sourceTree = "<group>"; };
@@ -2412,6 +2415,15 @@
 			path = DataManagment;
 			sourceTree = "<group>";
 		};
+		2D85DF20180EA55800459330 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				2D85DF21180EA59600459330 /* PCRueTwitterController.h */,
+				2D85DF22180EA59600459330 /* PCRueTwitterController.m */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
 		2D88C7341806D426003CCF58 /* ProgressButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -2615,6 +2627,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2D85DF20180EA55800459330 /* Twitter */,
 				2D926A9B18082627003B2FA8 /* BoxCar */,
 				571B7E2617F4ADF900B77DBA /* MKStoreKit */,
 				63C23E5517F1D95B004C55BC /* Helpers */,
@@ -5011,6 +5024,7 @@
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
+				2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

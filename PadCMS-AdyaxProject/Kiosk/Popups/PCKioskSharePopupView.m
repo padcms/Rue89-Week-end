@@ -11,7 +11,7 @@
 #import "PCApplication.h"
 #import "PCEmailController.h"
 #import "PCFacebookViewController.h"
-#import "PCTwitterNewController.h"
+#import "PCRueTwitterController.h"
 
 #import "PCGooglePlusController.h"
 
@@ -150,7 +150,8 @@
    // NSString *twitterMessage = [[self.revision.issue.application.notifications objectForKey:PCTwitterNotificationType]objectForKey:PCApplicationNotificationMessageKey];
     if (isOS5())
     {
-        PCTwitterNewController *twitterController = [[PCTwitterNewController alloc] initWithMessage:self.twitterMessage];
+        PCRueTwitterController *twitterController = [[PCRueTwitterController alloc] initWithMessage:self.twitterMessage];
+        twitterController.postUrl = [NSURL URLWithString:self.postUrl];
         twitterController.delegate = self.delegate;
         [twitterController showTwitterController];
     }

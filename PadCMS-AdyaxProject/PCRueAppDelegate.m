@@ -48,7 +48,7 @@
 
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
-    if([super respondsToSelector:@selector(applicationWillEnterForeground:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
     {
         [super applicationWillEnterForeground:application];
     }
@@ -57,7 +57,7 @@
 
 - (void) applicationDidBecomeActive:(UIApplication *)application
 {
-    if([super respondsToSelector:@selector(applicationDidBecomeActive:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
     {
         [super applicationDidBecomeActive:application];
     }
@@ -66,7 +66,7 @@
 
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    if([super respondsToSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
     {
         [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     }
@@ -75,7 +75,7 @@
 
 - (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    if([super respondsToSelector:@selector(application:didFailToRegisterForRemoteNotificationsWithError:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
     {
         [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
     }
@@ -84,7 +84,7 @@
 
 - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if([super respondsToSelector:@selector(application:didReceiveRemoteNotification:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
     {
         [super application:application didReceiveRemoteNotification:userInfo];
     }
