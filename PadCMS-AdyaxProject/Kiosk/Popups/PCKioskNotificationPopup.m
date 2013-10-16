@@ -7,6 +7,10 @@
 //
 
 #import "PCKioskNotificationPopup.h"
+#import "UIView+EasyFrame.h"
+
+#define kTopMargin 15
+#define kBottomMargin 15
 
 @interface PCKioskNotificationPopup()
 
@@ -23,22 +27,30 @@
     return self;
 }
 
-- (void)loadContent {
+- (void)loadContent
+{
     [super loadContent];
     self.titleLabel.textAlignment = MTLabelTextAlignmentLeft;
-    self.titleLabel.frame = CGRectMake(25, 15, 175, 50);
+    self.titleLabel.frame = CGRectMake(25, kTopMargin, 160, 45);
     //self.titleLabel.text = @"Hello";
     
     self.titleLabel.font = [UIFont fontWithName:self.titleLabel.font.fontName size:25];
     
-    self.descriptionLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame), 22, 500, 140);
+    self.descriptionLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame), kTopMargin, 515, 140);
+    
 }
 
 - (void)sizeToFitDescriptionLabelText {
     
-    CGSize textSize = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.descriptionLabel.frame.size.width, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = [self.descriptionLabel.plainText sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.descriptionLabel.frame.size.width, 9999) lineBreakMode:NSLineBreakByWordWrapping];
     
-    CGFloat newHeight = textSize.height + self.descriptionLabel.frame.origin.y*2 + 10;
+    self.descriptionLabel.frameHeight = textSize.height + 6;
+    
+    CGFloat minHeight = self.titleLabel.frameHeight + kTopMargin + kBottomMargin;
+    
+    CGFloat newHeight = self.descriptionLabel.frameHeight + kTopMargin + kBottomMargin;
+    
+    newHeight = newHeight >= minHeight ? newHeight : minHeight;
     
     CGRect frame = self.frame;
     frame.size.height = newHeight;
