@@ -1360,6 +1360,7 @@ BOOL stringExists(NSString* str)
     sharePopup.twitterMessage = currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.googleMessage = currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.descriptionLabel.text = currentApplication.shareMessage;
+    sharePopup.postUrl = currentApplication.shareUrl;
     sharePopup.delegate = self;
     [sharePopup show];
 }

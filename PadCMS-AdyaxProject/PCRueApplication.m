@@ -9,6 +9,7 @@
 #import "PCRueApplication.h"
 
 #define GOOGLE_MESSAGE_KEY @"application_notification_google"
+#define SHARE_URL_KEY @"application_share_url"
 
 @implementation PCRueApplication
 
@@ -28,6 +29,17 @@
             
             [self.notifications setObject:googleNotificationType forKey:PCGoogleNotificationType];
         }
+        
+        NSString* shareUrl = [parameters objectForKey:SHARE_URL_KEY];
+        if(shareUrl != nil && [shareUrl isKindOfClass:[NSString class]] && shareUrl.length)
+        {
+            self.shareUrl = shareUrl;
+        }
+        else
+        {
+            self.shareUrl = @"http://weekend.rue89.com";
+        }
+        
     }
     return self;
 }

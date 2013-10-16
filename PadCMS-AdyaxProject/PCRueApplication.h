@@ -12,4 +12,6 @@
 
 @interface PCRueApplication : PCApplication
 
+@property (nonatomic, copy) NSString* shareUrl;
+
 @end
