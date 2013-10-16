@@ -37,6 +37,8 @@
 
 - (void) hideDateLabel;
 
+- (BOOL) isTheSameDateWithCell:(PCKioskAdvancedControlElement*)prevCell;
+
 @end
 
 

@@ -273,17 +273,9 @@
         //reloading cell data
         [cell update];
         
-        if(counter > 0)
+        if(counter > 0 && [cell isTheSameDateWithCell:[cells objectAtIndex:counter - 1]])
         {
-            PCKioskAdvancedControlElement *prevCell = [cells objectAtIndex:counter - 1];
-            NSDate* prevDate = prevCell.revision.createDate;
-            NSDate* newDate = cell.revision.createDate;
-            
-            if([newDate compare:prevDate] == NSOrderedSame)
-            {
-                [cell hideDateLabel];
-            }
-            
+           [cell hideDateLabel];
         }
 
         if (!cell.superview) {

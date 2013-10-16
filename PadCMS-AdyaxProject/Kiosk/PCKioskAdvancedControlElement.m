@@ -417,8 +417,10 @@ typedef enum {
     [self.detailsView setupForRevision:self.revision];
     
     //date
-    NSDate * date = self.revision.createDate;
-    self.dateLabel.date = date;
+    NSDate * dateOfRevisionCreate = self.revision.createDate;
+    NSDate* dateOfIssuePublication = self.revision.issue.publishDate;
+    
+    self.dateLabel.date = dateOfIssuePublication ? dateOfIssuePublication : dateOfRevisionCreate;
     self.dateLabel.hidden = NO;
     
     //category
@@ -445,6 +447,14 @@ typedef enum {
     //if (executionTime > 0.05) {
          //NSLog(@"UPDATE executionTime = %f", executionTime);
     //}
+}
+
+- (BOOL) isTheSameDateWithCell:(PCKioskAdvancedControlElement*)prevCell
+{
+    NSDate* prevDate = prevCell.dateLabel.date;
+    NSDate* newDate = self.dateLabel.date;
+    
+    return ([newDate compare:prevDate] == NSOrderedSame);
 }
 
 - (void) hideDateLabel
@@ -551,7 +561,6 @@ typedef enum {
 			[payButton setTitle:[NSString stringWithString:[(NSDictionary *)[notification object] objectForKey:@"localizedPrice"]] forState:UIControlStateNormal];
 			payButton.hidden = NO;
 		}
-		
 		return;
 	}
 }
