@@ -26,6 +26,8 @@
 #import "PCRevision+DataOfDownload.h"
 #import "ProgressButton.h"
 
+#import "PCDownloadApiClient.h"
+
 typedef enum {
     ElementsStateNotDownloaded,
     ElementsStateInfoIsDownloading,
@@ -48,6 +50,7 @@ typedef enum {
 //    CGRect detailsFrameHidden;
     
     BOOL _isContentDownloading;
+    BOOL _isObservingReachability;
 }
 
 @property (nonatomic, strong) UIImageView * illustrationImageView;
@@ -323,6 +326,7 @@ typedef enum {
     downloadButton.userInteractionEnabled = YES;
     [(ProgressButton*)downloadButton hidePatience];
     [(ProgressButton*)downloadButton hideProgress];
+    [self stopObserveReachability];
     
     switch (state)
     {
@@ -333,7 +337,8 @@ typedef enum {
             break;
             
         case ElementsStateInfoIsDownloading:
-//
+
+            [self startObserveReachability];
 //            cancelButton.hidden = NO;
 //            downloadingInfoLabel.hidden = NO;
 //            downloadingProgressView.hidden = NO;
@@ -391,9 +396,47 @@ typedef enum {
             [(ProgressButton*)downloadButton showProgress];
             [(ProgressButton*)downloadButton showPatience];
             downloadButton.userInteractionEnabled = NO;
-            //[(ProgressButton*)downloadButton setProgress:0.1];
             
             break;
+    }
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"networkReachabilityStatus"])
+    {
+        NSLog(@"reachability : %@", change.debugDescription);
+        if(change[@"new"] == 0)
+        {
+            [self stopObserveReachability];
+            [self cancelButtonTapped];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                           value:@"You must be connected to the Internet."]
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                           value:@"OK"]
+                                                  otherButtonTitles:nil];
+			[alert show];
+        }
+    }
+}
+
+- (void) startObserveReachability
+{
+    if(_isObservingReachability == NO)
+    {
+        [[PCDownloadApiClient sharedClient] addObserver:self forKeyPath:@"networkReachabilityStatus" options:NSKeyValueObservingOptionNew context:nil];
+        _isObservingReachability = YES;
+    }
+}
+
+- (void) stopObserveReachability
+{
+    if(_isObservingReachability)
+    {
+        [[PCDownloadApiClient sharedClient] removeObserver:self forKeyPath:@"networkReachabilityStatus"];
+        _isObservingReachability = NO;
     }
 }
 
@@ -481,6 +524,13 @@ typedef enum {
 }
 
 #pragma mark - Buttons actions
+
+- (void) cancelButtonTapped
+{
+    if ([self.delegate respondsToSelector:@selector(cancelButtonTappedWithRevisionIndex:)]) {
+        [self.delegate cancelButtonTappedWithRevisionIndex:self.revisionIndex];
+    }
+}
 
 - (void) downloadButtonTapped
 {
