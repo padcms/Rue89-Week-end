@@ -14,6 +14,9 @@
 #import "PCRueTwitterController.h"
 
 #import "PCGooglePlusController.h"
+#import "RueFacebookController.h"
+#import "UIView+EasyFrame.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PCKioskSharePopupView()
 
@@ -21,6 +24,12 @@
 @property (nonatomic, strong) PCFacebookViewController * facebookViewController;
 
 @property (nonatomic, strong) PCGooglePlusController* googleController;
+@property (nonatomic, strong) RueFacebookController* facebookController;
+
+@property (nonatomic, weak) UIButton* facebookButton;
+@property (nonatomic, weak) UIButton* twitterButton;
+@property (nonatomic, weak) UIButton* emailButton;
+@property (nonatomic, weak) UIButton* googleButton;
 
 @end
 
@@ -63,6 +72,7 @@
     [facebookButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
     [facebookButton addTarget:self action:@selector(facebookShow) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:facebookButton];
+    self.facebookButton = facebookButton;
     
     //twitter button
     UIButton * twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,6 +80,7 @@
     [twitterButton setFrame:CGRectMake(center.x + padding, center.y - buttonSize.height - padding, buttonSize.width, buttonSize.height)];
     [twitterButton addTarget:self action:@selector(twitterShow) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:twitterButton];
+    self.twitterButton = twitterButton;
     
     //google button
     UIButton * googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,6 +88,7 @@
     [googlePlusButton setFrame:CGRectMake(center.x - buttonSize.width - padding, center.y + padding, buttonSize.width, buttonSize.height)];
     [googlePlusButton addTarget:self action:@selector(googlePlusShareButtonPresed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:googlePlusButton];
+    self.googleButton = googlePlusButton;
     
     //google button
     UIButton * mailButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -84,7 +96,7 @@
     [mailButton setFrame:CGRectMake(center.x + padding, center.y + padding, buttonSize.width, buttonSize.height)];
     [mailButton addTarget:self action:@selector(emailShow) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mailButton];
-    
+    self.emailButton = mailButton;
     
     
     //LABELS
@@ -134,12 +146,105 @@
 
 - (void)facebookShow
 {
-    if (!_facebookViewController)
+    if([RueFacebookController canPostEmbedded])
     {
-        //NSString *facebookMessage = [[self.revision.issue.application.notifications objectForKey:PCFacebookNotificationType]objectForKey:PCApplicationNotificationMessageKey];
-        _facebookViewController = [[PCFacebookViewController alloc] initWithMessage:self.facebookMessage];
+        [RueFacebookController postEmbeddedText:self.facebookMessage url:[NSURL URLWithString:self.postUrl] image:nil inController:(UIViewController*)self.delegate completionHandler:nil];
     }
-    [_facebookViewController initFacebookSharer];
+    else
+    {
+        UIActivityIndicatorView* (^createActivity)() = ^UIActivityIndicatorView*{
+            UIActivityIndicatorView* actyvity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            actyvity.hidesWhenStopped = YES;
+            actyvity.hidden = YES;
+            actyvity.frame = CGRectMake(self.facebookButton.frameWidth / 2 - actyvity.frameWidth / 2, self.facebookButton.frameHeight / 2 - actyvity.frameHeight / 2, actyvity.frameWidth, actyvity.frameHeight);
+            actyvity.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+            actyvity.layer.cornerRadius = (int)(actyvity.frameWidth / 2);
+            return actyvity;
+        };
+        
+        UIActivityIndicatorView* activity = createActivity();
+        
+        void(^showBlockingActivity)() = ^{
+            
+            [self setButtonsBlocked:YES];
+            [self.facebookButton addSubview:activity];
+            [activity startAnimating];
+            
+        };
+        void(^hideBlockingActivity)() = ^{
+            
+            [activity stopAnimating];
+            [activity removeFromSuperview];
+            [self setButtonsBlocked:NO];
+        };
+        void(^showViewAnimated)(UIView*) = ^(UIView* dialogView){
+            
+            dialogView.frame = self.facebookButton.frame;
+            dialogView.userInteractionEnabled = NO;
+            [self addSubview:dialogView];
+            CGRect finalFrame = self.bounds;
+            [UIView animateWithDuration:0.2 animations:^{
+                dialogView.frame = finalFrame;
+            } completion:^(BOOL finished) {
+                dialogView.userInteractionEnabled = YES;
+                hideBlockingActivity();
+            }];
+        };
+        void(^changeViewToViewAnimated)(UIView*, UIView*) = ^(UIView* prevView, UIView* newView){
+            
+            prevView.userInteractionEnabled = NO;
+            newView.userInteractionEnabled = NO;
+            
+            newView.frame = self.bounds;
+            
+            newView.frameY -= newView.frameHeight;
+            [self addSubview:newView];
+            self.clipsToBounds = YES;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                prevView.frameY += self.frameHeight;
+                newView.frameY += self.frameHeight;
+            } completion:^(BOOL finished) {
+                self.clipsToBounds = NO;
+                prevView.userInteractionEnabled = YES;
+                newView.userInteractionEnabled = YES;
+                [prevView removeFromSuperview];
+            }];
+        };
+        
+        self.facebookController = [[RueFacebookController alloc]initWithMessage:self.facebookMessage url:[NSURL URLWithString:self.postUrl]];
+        
+        showBlockingActivity();
+        [self.facebookController shareWithDialog:^(UIView *dialogView) {
+            
+            showViewAnimated(dialogView);
+            
+            
+        } authorizationComplete:^(UIView *authorizationView, UIView* confirmPostView) {
+            
+            changeViewToViewAnimated(authorizationView, confirmPostView);
+            
+        } postComplete:^(UIView *postView, NSError *postError) {
+            
+            CGRect newRect = CGRectMake(postView.frameWidth / 2 - 2, postView.frameHeight / 2 - 2, 4, 4);
+            [self setButtonsBlocked:YES];
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                postView.frame = newRect;
+            } completion:^(BOOL finished) {
+                [postView removeFromSuperview];
+                [self setButtonsBlocked:NO];
+            }];
+        }];
+    }
+    
+//    return;
+//    if (!_facebookViewController)
+//    {
+//        //NSString *facebookMessage = [[self.revision.issue.application.notifications objectForKey:PCFacebookNotificationType]objectForKey:PCApplicationNotificationMessageKey];
+//        _facebookViewController = [[PCFacebookViewController alloc] initWithMessage:self.facebookMessage];
+//    }
+//    [_facebookViewController initFacebookSharer];
 }
 
 - (void)twitterShow
@@ -200,6 +305,11 @@
     }];
     
     
+}
+
+- (void) setButtonsBlocked:(BOOL)block
+{
+    self.twitterButton.userInteractionEnabled = self.facebookButton.userInteractionEnabled = self.emailButton.userInteractionEnabled = self.googleButton.userInteractionEnabled = !block;
 }
 
 @end

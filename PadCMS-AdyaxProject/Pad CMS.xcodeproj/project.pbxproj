@@ -21,6 +21,11 @@
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
 		2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF22180EA59600459330 /* PCRueTwitterController.m */; };
+		2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF2A180EB43900459330 /* RueFacebookController.m */; };
+		2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D85DF2C180EB99C00459330 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF2F180ED01100459330 /* NSURL+Fragments.m */; };
+		2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF3A180EDA7100459330 /* FacebookPostConfirmView.m */; };
+		2D85DF3E180EDA7100459330 /* FacebookPostConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D85DF3B180EDA7100459330 /* FacebookPostConfirmView.xib */; };
 		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
@@ -30,6 +35,12 @@
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
+		2DA085F5180FF1AC00F9C716 /* ConfirmViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */; };
+		2DA085F6180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */; };
+		2DA085F7180FF1AC00F9C716 /* ConfirTopBarImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */; };
+		2DA085FC180FF31900F9C716 /* ConfirmViewButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F9180FF31900F9C716 /* ConfirmViewButton@2x.png */; };
+		2DA085FD180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */; };
+		2DA085FE180FF31900F9C716 /* ConfirTopBarImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
@@ -1622,6 +1633,14 @@
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
 		2D85DF21180EA59600459330 /* PCRueTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueTwitterController.h; sourceTree = "<group>"; };
 		2D85DF22180EA59600459330 /* PCRueTwitterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueTwitterController.m; sourceTree = "<group>"; };
+		2D85DF29180EB43800459330 /* RueFacebookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFacebookController.h; sourceTree = "<group>"; };
+		2D85DF2A180EB43900459330 /* RueFacebookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFacebookController.m; sourceTree = "<group>"; };
+		2D85DF2C180EB99C00459330 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2D85DF2E180ED01100459330 /* NSURL+Fragments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Fragments.h"; sourceTree = "<group>"; };
+		2D85DF2F180ED01100459330 /* NSURL+Fragments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Fragments.m"; sourceTree = "<group>"; };
+		2D85DF39180EDA7100459330 /* FacebookPostConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookPostConfirmView.h; sourceTree = "<group>"; };
+		2D85DF3A180EDA7100459330 /* FacebookPostConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookPostConfirmView.m; sourceTree = "<group>"; };
+		2D85DF3B180EDA7100459330 /* FacebookPostConfirmView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacebookPostConfirmView.xib; sourceTree = "<group>"; };
 		2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
 		2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
 		2D88C7351806D43F003CCF58 /* ProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressButton.h; sourceTree = "<group>"; };
@@ -1637,6 +1656,12 @@
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
 		2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSummaryPopupView.m; sourceTree = "<group>"; };
 		2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSummaryPopupView.xib; sourceTree = "<group>"; };
+		2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewButton.png; sourceTree = "<group>"; };
+		2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewDescriptionFon.png; sourceTree = "<group>"; };
+		2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirTopBarImage.png; sourceTree = "<group>"; };
+		2DA085F9180FF31900F9C716 /* ConfirmViewButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmViewButton@2x.png"; sourceTree = "<group>"; };
+		2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmViewDescriptionFon@2x.png"; sourceTree = "<group>"; };
+		2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirTopBarImage@2x.png"; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2184,6 +2209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */,
 				2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */,
 				57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */,
 				57BBD81717E1F7F4001F7653 /* SDWebImage.framework in Frameworks */,
@@ -2373,6 +2399,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D85DF2C180EB99C00459330 /* Social.framework */,
 				2D926AA2180853CE003B2FA8 /* Boxcar.framework */,
 				2D926A9F180826FF003B2FA8 /* AdSupport.framework */,
 				57FE3F3A17F0332000705EF0 /* Security.framework */,
@@ -2424,6 +2451,29 @@
 			path = Twitter;
 			sourceTree = "<group>";
 		};
+		2D85DF24180EB3DF00459330 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				2D85DF38180EDA7100459330 /* FacebookConfirmView */,
+				2D85DF29180EB43800459330 /* RueFacebookController.h */,
+				2D85DF2A180EB43900459330 /* RueFacebookController.m */,
+				2D85DF2E180ED01100459330 /* NSURL+Fragments.h */,
+				2D85DF2F180ED01100459330 /* NSURL+Fragments.m */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
+		2D85DF38180EDA7100459330 /* FacebookConfirmView */ = {
+			isa = PBXGroup;
+			children = (
+				2DA085F0180FF1AC00F9C716 /* ConfirmViewImages */,
+				2D85DF39180EDA7100459330 /* FacebookPostConfirmView.h */,
+				2D85DF3A180EDA7100459330 /* FacebookPostConfirmView.m */,
+				2D85DF3B180EDA7100459330 /* FacebookPostConfirmView.xib */,
+			);
+			path = FacebookConfirmView;
+			sourceTree = "<group>";
+		};
 		2D88C7341806D426003CCF58 /* ProgressButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -2442,6 +2492,19 @@
 				2D926A9D18082646003B2FA8 /* BoxCarController.m */,
 			);
 			path = BoxCar;
+			sourceTree = "<group>";
+		};
+		2DA085F0180FF1AC00F9C716 /* ConfirmViewImages */ = {
+			isa = PBXGroup;
+			children = (
+				2DA085F9180FF31900F9C716 /* ConfirmViewButton@2x.png */,
+				2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */,
+				2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */,
+				2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */,
+				2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */,
+				2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */,
+			);
+			path = ConfirmViewImages;
 			sourceTree = "<group>";
 		};
 		4D7B7361128B322B0066291A /* Products */ = {
@@ -2627,6 +2690,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2D85DF24180EB3DF00459330 /* Facebook */,
 				2D85DF20180EA55800459330 /* Twitter */,
 				2D926A9B18082627003B2FA8 /* BoxCar */,
 				571B7E2617F4ADF900B77DBA /* MKStoreKit */,
@@ -4378,6 +4442,13 @@
 				2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */,
 				2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */,
 				2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */,
+				2D85DF3E180EDA7100459330 /* FacebookPostConfirmView.xib in Resources */,
+				2DA085F5180FF1AC00F9C716 /* ConfirmViewButton.png in Resources */,
+				2DA085F6180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png in Resources */,
+				2DA085F7180FF1AC00F9C716 /* ConfirTopBarImage.png in Resources */,
+				2DA085FC180FF31900F9C716 /* ConfirmViewButton@2x.png in Resources */,
+				2DA085FD180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png in Resources */,
+				2DA085FE180FF31900F9C716 /* ConfirTopBarImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5025,6 +5096,9 @@
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */,
+				2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */,
+				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
+				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
