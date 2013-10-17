@@ -136,7 +136,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{120, 306}, {400, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="578320200"/>
+						<reference key="NSNextKeyView" ref="187007018"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -172,7 +172,7 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{67, 96}, {524, 168}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="229890292"/>
+						<reference key="NSNextKeyView" ref="264280703"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -190,7 +190,7 @@
 						<reference key="IBUIFontDescription" ref="758116136"/>
 						<reference key="IBUIFont" ref="208928176"/>
 					</object>
-					<object class="IBUILabel" id="229890292">
+					<object class="IBUILabel" id="264280703">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">303</int>
 						<string key="NSFrame">{{67, 272}, {524, 21}}</string>
@@ -220,7 +220,7 @@
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="578320200">
+					<object class="IBUIActivityIndicatorView" id="187007018">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483347</int>
 						<string key="NSFrame">{{311, 317}, {20, 20}}</string>
@@ -255,7 +255,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">linkLabel</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="229890292"/>
+						<reference key="destination" ref="264280703"/>
 					</object>
 					<int key="connectionID">15</int>
 				</object>
@@ -271,7 +271,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">activity</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="578320200"/>
+						<reference key="destination" ref="187007018"/>
 					</object>
 					<int key="connectionID">18</int>
 				</object>
@@ -309,8 +309,8 @@
 							<reference ref="998041089"/>
 							<reference ref="292538775"/>
 							<reference ref="298474281"/>
-							<reference ref="578320200"/>
-							<reference ref="229890292"/>
+							<reference ref="187007018"/>
+							<reference ref="264280703"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -369,12 +369,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="229890292"/>
+						<reference key="object" ref="264280703"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="578320200"/>
+						<reference key="object" ref="187007018"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
