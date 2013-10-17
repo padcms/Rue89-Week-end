@@ -72,7 +72,7 @@
 {
     if(self.progressView.hidden)
     {
-        self.progressView.progress = 0;
+        //self.progressView.progress = 0;
         self.progressView.hidden = NO;
         [self setNeedsLayout];
     }

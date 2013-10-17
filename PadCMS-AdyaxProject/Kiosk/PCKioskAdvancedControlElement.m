@@ -333,11 +333,18 @@ typedef enum {
             break;
             
         case ElementsStateInfoIsDownloading:
-            
-            cancelButton.hidden = NO;
+//
+//            cancelButton.hidden = NO;
+//            downloadingInfoLabel.hidden = NO;
+//            downloadingProgressView.hidden = NO;
+//
+            readButton.hidden = NO;
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
-            
+            downloadButton.hidden = NO;
+            [(ProgressButton*)downloadButton showProgress];
+            [(ProgressButton*)downloadButton showPatience];
+            downloadButton.userInteractionEnabled = NO;
             break;
             
         case ElementsStateInfoDownloaded:
@@ -384,6 +391,7 @@ typedef enum {
             [(ProgressButton*)downloadButton showProgress];
             [(ProgressButton*)downloadButton showPatience];
             downloadButton.userInteractionEnabled = NO;
+            //[(ProgressButton*)downloadButton setProgress:0.1];
             
             break;
     }
@@ -391,11 +399,21 @@ typedef enum {
 
 - (void) downloadProgressUpdatedWithProgress:(float)progress andRemainingTime:(NSString *)time
 {
+    static const float contentProgressPart = 0.9;
+    
     self.downloadInProgress = YES; //not sure if it will not bring any bugs
     downloadingProgressView.progress = progress;
     
+    if(self.revision.isDownloaded)
+    {
+        progress = progress * contentProgressPart + (1 - contentProgressPart);
+    }
+    else
+    {
+        progress = progress * (1.0 - contentProgressPart);
+    }
     [(ProgressButton*)downloadButton setProgress:progress];
-    [(ProgressButton*)cancelButton setProgress:progress];
+    //[(ProgressButton*)cancelButton setProgress:progress];
     
     if(time)
     {
