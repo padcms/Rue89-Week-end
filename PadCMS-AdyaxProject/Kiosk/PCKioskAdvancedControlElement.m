@@ -343,7 +343,7 @@ typedef enum {
 //            downloadingInfoLabel.hidden = NO;
 //            downloadingProgressView.hidden = NO;
 //
-            readButton.hidden = NO;
+            //readButton.hidden = NO;
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;
@@ -389,7 +389,7 @@ typedef enum {
             
         case ElementsStateContentDownloading:
             
-            readButton.hidden = NO;
+            //readButton.hidden = NO;
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;
