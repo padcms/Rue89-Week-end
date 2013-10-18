@@ -18,6 +18,8 @@
 #import "UIView+EasyFrame.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kDescriptionLabelLeftMargin 75
+
 @interface PCKioskSharePopupView()
 
 @property (nonatomic, strong) PCEmailController * emailController;
@@ -39,8 +41,8 @@
     [super loadContent];
     
     CGRect contentFrame = self.frame;
-    self.titleLabel.frame = CGRectMake( 0, 20, contentFrame.size.width, 50);
-    self.descriptionLabel.frame = CGRectMake(0, 90, contentFrame.size.width, 60);
+    self.titleLabel.frame = CGRectMake(0, 20, contentFrame.size.width, 50);
+    self.descriptionLabel.frame = CGRectMake(kDescriptionLabelLeftMargin, 90, contentFrame.size.width - kDescriptionLabelLeftMargin * 2, 60);
     
     self.titleLabel.text = @"Partagez Rue89 Week-end";
     //self.descriptionLabel.text = @"Il n’y a pas d’amour, il n’y a que des preuves d’amour. Alors faites\ndécouvrir votre magazine tablettes préféré à tout votre réseau !";
