@@ -439,11 +439,13 @@ BOOL stringExists(NSString* str)
         {
             UIImage* newImage = [UIImage imageWithData:newImageData];
             
-            if(newImage)
-            {
-                NSString* newstandPath = [[NSBundle mainBundle] pathForResource:@"icon_newsstand" ofType:@"png"];
-                [newImageData writeToFile:newstandPath atomically:YES];
-            }
+            [[UIApplication sharedApplication] setNewsstandIconImage:newImage];
+            
+//            if(newImage)
+//            {
+//                NSString* newstandPath = [[NSBundle mainBundle] pathForResource:@"icon_newsstand" ofType:@"png"];
+//                [newImageData writeToFile:newstandPath atomically:YES];
+//            }
         }
 //    }
 }

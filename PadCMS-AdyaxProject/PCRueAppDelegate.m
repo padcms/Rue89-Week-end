@@ -11,6 +11,7 @@
 #import "PCRueNavigationController.h"
 #import "MKStoreManager.h"
 #import "BoxCarController.h"
+#import "PCRueRemouteNotificationCenter.h"
 
 @implementation PCRueAppDelegate
 
@@ -43,6 +44,7 @@
 {
     BOOL handeled = [super application:application didFinishLaunchingWithOptions:launchOptions];
     [BoxCarController launchWithOptions:launchOptions];
+    
     return handeled;
 }
 
@@ -66,28 +68,36 @@
 
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-    {
-        [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    }
+//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
+//    {
+//        [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+//    }
+    [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] registerDeviceWithToken:deviceToken];
+    
     [BoxCarController applicationDidRegisterForNotificationWithToken:deviceToken];
 }
 
 - (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-    {
-        [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
-    }
+//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
+//    {
+//        [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
+//    }
+    
+    [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] registrationDidFailWithError:error];
+    
     [BoxCarController applicationDidFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-    {
-        [super application:application didReceiveRemoteNotification:userInfo];
-    }
+//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
+//    {
+//        [super application:application didReceiveRemoteNotification:userInfo];
+//    }
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] didReceiveRemoteNotification:userInfo];
+    
     [BoxCarController application:application didReceiveRemoteNotification:userInfo];
 }
 

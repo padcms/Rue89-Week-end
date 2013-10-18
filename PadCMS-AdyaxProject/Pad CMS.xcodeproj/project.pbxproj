@@ -44,6 +44,7 @@
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
+		2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0E17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -1666,6 +1667,8 @@
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
 		2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueApplication.m; sourceTree = "<group>"; };
+		2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
+		2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2381,6 +2384,8 @@
 				2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */,
 				2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */,
 				2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */,
+				2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */,
+				2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -5099,6 +5104,7 @@
 				2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */,
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
 				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
+				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
