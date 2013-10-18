@@ -215,6 +215,7 @@
         };
         
         self.facebookController = [[RueFacebookController alloc]initWithMessage:self.facebookMessage url:[NSURL URLWithString:self.postUrl]];
+        self.facebookController.needToConfirmPost = NO;
         
         showBlockingActivity();
         [self.facebookController shareWithDialog:^(UIView *dialogView) {

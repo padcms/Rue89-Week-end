@@ -57,6 +57,7 @@
     self = [super init];
     if(self)
     {
+        _needToConfirmPost = YES;
         _postString = message;
         _postUrl = url;
         [self cleareCookie];
@@ -88,7 +89,7 @@
     [self.webView loadRequest:request];
 }
 
-- (UIView*) confirmPostView
+- (UIView*) confirmPostViewCreate
 {
     self.confirmView = [[[NSBundle mainBundle]loadNibNamed:@"FacebookPostConfirmView" owner:nil options:nil]lastObject];
     self.confirmView.postMessage = _postString;
@@ -101,13 +102,32 @@
 {
     [self.confirmView setBlockedButton:YES];
     
+    [self sendPostRequestWithSuccessBlock:^{
+        
+        [self.confirmView showSuccessWithComplition:^{
+            
+            if(self.postComplete)
+            {
+                self.postComplete(self.confirmView, nil);
+                self.postComplete = nil;
+            }
+        }];
+        
+    } errorBlock:^(NSError *error) {
+        
+        [self.confirmView showError:error];
+    }];
+}
+
+- (void) sendPostRequestWithSuccessBlock:(void(^)())successBlock errorBlock:(void(^)(NSError*))errorBlock
+{
     NSMutableString* urlString = [NSMutableString stringWithString:@"https://graph.facebook.com/me/feed"];
     NSURL* requestUrl = [[NSURL alloc]initWithString:urlString];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:requestUrl];
     
-    NSString* postString = self.confirmView.postMessage;
+    NSString* postString = self.confirmView ? self.confirmView.postMessage : _postString;
     
-//    picture=%@
+    //    picture=%@
     NSString* paramsString = [NSString stringWithFormat:@"access_token=%@&message=%@&link=%@", self.token, postString, _postUrl.absoluteString];
     request.HTTPMethod = @"POST";
     
@@ -118,7 +138,7 @@
         if(error)
         {
             NSLog(@"Connection error : %@", error.localizedDescription);
-            [self.confirmView showError:error];
+            if(errorBlock) errorBlock(error);
         }
         else
         {
@@ -129,18 +149,11 @@
             if(errorDic)
             {
                 NSError* err = [NSError errorWithDomain:@"facebook" code:[errorDic[@"code"] intValue] userInfo:@{NSLocalizedDescriptionKey : errorDic[@"message"]}];
-                [self.confirmView showError:err];
+                if(errorBlock) errorBlock(err);
             }
             else
             {
-                [self.confirmView showSuccessWithComplition:^{
-                    
-                    if(self.postComplete)
-                    {
-                        self.postComplete(self.confirmView, nil);
-                        self.postComplete = nil;
-                    }
-                }];
+                if(successBlock) successBlock();
             }
         }
     }];
@@ -150,10 +163,26 @@
 {
     self.token = token;
     
-    if(self.tokenTaken)
+    if(self.needToConfirmPost)
     {
-        self.tokenTaken(self.webView, [self confirmPostView]);
-        self.tokenTaken = nil;
+        if(self.tokenTaken)
+        {
+            self.tokenTaken(self.webView, [self confirmPostViewCreate]);
+            self.tokenTaken = nil;
+        }
+    }
+    else
+    {
+        if(self.tokenTaken)
+        {
+            self.tokenTaken = nil;
+        }
+        if(self.postComplete)
+        {
+            self.postComplete(self.webView, nil);
+            self.postComplete = nil;
+        }
+        [self sendPostRequestWithSuccessBlock:nil errorBlock:nil];
     }
 }
 

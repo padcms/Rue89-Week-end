@@ -85,12 +85,14 @@ static NSString* post_button_default_title;
 {
     if(blocked)
     {
+        self.textView.userInteractionEnabled = NO;
         self.postButton.userInteractionEnabled = NO;
         [self.postButton setSelected:YES];
         [self.activity startAnimating];
     }
     else
     {
+        self.textView.userInteractionEnabled = YES;
         self.postButton.userInteractionEnabled = YES;
         [self.postButton setSelected:NO];
         [self.activity stopAnimating];
