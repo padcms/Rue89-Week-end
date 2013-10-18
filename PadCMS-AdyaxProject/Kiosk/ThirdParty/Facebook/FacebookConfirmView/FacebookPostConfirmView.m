@@ -69,8 +69,8 @@ static NSString* post_button_default_title;
     self.linkLabel.text = postLink;
 }
 
-#pragma clang diagnostic warning push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+//#pragma clang diagnostic warning push
+//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 - (IBAction)postPresed:(UIButton*)sender
 {
     [self.textView resignFirstResponder];
@@ -79,7 +79,7 @@ static NSString* post_button_default_title;
         [_postTarget performSelector:_postAction];
     }
 }
-#pragma clang diagnostic warning pop
+//#pragma clang diagnostic warning pop
 
 - (void) setBlockedButton:(BOOL)blocked
 {
