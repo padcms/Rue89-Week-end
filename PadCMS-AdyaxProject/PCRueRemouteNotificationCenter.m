@@ -65,7 +65,7 @@
     }
     else
     {
-        UUID =  [[UIDevice currentDevice] uniqueIdentifier];//[self generateUUID];
+        UUID =  [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];//[self generateUUID];
     }
     
     NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
