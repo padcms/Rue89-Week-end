@@ -2228,6 +2228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */,
 				2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */,
 				2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */,
 				57FE3F3B17F0332000705EF0 /* Security.framework in Frameworks */,
@@ -2255,7 +2256,6 @@
 				C5CFF3741574CE5300F2235B /* OpenAL.framework in Frameworks */,
 				C5CFF3751574CE5300F2235B /* OpenGLES.framework in Frameworks */,
 				57B4431917D737EC00FCFA87 /* libTestFlight.a in Frameworks */,
-				2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
