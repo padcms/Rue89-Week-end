@@ -17,6 +17,8 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
+		2D046FDC181523F7005087D7 /* PCHtmlColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */; };
+		2D046FDD181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
@@ -1626,6 +1628,9 @@
 		2899E5210DE3E06400AC0155 /* PCMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PCMainViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2D046FD9181523F7005087D7 /* PCHtmlColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCHtmlColumnViewController.h; sourceTree = "<group>"; };
+		2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCHtmlColumnViewController.m; sourceTree = "<group>"; };
+		2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCMagazineViewControllersFactory+HtmlTemplateSupport.m"; sourceTree = "<group>"; };
 		2D1C0B451804352B006B70BE /* RTLabelWithWordWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabelWithWordWrap.h; sourceTree = "<group>"; };
 		2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabelWithWordWrap.m; sourceTree = "<group>"; };
 		2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManager.h; sourceTree = "<group>"; };
@@ -2364,6 +2369,7 @@
 			children = (
 				60F0221C1590D7B70046FA44 /* PadCMS-CocoaTouch-Core.xcodeproj */,
 				4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */,
+				2D046FD71815237C005087D7 /* Controllers */,
 				60F022581590DEEC0046FA44 /* Kiosk */,
 				AB8139FC152591510038EC7B /* UNI */,
 				AB17A6FE1576396800DF9A05 /* Mondadori */,
@@ -2445,6 +2451,24 @@
 				CE8D7584133CD56D00FE4800 /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D046FD71815237C005087D7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D046FD81815237C005087D7 /* Magazine */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2D046FD81815237C005087D7 /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				2D046FD9181523F7005087D7 /* PCHtmlColumnViewController.h */,
+				2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */,
+				2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
+			);
+			path = Magazine;
 			sourceTree = "<group>";
 		};
 		2D6DEB1917F9971700133D9A /* DataManagment */ = {
@@ -5143,6 +5167,8 @@
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
 				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
 				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
+				2D046FDC181523F7005087D7 /* PCHtmlColumnViewController.m in Sources */,
+				2D046FDD181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
