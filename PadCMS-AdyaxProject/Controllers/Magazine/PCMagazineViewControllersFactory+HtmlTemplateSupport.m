@@ -28,7 +28,7 @@
         return nil;
     PCPage* firstPage = [column.pages objectAtIndex:0];
     
-    NSLog(@"page : %@", firstPage.pageTemplate);
+    //NSLog(@"page : %@", firstPage.pageTemplate);
     
     switch (firstPage.pageTemplate.identifier)
     {
