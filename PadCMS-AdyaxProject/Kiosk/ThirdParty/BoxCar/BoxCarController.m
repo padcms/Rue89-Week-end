@@ -56,6 +56,8 @@ static NSString* PUSH_MODE;
     [[Boxcar sharedInstance] trackNotification:remoteNotif];
     
     [[Boxcar sharedInstance] cleanNotificationsAndBadge];
+    
+    [self registerForNotifications];
         
     if(remoteNotif)
     {
