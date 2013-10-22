@@ -18,7 +18,7 @@
 #import "UIView+EasyFrame.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kDescriptionLabelLeftMargin 75
+#define kDescriptionLabelLeftMargin 100
 
 @interface PCKioskSharePopupView()
 
