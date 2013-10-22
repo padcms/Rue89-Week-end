@@ -550,8 +550,8 @@ BOOL stringExists(NSString* str)
         
         PCRevision* rev1 = obj1;
         PCRevision* rev2 = obj2;
-        NSDate* date1 = rev1.updateDate ? rev1.updateDate : rev1.createDate;
-        NSDate* date2 = rev2.updateDate ? rev2.updateDate : rev2.createDate;
+        NSDate* date1 = rev1.issue.publishDate ? rev1.issue.publishDate : rev1.createDate;
+        NSDate* date2 = rev2.issue.publishDate ? rev2.issue.publishDate : rev2.createDate;
         
         NSComparisonResult result = [date1 compare:date2];
         
