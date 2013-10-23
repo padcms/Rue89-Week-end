@@ -1668,6 +1668,7 @@
 		2DA085F9180FF31900F9C716 /* ConfirmViewButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmViewButton@2x.png"; sourceTree = "<group>"; };
 		2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmViewDescriptionFon@2x.png"; sourceTree = "<group>"; };
 		2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirTopBarImage@2x.png"; sourceTree = "<group>"; };
+		2DA240E418181BCF0022FEC4 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2756,6 +2757,7 @@
 		57A4742717C485FA00745732 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2DA240E418181BCF0022FEC4 /* NSString+HTML.h */,
 				2DC2FF601811547D00BA4F0B /* SBJSON */,
 				2D85DF24180EB3DF00459330 /* Facebook */,
 				2D85DF20180EA55800459330 /* Twitter */,

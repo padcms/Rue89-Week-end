@@ -7,6 +7,8 @@
 //
 
 #import "PCRueApplication.h"
+#import "PCJSONKeys.h"
+#import "NSString+HTML.h"
 
 #define GOOGLE_MESSAGE_KEY @"application_notification_google"
 #define SHARE_URL_KEY @"application_share_url"
@@ -39,6 +41,8 @@
         {
             self.shareUrl = @"http://weekend.rue89.com";
         }
+        
+        self.messageForReaders = [[[parameters objectForKey:PCJSONApplicationMessageForReadersKey]stringByDecodingHTMLEntities] copy];
         
     }
     return self;
