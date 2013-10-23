@@ -42,11 +42,29 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"launch options : %@", launchOptions.debugDescription);
     BOOL handeled = [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
     [BoxCarController launchWithOptions:launchOptions];
     
     return handeled;
 }
+
+//- (void) applicationDidEnterBackground:(UIApplication *)application
+//{
+//    UILocalNotification* notif = [UILocalNotification new];
+//    notif.alertBody = @"notif";
+//    //notif.hasAction = NO;
+//    notif.applicationIconBadgeNumber = 5;
+//    notif.fireDate = [NSDate dateWithTimeIntervalSinceNow:30];
+//    [application scheduleLocalNotification:notif];
+//}
+//
+//- (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+//{
+//    NSLog(@"fsddfjdfjdfsjdfsjdsfdsdfsjk");
+//    application.applicationIconBadgeNumber = 3;
+//}
 
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
@@ -59,7 +77,7 @@
 
 - (void) applicationDidBecomeActive:(UIApplication *)application
 {
-    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
+    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationDidBecomeActive:)])
     {
         [super applicationDidBecomeActive:application];
     }
@@ -68,10 +86,6 @@
 
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-//    {
-//        [super application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-//    }
     [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] registerDeviceWithToken:deviceToken];
     
     [BoxCarController applicationDidRegisterForNotificationWithToken:deviceToken];
@@ -79,11 +93,7 @@
 
 - (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-//    {
-//        [super application:application didFailToRegisterForRemoteNotificationsWithError:error];
-//    }
-    
+    NSLog(@"%@", error);
     [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] registrationDidFailWithError:error];
     
     [BoxCarController applicationDidFailToRegisterForRemoteNotificationsWithError:error];
@@ -91,10 +101,7 @@
 
 - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-//    if([[PCPadCMSAppDelegate class] instancesRespondToSelector:@selector(applicationWillEnterForeground:)])
-//    {
-//        [super application:application didReceiveRemoteNotification:userInfo];
-//    }
+    NSLog(@"remote notification : %@", userInfo.debugDescription);
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] didReceiveRemoteNotification:userInfo];
     

@@ -12,7 +12,7 @@
 #import "NSURL+Fragments.h"
 #import "FacebookPostConfirmView.h"
 
-#define kFacebookAppId @"217375451760338"
+//#define kFacebookAppId @"217375451760338"
 
 @interface RueFacebookController () <UIWebViewDelegate>
 {
@@ -30,6 +30,14 @@
 @end
 
 @implementation RueFacebookController
+
+static NSString* kFacebookAppId = nil;
+
++ (void) initialize
+{
+    NSDictionary* plist = [[NSBundle mainBundle]infoDictionary];
+    kFacebookAppId = plist[@"PADCMSConfig"][@"PCConfigFacebookId"];
+}
 
 + (void) postEmbeddedText:(NSString*)postText url:(NSURL*)postUrl image:(UIImage*)postImage inController:(UIViewController*)controller completionHandler:(void(^)(BOOL success, NSError* error))completionBlock
 {
