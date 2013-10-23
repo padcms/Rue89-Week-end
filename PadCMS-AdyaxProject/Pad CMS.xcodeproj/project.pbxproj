@@ -5827,8 +5827,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "com.apple.ubiquity.peer-uuid.354FBB70-5856-45BE-8E85-B63C20AE402A";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5857,8 +5857,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "FF452BD7-7F13-4A65-AEFD-64D1EA8D1491";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FF452BD7-7F13-4A65-AEFD-64D1EA8D1491";
+				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -5870,8 +5870,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5901,7 +5901,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "FF452BD7-7F13-4A65-AEFD-64D1EA8D1491";
+				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -5914,8 +5914,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5945,7 +5945,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "FF452BD7-7F13-4A65-AEFD-64D1EA8D1491";
+				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

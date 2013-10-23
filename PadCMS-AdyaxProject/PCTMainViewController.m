@@ -1303,9 +1303,14 @@ BOOL stringExists(NSString* str)
 #pragma mark - PCKioskHeaderViewDelegate
 
 - (void)contactUsButtonTapped {
-    NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"Subject", PCApplicationNotificationMessageKey : @"Message"};
+    NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"", PCApplicationNotificationMessageKey : @""};
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
-    [self.emailController.emailViewController setToRecipients:@[@"xxxxxxxxx@adyax.com"]];
+    
+    NSString * contactEmail = @"";
+    if (currentApplication.contactEmail) {
+        contactEmail = currentApplication.contactEmail;
+    }
+    [self.emailController.emailViewController setToRecipients:@[contactEmail]];
 
     self.emailController.delegate = self;
     [self.emailController emailShow];
