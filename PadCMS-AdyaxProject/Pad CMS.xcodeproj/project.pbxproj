@@ -43,6 +43,7 @@
 		2DA085FC180FF31900F9C716 /* ConfirmViewButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F9180FF31900F9C716 /* ConfirmViewButton@2x.png */; };
 		2DA085FD180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */; };
 		2DA085FE180FF31900F9C716 /* ConfirTopBarImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */; };
+		2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
@@ -1669,6 +1670,7 @@
 		2DA085FA180FF31900F9C716 /* ConfirmViewDescriptionFon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirmViewDescriptionFon@2x.png"; sourceTree = "<group>"; };
 		2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirTopBarImage@2x.png"; sourceTree = "<group>"; };
 		2DA240E418181BCF0022FEC4 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2479,6 +2481,7 @@
 				2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */,
 				2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */,
 				2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */,
+				2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */,
 			);
 			path = DataManagment;
 			sourceTree = "<group>";
@@ -5156,6 +5159,7 @@
 				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
 				2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */,
 				2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */,
+				2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */,
 				2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */,
 				2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
