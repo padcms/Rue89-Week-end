@@ -1671,6 +1671,8 @@
 		2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirTopBarImage@2x.png"; sourceTree = "<group>"; };
 		2DA240E418181BCF0022FEC4 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
+		2DA72EF7181954C300E11910 /* ImagesBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBank.h; sourceTree = "<group>"; };
+		2DA72EF8181954C300E11910 /* ImagesBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBank.m; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2477,6 +2479,7 @@
 		2D6DEB1917F9971700133D9A /* DataManagment */ = {
 			isa = PBXGroup;
 			children = (
+				2DA72EF6181954C300E11910 /* ImagesCatch */,
 				2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */,
 				2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */,
 				2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */,
@@ -2549,6 +2552,15 @@
 				2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */,
 			);
 			path = ConfirmViewImages;
+			sourceTree = "<group>";
+		};
+		2DA72EF6181954C300E11910 /* ImagesCatch */ = {
+			isa = PBXGroup;
+			children = (
+				2DA72EF7181954C300E11910 /* ImagesBank.h */,
+				2DA72EF8181954C300E11910 /* ImagesBank.m */,
+			);
+			path = ImagesCatch;
 			sourceTree = "<group>";
 		};
 		2DC2FF601811547D00BA4F0B /* SBJSON */ = {
