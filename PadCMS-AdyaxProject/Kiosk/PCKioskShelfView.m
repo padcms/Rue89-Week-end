@@ -72,25 +72,41 @@
     [self reload];
 }
 
-- (void)reload {
+- (void)reload
+{
      self.revisions = [self.dataSource allSortedRevisions];
     [self calculateNumberOfRevisionsForCurrentPage];
     
     self.pageControl.alpha = 0.0f;
     
     /* Animate the table view reload */
-    [UIView transitionWithView: mainScrollView
-                      duration: 0.35f
-                       options: UIViewAnimationOptionTransitionCrossDissolve
-                    animations: ^(void)
-     {
+//    [UIView transitionWithView: mainScrollView
+//                      duration: 0.35f
+//                       options: UIViewAnimationOptionTransitionCrossDissolve
+//    animations: ^(void)
+//     {
          //[self.tableView reloadData];
-         [self createCells];
-     }
-                    completion: ^(BOOL isFinished)
-     {
-         [self layoutPageControl];
-     }];
+//         [self createCells];
+//     }
+//    completion: ^(BOOL isFinished)
+//     {
+//         [self layoutPageControl];
+//     }];
+    
+    
+    fadeInViewWithDurationCompletion(mainScrollView, 0.2, ^{
+    
+        [self createCells];
+        if (self.shouldScrollToTopAfterReload)
+        {
+            self.shouldScrollToTopAfterReload = NO;
+            [self scrollToTopAnimated:NO];
+        }
+        fadeOutViewWithDurationCompletion(mainScrollView, 0.2, ^{
+    
+            [self layoutPageControl];
+        });
+    });
 }
 
 
@@ -248,11 +264,11 @@
     CGFloat paginationHeight = 57.0f;
     
     //animate scroll view content size change
-    [UIView animateWithDuration:0.5f animations:^{
+    //[UIView animateWithDuration:0.5f animations:^{
         NSInteger multiplier = MAX(_numberOfRevisionsForCurrentpage, 1);
         
         mainScrollView.contentSize = CGSizeMake(self.frame.size.width, multiplier*(KIOSK_ADVANCED_SHELF_ROW_HEIGHT + KIOSK_ADVANCED_SHELF_ROW_MARGIN) + KIOSK_ADVANCED_SHELF_MARGIN_TOP + paginationHeight);
-    }];
+    //}];
     
     //[cells removeAllObjects];
     
@@ -310,17 +326,26 @@
     
     //[self layoutPageControl];
     
-    [UIView animateWithDuration:0.5f animations:^{
-        if (self.shouldScrollToTopAfterReload) {
-            self.shouldScrollToTopAfterReload = NO;
-            [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
-        }
-    }];
-    
     [mainScrollView bringSubviewToFront:self.pageControl];
     
     NSLog(@"ALL SHELF VIEWS CREATED");
     
+}
+
+- (void) scrollToTopAnimated:(BOOL)animated
+{
+//    if(animated)
+//    {
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:0.5f];
+//    }
+    
+    [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
+    
+//    if(animated)
+//    {
+//        [UIView commitAnimations];
+//    }
 }
 
 - (void)layoutPageControl
@@ -406,7 +431,8 @@
 
 #pragma mark - PCKioskPageControlDelegate
 
-- (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page {
+- (void)kioskPageControl:(PCKioskPageControl *)pageControl didChangePage:(NSInteger)page
+{
     self.shouldScrollToTopAfterReload = YES;
     [self reload];
 }
@@ -414,8 +440,10 @@
 
 #pragma mark - PCKioskHeaderViewDelegate
 
-- (void)logoButtonTapped {
-    [mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+- (void)logoButtonTapped
+{
+    //[mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [self.pageControl setCurrentPage:1];
 }
 
 - (void)subscribeButtonTapped {
@@ -522,6 +550,28 @@
         }
     }
     return nil;
+}
+
+#pragma mark - Animations
+
+void fadeInViewWithDurationCompletion (UIView* view, NSTimeInterval duration, void(^completionBlock)())
+{
+    [UIView animateWithDuration:duration animations:^{
+        
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        if(completionBlock)completionBlock();
+    }];
+}
+
+void fadeOutViewWithDurationCompletion (UIView* view, NSTimeInterval duration, void(^completionBlock)())
+{
+    [UIView animateWithDuration:duration animations:^{
+        
+        view.alpha = 1;
+    }completion:^(BOOL finished) {
+        if(completionBlock)completionBlock();
+    }];
 }
 
 @end
