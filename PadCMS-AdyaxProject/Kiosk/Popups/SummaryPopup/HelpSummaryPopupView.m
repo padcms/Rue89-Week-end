@@ -27,8 +27,6 @@
 
 - (void) awakeFromNib
 {
-    //self.infoButton.layer.affineTransform = CGAffineTransformMakeScale(1.5, 1.5);
-    
     self.label.text = @"<font kern=-0.5>LES ARTICLES\nDEJA TELECHARGES\nS'AFFICHENT\nDANS CE MENU</font>";
     self.label.font = [UIFont fontWithName:PCFontInterstateLight size:15];
     self.label.textAlignment = RTTextAlignmentCenter;
