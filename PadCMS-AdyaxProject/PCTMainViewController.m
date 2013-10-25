@@ -34,7 +34,7 @@
 
 #import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
-#import "NSObject+Block.h"
+#import "UINavigationController+BalancedTransition.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, MKStoreManagerDataSource>
 
@@ -236,7 +236,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     {
         mainView = nil;
 #ifdef RUE
-        [self.navigationController  popViewControllerAnimated:YES];
+        [self.navigationController  popViewControllerAnimated:YES completion:nil];
         //_revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
@@ -259,21 +259,10 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
     {
-        self.navigationController.view.userInteractionEnabled = NO;
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        [self performBlock:^{
+        [self.navigationController popViewControllerAnimated:YES completion:^{
             
             showRevision(revisionToPresent);
-            
-            [self performBlock:^{
-                
-                self.navigationController.view.userInteractionEnabled = YES;
-                
-            } afterDealay:0.5];
-            
-        } afterDealay:0.5];
+        }];
     }
     else
     {
@@ -993,7 +982,7 @@ BOOL stringExists(NSString* str)
     [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
-    [[self navigationController] pushViewController:_revisionViewController animated:YES];
+    [[self navigationController] pushViewController:_revisionViewController animated:YES completion:nil];
 #else
     [self.view addSubview:_revisionViewController.view];
 #endif

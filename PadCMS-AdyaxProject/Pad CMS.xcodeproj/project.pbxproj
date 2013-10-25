@@ -34,6 +34,7 @@
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
+		2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
@@ -1658,6 +1659,8 @@
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
+		2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+BalancedTransition.h"; sourceTree = "<group>"; };
+		2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+BalancedTransition.m"; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
 		2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Block.m"; sourceTree = "<group>"; };
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
@@ -2643,6 +2646,8 @@
 				2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */,
 				2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */,
 				2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */,
+				2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */,
+				2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */,
 			);
 			path = SummaryPopup;
 			sourceTree = "<group>";
@@ -5164,6 +5169,7 @@
 				2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
+				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
