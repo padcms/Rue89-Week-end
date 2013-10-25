@@ -402,17 +402,18 @@
         
         if (isLastCell)
         {
-            CGFloat y = mainScrollView.contentOffset.y;
-            CGFloat height = mainScrollView.frame.size.height;
-            CGFloat contentHeight = mainScrollView.contentSize.height;
-            CGFloat treshOld = 100.0f;
-            BOOL isContentSizeBiggerThanSize = (contentHeight > height);
-            
-            
-            
-            if (isContentSizeBiggerThanSize && ((y + height) > (contentHeight - treshOld))) {
-                mainScrollView.contentOffset = CGPointMake(0, contentHeight - height);
-            }
+            [mainScrollView scrollRectToVisible:cell.frame animated:NO];
+//            CGFloat y = mainScrollView.contentOffset.y;
+//            CGFloat height = mainScrollView.frame.size.height;
+//            CGFloat contentHeight = mainScrollView.contentSize.height;
+//            CGFloat treshOld = 100.0f;
+//            BOOL isContentSizeBiggerThanSize = (contentHeight > height);
+//            
+//            
+//            
+//            if (isContentSizeBiggerThanSize && ((y + height) > (contentHeight - treshOld))) {
+//                mainScrollView.contentOffset = CGPointMake(0, contentHeight - height);
+//            }
         }
     }
     
