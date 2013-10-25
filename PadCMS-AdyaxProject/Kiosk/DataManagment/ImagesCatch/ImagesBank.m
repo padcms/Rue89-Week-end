@@ -203,8 +203,13 @@
     
     if(!imagesDir)
     {
-        NSString* tempDir = NSTemporaryDirectory();
-        imagesDir = [tempDir stringByAppendingPathComponent:@"Images"];
+        NSArray *libraryPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        NSString *libraryPath = [libraryPaths objectAtIndex:0];
+        
+        NSString * privatPath = [libraryPath stringByAppendingPathComponent:@"PrivateDocuments"];
+        
+        imagesDir = [privatPath stringByAppendingPathComponent:@"CoverImages"];
+        
         [[NSFileManager defaultManager]createDirectoryAtPath:imagesDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
     return imagesDir;
