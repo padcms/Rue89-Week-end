@@ -319,9 +319,8 @@
 
 - (PCKioskAdvancedControlElement*) lastVisibleCell
 {
-    NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
-    NSInteger lastVisibleRevisionIndex = startRevisionIndex + _numberOfRevisionsForCurrentpage - 1;
-    if(lastVisibleRevisionIndex >=0 && lastVisibleRevisionIndex < cells.count)
+    NSInteger lastVisibleRevisionIndex = _numberOfRevisionsForCurrentpage - 1;
+    if(lastVisibleRevisionIndex >= 0 && lastVisibleRevisionIndex < cells.count)
     {
         return [cells objectAtIndex:lastVisibleRevisionIndex];
     }
