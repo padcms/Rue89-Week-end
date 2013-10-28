@@ -1291,7 +1291,8 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - PCKioskHeaderViewDelegate
 
-- (void)contactUsButtonTapped {
+- (void)contactUsButtonTapped
+{
     NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"", PCApplicationNotificationMessageKey : @""};
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
     
@@ -1300,13 +1301,30 @@ BOOL stringExists(NSString* str)
         contactEmail = currentApplication.contactEmail;
     }
     [self.emailController.emailViewController setToRecipients:@[contactEmail]];
-
+    
     self.emailController.delegate = self;
     [self.emailController emailShow];
+    
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
+    
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
         [[self shelfView] reload];
     } onError:^(NSError *error) {
@@ -1315,6 +1333,21 @@ BOOL stringExists(NSString* str)
 }
 
 - (void)subscribeButtonTapped {
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
     
     //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
 //    [[InAppPurchases sharedInstance] newSubscription];
@@ -1349,7 +1382,8 @@ BOOL stringExists(NSString* str)
     
 }
 
-- (void)shareButtonTapped {
+- (void)shareButtonTapped
+{
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
     sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
