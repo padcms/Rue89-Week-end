@@ -10,9 +10,6 @@
 
 @implementation ImagesBankImage
 
-
-
-
 #pragma mark - NSCoding protocol
 
 - (void) encodeWithCoder:(NSCoder *)aCoder

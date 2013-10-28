@@ -22,7 +22,7 @@
         
         if(connectionError)
         {
-            NSLog(@"connection error : %@", connectionError.debugDescription);
+            //NSLog(@"connection error : %@", connectionError.debugDescription);
             if(complBlock) complBlock(nil, connectionError);
         }
         else
@@ -55,7 +55,7 @@
         
         if(connectionError)
         {
-            NSLog(@"connection error : %@", connectionError.debugDescription);
+            //NSLog(@"connection error : %@", connectionError.debugDescription);
             if(complBlock) complBlock(nil, nil, connectionError);
         }
         else
@@ -85,14 +85,5 @@
     [formatter setDateFormat:@"EEE, dd MMM yyy HH':'mm':'ss Z"];
     return [formatter dateFromString:dateString];
 }
-
-/*- (NSString*) stringFromDate:(NSDate*)date
-{
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-    [formatter setLocale:enUSPOSIXLocale];
-    [formatter setDateFormat:@"EEE, dd MMM yyy HH':'mm':'ss Z"];
-    return [formatter stringFromDate:date];
-}*/
 
 @end
