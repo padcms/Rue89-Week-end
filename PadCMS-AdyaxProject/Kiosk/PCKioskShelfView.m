@@ -79,21 +79,6 @@
     
     self.pageControl.alpha = 0.0f;
     
-    /* Animate the table view reload */
-//    [UIView transitionWithView: mainScrollView
-//                      duration: 0.35f
-//                       options: UIViewAnimationOptionTransitionCrossDissolve
-//    animations: ^(void)
-//     {
-         //[self.tableView reloadData];
-//         [self createCells];
-//     }
-//    completion: ^(BOOL isFinished)
-//     {
-//         [self layoutPageControl];
-//     }];
-    
-    
     fadeInViewWithDurationCompletion(mainScrollView, 0.2, ^{
     
         [self createCells];
@@ -332,39 +317,56 @@
     
 }
 
+- (PCKioskAdvancedControlElement*) lastVisibleCell
+{
+    NSInteger lastVisibleRevisionIndex = _numberOfRevisionsForCurrentpage - 1;
+    if(lastVisibleRevisionIndex >= 0 && lastVisibleRevisionIndex < cells.count)
+    {
+        return [cells objectAtIndex:lastVisibleRevisionIndex];
+    }
+    else
+    {
+        return [cells objectAtIndex:0];
+    }
+}
+
 - (void) scrollToTopAnimated:(BOOL)animated
 {
-//    if(animated)
-//    {
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:0.5f];
-//    }
+    if(animated)
+    {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5f];
+    }
     
     [mainScrollView setContentOffset:CGPointMake(0, -mainScrollView.contentInset.top)];
     
-//    if(animated)
-//    {
-//        [UIView commitAnimations];
-//    }
+    if(animated)
+    {
+        [UIView commitAnimations];
+    }
 }
 
 - (void)layoutPageControl
 {
-    //updating page control alignment
     self.pageControl.alpha = 0.0f;
-    [UIView animateWithDuration:0.0f animations:^{
-        CGRect frame = self.pageControl.frame;
-        frame.origin.y = mainScrollView.contentSize.height - frame.size.height - 12;
+    
+    CGRect frame = self.pageControl.frame;
+    
+    if(self.pageControl.pagesCount > 1)
+    {
+        frame.origin.y = CGRectGetMaxY([self lastVisibleCell].frame) + 12;
         self.pageControl.frame = frame;
         
-    } completion:^(BOOL finished) {
-        if(self.pageControl.pagesCount > 1)
-        {
-            [UIView animateWithDuration:0.3f animations:^{
-                self.pageControl.alpha = 1.0f;
-            }];
-        }
-    }];
+        mainScrollView.contentSize = CGSizeMake(mainScrollView.contentSize.width, CGRectGetMaxY(frame) + 12);
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            self.pageControl.alpha = 1.0f;
+        }];
+    }
+    else
+    {
+        mainScrollView.contentSize = CGSizeMake(mainScrollView.contentSize.width, CGRectGetMaxY([self lastVisibleCell].frame) + KIOSK_ADVANCED_SHELF_MARGIN_TOP);
+    }
 }
 
 #endif
@@ -372,18 +374,9 @@
 
 #pragma mark - PCKioskAdvancedControlElementHeightDelegate
 
-- (void)setHeight:(CGFloat)height forCell:(PCKioskAdvancedControlElement *)cell {
-    
+- (void)setHeight:(CGFloat)height forCell:(PCKioskAdvancedControlElement *)cell
+{
     NSInteger index = [cells indexOfObject:cell];
-    
-//    NSInteger count = 0;
-//    for (NSObject * object in cells) {
-//        if (![object isEqual:[NSNull null]]) {
-//            count++;
-//        }
-//    }
-    
-    //NSInteger count = [cells count];
     
     NSInteger count = _numberOfRevisionsForCurrentpage;
     
@@ -411,18 +404,20 @@
         
         BOOL isLastCell = (index == (count - 1));
         
-        if (isLastCell) {
-            CGFloat y = mainScrollView.contentOffset.y;
-            CGFloat height = mainScrollView.frame.size.height;
-            CGFloat contentHeight = mainScrollView.contentSize.height;
-            CGFloat treshOld = 100.0f;
-            BOOL isContentSizeBiggerThanSize = (contentHeight > height);
-            
-            
-            
-            if (isContentSizeBiggerThanSize && ((y + height) > (contentHeight - treshOld))) {
-                mainScrollView.contentOffset = CGPointMake(0, contentHeight - height);
-            }
+        if (isLastCell)
+        {
+            [mainScrollView scrollRectToVisible:cell.frame animated:NO];
+//            CGFloat y = mainScrollView.contentOffset.y;
+//            CGFloat height = mainScrollView.frame.size.height;
+//            CGFloat contentHeight = mainScrollView.contentSize.height;
+//            CGFloat treshOld = 100.0f;
+//            BOOL isContentSizeBiggerThanSize = (contentHeight > height);
+//            
+//            
+//            
+//            if (isContentSizeBiggerThanSize && ((y + height) > (contentHeight - treshOld))) {
+//                mainScrollView.contentOffset = CGPointMake(0, contentHeight - height);
+//            }
         }
     }
     

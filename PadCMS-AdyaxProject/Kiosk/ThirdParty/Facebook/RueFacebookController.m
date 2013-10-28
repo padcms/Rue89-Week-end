@@ -18,6 +18,8 @@
 {
     NSString* _postString;
     NSURL* _postUrl;
+    NSURL* _pictureUrl;
+    NSString* _postDescription;
 }
 @property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, strong) FacebookPostConfirmView* confirmView;
@@ -62,12 +64,26 @@ static NSString* kFacebookAppId = nil;
 
 - (id) initWithMessage:(NSString*)message url:(NSURL*)url
 {
+    return [self initWithMessage:message url:url pictureLink:nil description:nil];
+}
+
+- (id) initWithMessage:(NSString*)message url:(NSURL*)url pictureLink:(NSURL*)pictureLink
+{
+    return [self initWithMessage:message url:url pictureLink:pictureLink description:nil];
+}
+- (id) initWithMessage:(NSString*)message url:(NSURL*)url pictureLink:(NSURL*)pictureLink description:(NSString*)description
+{
     self = [super init];
     if(self)
     {
         _needToConfirmPost = YES;
         _postString = message;
         _postUrl = url;
+        if(description)
+        {
+            _postDescription = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        _pictureUrl = pictureLink;
         [self cleareCookie];
     }
     return self;
@@ -136,7 +152,16 @@ static NSString* kFacebookAppId = nil;
     NSString* postString = self.confirmView ? self.confirmView.postMessage : _postString;
     
     //    picture=%@
-    NSString* paramsString = [NSString stringWithFormat:@"access_token=%@&message=%@&link=%@", self.token, postString, _postUrl.absoluteString];
+    //      description
+    NSMutableString* paramsString = [NSMutableString stringWithFormat:@"access_token=%@&message=%@&link=%@", self.token, postString, _postUrl.absoluteString];
+    if(_pictureUrl)
+    {
+        [paramsString appendFormat:@"&picture=%@", [_pictureUrl.absoluteString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    if(_postDescription)
+    {
+        [paramsString appendFormat:@"&description=%@", _postDescription];
+    }
     request.HTTPMethod = @"POST";
     
     request.HTTPBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding];

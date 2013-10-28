@@ -34,7 +34,7 @@
 
 #import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
-#import "NSObject+Block.h"
+#import "UINavigationController+BalancedTransition.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, MKStoreManagerDataSource>
 
@@ -236,7 +236,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     {
         mainView = nil;
 #ifdef RUE
-        [self.navigationController  popViewControllerAnimated:YES];
+        [self.navigationController  popViewControllerAnimated:YES completion:nil];
         //_revisionViewController = nil;
 #else
         [_revisionViewController.view removeFromSuperview];
@@ -259,21 +259,10 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
     {
-        self.navigationController.view.userInteractionEnabled = NO;
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        [self performBlock:^{
+        [self.navigationController popViewControllerAnimated:YES completion:^{
             
             showRevision(revisionToPresent);
-            
-            [self performBlock:^{
-                
-                self.navigationController.view.userInteractionEnabled = YES;
-                
-            } afterDealay:0.5];
-            
-        } afterDealay:0.5];
+        }];
     }
     else
     {
@@ -993,7 +982,7 @@ BOOL stringExists(NSString* str)
     [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
-    [[self navigationController] pushViewController:_revisionViewController animated:YES];
+    [[self navigationController] pushViewController:_revisionViewController animated:YES completion:nil];
 #else
     [self.view addSubview:_revisionViewController.view];
 #endif
@@ -1302,7 +1291,8 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - PCKioskHeaderViewDelegate
 
-- (void)contactUsButtonTapped {
+- (void)contactUsButtonTapped
+{
     NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"", PCApplicationNotificationMessageKey : @""};
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
     
@@ -1311,13 +1301,30 @@ BOOL stringExists(NSString* str)
         contactEmail = currentApplication.contactEmail;
     }
     [self.emailController.emailViewController setToRecipients:@[contactEmail]];
-
+    
     self.emailController.delegate = self;
     [self.emailController emailShow];
+    
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
+    
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
         [[self shelfView] reload];
     } onError:^(NSError *error) {
@@ -1326,6 +1333,21 @@ BOOL stringExists(NSString* str)
 }
 
 - (void)subscribeButtonTapped {
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
     
     //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
 //    [[InAppPurchases sharedInstance] newSubscription];
@@ -1360,7 +1382,8 @@ BOOL stringExists(NSString* str)
     
 }
 
-- (void)shareButtonTapped {
+- (void)shareButtonTapped
+{
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
     sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];

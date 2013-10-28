@@ -18,7 +18,7 @@
 
 - (void)setText:(NSString *)text
 {
-    text = [text stringByReplacingOccurrencesOfString:@"|" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"|" withString:@" "];
     [super setText:text];
     if(self.shouldResizeHeightToFit)
     {
