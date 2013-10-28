@@ -10,8 +10,8 @@
 
 @interface ImagesBank : NSObject
 
-- (void) getImageNamed:(NSString*)imageName toBlock:(void(^)(UIImage* image, NSError* error, BOOL isThumbForVideo))completionBlock;
-- (void) pushImage:(UIImage*)image named:(NSString*)imageName completionBlock:(void (^)(NSError* error))completionBlock;
-- (void) removeImageNamed:(NSString*)imageName completionBlock:(void(^)(NSError *error))completionBlock;
++ (ImagesBank*) sharedBank;
+
+- (void) getImageWithName:(NSString*)name path:(NSString*)imagePath toBlock:(void(^)(UIImage* image, NSError* error))completionBlock;
 
 @end

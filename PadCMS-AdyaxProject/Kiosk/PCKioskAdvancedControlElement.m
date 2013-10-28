@@ -25,7 +25,7 @@
 
 #import "PCRevision+DataOfDownload.h"
 #import "ProgressButton.h"
-
+#import "ImagesBank.h"
 #import "PCDownloadApiClient.h"
 
 typedef enum {
@@ -492,11 +492,25 @@ typedef enum {
     UIImage * placeholderImage = [UIImage imageNamed:@"home_illustration_placeholder"];
     NSString * illustrationURLString = self.revision.issue.imageSmallURL;
     NSString * serverURLString = [PCConfig serverURLString];
-    NSURL * illustrationURL = [ NSURL URLWithString:[NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString]];
+    NSString * illustrationPath = [NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString];
+//    NSURL * illustrationURL = [ NSURL URLWithString:illustrationPath];
+    
+    self.illustrationImageView.image = placeholderImage;
+    
+    PCRevision* updatedRevision = self.revision;
+    
+    [[ImagesBank sharedBank] getImageWithName:[NSString stringWithFormat:@"%i", self.revision.issue.identifier] path:illustrationPath toBlock:^(UIImage *image, NSError *error) {
+        
+        if(image && updatedRevision == [self revision])
+        {
+            self.illustrationImageView.image = image;
+        }
+    }];
+    
     
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
     //[self.illustrationImageView setImage:placeholderImage];
-        [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
+//        [self.illustrationImageView setImageWithURL:illustrationURL placeholderImage:placeholderImage];
     //});
     
     
