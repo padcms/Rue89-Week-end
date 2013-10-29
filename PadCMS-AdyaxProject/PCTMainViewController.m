@@ -221,6 +221,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 #ifdef RUE
 - (void)showIntroPopup {
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
+    //introPopup.titleText = currentApplication...
+    //introPopup.descriptionText = currentApplication...
+    //introPopup.infoText = currentApplication...
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
     [introPopup show];
@@ -248,6 +251,47 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) switchToRevision:(PCRevision*)revisionToPresent
 {
+    _revisionViewController.view.userInteractionEnabled = NO;
+    
+    [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0.3 completion:^{
+        
+        [self checkInterfaceOrientationForRevision:revisionToPresent];
+        
+        NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
+        _revisionViewController = [[PCRueRevisionViewController alloc]
+                                   initWithNibName:@"PCRevisionViewController"
+                                   bundle:bundle];
+        
+        [_revisionViewController setRevision:revisionToPresent];
+        
+        _revisionViewController.mainViewController = (PCMainViewController *)self;
+        _revisionViewController.initialPageIndex = 0;
+        
+        [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+        [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        
+        _revisionViewController.view.userInteractionEnabled = NO;
+        
+        [(PCRueRevisionViewController*)_revisionViewController showSummaryMenuAnimated:NO];
+        [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0 completion:nil];
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:_revisionViewController animated:NO];
+        
+        [(PCRueRevisionViewController*)_revisionViewController fadeOutViewWithDuration:0.3 completion:^{
+            
+            [(PCRueRevisionViewController*)_revisionViewController hideSummaryMenuAnimated:YES];
+            
+            _revisionViewController.view.userInteractionEnabled = YES;
+        }];
+        
+        self.mainView = _revisionViewController.view;
+        self.mainView.tag = 100;
+    }];
+    
+    return;
+    
+    // back/forward transition
     void (^showRevision)(PCRevision*) = ^(PCRevision* revision){
         
         NSUInteger index = [self.allRevisions indexOfObject:revisionToPresent];
@@ -257,12 +301,15 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         }
     };
     
-    if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
+    if(self.navigationController.visibleViewController == _revisionViewController)
     {
-        [self.navigationController popViewControllerAnimated:YES completion:^{
-            
-            showRevision(revisionToPresent);
-        }];
+        if(_revisionViewController.revision != revisionToPresent)
+        {
+            [self.navigationController popViewControllerAnimated:YES completion:^{
+                
+                showRevision(revisionToPresent);
+            }];
+        }
     }
     else
     {
@@ -299,8 +346,13 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     if (currentApplication == nil)
     {
         NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
-        
         NSDictionary *previousPlistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSDictionary *previousApplicationsList = [previousPlistContent objectForKey:PCJSONApplicationsKey];
+        NSDictionary *previousApplicationParameters = nil;
+        if(previousApplicationsList && previousApplicationsList.count)
+        {
+            previousApplicationParameters = [previousApplicationsList objectForKey:[[previousApplicationsList allKeys] objectAtIndex:0]];
+        }
         
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
 
@@ -340,9 +392,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 		}
 		else
 		{
-            [self changeNewsstanfFromServerPlistContent:previousPlistContent toContent:plistContent];
-            
-            
 			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
             
 			NSArray *keys = [applicationsList allKeys];
@@ -352,10 +401,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
 				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
 																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
-                //[self changeShareMessageFromServerPlistContent:previousPlistContent toContent:plistContent];
+                
+                if(previousApplicationParameters)
+                {
+                    [self syncronyzeApp:currentApplication fromOldApplicationParameters:previousApplicationParameters toNewApplicationParameters:applicationParameters];
+                }
 			}
-			else {
-				
+			else
+            {
 				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                                 message:nil
                                                                delegate:nil
@@ -400,25 +453,13 @@ BOOL stringExists(NSString* str)
     return (str && [str isKindOfClass:[NSString class]] && str.length);
 }
 
-- (void) changeNewsstanfFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
+- (void) changeNewsstandIfNeededFromParameters:(NSDictionary*)previousParams toParameters:(NSDictionary*)newParams
 {
-    NSDictionary *prevApplicationsList = [previousContent objectForKey:PCJSONApplicationsKey];
-    NSDictionary *newApplicationsList = [newContent objectForKey:PCJSONApplicationsKey];
+    NSString* oldPath = [previousParams objectForKey:newsstand_cover_key];
+    NSString* newPath = [newParams objectForKey:newsstand_cover_key];
     
-    NSString* oldPath = nil;
-    if(prevApplicationsList && prevApplicationsList.count)
-    {
-        NSDictionary* settingsDict = [prevApplicationsList objectForKey:[[prevApplicationsList allKeys] objectAtIndex:0]];
-        oldPath = [settingsDict objectForKey:newsstand_cover_key];
-    }
-    NSString* newPath = nil;
-    if(newApplicationsList && newApplicationsList.count)
-    {
-        NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
-        newPath = [settingsDict objectForKey:newsstand_cover_key];
-    }
-#warning newsstand cover update
-//    if(oldPath && [oldPath isKindOfClass:[NSString class]] && oldPath.length && newPath && [newPath isKindOfClass:[NSString class]] && newPath.length && [newPath isEqualToString:oldPath] == NO)
+#warning newsstand cover update uncomment "if" for release
+//    if(stringExists(newPath) && (stringExists(oldPath) == NO || (stringExists(oldPath) && [newPath isEqualToString:oldPath] == NO)))
 //    {
         NSString* fullPath = [[[PCConfig serverURLString]stringByAppendingPathComponent:newPath]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
@@ -427,16 +468,20 @@ BOOL stringExists(NSString* str)
         if(newImageData && newImageData.length)
         {
             UIImage* newImage = [UIImage imageWithData:newImageData];
-            
-            [[UIApplication sharedApplication] setNewsstandIconImage:newImage];
-            
-//            if(newImage)
-//            {
-//                NSString* newstandPath = [[NSBundle mainBundle] pathForResource:@"icon_newsstand" ofType:@"png"];
-//                [newImageData writeToFile:newstandPath atomically:YES];
-//            }
+            if(newImage)
+            {
+                [[UIApplication sharedApplication] setNewsstandIconImage:newImage];
+            }
         }
 //    }
+}
+
+- (void) syncronyzeApp:(PCRueApplication*)application fromOldApplicationParameters:(NSDictionary*)oldParametersList toNewApplicationParameters:(NSDictionary*)newParametersList
+{
+    [self changeNewsstandIfNeededFromParameters:oldParametersList toParameters:newParametersList];
+    
+    //[self changeShareMessageFromServerPlistContent:previousPlistContent toContent:plistContent];
+    
 }
 
 -(void)restartApplication
@@ -1291,7 +1336,8 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - PCKioskHeaderViewDelegate
 
-- (void)contactUsButtonTapped {
+- (void)contactUsButtonTapped
+{
     NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"", PCApplicationNotificationMessageKey : @""};
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
     
@@ -1300,13 +1346,30 @@ BOOL stringExists(NSString* str)
         contactEmail = currentApplication.contactEmail;
     }
     [self.emailController.emailViewController setToRecipients:@[contactEmail]];
-
+    
     self.emailController.delegate = self;
     [self.emailController emailShow];
+    
 }
 
 - (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
+    
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
         [[self shelfView] reload];
     } onError:^(NSError *error) {
@@ -1315,6 +1378,21 @@ BOOL stringExists(NSString* str)
 }
 
 - (void)subscribeButtonTapped {
+    
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+        
+    }
     
     //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
 //    [[InAppPurchases sharedInstance] newSubscription];
@@ -1349,7 +1427,8 @@ BOOL stringExists(NSString* str)
     
 }
 
-- (void)shareButtonTapped {
+- (void)shareButtonTapped
+{
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
     sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];

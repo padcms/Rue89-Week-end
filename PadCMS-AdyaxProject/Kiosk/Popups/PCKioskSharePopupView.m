@@ -18,6 +18,9 @@
 #import "UIView+EasyFrame.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "PCDownloadApiClient.h"
+#import "PCLocalizationManager.h"
+
 #define kDescriptionLabelLeftMargin 100
 
 @interface PCKioskSharePopupView()
@@ -148,6 +151,20 @@
 
 - (void)facebookShow
 {
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     if([RueFacebookController canPostEmbedded])
     {
         [RueFacebookController postEmbeddedText:self.facebookMessage url:[NSURL URLWithString:self.postUrl] image:nil inController:(UIViewController*)self.delegate completionHandler:nil];
@@ -252,6 +269,20 @@
 
 - (void)twitterShow
 {
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     //Twitter Controller show
     //[self hideMenus];
     //[shareMenu removeFromSuperview];
@@ -267,6 +298,20 @@
 
 - (void) googlePlusShareButtonPresed:(UIButton*)sender
 {
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                       value:@"You must be connected to the Internet."]
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                       value:@"OK"]
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     self.googleController = [[PCGooglePlusController alloc]initWithMessage:self.googleMessage postUrl:self.postUrl];
     
     CGRect oldFrame = self.frame;

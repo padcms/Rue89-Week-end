@@ -319,11 +319,15 @@
 
 - (PCKioskAdvancedControlElement*) lastVisibleCell
 {
-    NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
-    NSInteger lastVisibleRevisionIndex = startRevisionIndex + _numberOfRevisionsForCurrentpage - 1;
-    
-    PCKioskAdvancedControlElement *cell = [cells objectAtIndex:lastVisibleRevisionIndex];
-    return cell;
+    NSInteger lastVisibleRevisionIndex = _numberOfRevisionsForCurrentpage - 1;
+    if(lastVisibleRevisionIndex >= 0 && lastVisibleRevisionIndex < cells.count)
+    {
+        return [cells objectAtIndex:lastVisibleRevisionIndex];
+    }
+    else
+    {
+        return [cells objectAtIndex:0];
+    }
 }
 
 - (void) scrollToTopAnimated:(BOOL)animated

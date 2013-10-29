@@ -34,6 +34,10 @@
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
+		2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EF8181954C300E11910 /* ImagesBank.m */; };
+		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
+		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
+		2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF26181E9A01006FC178 /* ImagesBankImage.m */; };
 		2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
@@ -1659,6 +1663,12 @@
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
+		2D94BF1C181E94C7006FC178 /* ImagesBank+Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Networking.h"; sourceTree = "<group>"; };
+		2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Networking.m"; sourceTree = "<group>"; };
+		2D94BF1F181E9712006FC178 /* ImagesBank+Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Storage.h"; sourceTree = "<group>"; };
+		2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Storage.m"; sourceTree = "<group>"; };
+		2D94BF25181E9A01006FC178 /* ImagesBankImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBankImage.h; sourceTree = "<group>"; };
+		2D94BF26181E9A01006FC178 /* ImagesBankImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBankImage.m; sourceTree = "<group>"; };
 		2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+BalancedTransition.h"; sourceTree = "<group>"; };
 		2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+BalancedTransition.m"; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
@@ -1674,6 +1684,8 @@
 		2DA085FB180FF31900F9C716 /* ConfirTopBarImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfirTopBarImage@2x.png"; sourceTree = "<group>"; };
 		2DA240E418181BCF0022FEC4 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
+		2DA72EF7181954C300E11910 /* ImagesBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBank.h; sourceTree = "<group>"; };
+		2DA72EF8181954C300E11910 /* ImagesBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBank.m; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2480,6 +2492,7 @@
 		2D6DEB1917F9971700133D9A /* DataManagment */ = {
 			isa = PBXGroup;
 			children = (
+				2DA72EF6181954C300E11910 /* ImagesCatch */,
 				2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */,
 				2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */,
 				2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */,
@@ -2552,6 +2565,21 @@
 				2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */,
 			);
 			path = ConfirmViewImages;
+			sourceTree = "<group>";
+		};
+		2DA72EF6181954C300E11910 /* ImagesCatch */ = {
+			isa = PBXGroup;
+			children = (
+				2DA72EF7181954C300E11910 /* ImagesBank.h */,
+				2DA72EF8181954C300E11910 /* ImagesBank.m */,
+				2D94BF1C181E94C7006FC178 /* ImagesBank+Networking.h */,
+				2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */,
+				2D94BF1F181E9712006FC178 /* ImagesBank+Storage.h */,
+				2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */,
+				2D94BF25181E9A01006FC178 /* ImagesBankImage.h */,
+				2D94BF26181E9A01006FC178 /* ImagesBankImage.m */,
+			);
+			path = ImagesCatch;
 			sourceTree = "<group>";
 		};
 		2DC2FF601811547D00BA4F0B /* SBJSON */ = {
@@ -5120,7 +5148,9 @@
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
+				2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */,
 				57EADAFE180306A800EEA1F5 /* MKStoreKit+PadCMS.m in Sources */,
+				2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */,
 				60F022831590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228A1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */,
@@ -5155,6 +5185,7 @@
 				571B7E3C17F4ADF900B77DBA /* VerificationController.m in Sources */,
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
+				2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */,
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
@@ -5167,6 +5198,7 @@
 				2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */,
 				2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */,
 				2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */,
+				2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
 				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
