@@ -221,6 +221,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 #ifdef RUE
 - (void)showIntroPopup {
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
+    //introPopup.titleText = currentApplication...
+    //introPopup.descriptionText = currentApplication...
+    //introPopup.infoText = currentApplication...
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
     [introPopup show];

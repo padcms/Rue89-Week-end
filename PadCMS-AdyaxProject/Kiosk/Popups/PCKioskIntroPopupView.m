@@ -31,10 +31,10 @@
     self.titleLabel.frame = CGRectMake( 0, 20, contentFrame.size.width, 50);
     self.descriptionLabel.frame = CGRectMake(leftPadding, 90, contentFrame.size.width - leftPadding*2, 300);
     
-    self.titleLabel.text = @"Bienvenue !";
-    self.descriptionLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec dui ligula. Cras lacus enim, condimentum et massa ac, iaculis tincidunt tortor. Ut velit neque, rutrum at nunc vel, vehicula tempus velit. Cras a orci sapien. Sed nibh magna, bibendum at facilisis eget, accumsan vitae neque.\n\nAenean vehicula, magna in elementum suscipit, augue risus dapibus eros, sit amet elementum enim sem in massa. In hac habitasse platea dictumst.Integer sem nibh, imperdiet ac sapien at, venenatis eleifend felis. Nulla commodo libero eget libero iaculis, et dignissim quam auctor. Vestibulum mauris neque, consectetur at mi ut, ornare fermentum nunc.\n\nVestibulum semper feugiat ligula et suscipit. Curabitur egestas commodo augue, non lobortis eros sagittis eget.";
+    self.titleLabel.text = self.titleText ? self.titleText : @"Bienvenue !";
+    self.descriptionLabel.text = self.descriptionText ? self.descriptionText : @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec dui ligula. Cras lacus enim, condimentum et massa ac, iaculis tincidunt tortor. Ut velit neque, rutrum at nunc vel, vehicula tempus velit. Cras a orci sapien. Sed nibh magna, bibendum at facilisis eget, accumsan vitae neque.\n\nAenean vehicula, magna in elementum suscipit, augue risus dapibus eros, sit amet elementum enim sem in massa. In hac habitasse platea dictumst.Integer sem nibh, imperdiet ac sapien at, venenatis eleifend felis. Nulla commodo libero eget libero iaculis, et dignissim quam auctor. Vestibulum mauris neque, consectetur at mi ut, ornare fermentum nunc.\n\nVestibulum semper feugiat ligula et suscipit. Curabitur egestas commodo augue, non lobortis eros sagittis eget.";
     
-    self.labelAfterSubscriptionButton.text = @"Je suis déjà qbonné ou je ux d'qbord voir à auoi something else wrote here but i do not known what.";
+    self.labelAfterSubscriptionButton.text = self.infoText ? self.infoText : @"Je suis déjà qbonné ou je ux d'qbord voir à auoi something else wrote here but i do not known what.";
     
     UIButton* aboveLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [aboveLabelButton addTarget:self action:@selector(tapLabel:) forControlEvents:UIControlEventTouchUpInside];

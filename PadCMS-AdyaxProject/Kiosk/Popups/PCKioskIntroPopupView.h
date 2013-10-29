@@ -13,4 +13,8 @@
 
 @property (nonatomic, weak) id<PCKioskSubscribeButtonDelegate> purchaseDelegate;
 
+@property (nonatomic, strong) NSString* titleText;
+@property (nonatomic, strong) NSString* descriptionText;
+@property (nonatomic, strong) NSString* infoText;
+
 @end
