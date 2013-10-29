@@ -481,7 +481,7 @@ typedef enum {
     NSDate * dateOfRevisionCreate = self.revision.createDate;
     NSDate* dateOfIssuePublication = self.revision.issue.publishDate;
     
-    self.dateLabel.date = dateOfIssuePublication ? dateOfIssuePublication : dateOfRevisionCreate;
+    self.dateLabel.date = dateOfIssuePublication ? onlyDayDateFromDate(dateOfIssuePublication) : dateOfRevisionCreate;
     self.dateLabel.hidden = NO;
     
     //category
@@ -522,6 +522,26 @@ typedef enum {
     //if (executionTime > 0.05) {
          //NSLog(@"UPDATE executionTime = %f", executionTime);
     //}
+}
+
+NSDate* onlyDayDateFromDate (NSDate* date)
+{
+    NSDateFormatter * dateFormatter = [NSDateFormatter new];
+    
+    [dateFormatter setDateFormat:@"dd"];
+    NSString * dayString = [dateFormatter stringFromDate:date];
+    [dateFormatter setDateFormat:@"yyyy"];
+    NSString * yearString = [dateFormatter stringFromDate:date];
+    [dateFormatter setDateFormat:@"MM"];
+    NSString * monthString = [dateFormatter stringFromDate:date];
+    
+    NSString* fullDate = [NSString stringWithFormat:@"%@-%@-%@", yearString, monthString, dayString];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate* newDate = [dateFormatter dateFromString:fullDate];
+    
+    return newDate;
 }
 
 - (BOOL) isTheSameDateWithCell:(PCKioskAdvancedControlElement*)prevCell
