@@ -251,6 +251,47 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) switchToRevision:(PCRevision*)revisionToPresent
 {
+    _revisionViewController.view.userInteractionEnabled = NO;
+    
+    [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0.3 completion:^{
+        
+        [self checkInterfaceOrientationForRevision:revisionToPresent];
+        
+        NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
+        _revisionViewController = [[PCRueRevisionViewController alloc]
+                                   initWithNibName:@"PCRevisionViewController"
+                                   bundle:bundle];
+        
+        [_revisionViewController setRevision:revisionToPresent];
+        
+        _revisionViewController.mainViewController = (PCMainViewController *)self;
+        _revisionViewController.initialPageIndex = 0;
+        
+        [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+        [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        
+        _revisionViewController.view.userInteractionEnabled = NO;
+        
+        [(PCRueRevisionViewController*)_revisionViewController showSummaryMenuAnimated:NO];
+        [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0 completion:nil];
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:_revisionViewController animated:NO];
+        
+        [(PCRueRevisionViewController*)_revisionViewController fadeOutViewWithDuration:0.3 completion:^{
+            
+            [(PCRueRevisionViewController*)_revisionViewController hideSummaryMenuAnimated:YES];
+            
+            _revisionViewController.view.userInteractionEnabled = YES;
+        }];
+        
+        self.mainView = _revisionViewController.view;
+        self.mainView.tag = 100;
+    }];
+    
+    return;
+    
+    // back/forward transition
     void (^showRevision)(PCRevision*) = ^(PCRevision* revision){
         
         NSUInteger index = [self.allRevisions indexOfObject:revisionToPresent];
@@ -260,12 +301,15 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         }
     };
     
-    if(self.navigationController.visibleViewController == _revisionViewController && _revisionViewController.revision != revisionToPresent)
+    if(self.navigationController.visibleViewController == _revisionViewController)
     {
-        [self.navigationController popViewControllerAnimated:YES completion:^{
-            
-            showRevision(revisionToPresent);
-        }];
+        if(_revisionViewController.revision != revisionToPresent)
+        {
+            [self.navigationController popViewControllerAnimated:YES completion:^{
+                
+                showRevision(revisionToPresent);
+            }];
+        }
     }
     else
     {

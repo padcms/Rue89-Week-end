@@ -143,6 +143,47 @@ const CGFloat kAnimationDuration = 0.4f;
 
 #pragma mark - Show/Hide public actions
 
+- (void)showAnimated:(BOOL)animated completion:(void(^)())completion
+{
+    self.isShown = YES;
+    if(animated)
+    {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            [self showAnimationActions];
+        } completion:^(BOOL finished) {
+            if(completion)completion();
+        }];
+    }
+    else
+    {
+        [self showAnimationActions];
+        if(completion)completion();
+    }
+}
+
+- (void)hideAnimated:(BOOL)animated completion:(void(^)())completion
+{
+    if(animated)
+    {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            
+            [self hideAnimationActions];
+            
+        } completion:^(BOOL finished) {
+            self.isShown = NO;
+            [self hideAnimationCompletionActions];
+            if(completion)completion();
+        }];
+    }
+    else
+    {
+        [self hideAnimationActions];
+        self.isShown = NO;
+        [self hideAnimationCompletionActions];
+        if(completion)completion();
+    }
+}
+
 - (void)show {
     self.isShown = YES;
     [UIView animateWithDuration:kAnimationDuration animations:^{

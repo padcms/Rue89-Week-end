@@ -10,6 +10,8 @@
 #import "PCRevisionSummaryPopup.h"
 #import "PCTMainViewController.h"
 
+#import "PCScrollView.h"
+
 @interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PCRevisionSummaryPopup * summaryPopup;
@@ -46,7 +48,70 @@
     [self addLeftSwipeToBackGesture];
 }
 
-- (void)addLeftSwipeToBackGesture {
+- (void) fadeInViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock
+{
+    void(^fadeIn)() = ^{
+        
+        self.mainScrollView.alpha = 0.0;
+    };
+    
+    if(duration)
+    {
+        [UIView animateWithDuration:duration animations:^{
+            
+            fadeIn();
+            
+        } completion:^(BOOL finished) {
+            
+            if(complBlock) complBlock();
+        }];
+    }
+    else
+    {
+        fadeIn();
+        if(complBlock)complBlock();
+    }
+}
+
+- (void) fadeOutViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock
+{
+    void(^fadeOut)() = ^{
+        
+        self.mainScrollView.alpha = 1.0;
+    };
+    
+    if(duration)
+    {
+        [UIView animateWithDuration:duration animations:^{
+            
+            fadeOut();
+            
+        } completion:^(BOOL finished) {
+            
+            if(complBlock) complBlock();
+        }];
+    }
+    else
+    {
+        fadeOut();
+        if(complBlock)complBlock();
+    }
+}
+
+- (void) showSummaryMenuAnimated:(BOOL)animated
+{
+    [self.summaryPopup setRevisionsList:[self sortedListOfAllDownloadedRevisions]];
+    [self.summaryPopup showAnimated:animated completion:nil];
+}
+
+
+- (void) hideSummaryMenuAnimated:(BOOL)animated
+{
+    [self.summaryPopup hideAnimated:animated completion:nil];
+}
+
+- (void)addLeftSwipeToBackGesture
+{
     UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandler:)];
     [swipe setDirection:UISwipeGestureRecognizerDirectionRight];
     swipe.delegate = self;
@@ -99,7 +164,8 @@
 
 - (void)tapGesture:(UIGestureRecognizer *)recognizer
 {
-    if (self.summaryPopup.isShown) {
+    if (self.summaryPopup.isShown)
+    {
         [self.summaryPopup hide];
     }
 }
@@ -108,7 +174,8 @@
 
 - (void)leftSwipeHandler:(UISwipeGestureRecognizer *)recognizer
 {
-    if (self.summaryPopup.isShown) {
+    if (self.summaryPopup.isShown)
+    {
         [self.summaryPopup hide];
     }
     [self topBarView:nil backButtonTapped:nil];
@@ -143,7 +210,7 @@
 
 - (void) revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectRevision:(PCRevision *)revision
 {
-    [popup hide];
+    //[popup hide];
     [(PCTMainViewController*)self.mainViewController switchToRevision:revision];
 }
 

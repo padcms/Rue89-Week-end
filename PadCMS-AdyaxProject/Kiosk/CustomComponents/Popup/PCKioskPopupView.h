@@ -103,6 +103,7 @@ typedef int PCKioskPopupPresentationStyle;
 
 - (void)hideAnimationCompletionActions;
 
-
+- (void)showAnimated:(BOOL)animated completion:(void(^)())completion;
+- (void)hideAnimated:(BOOL)animated completion:(void(^)())completion;
 
 @end

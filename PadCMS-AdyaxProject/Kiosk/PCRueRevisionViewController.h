@@ -10,4 +10,10 @@
 
 @interface PCRueRevisionViewController : PCRevisionViewController
 
+- (void) fadeInViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock;
+- (void) fadeOutViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock;
+
+- (void) showSummaryMenuAnimated:(BOOL)animated;
+- (void) hideSummaryMenuAnimated:(BOOL)animated;
+
 @end
