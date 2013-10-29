@@ -27,7 +27,8 @@
 
 - (void) awakeFromNib
 {
-    self.label.text = @"<font kern=-0.5>LES ARTICLES\nDEJA TELECHARGES\nS'AFFICHENT\nDANS CE MENU</font>";
+    self.label.text = @"LES ARTICLES DEJA TELECHARGES S'AFFICHENT DANS CE MENU";
+    self.label.kernValue = -0.5f;
     self.label.font = [UIFont fontWithName:PCFontInterstateLight size:15];
     self.label.textAlignment = RTTextAlignmentCenter;
     self.label.textColor = UIColorFromRGB(0x969696);
