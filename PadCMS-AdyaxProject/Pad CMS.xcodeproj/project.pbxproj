@@ -19,6 +19,7 @@
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
 		2D046FDC181523F7005087D7 /* PCHtmlColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */; };
 		2D046FDD181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2D05E3BA182141D7005C9E5B /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */; };
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
@@ -1678,6 +1679,7 @@
 		2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSummaryPopupView.m; sourceTree = "<group>"; };
 		2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSummaryPopupView.xib; sourceTree = "<group>"; };
 		2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate-BoldItalic.ttf"; sourceTree = "<group>"; };
+		2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
 		2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewButton.png; sourceTree = "<group>"; };
 		2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewDescriptionFon.png; sourceTree = "<group>"; };
 		2DA085F3180FF1AC00F9C716 /* ConfirTopBarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirTopBarImage.png; sourceTree = "<group>"; };
@@ -2487,6 +2489,7 @@
 				2D046FD9181523F7005087D7 /* PCHtmlColumnViewController.h */,
 				2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */,
 				2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
+				2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -5196,6 +5199,7 @@
 				571B7E3717F4ADF900B77DBA /* SFHFKeychainUtils.m in Sources */,
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
 				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
+				2D05E3BA182141D7005C9E5B /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */,
 				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
 				2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */,
 				2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */,
