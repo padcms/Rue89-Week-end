@@ -21,8 +21,8 @@ static NSString* PUSH_MODE;
 
 + (void) initialize
 {
-    CLIENT_KEY = @"rqet2t-BuxHXzzrJmhyAfwPIyxHX6_e7lkRysPj7MXBzEfVmI-JvAvHxfYvBkZOR9";
-    CLIENT_SECRET = @"t5DWCxESkq_F6bVgpTxEroy7fs4XT4SS1pjXIeH5zhifRs4BOvKW2C4yjhVUdNee";
+    CLIENT_KEY = @"wKIk6gJEl1d-v64Y08xZMy0VuUtQ88Ze-V1Jx_NYfehXr16x-0FpT4KILPxme-XS";
+    CLIENT_SECRET = @"AITqN8aXi9AjXaV3M8yPzJFxqDQAGyt_3ucmjxJ4yzC3MqFnvvsOZbItNF7-AXjL";
     API_URL = @"https://yellow2.process-one.net";
 #ifdef SANDBOX
     NSLog(@"BoxCar in debug mode.\n");
