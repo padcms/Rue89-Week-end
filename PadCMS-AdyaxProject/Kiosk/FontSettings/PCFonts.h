@@ -11,6 +11,7 @@
 extern NSString * const PCFontInterstateLight;
 extern NSString * const PCFontInterstateRegular;
 extern NSString * const PCFontInterstateBold;
+extern NSString * const PCFontInterstateBoldItalic;
 extern NSString * const PCFontInterstateBlack;
 extern NSString * const PCFontInterstateItalic;
 

@@ -17,5 +17,6 @@
 
 - (CTFontRef)boldFontRefForFontName:(NSString *)fontName size:(CGFloat)fontSize;
 - (CTFontRef)italicFontRefForFontName:(NSString *)fontName size:(CGFloat)fontSize;
+- (CTFontRef)boldItalicFontRefForFontName:(NSString *)fontName size:(CGFloat)fontSize;
 
 @end

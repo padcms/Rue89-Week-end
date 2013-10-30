@@ -314,7 +314,8 @@
 		<string>Quicksand_Bold.ttf</string>
 		<string>Interstate Regular.ttf</string>
 		<string>Interstate Light.ttf</string>
-		<string>Interstate Italic.ttf</string>
+		<string>Interstate Italic.TTF</string>
+		<string>Interstate-BoldItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
