@@ -255,6 +255,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     _revisionViewController.view.userInteractionEnabled = NO;
     
     NSArray* previousNavigationMenuList = [(PCRueRevisionViewController*)_revisionViewController summaryPopup].revisionsList;
+    float previousListOffset = [[(PCRueRevisionViewController*)_revisionViewController summaryPopup] contentOffset];
     
     [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0.3 completion:^{
         
@@ -275,7 +276,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         
         _revisionViewController.view.userInteractionEnabled = NO;
         
-        [(PCRueRevisionViewController*)_revisionViewController showSummaryMenuAnimated:NO withRevisionsList:previousNavigationMenuList];
+        [(PCRueRevisionViewController*)_revisionViewController showSummaryMenuAnimated:NO withRevisionsList:previousNavigationMenuList menuOffset:previousListOffset];
         [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0 completion:nil];
         
         [self.navigationController popViewControllerAnimated:NO];

@@ -83,6 +83,16 @@ const float kButtonsHeight = 60.0f;
 
 }
 
+- (void) setContentOffset:(float)contentOffset
+{
+    [self.tableView setContentOffset:CGPointMake(contentOffset, self.tableView.contentOffset.y)];
+}
+
+- (float) contentOffset
+{
+    return self.tableView.contentOffset.x;
+}
+
 - (NSArray*) revisionsList
 {
     return _revisionsList;

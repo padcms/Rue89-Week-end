@@ -19,6 +19,8 @@
 
 - (void) showSummaryMenuAnimated:(BOOL)animated;
 - (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList;
+- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList menuOffset:(float)offset;
+
 - (void) hideSummaryMenuAnimated:(BOOL)animated;
 
 @end

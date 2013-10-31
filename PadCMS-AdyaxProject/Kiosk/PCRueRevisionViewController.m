@@ -98,21 +98,26 @@
     }
 }
 
-- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList
+- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList menuOffset:(float)offset
 {
     if(revisionsList == nil)
     {
         revisionsList = [self sortedListOfAllDownloadedRevisions];
     }
     [self.summaryPopup setRevisionsList:revisionsList];
+    self.summaryPopup.contentOffset = offset;
     [self.summaryPopup showAnimated:animated completion:nil];
+}
+
+- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList
+{
+    [self showSummaryMenuAnimated:animated withRevisionsList:revisionsList menuOffset:0];
 }
 
 - (void) showSummaryMenuAnimated:(BOOL)animated
 {
     [self showSummaryMenuAnimated:animated withRevisionsList:nil];
 }
-
 
 - (void) hideSummaryMenuAnimated:(BOOL)animated
 {

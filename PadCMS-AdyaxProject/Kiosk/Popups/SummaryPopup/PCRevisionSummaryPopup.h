@@ -30,6 +30,8 @@
 @property (nonatomic, strong) EasyTableView * tableView;
 @property (nonatomic, weak) id<PCRevisionSummaryPopupDelegate> delegate;
 
+@property (nonatomic) float contentOffset;
+
 - (NSArray*) revisionsList;
 - (void) setRevisionsList:(NSArray*)revisions;
 
