@@ -8,12 +8,17 @@
 
 #import "PCRevisionViewController.h"
 
+@class PCRevisionSummaryPopup;
+
 @interface PCRueRevisionViewController : PCRevisionViewController
+
+@property (nonatomic, strong) PCRevisionSummaryPopup * summaryPopup;
 
 - (void) fadeInViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock;
 - (void) fadeOutViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock;
 
 - (void) showSummaryMenuAnimated:(BOOL)animated;
+- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList;
 - (void) hideSummaryMenuAnimated:(BOOL)animated;
 
 @end

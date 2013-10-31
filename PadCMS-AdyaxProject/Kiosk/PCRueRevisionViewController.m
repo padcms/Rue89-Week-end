@@ -14,7 +14,7 @@
 
 @interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) PCRevisionSummaryPopup * summaryPopup;
+
 
 @end
 
@@ -98,10 +98,19 @@
     }
 }
 
+- (void) showSummaryMenuAnimated:(BOOL)animated withRevisionsList:(NSArray*)revisionsList
+{
+    if(revisionsList == nil)
+    {
+        revisionsList = [self sortedListOfAllDownloadedRevisions];
+    }
+    [self.summaryPopup setRevisionsList:revisionsList];
+    [self.summaryPopup showAnimated:animated completion:nil];
+}
+
 - (void) showSummaryMenuAnimated:(BOOL)animated
 {
-    [self.summaryPopup setRevisionsList:[self sortedListOfAllDownloadedRevisions]];
-    [self.summaryPopup showAnimated:animated completion:nil];
+    [self showSummaryMenuAnimated:animated withRevisionsList:nil];
 }
 
 

@@ -15,9 +15,11 @@
 #import "PCRevision+DataOfDownload.h"
 
 @interface PCRevisionSummaryPopup() <EasyTableViewDelegate>
+{
+    NSArray* _revisionsList;
+}
 
 @property (nonatomic, strong) NSArray * tocItems;
-@property (nonatomic, strong) NSArray* revisionsList;
 
 @end
 
@@ -79,6 +81,11 @@ const float kButtonsHeight = 60.0f;
     [self insertSubview:menuButton atIndex:0];
     
 
+}
+
+- (NSArray*) revisionsList
+{
+    return _revisionsList;
 }
 
 - (void) setRevisionsList:(NSArray*)revisions
