@@ -13,8 +13,6 @@
 
 @interface RueSubscriptionManager () <MKStoreManagerDataSource>
 
-
-
 @end
 
 @implementation RueSubscriptionManager
@@ -45,6 +43,14 @@ static RueSubscriptionManager* _sharedManager = nil;
     return self;
 }
 
+- (NSArray*) avaliableSubscriptions
+{
+    return @[@"com.mobile.rue89.3months",
+             @"com.mobile.rue89.1months",
+             @"com.mobile.rue89.6months",
+             @"com.mobile.rue89.666months"];
+}
+
 - (void) subscribeCompletion:(void(^)(NSError* error))completion
 {
     //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
@@ -58,7 +64,7 @@ static RueSubscriptionManager* _sharedManager = nil;
     
     NSLog(@"IS SUBSCRIBED: %d", [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
     
-    if (![[MKStoreManager sharedManager] isSubscriptionActive:featureId])
+    if ([[MKStoreManager sharedManager] isSubscriptionActive:featureId] == NO)
     {
         [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
             
@@ -152,7 +158,7 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (void)productsFetched:(NSNotification *)notification
 {
-    NSLog(@"product fetched : %@", notification.userInfo);
+    NSLog(@"product fetched : %@", notification);
     
 //
 //    NSString * featureId = [[PCConfig subscriptions] lastObject];
@@ -166,7 +172,7 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (void)subscriptionsPurchased:(NSNotification *)notification
 {
-    NSLog(@"subscriptions purchased : %@", notification.userInfo);
+    NSLog(@"subscriptions purchased : %@", notification);
     
     
 //    NSString * featureId = [[PCConfig subscriptions] lastObject];

@@ -59,6 +59,9 @@
 		2DA592FC18228E5E00516768 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA592F318228E5E00516768 /* MKStoreManager.m */; };
 		2DA592FD18228E5E00516768 /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA592F518228E5E00516768 /* VerificationController.m */; };
 		2DA5930018228EAD00516768 /* RueSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA592FF18228EAD00516768 /* RueSubscriptionManager.m */; };
+		2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA593031822AD8400516768 /* SubscriptionMenuViewController.m */; };
+		2DA593061822AD8400516768 /* SubscriptionMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DA593041822AD8400516768 /* SubscriptionMenuViewController.xib */; };
+		2DA593091822B1CB00516768 /* SubscribeMenuPopuverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */; };
 		2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
@@ -1701,6 +1704,11 @@
 		2DA592F518228E5E00516768 /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 		2DA592FE18228EAD00516768 /* RueSubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSubscriptionManager.h; sourceTree = "<group>"; };
 		2DA592FF18228EAD00516768 /* RueSubscriptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSubscriptionManager.m; sourceTree = "<group>"; };
+		2DA593021822AD8400516768 /* SubscriptionMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionMenuViewController.h; sourceTree = "<group>"; };
+		2DA593031822AD8400516768 /* SubscriptionMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionMenuViewController.m; sourceTree = "<group>"; };
+		2DA593041822AD8400516768 /* SubscriptionMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionMenuViewController.xib; sourceTree = "<group>"; };
+		2DA593071822B1CB00516768 /* SubscribeMenuPopuverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeMenuPopuverController.h; sourceTree = "<group>"; };
+		2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeMenuPopuverController.m; sourceTree = "<group>"; };
 		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
 		2DA72EF7181954C300E11910 /* ImagesBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBank.h; sourceTree = "<group>"; };
 		2DA72EF8181954C300E11910 /* ImagesBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBank.m; sourceTree = "<group>"; };
@@ -2574,6 +2582,7 @@
 		2DA592E118228E1A00516768 /* SubscriptionManagment */ = {
 			isa = PBXGroup;
 			children = (
+				2DA593011822AD6100516768 /* SubsriptionMenuViewController */,
 				2DA592E318228E5E00516768 /* MKStoreKit */,
 				2DA592FE18228EAD00516768 /* RueSubscriptionManager.h */,
 				2DA592FF18228EAD00516768 /* RueSubscriptionManager.m */,
@@ -2618,6 +2627,18 @@
 				2DA592EB18228E5E00516768 /* SFHFKeychainUtils.m */,
 			);
 			path = Externals;
+			sourceTree = "<group>";
+		};
+		2DA593011822AD6100516768 /* SubsriptionMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2DA593021822AD8400516768 /* SubscriptionMenuViewController.h */,
+				2DA593031822AD8400516768 /* SubscriptionMenuViewController.m */,
+				2DA593041822AD8400516768 /* SubscriptionMenuViewController.xib */,
+				2DA593071822B1CB00516768 /* SubscribeMenuPopuverController.h */,
+				2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */,
+			);
+			path = SubsriptionMenuViewController;
 			sourceTree = "<group>";
 		};
 		2DA72EF6181954C300E11910 /* ImagesCatch */ = {
@@ -4500,6 +4521,7 @@
 				57A470A717BAA56300745732 /* home_footer_fade.png in Resources */,
 				57A470AD17BAA56300745732 /* home_footer_fade@2x.png in Resources */,
 				57A470B317BAA56300745732 /* home_header_bg.png in Resources */,
+				2DA593061822AD8400516768 /* SubscriptionMenuViewController.xib in Resources */,
 				57A470B917BAA56300745732 /* home_header_bg@2x.png in Resources */,
 				57A470BF17BAA56300745732 /* home_header_menu_separator.png in Resources */,
 				57A470C517BAA56300745732 /* home_header_menu_separator@2x.png in Resources */,
@@ -5192,8 +5214,10 @@
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
+				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
+				2DA593091822B1CB00516768 /* SubscribeMenuPopuverController.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
 				2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */,
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,

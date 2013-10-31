@@ -38,8 +38,11 @@
 #import "PCRevisionSummaryPopup.h"
 
 #import "RueSubscriptionManager.h"
+#import "SubscribeMenuPopuverController.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate>
+
+@property (nonatomic, strong) SubscribeMenuPopuverController* subscribePopoverController;
 
 @property (nonatomic, strong) NSMutableArray * allRevisions;
 @property (nonatomic, strong) PCTag * selectedTag;
@@ -1302,7 +1305,7 @@ BOOL stringExists(NSString* str)
     }
 }
 
-- (void)subscribeButtonTapped
+- (void)subscribeButtonTapped:(PCKioskSubscribeButton*)button
 {
     if([self isNotConnectedToNetwork])
     {
@@ -1310,6 +1313,13 @@ BOOL stringExists(NSString* str)
     }
     else
     {
+        NSArray* subscriptionsList = [[RueSubscriptionManager sharedManager] avaliableSubscriptions];
+        CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
+        
+        self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view];
+        
+        return;
+        
         [[RueSubscriptionManager sharedManager] subscribeCompletion:^(NSError *error) {
             
             if(error)

@@ -16,11 +16,14 @@
 
 @end
 
+
 @interface RueSubscriptionManager : NSObject
 
 + (RueSubscriptionManager*) sharedManager;
 
 @property (nonatomic, assign) id<RueSubscriptionManagerDelegate> delegate;
+
+- (NSArray*) avaliableSubscriptions;
 
 - (void) subscribeCompletion:(void(^)(NSError* error))completion;
 
