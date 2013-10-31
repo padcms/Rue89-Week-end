@@ -30,14 +30,16 @@
 #import "PCKioskSubHeaderView.h"
 #import "ArchivingDataSource.h"
 #import "PCRueKioskViewController.h"
-#import "MKStoreManager.h"
 
+#import "PCJSONKeys.h"
 #import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
 #import "UINavigationController+BalancedTransition.h"
 #import "PCRevisionSummaryPopup.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, MKStoreManagerDataSource>
+#import "RueSubscriptionManager.h"
+
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * allRevisions;
 @property (nonatomic, strong) PCTag * selectedTag;
@@ -570,8 +572,7 @@ BOOL stringExists(NSString* str)
 {
 	if (!currentApplication) return;
     
-    [[MKStoreManager sharedManager] setDataSource:self];
-    
+    [RueSubscriptionManager sharedManager].delegate = self;
     
     //load all revisions
     self.allRevisions = [NSMutableArray new];
@@ -624,9 +625,9 @@ BOOL stringExists(NSString* str)
     
     //subscription notification
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsFetched:) name:kProductFetchedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsFetched:) name:kProductFetchedNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
 
     //footer
     self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
@@ -677,28 +678,6 @@ BOOL stringExists(NSString* str)
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
 #endif
-}
-
-
-- (void)productsFetched:(NSNotification *)notification {
-//    
-//    NSString * featureId = [[PCConfig subscriptions] lastObject];
-//    
-//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-//    
-//    NSLog(@"IS SUBSCRIBED productsFetched: %d", isSubscriptionActive);
-//    
-//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
-}
-
-- (void)subscriptionsPurchased:(NSNotification *)notification {
-//    NSString * featureId = [[PCConfig subscriptions] lastObject];
-//    
-//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-//    
-//    NSLog(@"IS SUBSCRIBED subscriptionsPurchasedNotification: %d", isSubscriptionActive);
-//    
-//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
@@ -820,49 +799,11 @@ BOOL stringExists(NSString* str)
     return @"";
 }
 
- -(BOOL)isRevisionPaidWithIndex:(NSInteger)index
+- (BOOL)isRevisionPaidWithIndex:(NSInteger)index
 {
-    
-
-    
 	PCRevision *revision = [self revisionWithIndex:index];
     
-    if (revision.issue)
-    {
-        
-        //BOOL isIssuePaid = revision.issue.paid;
-        
-        BOOL isIssuePaid = NO;
-        if (revision.issue.productIdentifier.length < 1) {
-            isIssuePaid = YES;
-        } else {
-            isIssuePaid = [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
-        }
-        
-        
-#warning Check here for individual payment
-
-#warning HARDCODE!
-        BOOL isRevisionIndividuallyPaid = NO;
-#warning HARDCODE!
-        
-        if (isRevisionIndividuallyPaid) {
-            return  isIssuePaid;
-        }
-        
-        //REturn that PAID when we are already subscribed to whole magazine
-        
-        NSString * featureId = [[PCConfig subscriptions] lastObject];
-        BOOL subscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-        
-        if (subscriptionActive) {
-            return YES;
-        }
-        
-        return isIssuePaid;
-    }
-    
-    return NO;
+    return [[RueSubscriptionManager sharedManager] isRevisionPaid:revision];
 }
 
 - (UIImage *)revisionCoverImageWithIndex:(NSInteger)index andDelegate:(id<PCKioskCoverImageProcessingProtocol>)delegate
@@ -1076,18 +1017,9 @@ BOOL stringExists(NSString* str)
     
     if(revision)
     {
-		
-		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
+		if([self isNotConnectedToNetwork])
 		{
-			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                           value:@"You must be connected to the Internet."]
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                           value:@"OK"]
-                                                  otherButtonTitles:nil];
-			[alert show];
+			[self showNoConnectionAlert];
 			return;
 			
 		}
@@ -1136,18 +1068,11 @@ BOOL stringExists(NSString* str)
 //
 //	}
     
-    [[MKStoreManager sharedManager] buyFeature:revision.issue.productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
-        NSLog(@"Successfully bought product with id %@!", revision.issue.productIdentifier);
+    [[RueSubscriptionManager sharedManager] purchaseRevision:revision completion:^{
         
         revision.issue.paid = YES;
-        
         [[self shelfView] reload];
-    } onCancelled:^{
-        NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
     }];
-    
-    
-	
 }
 
 - (void) archiveRevisionWithIndex:(NSInteger)index {
@@ -1346,7 +1271,8 @@ BOOL stringExists(NSString* str)
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
     
     NSString * contactEmail = @"";
-    if (currentApplication.contactEmail) {
+    if (currentApplication.contactEmail)
+    {
         contactEmail = currentApplication.contactEmail;
     }
     [self.emailController.emailViewController setToRecipients:@[contactEmail]];
@@ -1356,79 +1282,71 @@ BOOL stringExists(NSString* str)
     
 }
 
-- (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues {
+- (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues
+{
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
     
-    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+    if([self isNotConnectedToNetwork])
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                       value:@"You must be connected to the Internet."]
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                       value:@"OK"]
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-        
+        [self showNoConnectionAlert];
     }
-    
-    [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
-        [[self shelfView] reload];
-    } onError:^(NSError *error) {
-        
-    }];
+    else
+    {
+        [[RueSubscriptionManager sharedManager] restorePurchasesCompletion:^(NSError *error) {
+            
+            if(error == nil)
+            {
+                [[self shelfView] reload];
+            }
+        }];
+    }
 }
 
-- (void)subscribeButtonTapped {
-    
-    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-    if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable)
+- (void)subscribeButtonTapped
+{
+    if([self isNotConnectedToNetwork])
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                       value:@"You must be connected to the Internet."]
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                       value:@"OK"]
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-        
+        [self showNoConnectionAlert];
     }
-    
-    //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
-//    [[InAppPurchases sharedInstance] newSubscription];
-    
-    NSString * featureId = [[PCConfig subscriptions] lastObject];
-    
-    //[MKStoreManager sharedManager]
-    
-    NSLog(@"IS PURCHASED: %d", [MKStoreManager isFeaturePurchased:featureId]);
-    
-    NSLog(@"IS SUBSCRIBED: %d", [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
-    
-    if (![[MKStoreManager sharedManager] isSubscriptionActive:featureId]) {
-        [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+    else
+    {
+        [[RueSubscriptionManager sharedManager] subscribeCompletion:^(NSError *error) {
             
-            self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
-            [[self shelfView] reload];
-            NSLog(@"Purchase completed.");
-        } onCancelled:^{
-            NSLog(@"Purchase cancelled.");
+            if(error)
+            {
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:error.localizedDescription
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                
+                self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+                [[self shelfView] reload];
+            }
         }];
-    } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:@"Subscription is already active"
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
-        [alert show];
     }
-    
+}
 
-    
+- (BOOL) isNotConnectedToNetwork
+{
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    return (remoteHostStatus == AFNetworkReachabilityStatusNotReachable);
+}
+
+- (void) showNoConnectionAlert
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                   value:@"You must be connected to the Internet."]
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                   value:@"OK"]
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)shareButtonTapped
@@ -1664,23 +1582,34 @@ BOOL stringExists(NSString* str)
     }
 }
 
+#pragma mark - RueSubscriptionManagerDelegate Protocol
 
-#pragma mark - MKStoreManagerDataSource
-
-- (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager {
-    
-    NSMutableArray * allIdentifiers = [NSMutableArray new];
-    
-    NSArray * issues = [self getApplication].issues;
-    
-    for (PCIssue * issue in issues) {
-        if (issue.productIdentifier.length > 0) {
-            [allIdentifiers addObject:issue.productIdentifier];
-        }
-    }
-    
-    return [NSArray arrayWithArray:allIdentifiers];
+- (NSArray*) allIssues
+{
+    return [self getApplication].issues;
 }
 
+/*- (void)productsFetched:(NSNotification *)notification {
+    //
+    //    NSString * featureId = [[PCConfig subscriptions] lastObject];
+    //
+    //    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
+    //
+    //    NSLog(@"IS SUBSCRIBED productsFetched: %d", isSubscriptionActive);
+    //
+    //    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
+}*/
+
+/*- (void)subscriptionsPurchased:(NSNotification *)notification {
+    //    NSString * featureId = [[PCConfig subscriptions] lastObject];
+    //
+    //    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
+    //
+    //    NSLog(@"IS SUBSCRIBED subscriptionsPurchasedNotification: %d", isSubscriptionActive);
+    //
+    //    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
+}*/
+
+#pragma mark -
 
 @end
