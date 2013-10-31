@@ -79,6 +79,7 @@ static const CGFloat padding_top = 12.0f;
     self.numberOfWordsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     self.autorsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     self.excerptLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    self.excerptLabel.kernValue = -0.5;
     self.autoresizesSubviews = YES;
     self.clipsToBounds = YES;
 }
@@ -121,16 +122,15 @@ static const CGFloat padding_top = 12.0f;
 
 - (void)setExcerptString:(NSString *)excerptString
 {
-    CGSize excerptTextSize = {0, 0};;
-    
     if (excerptString)
     {
-        excerptTextSize = [stringWithoutTagsFromString(excerptString) sizeWithFont:self.excerptLabel.font constrainedToSize:CGSizeMake(self.excerptLabel.frameWidth, 9999) lineBreakMode:self.excerptLabel.lineBreakMode];
-        excerptString = [[@"<font kern=-0.5>" stringByAppendingString:excerptString] stringByAppendingString:@"</font>"];
         self.excerptLabel.text = excerptString;
+        self.excerptLabel.frameHeight = self.excerptLabel.optimumSize.height + 1;
     }
-    excerptTextSize.height += 6;
-    self.excerptLabel.frameHeight = excerptTextSize.height;
+    else
+    {
+        self.excerptLabel.frameHeight = 0;
+    }
 }
 
 - (void) setupForRevision:(PCRevision*)revision

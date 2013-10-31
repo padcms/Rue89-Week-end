@@ -40,11 +40,9 @@
     
 }
 
-- (void)sizeToFitDescriptionLabelText {
-    
-    CGSize textSize = [self.descriptionLabel.plainText sizeWithFont:self.descriptionLabel.font constrainedToSize:CGSizeMake(self.descriptionLabel.frame.size.width, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-//    NSLog(@"pl text : %@", self.descriptionLabel.plainText);
-    self.descriptionLabel.frameHeight = textSize.height + 12;
+- (void)sizeToFitDescriptionLabelText
+{
+    self.descriptionLabel.frameHeight = self.descriptionLabel.optimumSize.height + 1;
     
     CGFloat minHeight = self.titleLabel.frameHeight + kTopMargin + kBottomMargin;
     

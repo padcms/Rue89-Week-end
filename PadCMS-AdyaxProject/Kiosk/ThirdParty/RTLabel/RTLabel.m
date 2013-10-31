@@ -392,8 +392,8 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 			}
 		}
 	}
-    
-    [self renderStrikeThroughForFrame:frame context:context];
+    if(context)
+        [self renderStrikeThroughForFrame:frame context:context];
 	
 	self.visibleRange = CTFrameGetVisibleStringRange(frame);
 
@@ -402,7 +402,8 @@ const CFStringRef kCustomStrikeThroughAttributeName = (__bridge CFStringRef)@"Cu
 	CFRelease(styleDict1);
 	CFRelease(styleDict);
 	CFRelease(framesetter);
-	CTFrameDraw(frame, context);
+    if(context)
+        CTFrameDraw(frame, context);
     CFRelease(frame);
 }
 
