@@ -11,6 +11,7 @@
 #import "PCLanscapeSladeshowColumnViewController.h"
 #import "PCHtmlColumnViewController.h"
 #import "objc/runtime.h"
+#import "FixedIllustrationTouchableColumnViewController.h"
 
 @implementation PCMagazineViewControllersFactory (HtmlTemplateSupport)
 
@@ -37,6 +38,9 @@
             break;
         case PCHTMLPageTemplate:
             return [[[PCHtmlColumnViewController alloc] initWithColumn:(PCColumn*)column] autorelease];
+            break;
+        case PCFixedIllustrationArticleTouchablePageTemplate:
+            return [[[FixedIllustrationTouchableColumnViewController alloc] initWithColumn:(PCColumn*)column] autorelease];
             break;
         default:
             return [[[PCColumnViewController alloc] initWithColumn:(PCColumn*)column] autorelease];
