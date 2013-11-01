@@ -30,7 +30,14 @@
     
     contentController.delegate = subscribePopoverController;
     
-    [subscribePopoverController setPopoverContentSize:CGSizeMake(contentSize.width, 0) animated:NO];
+    if([UIDevice currentDevice].systemVersion.floatValue >= 7.0)
+    {
+        [subscribePopoverController setPopoverContentSize:contentSize animated:NO];
+    }
+    else
+    {
+        [subscribePopoverController setPopoverContentSize:CGSizeMake(contentSize.width, 0) animated:NO];
+    }
     
     
     [subscribePopoverController presentPopoverFromRect:rect inView:view permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
