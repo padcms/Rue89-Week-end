@@ -1604,6 +1604,9 @@ BOOL stringExists(NSString* str)
 
 - (void) subscribtionScheme:(SubscriptionScheme *)scheme selectedInPopove:(SubscribeMenuPopuverController *)popover
 {
+    [self.subscribePopoverController dismissPopoverAnimated:YES];
+    self.subscribePopoverController = nil;
+    
     [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
      
         if(error)
