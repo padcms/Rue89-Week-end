@@ -40,7 +40,7 @@
 #import "RueSubscriptionManager.h"
 #import "SubscribeMenuPopuverController.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate>
 
 @property (nonatomic, strong) SubscribeMenuPopuverController* subscribePopoverController;
 
@@ -1317,27 +1317,7 @@ BOOL stringExists(NSString* str)
         CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
         
         self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view];
-        
-        return;
-        
-        [[RueSubscriptionManager sharedManager] subscribeCompletion:^(NSError *error) {
-            
-            if(error)
-            {
-                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:error.localizedDescription
-                                                                delegate:nil
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles:nil];
-                [alert show];
-            }
-            else
-            {
-                
-                self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
-                [[self shelfView] reload];
-            }
-        }];
+        self.subscribePopoverController.delegate = self;
     }
 }
 
@@ -1619,6 +1599,29 @@ BOOL stringExists(NSString* str)
     //
     //    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
 }*/
+
+#pragma mark - SubscribeMenuPopuverDelegate Protocol
+
+- (void) subscribtionScheme:(SubscriptionScheme *)scheme selectedInPopove:(SubscribeMenuPopuverController *)popover
+{
+    [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
+     
+        if(error)
+        {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:error.localizedDescription
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+            [[self shelfView] reload];
+        }
+    }];
+}
 
 #pragma mark -
 

@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class SubscriptionScheme, SubscribeMenuPopuverController;
+
+@protocol SubscribeMenuPopuverDelegate <UIPopoverControllerDelegate>
+
+@optional
+- (void) subscribtionScheme:(SubscriptionScheme*)scheme selectedInPopove:(SubscribeMenuPopuverController*)popover;
+
+@end
+
 @interface SubscribeMenuPopuverController : UIPopoverController
 
 + (SubscribeMenuPopuverController*) showMenuPopoverWithSubscriptions:(NSArray*)subscriptions fromRect:(CGRect)rect inView:(UIView*)view;
++ (SubscribeMenuPopuverController*) showMenuPopoverWithSubscriptions:(NSArray*)subscriptions fromRect:(CGRect)rect inView:(UIView*)view popoverTitle:(NSString*)title;
 
 @end

@@ -9,24 +9,43 @@
 #import "SubscribeMenuPopuverController.h"
 #import "SubscriptionMenuViewController.h"
 
+@interface SubscribeMenuPopuverController () <SubscriptionMenuViewControllerDelegate>
+
+@end
+
 @implementation SubscribeMenuPopuverController
 
 + (SubscribeMenuPopuverController*) showMenuPopoverWithSubscriptions:(NSArray*)subscriptions fromRect:(CGRect)rect inView:(UIView*)view
 {
-    SubscriptionMenuViewController* contentController = [SubscriptionMenuViewController subscriptionMenuControllerWithSubscriptions:subscriptions title:@"Select subscription."];
+    return [self showMenuPopoverWithSubscriptions:subscriptions fromRect:rect inView:view popoverTitle:@"Select subscription."];
+}
+
++ (SubscribeMenuPopuverController*) showMenuPopoverWithSubscriptions:(NSArray*)subscriptions fromRect:(CGRect)rect inView:(UIView*)view popoverTitle:(NSString*)title
+{
+    SubscriptionMenuViewController* contentController = [SubscriptionMenuViewController subscriptionMenuControllerWithSubscriptions:subscriptions title:title];
     
     CGSize contentSize = contentController.view.frame.size;
     
     SubscribeMenuPopuverController* subscribePopoverController = [[SubscribeMenuPopuverController alloc]initWithContentViewController:contentController];
     
+    contentController.delegate = subscribePopoverController;
+    
     [subscribePopoverController setPopoverContentSize:CGSizeMake(contentSize.width, 0) animated:NO];
     
     
-    [subscribePopoverController presentPopoverFromRect:rect inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [subscribePopoverController presentPopoverFromRect:rect inView:view permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
     
     subscribePopoverController.popoverContentSize = contentSize;
     
     return subscribePopoverController;
+}
+
+- (void) subscriptionSelected:(SubscriptionScheme *)subscrScheme
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(subscribtionScheme:selectedInPopove:)])
+    {
+        [(id<SubscribeMenuPopuverDelegate>)self.delegate subscribtionScheme:subscrScheme selectedInPopove:self];
+    }
 }
 
 @end

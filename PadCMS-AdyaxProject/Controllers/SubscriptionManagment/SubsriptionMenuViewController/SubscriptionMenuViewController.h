@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class SubscriptionScheme;
+
+@protocol SubscriptionMenuViewControllerDelegate <NSObject>
+
+- (void) subscriptionSelected:(SubscriptionScheme*)subscrScheme;
+
+@end
+
 @interface SubscriptionMenuViewController : UIViewController
 
 + (SubscriptionMenuViewController*) subscriptionMenuControllerWithSubscriptions:(NSArray*)subscriptions title:(NSString*)title;
+
+@property (nonatomic, weak) id<SubscriptionMenuViewControllerDelegate> delegate;
 
 @end

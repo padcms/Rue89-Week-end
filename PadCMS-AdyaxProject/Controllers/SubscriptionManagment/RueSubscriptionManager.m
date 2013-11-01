@@ -10,6 +10,7 @@
 #import "MKStoreManager.h"
 #import "PCKioskSubscribeButton.h"
 #import "PCIssue.h"
+#import "SubscriptionScheme.h"
 
 @interface RueSubscriptionManager () <MKStoreManagerDataSource>
 
@@ -45,24 +46,22 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (NSArray*) avaliableSubscriptions
 {
-    return @[@"com.mobile.rue89.3months",
-             @"com.mobile.rue89.1months",
-             @"com.mobile.rue89.6months",
-             @"com.mobile.rue89.666months"];
+    return @[[SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.3months"],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.1months"],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.6months"],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.666months"]];
 }
 
-- (void) subscribeCompletion:(void(^)(NSError* error))completion
+- (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion
 {
-    //self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
-    //    [[InAppPurchases sharedInstance] newSubscription];
+    //NSString * featureId = [[PCConfig subscriptions] lastObject];
+    NSString * featureId = subscrScheme.identifier;
     
-    NSString * featureId = [[PCConfig subscriptions] lastObject];
+    NSLog(@"IS %@ PURCHASED: %d", featureId, [MKStoreManager isFeaturePurchased:featureId]);
     
-    //[MKStoreManager sharedManager]
+    NSLog(@"IS %@ SUBSCRIBED: %d", featureId, [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
     
-    NSLog(@"IS PURCHASED: %d", [MKStoreManager isFeaturePurchased:featureId]);
-    
-    NSLog(@"IS SUBSCRIBED: %d", [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
+    return;
     
     if ([[MKStoreManager sharedManager] isSubscriptionActive:featureId] == NO)
     {

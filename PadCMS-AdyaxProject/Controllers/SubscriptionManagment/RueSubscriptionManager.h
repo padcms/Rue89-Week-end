@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class PCRevision, PCKioskSubscribeButton;
+@class PCRevision, PCKioskSubscribeButton, SubscriptionScheme;
 
 @protocol RueSubscriptionManagerDelegate <NSObject>
 
@@ -21,11 +21,11 @@
 
 + (RueSubscriptionManager*) sharedManager;
 
-@property (nonatomic, assign) id<RueSubscriptionManagerDelegate> delegate;
+@property (nonatomic, weak) id<RueSubscriptionManagerDelegate> delegate;
 
 - (NSArray*) avaliableSubscriptions;
 
-- (void) subscribeCompletion:(void(^)(NSError* error))completion;
+- (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion;
 
 - (void) purchaseRevision:(PCRevision*)revision completion:(void(^)())completion;
 
