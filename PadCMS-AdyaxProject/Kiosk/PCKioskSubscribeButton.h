@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class PCKioskSubscribeButton;
+
 @protocol PCKioskSubscribeButtonDelegate <NSObject>
 
 @required
-- (void)subscribeButtonTapped;
+- (void)subscribeButtonTapped:(PCKioskSubscribeButton*)button;
 
 @end
 
