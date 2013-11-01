@@ -44,6 +44,7 @@
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
 		2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B476318239AAF00F27836 /* SubscriptionScheme.m */; };
+		2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */; };
 		2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */; };
 		2DA085F5180FF1AC00F9C716 /* ConfirmViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */; };
 		2DA085F6180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */; };
@@ -1680,6 +1681,8 @@
 		2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSummaryPopupView.xib; sourceTree = "<group>"; };
 		2D9B476218239AAF00F27836 /* SubscriptionScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionScheme.h; sourceTree = "<group>"; };
 		2D9B476318239AAF00F27836 /* SubscriptionScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionScheme.m; sourceTree = "<group>"; };
+		2D9B47661823D82B00F27836 /* SubscriptionMenuActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionMenuActionSheet.h; sourceTree = "<group>"; };
+		2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionMenuActionSheet.m; sourceTree = "<group>"; };
 		2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate-BoldItalic.ttf"; sourceTree = "<group>"; };
 		2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
 		2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewButton.png; sourceTree = "<group>"; };
@@ -2642,6 +2645,8 @@
 				2DA593041822AD8400516768 /* SubscriptionMenuViewController.xib */,
 				2DA593071822B1CB00516768 /* SubscribeMenuPopuverController.h */,
 				2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */,
+				2D9B47661823D82B00F27836 /* SubscriptionMenuActionSheet.h */,
+				2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */,
 			);
 			path = SubsriptionMenuViewController;
 			sourceTree = "<group>";
@@ -5247,6 +5252,7 @@
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
 				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
+				2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,

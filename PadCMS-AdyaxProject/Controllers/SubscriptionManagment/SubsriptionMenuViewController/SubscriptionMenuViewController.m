@@ -116,7 +116,7 @@
     }
     else
     {
-        self.titleLabel.text = @"Sorry no proposals for now.";
+        self.title = @"Sorry no proposals for now.";
         self.view.frameHeight = self.titleLabel.frameY * 2 + self.titleLabel.frameHeight;
         for (UIButton*  btn in self.buttons)
         {

@@ -39,8 +39,10 @@
 
 #import "RueSubscriptionManager.h"
 #import "SubscribeMenuPopuverController.h"
+#import "SubscriptionScheme.h"
+#import "SubscriptionMenuActionSheet.h"
 
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate>
+@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) SubscribeMenuPopuverController* subscribePopoverController;
 
@@ -1315,9 +1317,15 @@ BOOL stringExists(NSString* str)
     {
         NSArray* subscriptionsList = [[RueSubscriptionManager sharedManager] avaliableSubscriptions];
         CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
+        NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
         
-        self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:@"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!"];
-        self.subscribePopoverController.delegate = self;
+        //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
+        //self.subscribePopoverController.delegate = self;
+        
+        SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
+        sheet.delegate = self;
+        [sheet showFromRect:buttonRect inView:self.view animated:YES];
+        
     }
 }
 
@@ -1624,6 +1632,41 @@ BOOL stringExists(NSString* str)
             [[self shelfView] reload];
         }
     }];
+}
+
+#pragma mark - UIActionSheetDelegate Protocol
+
+- (void) actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    SubscriptionScheme* scheme = nil;
+    
+    NSArray* subscrList = [(SubscriptionMenuActionSheet*)actionSheet subscriptions];
+    
+    if(subscrList && subscrList.count > buttonIndex)
+    {
+        scheme = subscrList[buttonIndex];
+    }
+    
+    if(scheme)
+    {
+        [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
+            
+            if(error)
+            {
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:error.localizedDescription
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+                [[self shelfView] reload];
+            }
+        }];
+    }
 }
 
 #pragma mark -
