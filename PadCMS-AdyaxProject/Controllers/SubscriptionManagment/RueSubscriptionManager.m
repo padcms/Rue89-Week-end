@@ -61,7 +61,8 @@ static RueSubscriptionManager* _sharedManager = nil;
     
     NSLog(@"IS %@ SUBSCRIBED: %d", featureId, [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
     
-    return;
+#warning harcode
+    featureId = @"com.mobile.rue89.3months";
     
     if ([[MKStoreManager sharedManager] isSubscriptionActive:featureId] == NO)
     {
