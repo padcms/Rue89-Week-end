@@ -22,6 +22,8 @@
 		2D05E3BA182141D7005C9E5B /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */; };
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
+		2D7FCFEA1824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */; };
+		2D7FCFEB1824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
 		2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF22180EA59600459330 /* PCRueTwitterController.m */; };
 		2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF2A180EB43900459330 /* RueFacebookController.m */; };
@@ -43,13 +45,8 @@
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
-<<<<<<< HEAD
-		2D9B476D1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B476C1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.m */; };
-		2D9B47711823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B47701823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
-=======
 		2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B476318239AAF00F27836 /* SubscriptionScheme.m */; };
 		2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */; };
->>>>>>> feature/SubscriptionManagment
 		2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */; };
 		2DA085F5180FF1AC00F9C716 /* ConfirmViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */; };
 		2DA085F6180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */; };
@@ -1649,6 +1646,10 @@
 		2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabelWithWordWrap.m; sourceTree = "<group>"; };
 		2D6DEB1A17F99A4400133D9A /* RueDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManager.h; sourceTree = "<group>"; };
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
+		2D7FCFE61824029500C30E5B /* FixedIllustrationTouchableColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIllustrationTouchableColumnViewController.h; sourceTree = "<group>"; };
+		2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIllustrationTouchableColumnViewController.m; sourceTree = "<group>"; };
+		2D7FCFE81824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFixedIllustrationArticleTouchablePageViewController.h; sourceTree = "<group>"; };
+		2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFixedIllustrationArticleTouchablePageViewController.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
 		2D85DF21180EA59600459330 /* PCRueTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueTwitterController.h; sourceTree = "<group>"; };
@@ -1684,17 +1685,10 @@
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
 		2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpSummaryPopupView.m; sourceTree = "<group>"; };
 		2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpSummaryPopupView.xib; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		2D9B476B1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIllustrationTouchableColumnViewController.h; sourceTree = "<group>"; };
-		2D9B476C1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIllustrationTouchableColumnViewController.m; sourceTree = "<group>"; };
-		2D9B476F1823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFixedIllustrationArticleTouchablePageViewController.h; sourceTree = "<group>"; };
-		2D9B47701823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFixedIllustrationArticleTouchablePageViewController.m; sourceTree = "<group>"; };
-=======
 		2D9B476218239AAF00F27836 /* SubscriptionScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionScheme.h; sourceTree = "<group>"; };
 		2D9B476318239AAF00F27836 /* SubscriptionScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionScheme.m; sourceTree = "<group>"; };
 		2D9B47661823D82B00F27836 /* SubscriptionMenuActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionMenuActionSheet.h; sourceTree = "<group>"; };
 		2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionMenuActionSheet.m; sourceTree = "<group>"; };
->>>>>>> feature/SubscriptionManagment
 		2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate-BoldItalic.ttf"; sourceTree = "<group>"; };
 		2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
 		2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewButton.png; sourceTree = "<group>"; };
@@ -2511,14 +2505,14 @@
 		2D046FD81815237C005087D7 /* Magazine */ = {
 			isa = PBXGroup;
 			children = (
+				2D7FCFE61824029500C30E5B /* FixedIllustrationTouchableColumnViewController.h */,
+				2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */,
+				2D7FCFE81824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.h */,
+				2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */,
 				2D046FD9181523F7005087D7 /* PCHtmlColumnViewController.h */,
 				2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */,
 				2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
 				2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */,
-				2D9B476B1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.h */,
-				2D9B476C1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.m */,
-				2D9B476F1823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.h */,
-				2D9B47701823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.m */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -5204,7 +5198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8137D6152224E50038EC7B /* main.m in Sources */,
-				2D9B476D1823F50400F27836 /* FixedIllustrationTouchableColumnViewController.m in Sources */,
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
@@ -5232,6 +5225,7 @@
 				57A4747817C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
+				2D7FCFEB1824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
@@ -5243,12 +5237,7 @@
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
-<<<<<<< HEAD
-				2D9B47711823FAFD00F27836 /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */,
-				571B7E3C17F4ADF900B77DBA /* VerificationController.m in Sources */,
-=======
 				2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */,
->>>>>>> feature/SubscriptionManagment
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
 				2DA593091822B1CB00516768 /* SubscribeMenuPopuverController.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
@@ -5272,6 +5261,7 @@
 				2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
+				2D7FCFEA1824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m in Sources */,
 				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
 				2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */,
