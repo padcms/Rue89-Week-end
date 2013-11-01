@@ -10,12 +10,15 @@
 #import "SubscriptionScheme.h"
 #import "UIView+EasyFrame.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RTLabel.h"
+#import "PCFonts.h"
 
 @interface SubscriptionMenuViewController ()
 
 @property (nonatomic, strong) NSArray* subscriptions;
+@property (nonatomic) NSString* title;
 
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) IBOutlet RTLabel* titleLabel;
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray* buttons;
 
 @end
@@ -28,7 +31,7 @@
     
     controller.view.userInteractionEnabled = YES;
     
-    controller.titleLabel.text = title;
+    controller.title = title;
     
     controller.subscriptions = subscriptions;
     
@@ -43,6 +46,32 @@
     {
         btn.layer.cornerRadius = 5;
     }
+    
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.font = [UIFont fontWithName:PCFontInterstateRegular size:17];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.textAlignment = RTTextAlignmentCenter;
+}
+
+- (NSString*) title
+{
+    return self.titleLabel.text;
+}
+
+- (void) setTitle:(NSString *)title
+{
+    self.titleLabel.text = title;
+    float newTitleHeight = (int)(self.titleLabel.optimumSize.height + 1);
+    
+    float dY = newTitleHeight - self.titleLabel.frameHeight;
+    
+    self.titleLabel.frameHeight = newTitleHeight;
+    
+    for (UIButton* btn in self.buttons)
+    {
+        btn.frameY += dY;
+    }
+    
 }
 
 - (void) setSubscriptions:(NSArray *)subscriptions

@@ -1316,7 +1316,7 @@ BOOL stringExists(NSString* str)
         NSArray* subscriptionsList = [[RueSubscriptionManager sharedManager] avaliableSubscriptions];
         CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
         
-        self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view];
+        self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:@"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!"];
         self.subscribePopoverController.delegate = self;
     }
 }
