@@ -16,4 +16,6 @@
 
 - (NSString*) identifier;
 
+- (BOOL) isIncludedIntoPurchasableObjects:(NSArray*)objects;
+
 @end

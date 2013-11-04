@@ -1303,6 +1303,10 @@ BOOL stringExists(NSString* str)
             {
                 [[self shelfView] reload];
             }
+            else
+            {
+                [self showAlertWithError:error];
+            }
         }];
     }
 }
@@ -1315,18 +1319,31 @@ BOOL stringExists(NSString* str)
     }
     else
     {
-        NSArray* subscriptionsList = [[RueSubscriptionManager sharedManager] avaliableSubscriptions];
-        CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
-        NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+        button.state = PCKioskSubscribeButtonStateSubscribing;
         
-        //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
-        //self.subscribePopoverController.delegate = self;
-        
-        SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
-        sheet.delegate = self;
-        sheet.initiatorButton = button;
-        [sheet showFromRect:buttonRect inView:self.view animated:YES];
-        
+        [[RueSubscriptionManager sharedManager] getAvalialeSubscriptionsToBlock:^(NSArray *avaliableSubscriptions, NSError *error) {
+            
+            if(error)
+            {
+                [self showAlertWithError:error];
+            }
+            else
+            {
+                NSArray* subscriptionsList = avaliableSubscriptions;
+                CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
+                NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+                
+                //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
+                //self.subscribePopoverController.delegate = self;
+                
+                SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
+                sheet.delegate = self;
+                sheet.initiatorButton = button;
+                [sheet showFromRect:buttonRect inView:self.view animated:YES];
+            }
+            
+            button.state = PCKioskSubscribeButtonStateNotSubscribed;
+        }];
     }
 }
 
@@ -1662,12 +1679,7 @@ BOOL stringExists(NSString* str)
             
             if(error)
             {
-                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:error.localizedDescription
-                                                                delegate:nil
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles:nil];
-                [alert show];
+                [self showAlertWithError:error];
                 initiator.state = PCKioskSubscribeButtonStateNotSubscribed;
             }
             else
@@ -1680,5 +1692,15 @@ BOOL stringExists(NSString* str)
 }
 
 #pragma mark -
+
+- (void) showAlertWithError:(NSError*)error
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
+                                                     message:error.localizedDescription
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+    [alert show];
+}
 
 @end

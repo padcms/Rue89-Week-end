@@ -7,14 +7,9 @@
 //
 
 #import "RueSubscriptionManager.h"
-#import "MKStoreManager.h"
 #import "PCKioskSubscribeButton.h"
 #import "PCIssue.h"
 #import "SubscriptionScheme.h"
-
-@interface RueSubscriptionManager () <MKStoreManagerDataSource>
-
-@end
 
 @implementation RueSubscriptionManager
 
@@ -34,17 +29,19 @@ static RueSubscriptionManager* _sharedManager = nil;
     self = [super init];
     if(self)
     {
-        [[MKStoreManager sharedManager] setDataSource:self];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsFetched:) name:kProductFetchedNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsInvalid:) name:kSubscriptionsInvalidNotification object:nil];
+        
+        [[MKStoreManager sharedManager] setDataSource:self];
     }
     return self;
 }
 
-- (NSArray*) avaliableSubscriptions
+
+- (NSArray*) predefinedSubscriptions
 {
     return @[[SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.3months"],
              [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.1months"],
@@ -58,11 +55,10 @@ static RueSubscriptionManager* _sharedManager = nil;
     NSString * featureId = subscrScheme.identifier;
     
     NSLog(@"IS %@ PURCHASED: %d", featureId, [MKStoreManager isFeaturePurchased:featureId]);
-    
+    NSLog(@"subscr products : %@", [[MKStoreManager sharedManager]subscriptionProducts].description);
+    NSLog(@"purchasable objects : %@ , %@", [[MKStoreManager sharedManager]purchasableObjects].description, [[MKStoreManager sharedManager]purchasableObjectsDescription].debugDescription);
     NSLog(@"IS %@ SUBSCRIBED: %d", featureId, [[MKStoreManager sharedManager] isSubscriptionActive:featureId]);
     
-#warning harcode
-    featureId = @"com.mobile.rue89.3months";
     
     if ([[MKStoreManager sharedManager] isSubscriptionActive:featureId] == NO)
     {
@@ -75,7 +71,8 @@ static RueSubscriptionManager* _sharedManager = nil;
         } onCancelled:^{
             
             NSLog(@"Purchase cancelled.");
-            
+            NSError* error = [NSError errorWithDomain:@"SubscribtionManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Subscription cancelled."}];
+            completion(error);
         }];
     }
     else
@@ -156,51 +153,57 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 #pragma mark - Notifications
 
+- (void) subscriptionsInvalid:(NSNotification *)notification
+{
+    NSLog(@"subscriptions invalid : %@", notification.description);
+}
+
 - (void)productsFetched:(NSNotification *)notification
 {
     NSLog(@"product fetched : %@", notification);
+    NSLog(@"purchasable objects : %@, %@", [[MKStoreManager sharedManager]purchasableObjects].description, [[MKStoreManager sharedManager]purchasableObjectsDescription].debugDescription);
+    NSLog(@"subscription products : %@", [[MKStoreManager sharedManager]subscriptionProducts].description);
     
-//
-//    NSString * featureId = [[PCConfig subscriptions] lastObject];
-//
-//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-//
-//    NSLog(@"IS SUBSCRIBED productsFetched: %d", isSubscriptionActive);
-//
-//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
+    [self checkForActiveSubscriptionAndNotifyDelegate];
 }
 
 - (void)subscriptionsPurchased:(NSNotification *)notification
 {
     NSLog(@"subscriptions purchased : %@", notification);
-    
-    
-//    NSString * featureId = [[PCConfig subscriptions] lastObject];
-//
-//    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-//
-//    NSLog(@"IS SUBSCRIBED subscriptionsPurchasedNotification: %d", isSubscriptionActive);
-//
-//    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
+
+    [self checkForActiveSubscriptionAndNotifyDelegate];
 }
 
-#pragma mark - MKStoreManagerDataSource
-
-- (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager
+- (SubscriptionScheme*) checkForActiveSubscription
 {
-    NSMutableArray * allIdentifiers = [NSMutableArray new];
+    SubscriptionScheme* activeScheme = nil;
     
-    NSArray * issues = [self.delegate allIssues];
+    NSArray* allSubscriptions = [self predefinedSubscriptions];
     
-    for (PCIssue * issue in issues)
+    for (SubscriptionScheme* scheme in allSubscriptions)
     {
-        if (issue.productIdentifier.length > 0)
+        if([[MKStoreManager sharedManager] isSubscriptionActive: scheme.identifier])
         {
-            [allIdentifiers addObject:issue.productIdentifier];
+            activeScheme = scheme;
         }
     }
     
-    return [NSArray arrayWithArray:allIdentifiers];
+    return activeScheme;
+}
+
+- (void) checkForActiveSubscriptionAndNotifyDelegate
+{
+    SubscriptionScheme* activeScheme = [self checkForActiveSubscription];
+    
+    if(activeScheme)
+    {
+        NSLog(@"Subscription is active : %@", activeScheme.identifier);
+        
+        if([self.delegate respondsToSelector:@selector(subscriptionIsActive:)])
+        {
+            [self.delegate subscriptionIsActive:activeScheme];
+        }
+    }
 }
 
 @end

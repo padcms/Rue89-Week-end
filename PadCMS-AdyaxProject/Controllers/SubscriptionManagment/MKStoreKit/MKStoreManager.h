@@ -61,6 +61,10 @@
 
 @interface MKStoreManager : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
+@property (nonatomic, copy) void(^completeLoadProductDataHendler)(NSArray* purchasableObjects);
+@property (nonatomic, copy) void(^failLoadProductDataHendler)(NSError* error);
+@property (nonatomic, readonly) BOOL isLoadindProducts;
+
 // These are the methods you will be using in your app
 + (MKStoreManager*)sharedManager;
 

@@ -7,6 +7,7 @@
 //
 
 #import "SubscriptionScheme.h"
+#import <StoreKit/StoreKit.h>
 
 @interface SubscriptionScheme ()
 {
@@ -46,6 +47,18 @@
     descr = [descr stringByAppendingString:dict.debugDescription];
     
     return descr;
+}
+
+- (BOOL) isIncludedIntoPurchasableObjects:(NSArray*)objects
+{
+    for (SKProduct* product in objects)
+    {
+        if([product.productIdentifier isEqualToString:self.identifier])
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

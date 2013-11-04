@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MKStoreManager.h"
 
 @class PCRevision, PCKioskSubscribeButton, SubscriptionScheme;
 
 @protocol RueSubscriptionManagerDelegate <NSObject>
 
 - (NSArray*) allIssues;
+
+@optional
+- (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme;
 
 @end
 
@@ -23,7 +27,7 @@
 
 @property (nonatomic, weak) id<RueSubscriptionManagerDelegate> delegate;
 
-- (NSArray*) avaliableSubscriptions;
+- (NSArray*) predefinedSubscriptions;
 
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion;
 
@@ -33,5 +37,11 @@
 
 - (BOOL) isRevisionPaid:(PCRevision*)revision;
 
+
+@end
+
+@interface RueSubscriptionManager (MKStoreManagerDataSource) <MKStoreManagerDataSource>
+
+- (void) getAvalialeSubscriptionsToBlock:(void(^)(NSArray* avaliableSubscriptions, NSError* error))completionBlock;
 
 @end

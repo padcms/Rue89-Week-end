@@ -240,6 +240,8 @@ static MKStoreManager* _sharedStoreManager;
 
 -(void) requestProductData
 {
+    _isLoadindProducts = YES;
+    
   NSMutableArray *productsArray = [NSMutableArray array];
   NSArray *consumables = [[[MKStoreManager storeKitItems] objectForKey:@"Consumables"] allKeys];
   NSArray *nonConsumables = [[MKStoreManager storeKitItems] objectForKey:@"Non-Consumables"];
@@ -308,6 +310,11 @@ static MKStoreManager* _sharedStoreManager;
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
 	[self.purchasableObjects addObjectsFromArray:response.products];
+    
+    if(self.completeLoadProductDataHendler)
+    {
+        self.completeLoadProductDataHendler(self.purchasableObjects);
+    }
 	
 #ifndef NDEBUG
 	for(int i=0;i<[self.purchasableObjects count];i++)
@@ -325,14 +332,20 @@ static MKStoreManager* _sharedStoreManager;
   [[NSNotificationCenter defaultCenter] postNotificationName:kProductFetchedNotification
                                                       object:[NSNumber numberWithBool:self.isProductsAvailable]];
 	self.productsRequest = nil;
+    _isLoadindProducts = NO;
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
+    if(self.failLoadProductDataHendler)
+    {
+        self.failLoadProductDataHendler(error);
+    }
 	self.isProductsAvailable = NO;
   [[NSNotificationCenter defaultCenter] postNotificationName:kProductFetchedNotification
                                                       object:[NSNumber numberWithBool:self.isProductsAvailable]];
 	self.productsRequest = nil;
+    _isLoadindProducts = NO;
 }
 
 // call this function to check if the user has already purchased your feature
