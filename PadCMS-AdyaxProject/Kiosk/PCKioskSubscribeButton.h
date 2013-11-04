@@ -10,6 +10,12 @@
 
 @class PCKioskSubscribeButton;
 
+typedef enum{
+    PCKioskSubscribeButtonStateNotSubscribed,
+    PCKioskSubscribeButtonStateSubscribing,
+    PCKioskSubscribeButtonStateSubscribed
+}PCKioskSubscribeButtonState;
+
 @protocol PCKioskSubscribeButtonDelegate <NSObject>
 
 @required
@@ -25,5 +31,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *subscribedLabel;
 
 @property (nonatomic) BOOL isSubscribedState;
+
+@property (nonatomic, assign) PCKioskSubscribeButtonState state;
 
 @end

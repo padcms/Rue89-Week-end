@@ -7,6 +7,13 @@
 //
 
 #import "PCKioskSubscribeButton.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface PCKioskSubscribeButton ()
+
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activity;
+
+@end
 
 @implementation PCKioskSubscribeButton
 
@@ -20,7 +27,8 @@
 }
 
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     NSString * fontName = @"QuicksandBold-Regular";
     
@@ -28,6 +36,8 @@
     [self.bottomLabel setFont:[UIFont fontWithName:fontName size:14.1]];
     
     [self.subscribedLabel setFont:[UIFont fontWithName:@"QuicksandBold-Regular" size:18]];
+    
+    self.activity.layer.cornerRadius = (int) (self.activity.frame.size.width / 2);
 }
 
 
@@ -66,6 +76,40 @@
 - (void)deselectLabels {
     [self.topLabel setTextColor:[UIColor whiteColor]];
     [self.bottomLabel setTextColor:[UIColor whiteColor]];
+}
+
+- (void) setState:(PCKioskSubscribeButtonState)state
+{
+    _state = state;
+    switch (state)
+    {
+        case PCKioskSubscribeButtonStateNotSubscribed:
+            
+            self.subscribedLabel.hidden = YES;
+            self.topLabel.hidden = NO;
+            self.bottomLabel.hidden = NO;
+            [self.activity stopAnimating];
+            self.button.userInteractionEnabled = YES;
+            break;
+            
+        case PCKioskSubscribeButtonStateSubscribing:
+            
+            self.subscribedLabel.hidden = YES;
+            self.topLabel.hidden = NO;
+            self.bottomLabel.hidden = NO;
+            [self.activity startAnimating];
+            self.button.userInteractionEnabled = NO;
+            break;
+            
+        case PCKioskSubscribeButtonStateSubscribed:
+            
+            self.subscribedLabel.hidden = NO;
+            self.topLabel.hidden = YES;
+            self.bottomLabel.hidden = YES;
+            [self.activity stopAnimating];
+            self.button.userInteractionEnabled = NO;
+            break;
+    }
 }
 
 - (void)setIsSubscribedState:(BOOL)isSubscribedState {
