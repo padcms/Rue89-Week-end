@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class PCKioskSubscribeButton;
+
 @interface SubscriptionMenuActionSheet : UIActionSheet
 
 @property (nonatomic, readonly) NSArray* subscriptions;
+@property (nonatomic, strong) PCKioskSubscribeButton* initiatorButton;
 
 - (id) initWithTitle:(NSString*)title subscriptions:(NSArray*)subscriptions;
 

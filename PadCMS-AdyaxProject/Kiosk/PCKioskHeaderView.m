@@ -76,9 +76,9 @@
         [self.delegate restorePurchasesButtonTapped:YES];
     }
 }
-- (void)purchaseAction:(PCKioskSubscribeButton *)sender {
+- (void)purchaseAction:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(subscribeButtonTapped:)]) {
-        [self.delegate subscribeButtonTapped:sender];
+        [self.delegate subscribeButtonTapped:self.subscribeButton];
     }
 }
 - (IBAction)logoButtonTapped:(UIButton *)sender {

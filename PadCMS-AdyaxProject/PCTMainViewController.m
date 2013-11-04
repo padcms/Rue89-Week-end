@@ -1324,6 +1324,7 @@ BOOL stringExists(NSString* str)
         
         SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
         sheet.delegate = self;
+        sheet.initiatorButton = button;
         [sheet showFromRect:buttonRect inView:self.view animated:YES];
         
     }
@@ -1634,6 +1635,11 @@ BOOL stringExists(NSString* str)
     }];
 }
 
+- (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme
+{
+    self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+}
+
 #pragma mark - UIActionSheetDelegate Protocol
 
 - (void) actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -1647,8 +1653,11 @@ BOOL stringExists(NSString* str)
         scheme = subscrList[buttonIndex];
     }
     
+    PCKioskSubscribeButton* initiator = [(SubscriptionMenuActionSheet*)actionSheet initiatorButton];
+    
     if(scheme)
     {
+        initiator.state = PCKioskSubscribeButtonStateSubscribing;
         [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
             
             if(error)
@@ -1659,10 +1668,11 @@ BOOL stringExists(NSString* str)
                                                        cancelButtonTitle:@"OK"
                                                        otherButtonTitles:nil];
                 [alert show];
+                initiator.state = PCKioskSubscribeButtonStateNotSubscribed;
             }
             else
             {
-                self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+                initiator.state = PCKioskSubscribeButtonStateSubscribed;
                 [[self shelfView] reload];
             }
         }];

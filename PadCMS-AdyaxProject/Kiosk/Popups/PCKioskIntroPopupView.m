@@ -88,9 +88,9 @@
     self.subscribeButton.layer.shadowOffset = CGSizeMake(0, 0);
 }
 
-- (void)purchaseAction:(PCKioskSubscribeButton *)sender {
+- (void)purchaseAction:(UIButton *)sender {
     if ([self.purchaseDelegate respondsToSelector:@selector(subscribeButtonTapped:)]) {
-        [self.purchaseDelegate subscribeButtonTapped:sender];
+        [self.purchaseDelegate subscribeButtonTapped:self.subscribeButton];
     }
 }
 
