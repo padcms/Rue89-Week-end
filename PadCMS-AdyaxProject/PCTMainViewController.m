@@ -895,11 +895,15 @@ BOOL stringExists(NSString* str)
             }];
         } else if (self.selectedTag.tagId == TAG_ID_ARCHIVES) {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                if (revision.state == PCRevisionStateArchived) {
+                
+                if (revision.state == PCRevisionStateArchived || [revision.issue isOld])
+                {
                     return YES;
                 }
-                
-                return NO;
+                else
+                {
+                    return NO;
+                }
             }];
         } else if (self.selectedTag.tagId == TAG_ID_FREE) {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
@@ -911,11 +915,15 @@ BOOL stringExists(NSString* str)
             }];
         } else if (self.selectedTag.tagId == TAG_ID_MAIN) {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                if (revision.state != PCRevisionStateArchived) {
+                
+                if (revision.state != PCRevisionStateArchived && revision.issue.isOld == NO)
+                {
                     return YES;
                 }
-                
-                return NO;
+                else
+                {
+                    return NO;
+                }
             }];
         }
         
