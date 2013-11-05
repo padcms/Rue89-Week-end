@@ -31,7 +31,7 @@
 
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion;
 
-- (void) purchaseRevision:(PCRevision*)revision completion:(void(^)())completion;
+- (void) purchaseRevision:(PCRevision*)revision completion:(void(^)(NSError*))completion;
 
 - (void) restorePurchasesCompletion:(void(^)(NSError *error))completion;
 
@@ -42,6 +42,6 @@
 
 @interface RueSubscriptionManager (MKStoreManagerDataSource) <MKStoreManagerDataSource>
 
-- (void) getAvalialeSubscriptionsToBlock:(void(^)(NSArray* avaliableSubscriptions, NSError* error))completionBlock;
+- (void) getAvalialeSubscriptionsToBlock:(void(^)(NSArray* avaliableSubscriptions, NSError* error))completionBlock; //return those subscriptions from "predefinedSubscriptions" which
 
 @end

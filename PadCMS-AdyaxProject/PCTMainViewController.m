@@ -1073,10 +1073,17 @@ BOOL stringExists(NSString* str)
 //
 //	}
     
-    [[RueSubscriptionManager sharedManager] purchaseRevision:revision completion:^{
+    [[RueSubscriptionManager sharedManager] purchaseRevision:revision completion:^(NSError* error){
         
-        revision.issue.paid = YES;
-        [[self shelfView] reload];
+        if(error)
+        {
+            [self showAlertWithError:error];
+        }
+        else
+        {
+            revision.issue.paid = YES;
+            [[self shelfView] reload];
+        }
     }];
 }
 

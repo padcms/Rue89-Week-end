@@ -40,7 +40,6 @@ static RueSubscriptionManager* _sharedManager = nil;
     return self;
 }
 
-
 - (NSArray*) predefinedSubscriptions
 {
     return @[[SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.3months"],
@@ -48,6 +47,7 @@ static RueSubscriptionManager* _sharedManager = nil;
              [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.6months"],
              [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.666months"]];
 }
+
 
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion
 {
@@ -68,10 +68,13 @@ static RueSubscriptionManager* _sharedManager = nil;
             
             if(completion) completion(nil);
             
-        } onCancelled:^{
+        } onCancelled:^(NSError* error){
             
             NSLog(@"Purchase cancelled.");
-            NSError* error = [NSError errorWithDomain:@"SubscribtionManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Subscription cancelled."}];
+            if(error == nil)
+            {
+                error = [NSError errorWithDomain:@"SubscribtionManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Subscription cancelled."}];
+            }
             completion(error);
         }];
     }
@@ -85,16 +88,17 @@ static RueSubscriptionManager* _sharedManager = nil;
     }
 }
 
-- (void) purchaseRevision:(PCRevision*)revision completion:(void(^)())completion
+- (void) purchaseRevision:(PCRevision*)revision completion:(void(^)(NSError*))completion
 {
     [[MKStoreManager sharedManager] buyFeature:revision.issue.productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
         
         NSLog(@"Successfully bought product with id %@!", revision.issue.productIdentifier);
         
-        if(completion) completion();
+        if(completion) completion(nil);
         
-    } onCancelled:^{
+    } onCancelled:^(NSError* error){
         
+        if(completion) completion(error);
         NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
     }];
 }

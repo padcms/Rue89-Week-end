@@ -52,7 +52,7 @@
 
 @interface MKStoreManager () //private methods and properties
 
-@property (nonatomic, copy) void (^onTransactionCancelled)();
+@property (nonatomic, copy) void (^onTransactionCancelled)(NSError*);
 @property (nonatomic, copy) void (^onTransactionCompleted)(NSString *productId, NSData* receiptData, NSArray* downloads);
 
 @property (nonatomic, copy) void (^onRestoreFailed)(NSError* error);
@@ -459,7 +459,7 @@ static MKStoreManager* _sharedStoreManager;
 
 - (void) buyFeature:(NSString*) featureId
          onComplete:(void (^)(NSString*, NSData*, NSArray*)) completionBlock
-        onCancelled:(void (^)(void)) cancelBlock
+        onCancelled:(void (^)(NSError*)) cancelBlock
 {
   self.onTransactionCompleted = completionBlock;
   self.onTransactionCancelled = cancelBlock;
@@ -650,6 +650,15 @@ static MKStoreManager* _sharedStoreManager;
      }
                                          onError:^(NSError* error)
      {
+         if(self.onTransactionCancelled)
+         {
+             NSError* err = error;
+             if(err == nil)
+             {
+                 err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
+             }
+             self.onTransactionCancelled(error);
+         }
        NSLog(@"%@", [error description]);
      }];
   }
@@ -663,7 +672,8 @@ static MKStoreManager* _sharedStoreManager;
       if(!receiptData) {
         if(self.onTransactionCancelled)
         {
-          self.onTransactionCancelled(productIdentifier);
+            NSError* err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
+          self.onTransactionCancelled(err);
         }
         else
         {
@@ -689,7 +699,7 @@ static MKStoreManager* _sharedStoreManager;
        {
          if(self.onTransactionCancelled)
          {
-           self.onTransactionCancelled(productIdentifier);
+           self.onTransactionCancelled(error);
          }
          else
          {
@@ -775,14 +785,22 @@ static MKStoreManager* _sharedStoreManager;
 {
   
 #ifndef NDEBUG
-  NSLog(@"Failed transaction: %@", [transaction description]);
-  NSLog(@"error: %@", transaction.error);
+    NSLog(@"Failed transaction: %@", [transaction description]);
+    NSLog(@"error: %@", transaction.error);
 #endif
 	
-  [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-  
-  if(self.onTransactionCancelled)
-    self.onTransactionCancelled();
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    
+    if(self.onTransactionCancelled)
+    {
+        NSError* error = transaction.error;
+        if(error == nil)
+        {
+            error = [NSError errorWithDomain:@"MKStoreKit" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Transaction is failed."}];
+        }
+        
+        self.onTransactionCancelled(error);
+    }
 }
 
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
