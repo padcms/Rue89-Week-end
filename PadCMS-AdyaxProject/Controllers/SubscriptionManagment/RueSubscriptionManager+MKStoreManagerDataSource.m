@@ -98,6 +98,17 @@
 {
     NSMutableArray * allIdentifiers = [NSMutableArray new];
     
+    [allIdentifiers addObjectsFromArray:[self productIdsFromAllIssues]];
+    
+    [allIdentifiers addObjectsFromArray:[self productIdsFromPredefinedSubscriptions]];
+    
+    return [NSArray arrayWithArray:allIdentifiers];
+}
+
+- (NSArray*) productIdsFromAllIssues
+{
+    NSMutableArray * allIdentifiers = [NSMutableArray new];
+    
     NSArray * issues = [self.delegate allIssues];
     
     for (PCIssue * issue in issues)
@@ -107,6 +118,12 @@
             [allIdentifiers addObject:issue.productIdentifier];
         }
     }
+    return [NSArray arrayWithArray:allIdentifiers];
+}
+
+- (NSArray*) productIdsFromPredefinedSubscriptions
+{
+    NSMutableArray * allIdentifiers = [NSMutableArray new];
     
     NSArray* subscriptions = [self predefinedSubscriptions];
     
@@ -114,9 +131,6 @@
     {
         [allIdentifiers addObject:scheme.identifier];
     }
-    
-    //NSLog(@"product ids for manager : %@", allIdentifiers.debugDescription);
-    
     return [NSArray arrayWithArray:allIdentifiers];
 }
 

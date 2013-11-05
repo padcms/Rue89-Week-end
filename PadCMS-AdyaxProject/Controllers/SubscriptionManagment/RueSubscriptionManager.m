@@ -105,12 +105,15 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (void) restorePurchasesCompletion:(void (^)(NSError *error))completion
 {
+    _isRestoringPurchases = YES;
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
         
+        _isRestoringPurchases = NO;
         if(completion) completion(nil);
         
     } onError:^(NSError *error) {
         
+        _isRestoringPurchases = NO;
         if(completion) completion(error);
     }];
 }

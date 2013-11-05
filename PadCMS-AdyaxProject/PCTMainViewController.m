@@ -808,6 +808,9 @@ BOOL stringExists(NSString* str)
 {
 	PCRevision *revision = [self revisionWithIndex:index];
     
+    revision.issue.productIdentifier = @"545s4f5d5";
+    revision.issue.price = @"50$";
+    
     return [[RueSubscriptionManager sharedManager] isRevisionPaid:revision];
 }
 
@@ -1294,7 +1297,7 @@ BOOL stringExists(NSString* str)
     
 }
 
-- (void)restorePurchasesButtonTapped:(BOOL)needRenewIssues
+- (void)restorePurchasesButtonTapped:(UIButton*)sender
 {
 //    [[InAppPurchases sharedInstance] renewSubscription:YES];
     
@@ -1304,6 +1307,7 @@ BOOL stringExists(NSString* str)
     }
     else
     {
+        sender.enabled = NO;
         [[RueSubscriptionManager sharedManager] restorePurchasesCompletion:^(NSError *error) {
             
             if(error == nil)
@@ -1313,8 +1317,12 @@ BOOL stringExists(NSString* str)
             else
             {
                 [self showAlertWithError:error];
+                [[self shelfView] reload];
             }
+            sender.enabled = YES;
         }];
+        
+        [[self shelfView] reload];
     }
 }
 

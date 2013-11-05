@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *contactUsButton;
 @property (strong, nonatomic) IBOutlet UIButton *restorePurchasesButton;
 
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* restorePurchasesActivity;
 
 @end
 
@@ -44,6 +45,8 @@
     [self.contactUsButton setTitleEdgeInsets:insets];
     [self.restorePurchasesButton setTitleEdgeInsets:insets];
     
+    [self.restorePurchasesButton addObserver:self forKeyPath:@"enabled" options:NSKeyValueObservingOptionNew context:nil];
+    
     //subscribe button
     
     //remove placeholer
@@ -55,6 +58,22 @@
     [self addSubview:self.subscribeButton];
     self.subscribeButton.frame = frame;
     [self.subscribeButton.button addTarget:self action:@selector(purchaseAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if(object == self.restorePurchasesButton && [keyPath isEqualToString:@"enabled"])
+    {
+        BOOL enabled = [change[@"new"] boolValue];
+        if(enabled)
+        {
+            [self.restorePurchasesActivity stopAnimating];
+        }
+        else
+        {
+            [self.restorePurchasesActivity startAnimating];
+        }
+    }
 }
 
 #pragma mark - Button actions
@@ -71,9 +90,10 @@
     }
 }
 
-- (IBAction)restorePurchasesButtonTapped:(UIButton *)sender {
+- (IBAction)restorePurchasesButtonTapped:(UIButton *)sender
+{
     if ([self.delegate respondsToSelector:@selector(restorePurchasesButtonTapped:)]) {
-        [self.delegate restorePurchasesButtonTapped:YES];
+        [self.delegate restorePurchasesButtonTapped:sender];
     }
 }
 - (void)purchaseAction:(UIButton *)sender {

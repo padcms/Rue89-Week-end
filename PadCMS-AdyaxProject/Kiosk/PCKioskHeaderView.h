@@ -15,7 +15,7 @@
 @required
 @optional
 - (void)contactUsButtonTapped;
-- (void)restorePurchasesButtonTapped:(BOOL) needRenewIssues;
+- (void)restorePurchasesButtonTapped:(UIButton*)sender;
 - (void)shareButtonTapped;
 - (void)logoButtonTapped;
 

@@ -27,6 +27,7 @@
 #import "ProgressButton.h"
 #import "ImagesBank.h"
 #import "PCDownloadApiClient.h"
+#import "RueSubscriptionManager.h"
 
 typedef enum {
     ElementsStateNotDownloaded,
@@ -339,11 +340,7 @@ typedef enum {
         case ElementsStateInfoIsDownloading:
 
             [self startObserveReachability];
-//            cancelButton.hidden = NO;
-//            downloadingInfoLabel.hidden = NO;
-//            downloadingProgressView.hidden = NO;
-//
-            //readButton.hidden = NO;
+            
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;
@@ -377,6 +374,17 @@ typedef enum {
                 NSString* productIdentifier = self.revision.issue.productIdentifier;//[self.dataSource productIdentifierWithIndex:self.revisionIndex];
                 [[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
             }
+            
+            if([[RueSubscriptionManager sharedManager]isRestoringPurchases])
+            {
+                payButton.alpha = 0.5;
+                payButton.userInteractionEnabled = NO;
+            }
+            else
+            {
+                payButton.alpha = 1;
+                payButton.userInteractionEnabled = YES;
+            }
         }
         break;
             
@@ -389,7 +397,6 @@ typedef enum {
             
         case ElementsStateContentDownloading:
             
-            //readButton.hidden = NO;
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
             downloadButton.hidden = NO;

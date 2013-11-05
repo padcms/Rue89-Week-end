@@ -26,6 +26,7 @@
 + (RueSubscriptionManager*) sharedManager;
 
 @property (nonatomic, weak) id<RueSubscriptionManagerDelegate> delegate;
+@property (nonatomic, readonly) BOOL isRestoringPurchases;
 
 - (NSArray*) predefinedSubscriptions;
 

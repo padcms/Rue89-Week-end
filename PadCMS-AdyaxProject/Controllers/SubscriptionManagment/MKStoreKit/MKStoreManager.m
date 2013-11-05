@@ -472,8 +472,12 @@ static MKStoreManager* _sharedStoreManager;
        [self showAlertWithTitle:NSLocalizedString(@"Review request approved", @"")
                         message:NSLocalizedString(@"You can use this feature for reviewing the app.", @"")];
        
-       if(self.onTransactionCompleted)
-         self.onTransactionCompleted(featureId, nil, nil);
+         if(self.onTransactionCompleted)
+         {
+             self.onTransactionCompleted(featureId, nil, nil);
+             self.onTransactionCompleted = nil;
+             self.onTransactionCancelled = nil;
+         }
      }
      else
      {
@@ -495,7 +499,17 @@ static MKStoreManager* _sharedStoreManager;
     NSArray *allIds = [self.purchasableObjects valueForKey:@"productIdentifier"];
     int index = [allIds indexOfObject:productId];
     
-    if(index == NSNotFound) return;
+        if(index == NSNotFound)
+        {
+            NSError* error = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"This purchase is not available yet. Try again later."}];
+            if(self.onTransactionCancelled)
+            {
+                self.onTransactionCancelled(error);
+                self.onTransactionCancelled = nil;
+                self.onTransactionCompleted = nil;
+            }
+            return;
+        }
     
     SKProduct *thisProduct = [self.purchasableObjects objectAtIndex:index];
 		SKPayment *payment = [SKPayment paymentWithProduct:thisProduct];
@@ -503,7 +517,7 @@ static MKStoreManager* _sharedStoreManager;
 	}
 	else
 	{
-    [self showAlertWithTitle:NSLocalizedString(@"In-App Purchasing disabled", @"")
+        [self showAlertWithTitle:NSLocalizedString(@"In-App Purchasing disabled", @"")
                      message:NSLocalizedString(@"Check your parental control settings and try again later", @"")];
 	}
 }
@@ -645,8 +659,12 @@ static MKStoreManager* _sharedStoreManager;
                                                            object:productIdentifier];
        
        [MKStoreManager setObject:receiptData forKey:productIdentifier];
-       if(self.onTransactionCompleted)
-         self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+         if(self.onTransactionCompleted)
+         {
+             self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+             self.onTransactionCompleted = nil;
+             self.onTransactionCancelled = nil;
+         }
      }
                                          onError:^(NSError* error)
      {
@@ -658,6 +676,8 @@ static MKStoreManager* _sharedStoreManager;
                  err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
              }
              self.onTransactionCancelled(error);
+             self.onTransactionCancelled = nil;
+             self.onTransactionCompleted = nil;
          }
        NSLog(@"%@", [error description]);
      }];
@@ -674,6 +694,8 @@ static MKStoreManager* _sharedStoreManager;
         {
             NSError* err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
           self.onTransactionCancelled(err);
+            self.onTransactionCancelled = nil;
+            self.onTransactionCompleted = nil;
         }
         else
         {
@@ -692,14 +714,20 @@ static MKStoreManager* _sharedStoreManager;
       [thisProduct verifyReceiptOnComplete:^
        {
          [self rememberPurchaseOfProduct:productIdentifier withReceipt:receiptData];
-         if(self.onTransactionCompleted)
-           self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+           if(self.onTransactionCompleted)
+           {
+               self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+               self.onTransactionCompleted = nil;
+               self.onTransactionCancelled = nil;
+           }
        }
                                    onError:^(NSError* error)
        {
          if(self.onTransactionCancelled)
          {
            self.onTransactionCancelled(error);
+             self.onTransactionCancelled = nil;
+             self.onTransactionCompleted = nil;
          }
          else
          {
@@ -710,8 +738,12 @@ static MKStoreManager* _sharedStoreManager;
     else
     {
       [self rememberPurchaseOfProduct:productIdentifier withReceipt:receiptData];
-      if(self.onTransactionCompleted)
-        self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+        if(self.onTransactionCompleted)
+        {
+            self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+            self.onTransactionCompleted = nil;
+            self.onTransactionCancelled = nil;
+        }
     }
   }
 }
@@ -800,6 +832,8 @@ static MKStoreManager* _sharedStoreManager;
         }
         
         self.onTransactionCancelled(error);
+        self.onTransactionCancelled = nil;
+        self.onTransactionCompleted = nil;
     }
 }
 

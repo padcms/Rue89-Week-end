@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1792</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.SystemVersion">12F45</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.AppKitVersion">1187.40</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -12,6 +12,7 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
 			<string>IBUIView</string>
@@ -175,6 +176,16 @@
 						<reference key="IBUIFontDescription" ref="566205644"/>
 						<reference key="IBUIFont" ref="1057216634"/>
 					</object>
+					<object class="IBUIActivityIndicatorView" id="632565908">
+						<reference key="NSNextResponder" ref="184171806"/>
+						<int key="NSvFlags">-2147482332</int>
+						<string key="NSFrame">{{737, 104}, {20, 20}}</string>
+						<reference key="NSSuperview" ref="184171806"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<string key="NSHuggingPriority">{750, 750}</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 143}</string>
@@ -220,6 +231,14 @@
 						<reference key="destination" ref="1052410164"/>
 					</object>
 					<string key="id">39</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">restorePurchasesActivity</string>
+						<reference key="source" ref="184171806"/>
+						<reference key="destination" ref="632565908"/>
+					</object>
+					<string key="id">zbn-2N-NYG</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -289,6 +308,7 @@
 							<reference ref="920496293"/>
 							<reference ref="1052410164"/>
 							<reference ref="214765881"/>
+							<reference ref="632565908"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -333,6 +353,11 @@
 						<reference key="parent" ref="184171806"/>
 						<string key="objectName">logoButton</string>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">ULg-12-xbR</string>
+						<reference key="object" ref="632565908"/>
+						<reference key="parent" ref="184171806"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -371,6 +396,7 @@
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<reference key="40.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="40.showNotes"/>
+				<string key="ULg-12-xbR.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
