@@ -375,7 +375,7 @@ typedef enum {
                 [[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
             }
             
-            if([[RueSubscriptionManager sharedManager]isRestoringPurchases])
+            if([[RueSubscriptionManager sharedManager]isRestoringPurchases] || [[RueSubscriptionManager sharedManager]isPurchasingRevision])
             {
                 payButton.alpha = 0.5;
                 payButton.userInteractionEnabled = NO;

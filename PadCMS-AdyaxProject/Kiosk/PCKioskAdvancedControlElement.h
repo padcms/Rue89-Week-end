@@ -36,7 +36,7 @@
 - (void) downloadContentFinished;
 
 - (void) hideDateLabel;
-
+- (void) adjustElements;
 - (BOOL) isTheSameDateWithCell:(PCKioskAdvancedControlElement*)prevCell;
 
 @end

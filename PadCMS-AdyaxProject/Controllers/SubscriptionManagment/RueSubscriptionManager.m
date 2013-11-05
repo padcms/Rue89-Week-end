@@ -90,22 +90,50 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (void) purchaseRevision:(PCRevision*)revision completion:(void(^)(NSError*))completion
 {
-    [[MKStoreManager sharedManager] buyFeature:revision.issue.productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+    _isPurchasingRevision = YES;
+    
+    void(^buyFeature)() = ^{
         
-        NSLog(@"Successfully bought product with id %@!", revision.issue.productIdentifier);
-        
-        if(completion) completion(nil);
-        
-    } onCancelled:^(NSError* error){
-        
-        if(completion) completion(error);
-        NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
-    }];
+        [[MKStoreManager sharedManager] buyFeature:revision.issue.productIdentifier onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
+            
+            NSLog(@"Successfully bought product with id %@!", revision.issue.productIdentifier);
+            _isPurchasingRevision = NO;
+            if(completion) completion(nil);
+            
+        } onCancelled:^(NSError* error){
+            
+            _isPurchasingRevision = NO;
+            if(completion) completion(error);
+            NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
+        }];
+    };
+    
+    NSArray* avaliableObjects = [MKStoreManager sharedManager].purchasableObjects;
+    if(avaliableObjects && avaliableObjects.count)
+    {
+        buyFeature();
+    }
+    else
+    {
+        [self updateProductsDataInStoreManager:[MKStoreManager sharedManager] onComplete:^(NSArray *purchasableObjects) {
+            
+            buyFeature();
+            
+        } onError:^(NSError *error) {
+            
+            _isPurchasingRevision = NO;
+            if(completion) completion(error);
+            NSLog(@"Failed to buy product with id %@!", revision.issue.productIdentifier);
+        }];
+    }
 }
 
 - (void) restorePurchasesCompletion:(void (^)(NSError *error))completion
 {
     _isRestoringPurchases = YES;
+    
+    
+    
     [[MKStoreManager sharedManager] restorePreviousTransactionsOnComplete:^{
         
         _isRestoringPurchases = NO;

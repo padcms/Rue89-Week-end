@@ -1090,9 +1090,14 @@ BOOL stringExists(NSString* str)
         else
         {
             revision.issue.paid = YES;
-            [[self shelfView] reload];
         }
+        
+        //[[self shelfView] reload];
+        [[self shelfView] updateElementsButtons];
     }];
+    
+    //[[self shelfView] reload];
+    [[self shelfView] updateElementsButtons];
 }
 
 - (void) archiveRevisionWithIndex:(NSInteger)index {
@@ -1317,17 +1322,20 @@ BOOL stringExists(NSString* str)
             
             if(error == nil)
             {
-                [[self shelfView] reload];
+                //[[self shelfView] reload];
             }
             else
             {
                 [self showAlertWithError:error];
-                [[self shelfView] reload];
+                //[[self shelfView] reload];
             }
+            
+            [[self shelfView] updateElementsButtons];
             sender.enabled = YES;
         }];
         
-        [[self shelfView] reload];
+        //[[self shelfView] reload];
+        [[self shelfView] updateElementsButtons];
     }
 }
 

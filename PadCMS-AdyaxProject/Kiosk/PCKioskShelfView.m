@@ -317,6 +317,19 @@
     
 }
 
+- (void) updateElementsButtons
+{
+    NSInteger startRevisionIndex = (self.pageControl.currentPage - 1) * _numberOfRevisionsPerPage;
+    
+    int counter = 0;
+    for(int i = startRevisionIndex; i < startRevisionIndex + _numberOfRevisionsForCurrentpage; i++)
+    {
+        PCKioskAdvancedControlElement *cell = [cells objectAtIndex:counter];
+        [cell adjustElements];
+        counter++;
+    }
+}
+
 - (PCKioskAdvancedControlElement*) lastVisibleCell
 {
     NSInteger lastVisibleRevisionIndex = _numberOfRevisionsForCurrentpage - 1;

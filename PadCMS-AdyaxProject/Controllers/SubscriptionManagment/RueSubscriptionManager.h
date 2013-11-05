@@ -26,7 +26,9 @@
 + (RueSubscriptionManager*) sharedManager;
 
 @property (nonatomic, weak) id<RueSubscriptionManagerDelegate> delegate;
+
 @property (nonatomic, readonly) BOOL isRestoringPurchases;
+@property (nonatomic, readonly) BOOL isPurchasingRevision;
 
 - (NSArray*) predefinedSubscriptions;
 
@@ -43,6 +45,8 @@
 
 @interface RueSubscriptionManager (MKStoreManagerDataSource) <MKStoreManagerDataSource>
 
-- (void) getAvalialeSubscriptionsToBlock:(void(^)(NSArray* avaliableSubscriptions, NSError* error))completionBlock; //return those subscriptions from "predefinedSubscriptions" which
+- (void) getAvalialeSubscriptionsToBlock:(void(^)(NSArray* avaliableSubscriptions, NSError* error))completionBlock; //return those subscriptions from "predefinedSubscriptions" which come from iTunes
+
+- (void) updateProductsDataInStoreManager:(MKStoreManager*)storeManager onComplete:(void(^)(NSArray* purchasableObjects))completionBlock onError:(void(^)(NSError*))errorBlock;
 
 @end
