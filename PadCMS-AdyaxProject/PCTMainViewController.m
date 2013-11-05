@@ -808,9 +808,6 @@ BOOL stringExists(NSString* str)
 {
 	PCRevision *revision = [self revisionWithIndex:index];
     
-    revision.issue.productIdentifier = @"545s4f5d5";
-    revision.issue.price = @"50$";
-    
     return [[RueSubscriptionManager sharedManager] isRevisionPaid:revision];
 }
 
