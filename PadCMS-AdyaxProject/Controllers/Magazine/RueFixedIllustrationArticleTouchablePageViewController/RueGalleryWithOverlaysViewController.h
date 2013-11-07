@@ -10,6 +10,4 @@
 
 @interface RueGalleryWithOverlaysViewController : PCGalleryWithOverlaysViewController
 
-- (void) presentIn:(UIViewController*)viewController;
-
 @end

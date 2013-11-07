@@ -12,9 +12,7 @@
 
 @interface RueFixedIllustrationArticleTouchablePageViewController : PCFixedIllustrationArticleViewController
 {
-//    RueGalleryWithOverlaysViewController *galleryWithOverlaysViewController;
     UIDeviceOrientation currentMagazineOrientation;
-    BOOL galleryIsShowed;
 }
 
 @property (nonatomic,strong) RueGalleryWithOverlaysViewController* galleryWithOverlaysViewController;

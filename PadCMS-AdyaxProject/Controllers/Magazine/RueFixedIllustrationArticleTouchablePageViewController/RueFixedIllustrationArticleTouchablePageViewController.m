@@ -66,23 +66,10 @@ typedef enum{
         NSLog(@"registered");
         
         self.galleryWithOverlaysViewController = [[RueGalleryWithOverlaysViewController alloc] initWithPage:self.page];
-        //self.galleryWithOverlaysViewController.horizontalOrientation = YES;
         
     }
-    galleryIsShowed = NO;
-    
     
     [self.articleView setScrollEnabled:( ! self.bodyViewController.view.hidden )];
-}
-
--(void)loadView
-{
-    [super loadView];
-    /*PCPageElementBody* bodyElement = (PCPageElementBody*)[self.page firstElementForType:PCPageElementTypeBody];
-     if(bodyElement)
-     [self.bodyViewController.view setHidden:!bodyElement.showTopLayer];
-     
-     [self.articleView setScrollEnabled:self.bodyViewController.view.hidden];*/
 }
 
 -(void)tapAction:(id)sender
@@ -203,43 +190,6 @@ typedef enum{
     if(galleryPresentationState != GalleryPresentstionStatePresenting)
     {
         [self checkFofGalleryPresentationState];
-    }
-    
-    return;
-    NSLog(@"Notification DEV");
-    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation]))
-    {
-        if ([self isOrientationChanged:[[UIDevice currentDevice] orientation]])
-        {
-            if (self.columnViewController.currentPageViewController == self && self.columnViewController.magazineViewController.currentColumnViewController == self.columnViewController)
-            {
-                if (galleryIsShowed)
-                {
-                    [self hideGallery];
-                }
-                else
-                {
-                    [self showGallery];
-                }
-            }
-        }
-    }
-    else if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]))
-    {
-        if ([self isOrientationChanged:[[UIDevice currentDevice] orientation]])
-        {
-            if (self.columnViewController.currentPageViewController == self && self.columnViewController.magazineViewController.currentColumnViewController == self.columnViewController)
-            {
-                if (galleryIsShowed)
-                {
-                    [self hideGallery];
-                }
-                else
-                {
-                    [self showGallery];
-                }
-            }
-        }
     }
 }
 

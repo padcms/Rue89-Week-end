@@ -18,38 +18,9 @@
 
 @interface RueGalleryWithOverlaysViewController ()
 
-
-
 @end
 
 @implementation RueGalleryWithOverlaysViewController
-
-- (void) presentIn:(UIViewController*)viewController
-{
-    viewController.view.userInteractionEnabled = NO;
-    self.view.userInteractionEnabled = NO;
-    
-    [viewController.view addSubview:self.view];
-    
-    self.view.frameY = viewController.view.frameHeight;
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        self.view.frameY = 0;
-        self.view.frameX = 0;
-        
-        
-    } completion:^(BOOL finished) {
-        
-        viewController.view.userInteractionEnabled = YES;
-        self.view.userInteractionEnabled = YES;
-    }];
-}
-
-- (void) dismissFrom:(UIViewController*)controller
-{
-    
-}
 
 - (void)createImageViews
 {
@@ -71,8 +42,6 @@
     {
         rotation = -M_PI_2;
     }
-    
-    
     
     CGRect              elementRect, rotatedRect;
     CGFloat             tmp;
@@ -198,55 +167,22 @@
 	[self showPhotoAtIndex:self.currentPage];
     
     CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(rotation);
-    //CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(0, 0);
     
-    
-    //self.view.layer.anchorPoint = CGPointMake(0, 768);
-    self.view.transform = rotationTransform;//CGAffineTransformConcat(rotationTransform, translateTransform);
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    NSLog(@"view size : %@", NSStringFromCGRect(self.view.frame));
-    NSLog(@"bounds : %@", NSStringFromCGRect(self.view.bounds));
+    self.view.transform = rotationTransform;
 }
 
 #pragma mark - Interface Orientation
 
-// Applications should use supportedInterfaceOrientations and/or shouldAutorotate..     NS_DEPRECATED_IOS(2_0, 6_0)
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-//}
-
-// New Autorotation support.    NS_AVAILABLE_IOS(6_0);
 - (BOOL)shouldAutorotate
 {
     return NO;
 }
-//- (NSUInteger)supportedInterfaceOrientations
-//{
-//    return UIInterfaceOrientationMaskLandscape;
-//}
+
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
 
-
-// Notifies when rotation begins, reaches halfway point and ends.
-//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-    //NSLog(@"orientation : %@", toInterfaceOrientation == UIInterfaceOrientationPortrait ? @"portrait" : ((toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) ? @"landscape left" : @"landscape right"));
-    
-    //_horizontalOrientation = YES;
-//}
-//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
-
-// Faster one-part variant, called from within a rotating animation block, for additional animations during rotation.
-// A subclass may override this method, or the two-part variants below, but not both.
-//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration NS_AVAILABLE_IOS(3_0);
 
 #pragma mark -
 
