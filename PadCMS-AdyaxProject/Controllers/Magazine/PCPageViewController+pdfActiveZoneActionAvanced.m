@@ -11,6 +11,8 @@
 #import "PCPDFActiveZones.h"
 #import "PCPageElemetTypes.h"
 #import "objc/runtime.h"
+#import "PCBrowserViewController.h"
+#import "PCScrollView.h"
 
 @interface PCPageViewController ()
 
@@ -134,8 +136,10 @@
                  [activeZone.URL hasPrefix:@"http://dailymotion.com"] || [activeZone.URL hasPrefix:@"http://www.dailymotion.com"] ||
                  [activeZone.URL hasPrefix:@"http://vimeo.com"] || [activeZone.URL hasPrefix:@"http://www.vimeo.com"])
         {
-            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-            [self showVideoWebView:activeZone.URL inRect:videoRect];
+//            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+//            [self showVideoWebView:activeZone.URL inRect:videoRect];
+            [self hideVideoWebView];
+            [self showVideoWebView:activeZone.URL inRectAdvanced:[self activeZoneRectForType:activeZone.URL]];
             return YES;
         }
         
@@ -148,6 +152,27 @@
         }
     }
     return NO;
+}
+
+- (void)showVideoWebView: (NSString *)videoWebViewURL inRectAdvanced: (CGRect)videoWebViewRect
+{
+    CGRect videoRect = videoWebViewRect;
+    if (CGRectEqualToRect(videoRect, CGRectZero))
+    {
+        videoRect = [[UIScreen mainScreen] bounds];
+    }
+    if (!webBrowserViewController)
+    {
+        webBrowserViewController = [[PCBrowserViewController alloc] init];
+    }
+    webBrowserViewController.videoRect = videoRect;
+    [self.mainScrollView addSubview:webBrowserViewController.view];
+    if (self.page.pageTemplate ==
+        [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate])
+    {
+        [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
+    }
+    [webBrowserViewController presentURL:videoWebViewURL];
 }
 
 @end
