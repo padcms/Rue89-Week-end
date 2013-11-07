@@ -93,7 +93,7 @@
 
 - (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"%@", error);
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError : %@", error);
     [[PCRueRemouteNotificationCenter defaultRemouteNotificationCenter] registrationDidFailWithError:error];
     
     [BoxCarController applicationDidFailToRegisterForRemoteNotificationsWithError:error];

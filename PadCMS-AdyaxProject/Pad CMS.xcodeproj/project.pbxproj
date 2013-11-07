@@ -23,7 +23,6 @@
 		2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1C0B461804352C006B70BE /* RTLabelWithWordWrap.m */; };
 		2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */; };
 		2D7FCFEA1824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */; };
-		2D7FCFEB1824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
 		2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */; };
 		2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF22180EA59600459330 /* PCRueTwitterController.m */; };
 		2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D85DF2A180EB43900459330 /* RueFacebookController.m */; };
@@ -48,6 +47,8 @@
 		2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B476318239AAF00F27836 /* SubscriptionScheme.m */; };
 		2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */; };
 		2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */; };
+		2D9DAA9F182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DAA9C182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
+		2D9DAAA0182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DAA9E182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m */; };
 		2D9E6F981827F1EA00FFBB78 /* RueSubscriptionManager+MKStoreManagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9E6F971827F1EA00FFBB78 /* RueSubscriptionManager+MKStoreManagerDataSource.m */; };
 		2DA085F5180FF1AC00F9C716 /* ConfirmViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */; };
 		2DA085F6180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */; };
@@ -1649,8 +1650,6 @@
 		2D6DEB1B17F99A4400133D9A /* RueDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManager.m; sourceTree = "<group>"; };
 		2D7FCFE61824029500C30E5B /* FixedIllustrationTouchableColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedIllustrationTouchableColumnViewController.h; sourceTree = "<group>"; };
 		2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedIllustrationTouchableColumnViewController.m; sourceTree = "<group>"; };
-		2D7FCFE81824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFixedIllustrationArticleTouchablePageViewController.h; sourceTree = "<group>"; };
-		2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFixedIllustrationArticleTouchablePageViewController.m; sourceTree = "<group>"; };
 		2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCRevision+DataOfDownload.h"; sourceTree = "<group>"; };
 		2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+DataOfDownload.m"; sourceTree = "<group>"; };
 		2D85DF21180EA59600459330 /* PCRueTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueTwitterController.h; sourceTree = "<group>"; };
@@ -1692,6 +1691,11 @@
 		2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionMenuActionSheet.m; sourceTree = "<group>"; };
 		2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate-BoldItalic.ttf"; sourceTree = "<group>"; };
 		2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
+		2D9DAA9A182A3C5800D1D832 /* PCGalleryWithOverlaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCGalleryWithOverlaysViewController.h; sourceTree = "<group>"; };
+		2D9DAA9B182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFixedIllustrationArticleTouchablePageViewController.h; sourceTree = "<group>"; };
+		2D9DAA9C182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFixedIllustrationArticleTouchablePageViewController.m; sourceTree = "<group>"; };
+		2D9DAA9D182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueGalleryWithOverlaysViewController.h; sourceTree = "<group>"; };
+		2D9DAA9E182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueGalleryWithOverlaysViewController.m; sourceTree = "<group>"; };
 		2D9E6F971827F1EA00FFBB78 /* RueSubscriptionManager+MKStoreManagerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueSubscriptionManager+MKStoreManagerDataSource.m"; sourceTree = "<group>"; };
 		2DA085F1180FF1AC00F9C716 /* ConfirmViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewButton.png; sourceTree = "<group>"; };
 		2DA085F2180FF1AC00F9C716 /* ConfirmViewDescriptionFon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmViewDescriptionFon.png; sourceTree = "<group>"; };
@@ -2507,10 +2511,9 @@
 		2D046FD81815237C005087D7 /* Magazine */ = {
 			isa = PBXGroup;
 			children = (
+				2D9DAA99182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController */,
 				2D7FCFE61824029500C30E5B /* FixedIllustrationTouchableColumnViewController.h */,
 				2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */,
-				2D7FCFE81824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.h */,
-				2D7FCFE91824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m */,
 				2D046FD9181523F7005087D7 /* PCHtmlColumnViewController.h */,
 				2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */,
 				2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
@@ -2582,6 +2585,18 @@
 				2D926A9D18082646003B2FA8 /* BoxCarController.m */,
 			);
 			path = BoxCar;
+			sourceTree = "<group>";
+		};
+		2D9DAA99182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2D9DAA9A182A3C5800D1D832 /* PCGalleryWithOverlaysViewController.h */,
+				2D9DAA9B182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.h */,
+				2D9DAA9C182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m */,
+				2D9DAA9D182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.h */,
+				2D9DAA9E182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m */,
+			);
+			path = RueFixedIllustrationArticleTouchablePageViewController;
 			sourceTree = "<group>";
 		};
 		2DA085F0180FF1AC00F9C716 /* ConfirmViewImages */ = {
@@ -5229,7 +5244,6 @@
 				57A4747817C4AF9400745732 /* MTLabel.m in Sources */,
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
-				2D7FCFEB1824029500C30E5B /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
@@ -5258,6 +5272,7 @@
 				63C23E5B17F1E01B004C55BC /* NSURL+Fragments.m in Sources */,
 				2D6DEB1C17F99A4400133D9A /* RueDownloadManager.m in Sources */,
 				2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */,
+				2D9DAA9F182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */,
 				2DA592F718228E5E00516768 /* NSData+MKBase64.m in Sources */,
 				2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */,
 				2D8512B417FD7E9000A289AC /* PCRevision+DataOfDownload.m in Sources */,
@@ -5277,6 +5292,7 @@
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
 				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
 				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
+				2D9DAAA0182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m in Sources */,
 				2D046FDC181523F7005087D7 /* PCHtmlColumnViewController.m in Sources */,
 				2D046FDD181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */,
 			);
@@ -5934,7 +5950,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5963,8 +5979,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
+				PROVISIONING_PROFILE = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -5976,7 +5992,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6007,8 +6023,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
+				PROVISIONING_PROFILE = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6021,7 +6037,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yann guegan (W4S3585QVP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yann guegan (W4S3585QVP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6051,8 +6067,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93C7CC4-F3BE-4A3B-A300-669CA70F7CFE";
+				PROVISIONING_PROFILE = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FD4FEBF2-3D78-4C7C-BCD9-72701A3C471C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

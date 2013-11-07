@@ -21,8 +21,8 @@ static NSString* PUSH_MODE;
 
 + (void) initialize
 {
-    CLIENT_KEY = @"wKIk6gJEl1d-v64Y08xZMy0VuUtQ88Ze-V1Jx_NYfehXr16x-0FpT4KILPxme-XS";
-    CLIENT_SECRET = @"AITqN8aXi9AjXaV3M8yPzJFxqDQAGyt_3ucmjxJ4yzC3MqFnvvsOZbItNF7-AXjL";
+    CLIENT_KEY = @"CHIVHixQMylMlMdwTDp24y9jtzZCvd1O6l9RHV8t3VmVk1C9ypklFLOj6cNI0SGJ";
+    CLIENT_SECRET = @"DtWhec2eX6Km71BHnGjMdlmZqfhQ-ZHSXTZYvss8LJr--86KmQf9TKciSUrx1C6k";
     API_URL = @"https://yellow2.process-one.net";
 #ifdef SANDBOX
     NSLog(@"BoxCar in debug mode.\n");
@@ -36,7 +36,6 @@ static NSString* PUSH_MODE;
 
 + (void) launchWithOptions:(NSDictionary*)launchOptions
 {
-    return;
     NSDictionary *boxcarOptions = @{kBXC_CLIENT_KEY : CLIENT_KEY,
                                     kBXC_CLIENT_SECRET : CLIENT_SECRET,
                                     kBXC_API_URL : API_URL,
@@ -99,6 +98,7 @@ static NSString* PUSH_MODE;
 
 + (void) applicationDidRegisterForNotificationWithToken:(NSData*)token
 {
+    NSLog(@"device token : %@", token);
     [[Boxcar sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:token];
 }
 
@@ -109,6 +109,7 @@ static NSString* PUSH_MODE;
 
 + (void) applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
+    NSLog(@"boxcar registration faild : %@", error.debugDescription);
     [[Boxcar sharedInstance] didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
