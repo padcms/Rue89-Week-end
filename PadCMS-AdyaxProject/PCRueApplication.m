@@ -13,6 +13,9 @@
 #define GOOGLE_MESSAGE_KEY @"application_notification_google"
 #define SHARE_URL_KEY @"application_share_url"
 
+#define kApplicationSubscribeButtonKey @"application_subscribe_button"
+#define kApplicationSubscribeTitleKey @"application_subscribe_title"
+
 @implementation PCRueApplication
 
 - (id)initWithParameters:(NSDictionary *)parameters
@@ -43,6 +46,18 @@
         }
         
         self.messageForReaders = [[[parameters objectForKey:PCJSONApplicationMessageForReadersKey]stringByDecodingHTMLEntities] copy];
+        
+        NSString* subscribeByttonTitle = [[parameters objectForKey:kApplicationSubscribeButtonKey]stringByDecodingHTMLEntities];
+        if(subscribeByttonTitle && [subscribeByttonTitle isKindOfClass:[NSString class]] && subscribeByttonTitle.length)
+        {
+            self.subscribeButtonTitle = subscribeByttonTitle;
+        }
+        
+        NSString* subscriptionListTitle = [[parameters objectForKey:kApplicationSubscribeTitleKey]stringByDecodingHTMLEntities];
+        if(subscriptionListTitle && [subscriptionListTitle isKindOfClass:[NSString class]] && subscriptionListTitle.length)
+        {
+            self.subscriptionsListTitle = subscriptionListTitle;
+        }
         
     }
     return self;

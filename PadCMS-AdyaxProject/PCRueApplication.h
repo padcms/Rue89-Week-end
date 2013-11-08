@@ -14,4 +14,7 @@
 
 @property (nonatomic, copy) NSString* shareUrl;
 
+@property (nonatomic, copy) NSString* subscribeButtonTitle;
+@property (nonatomic, copy) NSString* subscriptionsListTitle;
+
 @end
