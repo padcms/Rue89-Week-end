@@ -40,14 +40,6 @@ static RueSubscriptionManager* _sharedManager = nil;
     return self;
 }
 
-- (NSArray*) predefinedSubscriptions
-{
-    return @[[SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.3months"],
-             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.1months"],
-             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.6months"],
-             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.666months"]];
-}
-
 
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion
 {

@@ -82,10 +82,13 @@
 -(BOOL) isSubscriptionActive
 {    
   if(!self.receipt) return NO;
-  if([[self.verifiedReceiptDictionary objectForKey:@"receipt"] objectForKey:@"expires_date"]){
+    NSDictionary* verifiedDictionary = self.verifiedReceiptDictionary;
+  if([[verifiedDictionary objectForKey:@"receipt"] objectForKey:@"expires_date"]){
     
-    NSTimeInterval expiresDate = [[[self.verifiedReceiptDictionary objectForKey:@"receipt"] objectForKey:@"expires_date"] doubleValue]/1000.0;        
-    return expiresDate > [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval expiresDate = [[[verifiedDictionary objectForKey:@"latest_receipt_info"] objectForKey:@"expires_date"] doubleValue]/1000.0;
+      NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+      
+    return expiresDate > now;
     
 	}else{
     

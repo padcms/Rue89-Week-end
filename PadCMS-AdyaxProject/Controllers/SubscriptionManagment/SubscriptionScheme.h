@@ -11,6 +11,9 @@
 @interface SubscriptionScheme : NSObject
 
 + (id) schemeWithIdentifier:(NSString*)identifier;
++ (id) schemeWithIdentifier:(NSString*)identifier days:(int)days;
+
+@property (nonatomic, assign) int days;
 
 - (id) initWithIdentifier:(NSString*)identifier;
 

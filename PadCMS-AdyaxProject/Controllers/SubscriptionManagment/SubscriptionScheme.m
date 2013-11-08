@@ -22,6 +22,13 @@
     return [[SubscriptionScheme alloc]initWithIdentifier:identifier];
 }
 
++ (id) schemeWithIdentifier:(NSString*)identifier days:(int)days
+{
+    SubscriptionScheme * scheme = [[SubscriptionScheme alloc]initWithIdentifier:identifier];
+    scheme.days = days;
+    return scheme;
+}
+
 - (id) initWithIdentifier:(NSString*)identifier
 {
     self = [super init];

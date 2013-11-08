@@ -94,6 +94,14 @@
 
 #pragma mark - MKStoreManagerDataSource
 
+- (NSArray*) predefinedSubscriptions
+{
+    return @[[SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.3months" days:90],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.1months" days:30],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.6months" days:180],
+             [SubscriptionScheme schemeWithIdentifier:@"com.mobile.rue89.666months" days:2]];
+}
+
 - (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager
 {
     NSMutableArray * allIdentifiers = [NSMutableArray new];

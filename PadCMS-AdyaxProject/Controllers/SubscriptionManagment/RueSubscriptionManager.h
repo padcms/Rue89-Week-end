@@ -30,8 +30,6 @@
 @property (nonatomic, readonly) BOOL isRestoringPurchases;
 @property (nonatomic, readonly) BOOL isPurchasingRevision;
 
-- (NSArray*) predefinedSubscriptions;
-
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion;
 
 - (void) purchaseRevision:(PCRevision*)revision completion:(void(^)(NSError*))completion;

@@ -55,6 +55,7 @@
 @protocol MKStoreManagerDataSource <NSObject>
 
 - (NSArray *)serverProductIdsForMKStoreManager:(MKStoreManager *)manager;
+- (NSArray*) predefinedSubscriptions;
 
 @end
 

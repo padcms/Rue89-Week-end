@@ -1633,27 +1633,6 @@ BOOL stringExists(NSString* str)
     return [self getApplication].issues;
 }
 
-/*- (void)productsFetched:(NSNotification *)notification {
-    //
-    //    NSString * featureId = [[PCConfig subscriptions] lastObject];
-    //
-    //    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-    //
-    //    NSLog(@"IS SUBSCRIBED productsFetched: %d", isSubscriptionActive);
-    //
-    //    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
-}*/
-
-/*- (void)subscriptionsPurchased:(NSNotification *)notification {
-    //    NSString * featureId = [[PCConfig subscriptions] lastObject];
-    //
-    //    BOOL isSubscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-    //
-    //    NSLog(@"IS SUBSCRIBED subscriptionsPurchasedNotification: %d", isSubscriptionActive);
-    //
-    //    self.kioskHeaderView.subscribeButton.isSubscribedState = isSubscriptionActive;
-}*/
-
 #pragma mark - SubscribeMenuPopuverDelegate Protocol
 
 - (void) subscribtionScheme:(SubscriptionScheme *)scheme selectedInPopove:(SubscribeMenuPopuverController *)popover
@@ -1674,7 +1653,7 @@ BOOL stringExists(NSString* str)
         }
         else
         {
-            self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
             [[self shelfView] reload];
         }
     }];
@@ -1682,7 +1661,7 @@ BOOL stringExists(NSString* str)
 
 - (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme
 {
-    self.kioskHeaderView.subscribeButton.isSubscribedState = YES;
+    self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
 }
 
 #pragma mark - UIActionSheetDelegate Protocol

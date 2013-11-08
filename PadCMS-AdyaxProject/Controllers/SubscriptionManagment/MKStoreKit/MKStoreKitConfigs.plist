@@ -7,9 +7,6 @@
 	<key>Non-Consumables</key>
 	<array/>
 	<key>Subscriptions</key>
-	<dict>
-		<key>com.mobile.rue89.3months</key>
-		<integer>90</integer>
-	</dict>
+	<dict/>
 </dict>
 </plist>

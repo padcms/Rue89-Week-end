@@ -39,6 +39,8 @@
 #import "MKSKSubscriptionProduct.h"
 #import "MKSKProduct.h"
 #import "NSData+MKBase64.h"
+#import "SubscriptionScheme.h"
+
 #if ! __has_feature(objc_arc)
 #error MKStoreKit is ARC only. Either turn on ARC for the project or use -fobjc-arc flag
 #endif
@@ -51,6 +53,8 @@
 
 
 @interface MKStoreManager () //private methods and properties
+
+@property (nonatomic, strong) NSDictionary* storeKitItems;
 
 @property (nonatomic, copy) void (^onTransactionCancelled)(NSError*);
 @property (nonatomic, copy) void (^onTransactionCompleted)(NSString *productId, NSData* receiptData, NSArray* downloads);
@@ -143,13 +147,18 @@ static MKStoreManager* _sharedStoreManager;
   }
 }
 
++(void) setReceipt:(NSData*)data forKey:(NSString*)key
+{
+    [self setObject:data forKey:[NSString stringWithFormat:@"%@-receipt", key]];
+}
+
 +(id) receiptForKey:(NSString*) key {
   
-  NSData *receipt = [MKStoreManager objectForKey:key];
-  if(!receipt)
-    receipt = [MKStoreManager objectForKey:[NSString stringWithFormat:@"%@-receipt", key]];
+  //NSData *receipt = [MKStoreManager objectForKey:key];
+  //if(!receipt)
+    return [MKStoreManager dataForKey:[NSString stringWithFormat:@"%@-receipt", key]];
   
-  return receipt;
+//  return receipt;
 }
 
 +(id) objectForKey:(NSString*) key
@@ -177,6 +186,9 @@ static MKStoreManager* _sharedStoreManager;
 + (MKStoreManager*)sharedManager
 {
 	if(!_sharedStoreManager) {
+        
+//        [self setObject:nil forKey:@"com.mobile.rue89.3months-receipt"];
+        
 		static dispatch_once_t oncePredicate;
 		dispatch_once(&oncePredicate, ^{
 			_sharedStoreManager = [[self alloc] init];
@@ -186,7 +198,7 @@ static MKStoreManager* _sharedStoreManager;
 #endif
       //[_sharedStoreManager requestProductData];
       [[SKPaymentQueue defaultQueue] addTransactionObserver:_sharedStoreManager];
-      [_sharedStoreManager startVerifyingSubscriptionReceipts];
+      //[_sharedStoreManager startVerifyingSubscriptionReceipts];
     });
     
     if([self iCloudAvailable])
@@ -203,6 +215,9 @@ static MKStoreManager* _sharedStoreManager;
 - (void)setDataSource:(id<MKStoreManagerDataSource>)dataSource {
     _dataSource = dataSource;
     
+    [self addSubscriptions:[dataSource predefinedSubscriptions]];
+    [self startVerifyingSubscriptionReceipts];
+    
     [self requestProductData];
 }
 
@@ -210,9 +225,52 @@ static MKStoreManager* _sharedStoreManager;
 
 +(NSDictionary*) storeKitItems
 {
-  return [NSDictionary dictionaryWithContentsOfFile:
-          [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:
-           @"MKStoreKitConfigs.plist"]];
+    if(_sharedStoreManager && _sharedStoreManager.storeKitItems)
+    {
+        return _sharedStoreManager.storeKitItems;
+    }
+    else
+    {
+        return [NSDictionary dictionaryWithContentsOfFile:[self configsFilePath]];
+    }
+}
+
++ (NSString*) configsFilePath
+{
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"MKStoreKitConfigs.plist"];
+}
+
+- (void) addSubscriptions:(NSArray*)subscriptionsList
+{
+    if(subscriptionsList && subscriptionsList.count)
+    {
+        NSDictionary* storeKitItems = [self storeKitItems];
+        NSDictionary* subscriptions = [storeKitItems objectForKey:@"Subscriptions"];
+        if(subscriptions == nil)
+        {
+            subscriptions = [NSMutableDictionary dictionaryWithCapacity:subscriptionsList.count];
+        }
+        else
+        {
+            subscriptions = [NSMutableDictionary dictionaryWithDictionary:subscriptions];
+        }
+        for (SubscriptionScheme* subscr in subscriptionsList)
+        {
+            [(NSMutableDictionary*)subscriptions setObject:[NSNumber numberWithInt:subscr.days] forKey:subscr.identifier];
+        }
+        
+        NSMutableDictionary* newStoreKitItems = [NSMutableDictionary dictionaryWithDictionary:storeKitItems];
+        
+        [newStoreKitItems setObject:subscriptions forKey:@"Subscriptions"];
+        
+        self.storeKitItems = [NSDictionary dictionaryWithDictionary:newStoreKitItems];
+        
+        //NSString* path = [[NSBundle mainBundle]pathForResource:@"MKStoreKitConfigs" ofType:@"plist"];   //[self configsFilePath];
+        
+//        BOOL wr = [storeKitItems writeToURL:[NSURL fileURLWithPath:path] atomically:YES];
+        
+        //BOOL wr = [storeKitItems writeToFile:path atomically:YES];
+    }
 }
 
 - (void) restorePreviousTransactionsOnComplete:(void (^)(void)) completionBlock
@@ -559,34 +617,38 @@ static MKStoreManager* _sharedStoreManager;
   for(NSString *productId in [subscriptions allKeys])
   {
     MKSKSubscriptionProduct *product = [[MKSKSubscriptionProduct alloc] initWithProductId:productId subscriptionDays:[[subscriptions objectForKey:productId] intValue]];
-    product.receipt = [MKStoreManager dataForKey:productId]; // cached receipt
+    product.receipt = [MKStoreManager receiptForKey:productId]; // cached receipt
     
-    if(product.receipt)
-    {
-      [product verifyReceiptOnComplete:^(NSNumber* isActive)
-       {
-         if([isActive boolValue] == NO)
-         {
-           [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsInvalidNotification
-                                                               object:product.productId];
-           
-           NSLog(@"Subscription: %@ is inactive", product.productId);
-           product.receipt = nil;
-           [self.subscriptionProducts setObject:product forKey:productId];
-           [MKStoreManager setObject:nil forKey:product.productId];
-         }
-         else
-         {
-           NSLog(@"Subscription: %@ is active", product.productId);
-         }
-       }
-                               onError:^(NSError* error)
-       {
-         NSLog(@"Unable to check for subscription validity right now");
-       }];
-    }
-    
-    [self.subscriptionProducts setObject:product forKey:productId];
+      if(product.receipt)
+      {
+          //[self.subscriptionProducts setObject:product forKey:productId];
+          
+          [product verifyReceiptOnComplete:^(NSNumber* isActive)
+           {
+               if([isActive boolValue] == NO)
+               {
+                   NSLog(@"Subscription: %@ is inactive", product.productId);
+                   product.receipt = nil;
+                   [MKStoreManager setObject:nil forKey:product.productId];
+               }
+               else
+               {
+                   
+                   NSLog(@"Subscription: %@ is active", product.productId);
+                   [[NSNotificationCenter defaultCenter] postNotificationName:kProductFetchedNotification
+                                                                       object:self];
+               }
+           }
+                                   onError:^(NSError* error)
+           {
+               
+               NSLog(@"Unable to check for subscription validity right now");
+               [[NSNotificationCenter defaultCenter] postNotificationName:kProductFetchedNotification
+                                                                   object:self];
+           }];
+      }
+      
+      [self.subscriptionProducts setObject:product forKey:productId];
   }
 }
 
@@ -658,7 +720,11 @@ static MKStoreManager* _sharedStoreManager;
        [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsPurchasedNotification
                                                            object:productIdentifier];
        
-       [MKStoreManager setObject:receiptData forKey:productIdentifier];
+//       [MKStoreManager setObject:receiptData forKey:productIdentifier];
+         [MKStoreManager setReceipt:receiptData forKey:productIdentifier];
+         
+         [self startVerifyingSubscriptionReceipts];
+         
          if(self.onTransactionCompleted)
          {
              self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
@@ -768,7 +834,8 @@ static MKStoreManager* _sharedStoreManager;
     [MKStoreManager setObject:[NSNumber numberWithBool:YES] forKey:productIdentifier];
   }
   
-  [MKStoreManager setObject:receiptData forKey:[NSString stringWithFormat:@"%@-receipt", productIdentifier]];
+//  [MKStoreManager setObject:receiptData forKey:[NSString stringWithFormat:@"%@-receipt", productIdentifier]];
+    [MKStoreManager setReceipt:receiptData forKey:productIdentifier];
 }
 
 #pragma -
@@ -811,6 +878,7 @@ static MKStoreManager* _sharedStoreManager;
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
   [self restoreCompleted];
+    //[self startVerifyingSubscriptionReceipts];
 }
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
