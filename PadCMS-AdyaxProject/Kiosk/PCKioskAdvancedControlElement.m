@@ -356,7 +356,8 @@ typedef enum {
                     }
                     else
                     {
-                        [self setElementsState:ElementsStateSubscribePay];
+                        [self setElementsState:ElementsStatePay];
+                        //[self setElementsState:ElementsStateSubscribePay];
                     }
                     break;
             }

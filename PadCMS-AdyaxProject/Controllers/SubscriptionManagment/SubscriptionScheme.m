@@ -113,11 +113,11 @@ int days_from_identifier(NSString* identifier)
         {
             return 30;
         }
-        if([durationString isEqualToString:@"3month"])
+        if([durationString isEqualToString:@"3months"])
         {
             return 90;
         }
-        if([durationString isEqualToString:@"6month"])
+        if([durationString isEqualToString:@"6months"])
         {
             return 180;
         }
