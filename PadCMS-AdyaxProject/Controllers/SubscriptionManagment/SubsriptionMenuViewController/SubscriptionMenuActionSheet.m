@@ -33,7 +33,7 @@
     for (int i = 0; i < subscriptions.count; ++i)
     {
         SubscriptionScheme* scheme = subscriptions[i];
-        [self addButtonWithTitle:scheme.identifier];
+        [self addButtonWithTitle:scheme.title];
     }
     
     if(subscriptions == nil || subscriptions.count == 0)

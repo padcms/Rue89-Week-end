@@ -14,8 +14,11 @@
 + (id) schemeWithIdentifier:(NSString*)identifier days:(int)days;
 
 @property (nonatomic, assign) int days;
+@property (nonatomic, readonly) NSString* title;
 
 - (id) initWithIdentifier:(NSString*)identifier;
+
+- (id) initWithDictionary:(NSDictionary*)dictionary;
 
 - (NSString*) identifier;
 

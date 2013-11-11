@@ -14,6 +14,7 @@
 @protocol RueSubscriptionManagerDelegate <NSObject>
 
 - (NSArray*) allIssues;
+- (NSArray*) subscriptionSchemes;
 
 @optional
 - (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme;

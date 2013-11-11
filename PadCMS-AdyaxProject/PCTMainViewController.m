@@ -1683,6 +1683,11 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - RueSubscriptionManagerDelegate Protocol
 
+- (NSArray*) subscriptionSchemes
+{
+    return currentApplication.subscriptionsSchemes;
+}
+
 - (NSArray*) allIssues
 {
     return [self getApplication].issues;

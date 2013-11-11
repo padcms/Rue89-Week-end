@@ -29,6 +29,36 @@
     return scheme;
 }
 
+- (id) initWithDictionary:(NSDictionary*)dictionary
+{
+    NSString* identifier = [dictionary objectForKey:@"itunes_id"];
+    if(identifier && [identifier isKindOfClass:[NSString class]] && identifier.length)
+    {
+        self = [super init];
+        if(self)
+        {
+            _identifier = identifier;
+            
+            NSString* title = [dictionary objectForKey:@"button_title"];
+            if(title && [title isKindOfClass:[NSString class]] && title.length)
+            {
+                _title = title;
+            }
+            else
+            {
+                title = identifier;
+            }
+            
+            _days = days_from_identifier(identifier);
+        }
+        return self;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
 - (id) initWithIdentifier:(NSString*)identifier
 {
     self = [super init];
@@ -66,6 +96,37 @@
         }
     }
     return NO;
+}
+
+int days_from_identifier(NSString* identifier)
+{
+    NSArray* strings = [identifier componentsSeparatedByString:@"."];
+    
+    NSString* durationString = [strings lastObject];
+    if(durationString && durationString.length)
+    {
+        if([durationString isEqualToString:@"7days"])
+        {
+            return 7;
+        }
+        if([durationString isEqualToString:@"1month"])
+        {
+            return 30;
+        }
+        if([durationString isEqualToString:@"3month"])
+        {
+            return 90;
+        }
+        if([durationString isEqualToString:@"6month"])
+        {
+            return 180;
+        }
+        if([durationString isEqualToString:@"oneyear"])
+        {
+            return 360;
+        }
+    }
+    return 0;
 }
 
 @end

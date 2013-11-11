@@ -17,4 +17,6 @@
 @property (nonatomic, copy) NSString* subscribeButtonTitle;
 @property (nonatomic, copy) NSString* subscriptionsListTitle;
 
+@property (nonatomic, readonly) NSArray* subscriptionsSchemes;
+
 @end

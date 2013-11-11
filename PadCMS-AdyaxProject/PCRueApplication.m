@@ -13,6 +13,7 @@
 #import "NSString+HTML.h"
 #import "RueIssue.h"
 #import "PCTag.h"
+#import "SubscriptionScheme.h"
 
 #define GOOGLE_MESSAGE_KEY @"application_notification_google"
 #define SHARE_URL_KEY @"application_share_url"
@@ -210,6 +211,29 @@
         {
             self.subscriptionsListTitle = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
         }
+        
+        //---------------------------------- Subscriptions --------------------------------------------------------
+        NSMutableArray* schemes = [[NSMutableArray alloc]init];
+        
+        NSDictionary* schemesDictionary = [parameters objectForKey:@"application_subscriptions"];
+        if(schemesDictionary && [schemesDictionary isKindOfClass:[NSDictionary class]] && schemesDictionary.count)
+        {
+            [schemesDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                
+                NSDictionary* entyty = obj;
+                if(entyty && [entyty isKindOfClass:[NSDictionary class]] && entyty.count)
+                {
+                    SubscriptionScheme * aScheme = [[SubscriptionScheme alloc]initWithDictionary:entyty];
+                    if(aScheme)
+                    {
+                        [schemes addObject:aScheme];
+                    }
+                }
+            }];
+        }
+        
+        _subscriptionsSchemes = [NSArray arrayWithArray:schemes];
+        //---------------------------------------------------------------------------------------------------------
     }
     return self;
 }
