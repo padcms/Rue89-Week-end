@@ -21,7 +21,7 @@
 #endif
 #import "PCConfig.h"
 #import "PCKioskAdvancedControlElementDateLabel.h"
-#import "PCIssue.h"
+#import "RueIssue.h"
 
 #import "PCRevision+DataOfDownload.h"
 #import "ProgressButton.h"
@@ -35,7 +35,12 @@ typedef enum {
     ElementsStateInfoDownloaded,
     ElementsStateArchived,
     ElementsStatePay,
-    ElementsStateContentDownloading
+    ElementsStateContentDownloading,
+    
+    ElementsStateFree,
+    ElementsStateSubscribe,
+    ElementsStateSubscribePay
+    
 }ElementsState;
 
 @interface PCKioskAdvancedControlElement()
@@ -52,6 +57,8 @@ typedef enum {
     
     BOOL _isContentDownloading;
     BOOL _isObservingReachability;
+    
+    UIButton* subscribeButton;
 }
 
 @property (nonatomic, strong) UIImageView * illustrationImageView;
@@ -170,6 +177,10 @@ typedef enum {
 	payButton.frame = bottomButtonRect;
     _archiveButton.frame = bottomButtonRect;
     _restoreButton.frame = topButtonRect;
+    
+    subscribeButton = [self buttonWithTitle:@"S`ABONNER"];
+    subscribeButton.hidden = YES;
+    subscribeButton.frame = bottomButtonRect;
 }
 
 - (void)initCover {
@@ -273,14 +284,16 @@ typedef enum {
     [self.restoreButton addTarget:self
                            action:@selector(restoreButtonTapped)
                  forControlEvents:UIControlEventTouchUpInside];
+    
+    [subscribeButton addTarget:self action:@selector(subscribeButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) adjustElements
 {
-    BOOL previewAvailable = NO;
-    if ([self.dataSource respondsToSelector:@selector(previewAvailableForRevisionWithIndex:)]) {
-        previewAvailable = [self.dataSource previewAvailableForRevisionWithIndex:self.revisionIndex];
-    }
+//    BOOL previewAvailable = NO;
+//    if ([self.dataSource respondsToSelector:@selector(previewAvailableForRevisionWithIndex:)]) {
+//        previewAvailable = [self.dataSource previewAvailableForRevisionWithIndex:self.revisionIndex];
+//    }
     
     if (self.revision.isDownloaded)
     {
@@ -306,18 +319,55 @@ typedef enum {
         }
         else
         {
-            if([self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == NO)
+            //----- case that revision dont starts downloading ----------------------
+            switch ([(RueIssue*)self.revision.issue pricingPlan])
             {
-                [self setElementsState:ElementsStatePay];
+                case IssuePricingPlanFree:
+                    [self setElementsState:ElementsStateFree];
+                    break;
+                    
+                case IssuePricingPlanSubscriptionOnly:
+                    if([[RueSubscriptionManager sharedManager] isSubscribed])
+                    {
+                        [self setElementsState:ElementsStateNotDownloaded];
+                    }
+                    else
+                    {
+                        [self setElementsState:ElementsStateSubscribe];
+                    }
+                    break;
+                    
+                case IssuePricingPlanSinglePurchase:
+                    if([self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == NO)
+                    {
+                        [self setElementsState:ElementsStatePay];
+                    }
+                    else
+                    {
+                        [self setElementsState:ElementsStateNotDownloaded];
+                    }
+                    break;
+                    
+                case IssuePricingPlanSubscriptionOrSinglePurchase:
+                    if([[RueSubscriptionManager sharedManager] isSubscribed] || [self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == YES)
+                    {
+                        [self setElementsState:ElementsStateNotDownloaded];
+                    }
+                    else
+                    {
+                        [self setElementsState:ElementsStateSubscribePay];
+                    }
+                    break;
             }
-            else
-            {
-                [self setElementsState:ElementsStateNotDownloaded];
-                previewButton.hidden = previewAvailable ? NO : YES;
-            }
+            //-----------------------------------------------------------------------
         }
     }
     self.downloadInProgress = NO;
+}
+
+- (void) subscribeButtonTaped:(UIButton*)sender
+{
+    
 }
 
 - (void) setElementsState:(ElementsState)state
@@ -328,6 +378,10 @@ typedef enum {
     [(ProgressButton*)downloadButton hidePatience];
     [(ProgressButton*)downloadButton hideProgress];
     [self stopObserveReachability];
+    
+    [downloadButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"Download"] forState:UIControlStateNormal];
+    subscribeButton.hidden = YES;
+    subscribeButton.frame = downloadButton.frame;
     
     switch (state)
     {
@@ -387,6 +441,27 @@ typedef enum {
             }
         }
         break;
+            
+        case ElementsStateFree:
+            
+            downloadButton.hidden = NO;
+            [downloadButton setTitle:@"GRATUIT" forState:UIControlStateNormal];
+            
+            break;
+            
+        case ElementsStateSubscribe:
+            
+            subscribeButton.hidden = NO;
+            
+            break;
+            
+        case ElementsStateSubscribePay:
+            
+            subscribeButton.hidden = NO;
+            subscribeButton.frame = readButton.frame;
+            payButton.hidden = NO;
+            
+            break;
             
         case ElementsStateArchived:
             
