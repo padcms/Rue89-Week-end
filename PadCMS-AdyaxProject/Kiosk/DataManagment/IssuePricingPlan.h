@@ -8,9 +8,13 @@
 
 typedef enum{
     
-    IssuePricingPlanFree,
+    IssuePricingPlanFree = 1,
     IssuePricingPlanSubscriptionOnly,
     IssuePricingPlanSubscriptionOrSinglePurchase,
     IssuePricingPlanSinglePurchase
     
 }IssuePricingPlan;
+
+NSString* Issue_Pricing_Plan_JSON_Key;
+
+IssuePricingPlan pricingPlanFromString(NSString* string);

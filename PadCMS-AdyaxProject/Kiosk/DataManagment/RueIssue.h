@@ -7,7 +7,10 @@
 //
 
 #import "PCIssue.h"
+#import "IssuePricingPlan.h"
 
 @interface RueIssue : PCIssue
+
+@property (nonatomic, readonly) IssuePricingPlan pricingPlan;
 
 @end
