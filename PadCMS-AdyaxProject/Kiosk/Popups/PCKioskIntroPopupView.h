@@ -17,4 +17,6 @@
 @property (nonatomic, strong) NSString* descriptionText;
 @property (nonatomic, strong) NSString* infoText;
 
+@property (nonatomic, strong) PCKioskSubscribeButton * subscribeButton;
+
 @end

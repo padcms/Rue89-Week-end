@@ -234,6 +234,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     //introPopup.infoText = currentApplication...
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
+    introPopup.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
     [introPopup show];
 }
 #endif
@@ -338,7 +339,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 
-- (PCApplication*) getApplication
+- (PCRueApplication*) getApplication
 {
     return currentApplication;
 }
@@ -417,6 +418,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                 {
                     [self syncronyzeApp:currentApplication fromOldApplicationParameters:previousApplicationParameters toNewApplicationParameters:applicationParameters];
                 }
+                
+                
 			}
 			else
             {
@@ -627,6 +630,7 @@ BOOL stringExists(NSString* str)
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
     self.kioskHeaderView.delegate = self;
     [self.view addSubview:self.kioskHeaderView];
+    self.kioskHeaderView.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
     
     //subscription notification
     
@@ -1365,7 +1369,7 @@ BOOL stringExists(NSString* str)
             {
                 NSArray* subscriptionsList = avaliableSubscriptions;
                 CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
-                NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+                NSString* title = currentApplication.subscriptionsListTitle;
                 
                 //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
                 //self.subscribePopoverController.delegate = self;
@@ -1405,7 +1409,7 @@ BOOL stringExists(NSString* str)
             {
                 NSArray* subscriptionsList = avaliableSubscriptions;
                 CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
-                NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+                NSString* title = currentApplication.subscriptionsListTitle;
                 
                 //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
                 //self.subscribePopoverController.delegate = self;

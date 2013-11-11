@@ -206,6 +206,10 @@
         {
             self.subscriptionsListTitle = subscriptionListTitle;
         }
+        else
+        {
+            self.subscriptionsListTitle = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+        }
     }
     return self;
 }

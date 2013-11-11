@@ -14,7 +14,6 @@
 
 @interface PCKioskIntroPopupView()
 
-@property (nonatomic, strong) PCKioskSubscribeButton * subscribeButton;
 @property (nonatomic, strong) RTLabelWithWordWrap* labelAfterSubscriptionButton;
 
 @end

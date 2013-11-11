@@ -78,7 +78,7 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 - (void) stopBarTimer;
 
 - (void) restart;
-- (PCApplication*) getApplication;
+- (PCRueApplication*) getApplication;
 - (void) switchToKiosk;
 
 - (void) switchToRevision:(PCRevision*)revision;
