@@ -143,42 +143,14 @@ static RueSubscriptionManager* _sharedManager = nil;
 
 - (BOOL) isRevisionPaid:(PCRevision*)revision
 {
-    if (revision.issue)
+    if (revision.issue && revision.issue.productIdentifier && revision.issue.productIdentifier.length)
     {
-        
-        //BOOL isIssuePaid = revision.issue.paid;
-        
-        BOOL isIssuePaid = NO;
-        if (revision.issue.productIdentifier.length < 1) {
-            isIssuePaid = YES;
-        } else {
-            isIssuePaid = [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
-        }
-        
-        
-#warning Check here for individual payment
-        
-#warning HARDCODE!
-        BOOL isRevisionIndividuallyPaid = NO;
-#warning HARDCODE!
-        
-        if (isRevisionIndividuallyPaid) {
-            return  isIssuePaid;
-        }
-        
-        //REturn that PAID when we are already subscribed to whole magazine
-        
-        NSString * featureId = [[PCConfig subscriptions] lastObject];
-        BOOL subscriptionActive = [[MKStoreManager sharedManager] isSubscriptionActive:featureId];
-        
-        if (subscriptionActive) {
-            return YES;
-        }
-        
-        return isIssuePaid;
+        return [MKStoreManager isFeaturePurchased:revision.issue.productIdentifier];
     }
-    
-    return NO;
+    else
+    {
+        return NO;
+    }
 }
 
 #pragma mark - Notifications

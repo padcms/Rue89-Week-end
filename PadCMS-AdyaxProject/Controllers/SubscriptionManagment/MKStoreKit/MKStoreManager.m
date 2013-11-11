@@ -187,8 +187,6 @@ static MKStoreManager* _sharedStoreManager;
 {
 	if(!_sharedStoreManager) {
         
-//        [self setObject:nil forKey:@"com.mobile.rue89.3months-receipt"];
-        
 		static dispatch_once_t oncePredicate;
 		dispatch_once(&oncePredicate, ^{
 			_sharedStoreManager = [[self alloc] init];
@@ -708,48 +706,48 @@ static MKStoreManager* _sharedStoreManager;
             forReceipt:(NSData*) receiptData
          hostedContent:(NSArray*) hostedContent
 {
-  MKSKSubscriptionProduct *subscriptionProduct = [self.subscriptionProducts objectForKey:productIdentifier];
-  if(subscriptionProduct)
-  {
-    // MAC In App Purchases can never be a subscription product (at least as on Dec 2011)
-    // so this can be safely ignored.
-    
-    subscriptionProduct.receipt = receiptData;
-    [subscriptionProduct verifyReceiptOnComplete:^(NSNumber* isActive)
-     {
-       [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsPurchasedNotification
-                                                           object:productIdentifier];
-       
-//       [MKStoreManager setObject:receiptData forKey:productIdentifier];
-         [MKStoreManager setReceipt:receiptData forKey:productIdentifier];
-         
-         [self startVerifyingSubscriptionReceipts];
-         
-         if(self.onTransactionCompleted)
+    MKSKSubscriptionProduct *subscriptionProduct = [self.subscriptionProducts objectForKey:productIdentifier];
+    if(subscriptionProduct)
+    {
+        // MAC In App Purchases can never be a subscription product (at least as on Dec 2011)
+        // so this can be safely ignored.
+        
+        subscriptionProduct.receipt = receiptData;
+        [subscriptionProduct verifyReceiptOnComplete:^(NSNumber* isActive)
          {
-             self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
-             self.onTransactionCompleted = nil;
-             self.onTransactionCancelled = nil;
-         }
-     }
-                                         onError:^(NSError* error)
-     {
-         if(self.onTransactionCancelled)
-         {
-             NSError* err = error;
-             if(err == nil)
+             [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsPurchasedNotification
+                                                                 object:productIdentifier];
+             
+             [MKStoreManager setObject:[NSNumber numberWithBool:YES] forKey:productIdentifier];
+             [MKStoreManager setReceipt:receiptData forKey:productIdentifier];
+             
+             [self startVerifyingSubscriptionReceipts];
+             
+             if(self.onTransactionCompleted)
              {
-                 err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
+                 self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+                 self.onTransactionCompleted = nil;
+                 self.onTransactionCancelled = nil;
              }
-             self.onTransactionCancelled(error);
-             self.onTransactionCancelled = nil;
-             self.onTransactionCompleted = nil;
          }
-       NSLog(@"%@", [error description]);
-     }];
-  }
-  else
-  {
+                                             onError:^(NSError* error)
+         {
+             if(self.onTransactionCancelled)
+             {
+                 NSError* err = error;
+                 if(err == nil)
+                 {
+                     err = [NSError errorWithDomain:@"MKStoreManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Receipt data is invalid."}];
+                 }
+                 self.onTransactionCancelled(error);
+                 self.onTransactionCancelled = nil;
+                 self.onTransactionCompleted = nil;
+             }
+             NSLog(@"%@", [error description]);
+         }];
+    }
+    else
+    {
     if(!receiptData) {
       
       // could be a mac in app receipt.
