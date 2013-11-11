@@ -1318,23 +1318,28 @@ BOOL stringExists(NSString* str)
     else
     {
         sender.enabled = NO;
+        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
+        
         [[RueSubscriptionManager sharedManager] restorePurchasesCompletion:^(NSError *error) {
             
-            if(error == nil)
+            if(error)
             {
-                //[[self shelfView] reload];
+                [self showAlertWithError:error];
+            }
+            
+            if([[RueSubscriptionManager sharedManager] isSubscribed])
+            {
+                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
             }
             else
             {
-                [self showAlertWithError:error];
-                //[[self shelfView] reload];
+                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
             }
             
             [[self shelfView] updateElementsButtons];
             sender.enabled = YES;
         }];
         
-        //[[self shelfView] reload];
         [[self shelfView] updateElementsButtons];
     }
 }
