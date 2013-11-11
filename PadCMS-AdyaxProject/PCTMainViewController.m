@@ -1348,6 +1348,7 @@ BOOL stringExists(NSString* str)
     else
     {
         button.state = PCKioskSubscribeButtonStateSubscribing;
+        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
         
         [[RueSubscriptionManager sharedManager] getAvalialeSubscriptionsToBlock:^(NSArray *avaliableSubscriptions, NSError *error) {
             
@@ -1371,7 +1372,52 @@ BOOL stringExists(NSString* str)
             }
             
             button.state = PCKioskSubscribeButtonStateNotSubscribed;
+            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
+            [[self shelfView]updateElementsButtons];
         }];
+        [[self shelfView]updateElementsButtons];
+    }
+}
+
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision
+{
+    if([self isNotConnectedToNetwork])
+    {
+        [self showNoConnectionAlert];
+    }
+    else
+    {
+        //button.state = PCKioskSubscribeButtonStateSubscribing;
+        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
+        
+        [[RueSubscriptionManager sharedManager] getAvalialeSubscriptionsToBlock:^(NSArray *avaliableSubscriptions, NSError *error) {
+            
+            if(error)
+            {
+                [self showAlertWithError:error];
+            }
+            else
+            {
+                NSArray* subscriptionsList = avaliableSubscriptions;
+                CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
+                NSString* title = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
+                
+                //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
+                //self.subscribePopoverController.delegate = self;
+                
+                SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
+                sheet.delegate = self;
+                //sheet.initiatorButton = button;
+                [sheet showFromRect:buttonRect inView:self.view animated:YES];
+                
+                
+            }
+            
+            [[self shelfView] updateElementsButtons];
+            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
+        }];
+        
+        [[self shelfView]updateElementsButtons];
     }
 }
 
@@ -1662,6 +1708,7 @@ BOOL stringExists(NSString* str)
 - (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme
 {
     self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
+    [[self shelfView]updateElementsButtons];
 }
 
 #pragma mark - UIActionSheetDelegate Protocol
@@ -1682,19 +1729,26 @@ BOOL stringExists(NSString* str)
     if(scheme)
     {
         initiator.state = PCKioskSubscribeButtonStateSubscribing;
+        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
+        
         [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
             
             if(error)
             {
                 [self showAlertWithError:error];
                 initiator.state = PCKioskSubscribeButtonStateNotSubscribed;
+                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
             }
             else
             {
                 initiator.state = PCKioskSubscribeButtonStateSubscribed;
-                [[self shelfView] reload];
+                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
             }
+            
+            [[self shelfView] updateElementsButtons];
         }];
+        
+        [[self shelfView]updateElementsButtons];
     }
 }
 

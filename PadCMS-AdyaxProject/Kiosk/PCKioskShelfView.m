@@ -13,6 +13,7 @@
 #import "PCKioskSubHeaderView.h"
 #import "PCKioskShelfViewCell.h"
 #import "PCTMainViewController.h"
+#import "PCRueKioskViewController.h"
 
 @interface PCKioskShelfView() <PCKioskAdvancedControlElementHeightDelegate>
 
@@ -558,6 +559,14 @@
         }
     }
     return nil;
+}
+
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision
+{
+    if([self.delegate respondsToSelector:@selector(subscribeButtonTaped:fromRevision:)])
+    {
+        [(PCRueKioskViewController*)self.delegate subscribeButtonTaped:button fromRevision:revision];
+    }
 }
 
 #pragma mark - Animations

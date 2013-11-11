@@ -8,9 +8,13 @@
 
 #import "PCKioskViewController.h"
 
+@class PCRevision;
+
 @interface PCRueKioskViewController : PCKioskViewController
 
 - (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index;
 - (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index;
+
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
 
 @end

@@ -20,6 +20,7 @@
     {
         if(completionBlock)
         {
+            
             completionBlock([self subscriptionsFromPurchasableObjects:existingPurchasebleObjects], nil);
         }
         else
@@ -34,6 +35,7 @@
             
             if(completionBlock)
             {
+                self.isSubscribing = NO;
                 completionBlock([self subscriptionsFromPurchasableObjects:existingPurchasebleObjects], nil);
             }
             else
@@ -47,6 +49,7 @@
             
             if(completionBlock)
             {
+                self.isSubscribing = NO;
                 completionBlock(nil, error);
             }
             else
@@ -56,6 +59,7 @@
             }
         };
         
+        self.isSubscribing = YES;
         MKStoreManager* storeManager = [MKStoreManager sharedManager];
         if(storeManager.isLoadindProducts)
         {

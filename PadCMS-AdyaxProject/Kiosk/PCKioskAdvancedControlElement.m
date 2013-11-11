@@ -28,6 +28,7 @@
 #import "ImagesBank.h"
 #import "PCDownloadApiClient.h"
 #import "RueSubscriptionManager.h"
+#import "PCKioskShelfView.h"
 
 typedef enum {
     ElementsStateNotDownloaded,
@@ -338,18 +339,18 @@ typedef enum {
                     break;
                     
                 case IssuePricingPlanSinglePurchase:
-                    if([self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == NO)
+                    if([[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
                     {
-                        [self setElementsState:ElementsStatePay];
+                        [self setElementsState:ElementsStateNotDownloaded];
                     }
                     else
                     {
-                        [self setElementsState:ElementsStateNotDownloaded];
+                        [self setElementsState:ElementsStatePay];
                     }
                     break;
                     
                 case IssuePricingPlanSubscriptionOrSinglePurchase:
-                    if([[RueSubscriptionManager sharedManager] isSubscribed] || [self.dataSource isRevisionPaidWithIndex:self.revisionIndex] == YES)
+                    if([[RueSubscriptionManager sharedManager] isSubscribed] || [[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
                     {
                         [self setElementsState:ElementsStateNotDownloaded];
                     }
@@ -367,7 +368,10 @@ typedef enum {
 
 - (void) subscribeButtonTaped:(UIButton*)sender
 {
-    
+    if ([self.delegate respondsToSelector:@selector(subscribeButtonTaped:fromRevision:)])
+    {
+        [(PCKioskShelfView*)self.delegate subscribeButtonTaped:sender fromRevision:self.revision];
+    }
 }
 
 - (void) setElementsState:(ElementsState)state
@@ -397,10 +401,10 @@ typedef enum {
             
             downloadingInfoLabel.hidden = NO;
             downloadingProgressView.hidden = NO;
-            downloadButton.hidden = NO;
             [(ProgressButton*)downloadButton showProgress];
             [(ProgressButton*)downloadButton showPatience];
             downloadButton.userInteractionEnabled = NO;
+            downloadButton.hidden = NO;
             break;
             
         case ElementsStateInfoDownloaded:
@@ -429,16 +433,7 @@ typedef enum {
                 [[InAppPurchases sharedInstance] requestProductDataWithProductId:productIdentifier];
             }
             
-            if([[RueSubscriptionManager sharedManager]isRestoringPurchases] || [[RueSubscriptionManager sharedManager]isPurchasingRevision])
-            {
-                payButton.alpha = 0.5;
-                payButton.userInteractionEnabled = NO;
-            }
-            else
-            {
-                payButton.alpha = 1;
-                payButton.userInteractionEnabled = YES;
-            }
+            [self setupAvailabilityOfSubscribeAndPayButtons];
         }
         break;
             
@@ -450,17 +445,20 @@ typedef enum {
             break;
             
         case ElementsStateSubscribe:
-            
+        {
+            [self setupAvailabilityOfSubscribeAndPayButtons];
             subscribeButton.hidden = NO;
-            
+        }
             break;
             
         case ElementsStateSubscribePay:
+        {
+            [self setupAvailabilityOfSubscribeAndPayButtons];
             
             subscribeButton.hidden = NO;
             subscribeButton.frame = readButton.frame;
             payButton.hidden = NO;
-            
+        }
             break;
             
         case ElementsStateArchived:
@@ -480,6 +478,33 @@ typedef enum {
             downloadButton.userInteractionEnabled = NO;
             
             break;
+    }
+}
+
+- (void) setupAvailabilityOfSubscribeAndPayButtons
+{
+    RueSubscriptionManager* subscrManager = [RueSubscriptionManager sharedManager];
+    if([subscrManager isRestoringPurchases] || [subscrManager isSubscribing])
+    {
+        subscribeButton.alpha = 0.5;
+        subscribeButton.userInteractionEnabled = NO;
+        payButton.alpha = 0.5;
+        payButton.userInteractionEnabled = NO;
+    }
+    else
+    {
+        if([subscrManager isPurchasingRevision])
+        {
+            payButton.alpha = 0.5;
+            payButton.userInteractionEnabled = NO;
+        }
+        else
+        {
+            payButton.alpha = 1;
+            payButton.userInteractionEnabled = YES;
+        }
+        subscribeButton.alpha = 1;
+        subscribeButton.userInteractionEnabled = YES;
     }
 }
 
@@ -743,7 +768,7 @@ NSDate* onlyDayDateFromDate (NSDate* date)
         if(![self.dataSource isRevisionPaidWithIndex:self.revisionIndex])
 		{
 			[payButton setTitle:[NSString stringWithString:[(NSDictionary *)[notification object] objectForKey:@"localizedPrice"]] forState:UIControlStateNormal];
-			payButton.hidden = NO;
+			//payButton.hidden = NO;
 		}
 		return;
 	}

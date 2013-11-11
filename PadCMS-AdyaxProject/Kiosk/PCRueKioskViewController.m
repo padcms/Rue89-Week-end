@@ -9,6 +9,7 @@
 #import "PCRueKioskViewController.h"
 #import "PCKioskSubview.h"
 #import "PCKioskShelfView.h"
+#import "PCTMainViewController.h"
 
 @interface PCRueKioskViewController ()
 
@@ -22,6 +23,14 @@
     if (!once) {
         once = YES;
         [super reloadSubviewsOnViewWillAppear];
+    }
+}
+
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision
+{
+    if([self.delegate respondsToSelector:@selector(subscribeButtonTaped:fromRevision:)])
+    {
+        [(PCTMainViewController*)self.delegate subscribeButtonTaped:button fromRevision:revision];
     }
 }
 

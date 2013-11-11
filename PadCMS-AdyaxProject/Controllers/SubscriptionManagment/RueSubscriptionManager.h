@@ -27,7 +27,8 @@
 
 @property (nonatomic, weak) id<RueSubscriptionManagerDelegate> delegate;
 
-@property (nonatomic ,readonly) BOOL isSubscribed;
+@property (nonatomic, assign) BOOL isSubscribing;
+@property (nonatomic, readonly) BOOL isSubscribed;
 
 @property (nonatomic, readonly) BOOL isRestoringPurchases;
 @property (nonatomic, readonly) BOOL isPurchasingRevision;

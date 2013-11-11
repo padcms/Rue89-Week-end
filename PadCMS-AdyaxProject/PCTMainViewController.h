@@ -87,4 +87,6 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 
 - (NSUInteger) indexForRevision:(PCRevision*)revision;
 
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
+
 @end

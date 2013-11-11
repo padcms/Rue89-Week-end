@@ -11,6 +11,8 @@
 #import "PCKioskPageControl.h"
 #import "PCKioskHeaderView.h"
 
+@class PCRevision;
+
 /**
  @class PCKioskShelfView
  @brief Class for kiosk book shelf subview
@@ -33,5 +35,7 @@
 
 - (void) downloadingContentStartedWithRevisionIndex:(NSInteger)index;
 - (void) downloadingContentFinishedWithRevisionIndex:(NSInteger)index;
+
+- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
 
 @end

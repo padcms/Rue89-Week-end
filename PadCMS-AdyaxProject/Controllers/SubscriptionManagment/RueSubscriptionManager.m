@@ -40,7 +40,6 @@ static RueSubscriptionManager* _sharedManager = nil;
     return self;
 }
 
-
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion
 {
     //NSString * featureId = [[PCConfig subscriptions] lastObject];
@@ -54,14 +53,18 @@ static RueSubscriptionManager* _sharedManager = nil;
     
     if ([[MKStoreManager sharedManager] isSubscriptionActive:featureId] == NO)
     {
+        _isSubscribing = YES;
+        
         [[MKStoreManager sharedManager] buyFeature:featureId onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads) {
             
             NSLog(@"Purchase completed.");
+            _isSubscribing = NO;
             
             if(completion) completion(nil);
             
         } onCancelled:^(NSError* error){
             
+            _isSubscribing = NO;
             NSLog(@"Purchase cancelled.");
             if(error == nil)
             {
@@ -230,6 +233,18 @@ static RueSubscriptionManager* _sharedManager = nil;
         {
             [self.delegate subscriptionIsActive:activeScheme];
         }
+    }
+}
+
+- (BOOL) isSubscribed
+{
+    if([self checkForActiveSubscription])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
     }
 }
 
