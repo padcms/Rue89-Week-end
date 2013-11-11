@@ -68,6 +68,7 @@
 		2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA593031822AD8400516768 /* SubscriptionMenuViewController.m */; };
 		2DA593061822AD8400516768 /* SubscriptionMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DA593041822AD8400516768 /* SubscriptionMenuViewController.xib */; };
 		2DA593091822B1CB00516768 /* SubscribeMenuPopuverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */; };
+		2DA689781830D1C200E1F9EE /* RueIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA689771830D1C200E1F9EE /* RueIssue.m */; };
 		2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
@@ -1728,6 +1729,8 @@
 		2DA593071822B1CB00516768 /* SubscribeMenuPopuverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeMenuPopuverController.h; sourceTree = "<group>"; };
 		2DA593081822B1CB00516768 /* SubscribeMenuPopuverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeMenuPopuverController.m; sourceTree = "<group>"; };
 		2DA5A147182BFF52007C9152 /* IssuePricingPlan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IssuePricingPlan.h; sourceTree = "<group>"; };
+		2DA689761830D1C200E1F9EE /* RueIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueIssue.h; sourceTree = "<group>"; };
+		2DA689771830D1C200E1F9EE /* RueIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueIssue.m; sourceTree = "<group>"; };
 		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
 		2DA72EF7181954C300E11910 /* ImagesBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBank.h; sourceTree = "<group>"; };
 		2DA72EF8181954C300E11910 /* ImagesBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBank.m; sourceTree = "<group>"; };
@@ -2532,6 +2535,8 @@
 				2D8512B217FD7E9000A289AC /* PCRevision+DataOfDownload.h */,
 				2D8512B317FD7E9000A289AC /* PCRevision+DataOfDownload.m */,
 				2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */,
+				2DA689761830D1C200E1F9EE /* RueIssue.h */,
+				2DA689771830D1C200E1F9EE /* RueIssue.m */,
 			);
 			path = DataManagment;
 			sourceTree = "<group>";
@@ -5252,6 +5257,7 @@
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
 				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
+				2DA689781830D1C200E1F9EE /* RueIssue.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
