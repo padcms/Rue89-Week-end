@@ -11,6 +11,7 @@
 #import "RueGalleryWithOverlaysViewController.h"
 #import "PCPageElemetTypes.h"
 #import "PCPDFActiveZones.h"
+#import "PCPageViewController+IsPresented.h"
 
 typedef enum{
     GalleryPresentstionStateHidden,
@@ -214,9 +215,6 @@ typedef enum{
     return NO;
 }
 
-- (BOOL) isPresentedPage
-{
-    return (self.columnViewController == self.magazineViewController.currentColumnViewController && self == self.columnViewController.currentPageViewController);
-}
+
 
 @end

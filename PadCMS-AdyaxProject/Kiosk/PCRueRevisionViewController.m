@@ -36,8 +36,25 @@
     return [NSArray arrayWithArray:allRev];
 }
 
+- (void) setMainViewController:(PCMainViewController *)newMainViewController
+{
+    [super setMainViewController:newMainViewController];
+    if(newMainViewController == nil)
+    {
+        for (PCColumnViewController* column in columnsViewControllers)
+        {
+            column.magazineViewController = nil;
+            for (PCPageViewController* page in column.pageViewControllers)
+            {
+                page.magazineViewController = nil;
+            }
+        }
+    }
+}
+
 - (void) viewDidDisappear:(BOOL)animated
 {
+    
     //owerrided for keeping controller alive
 }
 

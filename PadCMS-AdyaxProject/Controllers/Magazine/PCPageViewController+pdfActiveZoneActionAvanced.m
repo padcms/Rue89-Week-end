@@ -11,14 +11,18 @@
 #import "PCPDFActiveZones.h"
 #import "PCPageElemetTypes.h"
 #import "objc/runtime.h"
-#import "PCBrowserViewController.h"
+#import "RueBrowserViewController.h"
 #import "PCScrollView.h"
+
+#import "PCPageViewController+IsPresented.h"
 
 @interface PCPageViewController ()
 
 - (void)hideVideoWebView;
 - (void)showVideoWebView: (NSString *)videoWebViewURL inRect: (CGRect)videoWebViewRect;
 - (void) showGalleryWithID:(NSInteger)ID initialPhotoID:(NSInteger)photoID;
+
+- (void) hideSubviews;
 
 @end
 
@@ -126,7 +130,7 @@
         if ([[activeZone.URL pathExtension] isEqualToString:@"mp4"]||[[activeZone.URL pathExtension] isEqualToString:@"avi"])
         {
             [self hideVideoWebView];
-            [self showVideoWebView:activeZone.URL inRect:[self activeZoneRectForType:activeZone.URL]];
+            [self showVideoWebView:activeZone.URL inRectAdvanced:[self activeZoneRectForType:activeZone.URL]];
             //[self showVideo:activeZone.URL];
             return YES;
         }
@@ -161,10 +165,13 @@
     {
         videoRect = [[UIScreen mainScreen] bounds];
     }
-    if (!webBrowserViewController)
+    if(webBrowserViewController)
     {
-        webBrowserViewController = [[PCBrowserViewController alloc] init];
+        [self hideVideoWebView];
+        [(RueBrowserViewController*)webBrowserViewController stop];
     }
+    webBrowserViewController = [[RueBrowserViewController alloc] init];
+    
     webBrowserViewController.videoRect = videoRect;
     [self.mainScrollView addSubview:webBrowserViewController.view];
     if (self.page.pageTemplate ==
@@ -173,6 +180,25 @@
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
     [webBrowserViewController presentURL:videoWebViewURL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+//    if([self isPresentedPage] == NO)
+//    {
+//        [self hideSubviews];
+        [super viewWillDisappear:animated];
+//    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if([self isPresentedPage] == NO)
+    {
+        [(RueBrowserViewController*)webBrowserViewController stop];
+        [self hideSubviews];
+        [super viewWillDisappear:animated];
+    }
 }
 
 @end

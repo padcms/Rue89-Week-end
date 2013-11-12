@@ -267,6 +267,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0.3 completion:^{
         
+        _revisionViewController.mainViewController = nil;
+        
         [self checkInterfaceOrientationForRevision:revisionToPresent];
         
         NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
