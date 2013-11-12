@@ -79,6 +79,8 @@ const CGFloat kLabelPadding = 30.0f;
     self.titleLabel.kernValue = -1.15;
     self.titleLabel.textColor = UIColorFromRGB(0x34495e);
     
+    self.titleLabel.lineHeightMultiply = 0.8;
+    
     self.titleLabel.shouldResizeHeightToFit = YES;
     self.titleLabel.maximumLinesNumber = 3;
     
@@ -99,6 +101,8 @@ const CGFloat kLabelPadding = 30.0f;
     self.descriptionLabel.shouldResizeHeightToFit = YES;
     self.descriptionLabel.maximumLinesNumber = 2;
     
+    self.descriptionLabel.lineHeightMultiply = 0.8;
+    
     //self.descriptionLabel.contentMode = UIViewContentModeRedraw;
     
     [self addSubview:self.descriptionLabel];
@@ -112,7 +116,7 @@ const CGFloat kLabelPadding = 30.0f;
 
 - (void)layoutLabels {
     self.titleLabel.center = CGPointMake(self.descriptionLabel.center.x, ((int)self.titleLabel.frameHeight % 2) ? 51.5 : 51);
-    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, ((int)self.descriptionLabel.frameHeight % 2) ? 118.5 : 119);
+    self.descriptionLabel.center = CGPointMake(self.descriptionLabel.center.x, ((int)self.descriptionLabel.frameHeight % 2) ? 115.5 : 116);
 }
 
 - (void) setTitle:(NSString*)title

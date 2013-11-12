@@ -22,7 +22,7 @@
     [super setText:text];
     if(self.shouldResizeHeightToFit)
     {
-        self.frame = CGRectMake(((int)self.frame.origin.x), ((int)self.frame.origin.y), ((int)self.frame.size.width), ((int)self.optimumSize.height));
+        self.frame = CGRectMake(((int)self.frame.origin.x), ((int)self.frame.origin.y), ((int)self.frame.size.width), ((int)self.optimumSize.height + 1));
     }
 }
 

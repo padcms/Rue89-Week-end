@@ -97,6 +97,8 @@ typedef enum
 @property (nonatomic, assign) BOOL highlighted;
 @property (nonatomic, assign) CGFloat kernValue;
 
+@property (nonatomic, assign) float lineHeightMultiply;
+
 // set text
 - (void)setText:(NSString*)text;
 + (RTLabelExtractedComponent*)extractTextStyleFromText:(NSString*)data paragraphReplacement:(NSString*)paragraphReplacement;
