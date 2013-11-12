@@ -155,7 +155,10 @@ typedef enum{
     }
     else if (UIDeviceOrientationIsLandscape(currentDeviceOrientation) && galleryPresentationState == GalleryPresentstionStateHidden)
     {
-        [self showGallery];
+        if([self isPresentedPage])
+        {
+            [self showGallery];
+        }
     }
 }
 
@@ -209,6 +212,11 @@ typedef enum{
         return (UIDeviceOrientationIsLandscape(tempOrientation));
     }
     return NO;
+}
+
+- (BOOL) isPresentedPage
+{
+    return (self.columnViewController == self.magazineViewController.currentColumnViewController && self == self.columnViewController.currentPageViewController);
 }
 
 @end
