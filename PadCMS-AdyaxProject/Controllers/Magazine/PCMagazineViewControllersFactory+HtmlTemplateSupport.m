@@ -12,6 +12,8 @@
 #import "PCHtmlColumnViewController.h"
 #import "objc/runtime.h"
 #import "FixedIllustrationTouchableColumnViewController.h"
+#import "PCPageControllersManager.h"
+#import "RueSlideshowViewController.h"
 
 @implementation PCMagazineViewControllersFactory (HtmlTemplateSupport)
 
@@ -19,8 +21,11 @@
 {
     Method prevMethod = class_getInstanceMethod([PCMagazineViewControllersFactory class], @selector(viewControllerForColumn:));
     Method newMethod = class_getInstanceMethod([PCMagazineViewControllersFactory class], @selector(viewControllerForColumnAdvanced:));
+    Method prevMethod2 = class_getInstanceMethod([PCMagazineViewControllersFactory class], @selector(viewControllerForPage:));
+    Method newMethod2 = class_getInstanceMethod([PCMagazineViewControllersFactory class], @selector(viewControllerForPageAdvanced:));
     
     method_exchangeImplementations(prevMethod, newMethod);
+    method_exchangeImplementations(prevMethod2, newMethod2);
 }
 
 -(PCColumnViewController*)viewControllerForColumnAdvanced:(PCColumn*)column
@@ -47,6 +52,25 @@
             break;
     }
     return nil;
+}
+
+-(PCPageViewController*)viewControllerForPageAdvanced:(PCPage *)page
+{
+    if(page.pageTemplate.identifier == PCSlideshowPageTemplate)
+    {
+        return [[[RueSlideshowViewController alloc]initWithPage:page]autorelease];
+    }
+    else
+    {
+        Class pageControllerClass = [[PCPageControllersManager sharedManager] controllerClassForPageTemplate:page.pageTemplate];
+        
+        if (pageControllerClass != nil)
+        {
+            return [[[pageControllerClass alloc] initWithPage:(PCPage *)page] autorelease];
+        }
+        
+        return nil;
+    }
 }
 
 @end

@@ -40,6 +40,7 @@
 		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
 		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
 		2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF26181E9A01006FC178 /* ImagesBankImage.m */; };
+		2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */; };
 		2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
@@ -1680,6 +1681,8 @@
 		2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Storage.m"; sourceTree = "<group>"; };
 		2D94BF25181E9A01006FC178 /* ImagesBankImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBankImage.h; sourceTree = "<group>"; };
 		2D94BF26181E9A01006FC178 /* ImagesBankImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBankImage.m; sourceTree = "<group>"; };
+		2D95BDE018326C57002C4F6F /* RueSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSlideshowViewController.h; sourceTree = "<group>"; };
+		2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSlideshowViewController.m; sourceTree = "<group>"; };
 		2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+BalancedTransition.h"; sourceTree = "<group>"; };
 		2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+BalancedTransition.m"; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
@@ -2524,6 +2527,8 @@
 				2D046FDA181523F7005087D7 /* PCHtmlColumnViewController.m */,
 				2D046FDB181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
 				2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */,
+				2D95BDE018326C57002C4F6F /* RueSlideshowViewController.h */,
+				2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -5228,6 +5233,7 @@
 				AB8137D6152224E50038EC7B /* main.m in Sources */,
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */,
