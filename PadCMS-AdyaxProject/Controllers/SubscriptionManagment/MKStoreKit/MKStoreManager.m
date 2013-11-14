@@ -617,6 +617,8 @@ static MKStoreManager* _sharedStoreManager;
     MKSKSubscriptionProduct *product = [[MKSKSubscriptionProduct alloc] initWithProductId:productId subscriptionDays:[[subscriptions objectForKey:productId] intValue]];
     product.receipt = [MKStoreManager receiptForKey:productId]; // cached receipt
     
+      [self.subscriptionProducts setObject:product forKey:productId];
+      
       if(product.receipt)
       {
           //[self.subscriptionProducts setObject:product forKey:productId];
@@ -646,7 +648,7 @@ static MKStoreManager* _sharedStoreManager;
            }];
       }
       
-      [self.subscriptionProducts setObject:product forKey:productId];
+      
   }
 }
 

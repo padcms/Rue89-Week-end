@@ -34,10 +34,17 @@ static RueSubscriptionManager* _sharedManager = nil;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsInvalid:) name:kSubscriptionsInvalidNotification object:nil];
-        
-        [[MKStoreManager sharedManager] setDataSource:self];
     }
     return self;
+}
+
+- (void) setDelegate:(id<RueSubscriptionManagerDelegate>)delegate
+{
+    if(_delegate != delegate && delegate != nil)
+    {
+        _delegate = delegate;
+        [[MKStoreManager sharedManager] setDataSource:self];
+    }
 }
 
 - (void) subscribeForScheme:(SubscriptionScheme*)subscrScheme completion:(void(^)(NSError* error))completion
@@ -71,6 +78,7 @@ static RueSubscriptionManager* _sharedManager = nil;
                 error = [NSError errorWithDomain:@"SubscribtionManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Subscription cancelled."}];
             }
             completion(error);
+            [self checkForActiveSubscriptionAndNotifyDelegate];
         }];
     }
     else
@@ -79,6 +87,7 @@ static RueSubscriptionManager* _sharedManager = nil;
         {
             NSError* error = [NSError errorWithDomain:@"SubscribtionManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Subscription is already active"}];
             completion(error);
+            [self checkForActiveSubscriptionAndNotifyDelegate];
         }
     }
 }
