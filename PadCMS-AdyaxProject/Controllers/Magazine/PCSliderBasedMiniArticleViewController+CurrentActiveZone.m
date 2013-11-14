@@ -7,8 +7,23 @@
 //
 
 #import "PCSliderBasedMiniArticleViewController.h"
+#import <objc/runtime.h>
+
+@interface PCPageViewController ()
+
+- (void)hideVideoWebView;
+
+@end
 
 @implementation PCSliderBasedMiniArticleViewController (CurrentActiveZone)
+
++ (void) load
+{
+    Method showArticleAtIndexMethod = class_getInstanceMethod([PCSliderBasedMiniArticleViewController class], @selector(showArticleAtIndex:));
+    Method showArticleAtIndexMethodAdvanced = class_getInstanceMethod([PCSliderBasedMiniArticleViewController class], @selector(showArticleAtIndexAdvanced:));
+    
+    method_exchangeImplementations(showArticleAtIndexMethod, showArticleAtIndexMethodAdvanced);
+}
 
 - (NSArray*) activeZonesAtPoint:(CGPoint)point
 {
@@ -58,55 +73,11 @@
     return activeZones;
 }
 
-/*-(void)showArticleAtIndex:(NSUInteger)index
+- (void) showArticleAtIndexAdvanced:(NSUInteger)index
 {
+    [self showArticleAtIndexAdvanced:index];
     
-    //TODO we need something for more blurring page change
-    if (miniArticleViews != nil && [miniArticleViews count] > index)
-    {
-        if([self.bodyViewController isEqual:[miniArticleViews objectAtIndex:index]])
-        {
-            return;
-        }
-        
-        for (UIView* view in [self.thumbsView subviews])
-            if ([view isKindOfClass:[UIButton class]])
-            {
-                [(UIButton*)view setSelected:[view tag]==index];
-            }
-        
-        PCPageElementViewController *prevController = [self.bodyViewController retain];
-        
-        self.bodyViewController = [miniArticleViews objectAtIndex:index];
-        
-        currentMiniArticleIndex = index;
-        
-        [self.mainScrollView addSubview:self.bodyViewController.view];
-        
-        
-		if (!self.bodyViewController.element.isComplete && index!=0) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:PCBoostPageNotification object:self.bodyViewController.element];
-            NSLog(@"BOOST message from miniarticle element - %d", self.bodyViewController.element?self.bodyViewController.element.identifier:0);
-		}
-		
-        [self.bodyViewController loadFullViewImmediate];
-        [self.bodyViewController showHUD];
-        
-        [prevController.view removeFromSuperview];
-        //        if (self.page.pageTemplate.identifier==PCFlashBulletInteractivePageTemplate)
-        //        {
-        //            self.bodyViewController.view.alpha = 0.0;
-        //
-        //            [UIView beginAnimations:nil context:NULL];
-        //            [UIView setAnimationDuration:.5];
-        //            self.bodyViewController.view.alpha = 1.0;
-        //            [UIView commitAnimations];
-        //        }
-        [prevController unloadView];
-        
-        [prevController release];
-    }
- 
-}*/
+    [self hideVideoWebView];
+}
 
 @end

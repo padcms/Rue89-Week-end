@@ -18,7 +18,7 @@
 
 @interface PCPageViewController ()
 
-- (void)hideVideoWebView;
+//- (void)hideVideoWebView;
 - (void)showVideoWebView: (NSString *)videoWebViewURL inRect: (CGRect)videoWebViewRect;
 - (void) showGalleryWithID:(NSInteger)ID initialPhotoID:(NSInteger)photoID;
 
@@ -160,6 +160,7 @@
 
 - (void)showVideoWebView: (NSString *)videoWebViewURL inRectAdvanced: (CGRect)videoWebViewRect
 {
+    NSLog(@"URL playing : %@", videoWebViewURL);
     CGRect videoRect = videoWebViewRect;
     if (CGRectEqualToRect(videoRect, CGRectZero))
     {
@@ -180,6 +181,16 @@
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
     [webBrowserViewController presentURL:videoWebViewURL];
+}
+
+- (void)hideVideoWebView
+{
+    if (webBrowserViewController)
+    {
+        [(RueBrowserViewController*)webBrowserViewController stop];
+        [webBrowserViewController.view removeFromSuperview];
+        webBrowserViewController = nil;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
