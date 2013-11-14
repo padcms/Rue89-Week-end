@@ -179,7 +179,7 @@ typedef enum {
     _archiveButton.frame = bottomButtonRect;
     _restoreButton.frame = topButtonRect;
     
-    subscribeButton = [self buttonWithTitle:@"S`ABONNER"];
+    subscribeButton = [self buttonWithTitle:@"S'ABONNER"];
     subscribeButton.hidden = YES;
     subscribeButton.frame = bottomButtonRect;
 }
