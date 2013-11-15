@@ -19,4 +19,6 @@
 
 @property (nonatomic, readonly) NSArray* subscriptionsSchemes;
 
+@property (nonatomic, copy) NSString* wellcomeMessage;
+
 @end

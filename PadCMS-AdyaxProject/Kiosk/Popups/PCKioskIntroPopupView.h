@@ -13,9 +13,9 @@
 
 @property (nonatomic, weak) id<PCKioskSubscribeButtonDelegate> purchaseDelegate;
 
-@property (nonatomic, strong) NSString* titleText;
-@property (nonatomic, strong) NSString* descriptionText;
-@property (nonatomic, strong) NSString* infoText;
+@property (nonatomic) NSString* titleText;
+@property (nonatomic) NSString* descriptionText;
+@property (nonatomic) NSString* infoText;
 
 @property (nonatomic, strong) PCKioskSubscribeButton * subscribeButton;
 

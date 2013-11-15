@@ -20,6 +20,7 @@
 
 #define kApplicationSubscribeButtonKey @"application_subscribe_button"
 #define kApplicationSubscribeTitleKey @"application_subscribe_title"
+#define kApplicationWellcomeMessageKey @"application_welcome_message"
 
 @implementation PCRueApplication
 
@@ -211,6 +212,8 @@
         {
             self.subscriptionsListTitle = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
         }
+        
+        self.wellcomeMessage = [[parameters objectForKey:kApplicationWellcomeMessageKey]stringByDecodingHTMLEntities];
         
         //---------------------------------- Subscriptions --------------------------------------------------------
         NSMutableArray* schemes = [[NSMutableArray alloc]init];

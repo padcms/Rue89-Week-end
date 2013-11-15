@@ -41,6 +41,7 @@
 #import "SubscribeMenuPopuverController.h"
 #import "SubscriptionScheme.h"
 #import "SubscriptionMenuActionSheet.h"
+#import "RueIssue.h"
 
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate, UIActionSheetDelegate>
 
@@ -227,10 +228,11 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 #ifdef RUE
-- (void)showIntroPopup {
+- (void)showIntroPopup
+{
     PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
     //introPopup.titleText = currentApplication...
-    //introPopup.descriptionText = currentApplication...
+    introPopup.descriptionText = currentApplication.wellcomeMessage;
     //introPopup.infoText = currentApplication...
     introPopup.purchaseDelegate = self;
     introPopup.delegate = self;
@@ -887,11 +889,16 @@ BOOL stringExists(NSString* str)
         
         NSPredicate * predicate;
         
-        if (![staticTagIds containsObject:@(self.selectedTag.tagId)]) {
+        if (![staticTagIds containsObject:@(self.selectedTag.tagId)])
+        {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                if (revision.state != PCRevisionStateArchived) {
-                    for (PCTag * tag in revision.issue.tags) {
-                        if (tag.tagId == self.selectedTag.tagId) {
+                
+                if (revision.state != PCRevisionStateArchived)
+                {
+                    for (PCTag * tag in revision.issue.tags)
+                    {
+                        if (tag.tagId == self.selectedTag.tagId)
+                        {
                             return YES;
                         }
                     }
@@ -899,7 +906,9 @@ BOOL stringExists(NSString* str)
 
                 return NO;
             }];
-        } else if (self.selectedTag.tagId == TAG_ID_ARCHIVES) {
+        }
+        else if (self.selectedTag.tagId == TAG_ID_ARCHIVES)
+        {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
                 
                 if (revision.state == PCRevisionStateArchived || [revision.issue isOld])
@@ -911,15 +920,21 @@ BOOL stringExists(NSString* str)
                     return NO;
                 }
             }];
-        } else if (self.selectedTag.tagId == TAG_ID_FREE) {
-            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                if (revision.issue.isPaid && (revision.state != PCRevisionStateArchived)) {
+        }
+        else if (self.selectedTag.tagId == TAG_ID_FREE)
+        {
+            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings){
+                
+                if ([(RueIssue*)revision.issue pricingPlan] == IssuePricingPlanFree && (revision.state != PCRevisionStateArchived) && revision.issue.isOld == NO)
+                {
                     return YES;
                 }
                 
                 return NO;
             }];
-        } else if (self.selectedTag.tagId == TAG_ID_MAIN) {
+        }
+        else if (self.selectedTag.tagId == TAG_ID_MAIN)
+        {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
                 
                 if (revision.state != PCRevisionStateArchived && revision.issue.isOld == NO)
@@ -932,8 +947,6 @@ BOOL stringExists(NSString* str)
                 }
             }];
         }
-        
-
         
         allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
     }
