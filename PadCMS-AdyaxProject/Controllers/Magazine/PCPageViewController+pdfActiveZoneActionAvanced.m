@@ -166,15 +166,13 @@
     {
         videoRect = [[UIScreen mainScreen] bounds];
     }
-    if(webBrowserViewController)
-    {
-        [self hideVideoWebView];
-        [(RueBrowserViewController*)webBrowserViewController stop];
-    }
-    webBrowserViewController = [[RueBrowserViewController alloc] init];
     
+    [self hideVideoWebView];
+    
+    webBrowserViewController = [[RueBrowserViewController alloc] init];
     webBrowserViewController.videoRect = videoRect;
     [self.mainScrollView addSubview:webBrowserViewController.view];
+    
     if (self.page.pageTemplate ==
         [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate])
     {
@@ -195,11 +193,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    if([self isPresentedPage] == NO)
-//    {
-//        [self hideSubviews];
-        [super viewWillDisappear:animated];
-//    }
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
