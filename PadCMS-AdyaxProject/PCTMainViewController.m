@@ -228,16 +228,25 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 
 #ifdef RUE
+
+#define FIRST_START_UP_KEY @"is_first_startup"
+
 - (void)showIntroPopup
 {
-    PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
-    //introPopup.titleText = currentApplication...
-    introPopup.descriptionText = currentApplication.wellcomeMessage;
-    //introPopup.infoText = currentApplication...
-    introPopup.purchaseDelegate = self;
-    introPopup.delegate = self;
-    introPopup.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
-    [introPopup show];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:FIRST_START_UP_KEY]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_START_UP_KEY];
+        PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
+        //introPopup.titleText = currentApplication...
+        introPopup.descriptionText = currentApplication.wellcomeMessage;
+        //introPopup.infoText = currentApplication...
+        introPopup.purchaseDelegate = self;
+        introPopup.delegate = self;
+        introPopup.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
+        [introPopup show];
+    } else {
+        [self showForOurReadersPopup];
+    }
+
 }
 #endif
 
@@ -1544,12 +1553,16 @@ BOOL stringExists(NSString* str)
 
 - (void)popupViewDidHide:(PCKioskPopupView *)popupView {
     if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
-        PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
-        popup.titleLabel.text = @"À nos lecteurs";
-        popup.descriptionLabel.text = currentApplication.messageForReaders;
-        [popup sizeToFitDescriptionLabelText];
-        [popup show];
+        [self showForOurReadersPopup];
     }
+}
+
+- (void)showForOurReadersPopup {
+    PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
+    popup.titleLabel.text = @"À nos lecteurs";
+    popup.descriptionLabel.text = currentApplication.messageForReaders;
+    [popup sizeToFitDescriptionLabelText];
+    [popup show];
 }
 
 #pragma mark - UIAlertViewDelegate
