@@ -7,17 +7,15 @@
 //
 
 #import "PCPageViewController+IsPresented.h"
-#import "objc/runtime.h"
+#import "PCColumnViewController.h"
+
+@interface PCPageViewController ()
+
+- (void) hideSubviews;
+
+@end
 
 @implementation PCPageViewController (IsPresented)
-
-+ (void) load
-{
-    Method prevMethod = class_getInstanceMethod([PCPageViewController class], @selector(viewDidLoad));
-    Method newMethod = class_getInstanceMethod([PCPageViewController class], @selector(viewDidLoadAdvanced));
-    
-    method_exchangeImplementations(prevMethod, newMethod);
-}
 
 - (BOOL) isPresentedPage
 {
@@ -38,20 +36,55 @@
     //return ([self magazineViewController] && [[self magazineViewController]navigationController] && self.columnViewController == self.magazineViewController.currentColumnViewController && self == self.columnViewController.currentPageViewController);
 }
 
-- (void) viewDidLoadAdvanced
+- (void) didBecamePresented
 {
-    [self viewDidLoadAdvanced];
-    if([self magazineViewController] && [self columnViewController])
-    {
-        [self.magazineViewController addObserver:self forKeyPath:@"currentColumnViewController" options:NSKeyValueObservingOptionNew context:nil];
-    }
+    
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void) didStopToBePresented
 {
-    if([keyPath isEqualToString:@"currentColumnViewController"])
+    [self hideSubviews];
+}
+
+@end
+
+@interface PCColumnViewController ()
+
+- (void) loadFullPageAtIndex:(NSInteger)index;
+- (void) unloadFullPageAtIndex:(NSInteger)index;
+
+@end
+
+@implementation PCColumnViewController (PageIsPresentedSupport)
+
+- (void) updateViewsForCurrentIndex
+{
+    NSInteger currentIndex = [self currentPageIndex];
+    
+    for(int i = 0; i < [pageViewControllers count]; ++i)
     {
-        
+        if(ABS(currentIndex - i) > 1)
+        {
+            [self unloadFullPageAtIndex:i];
+        }
+        else
+        {
+            [self loadFullPageAtIndex:i];
+            if(ABS(currentIndex - i) > 0)
+            {
+                PCPageViewController *currentPage = [pageViewControllers objectAtIndex:i];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [currentPage didStopToBePresented];
+                });
+            }
+            else
+            {
+                PCPageViewController *currentPage = [pageViewControllers objectAtIndex:i];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [currentPage didBecamePresented];
+                });
+            }
+        }
     }
 }
 
