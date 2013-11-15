@@ -9,8 +9,18 @@
 #import "PCRueRevisionViewController.h"
 #import "PCRevisionSummaryPopup.h"
 #import "PCTMainViewController.h"
-
+#import "PCGoogleAnalytics.h"
 #import "PCScrollView.h"
+
+#import "PCPageViewController+IsPresented.h"
+
+@interface PCRevisionViewController ()
+
+- (NSInteger) currentColumnIndex;
+- (void) loadFullColumnAtIndex:(NSInteger)index;
+- (void) unloadFullColumnAtIndex:(NSInteger)index;
+
+@end
 
 @interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
@@ -28,6 +38,48 @@
 //    }
 //    return self;
 //}
+
+- (void) updateViewsForCurrentIndex
+{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		if (self.currentColumnViewController.currentPageViewController.page && !self.currentColumnViewController.currentPageViewController.page.isComplete)
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:PCBoostPageNotification object:self.currentColumnViewController.currentPageViewController.page userInfo:nil];
+		}
+		
+		
+		NSInteger currentIndex = [self currentColumnIndex];
+		[self loadFullColumnAtIndex:currentIndex];
+		
+		for(int i = 0; i < [columnsViewControllers count]; ++i)
+		{
+			if(ABS(currentIndex - i) > 1)
+			{
+				[self unloadFullColumnAtIndex:i];
+			}
+			else
+			{
+                if(ABS(currentIndex - i) > 0)
+                {
+                    [self loadFullColumnAtIndex:i];
+                    PCColumnViewController* columnController = [columnsViewControllers objectAtIndex:i];
+                    [columnController.currentPageViewController didStopToBePresented];
+                }
+                else
+                {
+                    PCColumnViewController* columnController = [columnsViewControllers objectAtIndex:i];
+                    [columnController.currentPageViewController didBecamePresented];
+                }
+			}
+		}
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.currentColumnViewController.currentPageViewController showHUD];
+		});
+		
+		[PCGoogleAnalytics trackPageView:self.currentColumnViewController.currentPageViewController.page];
+	});
+    
+}
 
 - (NSArray*) sortedListOfAllDownloadedRevisions
 {
