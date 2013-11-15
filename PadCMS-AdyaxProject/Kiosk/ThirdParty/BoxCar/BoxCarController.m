@@ -9,7 +9,7 @@
 #import "BoxCarController.h"
 #import <Boxcar/Boxcar.h>
 
-#define SANDBOX //Comment this line for thr release
+//#define SANDBOX //Comment this line for thr release
 
 @implementation BoxCarController
 
