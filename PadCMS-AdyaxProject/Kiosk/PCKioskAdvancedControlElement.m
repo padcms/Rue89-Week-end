@@ -124,7 +124,7 @@ typedef enum {
 -(void)initButtons
 {
     
-    NSString * downloadButtonTitle = [PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
+    NSString * downloadButtonTitle = @"TÉLÉCHARGER";//[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
     
     downloadButton = [ProgressButton progressButtonWithTitle:downloadButtonTitle];
     [self addSubview:downloadButton];
