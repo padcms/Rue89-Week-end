@@ -123,7 +123,9 @@ typedef enum {
 
 -(void)initButtons
 {
-    
+//    É
+//    LATIN CAPITAL LETTER E WITH ACUTE
+//Unicode: U+00C9, UTF-8: C3 89
     NSString * downloadButtonTitle = @"TÉLÉCHARGER";//[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"DOWNLOAD"];
     
     downloadButton = [ProgressButton progressButtonWithTitle:downloadButtonTitle];
@@ -320,7 +322,7 @@ typedef enum {
         }
         else
         {
-            //[self setElementsState:ElementsStateNotDownloaded];
+//            [self setElementsState:ElementsStateNotDownloaded];
             //----- case that revision dont starts downloading ----------------------
             switch ([(RueIssue*)self.revision.issue pricingPlan])
             {
@@ -385,7 +387,7 @@ typedef enum {
     [(ProgressButton*)downloadButton hideProgress];
     [self stopObserveReachability];
     
-    [downloadButton setTitle:[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"Download"] forState:UIControlStateNormal];
+    [downloadButton setTitle:@"TÉLÉCHARGER" forState:UIControlStateNormal];//[PCLocalizationManager localizedStringForKey:@"KIOSK_BUTTON_TITLE_DOWNLOAD" value:@"Download"] forState:UIControlStateNormal];
     subscribeButton.hidden = YES;
     subscribeButton.frame = downloadButton.frame;
     
