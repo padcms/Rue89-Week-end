@@ -24,7 +24,7 @@
 
 @implementation PCGooglePlusController
 
-static NSString* google_client_id = @"1061550701781-ms4glu29lh2kgqv3q6gfg44t2a84bi2r.apps.googleusercontent.com";
+static NSString* google_client_id = @"585237059531-t6jvb2j14nnkm7k32viafrmciocjgk29.apps.googleusercontent.com";
 //static NSString* google_client_secret = @"es7pY7efaLpNFm2QD9CK-g_j";
 //static NSString* api_end_point = @"https://www.googleapis.com/plus/v1/";
 static NSString* authorization_end_point = @"https://accounts.google.com/o/oauth2/auth";
@@ -131,7 +131,7 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
 - (void) cleareCookie
 {
     static NSString* googleAccountsDomain = @"accounts.google.com";
-    static NSString* googleMainDomain = @".google.com.ua";
+    static NSString* googleMainDomain = @".google.fr";
     static NSString* googleDomain = @".google.com";
     
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];

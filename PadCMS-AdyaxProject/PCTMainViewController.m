@@ -238,6 +238,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
         PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
         //introPopup.titleText = currentApplication...
         introPopup.descriptionText = currentApplication.wellcomeMessage;
+        introPopup.infoText = currentApplication.welcomeMessageUnderButton;
         //introPopup.infoText = currentApplication...
         introPopup.purchaseDelegate = self;
         introPopup.delegate = self;
@@ -1485,9 +1486,9 @@ BOOL stringExists(NSString* str)
 {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
     sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
-    sharePopup.facebookMessage = currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
-    sharePopup.twitterMessage = currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
-    sharePopup.googleMessage = currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.facebookMessage = currentApplication.shareMessage;//currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.twitterMessage = currentApplication.shareMessage;//currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
+    sharePopup.googleMessage = currentApplication.shareMessage;//currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.descriptionLabel.text = currentApplication.shareMessage;
     sharePopup.postUrl = currentApplication.shareUrl;
     sharePopup.delegate = self;
