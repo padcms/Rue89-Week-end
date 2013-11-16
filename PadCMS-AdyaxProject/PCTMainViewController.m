@@ -1320,7 +1320,16 @@ BOOL stringExists(NSString* str)
 
 - (void)contactUsButtonTapped
 {
-    NSDictionary * emailParams = @{PCApplicationNotificationTitleKey : @"", PCApplicationNotificationMessageKey : @""};
+    NSMutableDictionary * emailParams = [NSMutableDictionary new];
+    
+    if (currentApplication.contactEmailSubject) {
+        [emailParams setObject:currentApplication.contactEmailSubject forKey:PCApplicationNotificationTitleKey];
+    }
+    
+    if (currentApplication.contactEmailText) {
+        [emailParams setObject:currentApplication.contactEmailText forKey:PCApplicationNotificationMessageKey];
+    }
+    
     self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
     
     NSString * contactEmail = @"";

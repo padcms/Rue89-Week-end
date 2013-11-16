@@ -21,6 +21,10 @@
 #define kApplicationSubscribeButtonKey @"application_subscribe_button"
 #define kApplicationSubscribeTitleKey @"application_subscribe_title"
 #define kApplicationWellcomeMessageKey @"application_welcome_message"
+#define kApplicationWellcomeMessagePart2Key @"application_welcome_message_part2"
+
+#define kApplicationContactEmailTextKey @"application_contact_email_text"
+#define kApplicationContactEmailSubjectKey @"application_contact_email_subject"
 
 @implementation PCRueApplication
 
@@ -214,6 +218,11 @@
         }
         
         self.wellcomeMessage = [[parameters objectForKey:kApplicationWellcomeMessageKey]stringByDecodingHTMLEntities];
+        self.welcomeMessageUnderButton = [[parameters objectForKey:kApplicationWellcomeMessagePart2Key]stringByDecodingHTMLEntities];
+        
+        self.contactEmailText = [parameters objectForKey:kApplicationContactEmailTextKey];
+        self.contactEmailSubject = [parameters objectForKey:kApplicationContactEmailSubjectKey];
+        
         
         //---------------------------------- Subscriptions --------------------------------------------------------
         NSMutableArray* schemes = [[NSMutableArray alloc]init];

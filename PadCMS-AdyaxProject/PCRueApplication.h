@@ -20,5 +20,8 @@
 @property (nonatomic, readonly) NSArray* subscriptionsSchemes;
 
 @property (nonatomic, copy) NSString* wellcomeMessage;
+@property (nonatomic, copy) NSString * welcomeMessageUnderButton;
 
+@property (nonatomic, copy) NSString * contactEmailText;
+@property (nonatomic, copy) NSString * contactEmailSubject;
 @end
