@@ -213,18 +213,35 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 	static BOOL notFirstRun;
 	if(notFirstRun) return;
 	
-	[VersionManager sharedManager];	
-	
+	[VersionManager sharedManager];
+    
 	notFirstRun = YES;
     
     [self initManager];
     [self initKiosk];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    
 #ifdef RUE
     //[self showIntroPopup];
     
     [self performSelector:@selector(showIntroPopup) withObject:nil afterDelay:0.1f];
 #endif
+}
+
+- (void) didEnterBackground
+{
+    [self switchToKiosk];
+    _revisionViewController = nil;
+    currentApplication = nil;
+}
+
+- (void) willEnterForeground
+{
+    [self initManager];
+    [self initKiosk];
 }
 
 #ifdef RUE
