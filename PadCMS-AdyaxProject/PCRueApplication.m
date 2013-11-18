@@ -245,7 +245,7 @@
             self.subscriptionsListTitle = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
         }
         
-        self.wellcomeMessage = [[parameters objectForKey:kApplicationWellcomeMessageKey]stringByDecodingHTMLEntities];
+        self.wellcomeMessage = [[[parameters objectForKey:kApplicationWellcomeMessageKey] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"] stringByDecodingHTMLEntities];
         self.welcomeMessageUnderButton = [[parameters objectForKey:kApplicationWellcomeMessagePart2Key]stringByDecodingHTMLEntities];
         
         self.contactEmailText = [parameters objectForKey:kApplicationContactEmailTextKey];

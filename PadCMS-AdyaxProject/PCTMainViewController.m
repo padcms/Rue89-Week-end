@@ -236,6 +236,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     [self switchToKiosk];
     _revisionViewController = nil;
     currentApplication = nil;
+    [self dissmissKiosk];
 }
 
 - (void) willEnterForeground
@@ -718,6 +719,19 @@ BOOL stringExists(NSString* str)
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
 #endif
+}
+
+- (void) dissmissKiosk
+{
+    self.kioskViewController.delegate = nil;
+    [self.kioskViewController.view removeFromSuperview];
+    self.kioskHeaderView.delegate = nil;
+    [self.kioskHeaderView removeFromSuperview];
+    self.kioskFooterView.delegate = nil;
+    [self.kioskFooterView removeFromSuperview];
+    
+    self.kioskNavigationBar.delegate = nil;
+//    self.kioskNavigationBa
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
