@@ -8,7 +8,9 @@
 
 #import "RueBrowserViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CustomAnimation.h"
 //#import <MediaPlayer/MediaPlayer.h>
+#import "AnimatableWebView.h"
 
 typedef enum{
     WebViewPresentationStateWindow,
@@ -28,6 +30,7 @@ typedef enum{
     UIDeviceOrientation _currentWebViewOrientation;
     WebViewPresentationState _currentWebViewPresentationState;
     //BOOL _isFullScreen;
+    CustomAnimation* _webViewAnimation;
 }
 //@property (nonatomic, strong) MPMoviePlayerController* player;
 
@@ -93,7 +96,7 @@ typedef enum{
 
 - (void)createWebView
 {
-    _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
+    _webView = [[AnimatableWebView alloc] initWithFrame:self.videoRect];
     _webView.delegate = self;
     
     _webView.scrollView.scrollEnabled = NO;
@@ -137,6 +140,7 @@ typedef enum{
     {
         [self makeWebViewFullScreenCompletion:^{
             
+            _currentWebViewOrientation = [UIApplication sharedApplication].statusBarOrientation;
             [self checkForOrientation];
             sender.enabled = YES;
         }];
@@ -149,7 +153,7 @@ typedef enum{
     [self changeWebViewFrame:self.view.bounds animatedWithDuration:0.3 completion:^{
         
         _currentWebViewPresentationState = WebViewPresentationStateFullscreen;
-        _currentWebViewOrientation = [UIApplication sharedApplication].statusBarOrientation;
+        self.view.backgroundColor = [UIColor blackColor];
         if(completion)
         {
             completion();
@@ -160,6 +164,7 @@ typedef enum{
 - (void) unmakeWebViewFullScreenCompletion:(void(^)())completion
 {
     _currentWebViewPresentationState = WebViewPresentationStateChanging;
+    self.view.backgroundColor = [UIColor clearColor];
     [self changeWebViewFrame:self.videoRect animatedWithDuration:0.3 completion:^{
         
         _currentWebViewPresentationState = WebViewPresentationStateWindow;
@@ -174,17 +179,13 @@ typedef enum{
 {
     UIDeviceOrientation currentDeviceOrientation = [[UIDevice currentDevice] orientation];
     
-//    if(UIDeviceOrientationIsPortrait(currentDeviceOrientation) && galleryPresentationState == GalleryPresentstionStatePresented)
-//    {
-//        [self hideGallery];
-//    }
-//    else if (UIDeviceOrientationIsLandscape(currentDeviceOrientation) && galleryPresentationState == GalleryPresentstionStateHidden)
-//    {
-//        if([self isPresentedPage])
-//        {
-//            [self showGallery];
-//        }
-//    }
+    if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen && currentDeviceOrientation != _currentWebViewOrientation)
+    {
+        [self rotateWebViewToOrientation:currentDeviceOrientation animatedWithDuration:0.5 completion:^{
+            
+            [self checkForOrientation];
+        }];
+    }
 }
 
 #pragma mark - UIWebView Protocol
@@ -244,8 +245,6 @@ typedef enum{
 
 - (void) deviceOrientationDidChange:(NSNotification*)notif
 {
-    NSLog(@"%@", notif);
-    
     if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen)
     {
         [self checkForOrientation];
@@ -256,15 +255,31 @@ typedef enum{
 
 - (void) changeWebViewFrame:(CGRect)newFrame animatedWithDuration:(NSTimeInterval)duration completion:(void(^)())completion
 {
+    _webView.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _webView.scrollView.backgroundColor = [UIColor blueColor];
+    
     [UIView animateWithDuration:duration animations:^{
         
         _webView.frame = newFrame;
+        _webView.scrollView.frame = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
+        _webView.scrollView.contentSize = CGSizeMake(newFrame.size.width, newFrame.size.height);
         
     } completion:^(BOOL finished) {
         
         if(completion) completion();
     }];
     
+    
+    return;
+    
+    if(_webViewAnimation)
+    {
+        [_webViewAnimation invalidate];
+    }
+    
+    _webViewAnimation = [[CustomAnimation alloc]initForView:_webView duration:duration finalFrame:newFrame finalTransform:_webView.transform];
+    
+    [_webViewAnimation performWithCompletion:completion];
     
     return;
     
@@ -276,5 +291,83 @@ typedef enum{
     [_webView.layer addAnimation:animation forKey:@"bounds"];
 }
 
+- (void) rotateWebViewToOrientation:(UIDeviceOrientation)toOrientation animatedWithDuration:(NSTimeInterval)duration completion:(void(^)())completion
+{
+    _currentWebViewPresentationState = WebViewPresentationStateChanging;
+    
+    void(^complete)() = ^{
+        _currentWebViewPresentationState = WebViewPresentationStateFullscreen;
+        _currentWebViewOrientation = toOrientation;
+        if(completion) completion();
+    };
+    
+    float angle = 0;
+    setAngleFromOrientationToOrientation(& angle, _currentWebViewOrientation, toOrientation);
+    
+    CGRect newWebViewRect = CGRectMake(0, 0, 768, 1024);
+    
+    [UIView animateWithDuration:duration animations:^{
+        
+        _webView.transform = CGAffineTransformMakeRotation(angle);
+        _webView.frame = newWebViewRect;
+        
+        
+    } completion:^(BOOL finished) {
+        
+        complete();
+    }];
+}
+
+void setAngleFromOrientationToOrientation(float * angle, UIDeviceOrientation fromOrientation, UIDeviceOrientation toOrientation)
+{
+    UIDeviceOrientation applicationOrientation = [[UIApplication sharedApplication]statusBarOrientation];
+    
+    switch (toOrientation)
+    {
+        case UIDeviceOrientationPortrait:
+        {
+            *angle = 0;
+            return;
+        }
+            
+        case UIDeviceOrientationPortraitUpsideDown:
+        {
+            *angle = 0;
+            return;
+        }
+            
+        case UIDeviceOrientationLandscapeLeft:
+        {
+            if(applicationOrientation == UIDeviceOrientationPortrait)
+            {
+                *angle = M_PI_2;
+                return;
+            }
+            else
+            {
+                *angle = -M_PI_2;
+                return;
+            }
+        }
+            
+        case UIDeviceOrientationLandscapeRight:
+        {
+            if(applicationOrientation == UIDeviceOrientationPortrait)
+            {
+                *angle = -M_PI_2;
+                return;
+            }
+            else
+            {
+                *angle = M_PI_2;
+                return;
+            }
+        }
+            
+        default:
+            *angle = 0;
+            return;
+    }
+}
 
 @end

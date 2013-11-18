@@ -44,6 +44,8 @@
 		2D95BDEE18327A2F002C4F6F /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDED18327A2F002C4F6F /* RueBrowserViewController.m */; };
 		2D95BDF2183287A2002C4F6F /* PCPageViewController+IsPresented.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDF1183287A2002C4F6F /* PCPageViewController+IsPresented.m */; };
 		2D95BDF518328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDF418328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m */; };
+		2D963831183A311E0092D5D7 /* CustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D963830183A311E0092D5D7 /* CustomAnimation.m */; };
+		2D963835183A4C500092D5D7 /* AnimatableWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D963834183A4C500092D5D7 /* AnimatableWebView.m */; };
 		2D9662BB1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9662BA1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */; };
 		2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
@@ -1692,6 +1694,10 @@
 		2D95BDF0183287A2002C4F6F /* PCPageViewController+IsPresented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCPageViewController+IsPresented.h"; sourceTree = "<group>"; };
 		2D95BDF1183287A2002C4F6F /* PCPageViewController+IsPresented.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+IsPresented.m"; sourceTree = "<group>"; };
 		2D95BDF418328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCBrowserViewController+FulscreenSupport.m"; sourceTree = "<group>"; };
+		2D96382F183A311E0092D5D7 /* CustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnimation.h; sourceTree = "<group>"; };
+		2D963830183A311E0092D5D7 /* CustomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnimation.m; sourceTree = "<group>"; };
+		2D963833183A4C500092D5D7 /* AnimatableWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatableWebView.h; sourceTree = "<group>"; };
+		2D963834183A4C500092D5D7 /* AnimatableWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatableWebView.m; sourceTree = "<group>"; };
 		2D9662BA1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCSliderBasedMiniArticleViewController+CurrentActiveZone.m"; sourceTree = "<group>"; };
 		2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+BalancedTransition.h"; sourceTree = "<group>"; };
 		2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+BalancedTransition.m"; sourceTree = "<group>"; };
@@ -2541,6 +2547,10 @@
 				2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */,
 				2D95BDEC18327A2F002C4F6F /* RueBrowserViewController.h */,
 				2D95BDED18327A2F002C4F6F /* RueBrowserViewController.m */,
+				2D963833183A4C500092D5D7 /* AnimatableWebView.h */,
+				2D963834183A4C500092D5D7 /* AnimatableWebView.m */,
+				2D96382F183A311E0092D5D7 /* CustomAnimation.h */,
+				2D963830183A311E0092D5D7 /* CustomAnimation.m */,
 				2D95BDF418328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m */,
 				2D9662BA1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */,
 			);
@@ -5277,6 +5287,7 @@
 				2DA5930018228EAD00516768 /* RueSubscriptionManager.m in Sources */,
 				57A4742217C478BB00745732 /* PCFonts.m in Sources */,
 				57A4747817C4AF9400745732 /* MTLabel.m in Sources */,
+				2D963831183A311E0092D5D7 /* CustomAnimation.m in Sources */,
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
@@ -5291,6 +5302,7 @@
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
+				2D963835183A4C500092D5D7 /* AnimatableWebView.m in Sources */,
 				2D95BDF518328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
 				2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */,
