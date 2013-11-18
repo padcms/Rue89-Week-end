@@ -117,6 +117,9 @@ typedef enum {
 	[button sizeToFit];
 	button.hidden = YES;
     
+    UIEdgeInsets titleInset = {4, 0, 0, 0};
+    button.titleEdgeInsets = titleInset;
+    
     [self addSubview:button];
     return button;
 }
