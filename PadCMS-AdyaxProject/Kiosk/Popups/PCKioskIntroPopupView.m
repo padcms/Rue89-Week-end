@@ -11,10 +11,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "RTLabelWithWordWrap.h"
+#import "UIView+EasyFrame.h"
 
 @interface PCKioskIntroPopupView()
 
 @property (nonatomic, strong) RTLabelWithWordWrap* labelAfterSubscriptionButton;
+
+@property (nonatomic, strong) UIButton* aboveLabelButton;
 
 @end
 
@@ -35,15 +38,32 @@
     
     self.labelAfterSubscriptionButton.text = @"Je suis déjà qbonné ou je ux d'qbord voir à auoi something else wrote here but i do not known what.";
     
-    UIButton* aboveLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [aboveLabelButton addTarget:self action:@selector(tapLabel:) forControlEvents:UIControlEventTouchUpInside];
-    aboveLabelButton.frame = self.labelAfterSubscriptionButton.frame;
-    [self addSubview:aboveLabelButton];
+    self.aboveLabelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.aboveLabelButton addTarget:self action:@selector(tapLabel:) forControlEvents:UIControlEventTouchUpInside];
+    self.aboveLabelButton.frame = self.labelAfterSubscriptionButton.frame;
+    [self addSubview:self.aboveLabelButton];
 }
 
 - (void) setDescriptionText:(NSString *)descriptionText
 {
     self.descriptionLabel.text = descriptionText;
+    [self sizeToFitDescriptionLabelText];
+}
+
+- (void)sizeToFitDescriptionLabelText
+{
+    self.descriptionLabel.frameHeight = self.descriptionLabel.optimumSize.height + 1;
+    self.subscribeButton.frameY = self.descriptionLabel.frameY + self.descriptionLabel.frameHeight + 20;
+    self.labelAfterSubscriptionButton.frameY = self.subscribeButton.frameY + self.subscribeButton.frameHeight + 20;
+    self.aboveLabelButton.frame = self.labelAfterSubscriptionButton.frame;
+    float newPopupHeight = self.labelAfterSubscriptionButton.frameY + self.labelAfterSubscriptionButton.frameHeight + 10;
+    
+    float oldPopupHeight = self.frameHeight;
+    
+    self.frameHeight = newPopupHeight;
+    self.frameY += (int)((oldPopupHeight - newPopupHeight) / 2);
+    
+    self.shadowImageView.frameHeight = self.frameHeight + self.shadowWidth * 2;
 }
 
 - (NSString*) descriptionText
