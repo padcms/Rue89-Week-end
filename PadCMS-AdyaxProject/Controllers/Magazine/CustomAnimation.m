@@ -8,13 +8,14 @@
 
 #import "CustomAnimation.h"
 
-#define kTimerStep 0.02
+#define kTimerStep 0.025
 
 @interface CustomAnimation ()
 {
     UIView* _view;
     
     NSTimer* _timer;
+//    NSTimeInterval _duration;
     int _stepsCount;
     int _currentStep;
     
@@ -22,9 +23,9 @@
     CGRect _toFrame;
     CGRect _frameStep;
     
-    BOOL _animatingTransform;
-    CGAffineTransform _toTransform;
-    CGAffineTransform _transformStep;
+//    BOOL _animatingTransform;
+//    CGAffineTransform _toTransform;
+//    CGAffineTransform _transformStep;
 }
 
 @property (nonatomic, copy) void(^completion)();
@@ -40,21 +41,24 @@
     {
         _view = view;
         
+        _stepsCount = (float)duration / kTimerStep;
+        
         if(CGRectEqualToRect(view.frame, toFrame) == NO)
         {
+//            _duration = duration;
             _animatingFrame = YES;
             _toFrame = toFrame;
-            
-            _stepsCount = (float)duration / kTimerStep;
             
             _frameStep = CGRectMake((toFrame.origin.x - view.frame.origin.x) / _stepsCount, (toFrame.origin.y - view.frame.origin.y) / _stepsCount, (toFrame.size.width - view.frame.size.width) / _stepsCount, (toFrame.size.height - view.frame.size.height) / _stepsCount);
         }
         
-        if(CGAffineTransformEqualToTransform(view.transform, toTransform) == NO)
-        {
-            _animatingTransform = YES;
-            _toTransform = toTransform;
-        }
+//        if(CGAffineTransformEqualToTransform(view.transform, toTransform) == NO)
+//        {
+//            _animatingTransform = YES;
+//            _toTransform = toTransform;
+//            
+//            _transformStep = CGAffineTransformMake((toTransform.a - view.transform.a) / _stepsCount, (toTransform.b - view.transform.b) / _stepsCount, (toTransform.c - view.transform.c) / _stepsCount, (toTransform.d - view.transform.d) / _stepsCount, (toTransform.tx - view.transform.tx) / _stepsCount, (toTransform.ty - view.transform.ty) / _stepsCount);
+//        }
         
     }
     return self;
@@ -63,10 +67,19 @@
 - (void) performWithCompletion:(void(^)())completion
 {
     self.completion = completion;
-    
-//    _timer = [[NSTimer alloc]initWithFireDate:[NSDate date] interval:kTimerStep target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+//    
+//    [UIScrollView animateWithDuration:_duration animations:^{
+//        
+//        _view.frame = _toFrame;
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        
+//        
+//    }];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:kTimerStep target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
               
 - (void) timerTick
@@ -83,17 +96,17 @@
         }
     }
     
-    if(_animatingTransform)
-    {
-        if(_currentStep == _stepsCount - 1)
-        {
-            _view.transform = _toTransform;
-        }
-        else
-        {
-            _view.transform = CGAffineTransformConcat(_view.transform, _transformStep);
-        }
-    }
+//    if(_animatingTransform)
+//    {
+//        if(_currentStep == _stepsCount - 1)
+//        {
+//            _view.transform = _toTransform;
+//        }
+//        else
+//        {
+//            _view.transform = CGAffineTransformConcat(_view.transform, _transformStep);
+//        }
+//    }
     
     if(_currentStep == _stepsCount - 1)
     {
@@ -107,10 +120,10 @@
     }
     else
     {
-        _currentStep += 1;
+        _currentStep ++;
     }
     
-    [_view setNeedsLayout];
+    //[_view setNeedsLayout];
 }
 
 - (void) invalidate

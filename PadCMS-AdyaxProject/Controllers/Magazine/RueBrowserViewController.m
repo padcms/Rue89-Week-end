@@ -9,8 +9,6 @@
 #import "RueBrowserViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CustomAnimation.h"
-//#import <MediaPlayer/MediaPlayer.h>
-#import "AnimatableWebView.h"
 
 typedef enum{
     WebViewPresentationStateWindow,
@@ -29,10 +27,10 @@ typedef enum{
 {
     UIDeviceOrientation _currentWebViewOrientation;
     WebViewPresentationState _currentWebViewPresentationState;
-    //BOOL _isFullScreen;
+    
     CustomAnimation* _webViewAnimation;
 }
-//@property (nonatomic, strong) MPMoviePlayerController* player;
+
 
 @end
 
@@ -65,30 +63,16 @@ typedef enum{
     [self createWebView];
     self.videoURL = [NSURL URLWithString:url];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
-//    [self showHUD];
-    
-//    self.player = [[MPMoviePlayerController alloc] initWithContentURL:self.videoURL];
-    
-//    self.player.view.frame = self.videoRect;
-    
-//    [self.view addSubview:self.player.view];
-
-//    [self subscribeForPlayerNotification];
+    [self showHUD];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
-    
-//    [self.player play];
-    
 }
 
 - (void) stop
 {
-//    [self.player stop];
-//    [self.player.view removeFromSuperview];
     [self unsubscribeForDeviceNitifications];
-//    [self unsubscribeForPlayerNotification];
-//    self.player = nil;
+    
     [self.webView stopLoading];
     [self.webView removeFromSuperview];
     self.webView = nil;
@@ -96,14 +80,14 @@ typedef enum{
 
 - (void)createWebView
 {
-    _webView = [[AnimatableWebView alloc] initWithFrame:self.videoRect];
+    _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
     _webView.delegate = self;
     
     _webView.scrollView.scrollEnabled = NO;
     _webView.scrollView.bounces = NO;
     [self.view addSubview:_webView];
     
-    _webView.backgroundColor = [UIColor yellowColor];
+    _webView.backgroundColor = [UIColor blackColor];
     
     [self createFullScreenButton];
 }
@@ -121,8 +105,6 @@ typedef enum{
     [fullScreenButton setFrame:CGRectMake(_webView.frame.size.width - btnWidth, _webView.frame.size.height - btnHeight, btnWidth, btnHeight)];
     
     [_webView addSubview:fullScreenButton];
-    
-    fullScreenButton.backgroundColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:0.5];
 }
 
 - (void) fullScreenButtonTap:(UIButton*)sender
@@ -179,12 +161,15 @@ typedef enum{
 {
     UIDeviceOrientation currentDeviceOrientation = [[UIDevice currentDevice] orientation];
     
-    if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen && currentDeviceOrientation != _currentWebViewOrientation)
+    if(UIDeviceOrientationIsPortrait(currentDeviceOrientation) || UIDeviceOrientationIsLandscape(currentDeviceOrientation))
     {
-        [self rotateWebViewToOrientation:currentDeviceOrientation animatedWithDuration:0.5 completion:^{
-            
-            [self checkForOrientation];
-        }];
+        if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen && currentDeviceOrientation != _currentWebViewOrientation)
+        {
+            [self rotateWebViewToOrientation:currentDeviceOrientation animatedWithDuration:0.5 completion:^{
+                
+                [self checkForOrientation];
+            }];
+        }
     }
 }
 
@@ -211,18 +196,6 @@ typedef enum{
 
 #pragma mark - Notifications
 
-//- (void) subscribeForPlayerNotification
-//{
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidEnterFullscreen:) name:MPMoviePlayerDidEnterFullscreenNotification object:self.player];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidExitFullscreen:) name:MPMoviePlayerDidExitFullscreenNotification object:self.player];
-//}
-
-//- (void) unsubscribeForPlayerNotification
-//{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerDidEnterFullscreenNotification object:self.player];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerDidExitFullscreenNotification object:self.player];
-//}
-
 - (void) subscribeForDeviceNitifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -232,16 +205,6 @@ typedef enum{
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
-
-//- (void) playerDidEnterFullscreen:(NSNotification*)notif
-//{
-//    NSLog(@"%@", notif);
-//}
-//
-//- (void) playerDidExitFullscreen:(NSNotification*)notif
-//{
-//    NSLog(@"%@", notif);
-//}
 
 - (void) deviceOrientationDidChange:(NSNotification*)notif
 {
@@ -255,23 +218,6 @@ typedef enum{
 
 - (void) changeWebViewFrame:(CGRect)newFrame animatedWithDuration:(NSTimeInterval)duration completion:(void(^)())completion
 {
-    _webView.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _webView.scrollView.backgroundColor = [UIColor blueColor];
-    
-    [UIView animateWithDuration:duration animations:^{
-        
-        _webView.frame = newFrame;
-        _webView.scrollView.frame = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
-        _webView.scrollView.contentSize = CGSizeMake(newFrame.size.width, newFrame.size.height);
-        
-    } completion:^(BOOL finished) {
-        
-        if(completion) completion();
-    }];
-    
-    
-    return;
-    
     if(_webViewAnimation)
     {
         [_webViewAnimation invalidate];
@@ -281,14 +227,14 @@ typedef enum{
     
     [_webViewAnimation performWithCompletion:completion];
     
-    return;
-    
-    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
-    animation.fromValue = [NSValue valueWithCGRect:_webView.layer.bounds];
-    animation.toValue = [NSValue valueWithCGRect:newFrame];
-    animation.duration = duration;
-    
-    [_webView.layer addAnimation:animation forKey:@"bounds"];
+    if(CGRectEqualToRect(self.videoRect, newFrame))
+    {
+    [UIView animateWithDuration:duration animations:^{
+        
+        _webView.transform = CGAffineTransformMakeRotation(0);
+        
+    }];
+    }
 }
 
 - (void) rotateWebViewToOrientation:(UIDeviceOrientation)toOrientation animatedWithDuration:(NSTimeInterval)duration completion:(void(^)())completion
@@ -300,10 +246,10 @@ typedef enum{
         _currentWebViewOrientation = toOrientation;
         if(completion) completion();
     };
-    
+
     float angle = 0;
     setAngleFromOrientationToOrientation(& angle, _currentWebViewOrientation, toOrientation);
-    
+
     CGRect newWebViewRect = CGRectMake(0, 0, 768, 1024);
     
     [UIView animateWithDuration:duration animations:^{
