@@ -13,6 +13,7 @@
 #import "PCScrollView.h"
 
 #import "PCPageViewController+IsPresented.h"
+#import "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
 
 @interface PCRevisionViewController ()
 
@@ -208,6 +209,15 @@
         return NO;
     }
     
+    if([self.currentColumnViewController.currentPageViewController canSwipeBackWithGesture:gestureRecognizer])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -215,6 +225,8 @@
     if (CGRectContainsPoint(self.summaryPopup.frame, [touch locationInView:self.summaryPopup])) {
         return NO;
     }
+    
+    
     
     return YES;
 }
