@@ -213,18 +213,36 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 	static BOOL notFirstRun;
 	if(notFirstRun) return;
 	
-	[VersionManager sharedManager];	
-	
+	[VersionManager sharedManager];
+    
 	notFirstRun = YES;
     
     [self initManager];
     [self initKiosk];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    
 #ifdef RUE
     //[self showIntroPopup];
     
     [self performSelector:@selector(showIntroPopup) withObject:nil afterDelay:0.1f];
 #endif
+}
+
+- (void) didEnterBackground
+{
+    [self switchToKiosk];
+    _revisionViewController = nil;
+    currentApplication = nil;
+    [self dissmissKiosk];
+}
+
+- (void) willEnterForeground
+{
+    [self initManager];
+    [self initKiosk];
 }
 
 #ifdef RUE
@@ -701,6 +719,19 @@ BOOL stringExists(NSString* str)
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
 #endif
+}
+
+- (void) dissmissKiosk
+{
+    self.kioskViewController.delegate = nil;
+    [self.kioskViewController.view removeFromSuperview];
+    self.kioskHeaderView.delegate = nil;
+    [self.kioskHeaderView removeFromSuperview];
+    self.kioskFooterView.delegate = nil;
+    [self.kioskFooterView removeFromSuperview];
+    
+    self.kioskNavigationBar.delegate = nil;
+//    self.kioskNavigationBa
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index

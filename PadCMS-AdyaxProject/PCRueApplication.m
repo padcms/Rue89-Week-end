@@ -155,12 +155,17 @@
         {
             self.tags = [NSMutableArray new];
         }
-            
-        for (RueIssue * issue in self.issues)
+        
+        NSArray* appTags = parameters[@"application_tags"];
+        
+        if(appTags && [appTags isKindOfClass:[NSArray class]] && appTags.count)
         {
-            for (PCTag * tag in issue.tags)
+            for (NSDictionary* tagDic in appTags)
             {
                 BOOL exists = NO;
+                
+                PCTag* tag = [[PCTag alloc]initWithDictionary:tagDic];
+                
                 for (PCTag * addedTag in self.tags)
                 {
                     if (addedTag.tagId == tag.tagId)
@@ -173,6 +178,29 @@
                 if (!exists)
                 {
                     [self.tags addObject:tag];
+                }
+            }
+        }
+        else
+        {
+            for (RueIssue * issue in self.issues)
+            {
+                for (PCTag * tag in issue.tags)
+                {
+                    BOOL exists = NO;
+                    for (PCTag * addedTag in self.tags)
+                    {
+                        if (addedTag.tagId == tag.tagId)
+                        {
+                            exists = YES;
+                            break;
+                        }
+                    }
+                    
+                    if (!exists)
+                    {
+                        [self.tags addObject:tag];
+                    }
                 }
             }
         }
@@ -217,7 +245,7 @@
             self.subscriptionsListTitle = @"Choisissez votre formule d'abonnement. Les quinze premiers jours sont gratuits!";
         }
         
-        self.wellcomeMessage = [[parameters objectForKey:kApplicationWellcomeMessageKey]stringByDecodingHTMLEntities];
+        self.wellcomeMessage = [[[parameters objectForKey:kApplicationWellcomeMessageKey] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"] stringByDecodingHTMLEntities];
         self.welcomeMessageUnderButton = [[parameters objectForKey:kApplicationWellcomeMessagePart2Key]stringByDecodingHTMLEntities];
         
         self.contactEmailText = [parameters objectForKey:kApplicationContactEmailTextKey];

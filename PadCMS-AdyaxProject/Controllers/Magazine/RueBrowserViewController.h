@@ -12,4 +12,9 @@
 
 - (void) stop;
 
+- (BOOL) containsPoint:(CGPoint)point;
+
+@property (nonatomic, weak) UIView* pageView;
+@property (nonatomic, weak) UIScrollView* mainScrollView;
+
 @end

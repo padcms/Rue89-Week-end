@@ -36,6 +36,9 @@
     [button sizeToFit];
     button.hidden = YES;
     
+    UIEdgeInsets titleInset = {4, 0, 0, 0};
+    button.titleEdgeInsets = titleInset;
+    
     [button setTitle:@"PATIENCE\u2026" forState:UIControlStateSelected];
     
     return button;
@@ -62,8 +65,11 @@
     [super layoutSubviews];
     self.progressView.frame = CGRectMake(self.titleLabel.frameX, self.titleLabel.frameY + self.titleLabel.frameHeight - 2, self.titleLabel.frameWidth, self.progressView.frameHeight);
     
-    self.titleLabel.frameHeight += 8;
-    self.titleLabel.frameY -= 4;
+    if([self.titleLabel.text rangeOfString:@"É"].length)
+    {
+        self.titleLabel.frameHeight += 8;
+        self.titleLabel.frameY -= 4;
+    }
 }
 
 - (void) setProgress:(float)progress

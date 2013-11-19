@@ -15,6 +15,7 @@
 #import "PCScrollView.h"
 
 #import "PCPageViewController+IsPresented.h"
+#import "UIView+EasyFrame.h"
 
 @interface PCPageViewController ()
 
@@ -166,17 +167,19 @@
     {
         videoRect = [[UIScreen mainScreen] bounds];
     }
-    if(webBrowserViewController)
-    {
-        [self hideVideoWebView];
-        [(RueBrowserViewController*)webBrowserViewController stop];
-    }
-    webBrowserViewController = [[RueBrowserViewController alloc] init];
     
+    [self hideVideoWebView];
+    
+    webBrowserViewController = [[RueBrowserViewController alloc] init];
     webBrowserViewController.videoRect = videoRect;
+    
+    ((RueBrowserViewController*)webBrowserViewController).mainScrollView = self.mainScrollView;
+    ((RueBrowserViewController*)webBrowserViewController).pageView = self.view;
+    
     [self.mainScrollView addSubview:webBrowserViewController.view];
+    
     if (self.page.pageTemplate ==
-        [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate])
+        [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate] || self.page.pageTemplate.identifier == PCBasicArticlePageTemplate)
     {
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
@@ -195,11 +198,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    if([self isPresentedPage] == NO)
-//    {
-//        [self hideSubviews];
-        [super viewWillDisappear:animated];
-//    }
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -210,6 +209,22 @@
         [self hideSubviews];
         [super viewWillDisappear:animated];
     }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGPoint point = [gestureRecognizer locationInView:self.mainScrollView];
+    NSArray* actions = [self activeZonesAtPoint:point];
+    if (actions&&[actions count]>0)
+    {
+        if(webBrowserViewController && [(RueBrowserViewController*)webBrowserViewController containsPoint:[gestureRecognizer locationInView:webBrowserViewController.view]])
+        {
+            return NO;
+        }
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end
