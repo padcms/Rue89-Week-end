@@ -9,6 +9,7 @@
 #import "RueBrowserViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CustomAnimation.h"
+#import "UIView+EasyFrame.h"
 
 typedef enum{
     WebViewPresentationStateWindow,
@@ -35,6 +36,20 @@ typedef enum{
 @end
 
 @implementation RueBrowserViewController
+
+- (void) setMainScrollView:(UIScrollView *)mainScrollView
+{
+    _mainScrollView = mainScrollView;
+    float offset = mainScrollView.contentOffset.y;
+    self.view.frameY = offset;
+    
+    if(_webView)
+    {
+        CGRect newWebRect = self.videoRect;
+        newWebRect.origin.y -= offset;
+        _webView.frame = newWebRect;
+    }
+}
 
 - (void) viewDidLoad
 {
@@ -81,6 +96,7 @@ typedef enum{
 - (void)createWebView
 {
     _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
+    _webView.frameY -= self.mainScrollView.contentOffset.y;
     _webView.delegate = self;
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
@@ -144,6 +160,15 @@ typedef enum{
 - (void) makeWebViewFullScreenCompletion:(void(^)())completion
 {
     _currentWebViewPresentationState = WebViewPresentationStateChanging;
+    
+    self.view.frameY = 0;
+    
+    CGRect newWebRect = self.videoRect;
+    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    _webView.frame = newWebRect;
+    
+    [self.pageView addSubview:self.view];
+    
     [self changeWebViewFrame:self.view.bounds animatedWithDuration:0.3 completion:^{
         
         _currentWebViewPresentationState = WebViewPresentationStateFullscreen;
@@ -159,7 +184,14 @@ typedef enum{
 {
     _currentWebViewPresentationState = WebViewPresentationStateChanging;
     self.view.backgroundColor = [UIColor clearColor];
-    [self changeWebViewFrame:self.videoRect animatedWithDuration:0.3 completion:^{
+    
+    self.view.frameY = self.mainScrollView.contentOffset.y;
+    [self.mainScrollView addSubview:self.view];
+    
+    CGRect newWebRect = self.videoRect;
+    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    
+    [self changeWebViewFrame:newWebRect animatedWithDuration:0.3 completion:^{
         
         _currentWebViewPresentationState = WebViewPresentationStateWindow;
         if(completion)
@@ -239,13 +271,16 @@ typedef enum{
     
     [_webViewAnimation performWithCompletion:completion];
     
-    if(CGRectEqualToRect(self.videoRect, newFrame))
+    CGRect newWebRect = self.videoRect;
+    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    
+    if(CGRectEqualToRect(newWebRect, newFrame))
     {
-    [UIView animateWithDuration:duration animations:^{
-        
-        _webView.transform = CGAffineTransformMakeRotation(0);
-        
-    }];
+        [UIView animateWithDuration:duration animations:^{
+            
+            _webView.transform = CGAffineTransformMakeRotation(0);
+            
+        }];
     }
 }
 

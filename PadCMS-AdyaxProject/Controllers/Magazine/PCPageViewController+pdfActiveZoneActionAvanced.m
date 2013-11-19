@@ -15,6 +15,7 @@
 #import "PCScrollView.h"
 
 #import "PCPageViewController+IsPresented.h"
+#import "UIView+EasyFrame.h"
 
 @interface PCPageViewController ()
 
@@ -171,6 +172,10 @@
     
     webBrowserViewController = [[RueBrowserViewController alloc] init];
     webBrowserViewController.videoRect = videoRect;
+    
+    ((RueBrowserViewController*)webBrowserViewController).mainScrollView = self.mainScrollView;
+    ((RueBrowserViewController*)webBrowserViewController).pageView = self.view;
+    
     [self.mainScrollView addSubview:webBrowserViewController.view];
     
     if (self.page.pageTemplate ==
