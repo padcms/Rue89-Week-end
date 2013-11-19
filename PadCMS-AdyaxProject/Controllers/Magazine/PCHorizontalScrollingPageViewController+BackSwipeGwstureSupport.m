@@ -8,6 +8,7 @@
 
 #import "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
 #import "PCScrollView.h"
+#import "PCSlideshowViewController.h"
 
 @implementation PCPageViewController (BackSwipeGwstureSupport)
 
@@ -37,6 +38,25 @@
     if (CGRectContainsPoint(scrollFrame, gestureLocation))
     {
         return (_paneScrollView.contentOffset.x == 0);
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+@end
+
+@implementation PCSlideshowViewController(BackSwipeGwstureSupport)
+
+- (BOOL) canSwipeBackWithGesture:(UIGestureRecognizer*)gesture
+{
+    CGPoint gestureLocation = [gesture locationInView:self.mainScrollView];
+    CGRect scrollFrame = slidersView.frame;
+    
+    if (CGRectContainsPoint(scrollFrame, gestureLocation))
+    {
+        return (slidersView.contentOffset.x == 0);
     }
     else
     {
