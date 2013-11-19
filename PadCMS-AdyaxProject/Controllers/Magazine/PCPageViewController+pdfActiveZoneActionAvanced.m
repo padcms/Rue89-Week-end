@@ -174,7 +174,7 @@
     [self.mainScrollView addSubview:webBrowserViewController.view];
     
     if (self.page.pageTemplate ==
-        [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate])
+        [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate] || self.page.pageTemplate.identifier == PCBasicArticlePageTemplate)
     {
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
@@ -204,6 +204,22 @@
         [self hideSubviews];
         [super viewWillDisappear:animated];
     }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGPoint point = [gestureRecognizer locationInView:self.mainScrollView];
+    NSArray* actions = [self activeZonesAtPoint:point];
+    if (actions&&[actions count]>0)
+    {
+        if(webBrowserViewController && [(RueBrowserViewController*)webBrowserViewController containsPoint:[gestureRecognizer locationInView:webBrowserViewController.view]])
+        {
+            return NO;
+        }
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

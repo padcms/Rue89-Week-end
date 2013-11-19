@@ -82,7 +82,7 @@ typedef enum{
 {
     _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
     _webView.delegate = self;
-    
+    _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
     _webView.scrollView.bounces = NO;
     [self.view addSubview:_webView];
@@ -90,6 +90,18 @@ typedef enum{
     _webView.backgroundColor = [UIColor blackColor];
     
     [self createFullScreenButton];
+}
+
+- (BOOL) containsPoint:(CGPoint)point
+{
+    if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen)
+    {
+        return CGRectContainsPoint(self.view.frame, point);
+    }
+    else
+    {
+        return CGRectContainsPoint(_webView.frame, point);
+    }
 }
 
 - (void) createFullScreenButton

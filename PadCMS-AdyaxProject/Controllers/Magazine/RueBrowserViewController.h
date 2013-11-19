@@ -12,4 +12,6 @@
 
 - (void) stop;
 
+- (BOOL) containsPoint:(CGPoint)point;
+
 @end
