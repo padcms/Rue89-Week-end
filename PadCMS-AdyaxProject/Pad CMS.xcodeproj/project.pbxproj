@@ -135,6 +135,11 @@
 		5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
 		5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
+		5775B2501837F53100BD677A /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 5775B24D1837F53100BD677A /* Icon-29.png */; };
+		5775B2511837F53100BD677A /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5775B24E1837F53100BD677A /* Icon-29@2x.png */; };
+		5775B2521837F53100BD677A /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 5775B24F1837F53100BD677A /* Icon-50.png */; };
+		5775B2551837F5C700BD677A /* Icon-72rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5775B2531837F5C700BD677A /* Icon-72rue.png */; };
+		5775B2561837F5C700BD677A /* Icon-72rue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5775B2541837F5C700BD677A /* Icon-72rue@2x.png */; };
 		5789895F17CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
 		5789896017CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
 		5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5789895E17CE0A3000572BAC /* PCKioskPageControl.m */; };
@@ -1792,6 +1797,11 @@
 		572C053C17C744D60075C859 /* PCKioskNotificationPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskNotificationPopup.m; sourceTree = "<group>"; };
 		5733797A17E791890049F15B /* PCRueAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueAppDelegate.m; sourceTree = "<group>"; };
 		5733797B17E791890049F15B /* PCRueAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueAppDelegate.h; sourceTree = "<group>"; };
+		5775B24D1837F53100BD677A /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
+		5775B24E1837F53100BD677A /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
+		5775B24F1837F53100BD677A /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		5775B2531837F5C700BD677A /* Icon-72rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72rue.png"; sourceTree = "<group>"; };
+		5775B2541837F5C700BD677A /* Icon-72rue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72rue@2x.png"; sourceTree = "<group>"; };
 		5789895D17CE0A3000572BAC /* PCKioskPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskPageControl.h; sourceTree = "<group>"; };
 		5789895E17CE0A3000572BAC /* PCKioskPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskPageControl.m; sourceTree = "<group>"; };
 		5789899E17CF90C800572BAC /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
@@ -3434,6 +3444,11 @@
 		AB8138B615224D6A0038EC7B /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				5775B2531837F5C700BD677A /* Icon-72rue.png */,
+				5775B2541837F5C700BD677A /* Icon-72rue@2x.png */,
+				5775B24D1837F53100BD677A /* Icon-29.png */,
+				5775B24E1837F53100BD677A /* Icon-29@2x.png */,
+				5775B24F1837F53100BD677A /* Icon-50.png */,
 				AB813895152234EF0038EC7B /* icon_newsstand.png */,
 				2DA8B12117FC13CD005E8FF8 /* icon.png */,
 				2DA8B12217FC13CD005E8FF8 /* icon@2x.png */,
@@ -4565,11 +4580,13 @@
 				AB8137C7152224E50038EC7B /* topNav_t_right.png in Resources */,
 				AB8137C8152224E50038EC7B /* topNav_b.png in Resources */,
 				AB8137CB152224E50038EC7B /* facebookClose.png in Resources */,
+				5775B2501837F53100BD677A /* Icon-29.png in Resources */,
 				AB8137CC152224E50038EC7B /* twitterClose.png in Resources */,
 				AB8137CF152224E50038EC7B /* flashButtonBackground.png in Resources */,
 				AB813896152234EF0038EC7B /* icon_newsstand.png in Resources */,
 				571B7E1D17F37B4A00B77DBA /* Interstate Italic.TTF in Resources */,
 				AB8138B515224D1E0038EC7B /* logo.png in Resources */,
+				5775B2521837F53100BD677A /* Icon-50.png in Resources */,
 				C59D6003157F8E97002EDD76 /* scroll-down-button-background.png in Resources */,
 				C59D600A157F8E97002EDD76 /* scroll-down-button-foreground.png in Resources */,
 				C59D6011157F8E97002EDD76 /* scroll-left-button-background.png in Resources */,
@@ -4585,14 +4602,17 @@
 				57A4703F17B8F33F00745732 /* Default-Portrait~ipad.png in Resources */,
 				57A4708F17BAA56300745732 /* home_footer_arrow.png in Resources */,
 				57A4709517BAA56300745732 /* home_footer_arrow@2x.png in Resources */,
+				5775B2511837F53100BD677A /* Icon-29@2x.png in Resources */,
 				57A4709B17BAA56300745732 /* home_footer_bg.png in Resources */,
 				57A470A117BAA56300745732 /* home_footer_bg@2x.png in Resources */,
 				57A470A717BAA56300745732 /* home_footer_fade.png in Resources */,
 				57A470AD17BAA56300745732 /* home_footer_fade@2x.png in Resources */,
+				5775B2561837F5C700BD677A /* Icon-72rue@2x.png in Resources */,
 				57A470B317BAA56300745732 /* home_header_bg.png in Resources */,
 				2DA593061822AD8400516768 /* SubscriptionMenuViewController.xib in Resources */,
 				57A470B917BAA56300745732 /* home_header_bg@2x.png in Resources */,
 				57A470BF17BAA56300745732 /* home_header_menu_separator.png in Resources */,
+				5775B2551837F5C700BD677A /* Icon-72rue.png in Resources */,
 				57A470C517BAA56300745732 /* home_header_menu_separator@2x.png in Resources */,
 				57A470CB17BAA56300745732 /* home_issue_bg_shadow_6px.png in Resources */,
 				57A470D117BAA56300745732 /* home_issue_bg_shadow_6px@2x.png in Resources */,
@@ -6061,8 +6081,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "Rue89 Week-end";
-				PROVISIONING_PROFILE = "2CE76CF6-6071-40DD-A487-16828EDE6EC5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2CE76CF6-6071-40DD-A487-16828EDE6EC5";
+				PROVISIONING_PROFILE = "DC649AC9-79FF-43A4-AFB3-FC1C57248A63";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC649AC9-79FF-43A4-AFB3-FC1C57248A63";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

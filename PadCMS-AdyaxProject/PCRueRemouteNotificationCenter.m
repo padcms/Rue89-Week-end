@@ -59,14 +59,9 @@
     NSString* appIdentifier = [NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]];
     
     NSString *UUID = nil;
-    if(systemVersionNotLessThan(6.0))
-    {
-        UUID =  [[UIDevice currentDevice] identifierForVendor].UUIDString;
-    }
-    else
-    {
-        UUID =  [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];//[self generateUUID];
-    }
+
+    UUID =  [[UIDevice currentDevice] identifierForVendor].UUIDString;
+
     
     NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
     [mainDict setObject:kNewSetDeviceTokenMethodName forKey:PCJSONMethodNameKey];
