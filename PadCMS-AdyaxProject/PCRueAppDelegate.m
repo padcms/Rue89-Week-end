@@ -50,7 +50,7 @@
     return handeled;
 }
 
-//- (void) applicationDidEnterBackground:(UIApplication *)application
+//- (void) applicationDidEnterBackground:(UIApplication * )application
 //{
 //    UILocalNotification* notif = [UILocalNotification new];
 //    notif.alertBody = @"notif";
@@ -109,4 +109,30 @@
 }
 
 #pragma mark -
+
+NSString* deviceID()
+{
+    NSString* gettingTokenSelectorString = nil;
+    NSString* udidSelectorString = nil;
+    
+    if([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+    {
+        gettingTokenSelectorString = @"identifierForVendor";
+        udidSelectorString = @"UUIDString";
+    }
+    else
+    {
+        gettingTokenSelectorString = @"uniqueIdentifier";
+        udidSelectorString = nil;
+    }
+    
+    if(udidSelectorString)
+    {
+        return [[[UIDevice currentDevice] performSelector:NSSelectorFromString(gettingTokenSelectorString)] performSelector:NSSelectorFromString(udidSelectorString)];
+    }
+    else
+    {
+        return [[UIDevice currentDevice] performSelector:NSSelectorFromString(gettingTokenSelectorString)];
+    }
+}
 @end

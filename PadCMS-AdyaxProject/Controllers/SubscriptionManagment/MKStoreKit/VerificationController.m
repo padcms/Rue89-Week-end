@@ -313,11 +313,12 @@ static VerificationController *singleton;
         failCount++;
     }
     
+    
     if ([[UIDevice currentDevice] respondsToSelector:NSSelectorFromString(@"identifierForVendor")]) // iOS 6?
     {
 #if IS_IOS6_AWARE
         // iOS 6 (or later)
-        NSString *localIdentifier                   = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        NSString *localIdentifier                   = deviceID();//[[[UIDevice currentDevice] identifierForVendor] UUIDString];
         NSString *purchaseInfoUniqueVendorId        = [purchaseInfoFromTransaction objectForKey:@"unique-vendor-identifier"];
         NSString *verifiedReceiptVendorIdentifier   = [verifiedReceiptReceiptDictionary objectForKey:@"unique_vendor_identifier"];
         

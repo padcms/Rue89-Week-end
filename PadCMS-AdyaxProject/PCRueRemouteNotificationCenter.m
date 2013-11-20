@@ -54,13 +54,15 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:PCRemouteNotificationCenterUUIDKey];
 }*/
 
+
+
 -(NSString*)generateDeviceRequestWithToken:(NSString*)deviceToken
 {
     NSString* appIdentifier = [NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]];
     
     NSString *UUID = nil;
 
-    UUID =  [[UIDevice currentDevice] identifierForVendor].UUIDString;
+    UUID =  deviceID();//[[UIDevice currentDevice] identifierForVendor].UUIDString;
 
     
     NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
