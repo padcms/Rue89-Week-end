@@ -50,6 +50,7 @@
 @property (nonatomic, strong) NSMutableArray * allRevisions;
 @property (nonatomic, strong) PCTag * selectedTag;
 @property (nonatomic, strong) PCEmailController * emailController;
+@property (nonatomic, assign) BOOL needUpdate;
 
 - (void) initManager;
 - (void) bindNotifications;
@@ -108,8 +109,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     return nil;
 }
 
-
-
 #pragma mark Timer Methods
 
 - (void) startBarTimer
@@ -164,9 +163,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     return NO;
 }
-
-#pragma mark Rotate Methods
-
 
 #pragma mark ViewController Methods
 
@@ -233,16 +229,83 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) didEnterBackground
 {
-    [self switchToKiosk];
+    
+}
+
+- (void) willEnterForeground
+{
+    if([self isKioskPresented])
+    {
+        [self update];
+    }
+    else
+    {
+        self.needUpdate = YES;
+    }
+}
+
+- (void) update
+{
+    if([self isNotConnectedToNetwork])
+    {
+        return;
+    }
+    
+    [self destroyKiosk];
+    
+    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.3];
+}
+
+- (void) destroyKiosk
+{
+    _revisionViewController.mainViewController = nil;
     _revisionViewController = nil;
     currentApplication = nil;
     [self dissmissKiosk];
 }
 
-- (void) willEnterForeground
+- (void) createKiosk
 {
     [self initManager];
     [self initKiosk];
+    
+    self.needUpdate = NO;
+}
+
+- (BOOL) isKioskPresented
+{
+    if(mainView == nil)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (void) switchToKiosk
+{
+	[[NSURLCache sharedURLCache] removeAllCachedResponses];
+	[[PCDownloadManager sharedManager] cancelAllOperations];
+    if(_revisionViewController)
+    {
+        mainView = nil;
+#ifdef RUE
+        [self.navigationController  popViewControllerAnimated:YES completion:^{
+            
+            if(self.needUpdate)
+            {
+                [self update];
+            }
+        }];
+        //_revisionViewController = nil;
+#else
+        [_revisionViewController.view removeFromSuperview];
+        _revisionViewController = nil;
+#endif
+        
+    }
 }
 
 #ifdef RUE
@@ -269,24 +332,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 }
 #endif
 
-
-- (void) switchToKiosk
-{
-	[[NSURLCache sharedURLCache] removeAllCachedResponses];
-	[[PCDownloadManager sharedManager] cancelAllOperations];
-    if(_revisionViewController)
-    {
-        mainView = nil;
-#ifdef RUE
-        [self.navigationController  popViewControllerAnimated:YES completion:nil];
-        //_revisionViewController = nil;
-#else
-        [_revisionViewController.view removeFromSuperview];
-        _revisionViewController = nil;
-#endif
-
-    }
-}
 
 - (void) switchToRevision:(PCRevision*)revisionToPresent
 {
@@ -504,9 +549,9 @@ BOOL stringExists(NSString* str)
     NSString* oldPath = [previousParams objectForKey:newsstand_cover_key];
     NSString* newPath = [newParams objectForKey:newsstand_cover_key];
     
-#warning newsstand cover update uncomment "if" for release
-//    if(stringExists(newPath) && (stringExists(oldPath) == NO || (stringExists(oldPath) && [newPath isEqualToString:oldPath] == NO)))
-//    {
+//#warning newsstand cover update uncomment "if" for release
+    if(stringExists(newPath) && (stringExists(oldPath) == NO || (stringExists(oldPath) && [newPath isEqualToString:oldPath] == NO)))
+    {
         NSString* fullPath = [[[PCConfig serverURLString]stringByAppendingPathComponent:newPath]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fullPath]];
@@ -519,7 +564,7 @@ BOOL stringExists(NSString* str)
                 [[UIApplication sharedApplication] setNewsstandIconImage:newImage];
             }
         }
-//    }
+    }
 }
 
 - (void) syncronyzeApp:(PCRueApplication*)application fromOldApplicationParameters:(NSDictionary*)oldParametersList toNewApplicationParameters:(NSDictionary*)newParametersList
@@ -562,15 +607,8 @@ BOOL stringExists(NSString* str)
 	}
 	
 	alreadyInit = YES;
-//	[self doFinishLoad];
 }
-/*
-- (void) afterHorizontalDone
-{
-	[self performSelectorOnMainThread:@selector(viewDidLoadStuff)
-                           withObject:nil
-                        waitUntilDone:NO];	
-}*/
+
 - (void) bindNotifications
 {
     if(IsNotificationsBinded) return;
@@ -731,6 +769,7 @@ BOOL stringExists(NSString* str)
     [self.kioskFooterView removeFromSuperview];
     
     self.kioskNavigationBar.delegate = nil;
+    
 //    self.kioskNavigationBa
 }
 
@@ -908,7 +947,6 @@ BOOL stringExists(NSString* str)
     PCRevision *revision = [self revisionWithIndex:index];
     return revision.issue.wordsCount;
 }
-
 
 - (NSString *)issueCategoryWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
@@ -1115,32 +1153,6 @@ BOOL stringExists(NSString* str)
 {
     PCRevision *revision = [self revisionWithIndex:index];
     
-//	if (revision)
-//	{
-//		NSLog(@"doPay");
-//		
-//		NSLog(@"productId: %@", revision.issue.productIdentifier);
-//
-//		if([[InAppPurchases sharedInstance] canMakePurchases])
-//		{
-//			
-//			[[InAppPurchases sharedInstance] purchaseForProductId:revision.issue.productIdentifier];
-//			
-//		}
-//		else
-//		{
-//			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"ALERT_TITLE_CANT_MAKE_PURCHASE"
-//                                                                                                           value:@"You can't make the purchase"]
-//                                                            message:nil
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-//                                                                                                           value:@"OK"]
-//                                                  otherButtonTitles:nil];
-//			[alert show];
-//		}
-//
-//	}
-    
     [[RueSubscriptionManager sharedManager] purchaseRevision:revision completion:^(NSError* error){
         
         if(error)
@@ -1152,11 +1164,9 @@ BOOL stringExists(NSString* str)
             revision.issue.paid = YES;
         }
         
-        //[[self shelfView] reload];
         [[self shelfView] updateElementsButtons];
     }];
     
-    //[[self shelfView] reload];
     [[self shelfView] updateElementsButtons];
 }
 
@@ -1495,24 +1505,6 @@ BOOL stringExists(NSString* str)
     }
 }
 
-- (BOOL) isNotConnectedToNetwork
-{
-    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-    return (remoteHostStatus == AFNetworkReachabilityStatusNotReachable);
-}
-
-- (void) showNoConnectionAlert
-{
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                   value:@"You must be connected to the Internet."]
-                                                    message:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                   value:@"OK"]
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
 - (void)shareButtonTapped
 {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
@@ -1835,7 +1827,7 @@ BOOL stringExists(NSString* str)
     }
 }
 
-#pragma mark -
+#pragma mark - Alerts
 
 - (void) showAlertWithError:(NSError*)error
 {
@@ -1844,6 +1836,24 @@ BOOL stringExists(NSString* str)
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles:nil];
+    [alert show];
+}
+
+- (BOOL) isNotConnectedToNetwork
+{
+    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+    return (remoteHostStatus == AFNetworkReachabilityStatusNotReachable);
+}
+
+- (void) showNoConnectionAlert
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                   value:@"You must be connected to the Internet."]
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                   value:@"OK"]
+                                          otherButtonTitles:nil];
     [alert show];
 }
 
