@@ -115,7 +115,7 @@ NSString* deviceID()
     NSString* gettingTokenSelectorString = nil;
     NSString* udidSelectorString = nil;
     
-    if([[[UIDevice currentDevice]systemVersion]floatValue] >= 6.0)
+    if([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
     {
         gettingTokenSelectorString = @"identifierForVendor";
         udidSelectorString = @"UUIDString";
