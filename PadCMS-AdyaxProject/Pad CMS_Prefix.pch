@@ -27,3 +27,5 @@
 #ifdef DCCV
 #define NEW_ICONS
 #endif
+
+NSString* deviceID();
