@@ -15,6 +15,8 @@
 #import "PCPageControllersManager.h"
 #import "RueSlideshowViewController.h"
 
+#import "RueScrollingPageViewController.h"
+
 @implementation PCMagazineViewControllersFactory (HtmlTemplateSupport)
 
 + (void) load
@@ -59,6 +61,10 @@
     if(page.pageTemplate.identifier == PCSlideshowPageTemplate)
     {
         return [[[RueSlideshowViewController alloc]initWithPage:page]autorelease];
+    }
+    else if (page.pageTemplate.identifier == PCScrollingPageTemplate)
+    {
+        return [[[RueScrollingPageViewController alloc]initWithPage:page]autorelease];
     }
     else
     {
