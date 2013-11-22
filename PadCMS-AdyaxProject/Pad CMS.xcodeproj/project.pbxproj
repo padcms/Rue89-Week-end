@@ -81,6 +81,10 @@
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
+		2DAB3D21183F6BB800E326CA /* RueScrollingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */; };
+		2DAB3D24183F950600E326CA /* tum.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3D23183F950600E326CA /* tum.gif */; };
+		2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */; };
+		2DAB3D2B183FBB4800E326CA /* GifView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D2A183FBB4800E326CA /* GifView.m */; };
 		2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -1764,6 +1768,13 @@
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
 		2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueApplication.m; sourceTree = "<group>"; };
+		2DAB3D1F183F6BB800E326CA /* RueScrollingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueScrollingPageViewController.h; sourceTree = "<group>"; };
+		2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueScrollingPageViewController.m; sourceTree = "<group>"; };
+		2DAB3D23183F950600E326CA /* tum.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tum.gif; sourceTree = "<group>"; };
+		2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueGifPageViewController.h; sourceTree = "<group>"; };
+		2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueGifPageViewController.m; sourceTree = "<group>"; };
+		2DAB3D29183FBB4800E326CA /* GifView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifView.h; sourceTree = "<group>"; };
+		2DAB3D2A183FBB4800E326CA /* GifView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifView.m; sourceTree = "<group>"; };
 		2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
 		2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
 		2DC2FF621811547D00BA4F0B /* SBJson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -2546,6 +2557,7 @@
 		2D046FD81815237C005087D7 /* Magazine */ = {
 			isa = PBXGroup;
 			children = (
+				2DAB3D1C183F5BE400E326CA /* NewTemplates */,
 				2D9DAA99182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController */,
 				2D7FCFE61824029500C30E5B /* FixedIllustrationTouchableColumnViewController.h */,
 				2D7FCFE71824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m */,
@@ -2743,6 +2755,36 @@
 				2D94BF26181E9A01006FC178 /* ImagesBankImage.m */,
 			);
 			path = ImagesCatch;
+			sourceTree = "<group>";
+		};
+		2DAB3D1C183F5BE400E326CA /* NewTemplates */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3D1E183F5D8300E326CA /* B */,
+				2DAB3D22183F925700E326CA /* H */,
+			);
+			path = NewTemplates;
+			sourceTree = "<group>";
+		};
+		2DAB3D1E183F5D8300E326CA /* B */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3D1F183F6BB800E326CA /* RueScrollingPageViewController.h */,
+				2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */,
+			);
+			path = B;
+			sourceTree = "<group>";
+		};
+		2DAB3D22183F925700E326CA /* H */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3D23183F950600E326CA /* tum.gif */,
+				2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */,
+				2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */,
+				2DAB3D29183FBB4800E326CA /* GifView.h */,
+				2DAB3D2A183FBB4800E326CA /* GifView.m */,
+			);
+			path = H;
 			sourceTree = "<group>";
 		};
 		2DC2FF601811547D00BA4F0B /* SBJSON */ = {
@@ -4563,6 +4605,7 @@
 				2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */,
 				AB8137A9152224E50038EC7B /* button_home.png in Resources */,
 				AB8137AA152224E50038EC7B /* button_partager.png in Resources */,
+				2DAB3D24183F950600E326CA /* tum.gif in Resources */,
 				AB8137AB152224E50038EC7B /* button_summary.png in Resources */,
 				AB8137AC152224E50038EC7B /* button_vero.png in Resources */,
 				AB8137AD152224E50038EC7B /* btnEmail.png in Resources */,
@@ -5313,8 +5356,10 @@
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
+				2DAB3D2B183FBB4800E326CA /* GifView.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
 				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
+				2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				2DA689781830D1C200E1F9EE /* RueIssue.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
@@ -5326,6 +5371,7 @@
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
 				2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */,
 				57231DC117D8CFAB00712185 /* PCRevisionSummaryPopup.m in Sources */,
+				2DAB3D21183F6BB800E326CA /* RueScrollingPageViewController.m in Sources */,
 				2DA593091822B1CB00516768 /* SubscribeMenuPopuverController.m in Sources */,
 				57231DC417D8D02A00712185 /* PCRevisionSummaryCell.m in Sources */,
 				2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */,
