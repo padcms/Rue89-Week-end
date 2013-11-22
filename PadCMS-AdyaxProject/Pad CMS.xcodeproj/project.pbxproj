@@ -6026,7 +6026,8 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
-					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
+					"\\\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\\\"",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6069,11 +6070,15 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
-					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
+					"\\\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\\\"",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = RUE;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					RUE,
+					NDEBUG,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/include/libxml2",
 					"libs/facebook-iphone-sdk/src",
@@ -6113,11 +6118,15 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject/Kiosk/ThirdParty/GooglePlus",
-					"\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\"",
+					"\\\"$(SRCROOT)/Kiosk/ThirdParty/GooglePlus\\\"",
+					"/Users/tar/github/fr/padcms-rue89weekend-ios-sample/PadCMS-AdyaxProject",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = RUE;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					RUE,
+					NDEBUG,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/include/libxml2",
 					"libs/facebook-iphone-sdk/src",
