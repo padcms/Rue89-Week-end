@@ -60,6 +60,8 @@
   self.onSubscriptionVerificationFailed = errorBlock;
   
   NSURL *url = [NSURL URLWithString:kReceiptValidationURL];
+    
+    NSLog(@"Receipt validation URL: %@", kReceiptValidationURL);
 	
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url 
                                                             cachePolicy:NSURLRequestReloadIgnoringCacheData 

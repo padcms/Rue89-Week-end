@@ -234,14 +234,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) willEnterForeground
 {
-    if([self isKioskPresented])
-    {
-        [self update];
-    }
-    else
-    {
-        self.needUpdate = YES;
-    }
+//    if([self isKioskPresented])
+//    {
+//        [self update];
+//    }
+//    else
+//    {
+//        self.needUpdate = YES;
+//    }
 }
 
 - (void) update
@@ -752,10 +752,13 @@ BOOL stringExists(NSString* str)
     
     
     self.view.backgroundColor = [UIColor whiteColor];
+    [[RueSubscriptionManager sharedManager] checkForActiveSubscriptionAndNotifyDelegate];
 #else
     [self.view addSubview:self.kioskNavigationBar];
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
+    
+    
 #endif
 }
 
