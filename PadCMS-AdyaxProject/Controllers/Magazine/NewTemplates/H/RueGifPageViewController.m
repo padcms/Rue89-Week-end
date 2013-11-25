@@ -8,11 +8,11 @@
 
 #import "RueGifPageViewController.h"
 #import "PCScrollView.h"
-#import "GifView.h"
+#import "GifViewController.h"
 
 @interface RueGifPageViewController ()
 
-@property (nonatomic, strong) NSArray* gifViews;
+@property (nonatomic, strong) NSArray* gifViewControllers;
 
 @end
 
@@ -32,28 +32,31 @@
         for (unsigned i = 0; i < [gifElements count]; i++)
         {
             PCPageElementGallery* element = [gifElements objectAtIndex:i];
-            GifView* gifView = [GifView gifViewForElement:element];
-            [gifViewsArray addObject:gifView];
             
-            [self.mainScrollView addSubview:gifView];
+            GifViewController* gifController = [GifViewController controllerForElement:element];
+            
+            [gifViewsArray addObject:gifController];
+            
+            [self.mainScrollView addSubview:gifController.view];
         }
     }
+    self.gifViewControllers = [NSArray arrayWithArray:gifViewsArray];
 }
 
 - (void) loadFullView
 {
     [super loadFullView];
-    for (GifView* gif in self.gifViews)
+    for (GifViewController* gifController in self.gifViewControllers)
     {
-        [gif startShowing];
+        [gifController startShowing];
     }
 }
 
 - (void) unloadFullView
 {
-    for (GifView* gif in self.gifViews)
+    for (GifViewController* gifController in self.gifViewControllers)
     {
-        [gif stopShowing];
+        [gifController stopShowing];
     }
     [super unloadFullView];
 }

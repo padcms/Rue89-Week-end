@@ -1,8 +1,8 @@
 //
-//  GifView.h
+//  GifViewController.h
 //  Pad CMS
 //
-//  Created by Maksym Martyniuk on 11/22/13.
+//  Created by Maksym Martyniuk on 11/25/13.
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
@@ -10,12 +10,11 @@
 
 @class PCPageElement;
 
-@interface GifView : UIWebView
+@interface GifViewController : UIViewController
 
-+ (id) gifViewForElement:(PCPageElement*)element;
++ (id) controllerForElement:(PCPageElement*)element;
 
 - (void) startShowing;
-
 - (void) stopShowing;
 
 @end

@@ -33,6 +33,7 @@
 		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
+		2D8D90F91843465E00A474EF /* GifViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D90F81843465E00A474EF /* GifViewController.m */; };
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
@@ -84,7 +85,6 @@
 		2DAB3D21183F6BB800E326CA /* RueScrollingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */; };
 		2DAB3D24183F950600E326CA /* tum.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3D23183F950600E326CA /* tum.gif */; };
 		2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */; };
-		2DAB3D2B183FBB4800E326CA /* GifView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D2A183FBB4800E326CA /* GifView.m */; };
 		2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
 		57189E0D17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -1686,6 +1686,8 @@
 		2D88C7361806D43F003CCF58 /* ProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressButton.m; sourceTree = "<group>"; };
 		2D88C73A1806DD6B003CCF58 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		2D88C73B1806DD6B003CCF58 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
+		2D8D90F71843465E00A474EF /* GifViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifViewController.h; sourceTree = "<group>"; };
+		2D8D90F81843465E00A474EF /* GifViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifViewController.m; sourceTree = "<group>"; };
 		2D926A9C18082646003B2FA8 /* BoxCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCarController.h; sourceTree = "<group>"; };
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -1773,8 +1775,6 @@
 		2DAB3D23183F950600E326CA /* tum.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tum.gif; sourceTree = "<group>"; };
 		2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueGifPageViewController.h; sourceTree = "<group>"; };
 		2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueGifPageViewController.m; sourceTree = "<group>"; };
-		2DAB3D29183FBB4800E326CA /* GifView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifView.h; sourceTree = "<group>"; };
-		2DAB3D2A183FBB4800E326CA /* GifView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifView.m; sourceTree = "<group>"; };
 		2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
 		2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
 		2DC2FF621811547D00BA4F0B /* SBJson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -2781,8 +2781,8 @@
 				2DAB3D23183F950600E326CA /* tum.gif */,
 				2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */,
 				2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */,
-				2DAB3D29183FBB4800E326CA /* GifView.h */,
-				2DAB3D2A183FBB4800E326CA /* GifView.m */,
+				2D8D90F71843465E00A474EF /* GifViewController.h */,
+				2D8D90F81843465E00A474EF /* GifViewController.m */,
 			);
 			path = H;
 			sourceTree = "<group>";
@@ -5356,7 +5356,6 @@
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
-				2DAB3D2B183FBB4800E326CA /* GifView.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
 				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
 				2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */,
@@ -5400,6 +5399,7 @@
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
 				2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
+				2D8D90F91843465E00A474EF /* GifViewController.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2DA6CC9C183B9CC800867377 /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
