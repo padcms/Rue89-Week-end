@@ -36,6 +36,8 @@
 		2D8D90F91843465E00A474EF /* GifViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D90F81843465E00A474EF /* GifViewController.m */; };
 		2D8D9100184361C900A474EF /* RuePageViewWithPopupsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D90FF184361C900A474EF /* RuePageViewWithPopupsController.m */; };
 		2D8D9103184375F600A474EF /* RuePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D9102184375F600A474EF /* RuePopupViewController.m */; };
+		2D8D910618438E9B00A474EF /* RuePageWithMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D910518438E9B00A474EF /* RuePageWithMenuViewController.m */; };
+		2D8D91091843975400A474EF /* RueScrollingAticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D91081843975400A474EF /* RueScrollingAticleViewController.m */; };
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
@@ -1693,6 +1695,10 @@
 		2D8D90FF184361C900A474EF /* RuePageViewWithPopupsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageViewWithPopupsController.m; sourceTree = "<group>"; };
 		2D8D9101184375F600A474EF /* RuePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePopupViewController.h; sourceTree = "<group>"; };
 		2D8D9102184375F600A474EF /* RuePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePopupViewController.m; sourceTree = "<group>"; };
+		2D8D910418438E9B00A474EF /* RuePageWithMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePageWithMenuViewController.h; sourceTree = "<group>"; };
+		2D8D910518438E9B00A474EF /* RuePageWithMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageWithMenuViewController.m; sourceTree = "<group>"; };
+		2D8D91071843975400A474EF /* RueScrollingAticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueScrollingAticleViewController.h; sourceTree = "<group>"; };
+		2D8D91081843975400A474EF /* RueScrollingAticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueScrollingAticleViewController.m; sourceTree = "<group>"; };
 		2D926A9C18082646003B2FA8 /* BoxCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCarController.h; sourceTree = "<group>"; };
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -2657,6 +2663,10 @@
 		2D8D90FC18435D1000A474EF /* C */ = {
 			isa = PBXGroup;
 			children = (
+				2D8D910418438E9B00A474EF /* RuePageWithMenuViewController.h */,
+				2D8D910518438E9B00A474EF /* RuePageWithMenuViewController.m */,
+				2D8D91071843975400A474EF /* RueScrollingAticleViewController.h */,
+				2D8D91081843975400A474EF /* RueScrollingAticleViewController.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -5384,6 +5394,7 @@
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
+				2D8D91091843975400A474EF /* RueScrollingAticleViewController.m in Sources */,
 				2D8D9100184361C900A474EF /* RuePageViewWithPopupsController.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
@@ -5425,6 +5436,7 @@
 				2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */,
 				2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */,
 				2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */,
+				2D8D910618438E9B00A474EF /* RuePageWithMenuViewController.m in Sources */,
 				2D1C0B471804352C006B70BE /* RTLabelWithWordWrap.m in Sources */,
 				2D7FCFEA1824029500C30E5B /* FixedIllustrationTouchableColumnViewController.m in Sources */,
 				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
