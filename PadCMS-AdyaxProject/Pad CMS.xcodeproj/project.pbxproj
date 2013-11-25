@@ -34,6 +34,8 @@
 		2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C7361806D43F003CCF58 /* ProgressButton.m */; };
 		2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D88C73B1806DD6B003CCF58 /* ProgressView.m */; };
 		2D8D90F91843465E00A474EF /* GifViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D90F81843465E00A474EF /* GifViewController.m */; };
+		2D8D9100184361C900A474EF /* RuePageViewWithPopupsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D90FF184361C900A474EF /* RuePageViewWithPopupsController.m */; };
+		2D8D9103184375F600A474EF /* RuePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D9102184375F600A474EF /* RuePopupViewController.m */; };
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
@@ -83,7 +85,6 @@
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
 		2DAB3D21183F6BB800E326CA /* RueScrollingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */; };
-		2DAB3D24183F950600E326CA /* tum.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3D23183F950600E326CA /* tum.gif */; };
 		2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */; };
 		2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */; };
 		57189E0C17EA19E5008834EA /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 57189E0B17EA19E5008834EA /* NullSafe.m */; };
@@ -1688,6 +1689,10 @@
 		2D88C73B1806DD6B003CCF58 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		2D8D90F71843465E00A474EF /* GifViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifViewController.h; sourceTree = "<group>"; };
 		2D8D90F81843465E00A474EF /* GifViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifViewController.m; sourceTree = "<group>"; };
+		2D8D90FE184361C900A474EF /* RuePageViewWithPopupsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePageViewWithPopupsController.h; sourceTree = "<group>"; };
+		2D8D90FF184361C900A474EF /* RuePageViewWithPopupsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageViewWithPopupsController.m; sourceTree = "<group>"; };
+		2D8D9101184375F600A474EF /* RuePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePopupViewController.h; sourceTree = "<group>"; };
+		2D8D9102184375F600A474EF /* RuePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePopupViewController.m; sourceTree = "<group>"; };
 		2D926A9C18082646003B2FA8 /* BoxCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCarController.h; sourceTree = "<group>"; };
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -1772,7 +1777,6 @@
 		2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueApplication.m; sourceTree = "<group>"; };
 		2DAB3D1F183F6BB800E326CA /* RueScrollingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueScrollingPageViewController.h; sourceTree = "<group>"; };
 		2DAB3D20183F6BB800E326CA /* RueScrollingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueScrollingPageViewController.m; sourceTree = "<group>"; };
-		2DAB3D23183F950600E326CA /* tum.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tum.gif; sourceTree = "<group>"; };
 		2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueGifPageViewController.h; sourceTree = "<group>"; };
 		2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueGifPageViewController.m; sourceTree = "<group>"; };
 		2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
@@ -2639,6 +2643,31 @@
 			path = ProgressButton;
 			sourceTree = "<group>";
 		};
+		2D8D90FB18435D1000A474EF /* A */ = {
+			isa = PBXGroup;
+			children = (
+				2D8D90FE184361C900A474EF /* RuePageViewWithPopupsController.h */,
+				2D8D90FF184361C900A474EF /* RuePageViewWithPopupsController.m */,
+				2D8D9101184375F600A474EF /* RuePopupViewController.h */,
+				2D8D9102184375F600A474EF /* RuePopupViewController.m */,
+			);
+			path = A;
+			sourceTree = "<group>";
+		};
+		2D8D90FC18435D1000A474EF /* C */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		2D8D90FD18435D1000A474EF /* D */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = D;
+			sourceTree = "<group>";
+		};
 		2D926A9B18082627003B2FA8 /* BoxCar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2760,7 +2789,10 @@
 		2DAB3D1C183F5BE400E326CA /* NewTemplates */ = {
 			isa = PBXGroup;
 			children = (
+				2D8D90FB18435D1000A474EF /* A */,
 				2DAB3D1E183F5D8300E326CA /* B */,
+				2D8D90FC18435D1000A474EF /* C */,
+				2D8D90FD18435D1000A474EF /* D */,
 				2DAB3D22183F925700E326CA /* H */,
 			);
 			path = NewTemplates;
@@ -2778,7 +2810,6 @@
 		2DAB3D22183F925700E326CA /* H */ = {
 			isa = PBXGroup;
 			children = (
-				2DAB3D23183F950600E326CA /* tum.gif */,
 				2DAB3D25183FB46A00E326CA /* RueGifPageViewController.h */,
 				2DAB3D26183FB46A00E326CA /* RueGifPageViewController.m */,
 				2D8D90F71843465E00A474EF /* GifViewController.h */,
@@ -4605,7 +4636,6 @@
 				2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */,
 				AB8137A9152224E50038EC7B /* button_home.png in Resources */,
 				AB8137AA152224E50038EC7B /* button_partager.png in Resources */,
-				2DAB3D24183F950600E326CA /* tum.gif in Resources */,
 				AB8137AB152224E50038EC7B /* button_summary.png in Resources */,
 				AB8137AC152224E50038EC7B /* button_vero.png in Resources */,
 				AB8137AD152224E50038EC7B /* btnEmail.png in Resources */,
@@ -5354,6 +5384,7 @@
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
+				2D8D9100184361C900A474EF /* RuePageViewWithPopupsController.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
@@ -5366,6 +5397,7 @@
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
+				2D8D9103184375F600A474EF /* RuePopupViewController.m in Sources */,
 				2D95BDF518328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
 				2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */,

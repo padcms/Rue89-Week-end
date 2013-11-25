@@ -8,6 +8,7 @@
 
 #import "GifViewController.h"
 #import "PCPageElement.h"
+#import "PCPage.h"
 
 @interface GifViewController ()
 
@@ -36,7 +37,8 @@
 
 - (void) startShowing
 {
-    NSURL* resourceUrl = [NSURL URLWithString:self.pageElement.resource];
+    NSString* fullResource = [self.pageElement.page.revision.contentDirectory stringByAppendingPathComponent:self.pageElement.resource];
+    NSURL* resourceUrl = [NSURL URLWithString:fullResource];
     NSURLRequest* request = [NSURLRequest requestWithURL:resourceUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:0];
     [self.webView loadRequest:request];
 }
