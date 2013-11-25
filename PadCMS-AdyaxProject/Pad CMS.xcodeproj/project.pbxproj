@@ -38,6 +38,7 @@
 		2D8D9103184375F600A474EF /* RuePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D9102184375F600A474EF /* RuePopupViewController.m */; };
 		2D8D910618438E9B00A474EF /* RuePageWithMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D910518438E9B00A474EF /* RuePageWithMenuViewController.m */; };
 		2D8D91091843975400A474EF /* RueScrollingAticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D91081843975400A474EF /* RueScrollingAticleViewController.m */; };
+		2D8D910D1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D910C1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m */; };
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
@@ -1699,6 +1700,8 @@
 		2D8D910518438E9B00A474EF /* RuePageWithMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageWithMenuViewController.m; sourceTree = "<group>"; };
 		2D8D91071843975400A474EF /* RueScrollingAticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueScrollingAticleViewController.h; sourceTree = "<group>"; };
 		2D8D91081843975400A474EF /* RueScrollingAticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueScrollingAticleViewController.m; sourceTree = "<group>"; };
+		2D8D910B1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDiaporamaInLongArticleViewController.h; sourceTree = "<group>"; };
+		2D8D910C1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDiaporamaInLongArticleViewController.m; sourceTree = "<group>"; };
 		2D926A9C18082646003B2FA8 /* BoxCarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCarController.h; sourceTree = "<group>"; };
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -2674,8 +2677,17 @@
 		2D8D90FD18435D1000A474EF /* D */ = {
 			isa = PBXGroup;
 			children = (
+				2D8D910B1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.h */,
+				2D8D910C1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m */,
 			);
 			path = D;
+			sourceTree = "<group>";
+		};
+		2D8D910A1843A2BF00A474EF /* E */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = E;
 			sourceTree = "<group>";
 		};
 		2D926A9B18082627003B2FA8 /* BoxCar */ = {
@@ -2803,6 +2815,7 @@
 				2DAB3D1E183F5D8300E326CA /* B */,
 				2D8D90FC18435D1000A474EF /* C */,
 				2D8D90FD18435D1000A474EF /* D */,
+				2D8D910A1843A2BF00A474EF /* E */,
 				2DAB3D22183F925700E326CA /* H */,
 			);
 			path = NewTemplates;
@@ -5447,6 +5460,7 @@
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2DA6CC9C183B9CC800867377 /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
+				2D8D910D1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m in Sources */,
 				2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */,
 				2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */,
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
