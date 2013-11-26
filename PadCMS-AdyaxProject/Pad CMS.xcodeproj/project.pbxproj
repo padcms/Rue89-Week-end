@@ -46,6 +46,9 @@
 		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
 		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
 		2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF26181E9A01006FC178 /* ImagesBankImage.m */; };
+		2D94C15F1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C15E1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m */; };
+		2D94C1631844BED60055D23F /* RuePageElementBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C1621844BED60055D23F /* RuePageElementBackground.m */; };
+		2D94C1661844C11C0055D23F /* RueSQLiteKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C1651844C11C0055D23F /* RueSQLiteKeys.m */; };
 		2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */; };
 		2D95BDEE18327A2F002C4F6F /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDED18327A2F002C4F6F /* RueBrowserViewController.m */; };
 		2D95BDF2183287A2002C4F6F /* PCPageViewController+IsPresented.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDF1183287A2002C4F6F /* PCPageViewController+IsPresented.m */; };
@@ -1712,6 +1715,11 @@
 		2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Storage.m"; sourceTree = "<group>"; };
 		2D94BF25181E9A01006FC178 /* ImagesBankImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBankImage.h; sourceTree = "<group>"; };
 		2D94BF26181E9A01006FC178 /* ImagesBankImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBankImage.m; sourceTree = "<group>"; };
+		2D94C15E1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageElementManager+RuePageElementManager.m"; sourceTree = "<group>"; };
+		2D94C1611844BED60055D23F /* RuePageElementBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePageElementBackground.h; sourceTree = "<group>"; };
+		2D94C1621844BED60055D23F /* RuePageElementBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageElementBackground.m; sourceTree = "<group>"; };
+		2D94C1641844C11C0055D23F /* RueSQLiteKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSQLiteKeys.h; sourceTree = "<group>"; };
+		2D94C1651844C11C0055D23F /* RueSQLiteKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSQLiteKeys.m; sourceTree = "<group>"; };
 		2D95BDE018326C57002C4F6F /* RueSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSlideshowViewController.h; sourceTree = "<group>"; };
 		2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSlideshowViewController.m; sourceTree = "<group>"; };
 		2D95BDEC18327A2F002C4F6F /* RueBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueBrowserViewController.h; sourceTree = "<group>"; };
@@ -2817,6 +2825,11 @@
 				2D8D90FD18435D1000A474EF /* D */,
 				2D8D910A1843A2BF00A474EF /* E */,
 				2DAB3D22183F925700E326CA /* H */,
+				2D94C15E1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m */,
+				2D94C1611844BED60055D23F /* RuePageElementBackground.h */,
+				2D94C1621844BED60055D23F /* RuePageElementBackground.m */,
+				2D94C1641844C11C0055D23F /* RueSQLiteKeys.h */,
+				2D94C1651844C11C0055D23F /* RueSQLiteKeys.m */,
 			);
 			path = NewTemplates;
 			sourceTree = "<group>";
@@ -5407,6 +5420,7 @@
 				57A474D717C667A800745732 /* PCKioskSharePopupView.m in Sources */,
 				572C052C17C691B40075C859 /* PCKioskIntroPopupView.m in Sources */,
 				57189E1617EA2D84008834EA /* PCKioskShelfViewCell.m in Sources */,
+				2D94C15F1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m in Sources */,
 				2D8D91091843975400A474EF /* RueScrollingAticleViewController.m in Sources */,
 				2D8D9100184361C900A474EF /* RuePageViewWithPopupsController.m in Sources */,
 				572C053F17C744D60075C859 /* PCKioskNotificationPopup.m in Sources */,
@@ -5432,6 +5446,7 @@
 				2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */,
 				57A2591E17DF3EEA008D576F /* PCKioskSubHeaderView.m in Sources */,
 				2DA592FC18228E5E00516768 /* MKStoreManager.m in Sources */,
+				2D94C1631844BED60055D23F /* RuePageElementBackground.m in Sources */,
 				578CB9AC17E0CE620014C897 /* ArchivingDataSource.m in Sources */,
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
@@ -5466,6 +5481,7 @@
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
 				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
 				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
+				2D94C1661844C11C0055D23F /* RueSQLiteKeys.m in Sources */,
 				2D9DAAA0182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m in Sources */,
 				2D046FDC181523F7005087D7 /* PCHtmlColumnViewController.m in Sources */,
 				2D046FDD181523F7005087D7 /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */,

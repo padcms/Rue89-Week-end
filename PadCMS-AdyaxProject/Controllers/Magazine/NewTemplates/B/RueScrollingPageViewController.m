@@ -8,6 +8,7 @@
 
 #import "RueScrollingPageViewController.h"
 #import "PCScrollView.h"
+#import "RuePageElementBackground.h"
 
 @interface RueScrollingPageViewController ()
 
@@ -15,11 +16,13 @@
 
 @implementation RueScrollingPageViewController
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
     
-    BOOL shouldBringBackgroundViewToFront = NO;
+    RuePageElementBackground* backgroundElement = (RuePageElementBackground*)[self.page firstElementForType:PCPageElementTypeBackground];
+    
+    BOOL shouldBringBackgroundViewToFront = backgroundElement.showOnTop;
     
     if(shouldBringBackgroundViewToFront)
     {
