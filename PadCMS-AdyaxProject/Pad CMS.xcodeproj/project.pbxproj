@@ -40,6 +40,9 @@
 		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
 		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
 		2D94BF27181E9A01006FC178 /* ImagesBankImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF26181E9A01006FC178 /* ImagesBankImage.m */; };
+		2D94C16D1844D8EA0055D23F /* RueAccessManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C16C1844D8EA0055D23F /* RueAccessManager.m */; };
+		2D94C1701844E7AE0055D23F /* RuePadCMSCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C16F1844E7AE0055D23F /* RuePadCMSCoder.m */; };
+		2D94C173184501A20055D23F /* PublisherPasswordAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94C172184501A20055D23F /* PublisherPasswordAlertView.m */; };
 		2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */; };
 		2D95BDEE18327A2F002C4F6F /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDED18327A2F002C4F6F /* RueBrowserViewController.m */; };
 		2D95BDF2183287A2002C4F6F /* PCPageViewController+IsPresented.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D95BDF1183287A2002C4F6F /* PCPageViewController+IsPresented.m */; };
@@ -1692,6 +1695,12 @@
 		2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Storage.m"; sourceTree = "<group>"; };
 		2D94BF25181E9A01006FC178 /* ImagesBankImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBankImage.h; sourceTree = "<group>"; };
 		2D94BF26181E9A01006FC178 /* ImagesBankImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBankImage.m; sourceTree = "<group>"; };
+		2D94C16B1844D8EA0055D23F /* RueAccessManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueAccessManager.h; sourceTree = "<group>"; };
+		2D94C16C1844D8EA0055D23F /* RueAccessManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueAccessManager.m; sourceTree = "<group>"; };
+		2D94C16E1844E7AE0055D23F /* RuePadCMSCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePadCMSCoder.h; sourceTree = "<group>"; };
+		2D94C16F1844E7AE0055D23F /* RuePadCMSCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePadCMSCoder.m; sourceTree = "<group>"; };
+		2D94C171184501A20055D23F /* PublisherPasswordAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherPasswordAlertView.h; sourceTree = "<group>"; };
+		2D94C172184501A20055D23F /* PublisherPasswordAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherPasswordAlertView.m; sourceTree = "<group>"; };
 		2D95BDE018326C57002C4F6F /* RueSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSlideshowViewController.h; sourceTree = "<group>"; };
 		2D95BDE118326C57002C4F6F /* RueSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSlideshowViewController.m; sourceTree = "<group>"; };
 		2D95BDEC18327A2F002C4F6F /* RueBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueBrowserViewController.h; sourceTree = "<group>"; };
@@ -2537,6 +2546,7 @@
 		2D046FD71815237C005087D7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D94C1691844D8830055D23F /* AccessManager */,
 				2DA592E118228E1A00516768 /* SubscriptionManagment */,
 				2D046FD81815237C005087D7 /* Magazine */,
 			);
@@ -2634,6 +2644,19 @@
 				2D926A9D18082646003B2FA8 /* BoxCarController.m */,
 			);
 			path = BoxCar;
+			sourceTree = "<group>";
+		};
+		2D94C1691844D8830055D23F /* AccessManager */ = {
+			isa = PBXGroup;
+			children = (
+				2D94C16B1844D8EA0055D23F /* RueAccessManager.h */,
+				2D94C16C1844D8EA0055D23F /* RueAccessManager.m */,
+				2D94C16E1844E7AE0055D23F /* RuePadCMSCoder.h */,
+				2D94C16F1844E7AE0055D23F /* RuePadCMSCoder.m */,
+				2D94C171184501A20055D23F /* PublisherPasswordAlertView.h */,
+				2D94C172184501A20055D23F /* PublisherPasswordAlertView.m */,
+			);
+			path = AccessManager;
 			sourceTree = "<group>";
 		};
 		2D9DAA99182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController */ = {
@@ -5295,6 +5318,7 @@
 				571B7E0617F1FC1A00B77DBA /* RTLabel+Kern.m in Sources */,
 				2D95BDEE18327A2F002C4F6F /* RueBrowserViewController.m in Sources */,
 				571B7E1317F3756300B77DBA /* RTLabel+CustomFontAttributes.m in Sources */,
+				2D94C173184501A20055D23F /* PublisherPasswordAlertView.m in Sources */,
 				57A4728D17BD95A400745732 /* PCKioskHeaderView.m in Sources */,
 				57189E0E17EA19E5008834EA /* NullSafe.m in Sources */,
 				2DA592F818228E5E00516768 /* SFHFKeychainUtils.m in Sources */,
@@ -5320,6 +5344,7 @@
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				2DA6897B1830DE2700E1F9EE /* IssuePricingPlan.m in Sources */,
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
+				2D94C16D1844D8EA0055D23F /* RueAccessManager.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
 				2D95BDF518328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
@@ -5335,6 +5360,7 @@
 				578CB9B517E101C90014C897 /* PCRueKioskViewController.m in Sources */,
 				63C23E4E17F07AC6004C55BC /* PCGooglePlusController.m in Sources */,
 				2DA592FD18228E5E00516768 /* VerificationController.m in Sources */,
+				2D94C1701844E7AE0055D23F /* RuePadCMSCoder.m in Sources */,
 				2DA592F918228E5E00516768 /* MKSKProduct.m in Sources */,
 				63C23E5817F1D971004C55BC /* UIView+EasyFrame.m in Sources */,
 				2D05E3BA182141D7005C9E5B /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */,

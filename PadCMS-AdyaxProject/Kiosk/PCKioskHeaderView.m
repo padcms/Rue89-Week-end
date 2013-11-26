@@ -13,8 +13,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIButton *contactUsButton;
 @property (strong, nonatomic) IBOutlet UIButton *restorePurchasesButton;
+@property (strong, nonatomic) IBOutlet UIButton *logoButton;
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* restorePurchasesActivity;
+
 
 @end
 
@@ -29,8 +31,8 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     
     NSString * fontName = @"QuicksandBold-Regular";
@@ -58,6 +60,12 @@
     [self addSubview:self.subscribeButton];
     self.subscribeButton.frame = frame;
     [self.subscribeButton.button addTarget:self action:@selector(purchaseAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UITapGestureRecognizer* fiveRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(fiveGestureActivated:)];
+    fiveRecognizer.numberOfTouchesRequired = 2;
+    fiveRecognizer.cancelsTouchesInView = YES;
+    [self.logoButton addGestureRecognizer:fiveRecognizer];
+    
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -106,4 +114,13 @@
         [self.delegate logoButtonTapped];
     }
 }
+
+- (void) fiveGestureActivated:(UIGestureRecognizer*)gesture
+{
+    if ([self.delegate respondsToSelector:@selector(secretGestureRecognized)])
+    {
+        [self.delegate secretGestureRecognized];
+    }
+}
+
 @end

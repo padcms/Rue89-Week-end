@@ -12,7 +12,7 @@
 
 @implementation RueAccessManager
 
-static NSString* _password = @"827ccb0eea8a706c4c34a16891f84e7b";
+static NSString* _password = @"";
 
 + (NSString*) publisherPassword
 {
@@ -49,7 +49,7 @@ static NSString* _password = @"827ccb0eea8a706c4c34a16891f84e7b";
     return request;
 }
 
-+ (void) confirmPassword:(NSString*)password
++ (void) confirmPassword:(NSString*)password completion:(void(^)(NSError* error))completionBlock
 {
     dispatch_queue_t requestQueue = dispatch_queue_create("WebServiceAPIQueue", NULL);
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
@@ -60,9 +60,16 @@ static NSString* _password = @"827ccb0eea8a706c4c34a16891f84e7b";
 
                        NSData *dataReply = [NSURLConnection  sendSynchronousRequest:[self confirmRequestForPassword:password] returningResponse:&response error:&error];
                        //NSDictionary* jsonResponse = nil;
-
-                       if(dataReply != nil)
+                       
+                       BOOL success = NO;
+                       
+                       if(dataReply != nil && dataReply.length)
                        {
+                           NSError* serializError = nil;
+                           NSArray* result = [NSJSONSerialization JSONObjectWithData:dataReply options:NSJSONReadingAllowFragments error:&serializError];
+                           
+                           NSLog(@"access responce : %@", result.debugDescription);
+                           
                            NSString* stringReply = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
                            NSLog(@"confirm - %@", stringReply);
                            //NSString* stringWithoutNull = [stringReply stringByReplacingOccurrencesOfString:@"null" withString:@"\"\""];
@@ -77,6 +84,15 @@ static NSString* _password = @"827ccb0eea8a706c4c34a16891f84e7b";
 
                        dispatch_async(mainQueue,
                                       ^{
+                                          if(success)
+                                          {
+                                              _password = password;
+                                              completionBlock(nil);
+                                          }
+                                          else
+                                          {
+                                              completionBlock(error);
+                                          }
                                       });
 
                    });

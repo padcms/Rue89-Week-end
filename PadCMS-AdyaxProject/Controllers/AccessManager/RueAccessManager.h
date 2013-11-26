@@ -10,7 +10,7 @@
 
 @interface RueAccessManager : NSObject
 
-+ (void) confirmPassword:(NSString*)password;
++ (void) confirmPassword:(NSString*)password completion:(void(^)(NSError* error))completionBlock;
 
 + (NSString*) publisherPassword;
 
