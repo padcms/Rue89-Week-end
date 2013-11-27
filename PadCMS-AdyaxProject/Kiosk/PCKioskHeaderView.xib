@@ -210,14 +210,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">restorePurchasesButton</string>
-						<reference key="source" ref="184171806"/>
-						<reference key="destination" ref="455144428"/>
-					</object>
-					<string key="id">26</string>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">shareButton</string>
 						<reference key="source" ref="184171806"/>
 						<reference key="destination" ref="847510818"/>
@@ -239,6 +231,22 @@
 						<reference key="destination" ref="632565908"/>
 					</object>
 					<string key="id">zbn-2N-NYG</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">logoButton</string>
+						<reference key="source" ref="184171806"/>
+						<reference key="destination" ref="214765881"/>
+					</object>
+					<string key="id">Cro-Vq-uMl</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">restorePurchasesButton</string>
+						<reference key="source" ref="184171806"/>
+						<reference key="destination" ref="455144428"/>
+					</object>
+					<string key="id">snh-aJ-pyG</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">

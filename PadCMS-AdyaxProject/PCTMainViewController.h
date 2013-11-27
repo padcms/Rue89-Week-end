@@ -21,7 +21,7 @@
 #import "PCKioskViewController.h"
 #import "PCKioskNavigationBar.h"
 #import "PCSearchViewController.h"
-#import "PadCMSCoder.h"
+#import "RuePadCMSCoder.h"
 #import "PCKioskHeaderView.h"
 #import "PCKioskFooterView.h"
 
@@ -69,7 +69,7 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 
 @property (nonatomic, strong) PCKioskViewController *kioskViewController;
 @property (nonatomic, strong) PCKioskNavigationBar *kioskNavigationBar;
-@property (nonatomic, strong) PadCMSCoder* padcmsCoder;
+@property (nonatomic, strong) RuePadCMSCoder* padcmsCoder;
 @property (nonatomic, strong) PCSubscriptionsMenuView *subscriptionsMenu;
 @property (nonatomic, strong) PCKioskHeaderView * kioskHeaderView;
 @property (nonatomic, strong) PCKioskFooterView * kioskFooterView;

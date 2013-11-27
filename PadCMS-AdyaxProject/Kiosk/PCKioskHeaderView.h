@@ -18,7 +18,7 @@
 - (void)restorePurchasesButtonTapped:(UIButton*)sender;
 - (void)shareButtonTapped;
 - (void)logoButtonTapped;
-
+- (void)secretGestureRecognized;
 @end
 
 @interface PCKioskHeaderView : UIView

@@ -42,6 +42,8 @@
 
 - (BOOL) isRevisionPaid:(PCRevision*)revision;
 
+- (void) checkForActiveSubscriptionAndNotifyDelegate;
+
 
 @end
 

@@ -43,7 +43,12 @@
 #import "SubscriptionMenuActionSheet.h"
 #import "RueIssue.h"
 
+#import "RueAccessManager.h"
+#import "PublisherPasswordAlertView.h"
+
 @interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate, UIActionSheetDelegate>
+
+@property (nonatomic, strong) UIAlertView* publisherPasswordAlert;
 
 @property (nonatomic, strong) SubscribeMenuPopuverController* subscribePopoverController;
 
@@ -234,14 +239,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) willEnterForeground
 {
-    if([self isKioskPresented])
-    {
-        [self update];
-    }
-    else
-    {
-        self.needUpdate = YES;
-    }
+//    if([self isKioskPresented])
+//    {
+//        [self update];
+//    }
+//    else
+//    {
+//        self.needUpdate = YES;
+//    }
 }
 
 - (void) update
@@ -253,7 +258,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     [self destroyKiosk];
     
-    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.1];
 }
 
 - (void) destroyKiosk
@@ -270,6 +275,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     [self initKiosk];
     
     self.needUpdate = NO;
+    
 }
 
 - (BOOL) isKioskPresented
@@ -454,9 +460,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 		}
 		else
         {
-			PadCMSCoder *padCMSCoder = [[PadCMSCoder alloc] initWithDelegate:self];
+			RuePadCMSCoder *padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
-			if (![self.padcmsCoder syncServerPlistDownload])
+			if (![self.padcmsCoder syncServerPlistDownloadWithPassword:[RueAccessManager publisherPassword]])
 			{
 				/*UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                                 message:nil
@@ -465,6 +471,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                                                       otherButtonTitles:nil];
 				[alert show];*/
 			}
+            self.padcmsCoder = nil;
 		}
         
         NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -577,7 +584,7 @@ BOOL stringExists(NSString* str)
 
 -(void)restartApplication
 {
-    
+    return;
     //what? restart? This just means that we are successfully subscribed to the app/purchased some item. Taras.
     
 #ifdef RUE
@@ -752,10 +759,13 @@ BOOL stringExists(NSString* str)
     
     
     self.view.backgroundColor = [UIColor whiteColor];
+    [[RueSubscriptionManager sharedManager] checkForActiveSubscriptionAndNotifyDelegate];
 #else
     [self.view addSubview:self.kioskNavigationBar];
     [self.kioskNavigationBar initElements];
     [self.view bringSubviewToFront:self.kioskNavigationBar];
+    
+    
 #endif
 }
 
@@ -1528,6 +1538,11 @@ BOOL stringExists(NSString* str)
     }
 }
 
+- (void) secretGestureRecognized
+{
+    [self showPublisherPasswordAlert];
+}
+
 #pragma mark - PCKioskFooterViewDelegate
 
 - (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag
@@ -1602,31 +1617,58 @@ BOOL stringExists(NSString* str)
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if(buttonIndex==1)
-	{
-        NSInteger       index = alertView.tag;
-        PCRevision *revision = [self revisionWithIndex:index];
-        
-        if(revision)
-        {
-            PCDownloadManager* manager = [PCDownloadManager sharedManager];
-            if (manager.revision == revision)
-            {
-                [manager cancelAllOperations];
-            }
+    if(alertView == self.publisherPasswordAlert && buttonIndex == 1)
+    {
+        NSString* enteredText = [(PublisherPasswordAlertView*)alertView text];
+        [RueAccessManager confirmPassword:enteredText completion:^(NSError *error) {
             
-            if (revision)
+            if(error)
             {
-                [revision deleteContent];
-                [revision deleteFromDownloadManager];
-                revision.state = PCRevisionStatePublished;
-                [ArchivingDataSource removeId:revision.identifier];
-                [self.kioskViewController updateRevisionWithIndex:index];
+                [self showAlertWithError:error];
+            }
+            else
+            {
+                [self update];
+            }
+        }];
+    }
+    else
+    {
+        if(buttonIndex == 1)
+        {
+            NSInteger       index = alertView.tag;
+            PCRevision *revision = [self revisionWithIndex:index];
+            
+            if(revision)
+            {
+                PCDownloadManager* manager = [PCDownloadManager sharedManager];
+                if (manager.revision == revision)
+                {
+                    [manager cancelAllOperations];
+                }
                 
-                [[self shelfView] reload];
+                if (revision)
+                {
+                    [revision deleteContent];
+                    [revision deleteFromDownloadManager];
+                    revision.state = PCRevisionStatePublished;
+                    [ArchivingDataSource removeId:revision.identifier];
+                    [self.kioskViewController updateRevisionWithIndex:index];
+                    
+                    [[self shelfView] reload];
+                }
             }
         }
-	}
+    }
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    if(alertView == self.publisherPasswordAlert)
+    {
+        return [(PublisherPasswordAlertView*)alertView hasText];
+    }
+    return YES;
 }
 
 #pragma mark - interface orientations
@@ -1828,6 +1870,15 @@ BOOL stringExists(NSString* str)
 }
 
 #pragma mark - Alerts
+
+- (void) showPublisherPasswordAlert
+{
+    self.publisherPasswordAlert = [[PublisherPasswordAlertView alloc]initWithTitle:@"Publisher password." message:nil delegate:self cancelButtonTitle:@"Cancel" confirmButtonTitle:@"OK"];
+
+    
+    
+    [self.publisherPasswordAlert show];
+}
 
 - (void) showAlertWithError:(NSError*)error
 {
