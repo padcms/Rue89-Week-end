@@ -38,7 +38,7 @@
 - (void) startShowing
 {
     NSString* fullResource = [self.pageElement.page.revision.contentDirectory stringByAppendingPathComponent:self.pageElement.resource];
-    NSURL* resourceUrl = [NSURL URLWithString:fullResource];
+    NSURL* resourceUrl = [NSURL fileURLWithPath:fullResource];
     NSURLRequest* request = [NSURLRequest requestWithURL:resourceUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:0];
     [self.webView loadRequest:request];
 }
@@ -58,12 +58,16 @@
     
     self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
     self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.scrollView.backgroundColor = [UIColor clearColor];
+    self.webView.opaque = NO;
+
+    [self.view addSubview:self.webView];
 }
 
 - (CGRect) rectFromPageElement:(PCPageElement*)element
 {
-#warning TODO
-    return CGRectMake(20, 20, 100, 100);
+    NSString* rectString = [element.dataRects valueForKey:@"gif"];
+    return CGRectFromString(rectString);
 }
 
 @end

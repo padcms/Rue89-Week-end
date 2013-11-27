@@ -10,6 +10,9 @@
 #import "PCScrollView.h"
 #import "GifViewController.h"
 
+#import "PCPageTemplatesPool.h"
+#import "PCPageControllersManager.h"
+
 @interface RueGifPageViewController ()
 
 @property (nonatomic, strong) NSArray* gifViewControllers;
@@ -18,6 +21,17 @@
 
 @implementation RueGifPageViewController
 
++ (void) load
+{
+    PCPageTemplate* newTemplate = [PCPageTemplate templateWithIdentifier:22
+                                                                   title:@"Scrolling Page With Gifs"
+                                                             description:@""
+                                                              connectors:PCTemplateAllConnectors
+                                                           engineVersion:1];
+    [[PCPageTemplatesPool templatesPool] registerPageTemplate:newTemplate];
+    
+    [[PCPageControllersManager sharedManager] registerPageControllerClass:[self class] forTemplate:newTemplate];
+}
 
 - (void) viewDidLoad
 {
@@ -32,12 +46,12 @@
         for (unsigned i = 0; i < [gifElements count]; i++)
         {
             PCPageElementGallery* element = [gifElements objectAtIndex:i];
-            
-            GifViewController* gifController = [GifViewController controllerForElement:element];
-            
-            [gifViewsArray addObject:gifController];
-            
-            [self.mainScrollView addSubview:gifController.view];
+            if([element.dataRects valueForKey:@"gif"])
+            {
+                GifViewController* gifController = [GifViewController controllerForElement:element];
+                [gifViewsArray addObject:gifController];
+                [self.mainScrollView addSubview:gifController.view];
+            }
         }
     }
     self.gifViewControllers = [NSArray arrayWithArray:gifViewsArray];
@@ -46,6 +60,9 @@
 - (void) loadFullView
 {
     [super loadFullView];
+    
+    self.mainScrollView.scrollEnabled = YES;
+    
     for (GifViewController* gifController in self.gifViewControllers)
     {
         [gifController startShowing];
