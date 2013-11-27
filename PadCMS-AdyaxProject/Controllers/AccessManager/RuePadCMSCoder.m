@@ -11,33 +11,13 @@
 #import "SBJsonWriter.h"
 #import "SBJsonParser.h"
 #import "Helper.h"
-#import <CommonCrypto/CommonDigest.h>
+#import "NSString+MD5.h"
 
 #define kPublisherTokenParameterKey @"publisher_token"
 
 NSString* PCNetworkServiceJSONRPCPath;
 
 @implementation RuePadCMSCoder
-
-- (NSString*) md5hashOfString:(NSString*)password
-{
-    // Create pointer to the string as UTF8
-    const char *ptr = [password UTF8String];
-    
-    // Create byte array of unsigned chars
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    
-    // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(ptr, strlen(ptr), md5Buffer);
-    
-    // Convert MD5 value in the buffer to NSString of hex values
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x",md5Buffer[i]];
-//    NSLog(@"MD5 : %@", output);
-    
-    return [NSString stringWithString:output];
-}
 
 - (BOOL) syncServerPlistDownloadWithPassword:(NSString*)password
 {
@@ -59,7 +39,7 @@ NSString* PCNetworkServiceJSONRPCPath;
     
 	/*NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",[PCConfig clientIdentifier]], @"iClientId",[NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]],@"iApplicationId", nil];*/
     
-	NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:devId, @"sUdid",[NSString stringWithFormat:@"%d",[PCConfig clientIdentifier]], @"iClientId",[NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]],@"iApplicationId", [self md5hashOfString:password], kPublisherTokenParameterKey, nil];
+	NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:devId, @"sUdid",[NSString stringWithFormat:@"%d",[PCConfig clientIdentifier]], @"iClientId",[NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]],@"iApplicationId", password.md5hash, kPublisherTokenParameterKey, nil];
 	[mainDict setObject:innerDict forKey:@"params"];
 	
 	[mainDict setObject:@"1" forKey:@"id"];

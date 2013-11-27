@@ -9,6 +9,7 @@
 #import "RueAccessManager.h"
 #import "PCConfig.h"
 #import "SBJsonWriter.h"
+#import "NSString+MD5.h"
 
 @implementation RueAccessManager
 
@@ -33,7 +34,7 @@ static NSString* _password = @"";
     NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
     [mainDict setObject:@"client.authenticatePublisher" forKey:PCJSONMethodNameKey];
 
-    NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:password, @"sPublisherToken", appIdentifier, PCJSONSDApplicationIDKey, nil];
+    NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:password.md5hash, @"sPublisherToken", appIdentifier, PCJSONSDApplicationIDKey, nil];
     [mainDict setObject:innerDict forKey:PCJSONParamsKey];
     [mainDict setObject:@"1" forKey:PCJSONIDKey];
 
@@ -66,20 +67,39 @@ static NSString* _password = @"";
                        if(dataReply != nil && dataReply.length)
                        {
                            NSError* serializError = nil;
-                           NSArray* result = [NSJSONSerialization JSONObjectWithData:dataReply options:NSJSONReadingAllowFragments error:&serializError];
+                           NSDictionary* result = [NSJSONSerialization JSONObjectWithData:dataReply options:NSJSONReadingAllowFragments error:&serializError];
                            
-                           NSLog(@"access responce : %@", result.debugDescription);
+                           if(serializError)
+                           {
+                               NSLog(@"confirm password responce serialize error : %@", serializError);
+                               error = serializError;
+                           }
+                           else
+                           {
+                               int responceValue = [[result valueForKey:@"result"]intValue];
+                               if(responceValue == 1)
+                               {
+                                   success = YES;
+                               }
+                               else
+                               {
+                                   success = NO;
+                                   error = [NSError errorWithDomain:@"RueAccessManager" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Wrong password"}];
+                               }
+                               NSLog(@"password confirmation : %@", success ? @"successful" : @"failed");
+                           }
                            
-                           NSString* stringReply = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
-                           NSLog(@"confirm - %@", stringReply);
+                           
+                           //NSString* stringReply = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
+                           //NSLog(@"confirm - %@", stringReply);
                            //NSString* stringWithoutNull = [stringReply stringByReplacingOccurrencesOfString:@"null" withString:@"\"\""];
                            //sonResponse = [stringWithoutNull JSONValue];
                            
                        }
                        else
                        {
-                           NSLog(@"WebServiceAPI error=%@",error);
-                           NSLog(@"WebServiceAPI response=%@",response);
+                           NSLog(@"confirm password error : %@",error);
+                           //NSLog(@"WebServiceAPI response=%@",response);
                        }
 
                        dispatch_async(mainQueue,

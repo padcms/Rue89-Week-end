@@ -258,7 +258,7 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     [self destroyKiosk];
     
-    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.1];
 }
 
 - (void) destroyKiosk
@@ -1620,7 +1620,17 @@ BOOL stringExists(NSString* str)
     if(alertView == self.publisherPasswordAlert && buttonIndex == 1)
     {
         NSString* enteredText = [(PublisherPasswordAlertView*)alertView text];
-        
+        [RueAccessManager confirmPassword:enteredText completion:^(NSError *error) {
+            
+            if(error)
+            {
+                [self showAlertWithError:error];
+            }
+            else
+            {
+                [self update];
+            }
+        }];
     }
     else
     {

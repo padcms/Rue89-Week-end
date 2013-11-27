@@ -50,6 +50,7 @@
 		2D963831183A311E0092D5D7 /* CustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D963830183A311E0092D5D7 /* CustomAnimation.m */; };
 		2D9662BB1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9662BA1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */; };
 		2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */; };
+		2D9A20381845FB3200CB142A /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A20371845FB3200CB142A /* NSString+MD5.m */; };
 		2D9AD3C017FEC2C700881F2C /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */; };
 		2D9AD3C617FEE14B00881F2C /* HelpSummaryPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C517FEE14B00881F2C /* HelpSummaryPopupView.m */; };
 		2D9AD3C817FEE16E00881F2C /* HelpSummaryPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AD3C717FEE16E00881F2C /* HelpSummaryPopupView.xib */; };
@@ -1713,6 +1714,8 @@
 		2D9662BA1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCSliderBasedMiniArticleViewController+CurrentActiveZone.m"; sourceTree = "<group>"; };
 		2D98F1E7181A78AF00526DB2 /* UINavigationController+BalancedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+BalancedTransition.h"; sourceTree = "<group>"; };
 		2D98F1E8181A78AF00526DB2 /* UINavigationController+BalancedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+BalancedTransition.m"; sourceTree = "<group>"; };
+		2D9A20361845FB3200CB142A /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		2D9A20371845FB3200CB142A /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		2D9AD3BE17FEC2C700881F2C /* NSObject+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Block.h"; sourceTree = "<group>"; };
 		2D9AD3BF17FEC2C700881F2C /* NSObject+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Block.m"; sourceTree = "<group>"; };
 		2D9AD3C417FEE14B00881F2C /* HelpSummaryPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpSummaryPopupView.h; sourceTree = "<group>"; };
@@ -2655,6 +2658,8 @@
 				2D94C16F1844E7AE0055D23F /* RuePadCMSCoder.m */,
 				2D94C171184501A20055D23F /* PublisherPasswordAlertView.h */,
 				2D94C172184501A20055D23F /* PublisherPasswordAlertView.m */,
+				2D9A20361845FB3200CB142A /* NSString+MD5.h */,
+				2D9A20371845FB3200CB142A /* NSString+MD5.m */,
 			);
 			path = AccessManager;
 			sourceTree = "<group>";
@@ -5323,6 +5328,7 @@
 				57189E0E17EA19E5008834EA /* NullSafe.m in Sources */,
 				2DA592F818228E5E00516768 /* SFHFKeychainUtils.m in Sources */,
 				57A4729E17BE505800745732 /* PCKioskFooterView.m in Sources */,
+				2D9A20381845FB3200CB142A /* NSString+MD5.m in Sources */,
 				2D9662BB1834D29A00B60ACD /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */,
 				57A473C617C2769800745732 /* PCKioskSubscribeButton.m in Sources */,
 				5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */,

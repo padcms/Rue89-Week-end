@@ -123,4 +123,9 @@
     }
 }
 
+- (void) dealloc
+{
+    [self.restorePurchasesButton removeObserver:self forKeyPath:@"enabled"];
+}
+
 @end
