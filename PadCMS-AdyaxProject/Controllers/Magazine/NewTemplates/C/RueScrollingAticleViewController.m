@@ -14,23 +14,10 @@
 @interface RueScrollingAticleViewController ()
 
 @property (nonatomic, strong) PCScrollView* mainScrollView;
-//@property (nonatomic, strong) PCPageElement* pageElement;
 
 @end
 
 @implementation RueScrollingAticleViewController
-
-
-//- (id) initForContent:(PCPageElementViewController*)contentViewController
-//{
-//    self = [super init];
-//    if(self)
-//    {
-////        self.pageElement = element;
-//        self.contentViewController = contentViewController;
-//    }
-//    return self;
-//}
 
 - (void)viewDidLoad
 {
@@ -51,18 +38,8 @@
     self.mainScrollView.clipsToBounds = YES;
     self.mainScrollView.verticalScrollButtonsEnabled = YES;
     self.mainScrollView.backgroundColor = [UIColor clearColor];
-    //self.mainScrollView.contentSize = self.contentViewController.view.frame.size;
     
     [self.view addSubview:self.mainScrollView];
-    //[self.mainScrollView addSubview:self.contentViewController.view];
-    
-//    NSString *fullResource = [self.page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
-//    
-//    PCPageElementViewController* slideView = [[PCPageElementViewController alloc] initWithResource:fullResource];
-//    slideView.element = element;
-//    [self.miniArticleViews addObject:slideView];
-//    
-//    [slideView release];
 }
 
 - (void) setContentViewController:(PCPageElementViewController *)contentViewController
@@ -72,14 +49,20 @@
         if(_contentViewController)
         {
             [_contentViewController.view removeFromSuperview];
+            [_contentViewController unloadView];
         }
         
         _contentViewController = contentViewController;
         
         if(contentViewController)
         {
-            [self.mainScrollView setContentSize:contentViewController.view.frame.size];
+            [contentViewController loadFullView];
+            CGSize contentSize = contentViewController.view.frame.size;
+            
+            //[self.mainScrollView setContentOffset:CGPointZero animated:YES];
             [self.mainScrollView addSubview:contentViewController.view];
+            
+            [self.mainScrollView setContentSize:contentSize];
         }
     }
 }

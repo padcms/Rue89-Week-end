@@ -9,6 +9,7 @@
 #import "RuePageWithMenuViewController.h"
 #import "PCScrollView.h"
 #import "RueScrollingAticleViewController.h"
+#import "PCPageControllersManager.h"
 
 @interface RuePageWithMenuViewController ()
 
@@ -20,31 +21,48 @@
 
 @implementation RuePageWithMenuViewController
 
++ (void) load
+{
+    PCPageTemplate* newTemplate = [PCPageTemplate templateWithIdentifier:24
+                                                                   title:@"Scrolling Gallery with Fixed Menu"
+                                                             description:@""
+                                                              connectors:PCTemplateAllConnectors
+                                                           engineVersion:1];
+    [[PCPageTemplatesPool templatesPool] registerPageTemplate:newTemplate];
+    
+    [[PCPageControllersManager sharedManager] registerPageControllerClass:[self class] forTemplate:newTemplate];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.mainScrollView.scrollEnabled = NO;
     
     self.articleController = [[RueScrollingAticleViewController alloc]init];
     
     [self.mainScrollView insertSubview:self.articleController.view belowSubview:self.bodyViewController.view];
     
-    [self createArticleContentViewControllers];
+    [self createGalleryContentViewControllers];
     
+    self.bodyViewController.view.userInteractionEnabled = NO;
+    
+    PCPageElementBody* bodyElement = (PCPageElementBody*)[self.page firstElementForType:PCPageElementTypeBody];
+    if(bodyElement.showTopLayer)
+    {
+        [self setCurrentArticleIndex:0];
+    }
 }
 
-- (void) createArticleContentViewControllers
+- (void) createGalleryContentViewControllers
 {
-    NSArray* minArticleElements = [self.page elementsForType:PCPageElementTypeMiniArticle];
+    NSArray* galleryElements = [self.page elementsForType:PCPageElementTypeGallery];
     
-    NSMutableArray* articleViewControllers = [[NSMutableArray alloc]initWithCapacity:minArticleElements.count];
+    NSMutableArray* articleViewControllers = [[NSMutableArray alloc]initWithCapacity:galleryElements.count];
     
-    if (minArticleElements && minArticleElements.count > 0)
+    if (galleryElements && galleryElements.count > 0)
     {
-        minArticleElements = [minArticleElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+        galleryElements = [galleryElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
         
-        for (PCPageElement* element in minArticleElements)
+        for (PCPageElement* element in galleryElements)
         {
             NSString *fullResource = [self.page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
             PCPageElementViewController* articleContentViewController = [[PCPageElementViewController alloc] initWithResource:fullResource];
@@ -60,6 +78,7 @@
     
     self.articleContentControllers = [NSArray arrayWithArray:articleViewControllers];
 }
+
 
 - (void) setCurrentArticleIndex:(int)index
 {
@@ -83,7 +102,7 @@
     }
 }
 
--(BOOL) pdfActiveZoneAction:(PCPageActiveZone*)activeZone
+- (BOOL) pdfActiveZoneAction:(PCPageActiveZone*)activeZone
 {
     [super pdfActiveZoneAction:activeZone];
     
@@ -96,6 +115,27 @@
         }
     }
     return NO;
+}
+
+- (NSArray*) activeZonesAtPoint:(CGPoint)point
+{
+    NSMutableArray* activeZones = [[NSMutableArray alloc] init];
+    
+    for (PCPageElement* element in self.page.elements)
+    {
+        for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+        {
+            CGRect rect = pdfActiveZone.rect;
+            if (!CGRectEqualToRect(rect, CGRectZero))
+            {
+                if (CGRectContainsPoint(rect, point))
+                {
+                    [activeZones addObject:pdfActiveZone];
+                }
+            }
+        }
+    }
+    return activeZones;
 }
 
 @end
