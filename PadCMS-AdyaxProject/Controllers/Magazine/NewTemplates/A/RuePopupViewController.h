@@ -12,7 +12,7 @@
 
 @interface RuePopupViewController : UIViewController
 
-+ (id) popupControllerForElement:(PCPageElement*)element;
++ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element;
 
 - (BOOL) isPresented;
 
