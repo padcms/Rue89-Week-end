@@ -42,6 +42,7 @@
 		2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D926A9D18082646003B2FA8 /* BoxCarController.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
+		2D93E3FA1848BD0400F7D56A /* RueSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93E3F91848BD0400F7D56A /* RueSlideViewController.m */; };
 		2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EF8181954C300E11910 /* ImagesBank.m */; };
 		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
 		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
@@ -1713,6 +1714,8 @@
 		2D926A9D18082646003B2FA8 /* BoxCarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCarController.m; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
+		2D93E3F81848BD0400F7D56A /* RueSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSlideViewController.h; sourceTree = "<group>"; };
+		2D93E3F91848BD0400F7D56A /* RueSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSlideViewController.m; sourceTree = "<group>"; };
 		2D94BF1C181E94C7006FC178 /* ImagesBank+Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Networking.h"; sourceTree = "<group>"; };
 		2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Networking.m"; sourceTree = "<group>"; };
 		2D94BF1F181E9712006FC178 /* ImagesBank+Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Storage.h"; sourceTree = "<group>"; };
@@ -2700,6 +2703,8 @@
 			children = (
 				2D8D910B1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.h */,
 				2D8D910C1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m */,
+				2D93E3F81848BD0400F7D56A /* RueSlideViewController.h */,
+				2D93E3F91848BD0400F7D56A /* RueSlideViewController.m */,
 			);
 			path = D;
 			sourceTree = "<group>";
@@ -5509,6 +5514,7 @@
 				2D8D910D1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m in Sources */,
 				2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */,
 				2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */,
+				2D93E3FA1848BD0400F7D56A /* RueSlideViewController.m in Sources */,
 				2D85DF30180ED01100459330 /* NSURL+Fragments.m in Sources */,
 				2D85DF3D180EDA7100459330 /* FacebookPostConfirmView.m in Sources */,
 				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
