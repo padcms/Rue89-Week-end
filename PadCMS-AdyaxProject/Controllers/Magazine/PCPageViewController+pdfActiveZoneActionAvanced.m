@@ -227,4 +227,9 @@
     return NO;
 }
 
+- (void) createGalleryButton
+{
+    
+}
+
 @end
