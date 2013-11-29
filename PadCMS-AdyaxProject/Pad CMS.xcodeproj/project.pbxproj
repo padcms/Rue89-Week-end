@@ -43,6 +43,8 @@
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; };
 		2D93E3FA1848BD0400F7D56A /* RueSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93E3F91848BD0400F7D56A /* RueSlideViewController.m */; };
+		2D93E3FE1848C5ED00F7D56A /* RueMultiScrollPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93E3FD1848C5ED00F7D56A /* RueMultiScrollPageViewController.m */; };
+		2D93E4011848D80300F7D56A /* RueScrollingPaneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93E4001848D80300F7D56A /* RueScrollingPaneViewController.m */; };
 		2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EF8181954C300E11910 /* ImagesBank.m */; };
 		2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */; };
 		2D94BF21181E9712006FC178 /* ImagesBank+Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D94BF20181E9712006FC178 /* ImagesBank+Storage.m */; };
@@ -1716,6 +1718,10 @@
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
 		2D93E3F81848BD0400F7D56A /* RueSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSlideViewController.h; sourceTree = "<group>"; };
 		2D93E3F91848BD0400F7D56A /* RueSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSlideViewController.m; sourceTree = "<group>"; };
+		2D93E3FC1848C5ED00F7D56A /* RueMultiScrollPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueMultiScrollPageViewController.h; sourceTree = "<group>"; };
+		2D93E3FD1848C5ED00F7D56A /* RueMultiScrollPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueMultiScrollPageViewController.m; sourceTree = "<group>"; };
+		2D93E3FF1848D80300F7D56A /* RueScrollingPaneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueScrollingPaneViewController.h; sourceTree = "<group>"; };
+		2D93E4001848D80300F7D56A /* RueScrollingPaneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueScrollingPaneViewController.m; sourceTree = "<group>"; };
 		2D94BF1C181E94C7006FC178 /* ImagesBank+Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Networking.h"; sourceTree = "<group>"; };
 		2D94BF1D181E94C7006FC178 /* ImagesBank+Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImagesBank+Networking.m"; sourceTree = "<group>"; };
 		2D94BF1F181E9712006FC178 /* ImagesBank+Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagesBank+Storage.h"; sourceTree = "<group>"; };
@@ -2712,6 +2718,10 @@
 		2D8D910A1843A2BF00A474EF /* E */ = {
 			isa = PBXGroup;
 			children = (
+				2D93E3FC1848C5ED00F7D56A /* RueMultiScrollPageViewController.h */,
+				2D93E3FD1848C5ED00F7D56A /* RueMultiScrollPageViewController.m */,
+				2D93E3FF1848D80300F7D56A /* RueScrollingPaneViewController.h */,
+				2D93E4001848D80300F7D56A /* RueScrollingPaneViewController.m */,
 			);
 			path = E;
 			sourceTree = "<group>";
@@ -5419,8 +5429,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8137D6152224E50038EC7B /* main.m in Sources */,
+				2D93E3FE1848C5ED00F7D56A /* RueMultiScrollPageViewController.m in Sources */,
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				2D93E4011848D80300F7D56A /* RueScrollingPaneViewController.m in Sources */,
 				2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
