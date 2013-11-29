@@ -32,6 +32,7 @@
     [button setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
     [button titleLabel].backgroundColor = [UIColor clearColor];
     [button titleLabel].textAlignment = NSTextAlignmentCenter;
+//    [button titleLabel].baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     [button titleLabel].textColor = [UIColor whiteColor];
     [button sizeToFit];
     button.hidden = YES;
@@ -67,8 +68,8 @@
     
     if([self.titleLabel.text rangeOfString:@"É"].length)
     {
-        self.titleLabel.frameHeight += 8;
-        self.titleLabel.frameY -= 4;
+        self.titleLabel.frameHeight = 24;
+        self.titleLabel.frameY = 8;
     }
 }
 
