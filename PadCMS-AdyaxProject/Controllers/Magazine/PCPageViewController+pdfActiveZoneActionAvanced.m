@@ -34,10 +34,14 @@
     Method prevMethod = class_getInstanceMethod([PCPageViewController class], @selector(pdfActiveZoneAction:));
     Method newMethod = class_getInstanceMethod([PCPageViewController class], @selector(pdfActiveZoneActionAdvanced:));
     
+    Method prevMethod2 = class_getInstanceMethod([PCPageViewController class], @selector(loadFullView));
+    Method newMethod2 = class_getInstanceMethod([PCPageViewController class], @selector(loadFullViewAdvanced));
+    
     method_exchangeImplementations(prevMethod, newMethod);
+    method_exchangeImplementations(prevMethod2, newMethod2);
 }
 
--(BOOL)pdfActiveZoneActionAdvanced:(PCPageActiveZone*)activeZone
+- (BOOL) pdfActiveZoneActionAdvanced:(PCPageActiveZone*)activeZone
 {
     if ([activeZone.URL hasPrefix:PCPDFActiveZoneNavigation])
     {
@@ -159,10 +163,27 @@
     return NO;
 }
 
-- (void)showVideoWebView: (NSString *)videoWebViewURL inRectAdvanced: (CGRect)videoWebViewRect
+- (void) showVideoWebView: (NSString *)videoWebViewURL inRectAdvanced: (CGRect)videoWebViewRect
 {
     NSLog(@"URL playing : %@", videoWebViewURL);
-    CGRect videoRect = videoWebViewRect;
+    
+    [self createWebBrowserViewWithFrame:videoWebViewRect];
+    
+    [webBrowserViewController presentURL:videoWebViewURL];
+}
+
+- (void) showVideoElement:(PCPageElementVideo*)element inRect:(CGRect)videoWebViewRect
+{
+    NSLog(@"URL playing : %@", element.resource);
+    
+    [self createWebBrowserViewWithFrame:videoWebViewRect];
+    
+    [(RueBrowserViewController*)webBrowserViewController presentElement:element ofPage:self.page];
+}
+
+- (void) createWebBrowserViewWithFrame:(CGRect)frame
+{
+    CGRect videoRect = frame;
     if (CGRectEqualToRect(videoRect, CGRectZero))
     {
         videoRect = [[UIScreen mainScreen] bounds];
@@ -183,16 +204,17 @@
     {
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
-    [webBrowserViewController presentURL:videoWebViewURL];
 }
 
-- (void)hideVideoWebView
+- (void) hideVideoWebView
 {
     if (webBrowserViewController)
     {
         [(RueBrowserViewController*)webBrowserViewController stop];
         [webBrowserViewController.view removeFromSuperview];
         webBrowserViewController = nil;
+        [self.mainScrollView setNeedsLayout];
+        [self.mainScrollView setNeedsDisplay];
     }
 }
 
@@ -205,7 +227,6 @@
 {
     if([self isPresentedPage] == NO)
     {
-        [(RueBrowserViewController*)webBrowserViewController stop];
         [self hideSubviews];
         [super viewWillDisappear:animated];
     }
@@ -227,9 +248,54 @@
     return NO;
 }
 
-- (void) createGalleryButton
+- (void) loadFullViewAdvanced
 {
+	isLoaded = YES;
+	//[self showHUD];
+    [self.backgroundViewController loadFullViewImmediate];
+    [self.bodyViewController loadFullViewImmediate];
     
+    CGSize bodySize = self.bodyViewController.view.frame.size;
+    
+    [self.mainScrollView setContentSize:bodySize];
+    
+    if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo] &&
+        ![self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] && self.isPresentedPage)
+    {
+        CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+        PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
+        
+        if (videoElement.stream || videoElement.resource)
+        {
+            [self showVideoElement:videoElement inRect:videoRect];
+        }
+    }
+    
+    //[self createGalleryButton];
+    
+    if (self.galleryButton != nil) {
+        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
+    }
+}
+
+- (CGRect)activeZoneRectForType:(NSString*)zoneType
+{
+    for (PCPageElement* element in self.page.elements)
+    {
+        CGRect rect = [element rectForElementType:zoneType];
+        if (!CGRectEqualToRect(rect, CGRectZero))
+        {
+//            CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
+//            float scale = pageSize.width/element.size.width;
+//            rect.size.width *= scale;
+//            rect.size.height *= scale;
+//            rect.origin.x *= scale;
+//            rect.origin.y *= scale;
+//            rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+            return rect;
+        }
+    }
+    return CGRectZero;
 }
 
 @end

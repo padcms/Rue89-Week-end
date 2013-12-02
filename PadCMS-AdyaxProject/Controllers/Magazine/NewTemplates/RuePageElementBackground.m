@@ -13,12 +13,7 @@
 
 - (void)pushElementData:(NSDictionary*)data
 {
-    self.resource = [data objectForKey:PCSQLiteElementResourceAttributeName];
-    if ([data objectForKey:PCSQLiteElementHeightAttributeName])
-        size.height = [[data objectForKey:PCSQLiteElementHeightAttributeName] floatValue];
-    
-    if ([data objectForKey:PCSQLiteElementWidthAttributeName])
-        size.width = [[data objectForKey:PCSQLiteElementWidthAttributeName] floatValue];
+    [super pushElementData:data];
     
     if([data objectForKey:PCSQLiteElementShowOnTopAttributeName])
     {

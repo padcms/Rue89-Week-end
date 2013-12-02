@@ -8,6 +8,8 @@
 
 #import "PCBrowserViewController.h"
 
+@class PCPage, PCPageElementVideo;
+
 @interface RueBrowserViewController : PCBrowserViewController
 
 - (void) stop;
@@ -16,5 +18,7 @@
 
 @property (nonatomic, weak) UIView* pageView;
 @property (nonatomic, weak) UIScrollView* mainScrollView;
+
+- (void) presentElement:(PCPageElementVideo*)element ofPage:(PCPage*)page;
 
 @end

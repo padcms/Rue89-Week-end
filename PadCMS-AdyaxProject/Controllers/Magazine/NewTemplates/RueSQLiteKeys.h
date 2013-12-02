@@ -9,3 +9,5 @@
 #import "PCSQLiteKeys.h"
 
 PADCMS_EXTERN NSString* PCSQLiteElementShowOnTopAttributeName;
+PADCMS_EXTERN NSString* PCSQLiteElementDisableUserInteractionAttributeName;
+PADCMS_EXTERN NSString* PCSQLiteElementLoopVideoAttributeName;

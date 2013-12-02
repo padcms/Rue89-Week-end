@@ -10,6 +10,7 @@
 #import "PCData.h"
 
 #import "RuePageElementBackground.h"
+#import "RuePageElementVideo.h"
 
 @implementation PCPageElementManager (RuePageElementManager)
 
@@ -20,7 +21,7 @@
     [self registerPageElementClass:[PCPageElement class] forElementType:PCPageElementTypePopup];
     
     [self registerPageElementClass:[PCPageElementBody class] forElementType:PCPageElementTypeBody];
-    [self registerPageElementClass:[PCPageElementVideo class] forElementType:PCPageElementTypeVideo];
+    [self registerPageElementClass:[RuePageElementVideo class] forElementType:PCPageElementTypeVideo];
     [self registerPageElementClass:[PCPageElementAdvert class] forElementType:PCPageElementTypeAdvert];
     [self registerPageElementClass:[PCPageElementScrollingPane class] forElementType:PCPageElementTypeScrollingPane];
     [self registerPageElementClass:[PCPageElementMiniArticle class] forElementType:PCPageElementTypeMiniArticle];

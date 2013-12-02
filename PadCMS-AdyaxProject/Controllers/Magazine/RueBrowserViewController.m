@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CustomAnimation.h"
 #import "UIView+EasyFrame.h"
+#import "RuePageElementVideo.h"
+#import "PCPage.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 typedef enum{
     WebViewPresentationStateWindow,
@@ -20,7 +23,7 @@ typedef enum{
 @interface PCBrowserViewController ()
 
 - (void) showHUD;
-- (void) createWebView;
+//- (void) createWebView;
 
 @end
 
@@ -30,8 +33,11 @@ typedef enum{
     WebViewPresentationState _currentWebViewPresentationState;
     
     CustomAnimation* _webViewAnimation;
+    
+    UIView* _currentPlayerView;
 }
 
+@property (nonatomic, strong) MPMoviePlayerController* player;
 
 @end
 
@@ -43,11 +49,11 @@ typedef enum{
     float offset = mainScrollView.contentOffset.y;
     self.view.frameY = offset;
     
-    if(_webView)
+    if(_currentPlayerView)
     {
         CGRect newWebRect = self.videoRect;
         newWebRect.origin.y -= offset;
-        _webView.frame = newWebRect;
+        _currentPlayerView.frame = newWebRect;
     }
 }
 
@@ -75,10 +81,38 @@ typedef enum{
 
 - (void)presentURL:(NSString *)url
 {
-    [self createWebView];
+    _currentPlayerView = [self createWebView];
+    [self createFullScreenButton];
+    
     self.videoURL = [NSURL URLWithString:url];
+    
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
     [self showHUD];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [self subscribeForDeviceNitifications];
+}
+
+- (void) presentElement:(RuePageElementVideo*)element ofPage:(PCPage*)page
+{
+    _currentPlayerView = [self createPlayerForElement:element];
+    if(element.userInteractionEnabled)
+    {
+        [self createFullScreenButton];
+    }
+    
+    if(element.stream)
+    {
+        self.videoURL = [NSURL URLWithString:element.stream];
+    }
+    else
+    {
+        NSString* fullPath = [page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
+        self.videoURL = [NSURL fileURLWithPath:fullPath];
+    }
+    
+    self.player.contentURL = self.videoURL;
+    [self.player play];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
@@ -88,12 +122,22 @@ typedef enum{
 {
     [self unsubscribeForDeviceNitifications];
     
-    [self.webView stopLoading];
-    [self.webView removeFromSuperview];
-    self.webView = nil;
+    if(self.webView)
+    {
+        [self.webView stopLoading];
+        self.webView = nil;
+    }
+    if(self.player)
+    {
+        [self.player stop];
+        self.player = nil;
+    }
+    
+    [_currentPlayerView removeFromSuperview];
+    _currentPlayerView = nil;
 }
 
-- (void)createWebView
+- (UIView*) createWebView
 {
     _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
     _webView.frameY -= self.mainScrollView.contentOffset.y;
@@ -101,11 +145,34 @@ typedef enum{
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
     _webView.scrollView.bounces = NO;
-    [self.view addSubview:_webView];
+    [self.view addSubview:_webView]; 
     
     _webView.backgroundColor = [UIColor blackColor];
     
-    [self createFullScreenButton];
+    return _webView;
+}
+
+- (UIView*) createPlayerForElement:(RuePageElementVideo*)element
+{
+    self.player = [[MPMoviePlayerController alloc]init];
+    if(element.loopVideo)
+    {
+        self.player.repeatMode = MPMovieRepeatModeOne;
+    }
+    if(element.userInteractionEnabled)
+    {
+        self.player.controlStyle = MPMovieControlStyleEmbedded;
+    }
+    else
+    {
+        self.player.controlStyle = MPMovieControlStyleNone;
+    }
+    
+    self.player.view.frame = self.videoRect;
+    self.player.view.frameY -= self.mainScrollView.contentOffset.y;
+    [self.view addSubview:self.player.view];
+    
+    return self.player.view;
 }
 
 - (BOOL) containsPoint:(CGPoint)point
@@ -116,7 +183,7 @@ typedef enum{
     }
     else
     {
-        return CGRectContainsPoint(_webView.frame, point);
+        return CGRectContainsPoint(_currentPlayerView.frame, point);
     }
 }
 
@@ -130,9 +197,9 @@ typedef enum{
     
     fullScreenButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     
-    [fullScreenButton setFrame:CGRectMake(_webView.frame.size.width - btnWidth, _webView.frame.size.height - btnHeight, btnWidth, btnHeight)];
+    [fullScreenButton setFrame:CGRectMake(_currentPlayerView.frame.size.width - btnWidth, _currentPlayerView.frame.size.height - btnHeight, btnWidth, btnHeight)];
     
-    [_webView addSubview:fullScreenButton];
+    [_currentPlayerView addSubview:fullScreenButton];
 }
 
 - (void) fullScreenButtonTap:(UIButton*)sender
@@ -165,7 +232,7 @@ typedef enum{
     
     CGRect newWebRect = self.videoRect;
     newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
-    _webView.frame = newWebRect;
+    _currentPlayerView.frame = newWebRect;
     
     [self.pageView addSubview:self.view];
     
@@ -267,7 +334,7 @@ typedef enum{
         [_webViewAnimation invalidate];
     }
     
-    _webViewAnimation = [[CustomAnimation alloc]initForView:_webView duration:duration finalFrame:newFrame finalTransform:_webView.transform];
+    _webViewAnimation = [[CustomAnimation alloc]initForView:_currentPlayerView duration:duration finalFrame:newFrame finalTransform:_currentPlayerView.transform];
     
     [_webViewAnimation performWithCompletion:completion];
     
@@ -278,7 +345,7 @@ typedef enum{
     {
         [UIView animateWithDuration:duration animations:^{
             
-            _webView.transform = CGAffineTransformMakeRotation(0);
+            _currentPlayerView.transform = CGAffineTransformMakeRotation(0);
             
         }];
     }
@@ -301,8 +368,8 @@ typedef enum{
     
     [UIView animateWithDuration:duration animations:^{
         
-        _webView.transform = CGAffineTransformMakeRotation(angle);
-        _webView.frame = newWebViewRect;
+        _currentPlayerView.transform = CGAffineTransformMakeRotation(angle);
+        _currentPlayerView.frame = newWebViewRect;
         
         
     } completion:^(BOOL finished) {

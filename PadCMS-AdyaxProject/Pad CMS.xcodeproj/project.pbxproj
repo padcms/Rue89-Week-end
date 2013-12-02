@@ -65,6 +65,7 @@
 		2D9B476418239AAF00F27836 /* SubscriptionScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B476318239AAF00F27836 /* SubscriptionScheme.m */; };
 		2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */; };
 		2D9BA5B9182109E900439240 /* Interstate-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */; };
+		2D9C0949184CC87500332C75 /* RuePageElementVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9C0948184CC87500332C75 /* RuePageElementVideo.m */; };
 		2D9DAA9F182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DAA9C182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
 		2D9DAAA0182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DAA9E182A3C5800D1D832 /* RueGalleryWithOverlaysViewController.m */; };
 		2D9E6F981827F1EA00FFBB78 /* RueSubscriptionManager+MKStoreManagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9E6F971827F1EA00FFBB78 /* RueSubscriptionManager+MKStoreManagerDataSource.m */; };
@@ -1756,6 +1757,8 @@
 		2D9B47671823D82B00F27836 /* SubscriptionMenuActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionMenuActionSheet.m; sourceTree = "<group>"; };
 		2D9BA5B8182109E900439240 /* Interstate-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Interstate-BoldItalic.ttf"; sourceTree = "<group>"; };
 		2D9BA5C01821315C00439240 /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
+		2D9C0947184CC87500332C75 /* RuePageElementVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePageElementVideo.h; sourceTree = "<group>"; };
+		2D9C0948184CC87500332C75 /* RuePageElementVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageElementVideo.m; sourceTree = "<group>"; };
 		2D9DAA9A182A3C5800D1D832 /* PCGalleryWithOverlaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCGalleryWithOverlaysViewController.h; sourceTree = "<group>"; };
 		2D9DAA9B182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueFixedIllustrationArticleTouchablePageViewController.h; sourceTree = "<group>"; };
 		2D9DAA9C182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueFixedIllustrationArticleTouchablePageViewController.m; sourceTree = "<group>"; };
@@ -2735,6 +2738,13 @@
 			path = BoxCar;
 			sourceTree = "<group>";
 		};
+		2D9C0945184C7E1A00332C75 /* G */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = G;
+			sourceTree = "<group>";
+		};
 		2D9DAA99182A3C5800D1D832 /* RueFixedIllustrationArticleTouchablePageViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2867,12 +2877,15 @@
 				2D8D90FC18435D1000A474EF /* C */,
 				2D8D90FD18435D1000A474EF /* D */,
 				2D8D910A1843A2BF00A474EF /* E */,
+				2D9C0945184C7E1A00332C75 /* G */,
 				2DAB3D22183F925700E326CA /* H */,
 				2D94C15E1844BB900055D23F /* PCPageElementManager+RuePageElementManager.m */,
 				2D94C1611844BED60055D23F /* RuePageElementBackground.h */,
 				2D94C1621844BED60055D23F /* RuePageElementBackground.m */,
 				2D94C1641844C11C0055D23F /* RueSQLiteKeys.h */,
 				2D94C1651844C11C0055D23F /* RueSQLiteKeys.m */,
+				2D9C0947184CC87500332C75 /* RuePageElementVideo.h */,
+				2D9C0948184CC87500332C75 /* RuePageElementVideo.m */,
 			);
 			path = NewTemplates;
 			sourceTree = "<group>";
@@ -5434,6 +5447,7 @@
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				2D93E4011848D80300F7D56A /* RueScrollingPaneViewController.m in Sources */,
 				2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */,
+				2D9C0949184CC87500332C75 /* RuePageElementVideo.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */,

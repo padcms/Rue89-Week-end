@@ -62,9 +62,9 @@
 			{
                 if(ABS(currentIndex - i) > 0)
                 {
-                    [self loadFullColumnAtIndex:i];
                     PCColumnViewController* columnController = [columnsViewControllers objectAtIndex:i];
                     [columnController.currentPageViewController didStopToBePresented];
+                    [self loadFullColumnAtIndex:i];
                 }
                 else
                 {

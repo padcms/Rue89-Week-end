@@ -8,4 +8,6 @@
 
 #import "RueSQLiteKeys.h"
 
-NSString* PCSQLiteElementShowOnTopAttributeName             = @"showOnTop";
+NSString* PCSQLiteElementShowOnTopAttributeName                 = @"showOnTop";
+NSString* PCSQLiteElementDisableUserInteractionAttributeName    = @"disable_user_interaction";
+NSString* PCSQLiteElementLoopVideoAttributeName                 = @"loop_video";
