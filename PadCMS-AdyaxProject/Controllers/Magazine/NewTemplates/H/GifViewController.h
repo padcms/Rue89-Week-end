@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCPageElement;
+@class PCPageElement, PCPageViewController;
 
 @interface GifViewController : UIViewController
 
-+ (id) controllerForElement:(PCPageElement*)element;
++ (id) controllerForElement:(PCPageElement*)element inPageViewController:(PCPageViewController*)pageController;
 
 - (void) startShowing;
 - (void) stopShowing;

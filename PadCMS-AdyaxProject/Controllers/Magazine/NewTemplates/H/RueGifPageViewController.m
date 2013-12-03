@@ -48,7 +48,7 @@
             PCPageElementGallery* element = [gifElements objectAtIndex:i];
             if([element.dataRects valueForKey:@"gif"])
             {
-                GifViewController* gifController = [GifViewController controllerForElement:element];
+                GifViewController* gifController = [GifViewController controllerForElement:element inPageViewController:self];
                 [gifViewsArray addObject:gifController];
                 [self.mainScrollView addSubview:gifController.view];
             }

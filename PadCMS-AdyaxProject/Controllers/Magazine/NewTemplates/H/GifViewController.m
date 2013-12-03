@@ -9,19 +9,23 @@
 #import "GifViewController.h"
 #import "PCPageElement.h"
 #import "PCPage.h"
+#import "PCPageViewController.h"
 
 @interface GifViewController ()
 
 @property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, strong) PCPageElement* pageElement;
 
+@property (nonatomic, weak) PCPageViewController* pageController;
+
 @end
 
 @implementation GifViewController
 
-+ (id) controllerForElement:(PCPageElement*)element
++ (id) controllerForElement:(PCPageElement*)element inPageViewController:(PCPageViewController*)pageController
 {
     GifViewController* controller = [[self alloc]initWithElement:element];
+    controller.pageController = pageController;
     return controller;
 }
 
@@ -66,8 +70,20 @@
 
 - (CGRect) rectFromPageElement:(PCPageElement*)element
 {
-    NSString* rectString = [element.dataRects valueForKey:@"gif"];
-    return CGRectFromString(rectString);
+    CGRect rect = [element rectForElementType:@"gif"];
+    
+    if (!CGRectEqualToRect(rect, CGRectZero))
+    {
+        CGSize pageSize = [self.pageController.columnViewController pageSizeForViewController:self.pageController];
+        float scale = pageSize.width/element.size.width;
+        rect.size.width *= scale;
+        rect.size.height *= scale;
+        rect.origin.x *= scale;
+        rect.origin.y *= scale;
+        rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+        
+    }
+    return rect;
 }
 
 @end
