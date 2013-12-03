@@ -68,49 +68,52 @@
     }
     if ([activeZone.URL hasPrefix:PCPDFActiveZoneActionVideo])
     {
-        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo])
-        {
-            if (videoWebView && videoWebView.superview)
-                [self hideVideoWebView];
-            else
-            {
-                CGRect videoRect = [[UIScreen mainScreen] bounds];
-                PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
-                [self showVideoWebView:videoElement.stream inRect:videoRect];
-            }
-            return YES;
-        }
-        NSArray* videoElements = [page elementsForType:PCPageElementTypeVideo];
-        PCPageElementVideo* video = nil;
-        if ([videoElements count]>1)
-        {
-            NSArray* comps = [activeZone.URL componentsSeparatedByString:PCPDFActiveZoneActionVideo];
-            if (comps&&[comps count]>1)
-            {
-                
-                NSString* num = [comps objectAtIndex:1];
-                int number = [num intValue]-1;
-                video = [videoElements objectAtIndex:number];
-            }
-            else
-            {
-                video = [videoElements objectAtIndex:0];
-            }
-        }
-        else
-        {
-            if ([videoElements count]>0)
-                video = [videoElements objectAtIndex:0];
-        }
+        NSArray* videoElementsArray = [page elementsForType:PCPageElementTypeVideo];
         
-        if (video)
+        if(videoElementsArray.count > 0)
         {
-            if (video.stream)
-                [self showVideo:video.stream];
-            
-            if (video.resource)
-                [self showVideo:[page.revision.contentDirectory stringByAppendingPathComponent:video.resource]];
-            
+            if(videoElementsArray.count == 1)
+            {
+                PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:0];
+                CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+                if(CGRectEqualToRect(videoRect, CGRectZero))
+                {
+                    videoRect = [self activeZoneRectForType:activeZone.URL];
+                }
+                [self showVideoElement:videoElement inRect:videoRect];
+            }
+            else
+            {
+                videoElementsArray = [videoElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                
+                int videoIndex = 0;
+                
+                NSArray* comps = [activeZone.URL componentsSeparatedByString:PCPDFActiveZoneActionVideo];
+                if (comps && [comps count] > 1)
+                {
+                    NSString* num = [comps objectAtIndex:1];
+                    videoIndex = [num intValue] - 1;
+                }
+                if(videoIndex >= videoElementsArray.count)
+                {
+                    videoIndex = videoIndex % videoElementsArray.count;
+                }
+                
+                NSString* videoZoneType = [PCPDFActiveZoneVideo stringByAppendingFormat:@"%i", (videoIndex + 1)];
+                CGRect videoRect = [self activeZoneRectForType:videoZoneType];
+                if(CGRectEqualToRect(videoRect, CGRectZero))
+                {
+                    videoZoneType = [videoZoneType stringByAppendingString:@"/autoplay"];
+                    videoRect = [self activeZoneRectForType:videoZoneType];
+                    if(CGRectEqualToRect(videoRect, CGRectZero))
+                    {
+                        videoRect = [self activeZoneRectForType:activeZone.URL];
+                    }
+                }
+                PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:videoIndex];
+                
+                [self showVideoElement:videoElement inRect:videoRect];
+            }
             return YES;
         }
     }
@@ -259,43 +262,88 @@
     
     [self.mainScrollView setContentSize:bodySize];
     
-    if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo] &&
-        ![self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] && self.isPresentedPage)
+    if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo])
     {
-        CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-        PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
-        
-        if (videoElement.stream || videoElement.resource)
+        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
         {
-            [self showVideoElement:videoElement inRect:videoRect];
+            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+            PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
+            
+            if (videoElement.stream || videoElement.resource)
+            {
+                [self showVideoElement:videoElement inRect:videoRect];
+            }
+        }
+        else
+        {
+            for (PCPageElement* element in self.page.elements)
+            {
+                for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+                {
+                    if ([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneVideo] && [pdfActiveZone.URL hasSuffix:@"/autoplay"])
+                    {
+                        NSString* indexStr = [[pdfActiveZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneVideo withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
+                        int videoElementIndex = [indexStr intValue] - 1;
+                        if(videoElementIndex >= 0)
+                        {
+                            NSArray* videoElementsArray = [page elementsForType:PCPageElementTypeVideo];
+                            videoElementsArray = [videoElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                            
+                            if(videoElementIndex < videoElementsArray.count)
+                            {
+                                CGRect videoRect = [self activeZoneRectForType:pdfActiveZone.URL];
+                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
+                                {
+                                    PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:videoElementIndex];
+                                    [self showVideoElement:videoElement inRect:videoRect];
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
     
     //[self createGalleryButton];
     
-    if (self.galleryButton != nil) {
-        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
-    }
-}
-
-- (CGRect)activeZoneRectForType:(NSString*)zoneType
-{
-    for (PCPageElement* element in self.page.elements)
-    {
-        CGRect rect = [element rectForElementType:zoneType];
-        if (!CGRectEqualToRect(rect, CGRectZero))
-        {
-//            CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
-//            float scale = pageSize.width/element.size.width;
-//            rect.size.width *= scale;
-//            rect.size.height *= scale;
-//            rect.origin.x *= scale;
-//            rect.origin.y *= scale;
-//            rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
-            return rect;
-        }
-    }
-    return CGRectZero;
+//    if (self.galleryButton != nil) {
+//        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
+//    }
+    
+//    for (PCPageElement* element in self.page.elements)
+//    {
+////        CGRect rect = [element rectForElementType:PCPDFActiveZoneActionVideo];
+//        
+//        [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//            
+//            NSString* keyStr = key;
+//            
+//            if([keyStr hasPrefix:PCPDFActiveZoneActionVideo])
+//            {
+//                CGRect rect = CGRectFromString(obj);
+//                if (!CGRectEqualToRect(rect, CGRectZero))
+//                {
+//                                CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
+//                                float scale = pageSize.width/element.size.width;
+//                                rect.size.width *= scale;
+//                                rect.size.height *= scale;
+//                                rect.origin.x *= scale;
+//                                rect.origin.y *= scale;
+//                                rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+//                    
+//                    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//                    btn.userInteractionEnabled = NO;
+//                    btn.backgroundColor = [UIColor greenColor];
+//                    btn.alpha = 0.3;
+//                    btn.frame = rect;
+//                    [self.mainScrollView addSubview:btn];
+//                    
+//                }
+//            }
+//        }];
+//    }
 }
 
 @end

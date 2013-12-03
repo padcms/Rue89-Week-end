@@ -46,13 +46,20 @@ typedef enum{
 - (void) setMainScrollView:(UIScrollView *)mainScrollView
 {
     _mainScrollView = mainScrollView;
-    float offset = mainScrollView.contentOffset.y;
-    self.view.frameY = offset;
+}
+
+- (void) setVideoRect:(CGRect)videoRect
+{
+    _videoRect = videoRect;
+    
+    float newViewY = videoRect.origin.y + videoRect.size.height / 2 - self.view.frame.size.height / 2;
+    
+    self.view.frameY = newViewY;
     
     if(_currentPlayerView)
     {
         CGRect newWebRect = self.videoRect;
-        newWebRect.origin.y -= offset;
+        newWebRect.origin.y -= self.view.frameY;
         _currentPlayerView.frame = newWebRect;
     }
 }
@@ -60,7 +67,7 @@ typedef enum{
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
+//    self.view.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.3];
     //self.view.frame = self.videoRect;
 }
 
@@ -140,7 +147,7 @@ typedef enum{
 - (UIView*) createWebView
 {
     _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
-    _webView.frameY -= self.mainScrollView.contentOffset.y;
+    _webView.frameY -= self.view.frameY;//self.mainScrollView.contentOffset.y;
     _webView.delegate = self;
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
@@ -169,7 +176,7 @@ typedef enum{
     }
     
     self.player.view.frame = self.videoRect;
-    self.player.view.frameY -= self.mainScrollView.contentOffset.y;
+    self.player.view.frameY -= self.view.frameY;//self.mainScrollView.contentOffset.y;
     [self.view addSubview:self.player.view];
     
     return self.player.view;
