@@ -43,7 +43,8 @@
     
     for (int i = 0; i < scrollersActiveZones.count && i < scrollElements.count; ++i)
     {
-        RueScrollingPaneViewController* scrollController = [RueScrollingPaneViewController controllerForElement:scrollElements[i] atActiveZone:scrollersActiveZones[i]];
+        PCPageActiveZone* activeZone = scrollersActiveZones[i];
+        RueScrollingPaneViewController* scrollController = [RueScrollingPaneViewController controllerForElement:scrollElements[i] atZone:[self activeZoneRectForType:activeZone.URL]];
         [scrollControllers addObject:scrollController];
         [self.mainScrollView addSubview:scrollController.view];
     }
@@ -80,7 +81,6 @@
             if([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneScroller])
             {
                 [activeZones addObject:pdfActiveZone];
-                
             }
         }
     }

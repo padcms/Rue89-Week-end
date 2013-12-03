@@ -9,7 +9,6 @@
 #import "RueScrollingPaneViewController.h"
 #import "PCPageElement.h"
 #import "PCPage.h"
-#import "PCPageActiveZone.h"
 
 @interface RueScrollingPaneViewController ()
 
@@ -23,11 +22,11 @@
 
 @implementation RueScrollingPaneViewController
 
-+ (id) controllerForElement:(PCPageElement*)element atActiveZone:(PCPageActiveZone*)activeZone
++ (id) controllerForElement:(PCPageElement*)element atZone:(CGRect)zone
 {
     RueScrollingPaneViewController* controller = [[self alloc]init];
     controller.resource = [element.page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
-    controller.zone = activeZone.rect;
+    controller.zone = zone;
     return controller;
 }
 

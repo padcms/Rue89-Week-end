@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCPageElement, PCPageActiveZone;
+@class PCPageElement;
 
 @interface RueScrollingPaneViewController : UIViewController
 
-+ (id) controllerForElement:(PCPageElement*)element atActiveZone:(PCPageActiveZone*)activeZone;
++ (id) controllerForElement:(PCPageElement*)element atZone:(CGRect)zone;
 
 - (CGPoint) contentOffset;
 
