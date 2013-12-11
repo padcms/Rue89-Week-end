@@ -7,6 +7,7 @@
 //
 
 #import "RueIssue.h"
+#import "PCJSONKeys.h"
 
 @implementation RueIssue
 
@@ -35,8 +36,31 @@
             }
         }
         //---------------------------------------------------------------------------------------------
+        
+        self.publishDate = fullDateFromString([parameters objectForKey:PCJSONIssuePublishDateKey]);
+        
+        
     }
     return self;
+}
+
+NSDate* fullDateFromString(NSString* strDate)
+{
+    if(strDate != nil && [strDate isKindOfClass:[NSString class]] && strDate.length)
+    {
+//        NSRange range = {0, 10};
+//        strDate = [strDate substringWithRange:range];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+        NSDate* date = [df dateFromString:strDate];
+        
+        return date;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 @end

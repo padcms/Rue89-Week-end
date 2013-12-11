@@ -686,8 +686,14 @@ BOOL stringExists(NSString* str)
                 return NSOrderedDescending;
                 
             case NSOrderedSame:
-                
-                return NSOrderedDescending;
+                if(rev1.issue.identifier > rev2.issue.identifier)
+                {
+                    return NSOrderedAscending;
+                }
+                else
+                {
+                    return NSOrderedDescending;
+                }
                 
             case NSOrderedDescending:
                 
