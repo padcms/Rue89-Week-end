@@ -12,13 +12,13 @@
 
 - (id) initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle confirmButtonTitle:(NSString *)okButtonTitle
 {
-    self = [super initWithTitle:@"Publisher password." message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:okButtonTitle, nil];
+    self = [super initWithTitle:@"Enter publisher password" message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:okButtonTitle, nil];
     if(self)
     {
         self.alertViewStyle = UIAlertViewStyleSecureTextInput;
         
         UITextField* passwordTextField = [self textFieldAtIndex:0];
-        passwordTextField.placeholder = @"Password...";
+        passwordTextField.placeholder = @"";
     }
     return self;
 }
