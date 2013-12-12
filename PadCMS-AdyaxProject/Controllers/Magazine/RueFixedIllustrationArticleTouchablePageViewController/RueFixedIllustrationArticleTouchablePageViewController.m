@@ -12,12 +12,17 @@
 #import "PCPageElemetTypes.h"
 #import "PCPDFActiveZones.h"
 #import "PCPageViewController+IsPresented.h"
+#import "RueBrowserViewController.h"
 
 typedef enum{
     GalleryPresentstionStateHidden,
     GalleryPresentstionStatePresenting,
     GalleryPresentstionStatePresented
 } GalleryPresentstionState;
+
+@interface PCPageViewController ()
+- (void) hideSubviews;
+@end
 
 @interface RueFixedIllustrationArticleTouchablePageViewController ()
 {
@@ -73,7 +78,7 @@ typedef enum{
     [self.articleView setScrollEnabled:( ! self.bodyViewController.view.hidden )];
 }
 
--(void)tapAction:(id)sender
+- (void) tapAction:(id)sender
 {
     CGPoint tapLocation = [sender locationInView:[sender view]];
     
@@ -95,10 +100,20 @@ typedef enum{
              tapLocationWithOffset.y = self.articleView.contentOffset.y + tapLocation.y;
              NSArray* actions = [self activeZonesAtPoint:tapLocationWithOffset];
              for (PCPageActiveZone* action in actions)
+             {
                  if ([self pdfActiveZoneAction:action])
+                 {
+                     if(webBrowserViewController)
+                     {
+                         [(RueBrowserViewController*)webBrowserViewController setMainScrollView:self.articleView];
+                         [self.bodyViewController.view addSubview:webBrowserViewController.view];
+                     }
                      break;
+                 }
+             }
              if (actions.count == 0)
              {
+                 [self hideSubviews];
                  self.bodyViewController.view.hidden = YES;
                  [self changeVideoLayout:self.bodyViewController.view.hidden];
              }
@@ -127,7 +142,10 @@ typedef enum{
 
 -(BOOL) pdfActiveZoneAction:(PCPageActiveZone*)activeZone
 {
-    [super pdfActiveZoneAction:activeZone];
+    if([super pdfActiveZoneAction:activeZone])
+    {
+        return YES;
+    }
     if ([activeZone.URL hasPrefix:PCPDFActiveZoneActionButton])
     {
         [self.articleView setScrollEnabled:self.bodyViewController.view.hidden];

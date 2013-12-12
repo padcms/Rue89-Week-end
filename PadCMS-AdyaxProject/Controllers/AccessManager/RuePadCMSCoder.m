@@ -13,7 +13,7 @@
 #import "Helper.h"
 #import "NSString+MD5.h"
 
-#define kPublisherTokenParameterKey @"publisher_token"
+#define kPublisherTokenParameterKey @"sPublisherToken"
 
 NSString* PCNetworkServiceJSONRPCPath;
 
@@ -47,7 +47,7 @@ NSString* PCNetworkServiceJSONRPCPath;
 	SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
 	NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
 	
-    //	NSLog(@"jsonString is:\n%@", jsonString);
+    //NSLog(@"jsonString is:\n%@", jsonString);
 	
 	
 	[request setHTTPBody:[jsonString dataUsingEncoding:NSASCIIStringEncoding]];

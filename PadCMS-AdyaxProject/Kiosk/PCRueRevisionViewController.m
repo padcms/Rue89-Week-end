@@ -63,7 +63,10 @@
                 if(ABS(currentIndex - i) > 0)
                 {
                     PCColumnViewController* columnController = [columnsViewControllers objectAtIndex:i];
-                    [columnController.currentPageViewController didStopToBePresented];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [columnController.currentPageViewController didStopToBePresented];
+                    });
+                    
                     [self loadFullColumnAtIndex:i];
                 }
                 else
