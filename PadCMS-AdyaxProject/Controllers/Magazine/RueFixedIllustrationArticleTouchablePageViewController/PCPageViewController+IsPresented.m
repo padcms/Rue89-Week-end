@@ -69,20 +69,21 @@
         }
         else
         {
-            [self loadFullPageAtIndex:i];
             if(ABS(currentIndex - i) > 0)
             {
                 PCPageViewController *currentPage = [pageViewControllers objectAtIndex:i];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [currentPage didStopToBePresented];
                 });
+                [self loadFullPageAtIndex:i];
             }
             else
             {
+                [self loadFullPageAtIndex:i];
                 PCPageViewController *currentPage = [pageViewControllers objectAtIndex:i];
-                dispatch_async(dispatch_get_main_queue(), ^{
+//                dispatch_async(dispatch_get_main_queue(), ^{
                     [currentPage didBecamePresented];
-                });
+//                });
             }
         }
     }

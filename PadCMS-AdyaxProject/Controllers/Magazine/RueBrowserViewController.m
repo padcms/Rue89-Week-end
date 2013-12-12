@@ -140,8 +140,11 @@ typedef enum{
         self.player = nil;
     }
     
-    [_currentPlayerView removeFromSuperview];
-    _currentPlayerView = nil;
+    if(_currentPlayerView)
+    {
+        [_currentPlayerView removeFromSuperview];
+        _currentPlayerView = nil;
+    }
 }
 
 - (UIView*) createWebView
