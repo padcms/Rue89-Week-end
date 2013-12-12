@@ -258,9 +258,24 @@
         NSDictionary* schemesDictionary = [parameters objectForKey:@"application_subscriptions"];
         if(schemesDictionary && [schemesDictionary isKindOfClass:[NSDictionary class]] && schemesDictionary.count)
         {
-            [schemesDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSLog(@"%@", schemesDictionary);
+            
+            NSArray* keys = [schemesDictionary allKeys];
+            keys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                 
-                NSDictionary* entyty = obj;
+                int first = [obj1 intValue];
+                int second = [obj2 intValue];
+                if(first > second)
+                    return NSOrderedDescending;
+                else if(first < second)
+                    return NSOrderedAscending;
+                else return NSOrderedSame;
+            }];
+            
+            for (int i = 0; i < keys.count; ++i)
+            {
+                NSString* key = keys[i];
+                NSDictionary* entyty = schemesDictionary[key];
                 if(entyty && [entyty isKindOfClass:[NSDictionary class]] && entyty.count)
                 {
                     SubscriptionScheme * aScheme = [[SubscriptionScheme alloc]initWithDictionary:entyty];
@@ -269,7 +284,7 @@
                         [schemes addObject:aScheme];
                     }
                 }
-            }];
+            }
         }
         
         _subscriptionsSchemes = [NSArray arrayWithArray:schemes];
