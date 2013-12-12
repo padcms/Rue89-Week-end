@@ -7,6 +7,7 @@
 //
 
 #import "PCKioskHeaderView.h"
+#import "RueAccessManager.h"
 
 @interface PCKioskHeaderView()
 
@@ -62,7 +63,7 @@
     [self.subscribeButton.button addTarget:self action:@selector(purchaseAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UITapGestureRecognizer* fiveRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(fiveGestureActivated:)];
-    fiveRecognizer.numberOfTouchesRequired = 2;
+    fiveRecognizer.numberOfTouchesRequired = kPublisherAccessNumberOfTouches;
     fiveRecognizer.cancelsTouchesInView = YES;
     [self.logoButton addGestureRecognizer:fiveRecognizer];
     

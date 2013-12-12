@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kPublisherAccessNumberOfTouches 2
+
 @interface RueAccessManager : NSObject
 
 + (void) confirmPassword:(NSString*)password completion:(void(^)(NSError* error))completionBlock;
