@@ -57,6 +57,8 @@
 @property (nonatomic, strong) PCEmailController * emailController;
 @property (nonatomic, assign) BOOL needUpdate;
 
+@property (nonatomic, strong) PCKioskNotificationPopup* kioskNotificationPopup;
+
 - (void) initManager;
 - (void) bindNotifications;
 - (void) updateApplicationData;
@@ -239,14 +241,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 - (void) willEnterForeground
 {
-//    if([self isKioskPresented])
-//    {
-//        [self update];
-//    }
-//    else
-//    {
-//        self.needUpdate = YES;
-//    }
+    if([self isKioskPresented])
+    {
+        [self update];
+    }
+    else
+    {
+        self.needUpdate = YES;
+    }
 }
 
 - (void) update
@@ -267,12 +269,15 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     _revisionViewController = nil;
     currentApplication = nil;
     [self dissmissKiosk];
+    [self hideForOurReadersPopup];
 }
 
 - (void) createKiosk
 {
     [self initManager];
     [self initKiosk];
+    
+    [self showForOurReadersPopup];
     
     self.needUpdate = NO;
     
@@ -1611,12 +1616,25 @@ BOOL stringExists(NSString* str)
     }
 }
 
-- (void)showForOurReadersPopup {
+- (void)showForOurReadersPopup
+{
     PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
     popup.titleLabel.text = @"À nos lecteurs";
     popup.descriptionLabel.text = currentApplication.messageForReaders;
     [popup sizeToFitDescriptionLabelText];
+    
+    self.kioskNotificationPopup = popup;
     [popup show];
+}
+
+- (void) hideForOurReadersPopup
+{
+    if(self.kioskNotificationPopup)
+    {
+        [self.kioskNotificationPopup hideAnimated:NO completion:^{
+            self.kioskNotificationPopup = nil;
+        }];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
