@@ -90,4 +90,48 @@ NSString* PCNetworkServiceJSONRPCPath;
 	return NO;
 }
 
+- (void) sendReceipt: (NSNotification *)notification
+{
+	NSLog(@"transactionReceipt: %@", [notification object]);
+	
+    NSString *devId = deviceID();
+	
+	NSURL* theURL = [[PCConfig serverURL] URLByAppendingPathComponent:PCNetworkServiceJSONRPCPath];
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+	
+	[request setHTTPMethod:@"POST"];
+	
+	NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
+	[mainDict setObject:@"purchase.apple.verifyReceipt" forKey:@"method"];
+    
+    NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:devId, @"sUdid", [notification object], @"sReceiptData", [PCConfig sharedSecretKey], @"sSecretPassword", nil];
+	
+	[mainDict setObject:innerDict forKey:@"params"];
+	
+	[mainDict setObject:@"1" forKey:@"id"];
+	
+	SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
+	NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
+	
+    //	NSLog(@"jsonString is:\n %@", jsonString);
+	
+	//[tmpJsonWriter release];
+	
+	[request setHTTPBody:[jsonString dataUsingEncoding:NSASCIIStringEncoding]];
+	
+	NSData *dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	
+	if(dataReply != nil)
+	{
+		NSString *str = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
+        //		NSLog(@"ReceiptVerify response:\n %@", str);
+		//[str release];
+	}
+	
+	[padDelegate restartApplication];
+	
+	//[[NSNotificationCenter defaultCenter] postNotificationName:reloadCellNotification object:nil];
+}
+
 @end

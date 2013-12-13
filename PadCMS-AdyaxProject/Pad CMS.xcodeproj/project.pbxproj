@@ -95,6 +95,9 @@
 		2DA69F7918475043006C01F3 /* RuePadCMSCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA69F7518475043006C01F3 /* RuePadCMSCoder.m */; };
 		2DA6CC9C183B9CC800867377 /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6CC9B183B9CC800867377 /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */; };
 		2DA72EED1819398C00E11910 /* PCRevision+Redefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */; };
+		2DA769E3185B0FB000FB586A /* CLScoreServerPost+UDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA769E2185B0FB000FB586A /* CLScoreServerPost+UDID.m */; };
+		2DA769E6185B0FCC00FB586A /* CLScoreServerRequest+UDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA769E5185B0FCC00FB586A /* CLScoreServerRequest+UDID.m */; };
+		2DA769F2185B141C00FB586A /* PCJSONKeys+iTunesKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA769F1185B141C00FB586A /* PCJSONKeys+iTunesKey.m */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
@@ -1812,6 +1815,10 @@
 		2DA72EEC1819398C00E11910 /* PCRevision+Redefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevision+Redefinition.m"; sourceTree = "<group>"; };
 		2DA72EF7181954C300E11910 /* ImagesBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesBank.h; sourceTree = "<group>"; };
 		2DA72EF8181954C300E11910 /* ImagesBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesBank.m; sourceTree = "<group>"; };
+		2DA769E2185B0FB000FB586A /* CLScoreServerPost+UDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLScoreServerPost+UDID.m"; sourceTree = "<group>"; };
+		2DA769E5185B0FCC00FB586A /* CLScoreServerRequest+UDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLScoreServerRequest+UDID.m"; sourceTree = "<group>"; };
+		2DA769F1185B141C00FB586A /* PCJSONKeys+iTunesKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCJSONKeys+iTunesKey.m"; sourceTree = "<group>"; };
+		2DA769F3185B145700FB586A /* PCJSONKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCJSONKeys.h; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2506,6 +2513,7 @@
 			children = (
 				60F0221C1590D7B70046FA44 /* PadCMS-CocoaTouch-Core.xcodeproj */,
 				4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */,
+				2DA769D9185B0E5100FB586A /* CoreChanges */,
 				2D046FD71815237C005087D7 /* Controllers */,
 				60F022581590DEEC0046FA44 /* Kiosk */,
 				AB8139FC152591510038EC7B /* UNI */,
@@ -2867,6 +2875,73 @@
 				2D94BF26181E9A01006FC178 /* ImagesBankImage.m */,
 			);
 			path = ImagesCatch;
+			sourceTree = "<group>";
+		};
+		2DA769D9185B0E5100FB586A /* CoreChanges */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769EF185B131A00FB586A /* Helpers */,
+				2DA769DA185B0E5100FB586A /* Controllers */,
+				2DA769DB185B0E5100FB586A /* ThirdParty */,
+				2DA769DF185B0E5100FB586A /* Versioning */,
+			);
+			path = CoreChanges;
+			sourceTree = "<group>";
+		};
+		2DA769DA185B0E5100FB586A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2DA769DB185B0E5100FB586A /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769DC185B0E5100FB586A /* cocos3d */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2DA769DC185B0E5100FB586A /* cocos3d */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769DD185B0E5100FB586A /* libs */,
+			);
+			path = cocos3d;
+			sourceTree = "<group>";
+		};
+		2DA769DD185B0E5100FB586A /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769DE185B0E5100FB586A /* cocoslive */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		2DA769DE185B0E5100FB586A /* cocoslive */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769E2185B0FB000FB586A /* CLScoreServerPost+UDID.m */,
+				2DA769E5185B0FCC00FB586A /* CLScoreServerRequest+UDID.m */,
+			);
+			path = cocoslive;
+			sourceTree = "<group>";
+		};
+		2DA769DF185B0E5100FB586A /* Versioning */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Versioning;
+			sourceTree = "<group>";
+		};
+		2DA769EF185B131A00FB586A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2DA769F3185B145700FB586A /* PCJSONKeys.h */,
+				2DA769F1185B141C00FB586A /* PCJSONKeys+iTunesKey.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2DAB3D1C183F5BE400E326CA /* NewTemplates */ = {
@@ -5451,6 +5526,7 @@
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				2D94BF1A181E8774006FC178 /* ImagesBank.m in Sources */,
+				2DA769E3185B0FB000FB586A /* CLScoreServerPost+UDID.m in Sources */,
 				2DA592F618228E5E00516768 /* MKStoreKit+PadCMS.m in Sources */,
 				2D94BF1E181E94C7006FC178 /* ImagesBank+Networking.m in Sources */,
 				60F022831590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
@@ -5489,6 +5565,7 @@
 				2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				2DA689781830D1C200E1F9EE /* RueIssue.m in Sources */,
+				2DA769F2185B141C00FB586A /* PCJSONKeys+iTunesKey.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
 				2DA6897B1830DE2700E1F9EE /* IssuePricingPlan.m in Sources */,
 				2DA69F7818475043006C01F3 /* RueAccessManager.m in Sources */,
@@ -5538,6 +5615,7 @@
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2DA6CC9C183B9CC800867377 /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
 				2D8D910D1843A6E800A474EF /* RueDiaporamaInLongArticleViewController.m in Sources */,
+				2DA769E6185B0FCC00FB586A /* CLScoreServerRequest+UDID.m in Sources */,
 				2D85DF23180EA59600459330 /* PCRueTwitterController.m in Sources */,
 				2D85DF2B180EB43900459330 /* RueFacebookController.m in Sources */,
 				2D93E3FA1848BD0400F7D56A /* RueSlideViewController.m in Sources */,
