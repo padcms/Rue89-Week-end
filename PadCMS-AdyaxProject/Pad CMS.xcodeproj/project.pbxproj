@@ -105,6 +105,10 @@
 		2DA76A09185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A08185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m */; };
 		2DA76A10185B61B000FB586A /* PCVideoController+NoAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */; };
 		2DA76A12185B644400FB586A /* PCRevisionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A11185B644400FB586A /* PCRevisionViewController.xib */; };
+		2DA76A15185B661200FB586A /* InAppPurchases+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A14185B661200FB586A /* InAppPurchases+CoreChanges.m */; };
+		2DA76A1A185B67F900FB586A /* PCSQLLiteModelBuilder+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A19185B67F900FB586A /* PCSQLLiteModelBuilder+CoreChanges.m */; };
+		2DA76A1F185B69BB00FB586A /* PCPageElementViewController+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A1E185B69BB00FB586A /* PCPageElementViewController+CoreChanges.m */; };
+		2DA76A23185B6D3100FB586A /* PCPageViewController+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A22185B6D3100FB586A /* PCPageViewController+CoreChanges.m */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
@@ -1834,6 +1838,11 @@
 		2DA76A0B185B5C9000FB586A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCVideoController+NoAlert.m"; sourceTree = "<group>"; };
 		2DA76A11185B644400FB586A /* PCRevisionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCRevisionViewController.xib; sourceTree = "<group>"; };
+		2DA76A14185B661200FB586A /* InAppPurchases+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InAppPurchases+CoreChanges.m"; sourceTree = "<group>"; };
+		2DA76A19185B67F900FB586A /* PCSQLLiteModelBuilder+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCSQLLiteModelBuilder+CoreChanges.m"; sourceTree = "<group>"; };
+		2DA76A1E185B69BB00FB586A /* PCPageElementViewController+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageElementViewController+CoreChanges.m"; sourceTree = "<group>"; };
+		2DA76A20185B6A7B00FB586A /* PCResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCResourceView.h; sourceTree = "<group>"; };
+		2DA76A22185B6D3100FB586A /* PCPageViewController+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+CoreChanges.m"; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2895,6 +2904,7 @@
 		2DA769D9185B0E5100FB586A /* CoreChanges */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A16185B67DD00FB586A /* Model */,
 				2DA769EF185B131A00FB586A /* Helpers */,
 				2DA769DA185B0E5100FB586A /* Controllers */,
 				2DA769DB185B0E5100FB586A /* ThirdParty */,
@@ -2906,6 +2916,7 @@
 		2DA769DA185B0E5100FB586A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A1B185B699C00FB586A /* Magazine */,
 				2DA76A0D185B619900FB586A /* Other */,
 			);
 			path = Controllers;
@@ -2948,6 +2959,7 @@
 		2DA769DF185B0E5100FB586A /* Versioning */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A14185B661200FB586A /* InAppPurchases+CoreChanges.m */,
 			);
 			path = Versioning;
 			sourceTree = "<group>";
@@ -3019,6 +3031,40 @@
 				2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		2DA76A16185B67DD00FB586A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A17185B67DD00FB586A /* ModelBilder */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2DA76A17185B67DD00FB586A /* ModelBilder */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A19185B67F900FB586A /* PCSQLLiteModelBuilder+CoreChanges.m */,
+			);
+			path = ModelBilder;
+			sourceTree = "<group>";
+		};
+		2DA76A1B185B699C00FB586A /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A1C185B699C00FB586A /* Resource */,
+				2DA76A22185B6D3100FB586A /* PCPageViewController+CoreChanges.m */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		2DA76A1C185B699C00FB586A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A20185B6A7B00FB586A /* PCResourceView.h */,
+				2DA76A1E185B69BB00FB586A /* PCPageElementViewController+CoreChanges.m */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		2DAB3D1C183F5BE400E326CA /* NewTemplates */ = {
@@ -5608,6 +5654,7 @@
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				2D93E4011848D80300F7D56A /* RueScrollingPaneViewController.m in Sources */,
 				2D95BDE218326C57002C4F6F /* RueSlideshowViewController.m in Sources */,
+				2DA76A1F185B69BB00FB586A /* PCPageElementViewController+CoreChanges.m in Sources */,
 				2D9C0949184CC87500332C75 /* RuePageElementVideo.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
@@ -5660,6 +5707,7 @@
 				57B4434F17D785D800FCFA87 /* PCKioskTitledPopupView.m in Sources */,
 				57B443A917D89B3600FCFA87 /* PCRueRevisionViewController.m in Sources */,
 				2DA593051822AD8400516768 /* SubscriptionMenuViewController.m in Sources */,
+				2DA76A23185B6D3100FB586A /* PCPageViewController+CoreChanges.m in Sources */,
 				2D8D9103184375F600A474EF /* RuePopupViewController.m in Sources */,
 				2D95BDF518328DBA002C4F6F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
 				57231D8717D8C5BD00712185 /* EasyTableView.m in Sources */,
@@ -5696,8 +5744,10 @@
 				2D98F1E9181A78AF00526DB2 /* UINavigationController+BalancedTransition.m in Sources */,
 				2DA69F7618475043006C01F3 /* NSString+MD5.m in Sources */,
 				2D88C7371806D43F003CCF58 /* ProgressButton.m in Sources */,
+				2DA76A15185B661200FB586A /* InAppPurchases+CoreChanges.m in Sources */,
 				2D9B47681823D82B00F27836 /* SubscriptionMenuActionSheet.m in Sources */,
 				2D88C73C1806DD6B003CCF58 /* ProgressView.m in Sources */,
+				2DA76A1A185B67F900FB586A /* PCSQLLiteModelBuilder+CoreChanges.m in Sources */,
 				2D8D90F91843465E00A474EF /* GifViewController.m in Sources */,
 				2D926A9E18082646003B2FA8 /* BoxCarController.m in Sources */,
 				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
