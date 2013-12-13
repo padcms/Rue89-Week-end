@@ -8,6 +8,23 @@
 
 #import "RueDownloadManager.h"
 #import "PCRevision.h"
+#import "PCPage.h"
+
+@interface PCDownloadManager()
+{
+    @public
+    AFHTTPClient *_httpClient;
+}
+
+- (void)launchCoverPageDownloading;
+- (void)launchPortraitPagesDownloading;
+- (void)launchTocDownloading;
+- (void)launchHelpDownloading;
+- (void)launchHorizonalPagesDownload;
+- (void)launchHorizontalTocDownload;
+- (void)clearData;
+
+@end
 
 @interface RueDownloadManager ()
 {
@@ -77,7 +94,54 @@ static NSMutableDictionary* active_dovnloaders;
     }
     
     _startOperationsCount = 0;
-    [super startDownloading];
+    
+        if (!self.revision) return;
+        if (_httpClient.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable)
+        {
+            //        NSString* message = [PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+            //                                                                   value:@"You must be connected to the Internet."];
+            //
+            //        NSString    *title = [PCLocalizationManager localizedStringForKey:@"TITLE_WARNING"
+            //                                                                    value:@"Warning!"];
+            //
+            //        NSString    *buttonTitle = [PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+            //                                                                          value:@"OK"];
+            //
+            //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+            //                                                        message:message
+            //                                                       delegate:nil
+            //                                              cancelButtonTitle:buttonTitle
+            //                                              otherButtonTitles:nil];
+            //        [alert show];
+            //        [alert release];
+            return;
+            
+        }
+        [self clearData];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boost:) name:PCBoostPageNotification object:nil];
+        self.operationsDic = [NSMutableDictionary dictionary];
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if ((orientation == UIInterfaceOrientationPortrait) || (orientation == UIInterfaceOrientationPortraitUpsideDown))
+        {
+            [self launchCoverPageDownloading];
+            [self launchTocDownloading];
+            [self launchHelpDownloading];
+            [self launchPortraitPagesDownloading];
+            [self launchHorizontalTocDownload];
+            [self launchHorizonalPagesDownload];
+            
+        }
+        else {
+            [self launchHorizontalTocDownload];
+            [self launchHorizonalPagesDownload];
+            [self launchCoverPageDownloading];
+            [self launchTocDownloading];
+            [self launchHelpDownloading];
+            [self launchPortraitPagesDownloading];
+            
+        }
+        self.isReady = YES;
+    
     _startOperationsCount = [self currentOperationsCount];
     
     if(_startOperationsCount)
@@ -159,40 +223,40 @@ static NSMutableDictionary* active_dovnloaders;
     }
 }
 
-//-(void) observeValueForKeyPath: (NSString *)keyPath ofObject: (id) object
-//                        change: (NSDictionary *) change context: (void *) context
-//{
-//	if([change objectForKey:NSKeyValueChangeNewKey] != [NSNull null] && [change objectForKey:NSKeyValueChangeOldKey] != [NSNull null])
-//	{
-//		AFNetworkReachabilityStatus newStatus = [[change objectForKey: NSKeyValueChangeNewKey] intValue];
-//		AFNetworkReachabilityStatus oldStatus = [[change objectForKey: NSKeyValueChangeOldKey] intValue];
-//		if (newStatus == AFNetworkReachabilityStatusNotReachable)
-//		{
-//            //			NSString* message = [PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-//            //                                                                       value:@"You must be connected to the Internet."];
-//            //
-//            //            NSString    *title = [PCLocalizationManager localizedStringForKey:@"TITLE_WARNING"
-//            //                                                                        value:@"Warning!"];
-//            //
-//            //            NSString    *buttonTitle = [PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-//            //                                                                        value:@"OK"];
-//            //
-//            //			dispatch_async(dispatch_get_main_queue(), ^{
-//            //				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
-//            //                                                                message:message
-//            //                                                               delegate:nil
-//            //                                                      cancelButtonTitle:buttonTitle
-//            //                                                      otherButtonTitles:nil];
-//            //				[alert show];
-//            //				[alert release];
-//            //			});
-//		}
-//		else if ((oldStatus == AFNetworkReachabilityStatusNotReachable) && ((newStatus == AFNetworkReachabilityStatusReachableViaWiFi) || (newStatus == AFNetworkReachabilityStatusReachableViaWWAN)) )
-//		{
-//			NSLog(@"Network now available!");
-//			[self startDownloading];
-//		}
-//	}
-//}
+-(void) observeValueForKeyPath: (NSString *)keyPath ofObject: (id) object
+                        change: (NSDictionary *) change context: (void *) context
+{
+	if([change objectForKey:NSKeyValueChangeNewKey] != [NSNull null] && [change objectForKey:NSKeyValueChangeOldKey] != [NSNull null])
+	{
+		AFNetworkReachabilityStatus newStatus = [[change objectForKey: NSKeyValueChangeNewKey] intValue];
+		AFNetworkReachabilityStatus oldStatus = [[change objectForKey: NSKeyValueChangeOldKey] intValue];
+		if (newStatus == AFNetworkReachabilityStatusNotReachable)
+		{
+            //			NSString* message = [PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+            //                                                                       value:@"You must be connected to the Internet."];
+            //
+            //            NSString    *title = [PCLocalizationManager localizedStringForKey:@"TITLE_WARNING"
+            //                                                                        value:@"Warning!"];
+            //
+            //            NSString    *buttonTitle = [PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+            //                                                                        value:@"OK"];
+            //
+            //			dispatch_async(dispatch_get_main_queue(), ^{
+            //				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+            //                                                                message:message
+            //                                                               delegate:nil
+            //                                                      cancelButtonTitle:buttonTitle
+            //                                                      otherButtonTitles:nil];
+            //				[alert show];
+            //				[alert release];
+            //			});
+		}
+		else if ((oldStatus == AFNetworkReachabilityStatusNotReachable) && ((newStatus == AFNetworkReachabilityStatusReachableViaWiFi) || (newStatus == AFNetworkReachabilityStatusReachableViaWWAN)) )
+		{
+			NSLog(@"Network now available!");
+			[self startDownloading];
+		}
+	}
+}
 
 @end

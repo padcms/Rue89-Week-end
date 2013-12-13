@@ -22,7 +22,8 @@
         self.productIdentifier = [[parameters objectForKey:PCJSONIssueProductIDKey] copy];
         self.titleShort = [parameters objectForKey:PCJSONIssueTitleShortKey];
         self.shortIntro = [[parameters objectForKey:PCJSONIssueShortIntroKey] stringByDecodingHTMLEntities];
-        
+        self.excerpt = [[[parameters objectForKey:PCJSONIssueExcerptKey] stringByDecodingHTMLEntities] copy];
+
         //------------------------ Pricing Plan -------------------------------------------------------
         NSString* pricinsPlanStr = parameters[Issue_Pricing_Plan_JSON_Key];
         if(pricinsPlanStr && [pricinsPlanStr isKindOfClass:[NSString class]] && pricinsPlanStr.length)

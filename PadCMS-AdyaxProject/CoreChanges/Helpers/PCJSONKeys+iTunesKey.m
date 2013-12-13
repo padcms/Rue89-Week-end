@@ -11,6 +11,7 @@
 NSString* PCJSONApplicationContactEmailKey                 = @"application_email";
 NSString* PCJSONIssuePublishDateKey                        = @"issue_publish_date";
 NSString* PCJSONIssueTitleShortKey                         = @"issue_title_short";
+NSString* PCJSONIssueShortIntroKey                         = @"issue_short_intro";
 
 @interface PCJSONKeys : NSObject
 @end
@@ -21,7 +22,6 @@ NSString* PCJSONIssueTitleShortKey                         = @"issue_title_short
 {
     PCJSONIssueProductIDKey     = @"issue_itunes_id";
     PCJSONIssueShortIntroKey    = @"issue_excerpt_short";
-    PCJSONIssueShortIntroKey    = @"issue_short_intro";
 }
 
 @end

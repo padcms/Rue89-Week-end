@@ -10,7 +10,7 @@
 #import "PCRevisionSummaryCell.h"
 #import "PCTocItem.h"
 #import "PCRevision.h"
-#import "PCIssue.h"
+#import "RueIssue.h"
 
 #import "PCRevision+DataOfDownload.h"
 
@@ -164,18 +164,18 @@ const float kButtonsHeight = 60.0f;
         //PCTocItem * tocItem = self.tocItems[indexPath.row];
         PCRevision* revision = [self.revisionsList objectAtIndex:indexPath.row];
         
-        if(revision.issue.titleShort && [revision.issue.titleShort isKindOfClass:[NSString class]] && revision.issue.titleShort.length)
+        if(((RueIssue*)revision.issue).titleShort && [((RueIssue*)revision.issue).titleShort isKindOfClass:[NSString class]] && ((RueIssue*)revision.issue).titleShort.length)
         {
-            [cell setTitle:revision.issue.titleShort];
+            [cell setTitle:((RueIssue*)revision.issue).titleShort];
         }
         else
         {
             [cell setTitle:revision.issue.title];
         }
         
-        if(revision.issue.shortIntro && [revision.issue.shortIntro isKindOfClass:[NSString class]] && revision.issue.shortIntro.length)
+        if(((RueIssue*)revision.issue).shortIntro && [((RueIssue*)revision.issue).shortIntro isKindOfClass:[NSString class]] && ((RueIssue*)revision.issue).shortIntro.length)
         {
-            [cell setDescription:revision.issue.shortIntro];
+            [cell setDescription:((RueIssue*)revision.issue).shortIntro];
         }
         else
         {

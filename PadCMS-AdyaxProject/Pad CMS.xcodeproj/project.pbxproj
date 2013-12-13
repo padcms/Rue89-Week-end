@@ -102,6 +102,9 @@
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A06185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A01185B2FAF00FB586A /* Localizable.strings */; };
+		2DA76A09185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A08185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m */; };
+		2DA76A10185B61B000FB586A /* PCVideoController+NoAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */; };
+		2DA76A12185B644400FB586A /* PCRevisionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A11185B644400FB586A /* PCRevisionViewController.xib */; };
 		2DA8B12317FC13CD005E8FF8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12117FC13CD005E8FF8 /* icon.png */; };
 		2DA8B12417FC13CD005E8FF8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA8B12217FC13CD005E8FF8 /* icon@2x.png */; };
 		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
@@ -1827,6 +1830,10 @@
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA76A02185B2FAF00FB586A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
+		2DA76A08185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLocalizationManager+AdditionalInitialization.m"; sourceTree = "<group>"; };
+		2DA76A0B185B5C9000FB586A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCVideoController+NoAlert.m"; sourceTree = "<group>"; };
+		2DA76A11185B644400FB586A /* PCRevisionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCRevisionViewController.xib; sourceTree = "<group>"; };
 		2DA8B12117FC13CD005E8FF8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2DA8B12217FC13CD005E8FF8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
@@ -2899,6 +2906,7 @@
 		2DA769DA185B0E5100FB586A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A0D185B619900FB586A /* Other */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2906,6 +2914,7 @@
 		2DA769DB185B0E5100FB586A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A0A185B5BFC00FB586A /* AFNetworking */,
 				2DA769DC185B0E5100FB586A /* cocos3d */,
 			);
 			path = ThirdParty;
@@ -2948,6 +2957,7 @@
 			children = (
 				2DA769F3185B145700FB586A /* PCJSONKeys.h */,
 				2DA769F1185B141C00FB586A /* PCJSONKeys+iTunesKey.m */,
+				2DA76A08185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2993,6 +3003,22 @@
 				2DA76A01185B2FAF00FB586A /* Localizable.strings */,
 			);
 			path = uk.lproj;
+			sourceTree = "<group>";
+		};
+		2DA76A0A185B5BFC00FB586A /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A0B185B5C9000FB586A /* UIImageView+AFNetworking.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		2DA76A0D185B619900FB586A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2DA76A0F185B61B000FB586A /* PCVideoController+NoAlert.m */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		2DAB3D1C183F5BE400E326CA /* NewTemplates */ = {
@@ -3368,6 +3394,7 @@
 		60F022581590DEEC0046FA44 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				2DA76A11185B644400FB586A /* PCRevisionViewController.xib */,
 				2D6DEB1917F9971700133D9A /* DataManagment */,
 				578CB9A617E0CE430014C897 /* Archiving */,
 				57A474D217C6678100745732 /* Popups */,
@@ -4893,6 +4920,7 @@
 				AB8138B515224D1E0038EC7B /* logo.png in Resources */,
 				5775B2521837F53100BD677A /* Icon-50.png in Resources */,
 				C59D6003157F8E97002EDD76 /* scroll-down-button-background.png in Resources */,
+				2DA76A12185B644400FB586A /* PCRevisionViewController.xib in Resources */,
 				C59D600A157F8E97002EDD76 /* scroll-down-button-foreground.png in Resources */,
 				C59D6011157F8E97002EDD76 /* scroll-left-button-background.png in Resources */,
 				C59D6018157F8E97002EDD76 /* scroll-left-button-foreground.png in Resources */,
@@ -5620,8 +5648,10 @@
 				5789896117CE0A3000572BAC /* PCKioskPageControl.m in Sources */,
 				578989A217CF90C800572BAC /* RTLabel.m in Sources */,
 				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
+				2DA76A09185B4BE400FB586A /* PCLocalizationManager+AdditionalInitialization.m in Sources */,
 				2DAB3D28183FB8F700E326CA /* RueGifPageViewController.m in Sources */,
 				57B442FE17D0A65F00FCFA87 /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
+				2DA76A10185B61B000FB586A /* PCVideoController+NoAlert.m in Sources */,
 				2DA689781830D1C200E1F9EE /* RueIssue.m in Sources */,
 				2DA769F2185B141C00FB586A /* PCJSONKeys+iTunesKey.m in Sources */,
 				57B4434817D785D800FCFA87 /* PCKioskPopupView.m in Sources */,
