@@ -8,6 +8,7 @@
 
 #import "RueIssue.h"
 #import "PCJSONKeys.h"
+#import "NSString+HTML.h"
 
 @implementation RueIssue
 
@@ -18,6 +19,10 @@
     self = [super initWithParameters:parameters rootDirectory:rootDirectory backEndURL:backEndURL];
     if(self)
     {
+        self.productIdentifier = [[parameters objectForKey:PCJSONIssueProductIDKey] copy];
+        self.titleShort = [parameters objectForKey:PCJSONIssueTitleShortKey];
+        self.shortIntro = [[parameters objectForKey:PCJSONIssueShortIntroKey] stringByDecodingHTMLEntities];
+        
         //------------------------ Pricing Plan -------------------------------------------------------
         NSString* pricinsPlanStr = parameters[Issue_Pricing_Plan_JSON_Key];
         if(pricinsPlanStr && [pricinsPlanStr isKindOfClass:[NSString class]] && pricinsPlanStr.length)
@@ -48,8 +53,6 @@ NSDate* fullDateFromString(NSString* strDate)
 {
     if(strDate != nil && [strDate isKindOfClass:[NSString class]] && strDate.length)
     {
-//        NSRange range = {0, 10};
-//        strDate = [strDate substringWithRange:range];
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         

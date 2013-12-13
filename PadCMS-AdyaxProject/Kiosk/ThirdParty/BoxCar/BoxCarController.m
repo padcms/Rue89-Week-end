@@ -19,6 +19,11 @@ static NSString* API_URL;       //API endpoint URL.
 static NSString* LOGGING;
 static NSString* PUSH_MODE;
 
++ (void) load
+{
+    objc_disposeClassPair(NSClassFromString(@"AFImageCache"));
+}
+
 + (void) initialize
 {
     CLIENT_KEY = @"AJpk3l1oqHCq2OYG1CXAU3RIRzgBtCEXpX3wqcpHQmskboBaQfVOXFXIZnuBt0Pl";   //@"CHIVHixQMylMlMdwTDp24y9jtzZCvd1O6l9RHV8t3VmVk1C9ypklFLOj6cNI0SGJ";

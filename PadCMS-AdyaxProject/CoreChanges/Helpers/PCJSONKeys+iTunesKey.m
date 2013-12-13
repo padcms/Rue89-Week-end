@@ -8,7 +8,9 @@
 
 #import "PCJSONKeys.h"
 
-//NSString* PCJSONIssueProductIDKey = @"issue_itunes_id";
+NSString* PCJSONApplicationContactEmailKey                 = @"application_email";
+NSString* PCJSONIssuePublishDateKey                        = @"issue_publish_date";
+NSString* PCJSONIssueTitleShortKey                         = @"issue_title_short";
 
 @interface PCJSONKeys : NSObject
 @end
@@ -17,7 +19,9 @@
 
 + (void) load
 {
-    PCJSONIssueProductIDKey = @"issue_itunes_id";
+    PCJSONIssueProductIDKey     = @"issue_itunes_id";
+    PCJSONIssueShortIntroKey    = @"issue_excerpt_short";
+    PCJSONIssueShortIntroKey    = @"issue_short_intro";
 }
 
 @end

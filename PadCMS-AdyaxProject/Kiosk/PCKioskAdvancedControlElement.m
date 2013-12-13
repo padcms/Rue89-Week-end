@@ -325,48 +325,48 @@ typedef enum {
         }
         else
         {
-//            [self setElementsState:ElementsStateNotDownloaded];
+            [self setElementsState:ElementsStateNotDownloaded];
             //----- case that revision dont starts downloading ----------------------
-            switch ([(RueIssue*)self.revision.issue pricingPlan])
-            {
-                case IssuePricingPlanFree:
-                    [self setElementsState:ElementsStateFree];
-                    break;
-                    
-                case IssuePricingPlanSubscriptionOnly:
-                    if([[RueSubscriptionManager sharedManager] isSubscribed])
-                    {
-                        [self setElementsState:ElementsStateNotDownloaded];
-                    }
-                    else
-                    {
-                        [self setElementsState:ElementsStateSubscribe];
-                    }
-                    break;
-                    
-                case IssuePricingPlanSinglePurchase:
-                    if([[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
-                    {
-                        [self setElementsState:ElementsStateNotDownloaded];
-                    }
-                    else
-                    {
-                        [self setElementsState:ElementsStatePay];
-                    }
-                    break;
-                    
-                case IssuePricingPlanSubscriptionOrSinglePurchase:
-                    if([[RueSubscriptionManager sharedManager] isSubscribed] || [[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
-                    {
-                        [self setElementsState:ElementsStateNotDownloaded];
-                    }
-                    else
-                    {
-                        [self setElementsState:ElementsStatePay];
-                        //[self setElementsState:ElementsStateSubscribePay];
-                    }
-                    break;
-            }
+//            switch ([(RueIssue*)self.revision.issue pricingPlan])
+//            {
+//                case IssuePricingPlanFree:
+//                    [self setElementsState:ElementsStateFree];
+//                    break;
+//                    
+//                case IssuePricingPlanSubscriptionOnly:
+//                    if([[RueSubscriptionManager sharedManager] isSubscribed])
+//                    {
+//                        [self setElementsState:ElementsStateNotDownloaded];
+//                    }
+//                    else
+//                    {
+//                        [self setElementsState:ElementsStateSubscribe];
+//                    }
+//                    break;
+//                    
+//                case IssuePricingPlanSinglePurchase:
+//                    if([[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
+//                    {
+//                        [self setElementsState:ElementsStateNotDownloaded];
+//                    }
+//                    else
+//                    {
+//                        [self setElementsState:ElementsStatePay];
+//                    }
+//                    break;
+//                    
+//                case IssuePricingPlanSubscriptionOrSinglePurchase:
+//                    if([[RueSubscriptionManager sharedManager] isSubscribed] || [[RueSubscriptionManager sharedManager]isRevisionPaid:self.revision])
+//                    {
+//                        [self setElementsState:ElementsStateNotDownloaded];
+//                    }
+//                    else
+//                    {
+//                        [self setElementsState:ElementsStatePay];
+//                        //[self setElementsState:ElementsStateSubscribePay];
+//                    }
+//                    break;
+//            }
             //-----------------------------------------------------------------------
         }
     }
@@ -593,7 +593,7 @@ typedef enum {
     
     //date
     NSDate * dateOfRevisionCreate = self.revision.createDate;
-    NSDate* dateOfIssuePublication = self.revision.issue.publishDate;
+    NSDate* dateOfIssuePublication = ((RueIssue*)self.revision.issue).publishDate;
     
     self.dateLabel.date = dateOfIssuePublication ? onlyDayDateFromDate(dateOfIssuePublication) : dateOfRevisionCreate;
     self.dateLabel.hidden = NO;

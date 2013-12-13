@@ -11,6 +11,14 @@
 
 @interface RueIssue : PCIssue
 
+@property (nonatomic, readonly) BOOL isOld;
+
 @property (nonatomic, readonly) IssuePricingPlan pricingPlan;
+
+@property (nonatomic, retain) NSDate *publishDate;
+
+@property (nonatomic, copy) NSString *titleShort;
+@property (nonatomic, copy) NSString * shortIntro;
+
 
 @end

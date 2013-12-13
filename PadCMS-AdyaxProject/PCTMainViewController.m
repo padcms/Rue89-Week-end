@@ -679,8 +679,8 @@ BOOL stringExists(NSString* str)
         
         PCRevision* rev1 = obj1;
         PCRevision* rev2 = obj2;
-        NSDate* date1 = rev1.issue.publishDate ? rev1.issue.publishDate : rev1.createDate;
-        NSDate* date2 = rev2.issue.publishDate ? rev2.issue.publishDate : rev2.createDate;
+        NSDate* date1 = ((RueIssue*)rev1.issue).publishDate ? ((RueIssue*)rev1.issue).publishDate : rev1.createDate;
+        NSDate* date2 = ((RueIssue*)rev2.issue).publishDate ? ((RueIssue*)rev2.issue).publishDate : rev2.createDate;
         
         NSComparisonResult result = [date1 compare:date2];
         
@@ -1011,7 +1011,7 @@ BOOL stringExists(NSString* str)
         {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
                 
-                if (revision.state == PCRevisionStateArchived || [revision.issue isOld])
+                if (revision.state == PCRevisionStateArchived || [(RueIssue*)revision.issue isOld])
                 {
                     return YES;
                 }
@@ -1025,7 +1025,7 @@ BOOL stringExists(NSString* str)
         {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings){
                 
-                if ([(RueIssue*)revision.issue pricingPlan] == IssuePricingPlanFree && (revision.state != PCRevisionStateArchived) && revision.issue.isOld == NO)
+                if ([(RueIssue*)revision.issue pricingPlan] == IssuePricingPlanFree && (revision.state != PCRevisionStateArchived) && ((RueIssue*)revision.issue).isOld == NO)
                 {
                     return YES;
                 }
@@ -1037,7 +1037,7 @@ BOOL stringExists(NSString* str)
         {
             predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
                 
-                if (revision.state != PCRevisionStateArchived && revision.issue.isOld == NO)
+                if (revision.state != PCRevisionStateArchived && ((RueIssue*)revision.issue).isOld == NO)
                 {
                     return YES;
                 }
