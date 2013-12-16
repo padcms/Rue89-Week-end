@@ -10,6 +10,7 @@
 #import "PCFonts.h"
 #import "HelpSummaryPopupView.h"
 #import "UIView+EasyFrame.h"
+#import "PCKioskShelfSettings.h"
 
 @interface PCRevisionSummaryCell ()
 

@@ -327,4 +327,11 @@
     [(PCTMainViewController*)self.mainViewController switchToRevision:revision];
 }
 
+- (void)topBarView:(PCTopBarView *)topBarView backButtonTapped:(UIButton *)button
+{
+//    [self hideMenus];
+//	[self unloadAll];
+    [self.mainViewController switchToKiosk];
+}
+
 @end

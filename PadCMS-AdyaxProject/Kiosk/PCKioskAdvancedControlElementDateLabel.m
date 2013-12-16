@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
+#import "PCKioskShelfSettings.h"
 #import "PCKioskAdvancedControlElementDateLabel.h"
 #import "PCFonts.h"
 

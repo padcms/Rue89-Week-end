@@ -10,6 +10,7 @@
 #import "RTLabelWithWordWrap.h"
 //#import <QuartzCore/QuartzCore.h>
 #import "PCFonts.h"
+#import "PCKioskShelfSettings.h"
 
 @interface HelpSummaryPopupView ()// <MTLabelDelegate>
 

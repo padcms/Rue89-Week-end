@@ -8,6 +8,7 @@
 
 #import "PCKioskSubviewDelegateProtocol.h"
 #import "PCKioskBaseShelfView.h"
+#import "PCKioskShelfSettings.h"
 
 @interface PCKioskBaseShelfView ()
 - (void) createCells;
