@@ -44,7 +44,7 @@ NSString* PCNetworkServiceJSONRPCPath;
 	
 	[mainDict setObject:@"1" forKey:@"id"];
 	
-	SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
+	RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
 	NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
 	
     //NSLog(@"jsonString is:\n%@", jsonString);
@@ -60,7 +60,7 @@ NSString* PCNetworkServiceJSONRPCPath;
         //		NSLog(@"stringReply is:\n%@", stringReply);
 		NSString* stringWithoutNull = [stringReply stringByReplacingOccurrencesOfString:@":null" withString:@":\"\""];
         
-        SBJsonParser * parser = [SBJsonParser new];
+        RueSBJsonParser * parser = [RueSBJsonParser new];
         
         
         NSDictionary* theDict = [parser objectWithString:stringWithoutNull];
@@ -111,7 +111,7 @@ NSString* PCNetworkServiceJSONRPCPath;
 	
 	[mainDict setObject:@"1" forKey:@"id"];
 	
-	SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
+	RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
 	NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
 	
     //	NSLog(@"jsonString is:\n %@", jsonString);

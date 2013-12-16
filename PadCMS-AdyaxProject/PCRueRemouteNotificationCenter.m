@@ -75,7 +75,7 @@
     
     //NSLog(@"register request : %@", mainDict.debugDescription);
     
-    SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
+    RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
     NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
     //[tmpJsonWriter release];
     

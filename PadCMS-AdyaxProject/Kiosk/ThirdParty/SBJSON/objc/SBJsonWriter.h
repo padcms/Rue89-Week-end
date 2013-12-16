@@ -36,7 +36,7 @@
 
  */
 
-@interface SBJsonWriter : NSObject
+@interface RueSBJsonWriter : NSObject
 
 /**
  The maximum recursing depth.

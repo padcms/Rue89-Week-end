@@ -36,7 +36,7 @@
 #import "SBJsonStreamParserAdapter.h"
 #import "SBJsonStreamParserAccumulator.h"
 
-@implementation SBJsonParser
+@implementation RueSBJsonParser
 
 @synthesize maxDepth;
 @synthesize error;

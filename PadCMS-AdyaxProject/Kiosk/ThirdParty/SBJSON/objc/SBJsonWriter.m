@@ -36,11 +36,11 @@
 #import "SBJsonStreamWriterAccumulator.h"
 
 
-@interface SBJsonWriter ()
+@interface RueSBJsonWriter ()
 @property (copy) NSString *error;
 @end
 
-@implementation SBJsonWriter
+@implementation RueSBJsonWriter
 
 @synthesize sortKeys;
 @synthesize humanReadable;

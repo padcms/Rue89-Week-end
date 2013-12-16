@@ -38,7 +38,7 @@ static NSString* _password = @"";
     [mainDict setObject:innerDict forKey:PCJSONParamsKey];
     [mainDict setObject:@"1" forKey:PCJSONIDKey];
 
-    SBJsonWriter *tmpJsonWriter = [[SBJsonWriter alloc] init];
+    RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
     NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self apiURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
