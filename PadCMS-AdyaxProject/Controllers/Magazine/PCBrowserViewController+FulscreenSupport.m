@@ -7,12 +7,8 @@
 //
 
 #import "PCBrowserViewController.h"
-
-@interface PCBrowserViewController ()
-
-- (void) hideHUD;
-
-@end
+#import "MBProgressHUD.h"
+#import "PCLocalizationManager.h"
 
 @implementation PCBrowserViewController (FulscreenSupport)
 
@@ -28,6 +24,27 @@
 {
     [self hideHUD];
     [super viewDidDisappear:animated];
+}
+
+-(void)showHUD
+{
+    if (self.HUD == nil) {
+        self.HUD = [[MBProgressHUD alloc] initWithView:self.webView];
+        self.HUD.labelText = [PCLocalizationManager localizedStringForKey:@"LABEL_LOADING"
+                                                                    value:@"Loading"];
+    }
+    
+    [self.webView addSubview:_HUD];
+    [self.HUD show:YES];
+}
+
+-(void)hideHUD
+{
+	if (self.HUD != nil) {
+        [self.HUD hide:YES];
+		[self.HUD removeFromSuperview];
+        self.HUD = nil;
+	}
 }
 
 @end

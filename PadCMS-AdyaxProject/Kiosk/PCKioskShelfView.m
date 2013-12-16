@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Adyax. All rights reserved.
 //
 
+#import "PCKioskDataSourceProtocol.h"
 #import "PCKioskShelfView.h"
 #import "PCKioskControlElement.h"
 #import "PCKioskAdvancedControlElement.h"

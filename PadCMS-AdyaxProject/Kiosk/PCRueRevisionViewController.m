@@ -11,7 +11,7 @@
 #import "PCTMainViewController.h"
 #import "PCGoogleAnalytics.h"
 #import "PCScrollView.h"
-
+#import "PCTopBarView.h"
 #import "PCPageViewController+IsPresented.h"
 #import "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
 
@@ -20,6 +20,9 @@
 - (NSInteger) currentColumnIndex;
 - (void) loadFullColumnAtIndex:(NSInteger)index;
 - (void) unloadFullColumnAtIndex:(NSInteger)index;
+
+- (void)createHUDView;
+- (void)destroyHUDView;
 
 @end
 
@@ -119,6 +122,18 @@
     [super viewDidLoad];
 	
     [self addLeftSwipeToBackGesture];
+}
+
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self setHorizontalHelpButton:nil];
+    [self setHelpButton:nil];
+    [self setTopSummaryButton:nil];
+    [self setSubscriptionButton:nil];
+    [super viewDidUnload];
+    
+    [self destroyHUDView];
 }
 
 - (void) fadeInViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock

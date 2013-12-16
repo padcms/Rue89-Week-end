@@ -20,5 +20,23 @@
 @property (nonatomic, copy) NSString *titleShort;
 @property (nonatomic, copy) NSString * shortIntro;
 
+/**
+ @brief Issue tags
+ */
+@property (nonatomic, retain) NSMutableArray * tags;
+
+@property (nonatomic, retain) NSString * category;
+
+@property (nonatomic, retain) NSString* price;
+
+@property (nonatomic, strong) NSString * author;
+
+@property (nonatomic, retain) NSString * excerpt;
+
+@property (nonatomic, retain) NSString * imageLargeURL;
+
+@property (nonatomic, retain) NSString * imageSmallURL;
+
+@property (nonatomic) NSInteger wordsCount;
 
 @end

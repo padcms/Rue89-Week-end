@@ -13,6 +13,10 @@
 #import "BoxCarController.h"
 #import "PCRueRemouteNotificationCenter.h"
 
+@interface PCPadCMSAppDelegate ()
+- (void) initTrackers;
+@end
+
 @implementation PCRueAppDelegate
 
 #ifdef RUE

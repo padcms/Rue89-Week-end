@@ -11,8 +11,8 @@
 #import "PCKioskShelfView.h"
 #import "PCTMainViewController.h"
 
-@interface PCRueKioskViewController ()
-
+@interface PCKioskViewController ()
+- (void) reloadSubviewsOnViewWillAppear;
 @end
 
 @implementation PCRueKioskViewController

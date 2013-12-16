@@ -96,4 +96,20 @@ static InAppPurchases *singleton;
 	}
 }
 
+- (void)requestProductDataWithProductId:(NSString *)productId
+{
+	if(![singleton.dataQueue containsObject:productId]  && productId)
+	{
+		NSLog(@"From requestProductDataWithProductId: %@", productId);
+		
+		[singleton.dataQueue addObject:productId];
+		
+		NSSet *productIdentifiers = [NSSet setWithObject:productId];
+		//[productId release];
+		SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
+		productsRequest.delegate = self;
+		[productsRequest start];
+	}
+}
+
 @end

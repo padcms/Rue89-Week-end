@@ -9,6 +9,7 @@
 #import "RueIssue.h"
 #import "PCJSONKeys.h"
 #import "NSString+HTML.h"
+#import "PCTag.h"
 
 @implementation RueIssue
 
@@ -19,6 +20,27 @@
     self = [super initWithParameters:parameters rootDirectory:rootDirectory backEndURL:backEndURL];
     if(self)
     {
+        self.author = [[parameters objectForKey:PCJSONIssueAuthorKey] copy];
+        self.excerpt = [[parameters objectForKey:PCJSONIssueExcerptKey] copy];
+        self.imageLargeURL = [[parameters objectForKey:PCJSONIssueImageLargeURLKey] copy];
+        self.imageSmallURL = [[parameters objectForKey:PCJSONIssueImageSmallURLKey] copy];
+        self.wordsCount = [[parameters objectForKey:PCJSONIssueWordsCountKey] integerValue];
+        
+        self.category = [[parameters objectForKey:PCJSONIssueCategoryKey] copy];
+        
+        self.tags = [NSMutableArray new];
+        
+        NSArray * tagsParameters = [parameters objectForKey:PCJSONIssueTagsKey];
+        
+        if ([tagsParameters count] > 0) {
+            for (NSDictionary * dic in tagsParameters) {
+                PCTag * tag = [[PCTag alloc] initWithDictionary:dic];
+                [self.tags addObject:tag];
+            }
+        }
+        
+        NSLog(@"TAGS : %@", self.tags);
+        
         self.productIdentifier = [[parameters objectForKey:PCJSONIssueProductIDKey] copy];
         self.titleShort = [parameters objectForKey:PCJSONIssueTitleShortKey];
         self.shortIntro = [[parameters objectForKey:PCJSONIssueShortIntroKey] stringByDecodingHTMLEntities];
@@ -46,6 +68,7 @@
         self.publishDate = fullDateFromString([parameters objectForKey:PCJSONIssuePublishDateKey]);
         
         
+        
     }
     return self;
 }
@@ -65,6 +88,33 @@ NSDate* fullDateFromString(NSString* strDate)
     {
         return nil;
     }
+}
+
+- (NSString *)description
+{
+    NSString *descriptionString = [NSString stringWithFormat:@"%@\ridentifier: %d\rtitle: %@\r"
+                                   "number: %@\rproductIdentifier: %@\rsubscriptionType: %d\r"
+                                   "paid: %d\rcolor: %@\rcoverImageThumbnailURL: %@\r"
+                                   "coverImageListURL: %@\rcoverImageURL: %@\rupdatedDate: %@\r"
+                                   "horisontalMode: %d\rcontentDirectory: %@\r"
+                                   "revisions: %@",
+                                   [super description],
+                                   self.identifier,
+                                   self.title,
+                                   self.number,
+                                   self.productIdentifier,
+                                   self.subscriptionType,
+                                   self.paid,
+                                   [UIColor whiteColor],        //hardcode, warning fix, 16.09.2013
+                                   self.coverImageThumbnailURL,
+                                   self.coverImageListURL,
+                                   self.coverImageURL,
+                                   self.updatedDate,
+                                   NO,                          //hardcode, warning fix, 16.09.2013
+                                   self.contentDirectory,
+                                   self.revisions];
+    
+    return descriptionString;
 }
 
 @end

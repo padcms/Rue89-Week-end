@@ -179,7 +179,7 @@ const float kButtonsHeight = 60.0f;
         }
         else
         {
-            [cell setDescription:revision.issue.excerpt];
+            [cell setDescription:((RueIssue*)revision.issue).excerpt];
         }
     }
 }

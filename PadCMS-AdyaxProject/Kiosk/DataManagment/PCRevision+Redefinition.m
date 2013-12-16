@@ -10,6 +10,11 @@
 #import <objc/runtime.h>
 #import "PCPage.h"
 #import "PCColumn.h"
+#import "PCPathHelper.h"
+#import "PCConfig.h"
+
+#define PCRevisionCoverImagePlaceholderName @"application-cover-placeholder.jpg"
+#define PCRevisionCoverImageFileName @"cover.jpg"
 
 @implementation PCRevision (Redefinition)
 
@@ -17,7 +22,35 @@
 {
     Method oldUpdateColumnsMethod = class_getInstanceMethod([PCRevision class], @selector(updateColumns));
     Method newUpdateColumnsMethod = class_getInstanceMethod([PCRevision class], @selector(updateColumnsRedefined));
+    
+    Method oldInitWithParameters = class_getInstanceMethod([PCRevision class], @selector(initWithParameters:rootDirectory:backEndURL:));
+    Method newInitWithParameters = class_getInstanceMethod([PCRevision class], @selector(initWithParametersAdvanced:rootDirectory:backEndURL:));
+    
     method_exchangeImplementations(oldUpdateColumnsMethod, newUpdateColumnsMethod);
+    method_exchangeImplementations(oldInitWithParameters, newInitWithParameters);
+}
+
+- (id)initWithParametersAdvanced:(NSDictionary *)parameters
+           rootDirectory:(NSString *)rootDirectory
+              backEndURL:(NSURL *)backEndURL
+{
+    self = [self initWithParametersAdvanced:parameters rootDirectory:rootDirectory backEndURL:backEndURL];
+    
+    if (self)
+    {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        NSString *strDate = [parameters objectForKey:PCJSONRevisionRevisionCreatedKey];
+        NSRange range = [strDate rangeOfString:@"T"];
+        if(range.length)
+        {
+            strDate = [strDate substringToIndex:range.location];
+        }
+        self.createDate = [df dateFromString:strDate];
+    }
+    
+    return self;
 }
 
 - (void)updateColumnsRedefined
@@ -77,6 +110,38 @@
         }
     }
     return nil;
+}
+
+- (UIImage *)coverImage
+{
+    NSString *coverImagePath = [self.contentDirectory stringByAppendingPathComponent:PCRevisionCoverImageFileName];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:coverImagePath])
+    {
+        return [UIImage imageWithContentsOfFile:coverImagePath];
+    }
+    else if (self.coverImageListURL != nil)
+    {
+        
+#warning - TEMPORARY RUE PERFORMANCE FIX, should be enabled for old projects like AIR
+        //        NSURL *serverURL = _backEndURL != nil ? _backEndURL : [PCConfig serverURL] ;
+        //        NSURL *fullCoverImageURL = [NSURL URLWithString:_coverImageListURL.absoluteString relativeToURL:serverURL];
+        //        NSData *imageData = [NSData dataWithContentsOfURL:fullCoverImageURL];
+        NSData *imageData = nil;
+        
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        if (image != nil)
+        {
+            [PCPathHelper createDirectoryIfNotExists:self.contentDirectory];
+            
+            [imageData writeToFile:coverImagePath atomically:YES];
+            
+            return [UIImage imageWithContentsOfFile:coverImagePath];
+        }
+    }
+    
+    return [UIImage imageNamed:PCRevisionCoverImagePlaceholderName];
 }
 
 @end

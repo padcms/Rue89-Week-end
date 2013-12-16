@@ -13,6 +13,20 @@ NSString* PCJSONIssuePublishDateKey                        = @"issue_publish_dat
 NSString* PCJSONIssueTitleShortKey                         = @"issue_title_short";
 NSString* PCJSONIssueShortIntroKey                         = @"issue_short_intro";
 
+NSString* PCJSONIssueCategoryKey                           = @"issue_category";
+NSString* PCJSONIssueTagsKey                               = @"tags";
+NSString* PCJSONIssueTagTitleKey                           = @"title";
+NSString* PCJSONIssueTagIdKey                              = @"id";
+
+NSString* PCJSONApplicationMessageForReadersKey            = @"application_message_for_readers";
+NSString* PCJSONApplicationShareMessageKey                 = @"application_share_message";
+
+NSString* PCJSONIssueAuthorKey                             = @"issue_author";
+NSString* PCJSONIssueExcerptKey                            = @"issue_excerpt";
+NSString* PCJSONIssueImageLargeURLKey                      = @"issue_image_large";
+NSString* PCJSONIssueImageSmallURLKey                      = @"issue_image_small";
+NSString* PCJSONIssueWordsCountKey                         = @"issue_words";
+
 @interface PCJSONKeys : NSObject
 @end
 

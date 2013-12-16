@@ -66,7 +66,6 @@
         self.messageForReaders = [[parameters objectForKey:PCJSONApplicationMessageForReadersKey] copy];
         self.shareMessage = [[parameters objectForKey:PCJSONApplicationShareMessageKey] copy];
         self.contactEmail = [[parameters objectForKey:PCJSONApplicationContactEmailKey] copy];
-        
         // Set up notifications
         if(self.notifications == nil)
         {

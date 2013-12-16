@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
+#import "PCKioskDataSourceProtocol.h"
+#import "PCKioskSubviewDelegateProtocol.h"
 #import "PCKioskAdvancedControlElement.h"
 #import "PCKioskShelfSettings.h"
 #import "InAppPurchases.h"
@@ -599,12 +601,13 @@ typedef enum {
     self.dateLabel.hidden = NO;
     
     //category
-    NSString * category = self.revision.issue.category;[self.dataSource issueCategoryWithIndex:self.revisionIndex];
+    NSString * category = ((RueIssue*)self.revision.issue).category;
+    [self.dataSource issueCategoryWithIndex:self.revisionIndex];
     self.categoryLabel.text = category;
     
     //illustration
     UIImage * placeholderImage = [UIImage imageNamed:@"home_illustration_placeholder"];
-    NSString * illustrationURLString = self.revision.issue.imageSmallURL;
+    NSString * illustrationURLString = ((RueIssue*)self.revision.issue).imageSmallURL;
     NSString * serverURLString = [PCConfig serverURLString];
     NSString * illustrationPath = [NSString stringWithFormat:@"%@%@", serverURLString, illustrationURLString];
 //    NSURL * illustrationURL = [ NSURL URLWithString:illustrationPath];

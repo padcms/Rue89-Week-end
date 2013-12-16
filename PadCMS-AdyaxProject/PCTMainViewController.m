@@ -30,7 +30,7 @@
 #import "PCKioskSubHeaderView.h"
 #import "ArchivingDataSource.h"
 #import "PCRueKioskViewController.h"
-
+#import "PCTag.h"
 #import "PCJSONKeys.h"
 #import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
@@ -946,32 +946,32 @@ BOOL stringExists(NSString* str)
 
 - (NSString *)issueAuthorWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.author;
+    return ((RueIssue*)revision.issue).author;
 }
 
 - (NSString *)issueExcerptWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.excerpt;
+    return ((RueIssue*)revision.issue).excerpt;
 }
 
 - (NSString *)issueImageLargeURLWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.imageLargeURL;
+    return ((RueIssue*)revision.issue).imageLargeURL;
 }
 
 - (NSString *)issueImageSmallURLWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.imageSmallURL;
+    return ((RueIssue*)revision.issue).imageSmallURL;
 }
 
 - (NSInteger)issueWordsCountWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.wordsCount;
+    return ((RueIssue*)revision.issue).wordsCount;
 }
 
 - (NSString *)issueCategoryWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.category;
+    return ((RueIssue*)revision.issue).category;
 }
 
 - (NSDate *)revisionDateWithIndex:(NSInteger)index {
@@ -995,7 +995,7 @@ BOOL stringExists(NSString* str)
                 
                 if (revision.state != PCRevisionStateArchived)
                 {
-                    for (PCTag * tag in revision.issue.tags)
+                    for (PCTag * tag in ((RueIssue*)revision.issue).tags)
                     {
                         if (tag.tagId == self.selectedTag.tagId)
                         {

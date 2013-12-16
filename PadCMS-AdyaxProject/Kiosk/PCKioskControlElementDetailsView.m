@@ -10,7 +10,7 @@
 #import "PCKioskShelfSettings.h"
 #import "PCFonts.h"
 #import "PCRevision.h"
-#import "PCIssue.h"
+#import "RueIssue.h"
 #import "UIView+EasyFrame.h"
 
 @interface PCKioskControlElementDetailsView ()
@@ -135,9 +135,9 @@ static const CGFloat padding_top = 12.0f;
 
 - (void) setupForRevision:(PCRevision*)revision
 {
-    NSString * excerptString = revision.issue.excerpt;
-    NSString * authors = revision.issue.author;
-    NSInteger wordsCount = revision.issue.wordsCount;
+    NSString * excerptString = ((RueIssue*)revision.issue).excerpt;
+    NSString * authors = ((RueIssue*)revision.issue).author;
+    NSInteger wordsCount = ((RueIssue*)revision.issue).wordsCount;
     
     [self setAuthorsString:authors];
     [self setNumberOfWords:wordsCount];
