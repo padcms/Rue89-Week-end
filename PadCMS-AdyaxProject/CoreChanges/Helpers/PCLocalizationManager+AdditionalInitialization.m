@@ -25,4 +25,18 @@ static PCLocalizationManager *sharedLocalizationManager;
     return sharedLocalizationManager;
 }
 
+- (NSBundle *)bundleForLanguage:(NSString*)language
+{
+    NSBundle *bundle = [NSBundle mainBundle];//[self coreResourcesBundle];
+    
+    if(bundle)
+    {
+        NSString *path = [bundle pathForResource:language
+                                              ofType:@"lproj"];
+        
+        return [NSBundle bundleWithPath:path];
+    }
+    return nil;
+}
+
 @end
