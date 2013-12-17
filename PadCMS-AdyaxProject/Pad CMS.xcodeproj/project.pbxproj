@@ -332,8 +332,8 @@
 		60F0228C1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */; };
 		60F0228D1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */; };
 		60F0228E1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */; };
-		60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
-		60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
+		60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		60F022A71590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A81590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
@@ -6049,6 +6049,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6062,7 +6063,7 @@
 				INFOPLIST_FILE = "DCCV/DCCV-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestflightSDK\"",
@@ -6085,6 +6086,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6099,7 +6101,7 @@
 				INFOPLIST_FILE = "DCCV/DCCV-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestflightSDK\"",
@@ -6123,6 +6125,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -6137,7 +6140,7 @@
 				INFOPLIST_FILE = "DCCV/DCCV-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestflightSDK\"",
