@@ -8,7 +8,8 @@
 
 #import "PCTMainViewController.h"
 #import "ZipArchive.h"
-#import "PCRevisionViewController.h"
+#import "AIRRevisionViewController.h"
+#import "DCCVRevisionViewController.h"
 #import "Helper.h"
 #import "PCSQLLiteModelBuilder.h"
 #import "PCPathHelper.h"
@@ -723,6 +724,19 @@
 
 #pragma mark - PCKioskViewControllerDelegateProtocol
 
+- (Class) revisionViewControllerClass
+{
+    Class revisionViewControllerClass = [PCRevisionViewController class];
+#ifdef DCCV
+    revisionViewControllerClass = [DCCVRevisionViewController class];
+#endif
+#ifdef MAG_AIR
+    revisionViewControllerClass = [AIRRevisionViewController class];
+#endif
+    
+    return revisionViewControllerClass;
+}
+
 - (void) tapInKiosk
 {
     subscriptionsMenu.hidden = YES;
@@ -742,7 +756,7 @@
         if (_revisionViewController == nil)
         {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-            _revisionViewController = [[PCRevisionViewController alloc] 
+            _revisionViewController = [[[self revisionViewControllerClass] alloc]
                                        initWithNibName:@"PCRevisionViewController"
                                        bundle:bundle];
         
@@ -1006,7 +1020,7 @@
         if (_revisionViewController == nil)
         {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-            _revisionViewController = [[PCRevisionViewController alloc] 
+            _revisionViewController = [[[self revisionViewControllerClass] alloc]
                                        initWithNibName:@"PCRevisionViewController"
                                        bundle:bundle];
          

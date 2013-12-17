@@ -258,6 +258,14 @@
 		2D995F9E18605EC300E2457F /* RueMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F9D18605EC300E2457F /* RueMainViewController.m */; };
 		2D995FA21860797800E2457F /* RueKioskShelfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FA11860797800E2457F /* RueKioskShelfView.m */; };
 		2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2D995FB118608FBE00E2457F /* DCCVKioskGalleryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FB018608FBE00E2457F /* DCCVKioskGalleryItem.m */; };
+		2D995FB718608FE900E2457F /* DCCVSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FB618608FE900E2457F /* DCCVSlideshowViewController.m */; };
+		2D995FBA1860902500E2457F /* DCCVRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FB91860902500E2457F /* DCCVRevisionViewController.m */; };
+		2D995FC51860918400E2457F /* AIRRevisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FBE1860918400E2457F /* AIRRevisionViewController.m */; };
+		2D995FC61860918400E2457F /* AIRSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC01860918400E2457F /* AIRSlideshowViewController.m */; };
+		2D995FC71860918400E2457F /* AIRKioskGalleryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC41860918400E2457F /* AIRKioskGalleryItem.m */; };
+		2D995FCA186096BF00E2457F /* AIRKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */; };
+		2D995FCD186097EB00E2457F /* DCCVKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */; };
 		2DA76A03185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769F8185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
@@ -1566,6 +1574,22 @@
 		2D995F9F186060DE00E2457F /* RueMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueMainViewController.h; sourceTree = "<group>"; };
 		2D995FA01860797800E2457F /* RueKioskShelfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueKioskShelfView.h; sourceTree = "<group>"; };
 		2D995FA11860797800E2457F /* RueKioskShelfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueKioskShelfView.m; sourceTree = "<group>"; };
+		2D995FAF18608FBE00E2457F /* DCCVKioskGalleryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVKioskGalleryItem.h; sourceTree = "<group>"; };
+		2D995FB018608FBE00E2457F /* DCCVKioskGalleryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVKioskGalleryItem.m; sourceTree = "<group>"; };
+		2D995FB518608FE900E2457F /* DCCVSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVSlideshowViewController.h; sourceTree = "<group>"; };
+		2D995FB618608FE900E2457F /* DCCVSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVSlideshowViewController.m; sourceTree = "<group>"; };
+		2D995FB81860902500E2457F /* DCCVRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVRevisionViewController.h; sourceTree = "<group>"; };
+		2D995FB91860902500E2457F /* DCCVRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVRevisionViewController.m; sourceTree = "<group>"; };
+		2D995FBD1860918400E2457F /* AIRRevisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRRevisionViewController.h; sourceTree = "<group>"; };
+		2D995FBE1860918400E2457F /* AIRRevisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRRevisionViewController.m; sourceTree = "<group>"; };
+		2D995FBF1860918400E2457F /* AIRSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRSlideshowViewController.h; sourceTree = "<group>"; };
+		2D995FC01860918400E2457F /* AIRSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRSlideshowViewController.m; sourceTree = "<group>"; };
+		2D995FC31860918400E2457F /* AIRKioskGalleryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRKioskGalleryItem.h; sourceTree = "<group>"; };
+		2D995FC41860918400E2457F /* AIRKioskGalleryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRKioskGalleryItem.m; sourceTree = "<group>"; };
+		2D995FC8186096BF00E2457F /* AIRKioskGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRKioskGalleryView.h; sourceTree = "<group>"; };
+		2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRKioskGalleryView.m; sourceTree = "<group>"; };
+		2D995FCB186097EB00E2457F /* DCCVKioskGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVKioskGalleryView.h; sourceTree = "<group>"; };
+		2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVKioskGalleryView.m; sourceTree = "<group>"; };
 		2DA769F9185B2FAF00FB586A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
@@ -3113,6 +3137,82 @@
 			path = xibs;
 			sourceTree = "<group>";
 		};
+		2D995FAD18608FBE00E2457F /* Kiosk */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FAE18608FBE00E2457F /* Base */,
+				2D995FCB186097EB00E2457F /* DCCVKioskGalleryView.h */,
+				2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */,
+			);
+			path = Kiosk;
+			sourceTree = "<group>";
+		};
+		2D995FAE18608FBE00E2457F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FAF18608FBE00E2457F /* DCCVKioskGalleryItem.h */,
+				2D995FB018608FBE00E2457F /* DCCVKioskGalleryItem.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		2D995FB318608FE900E2457F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FB418608FE900E2457F /* Magazine */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2D995FB418608FE900E2457F /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FB81860902500E2457F /* DCCVRevisionViewController.h */,
+				2D995FB91860902500E2457F /* DCCVRevisionViewController.m */,
+				2D995FB518608FE900E2457F /* DCCVSlideshowViewController.h */,
+				2D995FB618608FE900E2457F /* DCCVSlideshowViewController.m */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		2D995FBB1860918400E2457F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FBC1860918400E2457F /* Magazine */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2D995FBC1860918400E2457F /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FBD1860918400E2457F /* AIRRevisionViewController.h */,
+				2D995FBE1860918400E2457F /* AIRRevisionViewController.m */,
+				2D995FBF1860918400E2457F /* AIRSlideshowViewController.h */,
+				2D995FC01860918400E2457F /* AIRSlideshowViewController.m */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		2D995FC11860918400E2457F /* Kiosk */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FC21860918400E2457F /* Base */,
+				2D995FC8186096BF00E2457F /* AIRKioskGalleryView.h */,
+				2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */,
+			);
+			path = Kiosk;
+			sourceTree = "<group>";
+		};
+		2D995FC21860918400E2457F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2D995FC31860918400E2457F /* AIRKioskGalleryItem.h */,
+				2D995FC41860918400E2457F /* AIRKioskGalleryItem.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		2DA769F4185B2EF600FB586A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3238,6 +3338,8 @@
 		719A8B0714F52B7200F01F23 /* AIR */ = {
 			isa = PBXGroup;
 			children = (
+				2D995FBB1860918400E2457F /* Controllers */,
+				2D995FC11860918400E2457F /* Kiosk */,
 				719A8B2814F5312600F01F23 /* Air-Info.plist */,
 				719A8B1214F52E2E00F01F23 /* Resources */,
 			);
@@ -3247,6 +3349,8 @@
 		719A8B0B14F52B7600F01F23 /* DCCV */ = {
 			isa = PBXGroup;
 			children = (
+				2D995FB318608FE900E2457F /* Controllers */,
+				2D995FAD18608FBE00E2457F /* Kiosk */,
 				719A8B2414F52FB300F01F23 /* DCCV-Info.plist */,
 				719A8B1D14F52EBC00F01F23 /* Resources */,
 			);
@@ -4840,13 +4944,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2282A6C41223DE5E0059BAFD /* main.m in Sources */,
+				2D995FC71860918400E2457F /* AIRKioskGalleryItem.m in Sources */,
 				60F022651590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226C1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
+				2D995FCA186096BF00E2457F /* AIRKioskGalleryView.m in Sources */,
 				60F022731590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227A1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022811590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
+				2D995FC61860918400E2457F /* AIRSlideshowViewController.m in Sources */,
 				60F022881590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				2D995FC51860918400E2457F /* AIRRevisionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5090,14 +5198,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D995FBA1860902500E2457F /* DCCVRevisionViewController.m in Sources */,
+				2D995FCD186097EB00E2457F /* DCCVKioskGalleryView.m in Sources */,
 				CED37F5A14974D4400D71E8B /* main.m in Sources */,
 				60F022661590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				60F0226D1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				60F022741590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227B1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				60F022821590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
+				2D995FB718608FE900E2457F /* DCCVSlideshowViewController.m in Sources */,
 				60F022891590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */,
+				2D995FB118608FBE00E2457F /* DCCVKioskGalleryItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
