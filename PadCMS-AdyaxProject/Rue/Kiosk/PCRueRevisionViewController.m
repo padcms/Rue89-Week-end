@@ -8,7 +8,7 @@
 
 #import "PCRueRevisionViewController.h"
 #import "PCRevisionSummaryPopup.h"
-#import "PCTMainViewController.h"
+#import "RueMainViewController.h"
 #import "PCGoogleAnalytics.h"
 #import "PCScrollView.h"
 #import "PCTopBarView.h"
@@ -90,7 +90,7 @@
 
 - (NSArray*) sortedListOfAllDownloadedRevisions
 {
-    NSMutableArray* allRev = [NSMutableArray arrayWithArray:[(PCTMainViewController*)self.mainViewController allDownloadedRevisions]];
+    NSMutableArray* allRev = [NSMutableArray arrayWithArray:[(RueMainViewController*)self.mainViewController allDownloadedRevisions]];
     [allRev removeObject:self.revision];
     return [NSArray arrayWithArray:allRev];
 }
@@ -324,7 +324,7 @@
 - (void) revisionSummaryPopup:(PCRevisionSummaryPopup *)popup didSelectRevision:(PCRevision *)revision
 {
     //[popup hide];
-    [(PCTMainViewController*)self.mainViewController switchToRevision:revision];
+    [(RueMainViewController*)self.mainViewController switchToRevision:revision];
 }
 
 - (void)topBarView:(PCTopBarView *)topBarView backButtonTapped:(UIButton *)button

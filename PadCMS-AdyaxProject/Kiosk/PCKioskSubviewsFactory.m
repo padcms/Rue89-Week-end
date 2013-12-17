@@ -7,7 +7,7 @@
 //
 
 #import "PCKioskSubviewsFactory.h"
-#import "PCKioskShelfView.h"
+#import "RueKioskShelfView.h"
 #import "PCKioskGalleryView.h"
 
 @implementation PCKioskSubviewsFactory
@@ -16,7 +16,12 @@
 {
     NSArray     *result = nil;
     
-    PCKioskShelfView     *shelfSubview = [[PCKioskShelfView alloc] initWithFrame:frame];
+    Class kioskShelfViewClass = [PCKioskShelfView class];
+#ifdef RUE
+    kioskShelfViewClass = [RueKioskShelfView class];
+#endif
+    
+    PCKioskShelfView     *shelfSubview = [[kioskShelfViewClass alloc] initWithFrame:frame];
     
     shelfSubview.tag = [PCKioskShelfView subviewTag];
     shelfSubview.hidden = YES;
@@ -28,13 +33,11 @@
     
 #ifdef RUE
     result = [NSArray arrayWithObjects:
-             // gallerySubview,
               shelfSubview,
               gallerySubview,
               nil];
 #else
     result = [NSArray arrayWithObjects:
-              // gallerySubview,
               gallerySubview,
               shelfSubview,
               nil];

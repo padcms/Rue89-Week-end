@@ -90,7 +90,7 @@
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="967172110">
+						<object class="NSFont" key="IBUIFont" id="866512427">
 							<string key="NSName">HelveticaNeue</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -302,7 +302,7 @@
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="170012203"/>
-						<reference key="IBUIFont" ref="967172110"/>
+						<reference key="IBUIFont" ref="866512427"/>
 					</object>
 					<object class="IBUIButton" id="943163620">
 						<reference key="NSNextResponder" ref="378560098"/>
@@ -401,7 +401,7 @@
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="170012203"/>
-						<reference key="IBUIFont" ref="967172110"/>
+						<reference key="IBUIFont" ref="866512427"/>
 					</object>
 					<object class="IBUIScrollView" id="125337143">
 						<reference key="NSNextResponder" ref="441603183"/>

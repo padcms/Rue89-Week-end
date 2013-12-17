@@ -8,8 +8,8 @@
 
 #import "PCRueKioskViewController.h"
 #import "PCKioskSubview.h"
-#import "PCKioskShelfView.h"
-#import "PCTMainViewController.h"
+#import "RueKioskShelfView.h"
+#import "RueMainViewController.h"
 
 @interface PCKioskViewController ()
 - (void) reloadSubviewsOnViewWillAppear;
@@ -30,7 +30,7 @@
 {
     if([self.delegate respondsToSelector:@selector(subscribeButtonTaped:fromRevision:)])
     {
-        [(PCTMainViewController*)self.delegate subscribeButtonTaped:button fromRevision:revision];
+        [(RueMainViewController*)self.delegate subscribeButtonTaped:button fromRevision:revision];
     }
 }
 
@@ -40,9 +40,9 @@
 {
     for(PCKioskSubview *subview in self.kioskSubviews)
     {
-        if([subview isMemberOfClass:[PCKioskShelfView class]])
+        if([subview isMemberOfClass:[RueKioskShelfView class]])
         {
-            [(PCKioskShelfView*)subview downloadingContentStartedWithRevisionIndex:index];
+            [(RueKioskShelfView*)subview downloadingContentStartedWithRevisionIndex:index];
         }
     }
 }
@@ -51,9 +51,9 @@
 {
     for(PCKioskSubview *subview in self.kioskSubviews)
     {
-        if([subview isMemberOfClass:[PCKioskShelfView class]])
+        if([subview isMemberOfClass:[RueKioskShelfView class]])
         {
-            [(PCKioskShelfView*)subview downloadingContentFinishedWithRevisionIndex:index];
+            [(RueKioskShelfView*)subview downloadingContentFinishedWithRevisionIndex:index];
         }
     }
 }

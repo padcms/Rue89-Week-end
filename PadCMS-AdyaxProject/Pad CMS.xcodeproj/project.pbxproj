@@ -255,6 +255,9 @@
 		2D995F961860555000E2457F /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F911860555000E2457F /* PCRueRemouteNotificationCenter.m */; };
 		2D995F991860582300E2457F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D995F981860582300E2457F /* MainWindow.xib */; };
 		2D995F9B1860588B00E2457F /* PCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D995F9A1860588B00E2457F /* PCMainViewController.xib */; };
+		2D995F9E18605EC300E2457F /* RueMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F9D18605EC300E2457F /* RueMainViewController.m */; };
+		2D995FA21860797800E2457F /* RueKioskShelfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FA11860797800E2457F /* RueKioskShelfView.m */; };
+		2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2DA76A03185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769F8185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
@@ -331,7 +334,6 @@
 		60F0228E1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022641590DEEC0046FA44 /* PCKioskSubviewsFactory.m */; };
 		60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
-		60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A71590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A81590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
 		60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F022A31590E3000046FA44 /* PCTMainViewController.m */; };
@@ -589,7 +591,6 @@
 		AB6BC01C156BA85500F9D6F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18100D5712C4F5210012B3B3 /* QuartzCore.framework */; };
 		AB6BC01D156BA85500F9D6F7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED06192150116590075DE1F /* ImageIO.framework */; };
 		AB6BC01E156BA85500F9D6F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AE462B154AC0F200DAA716 /* CFNetwork.framework */; };
-		AB813798152224E50038EC7B /* PCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* PCMainViewController.xib */; };
 		AB81379C152224E50038EC7B /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF014F555C900F01F23 /* back.png */; };
 		AB81379D152224E50038EC7B /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF114F555C900F01F23 /* Default-Portrait.png */; };
 		AB81379E152224E50038EC7B /* wired_button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF414F555C900F01F23 /* wired_button0.png */; };
@@ -1561,6 +1562,10 @@
 		2D995F911860555000E2457F /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
 		2D995F981860582300E2457F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		2D995F9A1860588B00E2457F /* PCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMainViewController.xib; sourceTree = "<group>"; };
+		2D995F9D18605EC300E2457F /* RueMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueMainViewController.m; sourceTree = "<group>"; };
+		2D995F9F186060DE00E2457F /* RueMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueMainViewController.h; sourceTree = "<group>"; };
+		2D995FA01860797800E2457F /* RueKioskShelfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueKioskShelfView.h; sourceTree = "<group>"; };
+		2D995FA11860797800E2457F /* RueKioskShelfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueKioskShelfView.m; sourceTree = "<group>"; };
 		2DA769F9185B2FAF00FB586A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
@@ -2172,6 +2177,8 @@
 		2D995D0218604AE600E2457F /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				2D995FA01860797800E2457F /* RueKioskShelfView.h */,
+				2D995FA11860797800E2457F /* RueKioskShelfView.m */,
 				2D995DD1186050FA00E2457F /* Archiving */,
 				2D995DD4186050FA00E2457F /* CustomComponents */,
 				2D995DE2186050FA00E2457F /* DataManagment */,
@@ -3081,6 +3088,8 @@
 		2D995F871860555000E2457F /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2D995F9F186060DE00E2457F /* RueMainViewController.h */,
+				2D995F9D18605EC300E2457F /* RueMainViewController.m */,
 				2D995F881860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.h */,
 				2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */,
 				2D995F8A1860555000E2457F /* PCRueAppDelegate.h */,
@@ -4381,7 +4390,6 @@
 			files = (
 				2D995E87186050FB00E2457F /* ConfirmViewDescriptionFon@2x.png in Resources */,
 				C5CF325815B6C6FE0008A630 /* PadCMS-CocoaTouch-Core-Resources.bundle in Resources */,
-				AB813798152224E50038EC7B /* PCMainViewController.xib in Resources */,
 				AB81379C152224E50038EC7B /* back.png in Resources */,
 				2D995DA918604FFF00E2457F /* home_issue_button_bg@2x.png in Resources */,
 				2D995D9C18604FFF00E2457F /* home_footer_fade.png in Resources */,
@@ -4906,6 +4914,7 @@
 				2D995E95186050FB00E2457F /* RTLabel+CustomFontAttributes.m in Sources */,
 				2D995F5A186051D500E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */,
 				2D995E64186050FB00E2457F /* PCKioskTitledPopupView.m in Sources */,
+				2D995FA21860797800E2457F /* RueKioskShelfView.m in Sources */,
 				2D995E70186050FB00E2457F /* PCFonts.m in Sources */,
 				2D995EA0186050FB00E2457F /* SBJsonStreamWriterAccumulator.m in Sources */,
 				2D995E7B186050FB00E2457F /* EGOTextView.m in Sources */,
@@ -4927,7 +4936,6 @@
 				2D995E8C186050FB00E2457F /* NSURL+Fragments.m in Sources */,
 				60F022831590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228A1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
-				60F022A61590E3000046FA44 /* PCTMainViewController.m in Sources */,
 				2D995E94186050FB00E2457F /* NullSafe.m in Sources */,
 				2D995F7F186051D500E2457F /* GTMNSString+HTML.m in Sources */,
 				2D995F6A186051D500E2457F /* RueSubscriptionManager.m in Sources */,
@@ -4969,6 +4977,7 @@
 				2D995E77186050FB00E2457F /* PCRevisionSummaryPopup.m in Sources */,
 				2D995F41186051D500E2457F /* NSString+MD5.m in Sources */,
 				2D995F6B186051D500E2457F /* SubscriptionScheme.m in Sources */,
+				2D995F9E18605EC300E2457F /* RueMainViewController.m in Sources */,
 				2D995F7B186051D500E2457F /* PCKioskViewController+CoreChanges.m in Sources */,
 				2D995D2218604AE600E2457F /* PCKioskShelfViewCell.m in Sources */,
 				2D995F4C186051D500E2457F /* RueDiaporamaInLongArticleViewController.m in Sources */,
@@ -4987,6 +4996,7 @@
 				2D995D2618604AE600E2457F /* PCRueKioskViewController.m in Sources */,
 				2D995D2418604AE600E2457F /* PCKioskSubscribeButton.m in Sources */,
 				2D995E73186050FB00E2457F /* PCKioskSharePopupView.m in Sources */,
+				2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */,
 				2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */,
 				2D995F4E186051D500E2457F /* RueMultiScrollPageViewController.m in Sources */,
 				2D995F5B186051D500E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */,

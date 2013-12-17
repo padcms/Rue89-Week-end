@@ -30,7 +30,7 @@
 #import "ImagesBank.h"
 #import "PCDownloadApiClient.h"
 #import "RueSubscriptionManager.h"
-#import "PCKioskShelfView.h"
+#import "RueKioskShelfView.h"
 
 typedef enum {
     ElementsStateNotDownloaded,
@@ -379,7 +379,7 @@ typedef enum {
 {
     if ([self.delegate respondsToSelector:@selector(subscribeButtonTaped:fromRevision:)])
     {
-        [(PCKioskShelfView*)self.delegate subscribeButtonTaped:sender fromRevision:self.revision];
+        [(RueKioskShelfView*)self.delegate subscribeButtonTaped:sender fromRevision:self.revision];
     }
 }
 
