@@ -12,6 +12,7 @@
 
 @interface PCSlideshowViewController ()
 - (void) afterScroll;
+- (void) updateViewsForCurrentIndex;
 @end
 
 @interface DCCVSlideshowViewController ()

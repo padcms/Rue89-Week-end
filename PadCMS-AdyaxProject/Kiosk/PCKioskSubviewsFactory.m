@@ -8,7 +8,8 @@
 
 #import "PCKioskSubviewsFactory.h"
 #import "RueKioskShelfView.h"
-#import "PCKioskGalleryView.h"
+#import "AIRKioskGalleryView.h"
+#import "DCCVKioskGalleryView.h"
 
 @implementation PCKioskSubviewsFactory
 
@@ -26,7 +27,7 @@
     shelfSubview.tag = [PCKioskShelfView subviewTag];
     shelfSubview.hidden = YES;
     
-    PCKioskGalleryView     *gallerySubview = [[PCKioskGalleryView alloc] initWithFrame:frame];
+    PCKioskGalleryView     *gallerySubview = [[[self kioskGalleryViewClass] alloc] initWithFrame:frame];
     
     gallerySubview.tag = [PCKioskGalleryView subviewTag];
     gallerySubview.hidden = YES;
@@ -44,6 +45,18 @@
 #endif
     
     return result;
+}
+
+- (Class) kioskGalleryViewClass
+{
+    Class kioskGalleryViewClass = [PCKioskGalleryView class];
+    
+#ifdef DCCV
+    kioskGalleryViewClass = [DCCVKioskGalleryView class];
+#elif MAG_AIR
+    kioskGalleryViewClass = [AIRKioskGalleryView class];
+#endif
+    return kioskGalleryViewClass;
 }
 
 @end
