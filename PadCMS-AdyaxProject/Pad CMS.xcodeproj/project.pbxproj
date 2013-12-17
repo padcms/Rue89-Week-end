@@ -18,7 +18,6 @@
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
 		2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D85DF2C180EB99C00459330 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		2D995D1B18604AE600E2457F /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995D0418604AE600E2457F /* PCKioskAdvancedControlElement.m */; };
@@ -249,19 +248,17 @@
 		2D995F84186051D500E2457F /* FMDatabase+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3D186051D500E2457F /* FMDatabase+CoreChanges.m */; };
 		2D995F85186051D500E2457F /* InAppPurchases+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3F186051D500E2457F /* InAppPurchases+CoreChanges.m */; };
 		2D995F86186051D500E2457F /* VersionManager+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F40186051D500E2457F /* VersionManager+CoreChanges.m */; };
+		2D995F921860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */; };
+		2D995F931860555000E2457F /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F8B1860555000E2457F /* PCRueAppDelegate.m */; };
+		2D995F941860555000E2457F /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F8D1860555000E2457F /* PCRueApplication.m */; };
+		2D995F951860555000E2457F /* PCRueNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F8F1860555000E2457F /* PCRueNavigationController.m */; };
+		2D995F961860555000E2457F /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F911860555000E2457F /* PCRueRemouteNotificationCenter.m */; };
+		2D995F991860582300E2457F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D995F981860582300E2457F /* MainWindow.xib */; };
+		2D995F9B1860588B00E2457F /* PCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D995F9A1860588B00E2457F /* PCMainViewController.xib */; };
 		2DA76A03185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769F8185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A06185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A01185B2FAF00FB586A /* Localizable.strings */; };
-		2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */; };
-		2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */; };
-		572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 572B490717EB480200C02D42 /* PCRueNavigationController.m */; };
-		5733797C17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
-		5733797D17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
-		5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
-		5733797F17E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
-		5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
-		5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5733797A17E791890049F15B /* PCRueAppDelegate.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -593,7 +590,6 @@
 		AB6BC01D156BA85500F9D6F7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED06192150116590075DE1F /* ImageIO.framework */; };
 		AB6BC01E156BA85500F9D6F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AE462B154AC0F200DAA716 /* CFNetwork.framework */; };
 		AB813798152224E50038EC7B /* PCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* PCMainViewController.xib */; };
-		AB813799152224E50038EC7B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		AB81379C152224E50038EC7B /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF014F555C900F01F23 /* back.png */; };
 		AB81379D152224E50038EC7B /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF114F555C900F01F23 /* Default-Portrait.png */; };
 		AB81379E152224E50038EC7B /* wired_button0.png in Resources */ = {isa = PBXBuildFile; fileRef = 719A8BF414F555C900F01F23 /* wired_button0.png */; };
@@ -1207,8 +1203,6 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D85DF2C180EB99C00459330 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
-		2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
 		2D995D0318604AE600E2457F /* PCKioskAdvancedControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskAdvancedControlElement.h; sourceTree = "<group>"; };
@@ -1555,21 +1549,25 @@
 		2D995F3D186051D500E2457F /* FMDatabase+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+CoreChanges.m"; sourceTree = "<group>"; };
 		2D995F3F186051D500E2457F /* InAppPurchases+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InAppPurchases+CoreChanges.m"; sourceTree = "<group>"; };
 		2D995F40186051D500E2457F /* VersionManager+CoreChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VersionManager+CoreChanges.m"; sourceTree = "<group>"; };
+		2D995F881860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCLandscapeViewController+InterfaceOrientation.h"; sourceTree = "<group>"; };
+		2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCLandscapeViewController+InterfaceOrientation.m"; sourceTree = "<group>"; };
+		2D995F8A1860555000E2457F /* PCRueAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueAppDelegate.h; sourceTree = "<group>"; };
+		2D995F8B1860555000E2457F /* PCRueAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueAppDelegate.m; sourceTree = "<group>"; };
+		2D995F8C1860555000E2457F /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
+		2D995F8D1860555000E2457F /* PCRueApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueApplication.m; sourceTree = "<group>"; };
+		2D995F8E1860555000E2457F /* PCRueNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueNavigationController.h; sourceTree = "<group>"; };
+		2D995F8F1860555000E2457F /* PCRueNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueNavigationController.m; sourceTree = "<group>"; };
+		2D995F901860555000E2457F /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
+		2D995F911860555000E2457F /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
+		2D995F981860582300E2457F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		2D995F9A1860588B00E2457F /* PCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMainViewController.xib; sourceTree = "<group>"; };
 		2DA769F9185B2FAF00FB586A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA76A02185B2FAF00FB586A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
-		2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueApplication.h; sourceTree = "<group>"; };
-		2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueApplication.m; sourceTree = "<group>"; };
-		2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueRemouteNotificationCenter.h; sourceTree = "<group>"; };
-		2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueRemouteNotificationCenter.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		572B490617EB480200C02D42 /* PCRueNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueNavigationController.h; sourceTree = "<group>"; };
-		572B490717EB480200C02D42 /* PCRueNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueNavigationController.m; sourceTree = "<group>"; };
-		5733797A17E791890049F15B /* PCRueAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRueAppDelegate.m; sourceTree = "<group>"; };
-		5733797B17E791890049F15B /* PCRueAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRueAppDelegate.h; sourceTree = "<group>"; };
 		57A4710717BB663100745732 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		57B4431317D737EC00FCFA87 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		57B4431417D737EC00FCFA87 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
@@ -2118,20 +2116,10 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5733797B17E791890049F15B /* PCRueAppDelegate.h */,
-				5733797A17E791890049F15B /* PCRueAppDelegate.m */,
 				60F022A21590E3000046FA44 /* PCTMainViewController.h */,
 				60F022A31590E3000046FA44 /* PCTMainViewController.m */,
 				32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				572B490617EB480200C02D42 /* PCRueNavigationController.h */,
-				572B490717EB480200C02D42 /* PCRueNavigationController.m */,
-				2DA8B14017FC514A005E8FF8 /* PCRueApplication.h */,
-				2DA8B14117FC514A005E8FF8 /* PCRueApplication.m */,
-				2D8683BD180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.h */,
-				2D8683BE180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m */,
-				2DC1DD73181040390039A85D /* PCRueRemouteNotificationCenter.h */,
-				2DC1DD74181040390039A85D /* PCRueRemouteNotificationCenter.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -2224,6 +2212,7 @@
 			children = (
 				2D995D4518604F7100E2457F /* Fonts */,
 				2D995D2B18604E5700E2457F /* images */,
+				2D995F971860582300E2457F /* xibs */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3089,6 +3078,32 @@
 			path = Versioning;
 			sourceTree = "<group>";
 		};
+		2D995F871860555000E2457F /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2D995F881860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.h */,
+				2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */,
+				2D995F8A1860555000E2457F /* PCRueAppDelegate.h */,
+				2D995F8B1860555000E2457F /* PCRueAppDelegate.m */,
+				2D995F8C1860555000E2457F /* PCRueApplication.h */,
+				2D995F8D1860555000E2457F /* PCRueApplication.m */,
+				2D995F8E1860555000E2457F /* PCRueNavigationController.h */,
+				2D995F8F1860555000E2457F /* PCRueNavigationController.m */,
+				2D995F901860555000E2457F /* PCRueRemouteNotificationCenter.h */,
+				2D995F911860555000E2457F /* PCRueRemouteNotificationCenter.m */,
+			);
+			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		2D995F971860582300E2457F /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				2D995F9A1860588B00E2457F /* PCMainViewController.xib */,
+				2D995F981860582300E2457F /* MainWindow.xib */,
+			);
+			path = xibs;
+			sourceTree = "<group>";
+		};
 		2DA769F4185B2EF600FB586A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3489,9 +3504,10 @@
 		AB8137831522230E0038EC7B /* Rue */ = {
 			isa = PBXGroup;
 			children = (
-				2D995EA4186051D400E2457F /* Controllers */,
 				2D995F0D186051D500E2457F /* CoreChanges */,
+				2D995EA4186051D400E2457F /* Controllers */,
 				2D995D0218604AE600E2457F /* Kiosk */,
+				2D995F871860555000E2457F /* Other Sources */,
 				2D995D2A18604E5700E2457F /* Resources */,
 				2DA769F4185B2EF600FB586A /* Supporting Files */,
 				AB8137851522230E0038EC7B /* Rue-Info.plist */,
@@ -4366,7 +4382,6 @@
 				2D995E87186050FB00E2457F /* ConfirmViewDescriptionFon@2x.png in Resources */,
 				C5CF325815B6C6FE0008A630 /* PadCMS-CocoaTouch-Core-Resources.bundle in Resources */,
 				AB813798152224E50038EC7B /* PCMainViewController.xib in Resources */,
-				AB813799152224E50038EC7B /* MainWindow.xib in Resources */,
 				AB81379C152224E50038EC7B /* back.png in Resources */,
 				2D995DA918604FFF00E2457F /* home_issue_button_bg@2x.png in Resources */,
 				2D995D9C18604FFF00E2457F /* home_footer_fade.png in Resources */,
@@ -4405,6 +4420,7 @@
 				2D995F74186051D500E2457F /* PCSearchViewController.xib in Resources */,
 				AB8137B2152224E50038EC7B /* facebook.png in Resources */,
 				AB8137B3152224E50038EC7B /* sharePopup.png in Resources */,
+				2D995F9B1860588B00E2457F /* PCMainViewController.xib in Resources */,
 				AB8137B4152224E50038EC7B /* twitter.png in Resources */,
 				2D995DA618604FFF00E2457F /* home_issue_bg_shadow_6px.png in Resources */,
 				2D995E81186050FB00E2457F /* magnifier-ranged-lo-stemless@2x.png in Resources */,
@@ -4516,6 +4532,7 @@
 				2D995D5618604F7200E2457F /* LeckerliOne-Regular.otf in Resources */,
 				2D995D9A18604FFF00E2457F /* home_footer_bg.png in Resources */,
 				2D995DCC18604FFF00E2457F /* share_google_plus@2x.png in Resources */,
+				2D995F991860582300E2457F /* MainWindow.xib in Resources */,
 				2D995DCA18604FFF00E2457F /* share_facebook@2x.png in Resources */,
 				2D995DB418604FFF00E2457F /* home_subheader_bg.png in Resources */,
 				2D995DB218604FFF00E2457F /* home_issue_details_top_shadow_6px.png in Resources */,
@@ -4822,7 +4839,6 @@
 				60F022811590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F022881590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A41590E3000046FA44 /* PCTMainViewController.m in Sources */,
-				5733797C17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4838,7 +4854,6 @@
 				60F022871590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228E1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022AA1590E3000046FA44 /* PCTMainViewController.m in Sources */,
-				5733798117E791890049F15B /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4854,7 +4869,6 @@
 				60F022861590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228D1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A91590E3000046FA44 /* PCTMainViewController.m in Sources */,
-				5733798017E791890049F15B /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4872,6 +4886,7 @@
 				2D995F80186051D500E2457F /* NSString+HTML.m in Sources */,
 				2D995EA2186050FB00E2457F /* SBJsonWriter.m in Sources */,
 				2D995F55186051D500E2457F /* RueSQLiteKeys.m in Sources */,
+				2D995F961860555000E2457F /* PCRueRemouteNotificationCenter.m in Sources */,
 				AB8137D6152224E50038EC7B /* main.m in Sources */,
 				2D995E71186050FB00E2457F /* PCKioskIntroPopupView.m in Sources */,
 				2D995E8A186050FB00E2457F /* FacebookPostConfirmView.m in Sources */,
@@ -4880,11 +4895,13 @@
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				2D995E62186050FB00E2457F /* PCKioskPageControl.m in Sources */,
 				2D995F64186051D500E2457F /* MKSKProduct.m in Sources */,
+				2D995F921860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2D995F77186051D500E2457F /* PCJSONKeys+iTunesKey.m in Sources */,
 				2D995F44186051D500E2457F /* RuePadCMSCoder.m in Sources */,
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				2D995F78186051D500E2457F /* PCLocalizationManager+AdditionalInitialization.m in Sources */,
 				2D995D2718604AE600E2457F /* PCRueRevisionViewController.m in Sources */,
+				2D995F931860555000E2457F /* PCRueAppDelegate.m in Sources */,
 				2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */,
 				2D995E95186050FB00E2457F /* RTLabel+CustomFontAttributes.m in Sources */,
 				2D995F5A186051D500E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */,
@@ -4942,12 +4959,12 @@
 				2D995F56186051D500E2457F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
 				2D995E6C186050FB00E2457F /* PCRevision+DataOfDownload.m in Sources */,
 				2D995F42186051D500E2457F /* PublisherPasswordAlertView.m in Sources */,
-				5733797E17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 				2D995E91186050FB00E2457F /* UIView+EasyFrame.m in Sources */,
 				2D995E9E186050FB00E2457F /* SBJsonStreamTokeniser.m in Sources */,
 				2D995E68186050FB00E2457F /* ImagesBank+Storage.m in Sources */,
 				2D995E8D186050FB00E2457F /* RueFacebookController.m in Sources */,
 				2D995E99186050FB00E2457F /* SBJsonParser.m in Sources */,
+				2D995F941860555000E2457F /* PCRueApplication.m in Sources */,
 				2D995F63186051D500E2457F /* SFHFKeychainUtils.m in Sources */,
 				2D995E77186050FB00E2457F /* PCRevisionSummaryPopup.m in Sources */,
 				2D995F41186051D500E2457F /* NSString+MD5.m in Sources */,
@@ -4955,10 +4972,10 @@
 				2D995F7B186051D500E2457F /* PCKioskViewController+CoreChanges.m in Sources */,
 				2D995D2218604AE600E2457F /* PCKioskShelfViewCell.m in Sources */,
 				2D995F4C186051D500E2457F /* RueDiaporamaInLongArticleViewController.m in Sources */,
+				2D995F951860555000E2457F /* PCRueNavigationController.m in Sources */,
 				2D995E9D186050FB00E2457F /* SBJsonStreamParserState.m in Sources */,
 				2D995E61186050FB00E2457F /* ArchivingDataSource.m in Sources */,
 				2D995F5E186051D500E2457F /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */,
-				572B490817EB480200C02D42 /* PCRueNavigationController.m in Sources */,
 				2D995E65186050FB00E2457F /* ProgressButton.m in Sources */,
 				2D995F51186051D500E2457F /* RueGifPageViewController.m in Sources */,
 				2D995E63186050FB00E2457F /* PCKioskPopupView.m in Sources */,
@@ -4971,7 +4988,6 @@
 				2D995D2418604AE600E2457F /* PCKioskSubscribeButton.m in Sources */,
 				2D995E73186050FB00E2457F /* PCKioskSharePopupView.m in Sources */,
 				2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */,
-				2DA8B14217FC514A005E8FF8 /* PCRueApplication.m in Sources */,
 				2D995F4E186051D500E2457F /* RueMultiScrollPageViewController.m in Sources */,
 				2D995F5B186051D500E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */,
 				2D995F6E186051D500E2457F /* SubscriptionMenuViewController.m in Sources */,
@@ -4989,7 +5005,6 @@
 				2D995E6E186050FB00E2457F /* RueDownloadManager.m in Sources */,
 				2D995E67186050FB00E2457F /* ImagesBank+Networking.m in Sources */,
 				2D995E9C186050FB00E2457F /* SBJsonStreamParserAdapter.m in Sources */,
-				2D8683BF180C363A0040EC50 /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
 				2D995E9F186050FB00E2457F /* SBJsonStreamWriter.m in Sources */,
 				2D995EA3186050FB00E2457F /* PCRueTwitterController.m in Sources */,
 				2D995F67186051D500E2457F /* MKStoreManager.m in Sources */,
@@ -5000,7 +5015,6 @@
 				2D995D1C18604AE600E2457F /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				2D995F7D186051D500E2457F /* PCTag.m in Sources */,
 				2D995E96186050FB00E2457F /* RTLabel+Kern.m in Sources */,
-				2DC1DD75181040390039A85D /* PCRueRemouteNotificationCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5022,7 +5036,6 @@
 				60F022841590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F0228B1590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A71590E3000046FA44 /* PCTMainViewController.m in Sources */,
-				5733797F17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5075,7 +5088,6 @@
 				60F022821590DEEC0046FA44 /* PCKioskShelfView.m in Sources */,
 				60F022891590DEEC0046FA44 /* PCKioskSubviewsFactory.m in Sources */,
 				60F022A51590E3000046FA44 /* PCTMainViewController.m in Sources */,
-				5733797D17E791890049F15B /* PCRueAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
