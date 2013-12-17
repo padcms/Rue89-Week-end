@@ -139,7 +139,7 @@
 		2D995E78186050FB00E2457F /* UINavigationController+BalancedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E08186050FA00E2457F /* UINavigationController+BalancedTransition.m */; };
 		2D995E79186050FB00E2457F /* BoxCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E0C186050FA00E2457F /* BoxCarController.m */; };
 		2D995E7A186050FB00E2457F /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E0F186050FA00E2457F /* EasyTableView.m */; };
-		2D995E7B186050FB00E2457F /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E12186050FA00E2457F /* EGOTextView.m */; };
+		2D995E7B186050FB00E2457F /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E12186050FA00E2457F /* EGOTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D995E7C186050FB00E2457F /* drag-dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D995E14186050FA00E2457F /* drag-dot@2x.png */; };
 		2D995E7D186050FB00E2457F /* loupe-hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D995E15186050FA00E2457F /* loupe-hi@2x.png */; };
 		2D995E7E186050FB00E2457F /* loupe-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D995E16186050FA00E2457F /* loupe-lo@2x.png */; };
@@ -204,7 +204,7 @@
 		2D995F56186051D500E2457F /* PCBrowserViewController+FulscreenSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995ED8186051D400E2457F /* PCBrowserViewController+FulscreenSupport.m */; };
 		2D995F57186051D500E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDA186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */; };
 		2D995F58186051D500E2457F /* PCHtmlColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDC186051D400E2457F /* PCHtmlColumnViewController.m */; };
-		2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; };
+		2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D995F5A186051D500E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDE186051D400E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m */; };
 		2D995F5B186051D500E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDF186051D400E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */; };
 		2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EE1186051D400E2457F /* RueBrowserViewController.m */; };
@@ -241,9 +241,8 @@
 		2D995F7B186051D500E2457F /* PCKioskViewController+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F24186051D500E2457F /* PCKioskViewController+CoreChanges.m */; };
 		2D995F7C186051D500E2457F /* PCSQLLiteModelBuilder+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F2B186051D500E2457F /* PCSQLLiteModelBuilder+CoreChanges.m */; };
 		2D995F7D186051D500E2457F /* PCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F2D186051D500E2457F /* PCTag.m */; };
-		2D995F7E186051D500E2457F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F30186051D500E2457F /* UIImageView+AFNetworking.m */; };
-		2D995F7F186051D500E2457F /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F33186051D500E2457F /* GTMNSString+HTML.m */; };
-		2D995F80186051D500E2457F /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F35186051D500E2457F /* NSString+HTML.m */; };
+		2D995F7F186051D500E2457F /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F33186051D500E2457F /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2D995F80186051D500E2457F /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F35186051D500E2457F /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D995F81186051D500E2457F /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F37186051D500E2457F /* NSString+XMLEntities.m */; };
 		2D995F82186051D500E2457F /* CLScoreServerPost+UDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3B186051D500E2457F /* CLScoreServerPost+UDID.m */; };
 		2D995F83186051D500E2457F /* CLScoreServerRequest+UDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3C186051D500E2457F /* CLScoreServerRequest+UDID.m */; };
@@ -4896,7 +4895,6 @@
 				2D995E7A186050FB00E2457F /* EasyTableView.m in Sources */,
 				2D995F53186051D500E2457F /* RuePageElementBackground.m in Sources */,
 				2D995E79186050FB00E2457F /* BoxCarController.m in Sources */,
-				2D995F7E186051D500E2457F /* UIImageView+AFNetworking.m in Sources */,
 				2D995F5D186051D500E2457F /* PCPageViewController+IsPresented.m in Sources */,
 				2D995F46186051D500E2457F /* FixedIllustrationTouchableColumnViewController.m in Sources */,
 				2D995F49186051D500E2457F /* RueScrollingPageViewController.m in Sources */,
