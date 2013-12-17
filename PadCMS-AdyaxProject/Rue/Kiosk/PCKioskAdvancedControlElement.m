@@ -396,6 +396,8 @@ typedef enum {
     subscribeButton.hidden = YES;
     subscribeButton.frame = downloadButton.frame;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kInAppPurchaseManagerProductsFetchedNotification object:nil];
+    
     switch (state)
     {
         case ElementsStateNotDownloaded:
