@@ -161,7 +161,6 @@
 		2D995E8F186050FB00E2457F /* NSObject+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E31186050FA00E2457F /* NSObject+Block.m */; };
 		2D995E90186050FB00E2457F /* NSURL+Fragments.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E33186050FA00E2457F /* NSURL+Fragments.m */; };
 		2D995E91186050FB00E2457F /* UIView+EasyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E35186050FA00E2457F /* UIView+EasyFrame.m */; };
-		2D995E92186050FB00E2457F /* UIView+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E36186050FA00E2457F /* UIView+Log.m */; };
 		2D995E93186050FB00E2457F /* MTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E39186050FA00E2457F /* MTLabel.m */; };
 		2D995E94186050FB00E2457F /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E3C186050FA00E2457F /* NullSafe.m */; };
 		2D995E95186050FB00E2457F /* RTLabel+CustomFontAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995E40186050FA00E2457F /* RTLabel+CustomFontAttributes.m */; };
@@ -5061,7 +5060,6 @@
 				2D995E6A186050FB00E2457F /* ImagesBankImage.m in Sources */,
 				2D995E93186050FB00E2457F /* MTLabel.m in Sources */,
 				2D995F47186051D500E2457F /* RuePageViewWithPopupsController.m in Sources */,
-				2D995E92186050FB00E2457F /* UIView+Log.m in Sources */,
 				2D995E90186050FB00E2457F /* NSURL+Fragments.m in Sources */,
 				2D995F4F186051D500E2457F /* RueScrollingPaneViewController.m in Sources */,
 				2D995F5F186051D500E2457F /* RueGalleryWithOverlaysViewController.m in Sources */,
