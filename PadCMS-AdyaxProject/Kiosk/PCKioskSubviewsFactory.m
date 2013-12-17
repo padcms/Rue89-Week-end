@@ -7,8 +7,9 @@
 //
 
 #import "PCKioskSubviewsFactory.h"
-#import "PCKioskShelfView.h"
-#import "PCKioskGalleryView.h"
+#import "RueKioskShelfView.h"
+#import "AIRKioskGalleryView.h"
+#import "DCCVKioskGalleryView.h"
 
 @implementation PCKioskSubviewsFactory
 
@@ -16,31 +17,46 @@
 {
     NSArray     *result = nil;
     
-    PCKioskShelfView     *shelfSubview = [[PCKioskShelfView alloc] initWithFrame:frame];
+    Class kioskShelfViewClass = [PCKioskShelfView class];
+#ifdef RUE
+    kioskShelfViewClass = [RueKioskShelfView class];
+#endif
+    
+    PCKioskShelfView     *shelfSubview = [[kioskShelfViewClass alloc] initWithFrame:frame];
     
     shelfSubview.tag = [PCKioskShelfView subviewTag];
     shelfSubview.hidden = YES;
     
-    PCKioskGalleryView     *gallerySubview = [[PCKioskGalleryView alloc] initWithFrame:frame];
+    PCKioskGalleryView     *gallerySubview = [[[self kioskGalleryViewClass] alloc] initWithFrame:frame];
     
     gallerySubview.tag = [PCKioskGalleryView subviewTag];
     gallerySubview.hidden = YES;
     
 #ifdef RUE
     result = [NSArray arrayWithObjects:
-             // gallerySubview,
               shelfSubview,
               gallerySubview,
               nil];
 #else
     result = [NSArray arrayWithObjects:
-              // gallerySubview,
               gallerySubview,
               shelfSubview,
               nil];
 #endif
     
     return result;
+}
+
+- (Class) kioskGalleryViewClass
+{
+    Class kioskGalleryViewClass = [PCKioskGalleryView class];
+    
+#ifdef DCCV
+    kioskGalleryViewClass = [DCCVKioskGalleryView class];
+#elif MAG_AIR
+    kioskGalleryViewClass = [AIRKioskGalleryView class];
+#endif
+    return kioskGalleryViewClass;
 }
 
 @end

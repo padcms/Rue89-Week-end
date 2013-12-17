@@ -17,13 +17,11 @@
 //#import "WiredNavigator.h"
 
 #import "PCRevisionViewController.h"
-#import "PCRueApplication.h"
+#import "PCApplication.h"
 #import "PCKioskViewController.h"
 #import "PCKioskNavigationBar.h"
 #import "PCSearchViewController.h"
-#import "RuePadCMSCoder.h"
-#import "PCKioskHeaderView.h"
-#import "PCKioskFooterView.h"
+#import "PadCMSCoder.h"
 
 @class MagManager, PCRevisionViewController, PadCMSCoder, PCSubscriptionsMenuView;
 
@@ -33,7 +31,7 @@ PCKioskViewControllerDelegateProtocol, PCKioskDataSourceProtocol,
 PCKioskNavigationBarDelegate,
 PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 {
-    PCRueApplication* currentApplication;
+    PCApplication* currentApplication;
     
 	UIView                      *mainView;
 	
@@ -54,39 +52,38 @@ PCSearchViewControllerDelegate, PadCMSCodeDelegate>
 	BOOL                         IsNotificationsBinded;
 }
 
-@property (nonatomic, strong) PCRevisionViewController *revisionViewController;
+@property (nonatomic, retain) PCRevisionViewController *revisionViewController;
 @property (nonatomic, assign) BOOL currentTemplateLandscapeEnable;
 @property (nonatomic, assign) BOOL magManagerExist;
-@property (nonatomic, strong) NSTimer* barTimer;
-@property (nonatomic, strong) IBOutlet UIView* airTopMenu;
-@property (nonatomic, strong) IBOutlet UIView* airTopSummary;
-@property (nonatomic, strong) UIView* mainView;
+@property (nonatomic, retain) NSTimer* barTimer;
+@property (nonatomic, retain) IBOutlet UIView* airTopMenu;
+@property (nonatomic, retain) IBOutlet UIView* airTopSummary;
+@property (nonatomic, retain) UIView* mainView;
 @property (nonatomic, assign) BOOL firstOrientLandscape;
 @property (nonatomic, assign) BOOL alreadyInit;
 
-@property (nonatomic, strong) UILabel* issueLabel_h;
-@property (nonatomic, strong) IBOutlet UILabel* issueLabel_v;
+@property (nonatomic, retain) UILabel* issueLabel_h;
+@property (nonatomic, retain) IBOutlet UILabel* issueLabel_v;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* kiosk_req_v;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* kiosk_req_h;
+//@property (nonatomic, retain) WiredNavigator* navigator;
 
-@property (nonatomic, strong) PCKioskViewController *kioskViewController;
-@property (nonatomic, strong) PCKioskNavigationBar *kioskNavigationBar;
-@property (nonatomic, strong) RuePadCMSCoder* padcmsCoder;
-@property (nonatomic, strong) PCSubscriptionsMenuView *subscriptionsMenu;
-@property (nonatomic, strong) PCKioskHeaderView * kioskHeaderView;
-@property (nonatomic, strong) PCKioskFooterView * kioskFooterView;
+@property (nonatomic, retain) PCKioskViewController *kioskViewController;
+@property (nonatomic, retain) PCKioskNavigationBar *kioskNavigationBar;
+@property (nonatomic, retain) PadCMSCoder* padcmsCoder;
+@property (nonatomic, retain) PCSubscriptionsMenuView *subscriptionsMenu;
+
+//- (void) removeMainScroll;
+
+- (IBAction) btnUnloadTap:(id) sender;
 
 - (void) startBarTimer;
 - (void) stopBarTimer;
+//- (void) hideBars;
 
 - (void) restart;
-- (PCRueApplication*) getApplication;
+//- (void) viewDidLoadStuff;
+- (PCApplication*) getApplication;
 - (void) switchToKiosk;
-
-- (void) switchToRevision:(PCRevision*)revision;
-
-- (NSArray*) allDownloadedRevisions;
-
-- (NSUInteger) indexForRevision:(PCRevision*)revision;
-
-- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
 
 @end

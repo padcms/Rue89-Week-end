@@ -8,7 +8,8 @@
 
 #import "PCTMainViewController.h"
 #import "ZipArchive.h"
-#import "PCRevisionViewController.h"
+#import "AIRRevisionViewController.h"
+#import "DCCVRevisionViewController.h"
 #import "Helper.h"
 #import "PCSQLLiteModelBuilder.h"
 #import "PCPathHelper.h"
@@ -23,44 +24,13 @@
 #import "PCLocalizationManager.h"
 #import "PCConfig.h"
 #import "PCSubscriptionsMenuView.h"
-#import "PCKioskSharePopupView.h"
-#import "PCKioskIntroPopupView.h"
-#import "PCKioskNotificationPopup.h"
-#import "PCRueRevisionViewController.h"
-#import "PCKioskSubHeaderView.h"
-#import "ArchivingDataSource.h"
-#import "PCRueKioskViewController.h"
 
-#import "PCJSONKeys.h"
-#import "RueDownloadManager.h"
-#import "PCRevision+DataOfDownload.h"
-#import "UINavigationController+BalancedTransition.h"
-#import "PCRevisionSummaryPopup.h"
-
-#import "RueSubscriptionManager.h"
-#import "SubscribeMenuPopuverController.h"
-#import "SubscriptionScheme.h"
-#import "SubscriptionMenuActionSheet.h"
-#import "RueIssue.h"
-
-#import "RueAccessManager.h"
-#import "PublisherPasswordAlertView.h"
-
-@interface PCTMainViewController() <PCKioskHeaderViewDelegate, PCKioskPopupViewDelegate, PCKioskSharePopupViewDelegate, PCKioskFooterViewDelegate, RueSubscriptionManagerDelegate, SubscribeMenuPopuverDelegate, UIActionSheetDelegate>
-
-@property (nonatomic, strong) UIAlertView* publisherPasswordAlert;
-
-@property (nonatomic, strong) SubscribeMenuPopuverController* subscribePopoverController;
-
-@property (nonatomic, strong) NSMutableArray * allRevisions;
-@property (nonatomic, strong) PCTag * selectedTag;
-@property (nonatomic, strong) PCEmailController * emailController;
-@property (nonatomic, assign) BOOL needUpdate;
-
-@property (nonatomic, strong) PCKioskNotificationPopup* kioskNotificationPopup;
+@interface PCTMainViewController()
 
 - (void) initManager;
+- (void) showMagManagerView;
 - (void) bindNotifications;
+- (void) SearchResultSelectedNotification:(NSNotification *) notification;
 - (void) updateApplicationData;
 
 - (void) initKiosk;
@@ -74,12 +44,11 @@
 
 - (void)rotateToPortraitOrientation;
 - (void)rotateToLandscapeOrientation;
+- (void)rotateInterfaceIfNeedWithRevision:(PCRevision*)revision;
 
 @end
 
 @implementation PCTMainViewController
-
-static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 
 @synthesize revisionViewController = _revisionViewController;
 @synthesize airTopMenu;
@@ -90,6 +59,9 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 @synthesize issueLabel_h;
 @synthesize issueLabel_v;
 @synthesize magManagerExist;
+@synthesize kiosk_req_v;
+@synthesize kiosk_req_h;
+//@synthesize navigator = _navigator;
 @synthesize currentTemplateLandscapeEnable;
 @synthesize alreadyInit;
 @synthesize subscriptionsMenu;
@@ -115,6 +87,97 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     }
     return nil;
 }
+/*
+- (void) doBackgroundLoad
+{
+	NSAutoreleasePool   *pool = [[NSAutoreleasePool alloc] init];
+    
+	NSUserDefaults      *userDefaults = [NSUserDefaults standardUserDefaults];
+    int                 revision = [Helper getInternalRevision];
+	NSString            *zipFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.zip", revision]];
+	NSFileManager       *fileManager = [NSFileManager defaultManager];
+	NSDate              *packageModificationDate = nil;
+	NSDictionary        *zipFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:zipFilePath
+                                                                                  error:nil];
+	BOOL                skipUnpacking = NO;
+
+    
+	if (zipFileAttributes != nil)
+    {
+		packageModificationDate = [zipFileAttributes fileModificationDate];
+		NSLog(@"FILE MODIFICATION DATE: %@", [packageModificationDate description]);
+	}
+    
+	NSDate              *currentFileModificationDate = [userDefaults objectForKey:@"current_content"];
+	NSLog(@"current MODIFICATION DATE: %@", [currentFileModificationDate description]);
+    
+    
+	if ([fileManager fileExistsAtPath:[[Helper getIssueDirectory] stringByAppendingPathComponent:@"manifest.xml"]])
+    {
+		if ((currentFileModificationDate != nil) && [currentFileModificationDate isEqualToDate:packageModificationDate])
+        {
+			skipUnpacking = YES;
+			NSLog(@"\n\nskipUnpacking\n\n");
+		}
+	}
+
+	if (!skipUnpacking)
+    {
+        
+        ZipArchive      *zipArchive = [[ZipArchive alloc] init];
+        BOOL            zipResult = [zipArchive UnzipOpenFile:zipFilePath];
+        
+        NSLog(@"%@", zipFilePath);
+
+        if (zipResult)
+        {
+            [zipArchive UnzipFileTo:[Helper getIssueDirectory]
+                     overWrite:YES];				
+        }
+        
+        [zipArchive UnzipCloseFile];
+        [zipArchive release];
+		
+		[userDefaults setObject:packageModificationDate
+                         forKey:@"current_content"];
+        
+		[userDefaults synchronize];
+	}	
+    
+ 	//[self performSelectorOnMainThread:@selector(doFinishLoad) withObject:nil waitUntilDone:NO];
+    [self viewDidLoadStuff];
+    
+	[pool release];
+}*/
+
+- (IBAction) btnUnloadTap:(id) sender//??!!
+{
+	/*
+	if([[VersionManager sharedManager].items count] == 1)
+	{
+		NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
+		if(remoteHostStatus == NotReachable) 
+		{
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Vous devez être connecté à Internet."
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+
+			[alert show];
+			[alert release];		
+			return;		
+		}
+	}*/
+	
+	[self.kiosk_req_v startAnimating]; 
+	[self.kiosk_req_h startAnimating];
+	
+//	[[VersionManager sharedManager] kioskTap];
+	
+	[self.kiosk_req_v stopAnimating]; 
+	[self.kiosk_req_h stopAnimating];
+}
 
 #pragma mark Timer Methods
 
@@ -137,13 +200,31 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 		self.barTimer = nil;
 	}	
 }
+/*
+- (void) hideBars
+{
+//	if (mm.baseAppViewType == 1)
+//	{
+//		[self toggleBottomMenu:NO animated:YES];
+//		[self toggleTopMenu:NO animated:YES];
+//	}
+//	else
+//	{
+//		[self toggleTopMenu:NO animated:YES];
+//	}
+}*/
+
+#pragma mark logical 
+/*
+- (void) removeMainScroll
+{
+	self.mainView.hidden = YES;
+	self.firstOrientLandscape = YES;
+	self.view.hidden = NO;
+}*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-        
-    return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-    
-    
     if(_revisionViewController != nil && _revisionViewController.revision != nil) {
         
         PCRevision *revision = _revisionViewController.revision;
@@ -171,20 +252,34 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     return NO;
 }
 
+#pragma mark Rotate Methods
+
+/*
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+//	[self.navigator willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}*/
+
+//- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//	if(!self.magManagerExist) return NO;
+//	
+//	if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
+//	{
+//		return YES;
+//	}
+//	else
+//	{
+//		return currentTemplateLandscapeEnable;
+//	}
+//	
+//	return NO;
+//}
+
 #pragma mark ViewController Methods
 
 - (void) viewDidLoad
 {
-
-#ifdef  NSFoundationVersionNumber_iOS_6_1
-    //iOS 7 status bar fix
-    if (!(NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_6_1)) {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-#else
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-#endif
-    
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;
 
@@ -201,13 +296,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 	issueLabel_h.text = [Helper getIssueText];
 	issueLabel_v.text = [Helper getIssueText];
     
-    
+  
     
     //TODO !!!!!!!!!!!!!!!!!!!!!NOT FOR KIOSQUE
     //[self performSelectorInBackground:@selector(doBackgroundLoad) withObject:nil];
     
     [self bindNotifications];
-
+    
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -216,84 +312,70 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 	static BOOL notFirstRun;
 	if(notFirstRun) return;
 	
-	[VersionManager sharedManager];
-    
+	[VersionManager sharedManager];	
+//	[[VersionManager sharedManager] performSelectorInBackground:@selector(navigatorShouldAppear)
+//                                                     withObject:nil];		
 	notFirstRun = YES;
     
     [self initManager];
     [self initKiosk];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
-    
-#ifdef RUE
-    //[self showIntroPopup];
-    
-    [self performSelector:@selector(showIntroPopup) withObject:nil afterDelay:0.1f];
-#endif
 }
 
-- (void) didEnterBackground
+/*
+- (void) viewDidLoadStuff//??
 {
-    
+	[self performSelectorOnMainThread:@selector(doFinishLoad)
+                           withObject:nil
+                        waitUntilDone:NO];
+	alreadyInit = YES;
 }
 
-- (void) willEnterForeground
+- (void) doFinishLoad//??
 {
-    if([self isKioskPresented])
+	[self initManager];
+	
+	
+	[[VersionManager sharedManager] appLoaded];
+	
+  
+	[self showMagManagerView];
+}
+
+- (void) showMagManagerView//?
+{
+    NSInteger revisionID = [Helper getInternalRevision];
+    if (revisionID < 0) return;
+//    [self updateApplicationData];
+//    PCIssue* currentMagazine = [currentApplication issueForRevisionWithId:revisionID];
+//    
+
+    PCIssue *currentIssue = [currentApplication.issues objectAtIndex:0];
+    
+    if (currentIssue == nil) return;
+    
+    PCRevision *currentRevision = [[currentIssue revisions] objectAtIndex:0];
+    
+    if (currentRevision)
     {
-        [self update];
+        [self rotateInterfaceIfNeedWithRevision:currentRevision];
+        
+        [PCDownloadManager sharedManager].revision = currentRevision;
+        [[PCDownloadManager sharedManager] startDownloading];
+      
+        if (_revisionViewController == nil)
+        {
+            _revisionViewController = [[PCRevisionViewController alloc] 
+                                      initWithNibName:@"PCRevisionViewController"
+                                      bundle:nil];
+            [_revisionViewController setRevision:currentRevision];
+            _revisionViewController.mainViewController = self;
+            _revisionViewController.initialPageIndex = [Helper getInternalPageIndex];
+            [self.view addSubview:_revisionViewController.view];
+            self.mainView = _revisionViewController.view;
+            self.mainView.tag = 100;
+        }
     }
-    else
-    {
-        self.needUpdate = YES;
-    }
-}
-
-- (void) update
-{
-    if([self isNotConnectedToNetwork])
-    {
-        return;
-    }
-    
-    [self destroyKiosk];
-    
-    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.1];
-}
-
-- (void) destroyKiosk
-{
-    _revisionViewController.mainViewController = nil;
-    _revisionViewController = nil;
-    currentApplication = nil;
-    [self dissmissKiosk];
-    [self hideForOurReadersPopup];
-}
-
-- (void) createKiosk
-{
-    [self initManager];
-    [self initKiosk];
-    
-    [self showForOurReadersPopup];
-    
-    self.needUpdate = NO;
-    
-}
-
-- (BOOL) isKioskPresented
-{
-    if(mainView == nil)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
+}*/
 
 - (void) switchToKiosk
 {
@@ -301,124 +383,14 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 	[[PCDownloadManager sharedManager] cancelAllOperations];
     if(_revisionViewController)
     {
+        [self btnUnloadTap:self];
         mainView = nil;
-#ifdef RUE
-        [self.navigationController  popViewControllerAnimated:YES completion:^{
-            
-            if(self.needUpdate)
-            {
-                [self update];
-            }
-        }];
-        //_revisionViewController = nil;
-#else
+        
         [_revisionViewController.view removeFromSuperview];
+        [_revisionViewController release];
         _revisionViewController = nil;
-#endif
-        
+        //[self restart];
     }
-}
-
-#ifdef RUE
-
-#define FIRST_START_UP_KEY @"is_first_startup"
-
-- (void)showIntroPopup
-{
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:FIRST_START_UP_KEY]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_START_UP_KEY];
-        PCKioskIntroPopupView * introPopup = [[PCKioskIntroPopupView alloc] initWithSize:CGSizeMake(640, 500) viewToShowIn:self.view];
-        //introPopup.titleText = currentApplication...
-        introPopup.descriptionText = currentApplication.wellcomeMessage;
-        introPopup.infoText = currentApplication.welcomeMessageUnderButton;
-        //introPopup.infoText = currentApplication...
-        introPopup.purchaseDelegate = self;
-        introPopup.delegate = self;
-        introPopup.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
-        [introPopup show];
-    } else {
-        [self showForOurReadersPopup];
-    }
-
-}
-#endif
-
-
-- (void) switchToRevision:(PCRevision*)revisionToPresent
-{
-    _revisionViewController.view.userInteractionEnabled = NO;
-    
-    NSArray* previousNavigationMenuList = [(PCRueRevisionViewController*)_revisionViewController summaryPopup].revisionsList;
-    float previousListOffset = [[(PCRueRevisionViewController*)_revisionViewController summaryPopup] contentOffset];
-    
-    [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0.3 completion:^{
-        
-        _revisionViewController.mainViewController = nil;
-        
-        [self checkInterfaceOrientationForRevision:revisionToPresent];
-        
-        NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-        _revisionViewController = [[PCRueRevisionViewController alloc]
-                                   initWithNibName:@"PCRevisionViewController"
-                                   bundle:bundle];
-        
-        [_revisionViewController setRevision:revisionToPresent];
-        
-        _revisionViewController.mainViewController = (PCMainViewController *)self;
-        _revisionViewController.initialPageIndex = 0;
-        
-        [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-        [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        
-        _revisionViewController.view.userInteractionEnabled = NO;
-        
-        [(PCRueRevisionViewController*)_revisionViewController showSummaryMenuAnimated:NO withRevisionsList:previousNavigationMenuList menuOffset:previousListOffset];
-        [(PCRueRevisionViewController*)_revisionViewController fadeInViewWithDuration:0 completion:nil];
-        
-        [self.navigationController popViewControllerAnimated:NO];
-        [self.navigationController pushViewController:_revisionViewController animated:NO];
-        
-        [(PCRueRevisionViewController*)_revisionViewController fadeOutViewWithDuration:0.3 completion:^{
-            
-            [(PCRueRevisionViewController*)_revisionViewController hideSummaryMenuAnimated:YES];
-            
-            _revisionViewController.view.userInteractionEnabled = YES;
-        }];
-        
-        self.mainView = _revisionViewController.view;
-        self.mainView.tag = 100;
-    }];
-    
-    return;
-    
-    // back/forward transition
-    void (^showRevision)(PCRevision*) = ^(PCRevision* revision){
-        
-        NSUInteger index = [self.allRevisions indexOfObject:revisionToPresent];
-        if(index != NSNotFound)
-        {
-            [self readRevisionWithIndex:index];
-        }
-    };
-    
-    if(self.navigationController.visibleViewController == _revisionViewController)
-    {
-        if(_revisionViewController.revision != revisionToPresent)
-        {
-            [self.navigationController popViewControllerAnimated:YES completion:^{
-                
-                showRevision(revisionToPresent);
-            }];
-        }
-    }
-    else
-    {
-        showRevision(revisionToPresent);
-    }
-}
-
-- (void)subscribe {
-    //method is not used, just removing a warning
 }
 
 - (void) viewDidUnload
@@ -426,8 +398,15 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     [super viewDidUnload];
 }
 
+- (void) dealloc
+{
+    [currentApplication release];
+    [_revisionViewController release];
+	[_padcmsCoder release], _padcmsCoder = nil;
+    [super dealloc];
+}
 
-- (PCRueApplication*) getApplication
+- (PCApplication*) getApplication
 {
     return currentApplication;
 }
@@ -445,17 +424,8 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     if (currentApplication == nil)
     {
-        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
-        NSDictionary *previousPlistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        NSDictionary *previousApplicationsList = [previousPlistContent objectForKey:PCJSONApplicationsKey];
-        NSDictionary *previousApplicationParameters = nil;
-        if(previousApplicationsList && previousApplicationsList.count)
-        {
-            previousApplicationParameters = [previousApplicationsList objectForKey:[[previousApplicationsList allKeys] objectAtIndex:0]];
-        }
-        
 		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-
+	//	NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
 		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
 		{
 	/*		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Vous devez être connecté à Internet." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -463,25 +433,26 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
 			[alert release];*/
 		
 		}
-		else
-        {
-			RuePadCMSCoder *padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
+		else {
+			PadCMSCoder *padCMSCoder = [[PadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
-			if (![self.padcmsCoder syncServerPlistDownloadWithPassword:[RueAccessManager publisherPassword]])
+			[padCMSCoder release];
+			if (![self.padcmsCoder syncServerPlistDownload])
 			{
-				/*UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
+				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                                 message:nil
                                                                delegate:nil
                                                       cancelButtonTitle:alertCancelButtonTitle
                                                       otherButtonTitles:nil];
-				[alert show];*/
+				[alert show];
+				[alert release];
 			}
-            self.padcmsCoder = nil;
 		}
-        
+
+		        
+        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
         NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        
-		if(plistContent == nil || [plistContent count] == 0)
+		if(plistContent == nil)
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                             message:nil
@@ -489,118 +460,51 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                                                   cancelButtonTitle:alertCancelButtonTitle
                                                   otherButtonTitles:nil];
 			[alert show];
+			[alert release];
 
+		}
+		else if([plistContent count]==0)
+		{
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:alertCancelButtonTitle
+                                                  otherButtonTitles:nil];
+			[alert show];	
+			[alert release];
 		}
 		else
 		{
 			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
-            
 			NSArray *keys = [applicationsList allKeys];
 			
 			if ([keys count] > 0)
 			{
 				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
-				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
+				currentApplication = [[PCApplication alloc] initWithParameters:applicationParameters 
 																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
-                
-                if(previousApplicationParameters)
-                {
-                    [self syncronyzeApp:currentApplication fromOldApplicationParameters:previousApplicationParameters toNewApplicationParameters:applicationParameters];
-                }
-                
-                
 			}
-			else
-            {
+			else {
+				
 				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                                 message:nil
                                                                delegate:nil
                                                       cancelButtonTitle:alertCancelButtonTitle
                                                       otherButtonTitles:nil];
 				[alert show];		
+				[alert release];
 			}
 
 		}
 	}
 }
 
-- (void) changeShareMessageFromServerPlistContent:(NSDictionary*)previousContent toContent:(NSDictionary*)newContent
-{
-    NSDictionary *prevApplicationsList = [previousContent objectForKey:PCJSONApplicationsKey];
-    NSDictionary *newApplicationsList = [newContent objectForKey:PCJSONApplicationsKey];
-    
-    NSString* prevMessage = nil;
-    if(prevApplicationsList && prevApplicationsList.count)
-    {
-        NSDictionary* settingsDict = [prevApplicationsList objectForKey:[[prevApplicationsList allKeys] objectAtIndex:0]];
-        prevMessage = [settingsDict objectForKey:PCJSONApplicationShareMessageKey];
-    }
-    NSString* newMessage = nil;
-    if(newApplicationsList && newApplicationsList.count)
-    {
-        NSDictionary* settingsDict = [newApplicationsList objectForKey:[[newApplicationsList allKeys] objectAtIndex:0]];
-        newMessage = [settingsDict objectForKey:PCJSONApplicationShareMessageKey];
-    }
-    
-    if(stringExists(newMessage))
-    {
-        if(stringExists(prevMessage) && [newMessage isEqualToString:prevMessage] == NO)
-        {
-            currentApplication.shareMessage = prevMessage;
-        }
-    }
-}
-
-BOOL stringExists(NSString* str)
-{
-    return (str && [str isKindOfClass:[NSString class]] && str.length);
-}
-
-- (void) changeNewsstandIfNeededFromParameters:(NSDictionary*)previousParams toParameters:(NSDictionary*)newParams
-{
-    NSString* oldPath = [previousParams objectForKey:newsstand_cover_key];
-    NSString* newPath = [newParams objectForKey:newsstand_cover_key];
-    
-//#warning newsstand cover update uncomment "if" for release
-    if(stringExists(newPath) && (stringExists(oldPath) == NO || (stringExists(oldPath) && [newPath isEqualToString:oldPath] == NO)))
-    {
-        NSString* fullPath = [[[PCConfig serverURLString]stringByAppendingPathComponent:newPath]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        NSData* newImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fullPath]];
-        
-        if(newImageData && newImageData.length)
-        {
-            UIImage* newImage = [UIImage imageWithData:newImageData];
-            if(newImage)
-            {
-                [[UIApplication sharedApplication] setNewsstandIconImage:newImage];
-            }
-        }
-    }
-}
-
-- (void) syncronyzeApp:(PCRueApplication*)application fromOldApplicationParameters:(NSDictionary*)oldParametersList toNewApplicationParameters:(NSDictionary*)newParametersList
-{
-    [self changeNewsstandIfNeededFromParameters:oldParametersList toParameters:newParametersList];
-    
-    //[self changeShareMessageFromServerPlistContent:previousPlistContent toContent:plistContent];
-    
-}
-
 -(void)restartApplication
 {
-    return;
-    //what? restart? This just means that we are successfully subscribed to the app/purchased some item. Taras.
-    
-#ifdef RUE
-    //make all paid (except individually paid) revisions free
-    [[self shelfView] reload];
-#else
-    currentApplication = nil;
+	[currentApplication release], currentApplication = nil;
 	self.padcmsCoder = nil;
 	[self initManager];
 	[self initKiosk];
-#endif
 	
 }
 
@@ -619,8 +523,15 @@ BOOL stringExists(NSString* str)
 	}
 	
 	alreadyInit = YES;
+//	[self doFinishLoad];
 }
-
+/*
+- (void) afterHorizontalDone
+{
+	[self performSelectorOnMainThread:@selector(viewDidLoadStuff)
+                           withObject:nil
+                        waitUntilDone:NO];	
+}*/
 - (void) bindNotifications
 {
     if(IsNotificationsBinded) return;
@@ -639,170 +550,59 @@ BOOL stringExists(NSString* str)
     NSDictionary *applicationParameters = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     [currentApplication initWithParameters:applicationParameters 
                              rootDirectory:[PCPathHelper pathForPrivateDocuments]];
+    
+////    NSString* path = [[PCPathHelper issuesFolder] stringByAppendingPathComponent:@"server.plist"];
+//    NSString* path = [[PCPathHelper pathForIssueWithId:magazineViewController.magazine.identifier 
+//                                         applicationId:magazineViewController.magazine.application.identifier] 
+//                      stringByAppendingPathComponent:@"server.plist"];
+//
+//    NSLog(@"path: %@", path);
+//    
+//    NSDictionary* dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+//    [PCSQLLiteModelBuilder updateApplication:currentApplication withDictionary:dictionary];
+//    //    [[NSNotificationCenter defaultCenter] postNotificationName:PCApplicationDataWillUpdate object:nil];
 }
 
 #pragma mark - New kiosk implementation
 
-- (PCKioskShelfView *)shelfView {
-    return (PCKioskShelfView *)[self.kioskViewController.view viewWithTag:[PCKioskShelfView subviewTag]];
-}
-
-- (void)setArchivedRevisionStates {
-    
-    NSArray * archivedRevisionIds = [ArchivingDataSource allArchivedRevisionIds];
-    
-    for (PCRevision * revision in self.allRevisions) {
-        if ([archivedRevisionIds containsObject:@(revision.identifier)]) {
-            revision.state = PCRevisionStateArchived;
-        }
-    }
-}
-
 - (void) initKiosk
 {
 	if (!currentApplication) return;
-    
-    [RueSubscriptionManager sharedManager].delegate = self;
-    
-    //load all revisions
-    self.allRevisions = [NSMutableArray new];
-    
-    NSArray *issues = [self getApplication].issues;
-    for (PCIssue *issue in issues)
-    {
-        [self.allRevisions addObjectsFromArray:issue.revisions];
-    }
-    
-    [self setArchivedRevisionStates];
-    
-    self.allRevisions = [NSMutableArray arrayWithArray:[self.allRevisions sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        
-        PCRevision* rev1 = obj1;
-        PCRevision* rev2 = obj2;
-        NSDate* date1 = rev1.issue.publishDate ? rev1.issue.publishDate : rev1.createDate;
-        NSDate* date2 = rev2.issue.publishDate ? rev2.issue.publishDate : rev2.createDate;
-        
-        NSComparisonResult result = [date1 compare:date2];
-        
-        switch (result)
-        {
-            case NSOrderedAscending:
-                
-                return NSOrderedDescending;
-                
-            case NSOrderedSame:
-                if(rev1.issue.identifier > rev2.issue.identifier)
-                {
-                    return NSOrderedAscending;
-                }
-                else
-                {
-                    return NSOrderedDescending;
-                }
-                
-            case NSOrderedDescending:
-                
-                return NSOrderedAscending;
-        }
-    }]];
-    
     NSInteger           kioskBarHeight = 34.0;
     
     self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
     self.kioskNavigationBar.delegate = self;
     
-    Class kioskClass;
-    
-#ifdef RUE
-    //header
-    self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
-    self.kioskHeaderView.delegate = self;
-    [self.view addSubview:self.kioskHeaderView];
-    self.kioskHeaderView.subscribeButton.bottomLabel.text = currentApplication.subscribeButtonTitle;
-    
-    //subscription notification
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsFetched:) name:kProductFetchedNotification object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscriptionsPurchased:) name:kSubscriptionsPurchasedNotification object:nil];
+    PCKioskSubviewsFactory      *factory = [[[PCKioskSubviewsFactory alloc] init] autorelease];
 
-    //footer
-    self.kioskFooterView = [PCKioskFooterView footerViewForView:self.view];
-    self.kioskFooterView.delegate = self;
-    self.kioskFooterView.tags = currentApplication.tags;
-    [self.view addSubview:self.kioskFooterView];
-    
-    if (self.kioskFooterView.staticTags.count) {
-        self.selectedTag = self.kioskFooterView.staticTags[0];
-    }
-    
-    
-    NSInteger footerHeight = self.kioskFooterView.frame.size.height - 3;
-    NSInteger headerHeight = 136;
-    
-    kioskClass = [PCRueKioskViewController class];
-#else
-    NSInteger footerHeight = 0;
-    NSInteger headerHeight = 34;
-    
-    kioskClass = [PCKioskViewController class];
-#endif
-    
-
-    
-    //gallery
-    PCKioskSubviewsFactory      *factory = [[PCKioskSubviewsFactory alloc] init];
-    self.kioskViewController = [[kioskClass alloc] initWithKioskSubviewsFactory:factory
-                                                                                  andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
+    self.kioskViewController = [[PCKioskViewController alloc] initWithKioskSubviewsFactory:factory
+                                                                                  andFrame:CGRectMake(0, kioskBarHeight, self.view.bounds.size.width, self.view.bounds.size.height-kioskBarHeight)
                                                                              andDataSource:self];
+    
     self.kioskViewController.delegate = self;
+    
     [self.view addSubview:self.kioskViewController.view];
-    [self.view bringSubviewToFront:self.kioskViewController.view];
-    
-    UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
-    recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.kioskViewController.view addGestureRecognizer:recognizer];
-    
-#ifdef RUE
-    //[self.view bringSubviewToFront:self.subHeaderView];
-    [self.view bringSubviewToFront:self.kioskHeaderView];
-    [self.view bringSubviewToFront:self.kioskFooterView];
-    
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    [[RueSubscriptionManager sharedManager] checkForActiveSubscriptionAndNotifyDelegate];
-#else
     [self.view addSubview:self.kioskNavigationBar];
+    
     [self.kioskNavigationBar initElements];
+    
     [self.view bringSubviewToFront:self.kioskNavigationBar];
-    
-    
-#endif
-}
-
-- (void) dissmissKiosk
-{
-    self.kioskViewController.delegate = nil;
-    [self.kioskViewController.view removeFromSuperview];
-    self.kioskHeaderView.delegate = nil;
-    [self.kioskHeaderView removeFromSuperview];
-    self.kioskFooterView.delegate = nil;
-    [self.kioskFooterView removeFromSuperview];
-    
-    self.kioskNavigationBar.delegate = nil;
-    
-//    self.kioskNavigationBa
+    [self.view bringSubviewToFront:self.kioskViewController.view];
 }
 
 - (PCRevision*) revisionWithIndex:(NSInteger)index
 {
-    return [self.allRevisions objectAtIndex:index];
+    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
     
-    NSArray * sortedRevisions = [self allSortedRevisions];
-    
-    if (index>=0 && index<[sortedRevisions count])
+    NSArray *issues = [self getApplication].issues;
+    for (PCIssue *issue in issues)
     {
-        PCRevision *revision = [sortedRevisions objectAtIndex:index];
+        [allRevisions addObjectsFromArray:issue.revisions];
+    }
+    
+    if (index>=0 && index<[allRevisions count])
+    {
+        PCRevision *revision = [allRevisions objectAtIndex:index];
         return revision;
     }
     
@@ -811,7 +611,15 @@ BOOL stringExists(NSString* str)
 
 - (PCRevision*) revisionWithIdentifier:(NSInteger)identifier
 {
-    for(PCRevision *currentRevision in self.allRevisions)
+    NSMutableArray *allRevisions = [[[NSMutableArray alloc] init] autorelease];
+    
+    NSArray *issues = [self getApplication].issues;
+    for (PCIssue *issue in issues)
+    {
+        [allRevisions addObjectsFromArray:issue.revisions];
+    }
+    
+    for(PCRevision *currentRevision in allRevisions)
     {
         if(currentRevision.identifier == identifier) return currentRevision;
     }
@@ -821,64 +629,17 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - PCKioskDataSourceProtocol
 
-- (NSUInteger) indexForRevision:(PCRevision*)revision
-{
-    return [self.allRevisions indexOfObject:revision];
-}
-
-- (BOOL)isRevisionDownloadedWithIndex:(NSInteger)index
-{
-    PCRevision *revision = [self revisionWithIndex:index];
-    
-    if (revision)
-    {
-        return  [revision isDownloaded];
-    }
-    
-    return NO;
-}
-
-
-- (NSArray*) allDownloadedRevisions
-{
-    NSMutableArray* sortedRevisions = [[NSMutableArray alloc]init];
-    
-    NSMutableArray* sortedDates = [[NSMutableArray alloc]init];
-    
-    NSArray* revisionsArray = self.allRevisions;
-    NSLog(@"revisions count : %i", revisionsArray.count);
-    
-    for (PCRevision* revision in revisionsArray)
-    {
-        NSDate* downloadedDate = revision.dateOfDownload;
-        
-        if(downloadedDate)
-        {
-            int index = 0;
-            
-            for(int i = 0; i < sortedDates.count; ++i)
-            {
-                NSDate* currDate = [sortedDates objectAtIndex:i];
-                if([downloadedDate compare:currDate] == NSOrderedAscending)
-                {
-                    index++;
-                    continue;
-                }
-                else break;
-            }
-            
-            [sortedDates insertObject:downloadedDate atIndex:index];
-            [sortedRevisions insertObject:revision atIndex:index];
-            
-        }
-    }
-    
-    return [NSArray arrayWithArray:sortedRevisions];
-}
-
 - (NSInteger)numberOfRevisions
 {
-    return [self.allRevisions count];
+    NSInteger revisionsCount = 0;
+    
+    NSArray *issues = [self getApplication].issues;
+    for (PCIssue *issue in issues)
+    {
+        revisionsCount += [issue.revisions count];
+    }
+    
+    return revisionsCount;
 }
 
 - (NSString *)issueTitleWithIndex:(NSInteger)index
@@ -913,11 +674,28 @@ BOOL stringExists(NSString* str)
     return @"";
 }
 
-- (BOOL)isRevisionPaidWithIndex:(NSInteger)index
+- (BOOL)isRevisionDownloadedWithIndex:(NSInteger)index
+{
+    PCRevision *revision = [self revisionWithIndex:index];
+    
+    if (revision)
+    {
+        return  [revision isDownloaded];
+    }
+    
+    return NO;
+}
+
+ -(BOOL)isRevisionPaidWithIndex:(NSInteger)index
 {
 	PCRevision *revision = [self revisionWithIndex:index];
     
-    return [[RueSubscriptionManager sharedManager] isRevisionPaid:revision];
+    if (revision.issue)
+    {
+        return  revision.issue.paid;
+    }
+    
+    return NO;
 }
 
 - (UIImage *)revisionCoverImageWithIndex:(NSInteger)index andDelegate:(id<PCKioskCoverImageProcessingProtocol>)delegate
@@ -944,119 +722,20 @@ BOOL stringExists(NSString* str)
     return revision.issue.productIdentifier;
 }
 
-- (NSString *)issueAuthorWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.author;
-}
-
-- (NSString *)issueExcerptWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.excerpt;
-}
-
-- (NSString *)issueImageLargeURLWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.imageLargeURL;
-}
-
-- (NSString *)issueImageSmallURLWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.imageSmallURL;
-}
-
-- (NSInteger)issueWordsCountWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.wordsCount;
-}
-
-- (NSString *)issueCategoryWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.issue.category;
-}
-
-- (NSDate *)revisionDateWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    return revision.createDate;
-}
-
-- (NSArray *)allSortedRevisions {
-    
-    NSArray * allSortedRevisions = self.allRevisions;
-    
-    if (self.selectedTag) {
-        
-        NSArray * staticTagIds = [[self.kioskFooterView staticTags] valueForKey:@"tagId"];
-        
-        NSPredicate * predicate;
-        
-        if (![staticTagIds containsObject:@(self.selectedTag.tagId)])
-        {
-            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                
-                if (revision.state != PCRevisionStateArchived)
-                {
-                    for (PCTag * tag in revision.issue.tags)
-                    {
-                        if (tag.tagId == self.selectedTag.tagId)
-                        {
-                            return YES;
-                        }
-                    }
-                }
-
-                return NO;
-            }];
-        }
-        else if (self.selectedTag.tagId == TAG_ID_ARCHIVES)
-        {
-            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                
-                if (revision.state == PCRevisionStateArchived || [revision.issue isOld])
-                {
-                    return YES;
-                }
-                else
-                {
-                    return NO;
-                }
-            }];
-        }
-        else if (self.selectedTag.tagId == TAG_ID_FREE)
-        {
-            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings){
-                
-                if ([(RueIssue*)revision.issue pricingPlan] == IssuePricingPlanFree && (revision.state != PCRevisionStateArchived) && revision.issue.isOld == NO)
-                {
-                    return YES;
-                }
-                
-                return NO;
-            }];
-        }
-        else if (self.selectedTag.tagId == TAG_ID_MAIN)
-        {
-            predicate = [NSPredicate predicateWithBlock:^BOOL(PCRevision * revision, NSDictionary *bindings) {
-                
-                if (revision.state != PCRevisionStateArchived && revision.issue.isOld == NO)
-                {
-                    return YES;
-                }
-                else
-                {
-                    return NO;
-                }
-            }];
-        }
-        
-        allSortedRevisions = [self.allRevisions filteredArrayUsingPredicate:predicate];
-    }
-    
-    
-    
-    return allSortedRevisions;
-}
-
 #pragma mark - PCKioskViewControllerDelegateProtocol
+
+- (Class) revisionViewControllerClass
+{
+    Class revisionViewControllerClass = [PCRevisionViewController class];
+#ifdef DCCV
+    revisionViewControllerClass = [DCCVRevisionViewController class];
+#endif
+#ifdef MAG_AIR
+    revisionViewControllerClass = [AIRRevisionViewController class];
+#endif
+    
+    return revisionViewControllerClass;
+}
 
 - (void) tapInKiosk
 {
@@ -1071,53 +750,25 @@ BOOL stringExists(NSString* str)
     {
         [self checkInterfaceOrientationForRevision:currentRevision];
 
-        //[PCDownloadManager sharedManager].revision = currentRevision;
-        //[[PCDownloadManager sharedManager] startDownloading];
+        [PCDownloadManager sharedManager].revision = currentRevision;
+        [[PCDownloadManager sharedManager] startDownloading];
         
-//        if (_revisionViewController == nil)
-//        {
+        if (_revisionViewController == nil)
+        {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-#ifdef RUE
-            _revisionViewController = [[PCRueRevisionViewController alloc]
+            _revisionViewController = [[[self revisionViewControllerClass] alloc]
                                        initWithNibName:@"PCRevisionViewController"
                                        bundle:bundle];
-#else
-            _revisionViewController = [[PCRevisionViewController alloc]
-                                       initWithNibName:@"PCRevisionViewController"
-                                       bundle:bundle];
-#endif
         
             [_revisionViewController setRevision:currentRevision];
+            _revisionViewController.mainViewController = (PCMainViewController *)self;
+            _revisionViewController.initialPageIndex = 0;
+            [self.view addSubview:_revisionViewController.view];
+            self.mainView = _revisionViewController.view;
+            self.mainView.tag = 100;
             
-            [self showRevisioViewController];
             
-//        }
-    }
-}
-
-- (void) showRevisioViewController
-{
-    _revisionViewController.mainViewController = (PCMainViewController *)self;
-    _revisionViewController.initialPageIndex = 0;
-    
-#ifdef RUE
-    [_revisionViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-    [_revisionViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    
-    [[self navigationController] pushViewController:_revisionViewController animated:YES completion:nil];
-#else
-    [self.view addSubview:_revisionViewController.view];
-#endif
-    
-    self.mainView = _revisionViewController.view;
-    self.mainView.tag = 100;
-}
-
-- (void) swipeLeft:(UISwipeGestureRecognizer*)recognizer
-{
-    if(_revisionViewController)
-    {
-        [self showRevisioViewController];
+        }
     }
 }
 
@@ -1141,17 +792,29 @@ BOOL stringExists(NSString* str)
 	alert.delegate = self;
     alert.tag = index;
 	[alert show];
+	[alert release];
 }
 
 - (void) downloadRevisionWithIndex:(NSInteger)index
 {
-    PCRevision *revision = [self.allRevisions objectAtIndex:index];//[self revisionWithIndex:index];
+    PCRevision *revision = [self revisionWithIndex:index];
     
     if(revision)
     {
-		if([self isNotConnectedToNetwork])
+		
+		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
+	//	NetworkStatus remoteHostStatus = [[VersionManager sharedManager].reachability currentReachabilityStatus];
+		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
 		{
-			[self showNoConnectionAlert];
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
+                                                                                                           value:@"You must be connected to the Internet."]
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                           value:@"OK"]
+                                                  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
 			return;
 			
 		}
@@ -1173,93 +836,72 @@ BOOL stringExists(NSString* str)
 -(void) purchaseRevisionWithIndex:(NSInteger)index
 {
     PCRevision *revision = [self revisionWithIndex:index];
-    
-    [[RueSubscriptionManager sharedManager] purchaseRevision:revision completion:^(NSError* error){
-        
-        if(error)
-        {
-            [self showAlertWithError:error];
-        }
-        else
-        {
-            revision.issue.paid = YES;
-        }
-        
-        [[self shelfView] updateElementsButtons];
-    }];
-    
-    [[self shelfView] updateElementsButtons];
-}
+	if (revision)
+	{
+		NSLog(@"doPay");
+		
+		NSLog(@"productId: %@", revision.issue.productIdentifier);
 
-- (void) archiveRevisionWithIndex:(NSInteger)index {
-    
-    PCRevision *revision = [self revisionWithIndex:index];
-    revision.state = PCRevisionStateArchived;
-    
-    [[self shelfView] reload];
-    
-    [ArchivingDataSource addId:revision.identifier];
-    
-    
-}
+		if([[InAppPurchases sharedInstance] canMakePurchases])
+		{
+			
+			[[InAppPurchases sharedInstance] purchaseForProductId:revision.issue.productIdentifier];
+			
+		}
+		else
+		{
+			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"ALERT_TITLE_CANT_MAKE_PURCHASE"
+                                                                                                           value:@"You can't make the purchase"]
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
+                                                                                                           value:@"OK"]
+                                                  otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+		}
 
-- (void)restoreRevisionWithIndex:(NSInteger)index {
-    PCRevision *revision = [self revisionWithIndex:index];
-    revision.state = PCRevisionStatePublished;
-    
-    [[self shelfView] reload];
-    
-    [ArchivingDataSource removeId:revision.identifier];
+	}
+	
 }
 
 - (void) updateRevisionWithIndex:(NSInteger) index
 {
 }
 
-
-#pragma mark - I don't Know what is this.
-
-- (void)previewRevisionWithIndex:(NSInteger)index {
-    
-}
-
-- (BOOL)previewAvailableForRevisionWithIndex:(NSInteger)index {
-    return NO;
-}
-
 #pragma mark - Download flow
 
 - (void)doDownloadRevisionWithIndex:(NSNumber *)index
 {
-    @autoreleasepool {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-        PCRevision          *revision = [self revisionWithIndex:[index integerValue]];
-        
-        if(revision)
-        {
-            [revision download:^{
-                [self performSelectorOnMainThread:@selector(downloadRevisionFinishedWithIndex:)
-                                       withObject:index
-                                    waitUntilDone:NO];
-            } failed:^(NSError *error) {
-                [self performSelectorOnMainThread:@selector(downloadRevisionFailedWithIndex:)
-                                       withObject:index
-                                    waitUntilDone:NO];
-            } canceled:^{
-                [self performSelectorOnMainThread:@selector(downloadRevisionCanceledWithIndex:)
-                                       withObject:index
-                                    waitUntilDone:NO];
-            } progress:^(float progress) {
-                NSDictionary        *info = [NSDictionary dictionaryWithObjectsAndKeys:index, @"index", [NSNumber numberWithFloat:progress], @"progress", nil];
-                
-                [self performSelectorOnMainThread:@selector(downloadingRevisionProgressUpdate:)
-                                       withObject:info
-                                    waitUntilDone:NO];
-            }];
-        }
+    PCRevision          *revision = [self revisionWithIndex:[index integerValue]];
     
-    
+    if(revision)
+    {
+        [revision download:^{
+            [self performSelectorOnMainThread:@selector(downloadRevisionFinishedWithIndex:)
+                                   withObject:index
+                                waitUntilDone:NO];
+        } failed:^(NSError *error) {
+            [self performSelectorOnMainThread:@selector(downloadRevisionFailedWithIndex:)
+                                   withObject:index
+                                waitUntilDone:NO];
+        } canceled:^{
+            [self performSelectorOnMainThread:@selector(downloadRevisionCanceledWithIndex:)
+                                   withObject:index
+                                waitUntilDone:NO];
+        } progress:^(float progress) {
+            NSDictionary        *info = [NSDictionary dictionaryWithObjectsAndKeys:index, @"index", [NSNumber numberWithFloat:progress], @"progress", nil];
+            
+            [self performSelectorOnMainThread:@selector(downloadingRevisionProgressUpdate:)
+                                   withObject:info
+                                waitUntilDone:NO];
+        }];
     }
+    
+    
+    [pool release];
 }
 
 - (void)downloadRevisionCanceledWithIndex:(NSNumber*)index
@@ -1278,26 +920,6 @@ BOOL stringExists(NSString* str)
 {
     [self.kioskViewController downloadFinishedWithRevisionIndex:[index integerValue]];
     
-    PCRevision *revision = [self revisionWithIndex:[index integerValue]];
-    
-    [RueDownloadManager startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
-        
-        if(progress < 1)
-        {
-            [self.kioskViewController downloadingProgressChangedWithRevisionIndex:[index integerValue]
-                                                                   andProgess:progress];
-            return YES;
-        }
-        else
-        {
-            [(PCRueKioskViewController*)self.kioskViewController downloadingContentFinishedWithRevisionIndex:[index integerValue]];
-            return NO;
-        }
-        
-    }];
-    
-    [(PCRueKioskViewController*)self.kioskViewController downloadingContentStartedWithRevisionIndex:[index integerValue]];
-    
 }
 
 - (void)downloadRevisionFailedWithIndex:(NSNumber*)index
@@ -1315,6 +937,7 @@ BOOL stringExists(NSString* str)
                                 otherButtonTitles:nil];
     
     [errorAllert show];
+    [errorAllert release];
     
     PCRevision      *revision = [self revisionWithIndex:[index integerValue]];
     if(revision)
@@ -1363,6 +986,7 @@ BOOL stringExists(NSString* str)
     {
         [self presentModalViewController:searchViewController animated:YES];   
     }
+    [searchViewController release];
 }
 
 - (void) showSubscriptionsPopupInRect:(CGRect)rect
@@ -1379,204 +1003,6 @@ BOOL stringExists(NSString* str)
     subscriptionsMenu.alpha = subscriptionsMenu.hidden?0.0:1.0;
 }
 
-#pragma mark - PCKioskHeaderViewDelegate
-
-- (void)contactUsButtonTapped
-{
-    NSMutableDictionary * emailParams = [NSMutableDictionary new];
-    
-    if (currentApplication.contactEmailSubject) {
-        [emailParams setObject:currentApplication.contactEmailSubject forKey:PCApplicationNotificationTitleKey];
-    }
-    
-    if (currentApplication.contactEmailText) {
-        [emailParams setObject:currentApplication.contactEmailText forKey:PCApplicationNotificationMessageKey];
-    }
-    
-    self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
-    
-    NSString * contactEmail = @"";
-    if (currentApplication.contactEmail)
-    {
-        contactEmail = currentApplication.contactEmail;
-    }
-    [self.emailController.emailViewController setToRecipients:@[contactEmail]];
-    
-    self.emailController.delegate = self;
-    [self.emailController emailShow];
-    
-}
-
-- (void)restorePurchasesButtonTapped:(UIButton*)sender
-{
-//    [[InAppPurchases sharedInstance] renewSubscription:YES];
-    
-    if([self isNotConnectedToNetwork])
-    {
-        [self showNoConnectionAlert];
-    }
-    else
-    {
-        sender.enabled = NO;
-        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
-        
-        [[RueSubscriptionManager sharedManager] restorePurchasesCompletion:^(NSError *error) {
-            
-            if(error)
-            {
-                [self showAlertWithError:error];
-            }
-            
-            if([[RueSubscriptionManager sharedManager] isSubscribed])
-            {
-                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
-            }
-            else
-            {
-                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
-            }
-            
-            [[self shelfView] updateElementsButtons];
-            sender.enabled = YES;
-        }];
-        
-        [[self shelfView] updateElementsButtons];
-    }
-}
-
-- (void)subscribeButtonTapped:(PCKioskSubscribeButton*)button
-{
-    if([self isNotConnectedToNetwork])
-    {
-        [self showNoConnectionAlert];
-    }
-    else
-    {
-        button.state = PCKioskSubscribeButtonStateSubscribing;
-        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
-        
-        [[RueSubscriptionManager sharedManager] getAvalialeSubscriptionsToBlock:^(NSArray *avaliableSubscriptions, NSError *error) {
-            
-            if(error)
-            {
-                [self showAlertWithError:error];
-            }
-            else
-            {
-                NSArray* subscriptionsList = avaliableSubscriptions;
-                CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
-                NSString* title = currentApplication.subscriptionsListTitle;
-                
-                //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
-                //self.subscribePopoverController.delegate = self;
-                
-                SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
-                sheet.delegate = self;
-                sheet.initiatorButton = button;
-                [sheet showFromRect:buttonRect inView:self.view animated:YES];
-            }
-            
-            button.state = PCKioskSubscribeButtonStateNotSubscribed;
-            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
-            [[self shelfView]updateElementsButtons];
-        }];
-        [[self shelfView]updateElementsButtons];
-    }
-}
-
-- (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision
-{
-    if([self isNotConnectedToNetwork])
-    {
-        [self showNoConnectionAlert];
-    }
-    else
-    {
-        //button.state = PCKioskSubscribeButtonStateSubscribing;
-        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
-        
-        [[RueSubscriptionManager sharedManager] getAvalialeSubscriptionsToBlock:^(NSArray *avaliableSubscriptions, NSError *error) {
-            
-            if(error)
-            {
-                [self showAlertWithError:error];
-            }
-            else
-            {
-                NSArray* subscriptionsList = avaliableSubscriptions;
-                CGRect buttonRect = [self.view convertRect:button.frame fromView:button.superview];
-                NSString* title = currentApplication.subscriptionsListTitle;
-                
-                //self.subscribePopoverController = [SubscribeMenuPopuverController showMenuPopoverWithSubscriptions:subscriptionsList fromRect:buttonRect inView:self.view popoverTitle:titile];
-                //self.subscribePopoverController.delegate = self;
-                
-                SubscriptionMenuActionSheet* sheet = [[SubscriptionMenuActionSheet alloc]initWithTitle:title subscriptions:subscriptionsList];
-                sheet.delegate = self;
-                //sheet.initiatorButton = button;
-                [sheet showFromRect:buttonRect inView:self.view animated:YES];
-                
-                
-            }
-            
-            [[self shelfView] updateElementsButtons];
-            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
-        }];
-        
-        [[self shelfView]updateElementsButtons];
-    }
-}
-
-- (void)shareButtonTapped
-{
-    PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
-    sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
-    sharePopup.facebookMessage = currentApplication.shareMessage;//currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
-    sharePopup.twitterMessage = currentApplication.shareMessage;//currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
-    sharePopup.googleMessage = currentApplication.shareMessage;//currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];
-    sharePopup.descriptionLabel.text = currentApplication.shareMessage;
-    sharePopup.postUrl = currentApplication.shareUrl;
-    sharePopup.delegate = self;
-    [sharePopup show];
-}
-
-- (void)logoButtonTapped {
-    if (self.selectedTag.tagId != TAG_ID_MAIN) {
-        [self.kioskFooterView selectFirstTag];
-    } else {
-        if ([[self shelfView] respondsToSelector:@selector(logoButtonTapped)]) {
-            [[self shelfView] logoButtonTapped];
-        }
-    }
-}
-
-- (void) secretGestureRecognized
-{
-    [self showPublisherPasswordAlert];
-}
-
-#pragma mark - PCKioskFooterViewDelegate
-
-- (void)kioskFooterView:(PCKioskFooterView *)footerView didSelectTag:(PCTag *)tag
-{
-    
-    NSLog(@"title : %@, id : %i", tag.tagTitle, tag.tagId);
-    
-    self.selectedTag = tag;
-    
-    PCKioskShelfView * shelfView = [self shelfView];
-    
-    if (tag.tagId == TAG_ID_MAIN)
-    {
-        [shelfView showSubHeader:NO withTitle:nil];
-    }
-    else
-    {
-        [shelfView showSubHeader:YES withTitle:tag.tagTitle];
-    }
-    
-    shelfView.shouldScrollToTopAfterReload = YES;
-    [self shelfView].pageControl.currentPage = 1;
-}
 
 #pragma mark - PCSearchViewControllerDelegate
 
@@ -1594,12 +1020,12 @@ BOOL stringExists(NSString* str)
         if (_revisionViewController == nil)
         {
             NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"PadCMS-CocoaTouch-Core-Resources" withExtension:@"bundle"]];
-            _revisionViewController = [[PCRevisionViewController alloc] 
+            _revisionViewController = [[[self revisionViewControllerClass] alloc]
                                        initWithNibName:@"PCRevisionViewController"
                                        bundle:bundle];
          
             [_revisionViewController setRevision:currentRevision];
-            _revisionViewController.mainViewController = (PCMainViewController *)self;
+            _revisionViewController.mainViewController = self;
             _revisionViewController.initialPageIndex = pageIndex;
             [self.view addSubview:_revisionViewController.view];
             self.mainView = _revisionViewController.view;
@@ -1608,91 +1034,30 @@ BOOL stringExists(NSString* str)
     }
 }
 
-#pragma mark - PCKioskPopupViewDelegate
-
-- (void)popupViewDidHide:(PCKioskPopupView *)popupView {
-    if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
-        [self showForOurReadersPopup];
-    }
-}
-
-- (void)showForOurReadersPopup
-{
-    PCKioskNotificationPopup * popup = [[PCKioskNotificationPopup alloc] initWithSize:CGSizeMake(self.view.frame.size.width, 155) viewToShowIn:self.view];
-    popup.titleLabel.text = @"À nos lecteurs";
-    popup.descriptionLabel.text = currentApplication.messageForReaders;
-    [popup sizeToFitDescriptionLabelText];
-    
-    self.kioskNotificationPopup = popup;
-    [popup show];
-}
-
-- (void) hideForOurReadersPopup
-{
-    if(self.kioskNotificationPopup)
-    {
-        [self.kioskNotificationPopup hideAnimated:NO completion:^{
-            self.kioskNotificationPopup = nil;
-        }];
-    }
-}
-
 #pragma mark - UIAlertViewDelegate
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView == self.publisherPasswordAlert && buttonIndex == 1)
-    {
-        NSString* enteredText = [(PublisherPasswordAlertView*)alertView text];
-        [RueAccessManager confirmPassword:enteredText completion:^(NSError *error) {
-            
-            if(error)
-            {
-                [self showAlertWithError:error];
-            }
-            else
-            {
-                [self update];
-            }
-        }];
-    }
-    else
-    {
-        if(buttonIndex == 1)
+	if(buttonIndex==1)
+	{
+        NSInteger       index = alertView.tag;
+        PCRevision *revision = [self revisionWithIndex:index];
+        
+        if(revision)
         {
-            NSInteger       index = alertView.tag;
-            PCRevision *revision = [self revisionWithIndex:index];
-            
-            if(revision)
+            PCDownloadManager* manager = [PCDownloadManager sharedManager];
+            if (manager.revision == revision)
             {
-                PCDownloadManager* manager = [PCDownloadManager sharedManager];
-                if (manager.revision == revision)
-                {
-                    [manager cancelAllOperations];
-                }
-                
-                if (revision)
-                {
-                    [revision deleteContent];
-                    [revision deleteFromDownloadManager];
-                    revision.state = PCRevisionStatePublished;
-                    [ArchivingDataSource removeId:revision.identifier];
-                    [self.kioskViewController updateRevisionWithIndex:index];
-                    
-                    [[self shelfView] reload];
-                }
+                [manager cancelAllOperations];
+            }
+            
+            if (revision)
+            {
+                [revision deleteContent];
+                [self.kioskViewController updateRevisionWithIndex:index];
             }
         }
-    }
-}
-
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
-{
-    if(alertView == self.publisherPasswordAlert)
-    {
-        return [(PublisherPasswordAlertView*)alertView hasText];
-    }
-    return YES;
+	}
 }
 
 #pragma mark - interface orientations
@@ -1754,182 +1119,6 @@ BOOL stringExists(NSString* str)
             }
         }
     }
-}
-
-#pragma mark PCEmailControllerDelegate methods
-
-- (void)dismissPCEmailController:(MFMailComposeViewController *)currentPCEmailController
-{
-    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
-
-- (void)showPCEmailController:(MFMailComposeViewController *)emailControllerToShow
-{
-    if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
-    {
-        [self presentViewController:emailControllerToShow animated:YES completion:nil];
-    }
-    else
-    {
-        [self presentModalViewController:emailControllerToShow animated:YES];
-    }
-}
-
-#pragma mark TwitterNewControllerDelegate methods
-
-- (void)dismissPCNewTwitterController:(TWTweetComposeViewController *)currentPCTwitterNewController
-{
-    if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
-
-- (void)showPCNewTwitterController:(TWTweetComposeViewController *)tweetController
-{
-    if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
-    {
-        [self presentViewController:tweetController animated:YES completion:nil];
-    }
-    else
-    {
-        [self presentModalViewController:tweetController animated:YES];
-    }
-}
-
-#pragma mark - RueSubscriptionManagerDelegate Protocol
-
-- (NSArray*) subscriptionSchemes
-{
-    return currentApplication.subscriptionsSchemes;
-}
-
-- (NSArray*) allIssues
-{
-    return [self getApplication].issues;
-}
-
-#pragma mark - SubscribeMenuPopuverDelegate Protocol
-
-- (void) subscribtionScheme:(SubscriptionScheme *)scheme selectedInPopove:(SubscribeMenuPopuverController *)popover
-{
-    [self.subscribePopoverController dismissPopoverAnimated:YES];
-    self.subscribePopoverController = nil;
-    
-    [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
-     
-        if(error)
-        {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                             message:error.localizedDescription
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil];
-            [alert show];
-        }
-        else
-        {
-            self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
-            [[self shelfView] reload];
-        }
-    }];
-}
-
-- (void) subscriptionIsActive:(SubscriptionScheme*)activeSubscriptionScheme
-{
-    self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
-    [[self shelfView]updateElementsButtons];
-}
-
-#pragma mark - UIActionSheetDelegate Protocol
-
-- (void) actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    SubscriptionScheme* scheme = nil;
-    
-    NSArray* subscrList = [(SubscriptionMenuActionSheet*)actionSheet subscriptions];
-    
-    if(subscrList && subscrList.count > buttonIndex)
-    {
-        scheme = subscrList[buttonIndex];
-    }
-    
-    PCKioskSubscribeButton* initiator = [(SubscriptionMenuActionSheet*)actionSheet initiatorButton];
-    
-    if(scheme)
-    {
-        initiator.state = PCKioskSubscribeButtonStateSubscribing;
-        self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribing;
-        
-        [[RueSubscriptionManager sharedManager] subscribeForScheme:scheme completion:^(NSError *error) {
-            
-            if(error)
-            {
-                [self showAlertWithError:error];
-                initiator.state = PCKioskSubscribeButtonStateNotSubscribed;
-                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateNotSubscribed;
-            }
-            else
-            {
-                initiator.state = PCKioskSubscribeButtonStateSubscribed;
-                self.kioskHeaderView.subscribeButton.state = PCKioskSubscribeButtonStateSubscribed;
-            }
-            
-            [[self shelfView] updateElementsButtons];
-        }];
-        
-        [[self shelfView]updateElementsButtons];
-    }
-}
-
-#pragma mark - Alerts
-
-- (void) showPublisherPasswordAlert
-{
-    self.publisherPasswordAlert = [[PublisherPasswordAlertView alloc]initWithTitle:@"Publisher password." message:nil delegate:self cancelButtonTitle:@"Cancel" confirmButtonTitle:@"OK"];
-
-    
-    
-    [self.publisherPasswordAlert show];
-}
-
-- (void) showAlertWithError:(NSError*)error
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:error.localizedDescription
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-    [alert show];
-}
-
-- (BOOL) isNotConnectedToNetwork
-{
-    AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-    return (remoteHostStatus == AFNetworkReachabilityStatusNotReachable);
-}
-
-- (void) showNoConnectionAlert
-{
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-                                                                                                   value:@"You must be connected to the Internet."]
-                                                    message:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:[PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-                                                                                                   value:@"OK"]
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 
 @end
