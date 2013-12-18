@@ -98,24 +98,7 @@ static NSMutableDictionary* active_dovnloaders;
         if (!self.revision) return;
         if (_httpClient.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable)
         {
-            //        NSString* message = [PCLocalizationManager localizedStringForKey:@"MSG_NO_NETWORK_CONNECTION"
-            //                                                                   value:@"You must be connected to the Internet."];
-            //
-            //        NSString    *title = [PCLocalizationManager localizedStringForKey:@"TITLE_WARNING"
-            //                                                                    value:@"Warning!"];
-            //
-            //        NSString    *buttonTitle = [PCLocalizationManager localizedStringForKey:@"BUTTON_TITLE_OK"
-            //                                                                          value:@"OK"];
-            //
-            //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
-            //                                                        message:message
-            //                                                       delegate:nil
-            //                                              cancelButtonTitle:buttonTitle
-            //                                              otherButtonTitles:nil];
-            //        [alert show];
-            //        [alert release];
             return;
-            
         }
         [self clearData];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boost:) name:PCBoostPageNotification object:nil];
