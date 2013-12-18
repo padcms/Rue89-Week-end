@@ -53,14 +53,21 @@ static ImagesBank* bank = nil;
 
 - (void) addToLoadedImages:(ImagesBankImage*)image forKey:(NSString*)key
 {
+    [_loadedImages setObject:image forKey:key];
     [_imagesNames addObject:key];
-    if(_imagesNames.count > _itemsCacheSize)
+    
+    if(_imagesNames.count > _loadedImages.count)
     {
-        NSString* keyToDelete = [_imagesNames objectAtIndex:0];
-        [_loadedImages removeObjectForKey:keyToDelete];
+        NSRange rangeToRemove = {0,  _imagesNames.count - _loadedImages.count};
+        [_imagesNames removeObjectsInRange:rangeToRemove];
     }
     
-    [_loadedImages setObject:image forKey:key];
+    if(_loadedImages.count > _itemsCacheSize)
+    {
+        NSString* keyToDelete = [_imagesNames objectAtIndex:0];
+        [_imagesNames removeObjectAtIndex:0];
+        [_loadedImages removeObjectForKey:keyToDelete];
+    }
 }
 
 - (void) getImageWithName:(NSString*)fileName path:(NSString*)imagePath toBlock:(void(^)(UIImage* image, NSError* error))completionBlock
