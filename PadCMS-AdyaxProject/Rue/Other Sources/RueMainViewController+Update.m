@@ -110,12 +110,12 @@
 
 - (void) showUpdateAnimation
 {
-    
+    [self.kioskHeaderView.updateAppActivity startAnimating];
 }
 
 - (void) hideUpdateAnimation
 {
-    
+    [self.kioskHeaderView.updateAppActivity stopAnimating];
 }
 
 - (void) destroyKiosk

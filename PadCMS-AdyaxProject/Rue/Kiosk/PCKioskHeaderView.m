@@ -18,7 +18,6 @@
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* restorePurchasesActivity;
 
-
 @end
 
 @implementation PCKioskHeaderView
@@ -67,6 +66,7 @@
     fiveRecognizer.cancelsTouchesInView = YES;
     [self.logoButton addGestureRecognizer:fiveRecognizer];
     
+    self.updateAppActivity.layer.cornerRadius = (int) (self.updateAppActivity.frame.size.width / 2);
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

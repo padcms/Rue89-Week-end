@@ -27,4 +27,6 @@
 
 @property (strong, nonatomic) IBOutlet PCKioskSubscribeButton *subscribeButton;
 
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* updateAppActivity;
+
 @end
