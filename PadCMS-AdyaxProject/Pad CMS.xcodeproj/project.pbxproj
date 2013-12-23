@@ -272,6 +272,7 @@
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A06185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A01185B2FAF00FB586A /* Localizable.strings */; };
 		2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */; };
+		2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1600,6 +1601,8 @@
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA76A02185B2FAF00FB586A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
 		2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueMainViewController+Update.m"; sourceTree = "<group>"; };
+		2DAC91B718688FF5000B4CAC /* SimpleHorizontalPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHorizontalPageViewController.h; sourceTree = "<group>"; };
+		2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHorizontalPageViewController.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2845,6 +2848,8 @@
 		2D995ECB186051D400E2457F /* G */ = {
 			isa = PBXGroup;
 			children = (
+				2DAC91B718688FF5000B4CAC /* SimpleHorizontalPageViewController.h */,
+				2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */,
 			);
 			path = G;
 			sourceTree = "<group>";
@@ -5017,6 +5022,7 @@
 				2D995E71186050FB00E2457F /* PCKioskIntroPopupView.m in Sources */,
 				2D995E8A186050FB00E2457F /* FacebookPostConfirmView.m in Sources */,
 				2D995E97186050FB00E2457F /* RTLabel.m in Sources */,
+				2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */,
 				2D995E98186050FB00E2457F /* RTLabelWithWordWrap.m in Sources */,
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
 				2D995E62186050FB00E2457F /* PCKioskPageControl.m in Sources */,

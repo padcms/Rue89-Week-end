@@ -312,38 +312,36 @@
 //        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
 //    }
     
-//    for (PCPageElement* element in self.page.elements)
-//    {
-////        CGRect rect = [element rectForElementType:PCPDFActiveZoneActionVideo];
-//        
-//        [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//            
-//            NSString* keyStr = key;
-//            
-//            if([keyStr hasPrefix:PCPDFActiveZoneActionVideo])
-//            {
-//                CGRect rect = CGRectFromString(obj);
-//                if (!CGRectEqualToRect(rect, CGRectZero))
-//                {
-//                                CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
-//                                float scale = pageSize.width/element.size.width;
-//                                rect.size.width *= scale;
-//                                rect.size.height *= scale;
-//                                rect.origin.x *= scale;
-//                                rect.origin.y *= scale;
-//                                rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
-//                    
-//                    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//                    btn.userInteractionEnabled = NO;
-//                    btn.backgroundColor = [UIColor greenColor];
-//                    btn.alpha = 0.3;
-//                    btn.frame = rect;
-//                    [self.mainScrollView addSubview:btn];
-//                    
-//                }
-//            }
-//        }];
-//    }
+    for (PCPageElement* element in self.page.elements)
+    {
+        [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            CGRect rect = CGRectFromString(obj);
+            if (!CGRectEqualToRect(rect, CGRectZero))
+            {
+                CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
+                float scale = pageSize.width/element.size.width;
+                rect.size.width *= scale;
+                rect.size.height *= scale;
+                rect.origin.x *= scale;
+                rect.origin.y *= scale;
+                rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+                
+                UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                btn.userInteractionEnabled = NO;
+                btn.backgroundColor = [UIColor greenColor];//colorWithRed:((float)rand())/255.0 green:((float)rand())/255.0 blue:((float)rand())/255.0 alpha:1];
+                btn.alpha = 0.3;
+                btn.frame = rect;
+                
+                
+                btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+                btn.titleLabel.minimumScaleFactor = 0.01;
+                
+                [btn setTitle:key forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [self.mainScrollView addSubview:btn];
+            }
+        }];
+    }
 }
 
 @end

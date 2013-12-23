@@ -19,6 +19,8 @@
 @property (nonatomic, weak) UIView* pageView;
 @property (nonatomic, weak) UIScrollView* mainScrollView;
 
+@property (nonatomic, assign) BOOL isHorizontal;
+
 - (void) presentElement:(PCPageElementVideo*)element ofPage:(PCPage*)page;
 
 @end

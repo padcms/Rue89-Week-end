@@ -64,6 +64,13 @@ typedef enum{
     }
 }
 
+- (void) setIsHorizontal:(BOOL)isHorizontal
+{
+    
+    
+    
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -88,6 +95,10 @@ typedef enum{
 
 - (void)presentURL:(NSString *)url
 {
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+    
     _currentPlayerView = [self createWebView];
     [self createFullScreenButton];
     
@@ -131,8 +142,11 @@ typedef enum{
     
     if(self.webView)
     {
+        [self.webView loadHTMLString:@"about:blank" baseURL:nil];
         [self.webView stopLoading];
+        self.webView.delegate = nil;
         self.webView = nil;
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
     }
     if(self.player)
     {
@@ -298,6 +312,7 @@ typedef enum{
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    NSLog(@"loading : %@", request.debugDescription);
     if ([[request.URL absoluteURL] isEqual:[self.videoURL absoluteURL]]) {
         return YES;
     }
@@ -308,6 +323,7 @@ typedef enum{
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [super webViewDidFinishLoad:webView];
+    NSLog(@"web loaded : %@", webView.request.debugDescription);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
