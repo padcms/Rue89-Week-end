@@ -18,6 +18,7 @@
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
 		2D5082B71861CD37006D699A /* PCPage+VideoDownloading.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5082B61861CD37006D699A /* PCPage+VideoDownloading.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2D5082BB18620208006D699A /* RueHTMLPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5082BA18620208006D699A /* RueHTMLPageViewController.m */; };
 		2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D85DF2C180EB99C00459330 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -270,6 +271,7 @@
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A06185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A01185B2FAF00FB586A /* Localizable.strings */; };
+		2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1212,6 +1214,8 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D5082B61861CD37006D699A /* PCPage+VideoDownloading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPage+VideoDownloading.m"; sourceTree = "<group>"; };
+		2D5082B918620208006D699A /* RueHTMLPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueHTMLPageViewController.h; sourceTree = "<group>"; };
+		2D5082BA18620208006D699A /* RueHTMLPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueHTMLPageViewController.m; sourceTree = "<group>"; };
 		2D85DF2C180EB99C00459330 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
@@ -1595,6 +1599,7 @@
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA76A02185B2FAF00FB586A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
+		2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueMainViewController+Update.m"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2757,6 +2762,8 @@
 				2D995EE2186051D400E2457F /* RueFixedIllustrationArticleTouchablePageViewController */,
 				2D995EEA186051D400E2457F /* RueSlideshowViewController.h */,
 				2D995EEB186051D400E2457F /* RueSlideshowViewController.m */,
+				2D5082B918620208006D699A /* RueHTMLPageViewController.h */,
+				2D5082BA18620208006D699A /* RueHTMLPageViewController.m */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -3116,6 +3123,7 @@
 			children = (
 				2D995F9F186060DE00E2457F /* RueMainViewController.h */,
 				2D995F9D18605EC300E2457F /* RueMainViewController.m */,
+				2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */,
 				2D995F881860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.h */,
 				2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */,
 				2D995F8A1860555000E2457F /* PCRueAppDelegate.h */,
@@ -5067,6 +5075,7 @@
 				2D995F4F186051D500E2457F /* RueScrollingPaneViewController.m in Sources */,
 				2D995F5F186051D500E2457F /* RueGalleryWithOverlaysViewController.m in Sources */,
 				2D995E76186050FB00E2457F /* PCRevisionSummaryCell.m in Sources */,
+				2D5082BB18620208006D699A /* RueHTMLPageViewController.m in Sources */,
 				2D995F61186051D500E2457F /* MKStoreKit+PadCMS.m in Sources */,
 				2D995F45186051D500E2457F /* CustomAnimation.m in Sources */,
 				2D995F52186051D500E2457F /* PCPageElementManager+RuePageElementManager.m in Sources */,
@@ -5103,6 +5112,7 @@
 				2D995F85186051D500E2457F /* InAppPurchases+CoreChanges.m in Sources */,
 				2D995F48186051D500E2457F /* RuePopupViewController.m in Sources */,
 				2D995D2618604AE600E2457F /* PCRueKioskViewController.m in Sources */,
+				2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */,
 				2D995D2418604AE600E2457F /* PCKioskSubscribeButton.m in Sources */,
 				2D995E73186050FB00E2457F /* PCKioskSharePopupView.m in Sources */,
 				2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */,

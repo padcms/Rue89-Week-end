@@ -199,38 +199,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     }
 }
 
-- (void) update
-{
-    if([self isNotConnectedToNetwork])
-    {
-        return;
-    }
-    
-    [self destroyKiosk];
-    
-    [self performSelector:@selector(createKiosk) withObject:nil afterDelay:0.1];
-}
-
-- (void) destroyKiosk
-{
-    self.revisionViewController.mainViewController = nil;
-    self.revisionViewController = nil;
-    currentApplication = nil;
-    [self dissmissKiosk];
-    [self hideForOurReadersPopup];
-}
-
-- (void) createKiosk
-{
-    [self initManager];
-    [self initKiosk];
-    
-    [self showForOurReadersPopup];
-    
-    self.needUpdate = NO;
-    
-}
-
 - (BOOL) isKioskPresented
 {
     if(mainView == nil)
@@ -388,43 +356,31 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     if (currentApplication == nil)
     {
-        NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
-        NSDictionary *previousPlistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        NSDictionary *previousApplicationsList = [previousPlistContent objectForKey:PCJSONApplicationsKey];
-        NSDictionary *previousApplicationParameters = nil;
-        if(previousApplicationsList && previousApplicationsList.count)
-        {
-            previousApplicationParameters = [previousApplicationsList objectForKey:[[previousApplicationsList allKeys] objectAtIndex:0]];
-        }
+        NSDictionary *previousApplicationParameters = [RuePadCMSCoder applicationParametersFromCuurentPlistContent];
         
-		AFNetworkReachabilityStatus remoteHostStatus = [PCDownloadApiClient sharedClient].networkReachabilityStatus;
-
-		if(remoteHostStatus == AFNetworkReachabilityStatusNotReachable) 
+		if([PCDownloadApiClient sharedClient].networkReachabilityStatus != AFNetworkReachabilityStatusNotReachable)
 		{
-	/*		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Vous devez être connecté à Internet." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-			[alert show];
-			[alert release];*/
-		
-		}
-		else
-        {
-			RuePadCMSCoder *padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
+			RuePadCMSCoder* padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
 			self.padcmsCoder = padCMSCoder;
-			if (![padCMSCoder syncServerPlistDownloadWithPassword:[RueAccessManager publisherPassword]])
-			{
-				/*UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
-                                                                message:nil
-                                                               delegate:nil
-                                                      cancelButtonTitle:alertCancelButtonTitle
-                                                      otherButtonTitles:nil];
-				[alert show];*/
-			}
+            
+			[padCMSCoder syncServerPlistDownloadWithPassword:[RueAccessManager publisherPassword]];
+            
             self.padcmsCoder = nil;
 		}
         
-        NSDictionary *plistContent = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSDictionary* applicationParametersAfterSyncPlist = [RuePadCMSCoder applicationParametersFromCuurentPlistContent];;
         
-		if(plistContent == nil || [plistContent count] == 0)
+        if(applicationParametersAfterSyncPlist)
+		{
+			currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParametersAfterSyncPlist
+                                                                    rootDirectory:[PCPathHelper pathForPrivateDocuments]];
+                
+            if(previousApplicationParameters)
+            {
+                [self syncronyzeApp:[self getApplication] fromOldApplicationParameters:previousApplicationParameters toNewApplicationParameters:applicationParametersAfterSyncPlist];
+            }
+		}
+		else
 		{
 			UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
                                                             message:nil
@@ -432,37 +388,6 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
                                                   cancelButtonTitle:alertCancelButtonTitle
                                                   otherButtonTitles:nil];
 			[alert show];
-
-		}
-		else
-		{
-			NSDictionary *applicationsList = [plistContent objectForKey:PCJSONApplicationsKey];
-            
-			NSArray *keys = [applicationsList allKeys];
-			
-			if ([keys count] > 0)
-			{
-				NSDictionary *applicationParameters = [applicationsList objectForKey:[keys objectAtIndex:0]];
-				currentApplication = [[PCRueApplication alloc] initWithParameters:applicationParameters
-																 rootDirectory:[PCPathHelper pathForPrivateDocuments]];
-                
-                if(previousApplicationParameters)
-                {
-                    [self syncronyzeApp:[self getApplication] fromOldApplicationParameters:previousApplicationParameters toNewApplicationParameters:applicationParameters];
-                }
-                
-                
-			}
-			else
-            {
-				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:alertTitle
-                                                                message:nil
-                                                               delegate:nil
-                                                      cancelButtonTitle:alertCancelButtonTitle
-                                                      otherButtonTitles:nil];
-				[alert show];		
-			}
-
 		}
 	}
 }

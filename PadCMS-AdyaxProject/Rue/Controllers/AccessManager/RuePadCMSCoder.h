@@ -10,6 +10,10 @@
 
 @interface RuePadCMSCoder : PadCMSCoder
 
++ (NSDictionary*) applicationParametersFromCuurentPlistContent;
+
 - (BOOL) syncServerPlistDownloadWithPassword:(NSString*)password;
+
+- (void) syncServerPlistDownloadAsynchronouslyWithPassword:(NSString*)password completion:(void(^)(NSError*))complBlock;
 
 @end

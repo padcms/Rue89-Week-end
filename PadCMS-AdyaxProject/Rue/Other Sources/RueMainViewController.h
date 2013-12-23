@@ -31,3 +31,9 @@
 - (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
 
 @end
+
+@interface RueMainViewController (Update)
+
+- (void) update;
+
+@end
