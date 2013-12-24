@@ -23,7 +23,6 @@ typedef enum{
 @interface PCBrowserViewController ()
 
 - (void) showHUD;
-//- (void) createWebView;
 
 @end
 
@@ -58,17 +57,64 @@ typedef enum{
     
     if(_currentPlayerView)
     {
-        CGRect newWebRect = self.videoRect;
-        newWebRect.origin.y -= self.view.frameY;
-        _currentPlayerView.frame = newWebRect;
+        _currentPlayerView.frame = [self defaultVideoRect];
     }
 }
 
 - (void) setIsHorizontal:(BOOL)isHorizontal
 {
+    if(_isHorizontal != isHorizontal)
+    {
+        _isHorizontal = isHorizontal;
     
+        if(isHorizontal && _currentPlayerView)
+        {
+            _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
+            _currentPlayerView.frame = [self defaultVideoRect];
+        }
+    }
+}
+
+- (float) defaultRotationAngle
+{
+    if(self.isHorizontal)
+    {
+        return M_PI_2;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+- (CGRect) defaultVideoRect
+{
+    return CGRectMake(self.videoRect.origin.x, self.videoRect.origin.y - self.view.frameY, self.videoRect.size.width, self.videoRect.size.height);
+}
+
+- (UIDeviceOrientation) defaultOrientation
+{
+    UIDeviceOrientation appOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
-    
+    if(self.isHorizontal)
+    {
+        if (appOrientation == UIDeviceOrientationPortrait)
+        {
+            return UIDeviceOrientationLandscapeLeft;
+        }
+        else if (appOrientation == UIDeviceOrientationPortraitUpsideDown)
+        {
+            return UIDeviceOrientationLandscapeRight;
+        }
+        else
+        {
+            return appOrientation;
+        }
+    }
+    else
+    {
+        return appOrientation;
+    }
 }
 
 - (void) viewDidLoad
@@ -107,6 +153,9 @@ typedef enum{
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
     [self showHUD];
     
+    _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
+    _currentPlayerView.frame = [self defaultVideoRect];
+    
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
 }
@@ -118,6 +167,9 @@ typedef enum{
     {
         [self createFullScreenButton];
     }
+    
+    _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
+    _currentPlayerView.frame = [self defaultVideoRect];
     
     if(element.stream)
     {
@@ -163,8 +215,8 @@ typedef enum{
 
 - (UIView*) createWebView
 {
-    _webView = [[UIWebView alloc] initWithFrame:self.videoRect];
-    _webView.frameY -= self.view.frameY;//self.mainScrollView.contentOffset.y;
+    _webView = [[UIWebView alloc] initWithFrame:[self defaultVideoRect]];
+    
     _webView.delegate = self;
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
@@ -192,8 +244,8 @@ typedef enum{
         self.player.controlStyle = MPMovieControlStyleNone;
     }
     
-    self.player.view.frame = self.videoRect;
-    self.player.view.frameY -= self.view.frameY;//self.mainScrollView.contentOffset.y;
+    self.player.view.frame = [self defaultVideoRect];
+    
     [self.view addSubview:self.player.view];
     
     return self.player.view;
@@ -241,7 +293,7 @@ typedef enum{
     {
         [self makeWebViewFullScreenCompletion:^{
             
-            _currentWebViewOrientation = [UIApplication sharedApplication].statusBarOrientation;
+            _currentWebViewOrientation = [self defaultOrientation];
             [self checkForOrientation];
             sender.enabled = YES;
         }];
@@ -254,8 +306,8 @@ typedef enum{
     
     self.view.frameY = 0;
     
-    CGRect newWebRect = self.videoRect;
-    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    CGRect newWebRect = [self defaultVideoRect];
+    
     _currentPlayerView.frame = newWebRect;
     
     [self.pageView addSubview:self.view];
@@ -279,8 +331,7 @@ typedef enum{
     self.view.frameY = self.mainScrollView.contentOffset.y;
     [self.mainScrollView addSubview:self.view];
     
-    CGRect newWebRect = self.videoRect;
-    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    CGRect newWebRect = [self defaultVideoRect];
     
     [self changeWebViewFrame:newWebRect animatedWithDuration:0.3 completion:^{
         
@@ -364,14 +415,13 @@ typedef enum{
     
     [_webViewAnimation performWithCompletion:completion];
     
-    CGRect newWebRect = self.videoRect;
-    newWebRect.origin.y -= self.mainScrollView.contentOffset.y;
+    CGRect newWebRect = [self defaultVideoRect];
     
     if(CGRectEqualToRect(newWebRect, newFrame))
     {
         [UIView animateWithDuration:duration animations:^{
             
-            _currentPlayerView.transform = CGAffineTransformMakeRotation(0);
+            _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
             
         }];
     }

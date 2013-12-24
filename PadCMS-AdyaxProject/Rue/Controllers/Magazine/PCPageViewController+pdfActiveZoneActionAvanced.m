@@ -311,7 +311,7 @@
 //    if (self.galleryButton != nil) {
 //        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
 //    }
-    
+    /*
     for (PCPageElement* element in self.page.elements)
     {
         [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -341,7 +341,7 @@
                 [self.mainScrollView addSubview:btn];
             }
         }];
-    }
+    }*/
 }
 
 @end
