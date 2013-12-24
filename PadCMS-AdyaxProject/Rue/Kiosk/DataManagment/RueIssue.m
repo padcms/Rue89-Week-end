@@ -39,7 +39,7 @@
             }
         }
         
-        NSLog(@"TAGS : %@", self.tags);
+        //NSLog(@"TAGS : %@", self.tags);
         
         self.productIdentifier = [[parameters objectForKey:PCJSONIssueProductIDKey] copy];
         self.titleShort = [parameters objectForKey:PCJSONIssueTitleShortKey];

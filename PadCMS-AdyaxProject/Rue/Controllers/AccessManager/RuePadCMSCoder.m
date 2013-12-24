@@ -110,8 +110,15 @@ static void(^syncCompletedBlock)(NSError*);
 {
     NSURLRequest* request = [self requestToGetIssuesWithPublisherPassword:password];
 	
-	NSData *dataReply = [NSURLConnection  sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSHTTPURLResponse* responce = nil;
+    NSError* error = nil;
+	NSData *dataReply = [NSURLConnection  sendSynchronousRequest:request returningResponse:&responce error:&error];
 	
+    if(error)
+    {
+        NSLog(@"\nget issues list error : %@\n", error.debugDescription);
+    }
+    
 	if(dataReply != nil)
 	{
         NSDictionary* theDict = [self dictionaryFromResponceData:dataReply];
@@ -131,6 +138,10 @@ static void(^syncCompletedBlock)(NSError*);
             return NO;
         }
 	}
+    else if(responce)
+    {
+        NSLog(@"responce headers : %@", responce.allHeaderFields);
+    }
 	
 	return NO;
 }
@@ -145,20 +156,34 @@ static void(^syncCompletedBlock)(NSError*);
     
     NSDictionary* theDict = [parser objectWithString:stringWithoutNull];
     
-    NSLog(@"%@", theDict);
+    if(theDict)
+    {
+        NSLog(@"%@", theDict);
+    }
+    else
+    {
+        NSLog(@"responce : %@", stringReply);
+    }
     
     return [theDict valueForKey:@"result"];
 }
 
 - (NSURLRequest*) requestToGetIssuesWithPublisherPassword:(NSString*)password
 {
-    NSString *devId = deviceID();
+//    Audrey 36bd6c791d666a86f7ebba3deec743ea19b26d98
+//    Greg 3dd0134ec765400638a59a586236cad1952b39f6
+//    Rue89 bc152b7141ae6c9d9baf24706eb98d644d3c3bb3
+//    Rue89 FFFFFFFFE353CCD2A3854F94A16F96F1495688CD
+//    Rue89 e75979a675a1169f82f24dc0108ac5c36c223d9f
+//    Nabil dc1efe7fc00736f7f8470e527d81803da0a76bb9
     
+    NSString *devId = deviceID();
+//    NSLog(@"device id = %@", devId);
     //    devId = [[[UIDevice currentDevice]identifierForVendor]UUIDString];
     
 	NSURL* theURL = [[PCConfig serverURL] URLByAppendingPathComponent:PCNetworkServiceJSONRPCPath];
 	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10.0];
 	
 	[request setHTTPMethod:@"POST"];
 	
