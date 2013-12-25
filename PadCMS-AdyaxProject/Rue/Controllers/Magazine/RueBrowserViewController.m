@@ -157,7 +157,8 @@ typedef enum{
     _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
     _currentPlayerView.frame = [self defaultVideoRect];
     
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:240.0]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
+    
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];

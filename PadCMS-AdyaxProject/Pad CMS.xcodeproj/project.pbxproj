@@ -3230,6 +3230,21 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		2DA63501186B38370087649F /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				2DA63503186B38BD0087649F /* GoogleAnalyticsService */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2DA63503186B38BD0087649F /* GoogleAnalyticsService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GoogleAnalyticsService;
+			sourceTree = "<group>";
+		};
 		2DA769F4185B2EF600FB586A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3634,6 +3649,7 @@
 		AB8137831522230E0038EC7B /* Rue */ = {
 			isa = PBXGroup;
 			children = (
+				2DA63501186B38370087649F /* ThirdParty */,
 				2D995F0D186051D500E2457F /* CoreChanges */,
 				2D995EA4186051D400E2457F /* Controllers */,
 				2D995D0218604AE600E2457F /* Kiosk */,

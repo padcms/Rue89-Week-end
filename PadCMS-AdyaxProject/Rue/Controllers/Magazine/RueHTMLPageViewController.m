@@ -50,7 +50,7 @@
     
     //[NSURLCache setSharedURLCache:[[NSURLCache alloc]initWithMemoryCapacity:15 diskCapacity:30 diskPath:@"customCache"]];
     
-    [[NSURLCache sharedURLCache]setMemoryCapacity:5000];
+    //[[NSURLCache sharedURLCache]setMemoryCapacity:5000];
     
     if (_webViewController == nil) {
         PCPageElementHtml *pageElement =(PCPageElementHtml *)[self.page firstElementForType:PCPageElementTypeHtml];
@@ -107,10 +107,11 @@
         
         //url = [NSURL fileURLWithPath:@"URL: file:///Users/maks/Library/Application%20Support/iPhone%20Simulator/7.0/Applications/B9B0D571-C2A7-4F53-A665-CB1F90D02A15/Library/PrivateDocuments/application-104/issue-506/revision-623/element/00/01/02/60/resource/diapo.html?v=0.03"];
         
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:2147483647];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:2147483647];
         //        NSURLRequest* request = [NSURLRequest requestWithURL:url];
-        request.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+        //request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
         
+        request.HTTPShouldHandleCookies = NO;
         
 //        [webView loadHTMLString:str baseURL:nil];
         
@@ -134,7 +135,7 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSLog(@"loading request : %@", request.debugDescription);
-    
+    NSLog(@"request headers : %@", request.allHTTPHeaderFields);
 //    static NSURLRequest* currentRequest = nil;
 //    
 //    if(currentRequest)
@@ -183,7 +184,7 @@
 //        [_webView stopLoading];
         _webView = nil;
     }
-//    NSLog(@"cache : %i", [[NSURLCache sharedURLCache] currentMemoryUsage]);
+    //NSLog(@"cache : %i", [[NSURLCache sharedURLCache] currentMemoryUsage]);
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
