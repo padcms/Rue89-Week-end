@@ -10,6 +10,7 @@
 #import "PCPageControllersManager.h"
 #import "PCPageTemplatesPool.h"
 #import "ZipArchive.h"
+#import "PCPageElemetTypes.h"
 
 @interface PCPageViewController ()
 
