@@ -89,7 +89,9 @@ typedef enum{
 
 - (CGRect) defaultVideoRect
 {
-    return CGRectMake(self.videoRect.origin.x, self.videoRect.origin.y - self.view.frameY, self.videoRect.size.width, self.videoRect.size.height);
+    CGRect frame = self.videoRect;
+    frame.origin.y -= self.view.frameY;
+    return frame;
 }
 
 - (UIDeviceOrientation) defaultOrientation
@@ -120,7 +122,7 @@ typedef enum{
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.3];
+    //self.view.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.3];
     //self.view.frame = self.videoRect;
 }
 
@@ -155,7 +157,7 @@ typedef enum{
     _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
     _currentPlayerView.frame = [self defaultVideoRect];
     
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:240.0]];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
@@ -216,8 +218,8 @@ typedef enum{
 
 - (UIView*) createWebView
 {
-    _webView = [[UIWebView alloc] initWithFrame:[self defaultVideoRect]];
-    
+    _webView = [[UIWebView alloc] initWithFrame: self.videoRect]; //[self defaultVideoRect]];
+    _webView.frameY -= self.view.frameY;
     _webView.delegate = self;
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
