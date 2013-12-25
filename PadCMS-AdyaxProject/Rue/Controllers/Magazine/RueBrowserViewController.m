@@ -120,7 +120,7 @@ typedef enum{
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.3];
+    self.view.backgroundColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.3];
     //self.view.frame = self.videoRect;
 }
 
@@ -150,11 +150,12 @@ typedef enum{
     
     self.videoURL = [NSURL URLWithString:url];
     
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
     [self showHUD];
     
     _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
     _currentPlayerView.frame = [self defaultVideoRect];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.videoURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0]];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
@@ -221,6 +222,7 @@ typedef enum{
     _webView.userInteractionEnabled = YES;
     _webView.scrollView.scrollEnabled = NO;
     _webView.scrollView.bounces = NO;
+    
     [self.view addSubview:_webView]; 
     
     _webView.backgroundColor = [UIColor blackColor];

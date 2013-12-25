@@ -1218,6 +1218,7 @@
 		2D5082B918620208006D699A /* RueHTMLPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueHTMLPageViewController.h; sourceTree = "<group>"; };
 		2D5082BA18620208006D699A /* RueHTMLPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueHTMLPageViewController.m; sourceTree = "<group>"; };
 		2D85DF2C180EB99C00459330 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2D916ADE1869F1580057D77F /* PCTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTopBarView.h; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
 		2D995D0318604AE600E2457F /* PCKioskAdvancedControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskAdvancedControlElement.h; sourceTree = "<group>"; };
@@ -2210,6 +2211,7 @@
 		2D995D0218604AE600E2457F /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				2D916ADE1869F1580057D77F /* PCTopBarView.h */,
 				2D995FA01860797800E2457F /* RueKioskShelfView.h */,
 				2D995FA11860797800E2457F /* RueKioskShelfView.m */,
 				2D995DD1186050FA00E2457F /* Archiving */,

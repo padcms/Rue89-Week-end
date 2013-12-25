@@ -106,18 +106,14 @@
         
         //url = [NSURL fileURLWithPath:@"URL: file:///Users/maks/Library/Application%20Support/iPhone%20Simulator/7.0/Applications/B9B0D571-C2A7-4F53-A665-CB1F90D02A15/Library/PrivateDocuments/application-104/issue-506/revision-623/element/00/01/02/60/resource/diapo.html?v=0.03"];
         
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:2147483647];
         //        NSURLRequest* request = [NSURLRequest requestWithURL:url];
         request.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
         
         
 //        [webView loadHTMLString:str baseURL:nil];
         
-        
         [webView loadRequest:request];
-        
-        
-        
         
         //[webView release];
         
@@ -137,7 +133,7 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSLog(@"loading request : %@", request.debugDescription);
-//
+    
 //    static NSURLRequest* currentRequest = nil;
 //    
 //    if(currentRequest)
@@ -179,12 +175,12 @@
         //[_webView goBack];
         //[_webView goBack];
         [_webView loadHTMLString:@"about:blank" baseURL:nil];
-        //[_webView stopLoading];
-        //_webView.delegate = nil;
+        [_webView stopLoading];
+        _webView.delegate = nil;
 //        [_webView reload];
-        //[_webView removeFromSuperview];
+        [_webView removeFromSuperview];
 //        [_webView stopLoading];
-        //_webView = nil;
+        _webView = nil;
     }
 //    NSLog(@"cache : %i", [[NSURLCache sharedURLCache] currentMemoryUsage]);
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
