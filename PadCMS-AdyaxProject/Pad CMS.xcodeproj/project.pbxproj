@@ -270,6 +270,7 @@
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
+		2DA6E535186C8B5200CACB6C /* RuePageElementSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E534186C8B5200CACB6C /* RuePageElementSound.m */; };
 		2DA76A03185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769F8185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
@@ -1609,6 +1610,8 @@
 		2DA6E51F186C40B700CACB6C /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = GoogleAnalytics/Library/GAITracker.h; sourceTree = "<group>"; };
 		2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCGoogleAnalytics+v3.m"; sourceTree = "<group>"; };
+		2DA6E533186C8B5200CACB6C /* RuePageElementSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePageElementSound.h; sourceTree = "<group>"; };
+		2DA6E534186C8B5200CACB6C /* RuePageElementSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePageElementSound.m; sourceTree = "<group>"; };
 		2DA769F9185B2FAF00FB586A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
@@ -2805,6 +2808,8 @@
 				2D995ED5186051D400E2457F /* RuePageElementVideo.m */,
 				2D995ED6186051D400E2457F /* RueSQLiteKeys.h */,
 				2D995ED7186051D400E2457F /* RueSQLiteKeys.m */,
+				2DA6E533186C8B5200CACB6C /* RuePageElementSound.h */,
+				2DA6E534186C8B5200CACB6C /* RuePageElementSound.m */,
 			);
 			path = NewTemplates;
 			sourceTree = "<group>";
@@ -5138,6 +5143,7 @@
 				2D995E8D186050FB00E2457F /* RueFacebookController.m in Sources */,
 				2D995E99186050FB00E2457F /* SBJsonParser.m in Sources */,
 				2D995F941860555000E2457F /* PCRueApplication.m in Sources */,
+				2DA6E535186C8B5200CACB6C /* RuePageElementSound.m in Sources */,
 				2D995F63186051D500E2457F /* SFHFKeychainUtils.m in Sources */,
 				2D995E77186050FB00E2457F /* PCRevisionSummaryPopup.m in Sources */,
 				2D995F41186051D500E2457F /* NSString+MD5.m in Sources */,

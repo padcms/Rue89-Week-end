@@ -8,16 +8,17 @@
 
 #import "PCPageElementManager.h"
 #import "PCData.h"
-
+#import "PCPageElemetTypes.h"
 #import "RuePageElementBackground.h"
 #import "RuePageElementVideo.h"
+#import "RuePageElementSound.h"
 
 @implementation PCPageElementManager (RuePageElementManager)
 
 - (void) initializeBaseElements
 {
     [self registerPageElementClass:[RuePageElementBackground class] forElementType:PCPageElementTypeBackground];
-    [self registerPageElementClass:[PCPageElement class] forElementType:PCPageElementTypeSound];
+    [self registerPageElementClass:[RuePageElementSound class] forElementType:PCPageElementTypeSound];
     [self registerPageElementClass:[PCPageElement class] forElementType:PCPageElementTypePopup];
     
     [self registerPageElementClass:[PCPageElementBody class] forElementType:PCPageElementTypeBody];
