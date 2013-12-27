@@ -10,4 +10,6 @@
 
 @interface RuePageElementSound : PCPageElement
 
+@property (nonatomic, assign) BOOL loopSound;
+
 @end

@@ -11,3 +11,5 @@
 PADCMS_EXTERN NSString* PCSQLiteElementShowOnTopAttributeName;
 PADCMS_EXTERN NSString* PCSQLiteElementDisableUserInteractionAttributeName;
 PADCMS_EXTERN NSString* PCSQLiteElementLoopVideoAttributeName;
+
+PADCMS_EXTERN NSString* PCSQLiteElementLoopSoundAttributeName;

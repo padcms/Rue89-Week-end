@@ -7,6 +7,7 @@
 //
 
 #import "RuePageElementSound.h"
+#import "RueSQLiteKeys.h"
 
 @implementation RuePageElementSound
 
@@ -23,10 +24,10 @@
 //        self.userInteractionEnabled = YES;
 //    }
 //    
-//    if([data objectForKey:PCSQLiteElementLoopVideoAttributeName])
-//    {
-//        self.loopVideo = [[data objectForKey:PCSQLiteElementLoopVideoAttributeName] boolValue];
-//    }
+    if([data objectForKey:PCSQLiteElementLoopSoundAttributeName])
+    {
+        self.loopSound = [[data objectForKey:PCSQLiteElementLoopSoundAttributeName] boolValue];
+    }
 }
 
 @end

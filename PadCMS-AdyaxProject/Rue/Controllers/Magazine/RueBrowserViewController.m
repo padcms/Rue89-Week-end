@@ -196,10 +196,10 @@ typedef enum{
 - (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page
 {
     self.player = [[MPMoviePlayerController alloc]init];
-//    if(element.loopVideo)
-//    {
-//        self.player.repeatMode = MPMovieRepeatModeOne;
-//    }
+    if(element.loopSound)
+    {
+        self.player.repeatMode = MPMovieRepeatModeOne;
+    }
 //    if(element.userInteractionEnabled)
 //    {
 //        self.player.controlStyle = MPMovieControlStyleEmbedded;

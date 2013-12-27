@@ -11,3 +11,5 @@
 NSString* PCSQLiteElementShowOnTopAttributeName                 = @"showOnTop";
 NSString* PCSQLiteElementDisableUserInteractionAttributeName    = @"disable_user_interaction";
 NSString* PCSQLiteElementLoopVideoAttributeName                 = @"loop_video";
+
+NSString* PCSQLiteElementLoopSoundAttributeName                 = @"loop_sound";
