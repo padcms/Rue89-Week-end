@@ -8,7 +8,7 @@
 
 #import "PCBrowserViewController.h"
 
-@class PCPage, PCPageElementVideo;
+@class PCPage, PCPageElementVideo, RuePageElementSound;
 
 @interface RueBrowserViewController : PCBrowserViewController
 
@@ -22,5 +22,7 @@
 @property (nonatomic, assign) BOOL isHorizontal;
 
 - (void) presentElement:(PCPageElementVideo*)element ofPage:(PCPage*)page;
+
+- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page;
 
 @end

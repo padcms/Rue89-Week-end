@@ -8,11 +8,12 @@
 
 #import "PCPageViewController.h"
 #import "PCSliderBasedMiniArticleViewController.h"
-#import "PCPDFActiveZones.h"
+#import "RuePDFActiveZones.h"
 #import "PCPageElemetTypes.h"
 #import "objc/runtime.h"
 #import "RueBrowserViewController.h"
 #import "PCScrollView.h"
+#import "RuePageElementSound.h"
 
 #import "PCPageViewController+IsPresented.h"
 #import "UIView+EasyFrame.h"
@@ -92,7 +93,10 @@
                 if (comps && [comps count] > 1)
                 {
                     NSString* num = [comps objectAtIndex:1];
-                    videoIndex = [num intValue] - 1;
+                    if(num && num.length && [num intValue] > 0)
+                    {
+                        videoIndex = [num intValue] - 1;
+                    }
                 }
                 if(videoIndex >= videoElementsArray.count)
                 {
@@ -113,6 +117,61 @@
                 PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:videoIndex];
                 
                 [self showVideoElement:videoElement inRect:videoRect];
+            }
+            return YES;
+        }
+    }
+    
+    if ([activeZone.URL hasPrefix:PCPDFActiveZoneActionSound])
+    {
+        NSArray* soundElementsArray = [page elementsForType:PCPageElementTypeSound];
+        
+        if(soundElementsArray.count > 0)
+        {
+            if(soundElementsArray.count == 1)
+            {
+                RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:0];
+                CGRect soundRect;// = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+//                if(CGRectEqualToRect(videoRect, CGRectZero))
+//                {
+                    soundRect = [self activeZoneRectForType:activeZone.URL];
+//                }
+                [self playSoundElement:soundElement fromRect:soundRect];
+            }
+            else
+            {
+                soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                
+                int soundIndex = 0;
+
+                NSArray* comps = [activeZone.URL componentsSeparatedByString:PCPDFActiveZoneActionSound];
+                if (comps && [comps count] > 1)
+                {
+                    NSString* num = [comps objectAtIndex:1];
+                    if(num && num.length && [num intValue] > 0)
+                    {
+                        soundIndex = [num intValue] - 1;
+                    }
+                }
+//                if(videoIndex >= videoElementsArray.count)
+//                {
+//                    videoIndex = videoIndex % videoElementsArray.count;
+//                }
+//                
+//                NSString* videoZoneType = [PCPDFActiveZoneVideo stringByAppendingFormat:@"%i", (videoIndex + 1)];
+                CGRect soundRect; // = [self activeZoneRectForType:PCPDFActiveZoneActionSound]; //videoZoneType];
+//                if(CGRectEqualToRect(videoRect, CGRectZero))
+//                {
+//                    videoZoneType = [videoZoneType stringByAppendingString:@"/autoplay"];
+//                    videoRect = [self activeZoneRectForType:videoZoneType];
+//                    if(CGRectEqualToRect(videoRect, CGRectZero))
+//                    {
+                        soundRect = [self activeZoneRectForType:activeZone.URL];
+//                    }
+//                }
+                RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundIndex];
+            
+            [self playSoundElement:soundElement fromRect:soundRect];
             }
             return YES;
         }
@@ -177,7 +236,7 @@
 
 - (void) showVideoElement:(PCPageElementVideo*)element inRect:(CGRect)videoWebViewRect
 {
-    NSLog(@"URL playing : %@", element.resource);
+    NSLog(@"video playing : %@", element.resource);
     
     [self createWebBrowserViewWithFrame:videoWebViewRect];
     
@@ -207,6 +266,15 @@
     {
         [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
     }
+}
+
+- (void) playSoundElement:(RuePageElementSound*)soundElement fromRect:(CGRect)soundActionRect
+{
+    NSLog(@"sound playing : %@", soundElement.resource);
+    
+    [self createWebBrowserViewWithFrame:soundActionRect];
+    
+    [(RueBrowserViewController*)webBrowserViewController presentSoundElement:soundElement ofPage:self.page];
 }
 
 - (void) hideVideoWebView
@@ -311,7 +379,7 @@
 //    if (self.galleryButton != nil) {
 //        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
 //    }
-    /*
+    
     for (PCPageElement* element in self.page.elements)
     {
         [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -341,7 +409,7 @@
                 [self.mainScrollView addSubview:btn];
             }
         }];
-    }*/
+    }
 }
 
 @end

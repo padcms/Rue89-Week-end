@@ -275,6 +275,7 @@
 		2DA76A04185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FB185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A05185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA769FE185B2FAF00FB586A /* Localizable.strings */; };
 		2DA76A06185B2FAF00FB586A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DA76A01185B2FAF00FB586A /* Localizable.strings */; };
+		2DAB7420186D80D70075A32F /* RuePDFActiveZones.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB741F186D80D70075A32F /* RuePDFActiveZones.m */; };
 		2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */; };
 		2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1616,6 +1617,8 @@
 		2DA769FC185B2FAF00FB586A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA769FF185B2FAF00FB586A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
 		2DA76A02185B2FAF00FB586A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
+		2DAB741E186D80D70075A32F /* RuePDFActiveZones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuePDFActiveZones.h; sourceTree = "<group>"; };
+		2DAB741F186D80D70075A32F /* RuePDFActiveZones.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuePDFActiveZones.m; sourceTree = "<group>"; };
 		2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueMainViewController+Update.m"; sourceTree = "<group>"; };
 		2DAC91B718688FF5000B4CAC /* SimpleHorizontalPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHorizontalPageViewController.h; sourceTree = "<group>"; };
 		2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHorizontalPageViewController.m; sourceTree = "<group>"; };
@@ -2810,6 +2813,8 @@
 				2D995ED7186051D400E2457F /* RueSQLiteKeys.m */,
 				2DA6E533186C8B5200CACB6C /* RuePageElementSound.h */,
 				2DA6E534186C8B5200CACB6C /* RuePageElementSound.m */,
+				2DAB741E186D80D70075A32F /* RuePDFActiveZones.h */,
+				2DAB741F186D80D70075A32F /* RuePDFActiveZones.m */,
 			);
 			path = NewTemplates;
 			sourceTree = "<group>";
@@ -5061,6 +5066,7 @@
 				2D995F50186051D500E2457F /* GifViewController.m in Sources */,
 				2D995F84186051D500E2457F /* FMDatabase+CoreChanges.m in Sources */,
 				2D995F80186051D500E2457F /* NSString+HTML.m in Sources */,
+				2DAB7420186D80D70075A32F /* RuePDFActiveZones.m in Sources */,
 				2D995EA2186050FB00E2457F /* SBJsonWriter.m in Sources */,
 				2D995F55186051D500E2457F /* RueSQLiteKeys.m in Sources */,
 				2D995F961860555000E2457F /* PCRueRemouteNotificationCenter.m in Sources */,

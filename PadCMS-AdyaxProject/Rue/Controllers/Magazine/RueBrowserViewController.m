@@ -11,6 +11,7 @@
 #import "CustomAnimation.h"
 #import "UIView+EasyFrame.h"
 #import "RuePageElementVideo.h"
+#import "RuePageElementSound.h"
 #import "PCPage.h"
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -190,6 +191,50 @@ typedef enum{
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [self subscribeForDeviceNitifications];
+}
+
+- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page
+{
+    self.player = [[MPMoviePlayerController alloc]init];
+//    if(element.loopVideo)
+//    {
+//        self.player.repeatMode = MPMovieRepeatModeOne;
+//    }
+//    if(element.userInteractionEnabled)
+//    {
+//        self.player.controlStyle = MPMovieControlStyleEmbedded;
+//    }
+//    else
+//    {
+//        self.player.controlStyle = MPMovieControlStyleNone;
+//    }
+    
+//    self.player.view.frame = [self defaultVideoRect];
+    
+//    [self.view addSubview:self.player.view];
+//    if(element.userInteractionEnabled)
+//    {
+//        [self createFullScreenButton];
+//    }
+    
+//    _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
+//    _currentPlayerView.frame = [self defaultVideoRect];
+    
+//    if(element.stream)
+//    {
+//        self.videoURL = [NSURL URLWithString:element.stream];
+//    }
+//    else
+//    {
+        NSString* fullPath = [page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
+        self.videoURL = [NSURL fileURLWithPath:fullPath];
+//    }
+    
+    self.player.contentURL = self.videoURL;
+    [self.player play];
+    
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [self subscribeForDeviceNitifications];
 }
 
 - (void) stop
