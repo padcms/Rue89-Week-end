@@ -8,4 +8,5 @@
 
 #import "RuePDFActiveZones.h"
 
+NSString* PCPDFActiveZoneSound              = @"local://sound";
 NSString* PCPDFActiveZoneActionSound        = @"local://action/sound";

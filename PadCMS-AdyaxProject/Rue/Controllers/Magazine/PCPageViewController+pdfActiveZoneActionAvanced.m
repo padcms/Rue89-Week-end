@@ -143,16 +143,13 @@
                 soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
                 
                 int soundIndex = 0;
-
-                NSArray* comps = [activeZone.URL componentsSeparatedByString:PCPDFActiveZoneActionSound];
-                if (comps && [comps count] > 1)
+                
+                NSString* indexStr = [[activeZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionSound withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
+                if(indexStr && indexStr.length && [indexStr intValue] > 0)
                 {
-                    NSString* num = [comps objectAtIndex:1];
-                    if(num && num.length && [num intValue] > 0)
-                    {
-                        soundIndex = [num intValue] - 1;
-                    }
+                    soundIndex = [indexStr intValue] - 1;
                 }
+                
 //                if(videoIndex >= videoElementsArray.count)
 //                {
 //                    videoIndex = videoIndex % videoElementsArray.count;
@@ -373,6 +370,11 @@
             }
         }
     }
+    else
+    {
+        [self checkForAutoplayingSound];
+    }
+    
     
     //[self createGalleryButton];
     
@@ -409,6 +411,89 @@
                 [self.mainScrollView addSubview:btn];
             }
         }];
+    }
+}
+
+- (void) checkForAutoplayingSound
+{
+    if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneSound])
+    {
+//        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
+//        {
+//            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+//            PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
+//            
+//            if (videoElement.stream || videoElement.resource)
+//            {
+//                [self showVideoElement:videoElement inRect:videoRect];
+//            }
+//        }
+//        else
+//        {
+        for (PCPageElement* element in self.page.elements)
+        {
+            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+            {
+                if ([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneSound] && [pdfActiveZone.URL hasSuffix:@"/autoplay"])
+                {
+                    NSString* indexStr = [[pdfActiveZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneSound withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
+                    int soundElementIndex = 0;
+                    if(indexStr && indexStr.length && [indexStr intValue] > 0)
+                    {
+                        soundElementIndex = [indexStr intValue] - 1;
+                    }
+                    
+                    NSArray* soundElementsArray = [page elementsForType:PCPageElementTypeSound];
+                    soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                    
+                    if(soundElementIndex < soundElementsArray.count)
+                    {
+                        CGRect soundRect = [self activeZoneRectForType:pdfActiveZone.URL];
+                        //                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
+                        //                                {
+                        RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
+                        //
+                        [self playSoundElement:soundElement fromRect:soundRect];
+                        //                                }
+                    }
+                    return;
+                }
+            }
+        }
+//        }
+    }
+    if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionSound])
+    {
+        for (PCPageElement* element in self.page.elements)
+        {
+            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+            {
+                if ([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneActionSound] && [pdfActiveZone.URL hasSuffix:@"/autoplay"])
+                {
+                    NSString* indexStr = [[pdfActiveZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionSound withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
+                    int soundElementIndex = 0;
+                    if(indexStr && indexStr.length && [indexStr intValue] > 0)
+                    {
+                        soundElementIndex = [indexStr intValue] - 1;
+                    }
+                    
+                    NSArray* soundElementsArray = [page elementsForType:PCPageElementTypeSound];
+                    soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                    
+                    if(soundElementIndex < soundElementsArray.count)
+                    {
+                        CGRect soundRect = [self activeZoneRectForType:pdfActiveZone.URL];
+                        //                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
+                        //                                {
+                        RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
+                        //
+                        [self playSoundElement:soundElement fromRect:soundRect];
+                        //                                }
+                    }
+                    return;
+                }
+            }
+        }
     }
 }
 

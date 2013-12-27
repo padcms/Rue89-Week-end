@@ -8,4 +8,5 @@
 
 #import "PCPDFActiveZones.h"
 
+PADCMS_EXTERN NSString* PCPDFActiveZoneSound;
 PADCMS_EXTERN NSString* PCPDFActiveZoneActionSound;
