@@ -99,6 +99,12 @@
         
     }
     
+    NSMutableArray* soundElements = [NSMutableArray arrayWithArray:[self elementsForType:PCPageElementTypeSound]];
+    if (soundElements)
+    {
+        [array addObjectsFromArray:soundElements];
+    }
+    
     _secondaryElements = [[NSArray alloc] initWithArray:array];
     [array release];
     
