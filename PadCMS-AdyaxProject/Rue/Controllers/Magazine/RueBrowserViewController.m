@@ -195,42 +195,24 @@ typedef enum{
     [self subscribeForDeviceNitifications];
 }
 
-- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page
+- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page allowPause:(BOOL)allowPause
 {
     self.player = [[MPMoviePlayerController alloc]init];
     if(element.loopSound)
     {
         self.player.repeatMode = MPMovieRepeatModeOne;
     }
-//    if(element.userInteractionEnabled)
-//    {
-//        self.player.controlStyle = MPMovieControlStyleEmbedded;
-//    }
-//    else
-//    {
-//        self.player.controlStyle = MPMovieControlStyleNone;
-//    }
     
-    [self createPauseSoundButton];
+    if (allowPause)
+    {
+        [self createPauseSoundButton];
+    }
     
-//    _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
-//    _currentPlayerView.frame = [self defaultVideoRect];
-    
-//    if(element.stream)
-//    {
-//        self.videoURL = [NSURL URLWithString:element.stream];
-//    }
-//    else
-//    {
-        NSString* fullPath = [page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
-        self.videoURL = [NSURL fileURLWithPath:fullPath];
-//    }
+    NSString* fullPath = [page.revision.contentDirectory stringByAppendingPathComponent:element.resource];
+    self.videoURL = [NSURL fileURLWithPath:fullPath];
     
     self.player.contentURL = self.videoURL;
     [self.player play];
-    
-//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//    [self subscribeForDeviceNitifications];
 }
 
 - (void) createPauseSoundButton
@@ -245,7 +227,7 @@ typedef enum{
     [pauseSoundButton addTarget:self action:@selector(pauseSoundButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     
     [pauseSoundButton setFrame:[self defaultVideoRect]];
-    pauseSoundButton.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.4];
+    //pauseSoundButton.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.4];
     
     self.pauseSoundButton = pauseSoundButton;
     [self.view addSubview:pauseSoundButton];
@@ -260,6 +242,10 @@ typedef enum{
     else if(self.player.playbackState == MPMoviePlaybackStatePaused || self.player.playbackState == MPMoviePlaybackStateStopped)
     {
         [self.player play];
+    }
+    if(self.stopOnTouch)
+    {
+        [sender removeFromSuperview];
     }
 }
 

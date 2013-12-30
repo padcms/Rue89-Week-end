@@ -128,48 +128,73 @@
         
         if(soundElementsArray.count > 0)
         {
-            if(soundElementsArray.count == 1)
-            {
-                RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:0];
-                CGRect soundRect;// = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-//                if(CGRectEqualToRect(videoRect, CGRectZero))
-//                {
-                    soundRect = [self activeZoneRectForType:activeZone.URL];
-//                }
-                [self playSoundElement:soundElement fromRect:soundRect];
-            }
-            else
-            {
-                soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
-                
-                int soundIndex = 0;
-                
-                NSString* indexStr = [[activeZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionSound withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
-                if(indexStr && indexStr.length && [indexStr intValue] > 0)
-                {
-                    soundIndex = [indexStr intValue] - 1;
-                }
-                
-//                if(videoIndex >= videoElementsArray.count)
-//                {
-//                    videoIndex = videoIndex % videoElementsArray.count;
-//                }
-//                
-//                NSString* videoZoneType = [PCPDFActiveZoneVideo stringByAppendingFormat:@"%i", (videoIndex + 1)];
-                CGRect soundRect; // = [self activeZoneRectForType:PCPDFActiveZoneActionSound]; //videoZoneType];
-//                if(CGRectEqualToRect(videoRect, CGRectZero))
-//                {
-//                    videoZoneType = [videoZoneType stringByAppendingString:@"/autoplay"];
-//                    videoRect = [self activeZoneRectForType:videoZoneType];
-//                    if(CGRectEqualToRect(videoRect, CGRectZero))
-//                    {
-                        soundRect = [self activeZoneRectForType:activeZone.URL];
-//                    }
-//                }
-                RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundIndex];
+            soundElementsArray = [soundElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
             
-            [self playSoundElement:soundElement fromRect:soundRect];
+            int soundIndex = 0;
+            
+            NSString* indexStr = [[activeZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionSound withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
+            if(indexStr && indexStr.length && [indexStr intValue] > 0)
+            {
+                soundIndex = [indexStr intValue] - 1;
             }
+            
+            if(soundIndex >= soundElementsArray.count)
+            {
+                soundIndex = soundIndex % soundElementsArray.count;
+            }
+            
+            CGRect soundRect = CGRectZero;
+            BOOL isRectActionZone = YES;
+            BOOL isZoneAutoplaying = NO;
+            
+            NSString* soundZoneType = [PCPDFActiveZoneSound stringByAppendingFormat:@"%i", (soundIndex + 1)];
+            soundRect = [self activeZoneRectForType:soundZoneType];
+            isRectActionZone = NO;
+            if(CGRectEqualToRect(soundRect, CGRectZero))
+            {
+                soundZoneType = [soundZoneType stringByAppendingString:@"/autoplay"];
+                soundRect = [self activeZoneRectForType:soundZoneType];
+                isZoneAutoplaying = YES;
+            }
+            if(CGRectEqualToRect(soundRect, CGRectZero) && soundIndex == 0)
+            {
+                soundRect = [self activeZoneRectForType:PCPDFActiveZoneSound];
+                isZoneAutoplaying = NO;
+                if(CGRectEqualToRect(soundRect, CGRectZero))
+                {
+                    soundZoneType = [PCPDFActiveZoneSound stringByAppendingString:@"/autoplay"];
+                    soundRect = [self activeZoneRectForType:soundZoneType];
+                    isZoneAutoplaying = YES;
+                }
+            }
+            if(CGRectEqualToRect(soundRect, CGRectZero))
+            {
+                soundRect = [self activeZoneRectForType:activeZone.URL];
+                isRectActionZone = YES;
+                isZoneAutoplaying = [activeZone.URL hasPrefix:@"/autoplay"];
+            }
+            
+            RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundIndex];
+            
+            BOOL allowPause = YES;
+            BOOL stopOnTouch = NO;
+            
+            if(soundElement.userInteractionEnabled == NO)
+            {
+                if(isRectActionZone)
+                {
+                    allowPause = NO;
+                }
+                else
+                {
+                    allowPause = YES;
+                    stopOnTouch = YES;
+                }
+            }
+            
+            [self playSoundElement:soundElement fromRect:soundRect allowPause:allowPause];
+            [(RueBrowserViewController*)webBrowserViewController setStopOnTouch:stopOnTouch];
+            
             return YES;
         }
     }
@@ -265,13 +290,13 @@
     }
 }
 
-- (void) playSoundElement:(RuePageElementSound*)soundElement fromRect:(CGRect)soundActionRect
+- (void) playSoundElement:(RuePageElementSound*)soundElement fromRect:(CGRect)soundActionRect allowPause:(BOOL)allowPause
 {
     NSLog(@"sound playing : %@", soundElement.resource);
     
     [self createWebBrowserViewWithFrame:soundActionRect];
     
-    [(RueBrowserViewController*)webBrowserViewController presentSoundElement:soundElement ofPage:self.page];
+    [(RueBrowserViewController*)webBrowserViewController presentSoundElement:soundElement ofPage:self.page allowPause:allowPause];
 }
 
 - (void) hideVideoWebView
@@ -375,14 +400,7 @@
         [self checkForAutoplayingSound];
     }
     
-    
-    //[self createGalleryButton];
-    
-//    if (self.galleryButton != nil) {
-//        [self.galleryButton.superview bringSubviewToFront:self.galleryButton];
-//    }
-    
-    for (PCPageElement* element in self.page.elements)
+    /*for (PCPageElement* element in self.page.elements)
     {
         [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             CGRect rect = CGRectFromString(obj);
@@ -411,25 +429,13 @@
                 [self.mainScrollView addSubview:btn];
             }
         }];
-    }
+    }*/
 }
 
 - (void) checkForAutoplayingSound
 {
     if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneSound])
     {
-//        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
-//        {
-//            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-//            PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
-//            
-//            if (videoElement.stream || videoElement.resource)
-//            {
-//                [self showVideoElement:videoElement inRect:videoRect];
-//            }
-//        }
-//        else
-//        {
         for (PCPageElement* element in self.page.elements)
         {
             for (PCPageActiveZone* pdfActiveZone in element.activeZones)
@@ -449,18 +455,16 @@
                     if(soundElementIndex < soundElementsArray.count)
                     {
                         CGRect soundRect = [self activeZoneRectForType:pdfActiveZone.URL];
-                        //                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
-                        //                                {
+                        
                         RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
-                        //
-                        [self playSoundElement:soundElement fromRect:soundRect];
-                        //                                }
+                        
+                        [self playSoundElement:soundElement fromRect:soundRect allowPause:soundElement.userInteractionEnabled];
                     }
                     return;
                 }
             }
         }
-//        }
+        
     }
     if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionSound])
     {
@@ -483,12 +487,10 @@
                     if(soundElementIndex < soundElementsArray.count)
                     {
                         CGRect soundRect = [self activeZoneRectForType:pdfActiveZone.URL];
-                        //                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
-                        //                                {
+                        
                         RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
-                        //
-                        [self playSoundElement:soundElement fromRect:soundRect];
-                        //                                }
+                        
+                        [self playSoundElement:soundElement fromRect:soundRect allowPause:soundElement.userInteractionEnabled];
                     }
                     return;
                 }

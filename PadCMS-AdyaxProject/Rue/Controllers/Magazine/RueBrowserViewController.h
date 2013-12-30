@@ -21,8 +21,10 @@
 
 @property (nonatomic, assign) BOOL isHorizontal;
 
+@property (nonatomic, assign) BOOL stopOnTouch;
+
 - (void) presentElement:(PCPageElementVideo*)element ofPage:(PCPage*)page;
 
-- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page;
+- (void) presentSoundElement:(RuePageElementSound*)element ofPage:(PCPage*)page allowPause:(BOOL)allowPause;
 
 @end

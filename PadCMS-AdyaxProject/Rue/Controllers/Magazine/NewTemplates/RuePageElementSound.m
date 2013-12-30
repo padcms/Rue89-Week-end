@@ -15,15 +15,15 @@
 {
     [super pushElementData:data];
     
-//    if([data objectForKey:PCSQLiteElementDisableUserInteractionAttributeName])
-//    {
-//        self.userInteractionEnabled = ! [[data objectForKey:PCSQLiteElementDisableUserInteractionAttributeName] boolValue];
-//    }
-//    else
-//    {
-//        self.userInteractionEnabled = YES;
-//    }
-//    
+    if([data objectForKey:PCSQLiteElementDisableUserInteractionAttributeName])
+    {
+        self.userInteractionEnabled = ! [[data objectForKey:PCSQLiteElementDisableUserInteractionAttributeName] boolValue];
+    }
+    else
+    {
+        self.userInteractionEnabled = YES;
+    }
+    
     if([data objectForKey:PCSQLiteElementLoopSoundAttributeName])
     {
         self.loopSound = [[data objectForKey:PCSQLiteElementLoopSoundAttributeName] boolValue];
