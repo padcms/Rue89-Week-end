@@ -39,6 +39,8 @@ typedef enum{
 
 @property (nonatomic, strong) MPMoviePlayerController* player;
 
+@property (nonatomic, strong) UIButton* pauseSoundButton;
+
 @end
 
 @implementation RueBrowserViewController
@@ -209,13 +211,7 @@ typedef enum{
 //        self.player.controlStyle = MPMovieControlStyleNone;
 //    }
     
-//    self.player.view.frame = [self defaultVideoRect];
-    
-//    [self.view addSubview:self.player.view];
-//    if(element.userInteractionEnabled)
-//    {
-//        [self createFullScreenButton];
-//    }
+    [self createPauseSoundButton];
     
 //    _currentPlayerView.transform = CGAffineTransformMakeRotation([self defaultRotationAngle]);
 //    _currentPlayerView.frame = [self defaultVideoRect];
@@ -235,6 +231,36 @@ typedef enum{
     
 //    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 //    [self subscribeForDeviceNitifications];
+}
+
+- (void) createPauseSoundButton
+{
+    if(self.pauseSoundButton)
+    {
+        [self.pauseSoundButton removeFromSuperview];
+        self.pauseSoundButton = nil;
+    }
+    
+    UIButton* pauseSoundButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [pauseSoundButton addTarget:self action:@selector(pauseSoundButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [pauseSoundButton setFrame:[self defaultVideoRect]];
+    pauseSoundButton.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.4];
+    
+    self.pauseSoundButton = pauseSoundButton;
+    [self.view addSubview:pauseSoundButton];
+}
+
+- (void) pauseSoundButtonTap:(UIButton*)sender
+{
+    if(self.player.playbackState == MPMoviePlaybackStatePlaying)
+    {
+        [self.player pause];
+    }
+    else if(self.player.playbackState == MPMoviePlaybackStatePaused || self.player.playbackState == MPMoviePlaybackStateStopped)
+    {
+        [self.player play];
+    }
 }
 
 - (void) stop
