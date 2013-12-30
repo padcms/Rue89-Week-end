@@ -29,6 +29,9 @@
 
 @end
 
+@interface ButtonWithAccents : UIButton
+@end
+
 @implementation PCKioskFooterView
 
 + (PCKioskFooterView *)footerViewForView:(UIView *)view {
@@ -61,7 +64,7 @@
         
         PCTag * tag2 = [[PCTag alloc] init];
         tag2.tagId = TAG_ID_ARCHIVES;
-        tag2.tagTitle = @"ARCHIVES";
+        tag2.tagTitle = @"ARCHIVÉS";
         
         PCTag * tag3 = [[PCTag alloc] init];
         tag3.tagId = TAG_ID_FREE;
@@ -174,7 +177,7 @@
     CGFloat previousButtonX = 0;
     int buttonsCount = self.allTags.count;
     for (PCTag * tag in self.allTags) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton * button = [ButtonWithAccents buttonWithType:UIButtonTypeCustom];
         button.exclusiveTouch = YES;
         button.frame = CGRectMake(previousButtonX, 4, 0, 0);
         button.backgroundColor = [UIColor clearColor];
@@ -317,6 +320,20 @@
     {
         [scrollView setContentOffset:scrollView.contentOffset];
     }
+}
+
+@end
+
+#import "UIView+EasyFrame.h"
+
+@implementation ButtonWithAccents
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.titleLabel.frameY = 9;
+    self.titleLabel.frameHeight = 26;
 }
 
 @end
