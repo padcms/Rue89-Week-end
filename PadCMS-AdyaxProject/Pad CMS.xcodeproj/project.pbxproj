@@ -267,6 +267,7 @@
 		2D995FC71860918400E2457F /* AIRKioskGalleryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC41860918400E2457F /* AIRKioskGalleryItem.m */; };
 		2D995FCA186096BF00E2457F /* AIRKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */; };
 		2D995FCD186097EB00E2457F /* DCCVKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */; };
+		2D997D001872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
@@ -1602,6 +1603,7 @@
 		2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRKioskGalleryView.m; sourceTree = "<group>"; };
 		2D995FCB186097EB00E2457F /* DCCVKioskGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVKioskGalleryView.h; sourceTree = "<group>"; };
 		2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVKioskGalleryView.m; sourceTree = "<group>"; };
+		2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevisionViewController+MemoryOptimization.m"; sourceTree = "<group>"; };
 		2DA6E517186C408A00CACB6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2DA6E51A186C40B700CACB6C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
 		2DA6E51B186C40B700CACB6C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -3001,6 +3003,7 @@
 			children = (
 				2D995F10186051D500E2457F /* PCPageViewController+CoreChanges.m */,
 				2D995F11186051D500E2457F /* Resource */,
+				2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -5094,6 +5097,7 @@
 				2D995E70186050FB00E2457F /* PCFonts.m in Sources */,
 				2D995EA0186050FB00E2457F /* SBJsonStreamWriterAccumulator.m in Sources */,
 				2D995E7B186050FB00E2457F /* EGOTextView.m in Sources */,
+				2D997D001872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m in Sources */,
 				2D995E7A186050FB00E2457F /* EasyTableView.m in Sources */,
 				2D995F53186051D500E2457F /* RuePageElementBackground.m in Sources */,
 				2D995E79186050FB00E2457F /* BoxCarController.m in Sources */,

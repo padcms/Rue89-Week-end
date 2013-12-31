@@ -359,7 +359,8 @@ CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
     //CGFloat suggestedHeight = suggestedSize.height;
     
     CGSize ceiledSize = CGSizeMake(ceilf(suggestedSize.width + 1), ceilf(suggestedSize.height + 1));
-    
+    if(framesetter)
+        CFRelease(framesetter);
     return ceiledSize;
 }
 
