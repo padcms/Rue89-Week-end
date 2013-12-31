@@ -268,6 +268,7 @@
 		2D995FCA186096BF00E2457F /* AIRKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FC9186096BF00E2457F /* AIRKioskGalleryView.m */; };
 		2D995FCD186097EB00E2457F /* DCCVKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */; };
 		2D997D001872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */; };
+		2D997D6F1872F345000B7246 /* PCResourceCache+MemoryWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
@@ -1604,6 +1605,8 @@
 		2D995FCB186097EB00E2457F /* DCCVKioskGalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCVKioskGalleryView.h; sourceTree = "<group>"; };
 		2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCVKioskGalleryView.m; sourceTree = "<group>"; };
 		2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevisionViewController+MemoryOptimization.m"; sourceTree = "<group>"; };
+		2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCResourceCache+MemoryWarning.m"; sourceTree = "<group>"; };
+		2D997D701872F454000B7246 /* PCResourceCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCResourceCache.h; sourceTree = "<group>"; };
 		2DA6E517186C408A00CACB6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2DA6E51A186C40B700CACB6C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
 		2DA6E51B186C40B700CACB6C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -2772,6 +2775,7 @@
 		2D995EAE186051D400E2457F /* Magazine */ = {
 			isa = PBXGroup;
 			children = (
+				2D997D691872F2CD000B7246 /* Resource */,
 				2D995EAF186051D400E2457F /* CustomAnimation.h */,
 				2D995EB0186051D400E2457F /* CustomAnimation.m */,
 				2D995EB1186051D400E2457F /* FixedIllustrationTouchableColumnViewController.h */,
@@ -3256,6 +3260,15 @@
 				2D995FC41860918400E2457F /* AIRKioskGalleryItem.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		2D997D691872F2CD000B7246 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2D997D701872F454000B7246 /* PCResourceCache.h */,
+				2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		2DA63501186B38370087649F /* ThirdParty */ = {
@@ -5062,6 +5075,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D995F68186051D500E2457F /* VerificationController.m in Sources */,
+				2D997D6F1872F345000B7246 /* PCResourceCache+MemoryWarning.m in Sources */,
 				2D995E78186050FB00E2457F /* UINavigationController+BalancedTransition.m in Sources */,
 				2D995F7C186051D500E2457F /* PCSQLLiteModelBuilder+CoreChanges.m in Sources */,
 				2D995F6D186051D500E2457F /* SubscriptionMenuActionSheet.m in Sources */,
