@@ -46,7 +46,7 @@
             }
             else
             {
-                title = identifier;
+                _title = nil;
             }
             
             _days = days_from_identifier(identifier);

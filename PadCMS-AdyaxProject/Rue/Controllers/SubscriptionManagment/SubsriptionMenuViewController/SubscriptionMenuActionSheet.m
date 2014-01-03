@@ -28,15 +28,15 @@
 
 - (void) setSubscriptions:(NSArray *)subscriptions
 {
-    _subscriptions = subscriptions;
+    _subscriptions = [subscriptions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"title != nil"]];
     
-    for (int i = 0; i < subscriptions.count; ++i)
+    for (int i = 0; i < _subscriptions.count; ++i)
     {
-        SubscriptionScheme* scheme = subscriptions[i];
+        SubscriptionScheme* scheme = _subscriptions[i];
         [self addButtonWithTitle:scheme.title];
     }
     
-    if(subscriptions == nil || subscriptions.count == 0)
+    if(_subscriptions == nil || _subscriptions.count == 0)
     {
         self.title = @"Sorry no proposals for now.";
     }
