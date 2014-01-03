@@ -13,6 +13,7 @@
 #import "Helper.h"
 #import "NSString+MD5.h"
 #import "PCPathHelper.h"
+#import "PCJSONKeys.h"
 
 #define kPublisherTokenParameterKey @"sPublisherToken"
 
@@ -118,7 +119,7 @@ static void(^syncCompletedBlock)(NSError*);
     {
         NSLog(@"\nget issues list error : %@\n", error.debugDescription);
     }
-    
+    NSLog(@"responce headers : %@", responce.allHeaderFields);
 	if(dataReply != nil)
 	{
         NSDictionary* theDict = [self dictionaryFromResponceData:dataReply];
@@ -241,7 +242,7 @@ static void(^syncCompletedBlock)(NSError*);
 	
 	if(dataReply != nil)
 	{
-		NSString *str = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
+		//NSString *str = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
         //		NSLog(@"ReceiptVerify response:\n %@", str);
 		//[str release];
 	}
