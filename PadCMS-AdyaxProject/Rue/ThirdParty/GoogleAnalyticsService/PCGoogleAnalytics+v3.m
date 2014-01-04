@@ -44,7 +44,7 @@ static BOOL GoogleAnalyticsTrackerStarted = NO;
         [GAI sharedInstance].dispatchInterval = GANDispatchPeriodSec;
         
         // Optional: set Logger to VERBOSE for debug information.
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelInfo];
+        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
         
         // Initialize tracker.
         id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:accountId];
