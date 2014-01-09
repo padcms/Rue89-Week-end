@@ -270,6 +270,9 @@
 		2D995FCD186097EB00E2457F /* DCCVKioskGalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995FCC186097EB00E2457F /* DCCVKioskGalleryView.m */; };
 		2D997D001872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */; };
 		2D997D6F1872F345000B7246 /* PCResourceCache+MemoryWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */; };
+		2D997F77187D7D5200F436B4 /* RueResourceShredder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997F76187D7D5200F436B4 /* RueResourceShredder.m */; };
+		2D9D73D818783726005C9EC6 /* RueLongPageElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */; };
+		2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73DB18786B73005C9EC6 /* RueResourceView.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
@@ -1609,6 +1612,12 @@
 		2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCRevisionViewController+MemoryOptimization.m"; sourceTree = "<group>"; };
 		2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCResourceCache+MemoryWarning.m"; sourceTree = "<group>"; };
 		2D997D701872F454000B7246 /* PCResourceCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCResourceCache.h; sourceTree = "<group>"; };
+		2D997F75187D7D5200F436B4 /* RueResourceShredder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceShredder.h; sourceTree = "<group>"; };
+		2D997F76187D7D5200F436B4 /* RueResourceShredder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueResourceShredder.m; sourceTree = "<group>"; };
+		2D9D73D618783726005C9EC6 /* RueLongPageElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueLongPageElementViewController.h; sourceTree = "<group>"; };
+		2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueLongPageElementViewController.m; sourceTree = "<group>"; };
+		2D9D73DA18786B73005C9EC6 /* RueResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceView.h; sourceTree = "<group>"; };
+		2D9D73DB18786B73005C9EC6 /* RueResourceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueResourceView.m; sourceTree = "<group>"; };
 		2DA6E517186C408A00CACB6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2DA6E51A186C40B700CACB6C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
 		2DA6E51B186C40B700CACB6C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -3270,6 +3279,12 @@
 			children = (
 				2D997D701872F454000B7246 /* PCResourceCache.h */,
 				2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */,
+				2D9D73D618783726005C9EC6 /* RueLongPageElementViewController.h */,
+				2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */,
+				2D9D73DA18786B73005C9EC6 /* RueResourceView.h */,
+				2D9D73DB18786B73005C9EC6 /* RueResourceView.m */,
+				2D997F75187D7D5200F436B4 /* RueResourceShredder.h */,
+				2D997F76187D7D5200F436B4 /* RueResourceShredder.m */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -5137,6 +5152,7 @@
 				2D995F7F186051D500E2457F /* GTMNSString+HTML.m in Sources */,
 				2D995F6A186051D500E2457F /* RueSubscriptionManager.m in Sources */,
 				2D995E8F186050FB00E2457F /* NSObject+Block.m in Sources */,
+				2D9D73D818783726005C9EC6 /* RueLongPageElementViewController.m in Sources */,
 				2D995E72186050FB00E2457F /* PCKioskNotificationPopup.m in Sources */,
 				2D995F60186051D500E2457F /* RueSlideshowViewController.m in Sources */,
 				2D995F71186051D500E2457F /* PCPageElementViewController+CoreChanges.m in Sources */,
@@ -5150,6 +5166,7 @@
 				2D995E6A186050FB00E2457F /* ImagesBankImage.m in Sources */,
 				2D995E93186050FB00E2457F /* MTLabel.m in Sources */,
 				2D995F47186051D500E2457F /* RuePageViewWithPopupsController.m in Sources */,
+				2D997F77187D7D5200F436B4 /* RueResourceShredder.m in Sources */,
 				2D995E90186050FB00E2457F /* NSURL+Fragments.m in Sources */,
 				2D995F4F186051D500E2457F /* RueScrollingPaneViewController.m in Sources */,
 				2D995F5F186051D500E2457F /* RueGalleryWithOverlaysViewController.m in Sources */,
@@ -5223,6 +5240,7 @@
 				2D995D2318604AE600E2457F /* PCKioskSubHeaderView.m in Sources */,
 				2D5082B71861CD37006D699A /* PCPage+VideoDownloading.m in Sources */,
 				2D995E8E186050FB00E2457F /* PCGooglePlusController.m in Sources */,
+				2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */,
 				2D995D1C18604AE600E2457F /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
 				2D995F7D186051D500E2457F /* PCTag.m in Sources */,
 				2D995E96186050FB00E2457F /* RTLabel+Kern.m in Sources */,
