@@ -426,11 +426,11 @@ typedef enum{
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSLog(@"loading : %@", request.debugDescription);
-    if ([[request.URL absoluteURL] isEqual:[self.videoURL absoluteURL]]) {
+    //if ([[request.URL absoluteURL] isEqual:[self.videoURL absoluteURL]]) {
         return YES;
-    }
+    //}
     
-    return NO;
+    //return NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView;

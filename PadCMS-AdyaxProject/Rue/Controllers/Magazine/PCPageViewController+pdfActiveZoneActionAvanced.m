@@ -352,6 +352,8 @@
     
     [self.mainScrollView setContentSize:bodySize];
     
+    
+    //------------------------------------ Autoplaying video ----------------------------------------------------------
     if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo])
     {
         if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
