@@ -6,12 +6,16 @@
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
-#import "PCRevision.h"
+#import "PCRevision+DataOfDownload.h"
 #import <objc/runtime.h>
 #import "PCPage.h"
 #import "PCColumn.h"
 #import "PCPathHelper.h"
 #import "PCConfig.h"
+#import "PCJSONKeys.h"
+
+#import "PCPageElementMiniArticle.h"
+#import "PCTocItem.h"
 
 #define PCRevisionCoverImagePlaceholderName @"application-cover-placeholder.jpg"
 #define PCRevisionCoverImageFileName @"cover.jpg"
@@ -26,8 +30,12 @@
     Method oldInitWithParameters = class_getInstanceMethod([PCRevision class], @selector(initWithParameters:rootDirectory:backEndURL:));
     Method newInitWithParameters = class_getInstanceMethod([PCRevision class], @selector(initWithParametersAdvanced:rootDirectory:backEndURL:));
     
+    Method oldIsDownloadedMethod = class_getInstanceMethod([PCRevision class], @selector(isDownloaded));
+    Method newIsDownloadedMethod = class_getInstanceMethod([PCRevision class], @selector(isDownloadedAdvanced));
+    
     method_exchangeImplementations(oldUpdateColumnsMethod, newUpdateColumnsMethod);
     method_exchangeImplementations(oldInitWithParameters, newInitWithParameters);
+    method_exchangeImplementations(oldIsDownloadedMethod, newIsDownloadedMethod);
 }
 
 - (id)initWithParametersAdvanced:(NSDictionary *)parameters
@@ -142,6 +150,133 @@
     }
     
     return [UIImage imageNamed:PCRevisionCoverImagePlaceholderName];
+}
+
+- (BOOL) isDownloadedAdvanced
+{
+    BOOL isDatabaseDownloaded = [self isDownloadedAdvanced];
+    
+    if(isDatabaseDownloaded)
+    {
+        if(self.isContentDownloading)
+        {
+            return YES;
+        }
+        else
+        {
+            if([self isAllFilesDownloaded])
+            {
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
+        }
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (BOOL) isAllFilesDownloaded
+{
+    NSArray* allFiles = [self allDownloadingResources];
+    
+    for (NSString* resource in allFiles)
+    {
+        if([[NSFileManager defaultManager]fileExistsAtPath:[self.contentDirectory stringByAppendingPathComponent:resource]])
+        {
+            continue;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (NSArray*) allDownloadingResources
+{
+    NSMutableArray* resources = [[NSMutableArray alloc]init];
+    
+    //TocDownloading
+    
+    for (PCTocItem* item in self.toc)
+    {
+        if(item.thumbStripe)
+            [resources addObject:item.thumbStripe];
+        if(item.thumbSummary)
+            [resources addObject:item.thumbSummary];
+    }
+    
+    //HelpDownloading
+    
+	if(self.helpPages && [self.helpPages count] > 0)
+    {
+        [self.helpPages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [resources addObject:obj];
+        }];
+    }
+    
+    //PortraitPagesDownloading
+    
+    for (PCColumn* column in self.columns)
+    {
+        for (PCPage* page in column.pages)
+        {
+            BOOL isMiniArticleMet = NO;
+            for (PCPageElement* element in page.primaryElements)
+            {
+                if ([element isKindOfClass:[PCPageElementMiniArticle class]])
+                {
+                    if (!isMiniArticleMet)
+                    {
+                        if(element.resource)
+                            [resources addObject:element.resource];
+                    }
+                    isMiniArticleMet = YES;
+                    PCPageElementMiniArticle* miniArticle = (PCPageElementMiniArticle*)element;
+                    if(miniArticle.thumbnail)
+                        [resources addObject:miniArticle.thumbnail];
+                    if(miniArticle.thumbnailSelected)
+                        [resources addObject:miniArticle.thumbnailSelected];
+                }
+                else
+                {
+                    if(element.resource)
+                        [resources addObject:element.resource];
+                }
+            }
+            for (PCPageElement* element in page.secondaryElements)
+            {
+                if(element.resource)
+                    [resources addObject:element.resource];
+            }
+        }
+    }
+    
+    //HorizontalTocDownload
+    
+	for (NSString* resource in [self.horisontalTocItems allValues])
+    {
+        [resources addObject:[@"/horisontal_toc_items" stringByAppendingPathComponent:resource]];
+	}
+    
+    //HorizonalPagesDownload
+    
+	if (self.horizontalPages && [self.horizontalPages count] > 0)
+    {
+        [self.horizontalPages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [resources addObject:obj];
+        }];
+    }
+    
+    
+    return [NSArray arrayWithArray:resources];
 }
 
 @end

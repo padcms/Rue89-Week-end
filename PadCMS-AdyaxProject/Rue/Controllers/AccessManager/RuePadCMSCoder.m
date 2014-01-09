@@ -119,7 +119,7 @@ static void(^syncCompletedBlock)(NSError*);
     {
         NSLog(@"\nget issues list error : %@\n", error.debugDescription);
     }
-    NSLog(@"responce headers : %@", responce.allHeaderFields);
+    //NSLog(@"responce headers : %@", responce.allHeaderFields);
 	if(dataReply != nil)
 	{
         NSDictionary* theDict = [self dictionaryFromResponceData:dataReply];

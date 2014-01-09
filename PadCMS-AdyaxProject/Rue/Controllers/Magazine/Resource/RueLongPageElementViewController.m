@@ -37,15 +37,15 @@
 
 @implementation RueLongPageElementViewController
 
-- (BOOL) isEqual:(id)object///////??????????
+- (BOOL) isEqual:(id)object
 {
     if([super isEqual:object])
         return YES;
     
-    if([object class] != [PCPageElementViewController class])
+    if([object class] != [RueLongPageElementViewController class])
         return NO;
     
-    PCPageElementViewController *anotherObject = (PCPageElementViewController *)object;
+    RueLongPageElementViewController *anotherObject = (RueLongPageElementViewController *)object;
     
     return [self.resource isEqualToString:anotherObject.resource];
 }
