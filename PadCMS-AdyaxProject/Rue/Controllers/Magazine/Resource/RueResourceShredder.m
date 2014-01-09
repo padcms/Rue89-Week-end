@@ -124,10 +124,8 @@ static NSMutableArray* shredersQueue = nil;
     }
 }
 
-- (void) shredResource      //FomIndex:(NSNumber*)startIndex
+- (void) shredResource
 {
-//    PreperePieceCompleteBlock completeBlock = [self.pieceCompleteBlocks objectForKey:[NSNumber numberWithInt:0]];
-    
     @autoreleasepool {
     
         int startIndex = 0;
@@ -168,6 +166,7 @@ static NSMutableArray* shredersQueue = nil;
                 CGRect imageRect = CGRectMake(0, i * kPieceHeight, resource.size.width, kPieceHeight);
                 
                 CGImageRef resourceCGImage = resource.CGImage;
+                
                 CGImageRef cgImage = CGImageCreateWithImageInRect(resourceCGImage, imageRect);
                 
                 [self writeToDiskImage:[[UIImage alloc]initWithCGImage:cgImage] asPieceWithIndex:i];
@@ -251,8 +250,8 @@ static NSMutableArray* shredersQueue = nil;
 {
     NSData* imageData = UIImagePNGRepresentation(image);
     
-    BOOL writeFileSuccessful = [imageData writeToFile:[self pathForPieceWithIndex:index] atomically:NO];
-    NSLog(@"file was writed to disk : %i", writeFileSuccessful);
+    [imageData writeToFile:[self pathForPieceWithIndex:index] atomically:NO];
+    NSLog(@"image piece was writed to disk : %i", index);
 }
 
 @end

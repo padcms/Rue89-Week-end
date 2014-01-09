@@ -9,9 +9,12 @@
 #import "RueResourceView.h"
 #import "PCResourceCache.h"
 #import "RueResourceShredder.h"
+#import "MBProgressHUD.h"
 
 @interface RueResourceView ()
 {
+    MBProgressHUD* _HUD;
+    
     NSString* _resourceName;
     BOOL _loaded;
     NSString* _piecePath;
@@ -45,6 +48,8 @@
     
     if(_piecePath)
     {
+        [self hideHUD];
+        
         id resource = [[PCResourceCache defaultResourceCache] objectForKey:_piecePath];
         
         if (resource != nil && [resource isKindOfClass:UIImage.class])
@@ -58,6 +63,7 @@
     }
     else
     {
+        [self showHUD];
         [RueResourceShredder preparePieceAtIndex:self.indexOfPiece ofResource:_resourceName completion:^(NSString *piecePath) {
             
             _piecePath = piecePath;
@@ -71,6 +77,7 @@
 
 - (void) unload
 {
+    [self hideHUD];
     _loaded = NO;
     self.image = nil;
 }
@@ -115,6 +122,32 @@
 - (BOOL) isLoaded
 {
     return _loaded;
+}
+
+- (void) showHUD
+{
+	if (_HUD)
+	{
+		[_HUD removeFromSuperview];
+		_HUD = nil;
+	}
+	_HUD = [[MBProgressHUD alloc] initWithView:self];
+	[self addSubview:_HUD];
+	_HUD.mode = MBProgressHUDModeIndeterminate;
+//	_element.progressDelegate = _HUD;
+	[_HUD show:YES];
+	
+}
+
+- (void) hideHUD
+{
+	if (_HUD)
+	{
+		[_HUD hide:YES];
+//		_element.progressDelegate = nil;
+		[_HUD removeFromSuperview];
+		_HUD = nil;
+	}
 }
 
 @end

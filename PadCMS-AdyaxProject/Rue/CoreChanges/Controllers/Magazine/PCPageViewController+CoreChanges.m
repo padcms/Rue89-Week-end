@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "Helper.h"
 #import "RueLongPageElementViewController.h"
+#import "PCPageElemetTypes.h"
 
 @interface PCPageViewController (CoreChanges) <UIScrollViewDelegate>
 
@@ -100,13 +101,12 @@
         if(imageSize.height > 1024 * 3)
         {
             self.bodyViewController = [[RueLongPageElementViewController alloc] initWithResource:fullResource];
+            self.mainScrollView.delegate = self;
         }
         else
         {
             self.bodyViewController = [[PCPageElementViewController alloc] initWithResource:fullResource];
         }
-        
-        self.mainScrollView.delegate = self;
         
         // self.bodyViewController.element = bodyElement;
         [self.bodyViewController setTargetWidth:self.mainScrollView.bounds.size.width];

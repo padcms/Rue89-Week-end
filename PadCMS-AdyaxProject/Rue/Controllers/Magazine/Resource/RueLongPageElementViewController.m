@@ -75,16 +75,14 @@
     }
     
     int index = [self indexForOffset:self.yOffset];
-//    if(index != _currentIndex)
-//    {
-        _currentIndex = index;
     
-        [self unloadViewAtIndex:_currentIndex - 2];
+    _currentIndex = index;
+    
+    [self unloadViewAtIndex:_currentIndex - 2];
     [self unloadViewAtIndex:_currentIndex + 2];
     [self loadViewAtIndex:_currentIndex];
-        [self loadViewAtIndex:_currentIndex + 1];
-        [self loadViewAtIndex:_currentIndex - 1];
-//    }
+    [self loadViewAtIndex:_currentIndex + 1];
+    [self loadViewAtIndex:_currentIndex - 1];
 }
 
 - (void) loadViewAtIndex:(int)index
@@ -123,10 +121,6 @@
     
     [self initResourceViews];
     
-//    _resourceView = [[PCResourceView alloc] initWithFrame:self.view.bounds];
-//    _resourceView.resourceName = self.resource;
-//    [self.view addSubview:_resourceView];
-    
     for (int i = 0; i < _resourceViews.count; ++i)
     {
         RueResourceView* view = [_resourceViews objectAtIndex:i];
@@ -148,9 +142,6 @@
         return;
     }
     
-//    _resourceView = [[PCResourceView alloc] initWithFrame:self.view.bounds];
-//    _resourceView.resourceName = self.resource;
-    
     [self initResourceViews];
     
     _loaded = YES;
@@ -162,44 +153,29 @@
     }
     
     [self updateForCurrentResourceViewIndex];
-    
-//    [self.view addSubview:_resourceView];
 }
 
 - (void) initResourceViews
 {
-    int piecesCount = [RueResourceShredder piecesCountForResource:self.resource];  //= 0;
-    //BOOL isAlreadySredded = [self isResourceShreddedGetNumberOfPieces:& piecesCount];
+    int piecesCount = [RueResourceShredder piecesCountForResource:self.resource];
     
-    //if(isAlreadySredded)
-    //{
-        NSMutableArray* resourcesViews = [NSMutableArray arrayWithCapacity:piecesCount];
+    NSMutableArray* resourcesViews = [NSMutableArray arrayWithCapacity:piecesCount];
+    
+    float resourceViewY = 0;
+    for (int i = 0; i < piecesCount; ++i)
+    {
+        CGSize viewSize = [self sizeForResourceViewAtIndex:i];
+        CGRect viewRect = CGRectMake(0, resourceViewY, viewSize.width, viewSize.height);
+        resourceViewY += viewSize.height;
         
-        float resourceViewY = 0;
-        for (int i = 0; i < piecesCount; ++i)
-        {
-            CGSize viewSize = [self sizeForResourceViewAtIndex:i];
-            CGRect viewRect = CGRectMake(0, resourceViewY, viewSize.width, viewSize.height);
-            resourceViewY += viewSize.height;
-            
-            RueResourceView* resourceView = [[RueResourceView alloc] initWithFrame:viewRect];
-            resourceView.resourceName = self.resource;  //[self pathForPieceWithIndex:i];
-            resourceView.indexOfPiece = i;
-            
-            [resourcesViews addObject:resourceView];
-        }
+        RueResourceView* resourceView = [[RueResourceView alloc] initWithFrame:viewRect];
+        resourceView.resourceName = self.resource;
+        resourceView.indexOfPiece = i;
         
-        _resourceViews = [NSArray arrayWithArray:resourcesViews];
-//    }
-//    else
-//    {
-//        NSError* err = nil;
-//        [[NSFileManager defaultManager]createDirectoryAtPath:[self pathToPiecesFolder] withIntermediateDirectories:YES attributes:nil error:&err];
-//        if(err)
-//            NSLog(@"dirrectiry creation error : %@", err.debugDescription);
-//        
-//        [self performSelectorInBackground:@selector(shredResource) withObject:nil];
-//    }
+        [resourcesViews addObject:resourceView];
+    }
+    
+    _resourceViews = [NSArray arrayWithArray:resourcesViews];
 }
 
 
@@ -227,18 +203,6 @@
 - (CGSize) sizeForResourceViewAtIndex:(int)index
 {
     return [RueResourceShredder sizeOfPieceAtIndex:index forResours:self.resource];
-    
-//    CGSize imageSize = [Helper getSizeForImage:[self pathForPieceWithIndex:index]];
-//    
-//    if(_targetWidth != imageSize.width && !CGSizeEqualToSize(imageSize, CGSizeZero))
-//    {
-//        CGFloat scale = _targetWidth / imageSize.width;
-//        return CGSizeMake(imageSize.width * scale, imageSize.height * scale);
-//    }
-//    
-//    NSLog(@"image size : %@", NSStringFromCGSize(imageSize));
-//    
-//    return imageSize;
 }
 
 - (void) correctSize
