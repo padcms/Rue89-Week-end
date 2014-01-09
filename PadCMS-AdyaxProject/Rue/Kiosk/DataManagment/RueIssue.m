@@ -77,6 +77,8 @@ NSDate* fullDateFromString(NSString* strDate)
 {
     if(strDate != nil && [strDate isKindOfClass:[NSString class]] && strDate.length)
     {
+        strDate = [strDate substringToIndex:10];
+        
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
