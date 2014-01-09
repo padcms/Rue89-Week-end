@@ -76,6 +76,12 @@ typedef enum{
     }
     
     [self.articleView setScrollEnabled:( ! self.bodyViewController.view.hidden )];
+    
+    if(mainScrollView.delegate == (id<UIScrollViewDelegate>)self)
+    {
+        mainScrollView.delegate = nil;
+        self.articleView.delegate = (id<UIScrollViewDelegate>)self;
+    }
 }
 
 - (void) tapAction:(id)sender
