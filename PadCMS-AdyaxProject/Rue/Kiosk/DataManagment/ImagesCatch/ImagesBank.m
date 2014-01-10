@@ -27,6 +27,7 @@
 @implementation ImagesBank
 
 static ImagesBank* bank = nil;
+static CGSize fixedSize = {533, 300};
 
 + (void) initialize
 {
@@ -76,14 +77,17 @@ static ImagesBank* bank = nil;
         
         [self downloadImageFromPath:imagePath completion:^(UIImage *image, NSDate *lastModifiedDate, NSError *error) {
             
-            ImagesBankImage* newImage = [[ImagesBankImage alloc]init];
-            newImage.rootImage = image;
-            newImage.lastModifiedDate = lastModifiedDate;
-            [self addToLoadedImages:newImage forKey:fileName];
-            [self performInBackground:^{
-                [self writeImage:newImage toDiscWithName:fileName];
+            [self scaleImageIfNeeded:image completion:^(UIImage *resultImage) {
+                
+                ImagesBankImage* newImage = [[ImagesBankImage alloc]init];
+                newImage.rootImage = resultImage;
+                newImage.lastModifiedDate = lastModifiedDate;
+                [self addToLoadedImages:newImage forKey:fileName];
+                [self performInBackground:^{
+                    [self writeImage:newImage toDiscWithName:fileName];
+                }];
+                if(completionBlock) completionBlock(newImage.rootImage, nil);
             }];
-            if(completionBlock) completionBlock(newImage.rootImage, nil);
         }];
     };
     
@@ -132,6 +136,18 @@ static ImagesBank* bank = nil;
             updateImage();
         }
     }
+}
+
+- (void) scaleImageIfNeeded:(UIImage*)image completion:(void(^)(UIImage* resultImage))completion
+{
+    if([UIScreen mainScreen].scale == 1 && image.size.width >= fixedSize.width * 2)
+    {
+        UIGraphicsBeginImageContext(fixedSize);
+        [image drawInRect:CGRectMake(0, 0, fixedSize.width, fixedSize.height)];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    completion(image);
 }
 
 - (void) didReceiveMemoryWarningWithNotification:(NSNotification*)notification
