@@ -49,8 +49,13 @@
 #import "PCRueApplication.h"
 #import "RuePadCMSCoder.h"
 
-@interface PCTMainViewController ()
+#import "PCKioskViewController+RemoveMemoryLeak.h"
 
+@interface PCTMainViewController ()
+{
+    @public
+    PCKioskViewController* _kioskViewController;
+}
 - (void) checkInterfaceOrientationForRevision:(PCRevision*)revision;
 - (void) downloadRevisionFinishedWithIndex:(NSNumber*)index;
 - (void) bindNotifications;
@@ -620,9 +625,13 @@ BOOL stringExists(NSString* str)
     
     //gallery
     PCKioskSubviewsFactory      *factory = [[PCKioskSubviewsFactory alloc] init];
-    self.kioskViewController = [[kioskClass alloc] initWithKioskSubviewsFactory:factory
-                                                                                  andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight)
-                                                                             andDataSource:self];
+    
+    PCKioskViewController* kioskController = [[kioskClass alloc] initWithKioskSubviewsFactory:factory andFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight - footerHeight) andDataSource:self];
+    
+    _kioskViewController = kioskController;
+    
+    kioskController = nil;
+    
     self.kioskViewController.delegate = self;
     [self.view addSubview:self.kioskViewController.view];
     [self.view bringSubviewToFront:self.kioskViewController.view];
@@ -651,7 +660,10 @@ BOOL stringExists(NSString* str)
 - (void) dissmissKiosk
 {
     self.kioskViewController.delegate = nil;
+    [self.kioskViewController unloadView];
     [self.kioskViewController.view removeFromSuperview];
+    self.kioskViewController = nil;
+    
     self.kioskHeaderView.delegate = nil;
     [self.kioskHeaderView removeFromSuperview];
     self.kioskFooterView.delegate = nil;
