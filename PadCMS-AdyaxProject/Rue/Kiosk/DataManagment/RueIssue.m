@@ -119,4 +119,9 @@ NSDate* fullDateFromString(NSString* strDate)
     return descriptionString;
 }
 
+- (void) dealloc
+{
+    self.revisions = nil;
+}
+
 @end
