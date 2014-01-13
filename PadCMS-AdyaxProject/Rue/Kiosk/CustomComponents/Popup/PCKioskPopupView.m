@@ -229,6 +229,7 @@ const CGFloat kAnimationDuration = 0.4f;
     if ([self.delegate respondsToSelector:@selector(popupViewDidHide:)]) {
         [self.delegate popupViewDidHide:self];
     }
+    [self removeFromSuperview];
 }
 
 #pragma mark - Frame helpers

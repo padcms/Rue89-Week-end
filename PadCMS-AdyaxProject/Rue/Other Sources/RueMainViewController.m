@@ -477,43 +477,6 @@ BOOL stringExists(NSString* str)
 	
 }
 
-//- (void) restart
-//{
-//	self.magManagerExist = NO;
-//	
-//	if(alreadyInit)
-//	{
-//		[self stopBarTimer];
-//        if (self.mainView)
-//        {
-//            self.mainView.hidden = YES;
-//            [self.mainView removeFromSuperview];
-//        }
-//	}
-//	
-//	alreadyInit = YES;
-//}
-
-//- (void) bindNotifications
-//{
-//    if(IsNotificationsBinded) return;
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(updateApplicationData)
-//                                                 name:PCApplicationDataWillUpdate
-//                                               object:nil];
-//    IsNotificationsBinded = YES;
-//}
-
-//- (void) updateApplicationData//??
-//{
-//    NSLog(@"updateApplicationData");
-//    
-//    NSString *plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
-//    NSDictionary *applicationParameters = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-//    [currentApplication initWithParameters:applicationParameters 
-//                             rootDirectory:[PCPathHelper pathForPrivateDocuments]];
-//}
-
 #pragma mark - New kiosk implementation
 
 - (RueKioskShelfView *)shelfView {
@@ -579,14 +542,13 @@ BOOL stringExists(NSString* str)
         }
     }]];
     
-    NSInteger           kioskBarHeight = 34.0;
+    //NSInteger           kioskBarHeight = 34.0;
     
-    self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
-    self.kioskNavigationBar.delegate = self;
+    //self.kioskNavigationBar = [[PCKioskNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kioskBarHeight)];
+    //self.kioskNavigationBar.delegate = self;
     
     Class kioskClass;
     
-#ifdef RUE
     //header
     self.kioskHeaderView = (PCKioskHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PCKioskHeaderView" owner:nil options:nil] objectAtIndex:0];
     self.kioskHeaderView.delegate = self;
@@ -614,14 +576,6 @@ BOOL stringExists(NSString* str)
     NSInteger headerHeight = 136;
     
     kioskClass = [PCRueKioskViewController class];
-#else
-    NSInteger footerHeight = 0;
-    NSInteger headerHeight = 34;
-    
-    kioskClass = [PCKioskViewController class];
-#endif
-    
-
     
     //gallery
     PCKioskSubviewsFactory      *factory = [[PCKioskSubviewsFactory alloc] init];
@@ -640,21 +594,12 @@ BOOL stringExists(NSString* str)
     recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.kioskViewController.view addGestureRecognizer:recognizer];
     
-#ifdef RUE
-    //[self.view bringSubviewToFront:self.subHeaderView];
     [self.view bringSubviewToFront:self.kioskHeaderView];
     [self.view bringSubviewToFront:self.kioskFooterView];
     
     
     self.view.backgroundColor = [UIColor whiteColor];
     [[RueSubscriptionManager sharedManager] checkForActiveSubscriptionAndNotifyDelegate];
-#else
-    [self.view addSubview:self.kioskNavigationBar];
-    [self.kioskNavigationBar initElements];
-    [self.view bringSubviewToFront:self.kioskNavigationBar];
-    
-    
-#endif
 }
 
 - (void) dissmissKiosk
@@ -761,68 +706,12 @@ BOOL stringExists(NSString* str)
     return [self.allRevisions count];
 }
 
-//- (NSString *)issueTitleWithIndex:(NSInteger)index
-//{
-//    PCRevision *revision = [self revisionWithIndex:index];
-//    
-//    if(revision)
-//    {
-//        if(revision.issue)
-//        {
-//            return revision.issue.title;
-//        }
-//    }
-//    
-//    return @"";
-//}
-
-//- (NSString *)revisionTitleWithIndex:(NSInteger)index
-//{
-//    PCRevision *revision = [self revisionWithIndex:index];
-//    
-//    if(revision)
-//    {
-//        return revision.title;
-//    }
-//    
-//    return @"";
-//}
-
-//-(NSString*) revisionStateWithIndex:(NSInteger) index
-//{
-//    return @"";
-//}
-
 - (BOOL)isRevisionPaidWithIndex:(NSInteger)index
 {
 	PCRevision *revision = [self revisionWithIndex:index];
     
     return [[RueSubscriptionManager sharedManager] isRevisionPaid:revision];
 }
-
-//- (UIImage *)revisionCoverImageWithIndex:(NSInteger)index andDelegate:(id<PCKioskCoverImageProcessingProtocol>)delegate
-//{
-//    PCRevision *revision = [self revisionWithIndex:index];
-//    
-//    if (revision)
-//    {
-//        return  revision.coverImage;
-//    }
-//    
-//    return nil;
-//}
-
-//-(NSString *)priceWithIndex:(NSInteger)index
-//{
-//	PCRevision *revision = [self revisionWithIndex:index];
-//    return revision.issue.price;					
-//}
-
-//-(NSString *)productIdentifierWithIndex:(NSInteger)index
-//{
-//	PCRevision *revision = [self revisionWithIndex:index];
-//    return revision.issue.productIdentifier;
-//}
 
 - (NSString *)issueAuthorWithIndex:(NSInteger)index {
     PCRevision *revision = [self revisionWithIndex:index];
@@ -1379,8 +1268,10 @@ BOOL stringExists(NSString* str)
 
 #pragma mark - PCKioskPopupViewDelegate
 
-- (void)popupViewDidHide:(PCKioskPopupView *)popupView {
-    if ([popupView isKindOfClass:[PCKioskIntroPopupView class]]) {
+- (void)popupViewDidHide:(PCKioskPopupView *)popupView
+{
+    if ([popupView isKindOfClass:[PCKioskIntroPopupView class]])
+    {
         [self showForOurReadersPopup];
     }
 }
