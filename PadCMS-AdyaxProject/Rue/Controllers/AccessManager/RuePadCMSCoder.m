@@ -27,6 +27,76 @@ NSString* PCNetworkServiceJSONRPCPath;
 
 static void(^syncCompletedBlock)(NSError*);
 
++ (void) isParametersOutdated:(NSDictionary*)previousParameters completion:(void(^)(NSError* error, BOOL isOutdated))completionBlock
+{
+    if(previousParameters && [previousParameters objectForKey:PCJSONApplicationUpdatedTimestampKey])
+    {
+        NSString* timestampString = [previousParameters objectForKey:PCJSONApplicationUpdatedTimestampKey];
+        
+        NSURLRequest* request = [self requestToCheckIfupdatedFromTimestamp:[timestampString longLongValue]];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            
+            if(connectionError == nil)
+            {
+                NSString* stringReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                
+                RueSBJsonParser * parser = [RueSBJsonParser new];
+                
+                NSDictionary* theDict = [parser objectWithString:stringReply];
+                
+                if(theDict)
+                {
+                    NSLog(@"Need update responce : %@", theDict);
+                    completionBlock(nil, [[theDict objectForKey:@"result"]boolValue]);
+                }
+                else
+                {
+                    NSLog(@"responce : %@", stringReply);
+                    completionBlock(nil, YES);
+                }
+            }
+            else
+            {
+                completionBlock(connectionError, NO);
+            }
+        }];
+    }
+    else
+    {
+        completionBlock(nil, YES);
+    }
+}
+
++ (NSURLRequest*) requestToCheckIfupdatedFromTimestamp:(long long)timestamp
+{
+	NSURL* theURL = [[PCConfig serverURL] URLByAppendingPathComponent:PCNetworkServiceJSONRPCPath];
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10.0];
+	
+	[request setHTTPMethod:@"POST"];
+	
+	NSMutableDictionary *mainDict = [NSMutableDictionary dictionary];
+	[mainDict setObject:@"client.isApplicationUpdated" forKey:@"method"];
+    
+	NSDictionary *innerDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSString stringWithFormat:@"%d",[PCConfig applicationIdentifier]],@"iApplicationId",
+                               [NSString stringWithFormat:@"%lli",timestamp],@"iUpdatedTimestamp",
+                               nil];
+	[mainDict setObject:innerDict forKey:@"params"];
+	
+	[mainDict setObject:@"1" forKey:@"id"];
+	
+	RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
+	NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
+	
+    NSLog(@"jsonString is:\n%@", jsonString);
+	
+	[request setHTTPBody:[jsonString dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    return request;
+}
+
 + (NSDictionary*) applicationParametersFromCuurentPlistContent
 {
     NSString* plistPath = [[PCPathHelper pathForPrivateDocuments] stringByAppendingPathComponent:@"server.plist"];
@@ -40,6 +110,33 @@ static void(^syncCompletedBlock)(NSError*);
             return applicationParameters;
     }
     return nil;
+}
+
++ (BOOL) isInPublisherMode:(NSDictionary*)parameters
+{
+    NSString* isInPublisherModeString = [parameters objectForKey:PCJSONApplicationIsInPublisherModeKey];
+    if(isInPublisherModeString && [isInPublisherModeString isKindOfClass:[NSString class]] && isInPublisherModeString.length)
+    {
+        if([isInPublisherModeString isEqualToString:@"true"])
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return NO;
+    }
+}
+
++ (NSDictionary*) setInPublisherMode:(NSDictionary*)parameters
+{
+    NSMutableDictionary* newParams = [parameters mutableCopy];
+    [newParams setObject:@"true" forKey:PCJSONApplicationIsInPublisherModeKey];
+    return [NSDictionary dictionaryWithDictionary:newParams];
 }
 
 - (void) syncServerPlistDownloadAsynchronouslyWithPassword:(NSString*)password completion:(void(^)(NSError*))complBlock

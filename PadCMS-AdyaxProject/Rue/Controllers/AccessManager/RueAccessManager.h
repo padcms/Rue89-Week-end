@@ -16,4 +16,6 @@
 
 + (NSString*) publisherPassword;
 
++ (BOOL) isInPublisherMode;
+
 @end

@@ -12,6 +12,11 @@
 
 + (NSDictionary*) applicationParametersFromCuurentPlistContent;
 
++ (void) isParametersOutdated:(NSDictionary*)previousParameters completion:(void(^)(NSError* error, BOOL isOutdated))completionBlock;
+
++ (BOOL) isInPublisherMode:(NSDictionary*)parameters;
++ (NSDictionary*) setInPublisherMode:(NSDictionary*)parameters;
+
 - (BOOL) syncServerPlistDownloadWithPassword:(NSString*)password;
 
 - (void) syncServerPlistDownloadAsynchronouslyWithPassword:(NSString*)password completion:(void(^)(NSError*))complBlock;

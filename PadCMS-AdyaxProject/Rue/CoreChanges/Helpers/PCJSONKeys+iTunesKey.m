@@ -27,6 +27,9 @@ NSString* PCJSONIssueImageLargeURLKey                      = @"issue_image_large
 NSString* PCJSONIssueImageSmallURLKey                      = @"issue_image_small";
 NSString* PCJSONIssueWordsCountKey                         = @"issue_words";
 
+NSString* PCJSONApplicationUpdatedTimestampKey             = @"application_updated";
+NSString* PCJSONApplicationIsInPublisherModeKey            = @"application_is_in_publisher_mode";
+
 @interface PCJSONKeys : NSObject
 @end
 

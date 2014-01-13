@@ -10,10 +10,23 @@
 #import "PCConfig.h"
 #import "SBJsonWriter.h"
 #import "NSString+MD5.h"
+#import "PCJSONKeys.h"
 
 @implementation RueAccessManager
 
 static NSString* _password = @"";
+
++ (BOOL) isInPublisherMode
+{
+    if(_password.length > 0)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 
 + (NSString*) publisherPassword
 {
@@ -41,7 +54,7 @@ static NSString* _password = @"";
     RueSBJsonWriter *tmpJsonWriter = [[RueSBJsonWriter alloc] init];
     NSString *jsonString = [tmpJsonWriter stringWithObject:mainDict];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self apiURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self apiURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10.0];
     
     [request setHTTPMethod:@"POST"];
     

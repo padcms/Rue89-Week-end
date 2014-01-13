@@ -35,6 +35,46 @@
     static NSDictionary* _previousApplicationInfo = nil;
     static NSDictionary* _actualApplicationInfo = nil;
     
+    void(^stopUpdating)() = ^{
+        self.needUpdate = NO;
+        [self hideUpdateAnimation];
+    };
+    
+    void(^updateApp)() = ^{
+        
+        RuePadCMSCoder* padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
+        
+        BOOL isPublisherMode = [RueAccessManager isInPublisherMode];
+        
+        [padCMSCoder syncServerPlistDownloadAsynchronouslyWithPassword:[RueAccessManager publisherPassword] completion:^(NSError *error) {
+            
+            _isUpdating = NO;
+            if(error == nil)
+            {
+                _actualApplicationInfo = [RuePadCMSCoder applicationParametersFromCuurentPlistContent];
+                if(isPublisherMode)
+                {
+                    _actualApplicationInfo = [RuePadCMSCoder setInPublisherMode:_actualApplicationInfo];
+                }
+                
+                if([self isKioskPresented])
+                {
+                    [self updateKioskFrom:_previousApplicationInfo to:_actualApplicationInfo];
+                    _previousApplicationInfo = _actualApplicationInfo = nil;
+                    stopUpdating();
+                }
+            }
+            else
+            {
+                if([self isKioskPresented])
+                {
+                    stopUpdating();
+                }
+                NSLog(@"Update issues list error : %@", error);
+            }
+        }];
+    };
+    
     if(_isUpdating)
     {
         return;
@@ -45,43 +85,43 @@
         {
             [self updateKioskFrom:_previousApplicationInfo to:_actualApplicationInfo];
             _previousApplicationInfo = _actualApplicationInfo = nil;
-            self.needUpdate = NO;
-            [self hideUpdateAnimation];
+            stopUpdating();
         }
         else if([self isNotConnectedToNetwork] == NO)
         {
-            
             [self showUpdateAnimation];
             _isUpdating = YES;
             
             _previousApplicationInfo = [RuePadCMSCoder applicationParametersFromCuurentPlistContent];
             
-            RuePadCMSCoder* padCMSCoder = [[RuePadCMSCoder alloc] initWithDelegate:self];
-            [padCMSCoder syncServerPlistDownloadAsynchronouslyWithPassword:[RueAccessManager publisherPassword] completion:^(NSError *error) {
-                
-                _isUpdating = NO;
-                if(error == nil)
-                {
-                    _actualApplicationInfo = [RuePadCMSCoder applicationParametersFromCuurentPlistContent];
+            if([RueAccessManager isInPublisherMode] || [RuePadCMSCoder isInPublisherMode:_previousApplicationInfo])
+            {
+                updateApp();
+            }
+            else
+            {
+                [RuePadCMSCoder isParametersOutdated:_previousApplicationInfo completion:^(NSError *error, BOOL isOutdated) {
                     
-                    if([self isKioskPresented])
+                    if(error)
                     {
-                        [self updateKioskFrom:_previousApplicationInfo to:_actualApplicationInfo];
-                        _previousApplicationInfo = _actualApplicationInfo = nil;
-                        self.needUpdate = NO;
-                        [self hideUpdateAnimation];
+                        _isUpdating = NO;
+                        NSLog(@"Request timestamp error : %@", error.debugDescription);
+                        if([self isKioskPresented])
+                        {
+                            stopUpdating();
+                        }
                     }
-                }
-                else
-                {
-                    if([self isKioskPresented])
+                    else if(isOutdated)
                     {
-                        self.needUpdate = NO;
-                        [self hideUpdateAnimation];
+                        updateApp();
                     }
-                    NSLog(@"Update issues list error : %@", error);
-                }
-            }];
+                    else
+                    {
+                        _isUpdating = NO;
+                        stopUpdating();
+                    }
+                }];
+            }
         }
     }
 }
