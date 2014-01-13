@@ -599,7 +599,7 @@ typedef enum {
     NSDate * dateOfRevisionCreate = self.revision.createDate;
     NSDate* dateOfIssuePublication = ((RueIssue*)self.revision.issue).publishDate;
     
-    self.dateLabel.date = dateOfIssuePublication ? onlyDayDateFromDate(dateOfIssuePublication) : dateOfRevisionCreate;
+    self.dateLabel.date = dateOfIssuePublication ? dateOfIssuePublication : dateOfRevisionCreate;
     self.dateLabel.hidden = NO;
     
     //category

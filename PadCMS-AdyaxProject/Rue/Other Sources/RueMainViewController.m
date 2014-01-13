@@ -564,7 +564,7 @@ BOOL stringExists(NSString* str)
                 return NSOrderedDescending;
                 
             case NSOrderedSame:
-                if(rev1.issue.identifier > rev2.issue.identifier)
+                if(rev1.issue.number.intValue > rev2.issue.number.intValue)
                 {
                     return NSOrderedAscending;
                 }

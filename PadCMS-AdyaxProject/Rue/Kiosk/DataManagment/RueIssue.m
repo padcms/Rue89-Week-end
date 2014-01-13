@@ -80,7 +80,7 @@ NSDate* fullDateFromString(NSString* strDate)
         strDate = [strDate substringToIndex:10];
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [df setDateFormat:@"yyyy-MM-dd"];
         
         NSDate* date = [df dateFromString:strDate];
         
