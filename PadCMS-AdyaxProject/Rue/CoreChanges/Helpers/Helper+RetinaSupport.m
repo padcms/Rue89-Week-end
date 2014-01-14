@@ -22,7 +22,7 @@
 {
     CGSize superSize = [Helper getSizeForImageAdvanced:imagePath];
     
-    if(CGSizeEqualToSize(superSize, CGSizeZero))
+    if(CGSizeEqualToSize(superSize, CGSizeZero) == NO)
     {
         float screenScale = [UIScreen mainScreen].scale;
         superSize.width /= screenScale;
