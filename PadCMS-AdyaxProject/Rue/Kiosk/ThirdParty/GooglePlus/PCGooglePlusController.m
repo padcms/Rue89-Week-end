@@ -70,7 +70,7 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
     
     NSMutableString* urlString = [NSMutableString stringWithString:authorization_end_point];
     
-    NSString* scope = @"https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile";
+    NSString* scope = @"https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me"; //https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile";
     //login_hint
     
     NSString* params = [NSString stringWithFormat:@"redirect_uri=%@&response_type=token&client_id=%@&state=authorization&scope=%@", authorization_redirect_uri, google_client_id, scope];
@@ -150,6 +150,7 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     //NSLog(@"%@", request.URL.absoluteString);
+    //NSLog(@"params : %@", request.URL.queryFragments);
     
     if([request.URL.path isEqualToString:@"/login_complete"])
     {
@@ -163,6 +164,14 @@ static NSString* share_redirect_uri = @"https://complete.com/share_complete";
     {
         if(self.comleteShareBlock) self.comleteShareBlock(webView);
         return NO;
+    }
+    else if([request.URL.path isEqualToString:@"/accounts/SetSID"])
+    {
+        if(self.comleteAuthorizationBlock)
+        {
+            self.comleteAuthorizationBlock(self.webView);
+            self.comleteAuthorizationBlock = nil;
+        }
     }
     return YES;
 }
