@@ -23,6 +23,7 @@
 		2D90FF8B1880570A002E6BDC /* PCKioskViewController+RemoveMemoryLeak.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D90FF8A1880570A002E6BDC /* PCKioskViewController+RemoveMemoryLeak.m */; };
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		2D93A37118859C770090A0E9 /* Helper+RetinaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93A37018859C770090A0E9 /* Helper+RetinaSupport.m */; };
 		2D93F8E51876F69D00162712 /* PCDownloadManager+OffAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */; };
 		2D995D1B18604AE600E2457F /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995D0418604AE600E2457F /* PCKioskAdvancedControlElement.m */; };
 		2D995D1C18604AE600E2457F /* PCKioskAdvancedControlElementDateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995D0618604AE600E2457F /* PCKioskAdvancedControlElementDateLabel.m */; };
@@ -1235,6 +1236,7 @@
 		2D916ADE1869F1580057D77F /* PCTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTopBarView.h; sourceTree = "<group>"; };
 		2D926A9F180826FF003B2FA8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
+		2D93A37018859C770090A0E9 /* Helper+RetinaSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Helper+RetinaSupport.m"; sourceTree = "<group>"; };
 		2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDownloadManager+OffAlert.m"; sourceTree = "<group>"; };
 		2D995D0318604AE600E2457F /* PCKioskAdvancedControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskAdvancedControlElement.h; sourceTree = "<group>"; };
 		2D995D0418604AE600E2457F /* PCKioskAdvancedControlElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKioskAdvancedControlElement.m; sourceTree = "<group>"; };
@@ -3054,6 +3056,7 @@
 				2D995F1C186051D500E2457F /* PCJSONKeys.h */,
 				2D995F1D186051D500E2457F /* PCLocalizationManager+AdditionalInitialization.m */,
 				2D995F1E186051D500E2457F /* PCMacros.h */,
+				2D93A37018859C770090A0E9 /* Helper+RetinaSupport.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -5219,6 +5222,7 @@
 				2D995D2418604AE600E2457F /* PCKioskSubscribeButton.m in Sources */,
 				2D995E73186050FB00E2457F /* PCKioskSharePopupView.m in Sources */,
 				2D93F8E51876F69D00162712 /* PCDownloadManager+OffAlert.m in Sources */,
+				2D93A37118859C770090A0E9 /* Helper+RetinaSupport.m in Sources */,
 				2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */,
 				2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */,
 				2D995F4E186051D500E2457F /* RueMultiScrollPageViewController.m in Sources */,

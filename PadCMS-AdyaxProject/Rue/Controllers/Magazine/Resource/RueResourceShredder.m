@@ -158,12 +158,13 @@ static NSMutableArray* shredersQueue = nil;
         
         
         UIImage* resource = [UIImage imageWithContentsOfFile:self.resourcePath];
+        float screenScale = [UIScreen mainScreen].scale;
         
         for (int i = startIndex; i < countOfPieces; ++i)
         {
             @autoreleasepool {
                
-                CGRect imageRect = CGRectMake(0, i * kPieceHeight, resource.size.width, kPieceHeight);
+                CGRect imageRect = CGRectMake(0, i * kPieceHeight * screenScale, self.sizeForResource.width * screenScale, kPieceHeight * screenScale);
                 
                 CGImageRef resourceCGImage = resource.CGImage;
                 
