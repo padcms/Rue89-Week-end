@@ -33,4 +33,6 @@
 
 - (void) subscribeButtonTaped:(UIButton*)button fromRevision:(PCRevision*)revision;
 
+- (void) unloadView;
+
 @end

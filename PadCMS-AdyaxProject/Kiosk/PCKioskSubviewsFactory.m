@@ -27,15 +27,19 @@
     shelfSubview.tag = [PCKioskShelfView subviewTag];
     shelfSubview.hidden = YES;
     
+    
+#ifndef RUE
     PCKioskGalleryView     *gallerySubview = [[[self kioskGalleryViewClass] alloc] initWithFrame:frame];
     
     gallerySubview.tag = [PCKioskGalleryView subviewTag];
     gallerySubview.hidden = YES;
+#endif
+    
     
 #ifdef RUE
     result = [NSArray arrayWithObjects:
               shelfSubview,
-              gallerySubview,
+              //gallerySubview,
               nil];
 #else
     result = [NSArray arrayWithObjects:

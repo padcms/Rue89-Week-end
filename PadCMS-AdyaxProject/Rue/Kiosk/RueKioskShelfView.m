@@ -147,6 +147,18 @@
     //[self initTableView];
 }
 
+- (void) unloadView
+{
+    if (cells)
+    {
+        for (PCKioskAdvancedControlElement* cell in cells)
+        {
+            cell.dataSource = nil;
+            cell.delegate = nil;
+        }
+    }
+}
+
 - (void)initTableView {
     
     [self createPrecomputedTableViewCells];

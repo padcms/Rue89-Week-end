@@ -8,6 +8,7 @@
 
 #import "PCKioskViewController+RemoveMemoryLeak.h"
 #import "PCKioskSubview.h"
+#import "RueKioskShelfView.h"
 
 @implementation PCKioskViewController (RemoveMemoryLeak)
 
@@ -15,6 +16,11 @@
 {
     for(PCKioskSubview *current in self.kioskSubviews)
     {
+        if([current isKindOfClass:[RueKioskShelfView class]])
+        {
+            [(RueKioskShelfView*)current unloadView];
+        }
+        
         [current removeFromSuperview];
         current.delegate = nil;
         current.dataSource = nil;
