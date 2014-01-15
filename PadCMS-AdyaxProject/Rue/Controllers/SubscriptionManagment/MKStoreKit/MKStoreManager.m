@@ -187,6 +187,10 @@ static MKStoreManager* _sharedStoreManager;
 {
 	if(!_sharedStoreManager) {
         
+#ifndef NDEBUG
+        NSLog(@"MKStoreManager in sandbox mode");
+#endif
+        
 		static dispatch_once_t oncePredicate;
 		dispatch_once(&oncePredicate, ^{
 			_sharedStoreManager = [[self alloc] init];

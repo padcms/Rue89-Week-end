@@ -5981,10 +5981,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pad CMS_Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					RUE,
-					NDEBUG,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = RUE;
 				HEADER_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/include/libxml2",
 					"libs/facebook-iphone-sdk/src",
