@@ -8,6 +8,7 @@
 
 #import "RueResourceShredder.h"
 #import "Helper.h"
+#import "PCPageElement.h"
 
 #define kPieceHeight 1024
 
@@ -29,6 +30,11 @@ typedef void(^PreperePieceCompleteBlock)(NSString* piecePath);
 
 static NSMutableDictionary* activeShredders = nil;
 static NSMutableArray* shredersQueue = nil;
+
++ (float) heightNoNeededToShred
+{
+    return 3072.0;
+}
 
 + (void) load
 {
@@ -202,6 +208,43 @@ static NSMutableArray* shredersQueue = nil;
     {
         ((PreperePieceCompleteBlock)completeBlock)([self pathForPieceWithIndex:index]);
     }
+}
+
++ (int) piecesCountForElement:(PCPageElement*)element
+{
+    return ceilf(element.size.height / kPieceHeight);
+}
+
++ (BOOL) pieceExistsAtIndex:(int)index forResource:(NSString*)resource
+{
+    NSString* fileName = [[resource lastPathComponent] stringByDeletingPathExtension];
+    
+    NSString* folderPath = [resource stringByDeletingPathExtension];
+    
+    NSString* piecePath = [[[folderPath stringByAppendingPathComponent:fileName] stringByAppendingFormat:@"%i", index] stringByAppendingPathExtension:@"png"];
+    
+    return [[NSFileManager defaultManager] fileExistsAtPath:piecePath];
+}
+
++ (BOOL) allPeacesExistsForResource:(NSString*)resourcePath
+{
+    RueResourceShredder* shredder = [self shredderForResource:resourcePath];
+    
+    int piecesCount = [shredder countOfPieces];
+    
+    for (int i = 0; i < piecesCount; ++i)
+    {
+        if([shredder pieceAtIndexExists:i])
+        {
+            continue;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - file management

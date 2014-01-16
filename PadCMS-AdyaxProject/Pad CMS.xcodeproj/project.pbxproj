@@ -286,6 +286,7 @@
 		2DAB7420186D80D70075A32F /* RuePDFActiveZones.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB741F186D80D70075A32F /* RuePDFActiveZones.m */; };
 		2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */; };
 		2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */; };
+		2DAE9C2B1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1643,6 +1644,9 @@
 		2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueMainViewController+Update.m"; sourceTree = "<group>"; };
 		2DAC91B718688FF5000B4CAC /* SimpleHorizontalPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHorizontalPageViewController.h; sourceTree = "<group>"; };
 		2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHorizontalPageViewController.m; sourceTree = "<group>"; };
+		2DAE9C291887F9E200296A21 /* RueDownloadManagerWithShreddingResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManagerWithShreddingResources.h; sourceTree = "<group>"; };
+		2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManagerWithShreddingResources.m; sourceTree = "<group>"; };
+		2DAE9C2D18880DEF00296A21 /* PCDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDownloadOperation.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2495,6 +2499,7 @@
 		2D995DE2186050FA00E2457F /* DataManagment */ = {
 			isa = PBXGroup;
 			children = (
+				2DAE9C2D18880DEF00296A21 /* PCDownloadOperation.h */,
 				2D995DE3186050FA00E2457F /* ImagesCatch */,
 				2D995DEC186050FA00E2457F /* IssuePricingPlan.h */,
 				2D995DED186050FA00E2457F /* IssuePricingPlan.m */,
@@ -2503,6 +2508,8 @@
 				2D995DF0186050FA00E2457F /* PCRevision+Redefinition.m */,
 				2D995DF1186050FA00E2457F /* RueDownloadManager.h */,
 				2D995DF2186050FA00E2457F /* RueDownloadManager.m */,
+				2DAE9C291887F9E200296A21 /* RueDownloadManagerWithShreddingResources.h */,
+				2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */,
 				2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */,
 				2D995DF3186050FA00E2457F /* RueIssue.h */,
 				2D995DF4186050FA00E2457F /* RueIssue.m */,
@@ -5243,6 +5250,7 @@
 				2D995E67186050FB00E2457F /* ImagesBank+Networking.m in Sources */,
 				2D995E9C186050FB00E2457F /* SBJsonStreamParserAdapter.m in Sources */,
 				2D995E9F186050FB00E2457F /* SBJsonStreamWriter.m in Sources */,
+				2DAE9C2B1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m in Sources */,
 				2D995EA3186050FB00E2457F /* PCRueTwitterController.m in Sources */,
 				2D995F67186051D500E2457F /* MKStoreManager.m in Sources */,
 				2D995D1B18604AE600E2457F /* PCKioskAdvancedControlElement.m in Sources */,

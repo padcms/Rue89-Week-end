@@ -13,7 +13,7 @@
 #import "PCSQLLiteModelBuilder.h"
 #import "PCPathHelper.h"
 #import "PCMacros.h"
-#import "PCDownloadManager.h"
+#import "RueDownloadManagerWithShreddingResources.h"
 #import "PCKioskSubviewsFactory.h"
 #import "RueKioskShelfView.h"
 #import "PCKioskGalleryView.h"
@@ -32,7 +32,7 @@
 #import "PCRueKioskViewController.h"
 #import "PCTag.h"
 #import "PCJSONKeys.h"
-#import "RueDownloadManager.h"
+//#import "RueDownloadManager.h"
 #import "PCRevision+DataOfDownload.h"
 #import "UINavigationController+BalancedTransition.h"
 #import "PCRevisionSummaryPopup.h"
@@ -968,7 +968,7 @@ BOOL stringExists(NSString* str)
     
     PCRevision *revision = [self revisionWithIndex:[index integerValue]];
     
-    [RueDownloadManager startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
+    [RueDownloadManagerWithShreddingResources startDownloadingRevision:revision progressBlock:^BOOL(float progress) {
         
         if(progress < 1)
         {

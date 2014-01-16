@@ -13,9 +13,10 @@
 #import "PCPathHelper.h"
 #import "PCConfig.h"
 #import "PCJSONKeys.h"
-
+#import "PCPageElemetTypes.h"
 #import "PCPageElementMiniArticle.h"
 #import "PCTocItem.h"
+#import "RueResourceShredder.h"
 
 #define PCRevisionCoverImagePlaceholderName @"application-cover-placeholder.jpg"
 #define PCRevisionCoverImageFileName @"cover.jpg"
@@ -131,7 +132,7 @@
     else if (self.coverImageListURL != nil)
     {
         
-#warning - TEMPORARY RUE PERFORMANCE FIX, should be enabled for old projects like AIR
+//#warning - TEMPORARY RUE PERFORMANCE FIX, should be enabled for old projects like AIR
         //        NSURL *serverURL = _backEndURL != nil ? _backEndURL : [PCConfig serverURL] ;
         //        NSURL *fullCoverImageURL = [NSURL URLWithString:_coverImageListURL.absoluteString relativeToURL:serverURL];
         //        NSData *imageData = [NSData dataWithContentsOfURL:fullCoverImageURL];
@@ -164,7 +165,7 @@
         }
         else
         {
-            if([self isAllFilesDownloaded])
+            if([self isAllFilesDownloaded] && [self isAllResourcesShredded])
             {
                 return YES;
             }
@@ -178,6 +179,25 @@
     {
         return NO;
     }
+}
+
+- (BOOL) isAllResourcesShredded
+{
+    NSArray* resources = [self allShreddingResources];
+    
+    for (NSString* resource in resources)
+    {
+        if([RueResourceShredder allPeacesExistsForResource:resource])
+        {
+            continue;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (BOOL) isAllFilesDownloaded
@@ -277,6 +297,29 @@
     
     
     return [NSArray arrayWithArray:resources];
+}
+
+- (NSArray*) allShreddingResources
+{
+    NSMutableArray* shreddingResources = [[NSMutableArray alloc]init];
+    
+    for (PCColumn* column in self.columns)
+    {
+        for (PCPage* page in column.pages)
+        {
+            NSArray* bodyElements = [page elementsForType:PCPageElementTypeBody];
+            
+            for (PCPageElement* element in bodyElements)
+            {
+                if(element.size.height > [RueResourceShredder heightNoNeededToShred])
+                {
+                    [shreddingResources addObject:[self.contentDirectory stringByAppendingPathComponent:element.resource]];
+                }
+            }
+        }
+    }
+    
+    return [NSArray arrayWithArray:shreddingResources];
 }
 
 @end
