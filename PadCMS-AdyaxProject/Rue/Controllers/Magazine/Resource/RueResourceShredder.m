@@ -217,13 +217,7 @@ static NSMutableArray* shredersQueue = nil;
 
 + (BOOL) pieceExistsAtIndex:(int)index forResource:(NSString*)resource
 {
-    NSString* fileName = [[resource lastPathComponent] stringByDeletingPathExtension];
-    
-    NSString* folderPath = [resource stringByDeletingPathExtension];
-    
-    NSString* piecePath = [[[folderPath stringByAppendingPathComponent:fileName] stringByAppendingFormat:@"%i", index] stringByAppendingPathExtension:@"png"];
-    
-    return [[NSFileManager defaultManager] fileExistsAtPath:piecePath];
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self piecePathAtIndex:index forResource:resource]];
 }
 
 + (BOOL) allPeacesExistsForResource:(NSString*)resourcePath
@@ -248,6 +242,16 @@ static NSMutableArray* shredersQueue = nil;
 }
 
 #pragma mark - file management
+
++ (NSString*) piecePathAtIndex:(int)index forResource:(NSString*)resource
+{
+    NSString* fileName = [[resource lastPathComponent] stringByDeletingPathExtension];
+    
+    NSString* folderPath = [resource stringByDeletingPathExtension];
+    
+    NSString* piecePath = [[[folderPath stringByAppendingPathComponent:fileName] stringByAppendingFormat:@"%i", index] stringByAppendingPathExtension:@"png"];
+    return piecePath;
+}
 
 - (BOOL) isShreddingComplete
 {

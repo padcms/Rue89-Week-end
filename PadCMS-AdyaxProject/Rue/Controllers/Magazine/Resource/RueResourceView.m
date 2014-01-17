@@ -48,7 +48,7 @@
     
     if(_piecePath)
     {
-        [self hideHUD];
+        //[self hideHUD];
         
         id resource = [[PCResourceCache defaultResourceCache] objectForKey:_piecePath];
         
@@ -63,7 +63,7 @@
     }
     else
     {
-        [self showHUD];
+        //[self showHUD];
         [RueResourceShredder preparePieceAtIndex:self.indexOfPiece ofResource:_resourceName completion:^(NSString *piecePath) {
             
             _piecePath = piecePath;
@@ -77,7 +77,7 @@
 
 - (void) unload
 {
-    [self hideHUD];
+    //[self hideHUD];
     _loaded = NO;
     self.image = nil;
 }
@@ -97,6 +97,8 @@
         
         if (resource != nil && [resource isKindOfClass:UIImage.class])
         {
+            self.image = resource;
+            
             [self performSelectorOnMainThread:@selector(resourceLoaded:) withObject:resource waitUntilDone:YES];
         }
         else

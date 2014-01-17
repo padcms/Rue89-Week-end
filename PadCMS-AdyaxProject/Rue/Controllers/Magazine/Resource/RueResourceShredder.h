@@ -27,4 +27,6 @@
 
 + (BOOL) pieceExistsAtIndex:(int)index forResource:(NSString*)resource;
 
++ (NSString*) piecePathAtIndex:(int)index forResource:(NSString*)resource;
+
 @end
