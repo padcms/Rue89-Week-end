@@ -28,8 +28,8 @@
 #define NEW_ICONS
 #endif
 
-#ifdef RUE
+//#ifdef RUE
 
 NSString* deviceID();
 
-#endif
+//#endif

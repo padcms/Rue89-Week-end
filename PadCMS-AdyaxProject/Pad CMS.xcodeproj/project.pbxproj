@@ -251,7 +251,6 @@
 		2D995F83186051D500E2457F /* CLScoreServerRequest+UDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3C186051D500E2457F /* CLScoreServerRequest+UDID.m */; };
 		2D995F84186051D500E2457F /* FMDatabase+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3D186051D500E2457F /* FMDatabase+CoreChanges.m */; };
 		2D995F85186051D500E2457F /* InAppPurchases+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F3F186051D500E2457F /* InAppPurchases+CoreChanges.m */; };
-		2D995F86186051D500E2457F /* VersionManager+CoreChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F40186051D500E2457F /* VersionManager+CoreChanges.m */; };
 		2D995F921860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F891860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m */; };
 		2D995F931860555000E2457F /* PCRueAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F8B1860555000E2457F /* PCRueAppDelegate.m */; };
 		2D995F941860555000E2457F /* PCRueApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995F8D1860555000E2457F /* PCRueApplication.m */; };
@@ -5238,7 +5237,6 @@
 				2D995F4B186051D500E2457F /* RueScrollingAticleViewController.m in Sources */,
 				2D995E74186050FB00E2457F /* HelpSummaryPopupView.m in Sources */,
 				2D995EA1186050FB00E2457F /* SBJsonStreamWriterState.m in Sources */,
-				2D995F86186051D500E2457F /* VersionManager+CoreChanges.m in Sources */,
 				2D995F4D186051D500E2457F /* RueSlideViewController.m in Sources */,
 				2D995F76186051D500E2457F /* PCPadCMSAppDelegate+CoreChanges.m in Sources */,
 				2D995F58186051D500E2457F /* PCHtmlColumnViewController.m in Sources */,
