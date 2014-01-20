@@ -77,17 +77,25 @@ static CGSize fixedSize = {533, 300};
         
         [self downloadImageFromPath:imagePath completion:^(UIImage *image, NSDate *lastModifiedDate, NSError *error) {
             
-            [self scaleImageIfNeeded:image completion:^(UIImage *resultImage) {
-                
-                ImagesBankImage* newImage = [[ImagesBankImage alloc]init];
-                newImage.rootImage = resultImage;
-                newImage.lastModifiedDate = lastModifiedDate;
-                [self addToLoadedImages:newImage forKey:fileName];
-                [self performInBackground:^{
-                    [self writeImage:newImage toDiscWithName:fileName];
+            if(error)
+            {
+                NSLog(@"error downloadin image %@ : %@", fileName, error.debugDescription);
+                if(completionBlock) completionBlock(nil, error);
+            }
+            else
+            {
+                [self scaleImageIfNeeded:image completion:^(UIImage *resultImage) {
+                    
+                    ImagesBankImage* newImage = [[ImagesBankImage alloc]init];
+                    newImage.rootImage = resultImage;
+                    newImage.lastModifiedDate = lastModifiedDate;
+                    [self addToLoadedImages:newImage forKey:fileName];
+                    [self performInBackground:^{
+                        [self writeImage:newImage toDiscWithName:fileName];
+                    }];
+                    if(completionBlock) completionBlock(newImage.rootImage, nil);
                 }];
-                if(completionBlock) completionBlock(newImage.rootImage, nil);
-            }];
+            }
         }];
     };
     
