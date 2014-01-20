@@ -79,7 +79,7 @@ static CGSize fixedSize = {533, 300};
             
             if(error)
             {
-                NSLog(@"error downloadin image %@ : %@", fileName, error.debugDescription);
+                //NSLog(@"error downloadin image %@ : %@", fileName, error.debugDescription);
                 if(completionBlock) completionBlock(nil, error);
             }
             else

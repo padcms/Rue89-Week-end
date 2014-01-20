@@ -17,6 +17,8 @@
 
 #define kPublisherTokenParameterKey @"sPublisherToken"
 
+//#define AllwaysUpdate
+
 NSString* PCNetworkServiceJSONRPCPath;
 
 @interface RuePadCMSCoder ()
@@ -48,7 +50,11 @@ static void(^syncCompletedBlock)(NSError*);
                 if(theDict)
                 {
                     NSLog(@"Need update responce : %@", theDict);
+#ifdef AllwaysUpdate
+                    completionBlock(nil, YES);
+#else
                     completionBlock(nil, [[theDict objectForKey:@"result"]boolValue]);
+#endif
                 }
                 else
                 {

@@ -160,14 +160,20 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     //[self performSelectorInBackground:@selector(doBackgroundLoad) withObject:nil];
     
     [self bindNotifications];
-
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     //TODO !!!!!!!!!!!!!!!!!!!!!NOT FOR KIOSQUE
-	static BOOL notFirstRun;
-	if(notFirstRun) return;
+	static BOOL notFirstRun = NO;
+	if(notFirstRun)
+    {
+        if(self.kioskViewController == nil)
+        {
+            [self initKiosk];
+        }
+        return;
+    }
 	
 	[VersionManager sharedManager];
     
@@ -185,6 +191,12 @@ static NSString* newsstand_cover_key = @"application_newsstand_cover_path";
     
     [self performSelector:@selector(showIntroPopup) withObject:nil afterDelay:0.1f];
 #endif
+}
+
+- (void) viewDidUnload
+{
+    [self dissmissKiosk];
+    [super viewDidUnload];
 }
 
 - (void) didEnterBackground
