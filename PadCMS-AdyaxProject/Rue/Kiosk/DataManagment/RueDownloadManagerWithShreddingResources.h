@@ -8,6 +8,10 @@
 
 #import "RueDownloadManager.h"
 
+/**
+ @brief Subclass of RueDownloadManager that shredding image resources with big height via RueResourceShredder into small pieces as part of downloading operation.
+ @see RueResourceShredder
+ */
 @interface RueDownloadManagerWithShreddingResources : RueDownloadManager
 
 @end

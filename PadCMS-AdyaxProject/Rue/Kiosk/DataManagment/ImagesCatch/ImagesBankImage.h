@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ @brief Class that encapsulates image and its last madified date. 
+ @brief Confirms to NsCoding protocol and can be archieved to file.
+ */
 @interface ImagesBankImage : NSObject <NSCoding>
 
 @property UIImage* rootImage;
