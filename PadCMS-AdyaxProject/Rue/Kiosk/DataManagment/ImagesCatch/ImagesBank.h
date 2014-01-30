@@ -15,7 +15,7 @@
 
 /**
  @brief Singleton object that catching downloaded from internet images. 
- @brief Memory cache size is equal 20 images. It's mean that in memory exists not more than 20 last requested images at a time. But all images stored on disk.
+ @brief Memory cache size is equal to 20 images. It's mean that in memory exists not more than 20 last requested images at a time. But all images stored on disk.
  @brief When application receives memory warning all cached images removing from memory but stay on disk.
  */
 + (ImagesBank*) sharedBank;

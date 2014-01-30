@@ -10,7 +10,14 @@
 
 @interface UINavigationController (BalancedTransition)
 
+/**
+ @brief Shows swipe animation for changing controllers, after animation complete calls block.
+ */
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion;
+
+/**
+ @brief Shows swipe animation for changing controllers, after animation complete calls block.
+ */
 - (UIViewController*) popViewControllerAnimated:(BOOL)animated completion:(void(^)())completion;
 
 @end
