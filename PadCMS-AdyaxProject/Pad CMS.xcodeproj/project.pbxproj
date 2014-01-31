@@ -263,6 +263,7 @@
 		2D997D001872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997CFF1872D45E000B7246 /* PCRevisionViewController+MemoryOptimization.m */; };
 		2D997D6F1872F345000B7246 /* PCResourceCache+MemoryWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997D6E1872F345000B7246 /* PCResourceCache+MemoryWarning.m */; };
 		2D997F77187D7D5200F436B4 /* RueResourceShredder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997F76187D7D5200F436B4 /* RueResourceShredder.m */; };
+		2D9C3CA3189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9C3CA2189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.m */; };
 		2D9D73D818783726005C9EC6 /* RueLongPageElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */; };
 		2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73DB18786B73005C9EC6 /* RueResourceView.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
@@ -1600,6 +1601,8 @@
 		2D997D701872F454000B7246 /* PCResourceCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCResourceCache.h; sourceTree = "<group>"; };
 		2D997F75187D7D5200F436B4 /* RueResourceShredder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceShredder.h; sourceTree = "<group>"; };
 		2D997F76187D7D5200F436B4 /* RueResourceShredder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueResourceShredder.m; sourceTree = "<group>"; };
+		2D9C3CA1189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueHorizontalScrollingBrowserViewController.h; sourceTree = "<group>"; };
+		2D9C3CA2189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueHorizontalScrollingBrowserViewController.m; sourceTree = "<group>"; };
 		2D9D73D618783726005C9EC6 /* RueLongPageElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueLongPageElementViewController.h; sourceTree = "<group>"; };
 		2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueLongPageElementViewController.m; sourceTree = "<group>"; };
 		2D9D73DA18786B73005C9EC6 /* RueResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceView.h; sourceTree = "<group>"; };
@@ -2769,6 +2772,8 @@
 				2D995EDF186051D400E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */,
 				2D995EE0186051D400E2457F /* RueBrowserViewController.h */,
 				2D995EE1186051D400E2457F /* RueBrowserViewController.m */,
+				2D9C3CA1189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.h */,
+				2D9C3CA2189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.m */,
 				2D995EE2186051D400E2457F /* RueFixedIllustrationArticleTouchablePageViewController */,
 				2D995EEA186051D400E2457F /* RueSlideshowViewController.h */,
 				2D995EEB186051D400E2457F /* RueSlideshowViewController.m */,
@@ -5122,6 +5127,7 @@
 				2D995F75186051D500E2457F /* PCVideoController+NoAlert.m in Sources */,
 				2D995E9A186050FB00E2457F /* SBJsonStreamParser.m in Sources */,
 				2D995D2018604AE600E2457F /* PCKioskHeaderView.m in Sources */,
+				2D9C3CA3189BF3FE0033B6AE /* RueHorizontalScrollingBrowserViewController.m in Sources */,
 				2D995D1D18604AE600E2457F /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
 				2D995E6A186050FB00E2457F /* ImagesBankImage.m in Sources */,
 				2D995E93186050FB00E2457F /* MTLabel.m in Sources */,
