@@ -277,6 +277,7 @@
 		2DAC91B518683EE7000B4CAC /* RueMainViewController+Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B418683EE7000B4CAC /* RueMainViewController+Update.m */; };
 		2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */; };
 		2DAE9C2B1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */; };
+		2DB8B08E189FCB2A009C5CC8 /* PCPageElementActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1627,6 +1628,8 @@
 		2DAE9C291887F9E200296A21 /* RueDownloadManagerWithShreddingResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueDownloadManagerWithShreddingResources.h; sourceTree = "<group>"; };
 		2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueDownloadManagerWithShreddingResources.m; sourceTree = "<group>"; };
 		2DAE9C2D18880DEF00296A21 /* PCDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDownloadOperation.h; sourceTree = "<group>"; };
+		2DB8B08C189FCB2A009C5CC8 /* PCPageElementActiveZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPageElementActiveZone.h; sourceTree = "<group>"; };
+		2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPageElementActiveZone.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -3324,6 +3327,15 @@
 			path = uk.lproj;
 			sourceTree = "<group>";
 		};
+		2DB8B08B189FCB01009C5CC8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2DB8B08C189FCB2A009C5CC8 /* PCPageElementActiveZone.h */,
+				2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4D7B7361128B322B0066291A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -3685,6 +3697,7 @@
 		AB8137831522230E0038EC7B /* Rue */ = {
 			isa = PBXGroup;
 			children = (
+				2DB8B08B189FCB01009C5CC8 /* Model */,
 				2DA63501186B38370087649F /* ThirdParty */,
 				2D995F0D186051D500E2457F /* CoreChanges */,
 				2D995EA4186051D400E2457F /* Controllers */,
@@ -5153,6 +5166,7 @@
 				2D995F41186051D500E2457F /* NSString+MD5.m in Sources */,
 				2D995F6B186051D500E2457F /* SubscriptionScheme.m in Sources */,
 				2D995F9E18605EC300E2457F /* RueMainViewController.m in Sources */,
+				2DB8B08E189FCB2A009C5CC8 /* PCPageElementActiveZone.m in Sources */,
 				2D995F7B186051D500E2457F /* PCKioskViewController+CoreChanges.m in Sources */,
 				2D995D2218604AE600E2457F /* PCKioskShelfViewCell.m in Sources */,
 				2D995F4C186051D500E2457F /* RueDiaporamaInLongArticleViewController.m in Sources */,

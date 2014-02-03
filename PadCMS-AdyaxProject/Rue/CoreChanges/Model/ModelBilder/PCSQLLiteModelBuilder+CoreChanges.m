@@ -9,6 +9,9 @@
 #import "PCSQLLiteModelBuilder.h"
 #import "FMDatabase.h"
 #import "PCLocalizationManager.h"
+#import "PCPageElementManager.h"
+#import "PCPageElementActiveZone.h"
+#import <objc/runtime.h>
 
 @interface PCSQLLiteModelBuilder ()
 + (PCPageElement*)buildPageElement:(FMResultSet*)elementData withDataBase:(FMDatabase*)dataBase;
@@ -16,7 +19,19 @@
 
 @implementation PCSQLLiteModelBuilder (CoreChanges)
 
-+ (void) addPagesFromSQLiteBaseWithPath:(NSString*)path toRevision:(PCRevision*)revision
++ (void) load
+{
+    Method addPagesOld = class_getClassMethod([PCSQLLiteModelBuilder class], @selector(addPagesFromSQLiteBaseWithPath:toRevision:));
+    Method addPagesNew = class_getClassMethod([PCSQLLiteModelBuilder class], @selector(addPagesFromSQLiteBaseWithPathAdvanced:toRevision:));
+    
+    Method buildPageElementOld = class_getClassMethod([PCSQLLiteModelBuilder class], @selector(buildPageElement:withDataBase:));
+    Method buildPageElementNew = class_getClassMethod([PCSQLLiteModelBuilder class], @selector(buildPageElementAdvanced:withDataBase:));
+    
+    method_exchangeImplementations(addPagesOld, addPagesNew);
+    method_exchangeImplementations(buildPageElementOld, buildPageElementNew);
+}
+
++ (void) addPagesFromSQLiteBaseWithPathAdvanced:(NSString*)path toRevision:(PCRevision*)revision
 {
     FMDatabase* base = [[FMDatabase alloc] initWithPath:path];
     [base open];
@@ -192,6 +207,100 @@
 		});
 		
 	}
+}
+
++ (PCPageElement*) buildPageElementAdvanced:(FMResultSet*)elementData withDataBase:(FMDatabase*)dataBase
+{
+    NSString* fieldTypeName = [elementData stringForColumn:PCSQLiteElementTypeNameColumnName];
+    NSInteger elementID = [elementData intForColumn:PCSQLiteIDColumnName];
+    
+    PCPageElement* pageElement = nil;
+    
+    Class pageElementClass = [[PCPageElementManager sharedManager] elementClassForElementType:fieldTypeName];
+    pageElement = [[pageElementClass alloc] init];
+    
+    NSMutableDictionary* elementDatas = [[NSMutableDictionary alloc] init];
+    NSString* elementDataQuery = [NSString stringWithFormat:@"select * from %@ where %@=?",PCSQLiteElementDataTableName,PCSQLiteElementIDColumnName];
+    NSMutableDictionary* elementDataRects = [[NSMutableDictionary alloc] init];
+    
+    NSMutableArray* elementActiveZones = [[NSMutableArray alloc] init];
+    
+    FMResultSet* data = [dataBase executeQuery:elementDataQuery,[NSNumber numberWithInt:elementID]];
+    
+    while ([data next])
+    {
+        NSString* value = [data stringForColumn:PCSQLiteValueColumnName];
+        NSString* type = [data stringForColumn:PCSQLiteTypeColumnName];
+        
+        [elementDatas setObject:value forKey:type];
+        int position_id = [data intForColumn:PCSQLitePositionIDColumnName];
+        
+        PCPageActiveZone *activeZone = nil;
+        
+        if([type isEqualToString:PCSQLiteElementActiveZoneAttributeName])
+        {
+            activeZone = [[PCPageElementActiveZone alloc] init];
+            activeZone.URL = value;
+            ((PCPageElementActiveZone*)activeZone).pageElement = pageElement;
+        }
+        
+        if (position_id > 0)
+        {
+            NSString* positionDataQuery = [NSString stringWithFormat:@"select * from %@ where %@=?",PCSQLiteElementDataPositionTableName,PCSQLiteIDColumnName];
+            [dataBase setLogsErrors:YES];
+            FMResultSet* positionData = [dataBase executeQuery:positionDataQuery,[NSNumber numberWithInt:position_id]];
+            while ([positionData next])
+            {
+                CGPoint startpoint = CGPointZero;
+                CGPoint endPoint   = CGPointZero;
+                
+                startpoint.x =  [positionData doubleForColumn:PCSQLiteStartXColumnName];
+                startpoint.y =  [positionData doubleForColumn:PCSQLiteStartYColumnName];
+                endPoint.x   =  [positionData doubleForColumn:PCSQLiteEndXColumnName];
+                endPoint.y   =  [positionData doubleForColumn:PCSQLiteEndYColumnName];
+                CGRect elementRect = CGRectMake(MIN(startpoint.x,endPoint.x),
+                                                MIN(startpoint.y,endPoint.y),
+                                                MAX(startpoint.x,endPoint.x)-MIN(startpoint.x,endPoint.x),
+                                                MAX(startpoint.y,endPoint.y)-MIN(startpoint.y,endPoint.y));
+                if (elementRect.origin.y<0)
+                {
+                    elementRect.size.height+=2*elementRect.origin.y;
+                    elementRect.origin.y=0;
+                }
+                if (elementRect.origin.x<0)
+                {
+                    elementRect.size.width+=2*elementRect.origin.x;
+                    elementRect.origin.x=0;
+                }
+                [elementDataRects setObject:NSStringFromCGRect(elementRect) forKey:value];
+                
+                if([type isEqualToString:PCSQLiteElementActiveZoneAttributeName])
+                    activeZone.rect = elementRect;
+            }
+        }
+        
+        if(activeZone != nil)
+        {
+            [elementActiveZones addObject:activeZone];
+        }
+    }
+    
+    
+    if (pageElement != nil)
+    {
+        pageElement.fieldTypeName = fieldTypeName;
+        pageElement.identifier = elementID;
+        pageElement.contentText = [elementData stringForColumn:PCSQLiteContentTextColumnName];
+        if ([elementData intForColumn:PCSQLiteWeightColumnName])
+            pageElement.weight = [elementData intForColumn:PCSQLiteWeightColumnName];
+    }
+    
+    [pageElement pushElementData:elementDatas];
+    [pageElement setDataRects:elementDataRects];
+    
+    [pageElement.activeZones addObjectsFromArray:elementActiveZones];
+    
+    return pageElement;
 }
 
 @end
