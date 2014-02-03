@@ -55,8 +55,10 @@ typedef enum{
     _videoRect = videoRect;
     
     float newViewY = videoRect.origin.y + videoRect.size.height / 2 - self.view.frame.size.height / 2;
+    float newViewX = videoRect.origin.x + videoRect.size.width / 2 - self.view.frame.size.width / 2;
     
     self.view.frameY = newViewY;
+    self.view.frameX = newViewX;
     
     if(_currentPlayerView)
     {
@@ -94,6 +96,7 @@ typedef enum{
 {
     CGRect frame = self.videoRect;
     frame.origin.y -= self.view.frameY;
+    frame.origin.x -= self.view.frameX;
     return frame;
 }
 
@@ -367,6 +370,7 @@ typedef enum{
     _currentWebViewPresentationState = WebViewPresentationStateChanging;
     
     self.view.frameY = 0;
+    self.view.frameX = 0;
     
     CGRect newWebRect = self.videoRect;
     newWebRect.origin.x -= self.mainScrollView.contentOffset.x - self.mainScrollView.frameX;
@@ -393,6 +397,8 @@ typedef enum{
     self.view.backgroundColor = [UIColor clearColor];
     
     self.view.frameY = self.mainScrollView.contentOffset.y - self.mainScrollView.frameY;
+    self.view.frameX = self.mainScrollView.contentOffset.x - self.mainScrollView.frameX;
+    
     BOOL prevMainScrolClipToBounds = self.mainScrollView.clipsToBounds;
     self.mainScrollView.clipsToBounds = NO;
     [self.mainScrollView addSubview:self.view];

@@ -11,7 +11,7 @@
 #import "PCSlideshowViewController.h"
 #import "PCPageElemetTypes.h"
 #import "PCHorizontalPageElementViewController.h"
-#import "RueHorizontalScrollingBrowserViewController.h"
+#import "RueBrowserViewController.h"
 
 @interface PCPageViewController ()
 
@@ -177,7 +177,7 @@
         
         [self hideVideoWebView];
         
-        webBrowserViewController = [[RueHorizontalScrollingBrowserViewController alloc] init];
+        webBrowserViewController = [[RueBrowserViewController alloc] init];
         webBrowserViewController.videoRect = videoRect;
         
         ((RueBrowserViewController*)webBrowserViewController).mainScrollView = _paneScrollView;//self.mainScrollView;

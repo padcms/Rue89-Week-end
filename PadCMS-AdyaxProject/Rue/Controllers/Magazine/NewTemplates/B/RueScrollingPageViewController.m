@@ -9,6 +9,7 @@
 #import "RueScrollingPageViewController.h"
 #import "PCScrollView.h"
 #import "RuePageElementBackground.h"
+#import "PCPageElemetTypes.h"
 
 @interface RueScrollingPageViewController ()
 
