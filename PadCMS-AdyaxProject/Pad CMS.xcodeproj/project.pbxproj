@@ -201,7 +201,6 @@
 		2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D995F5A186051D500E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDE186051D400E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m */; };
 		2D995F5B186051D500E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDF186051D400E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */; };
-		2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EE1186051D400E2457F /* RueBrowserViewController.m */; };
 		2D995F5D186051D500E2457F /* PCPageViewController+IsPresented.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EE5186051D400E2457F /* PCPageViewController+IsPresented.m */; };
 		2D995F5E186051D500E2457F /* RueFixedIllustrationArticleTouchablePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EE7186051D400E2457F /* RueFixedIllustrationArticleTouchablePageViewController.m */; };
 		2D995F5F186051D500E2457F /* RueGalleryWithOverlaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EE9186051D400E2457F /* RueGalleryWithOverlaysViewController.m */; };
@@ -265,6 +264,8 @@
 		2D997F77187D7D5200F436B4 /* RueResourceShredder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997F76187D7D5200F436B4 /* RueResourceShredder.m */; };
 		2D9D73D818783726005C9EC6 /* RueLongPageElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */; };
 		2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73DB18786B73005C9EC6 /* RueResourceView.m */; };
+		2DA042F518A11D1B0070F8BD /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */; };
+		2DA042F918A11D560070F8BD /* CostomTouchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F818A11D560070F8BD /* CostomTouchesView.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
@@ -278,6 +279,7 @@
 		2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAC91B818688FF5000B4CAC /* SimpleHorizontalPageViewController.m */; };
 		2DAE9C2B1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAE9C2A1887F9E200296A21 /* RueDownloadManagerWithShreddingResources.m */; };
 		2DB8B08E189FCB2A009C5CC8 /* PCPageElementActiveZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */; };
+		2DB8B091189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB8B090189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m */; };
 		575F639817CC98BD00150CF6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57A4710817BB663100745732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
 		57B4430717D4A66000FCFA87 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A4710717BB663100745732 /* CoreText.framework */; };
@@ -1491,8 +1493,6 @@
 		2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCMagazineViewControllersFactory+HtmlTemplateSupport.m"; sourceTree = "<group>"; };
 		2D995EDE186051D400E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+pdfActiveZoneActionAvanced.m"; sourceTree = "<group>"; };
 		2D995EDF186051D400E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCSliderBasedMiniArticleViewController+CurrentActiveZone.m"; sourceTree = "<group>"; };
-		2D995EE0186051D400E2457F /* RueBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueBrowserViewController.h; sourceTree = "<group>"; };
-		2D995EE1186051D400E2457F /* RueBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueBrowserViewController.m; sourceTree = "<group>"; };
 		2D995EE3186051D400E2457F /* PCGalleryWithOverlaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCGalleryWithOverlaysViewController.h; sourceTree = "<group>"; };
 		2D995EE4186051D400E2457F /* PCPageViewController+IsPresented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCPageViewController+IsPresented.h"; sourceTree = "<group>"; };
 		2D995EE5186051D400E2457F /* PCPageViewController+IsPresented.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPageViewController+IsPresented.m"; sourceTree = "<group>"; };
@@ -1605,6 +1605,11 @@
 		2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueLongPageElementViewController.m; sourceTree = "<group>"; };
 		2D9D73DA18786B73005C9EC6 /* RueResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceView.h; sourceTree = "<group>"; };
 		2D9D73DB18786B73005C9EC6 /* RueResourceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueResourceView.m; sourceTree = "<group>"; };
+		2DA042F318A11D1B0070F8BD /* RueBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueBrowserViewController.h; sourceTree = "<group>"; };
+		2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueBrowserViewController.m; sourceTree = "<group>"; };
+		2DA042F718A11D560070F8BD /* CostomTouchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomTouchesView.h; sourceTree = "<group>"; };
+		2DA042F818A11D560070F8BD /* CostomTouchesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostomTouchesView.m; sourceTree = "<group>"; };
+		2DA042FA18A126710070F8BD /* CostomTouchesViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CostomTouchesViewDelegate.h; sourceTree = "<group>"; };
 		2DA6E517186C408A00CACB6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2DA6E51A186C40B700CACB6C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
 		2DA6E51B186C40B700CACB6C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -1630,6 +1635,8 @@
 		2DAE9C2D18880DEF00296A21 /* PCDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDownloadOperation.h; sourceTree = "<group>"; };
 		2DB8B08C189FCB2A009C5CC8 /* PCPageElementActiveZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPageElementActiveZone.h; sourceTree = "<group>"; };
 		2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPageElementActiveZone.m; sourceTree = "<group>"; };
+		2DB8B08F189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCScrollingPageViewController+VideoOnElements.h"; sourceTree = "<group>"; };
+		2DB8B090189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCScrollingPageViewController+VideoOnElements.m"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Pad CMS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pad CMS_Prefix.pch"; sourceTree = "<group>"; };
 		4D7B7360128B322B0066291A /* OAuthConsumer-iPhoneLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OAuthConsumer-iPhoneLib.xcodeproj"; path = "libs/OAuthConsumeriPhoneLib/OAuthConsumer-iPhoneLib.xcodeproj"; sourceTree = "<group>"; };
 		4D7B7570128B33AB0066291A /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2770,8 +2777,7 @@
 				2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
 				2D995EDE186051D400E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m */,
 				2D995EDF186051D400E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m */,
-				2D995EE0186051D400E2457F /* RueBrowserViewController.h */,
-				2D995EE1186051D400E2457F /* RueBrowserViewController.m */,
+				2DA042F218A11D1B0070F8BD /* BrowserViewController */,
 				2D995EE2186051D400E2457F /* RueFixedIllustrationArticleTouchablePageViewController */,
 				2D995EEA186051D400E2457F /* RueSlideshowViewController.h */,
 				2D995EEB186051D400E2457F /* RueSlideshowViewController.m */,
@@ -2822,6 +2828,8 @@
 			children = (
 				2D995EBA186051D400E2457F /* RueScrollingPageViewController.h */,
 				2D995EBB186051D400E2457F /* RueScrollingPageViewController.m */,
+				2DB8B08F189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.h */,
+				2DB8B090189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m */,
 			);
 			path = B;
 			sourceTree = "<group>";
@@ -3259,6 +3267,18 @@
 				2D997F76187D7D5200F436B4 /* RueResourceShredder.m */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		2DA042F218A11D1B0070F8BD /* BrowserViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2DA042F318A11D1B0070F8BD /* RueBrowserViewController.h */,
+				2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */,
+				2DA042F718A11D560070F8BD /* CostomTouchesView.h */,
+				2DA042F818A11D560070F8BD /* CostomTouchesView.m */,
+				2DA042FA18A126710070F8BD /* CostomTouchesViewDelegate.h */,
+			);
+			path = BrowserViewController;
 			sourceTree = "<group>";
 		};
 		2DA63501186B38370087649F /* ThirdParty */ = {
@@ -5106,12 +5126,14 @@
 				2D995E7A186050FB00E2457F /* EasyTableView.m in Sources */,
 				2D995F53186051D500E2457F /* RuePageElementBackground.m in Sources */,
 				2D995E79186050FB00E2457F /* BoxCarController.m in Sources */,
+				2DA042F918A11D560070F8BD /* CostomTouchesView.m in Sources */,
 				2D995F5D186051D500E2457F /* PCPageViewController+IsPresented.m in Sources */,
 				2D995F46186051D500E2457F /* FixedIllustrationTouchableColumnViewController.m in Sources */,
 				2D995F49186051D500E2457F /* RueScrollingPageViewController.m in Sources */,
 				60F022751590DEEC0046FA44 /* PCKioskGalleryView.m in Sources */,
 				60F0227C1590DEEC0046FA44 /* PCKioskNavigationBar.m in Sources */,
 				2D995F54186051D500E2457F /* RuePageElementVideo.m in Sources */,
+				2DB8B091189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m in Sources */,
 				2D995F69186051D500E2457F /* RueSubscriptionManager+MKStoreManagerDataSource.m in Sources */,
 				2D995F57186051D500E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
 				2D995F83186051D500E2457F /* CLScoreServerRequest+UDID.m in Sources */,
@@ -5133,6 +5155,7 @@
 				2D995F79186051D500E2457F /* PCKioskBaseControlElement+CoreChanges.m in Sources */,
 				2D995F81186051D500E2457F /* NSString+XMLEntities.m in Sources */,
 				2D995F75186051D500E2457F /* PCVideoController+NoAlert.m in Sources */,
+				2DA042F518A11D1B0070F8BD /* RueBrowserViewController.m in Sources */,
 				2D995E9A186050FB00E2457F /* SBJsonStreamParser.m in Sources */,
 				2D995D2018604AE600E2457F /* PCKioskHeaderView.m in Sources */,
 				2D995D1D18604AE600E2457F /* PCKioskAdvancedControlElementTitleLabel.m in Sources */,
@@ -5190,7 +5213,6 @@
 				2D93F8E51876F69D00162712 /* PCDownloadManager+OffAlert.m in Sources */,
 				2D93A37118859C770090A0E9 /* Helper+RetinaSupport.m in Sources */,
 				2D995FA3186080F300E2457F /* PCTMainViewController.m in Sources */,
-				2D995F5C186051D500E2457F /* RueBrowserViewController.m in Sources */,
 				2D995F4E186051D500E2457F /* RueMultiScrollPageViewController.m in Sources */,
 				2D995F5B186051D500E2457F /* PCSliderBasedMiniArticleViewController+CurrentActiveZone.m in Sources */,
 				2D995F6E186051D500E2457F /* SubscriptionMenuViewController.m in Sources */,

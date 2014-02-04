@@ -14,6 +14,7 @@
 #import "RuePageElementSound.h"
 #import "PCPage.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "CostomTouchesView.h"
 
 typedef enum{
     WebViewPresentationStateWindow,
@@ -27,7 +28,7 @@ typedef enum{
 
 @end
 
-@interface RueBrowserViewController ()
+@interface RueBrowserViewController () <CostomTouchesViewDelegate>
 {
     UIDeviceOrientation _currentWebViewOrientation;
     WebViewPresentationState _currentWebViewPresentationState;
@@ -123,6 +124,12 @@ typedef enum{
     {
         return appOrientation;
     }
+}
+
+- (void) loadView
+{
+    self.view = [[CostomTouchesView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [(CostomTouchesView*)self.view setDelegate:self];
 }
 
 - (void) viewDidLoad
@@ -576,6 +583,18 @@ void setAngleFromOrientationToOrientation(float * angle, UIDeviceOrientation fro
         default:
             *angle = 0;
             return;
+    }
+}
+
+- (BOOL) shouldReceiveTouchInPoint:(CGPoint)point
+{
+    if(_currentPlayerView)
+    {
+        return CGRectContainsPoint(_currentPlayerView.frame, point);
+    }
+    else
+    {
+        return NO;
     }
 }
 
