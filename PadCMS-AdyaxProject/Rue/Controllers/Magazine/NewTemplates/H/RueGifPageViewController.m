@@ -9,9 +9,10 @@
 #import "RueGifPageViewController.h"
 #import "PCScrollView.h"
 #import "GifViewController.h"
-
+#import "PCPageElemetTypes.h"
 #import "PCPageTemplatesPool.h"
 #import "PCPageControllersManager.h"
+#import "RuePDFActiveZones.h"
 
 @interface RueGifPageViewController ()
 
@@ -24,7 +25,7 @@
 + (void) load
 {
     PCPageTemplate* newTemplate = [PCPageTemplate templateWithIdentifier:22
-                                                                   title:@"Scrolling Page With Gifs"
+                                                                   title:@"Basic Article Page With Gifs"
                                                              description:@""
                                                               connectors:PCTemplateAllConnectors
                                                            engineVersion:1];
@@ -37,8 +38,7 @@
 {
     [super viewDidLoad];
     
-    NSArray* gifElements = [page elementsForType:PCPageElementTypeGallery];
-    
+    NSArray* gifElements = [self sortedByWeightGifElements];
     NSMutableArray* gifViewsArray = [[NSMutableArray alloc]initWithCapacity:gifElements.count];
     
     if (gifElements && [gifElements count] > 0)
@@ -46,15 +46,35 @@
         for (unsigned i = 0; i < [gifElements count]; i++)
         {
             PCPageElementGallery* element = [gifElements objectAtIndex:i];
-            if([element.dataRects valueForKey:@"gif"])
+            
+            CGRect elementFrame = [self frameForGifElementAtIndex:i];
+            
+            if(CGRectEqualToRect(elementFrame, CGRectZero) == NO)
             {
-                GifViewController* gifController = [GifViewController controllerForElement:element inPageViewController:self];
+                GifViewController* gifController = [GifViewController controllerForElement:element withFrame:elementFrame inPageViewController:self];
                 [gifViewsArray addObject:gifController];
                 [self.mainScrollView addSubview:gifController.view];
             }
         }
     }
     self.gifViewControllers = [NSArray arrayWithArray:gifViewsArray];
+}
+
+- (CGRect) frameForGifElementAtIndex:(int)index
+{
+    NSString* activeZoneType = [PCPDFActiveZoneGif stringByAppendingFormat:@"%i", index + 1];
+    CGRect frame = [self activeZoneRectForType:activeZoneType];
+    if(index == 0 && CGRectEqualToRect(frame, CGRectZero))
+    {
+        return [self activeZoneRectForType:PCPDFActiveZoneGif];
+    }
+    return frame;
+}
+
+- (NSArray*) sortedByWeightGifElements
+{
+    NSArray* galleryElements = [page elementsForType:PCPageElementTypeGallery];
+    return [galleryElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
 }
 
 - (void) loadFullView

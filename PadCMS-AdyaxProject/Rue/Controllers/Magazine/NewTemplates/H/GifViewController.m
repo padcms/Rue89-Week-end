@@ -14,29 +14,22 @@
 @interface GifViewController ()
 
 @property (nonatomic, strong) UIWebView* webView;
-@property (nonatomic, strong) PCPageElement* pageElement;
 
+@property (nonatomic, strong) PCPageElement* pageElement;
+@property (nonatomic, assign) CGRect gifRect;
 @property (nonatomic, weak) PCPageViewController* pageController;
 
 @end
 
 @implementation GifViewController
 
-+ (id) controllerForElement:(PCPageElement*)element inPageViewController:(PCPageViewController*)pageController
++ (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)frame inPageViewController:(PCPageViewController*)pageController
 {
-    GifViewController* controller = [[self alloc]initWithElement:element];
+    GifViewController* controller = [[self alloc]init];
+    controller.pageElement = element;
+    controller.gifRect = frame;
     controller.pageController = pageController;
     return controller;
-}
-
-- (id) initWithElement:(PCPageElement*)element
-{
-    self = [super init];
-    if(self)
-    {
-        self.pageElement = element;
-    }
-    return self;
 }
 
 - (void) startShowing
@@ -56,7 +49,7 @@
 {
     [super viewDidLoad];
     
-    self.view.frame = [self rectFromPageElement:self.pageElement];
+    self.view.frame = self.gifRect;
     self.view.backgroundColor = [UIColor clearColor];
     self.view.userInteractionEnabled = NO;
     
@@ -68,22 +61,5 @@
     [self.view addSubview:self.webView];
 }
 
-- (CGRect) rectFromPageElement:(PCPageElement*)element
-{
-    CGRect rect = [element rectForElementType:@"gif"];
-    
-    if (!CGRectEqualToRect(rect, CGRectZero))
-    {
-        CGSize pageSize = [self.pageController.columnViewController pageSizeForViewController:self.pageController];
-        float scale = pageSize.width/element.size.width;
-        rect.size.width *= scale;
-        rect.size.height *= scale;
-        rect.origin.x *= scale;
-        rect.origin.y *= scale;
-        rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
-        
-    }
-    return rect;
-}
 
 @end
