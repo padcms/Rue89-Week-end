@@ -17,7 +17,6 @@
 		2282A6E91223DE5E0059BAFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2299C76C120C4EE50014C014 /* libz.dylib */; };
 		2282A6EA1223DE5E0059BAFD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A055DB12141CC2005CEF4D /* MessageUI.framework */; };
 		22D724DB131A973A004DF7F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D724DA131A973A004DF7F1 /* AVFoundation.framework */; };
-		2D5082B71861CD37006D699A /* PCPage+VideoDownloading.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5082B61861CD37006D699A /* PCPage+VideoDownloading.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D5082BB18620208006D699A /* RueHTMLPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5082BA18620208006D699A /* RueHTMLPageViewController.m */; };
 		2D85DF2D180EB99C00459330 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D85DF2C180EB99C00459330 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D90FF8B1880570A002E6BDC /* PCKioskViewController+RemoveMemoryLeak.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D90FF8A1880570A002E6BDC /* PCKioskViewController+RemoveMemoryLeak.m */; };
@@ -264,6 +263,7 @@
 		2D997F77187D7D5200F436B4 /* RueResourceShredder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D997F76187D7D5200F436B4 /* RueResourceShredder.m */; };
 		2D9D73D818783726005C9EC6 /* RueLongPageElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */; };
 		2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73DB18786B73005C9EC6 /* RueResourceView.m */; };
+		2D9EC51718A26F34007BB46C /* PCPage+NewTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9EC51618A26F34007BB46C /* PCPage+NewTemplates.m */; };
 		2DA042F518A11D1B0070F8BD /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */; };
 		2DA042F918A11D560070F8BD /* CostomTouchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F818A11D560070F8BD /* CostomTouchesView.m */; };
 		2DA042FD18A143550070F8BD /* RueHorizontalScrollingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042FC18A143550070F8BD /* RueHorizontalScrollingPageViewController.m */; };
@@ -1222,7 +1222,6 @@
 		2899E5210DE3E06400AC0155 /* PCMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PCMainViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2D5082B61861CD37006D699A /* PCPage+VideoDownloading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPage+VideoDownloading.m"; sourceTree = "<group>"; };
 		2D5082B918620208006D699A /* RueHTMLPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueHTMLPageViewController.h; sourceTree = "<group>"; };
 		2D5082BA18620208006D699A /* RueHTMLPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueHTMLPageViewController.m; sourceTree = "<group>"; };
 		2D85DF2C180EB99C00459330 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1606,6 +1605,8 @@
 		2D9D73D718783726005C9EC6 /* RueLongPageElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueLongPageElementViewController.m; sourceTree = "<group>"; };
 		2D9D73DA18786B73005C9EC6 /* RueResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueResourceView.h; sourceTree = "<group>"; };
 		2D9D73DB18786B73005C9EC6 /* RueResourceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueResourceView.m; sourceTree = "<group>"; };
+		2D9EC51518A26F34007BB46C /* PCPage+NewTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCPage+NewTemplates.h"; sourceTree = "<group>"; };
+		2D9EC51618A26F34007BB46C /* PCPage+NewTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCPage+NewTemplates.m"; sourceTree = "<group>"; };
 		2DA042F318A11D1B0070F8BD /* RueBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueBrowserViewController.h; sourceTree = "<group>"; };
 		2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueBrowserViewController.m; sourceTree = "<group>"; };
 		2DA042F718A11D560070F8BD /* CostomTouchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomTouchesView.h; sourceTree = "<group>"; };
@@ -2506,7 +2507,6 @@
 				2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */,
 				2D995DF3186050FA00E2457F /* RueIssue.h */,
 				2D995DF4186050FA00E2457F /* RueIssue.m */,
-				2D5082B61861CD37006D699A /* PCPage+VideoDownloading.m */,
 			);
 			path = DataManagment;
 			sourceTree = "<group>";
@@ -3357,6 +3357,8 @@
 			children = (
 				2DB8B08C189FCB2A009C5CC8 /* PCPageElementActiveZone.h */,
 				2DB8B08D189FCB2A009C5CC8 /* PCPageElementActiveZone.m */,
+				2D9EC51518A26F34007BB46C /* PCPage+NewTemplates.h */,
+				2D9EC51618A26F34007BB46C /* PCPage+NewTemplates.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5111,6 +5113,7 @@
 				2DAC91B918688FF5000B4CAC /* SimpleHorizontalPageViewController.m in Sources */,
 				2D995E98186050FB00E2457F /* RTLabelWithWordWrap.m in Sources */,
 				60F022671590DEEC0046FA44 /* PCKioskControlElement.m in Sources */,
+				2D9EC51718A26F34007BB46C /* PCPage+NewTemplates.m in Sources */,
 				2D995E62186050FB00E2457F /* PCKioskPageControl.m in Sources */,
 				2D995F64186051D500E2457F /* MKSKProduct.m in Sources */,
 				2D995F921860555000E2457F /* PCLandscapeViewController+InterfaceOrientation.m in Sources */,
@@ -5242,7 +5245,6 @@
 				2D995D1B18604AE600E2457F /* PCKioskAdvancedControlElement.m in Sources */,
 				2D995E66186050FB00E2457F /* ProgressView.m in Sources */,
 				2D995D2318604AE600E2457F /* PCKioskSubHeaderView.m in Sources */,
-				2D5082B71861CD37006D699A /* PCPage+VideoDownloading.m in Sources */,
 				2D995E8E186050FB00E2457F /* PCGooglePlusController.m in Sources */,
 				2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */,
 				2D995D1C18604AE600E2457F /* PCKioskAdvancedControlElementDateLabel.m in Sources */,
