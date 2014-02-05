@@ -9,6 +9,7 @@
 #import "PCPageViewController.h"
 #import "PCSliderBasedMiniArticleViewController.h"
 #import "RuePDFActiveZones.h"
+#import "PCPageElementActiveZone.h"
 #import "PCPageElemetTypes.h"
 #import "objc/runtime.h"
 #import "RueBrowserViewController.h"
@@ -17,6 +18,8 @@
 
 #import "PCPageViewController+IsPresented.h"
 #import "UIView+EasyFrame.h"
+
+//#define SHOW_ZONES
 
 @interface PCPageViewController ()
 
@@ -79,8 +82,10 @@
                 CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
                 if(CGRectEqualToRect(videoRect, CGRectZero))
                 {
+//                    [self showVideoElement:videoElement forActiveZone:(PCPageElementActiveZone*)activeZone];
                     videoRect = [self activeZoneRectForType:activeZone.URL];
                 }
+//                [self showVideoElement:videoElement forActiveZone:[self ac];
                 [self showVideoElement:videoElement inRect:videoRect];
             }
             else
@@ -219,8 +224,7 @@
         if ([[activeZone.URL pathExtension] isEqualToString:@"mp4"]||[[activeZone.URL pathExtension] isEqualToString:@"avi"])
         {
             [self hideVideoWebView];
-            [self showVideoWebView:activeZone.URL inRectAdvanced:[self activeZoneRectForType:activeZone.URL]];
-            //[self showVideo:activeZone.URL];
+            [self showVideoWebViewForActiveZone:(PCPageElementActiveZone*)activeZone];
             return YES;
         }
         
@@ -229,10 +233,8 @@
                  [activeZone.URL hasPrefix:@"http://dailymotion.com"] || [activeZone.URL hasPrefix:@"http://www.dailymotion.com"] ||
                  [activeZone.URL hasPrefix:@"http://vimeo.com"] || [activeZone.URL hasPrefix:@"http://www.vimeo.com"])
         {
-//            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-//            [self showVideoWebView:activeZone.URL inRect:videoRect];
             [self hideVideoWebView];
-            [self showVideoWebView:activeZone.URL inRectAdvanced:[self activeZoneRectForType:activeZone.URL]];
+            [self showVideoWebViewForActiveZone:(PCPageElementActiveZone*)activeZone];
             return YES;
         }
         
@@ -247,14 +249,30 @@
     return NO;
 }
 
-- (void) showVideoWebView: (NSString *)videoWebViewURL inRectAdvanced: (CGRect)videoWebViewRect
+- (void) showVideoWebViewForActiveZone:(PCPageElementActiveZone*)activeZone
 {
+    NSString* videoWebViewURL = activeZone.URL;
+    //CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
+    
     NSLog(@"URL playing : %@", videoWebViewURL);
     
-    [self createWebBrowserViewWithFrame:videoWebViewRect];
+    //[self createWebBrowserViewWithFrame:videoWebViewRect];
+    
+    [self createWebBrowserViewForActiveZone:activeZone];
     
     [webBrowserViewController presentURL:videoWebViewURL];
 }
+
+/*- (void) showVideoElement:(PCPageElementVideo*)element forActiveZone:(PCPageElementActiveZone*)activeZone
+{
+    CGRect videoRect = [self activeZoneRectForType:activeZone.URL];
+    
+    NSLog(@"video playing : %@", element.resource);
+    
+    [self createWebBrowserViewWithFrame:videoRect];
+    
+    [(RueBrowserViewController*)webBrowserViewController presentElement:element ofPage:self.page];
+}*/
 
 - (void) showVideoElement:(PCPageElementVideo*)element inRect:(CGRect)videoWebViewRect
 {
@@ -265,7 +283,28 @@
     [(RueBrowserViewController*)webBrowserViewController presentElement:element ofPage:self.page];
 }
 
-- (void) createWebBrowserViewWithFrame:(CGRect)frame
+- (void) playSoundElement:(RuePageElementSound*)soundElement fromRect:(CGRect)soundActionRect allowPause:(BOOL)allowPause
+{
+    NSLog(@"sound playing : %@", soundElement.resource);
+    
+    [self createWebBrowserViewWithFrame:soundActionRect];
+    
+    [(RueBrowserViewController*)webBrowserViewController presentSoundElement:soundElement ofPage:self.page allowPause:allowPause];
+}
+
+- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone
+{
+    CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
+    
+    [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:self.mainScrollView];
+}
+
+- (void) createWebBrowserViewWithFrame:(CGRect)frame /// delete
+{
+    [self createWebBrowserViewWithFrame:frame onScrollView:self.mainScrollView];
+}
+
+- (void) createWebBrowserViewWithFrame:(CGRect)frame onScrollView:(UIScrollView*)scrollView
 {
     CGRect videoRect = frame;
     if (CGRectEqualToRect(videoRect, CGRectZero))
@@ -278,25 +317,16 @@
     webBrowserViewController = [[RueBrowserViewController alloc] init];
     webBrowserViewController.videoRect = videoRect;
     
-    ((RueBrowserViewController*)webBrowserViewController).mainScrollView = self.mainScrollView;
+    ((RueBrowserViewController*)webBrowserViewController).mainScrollView = scrollView;
     ((RueBrowserViewController*)webBrowserViewController).pageView = self.view;
     
-    [self.mainScrollView addSubview:webBrowserViewController.view];
+    [scrollView addSubview:webBrowserViewController.view];
     
     if (self.page.pageTemplate ==
         [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate] || self.page.pageTemplate.identifier == PCBasicArticlePageTemplate)
     {
-        [self changeVideoLayout:YES]; //bodyViewController.view.hidden];
+        [self changeVideoLayout:YES];
     }
-}
-
-- (void) playSoundElement:(RuePageElementSound*)soundElement fromRect:(CGRect)soundActionRect allowPause:(BOOL)allowPause
-{
-    NSLog(@"sound playing : %@", soundElement.resource);
-    
-    [self createWebBrowserViewWithFrame:soundActionRect];
-    
-    [(RueBrowserViewController*)webBrowserViewController presentSoundElement:soundElement ofPage:self.page allowPause:allowPause];
 }
 
 - (void) hideVideoWebView
@@ -402,7 +432,8 @@
         [self checkForAutoplayingSound];
     }
     
-    /*for (PCPageElement* element in self.page.elements)
+#ifdef SHOW_ZONES
+    for (PCPageElement* element in self.page.elements)
     {
         [element.dataRects enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             CGRect rect = CGRectFromString(obj);
@@ -431,7 +462,8 @@
                 [self.mainScrollView addSubview:btn];
             }
         }];
-    }*/
+    }
+#endif
 }
 
 - (void) checkForAutoplayingSound

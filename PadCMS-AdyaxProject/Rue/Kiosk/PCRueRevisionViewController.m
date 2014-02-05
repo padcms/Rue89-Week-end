@@ -13,7 +13,7 @@
 #import "PCScrollView.h"
 #import "PCTopBarView.h"
 #import "PCPageViewController+IsPresented.h"
-#import "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
+#import "RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
 
 @interface PCRevisionViewController ()
 
@@ -120,7 +120,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	NSLog(@"issue %i", self.revision.issue.identifier);
     [self addLeftSwipeToBackGesture];
 }
 

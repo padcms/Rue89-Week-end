@@ -11,11 +11,13 @@
 #import "PCPageElemetTypes.h"
 #import "PCScrollView.h"
 #import "RueBrowserViewController.h"
+#import "PCPDFActiveZones.h"
+#import "MBProgressHUD.h"
 
 @interface PCPageViewController ()
 
-- (void) showVideoWebViewForActiveZone:(PCPageElementActiveZone*)activeZone;
 - (void) createWebBrowserViewWithFrame:(CGRect)frame onScrollView:(UIScrollView*)scrollView;
+- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone;
 
 @end
 
@@ -26,28 +28,25 @@
 //    UIButton *_scrollDownButton;
 //    UIButton *_scrollUpButton;
 }
+
+- (void)initializeScrollButtons;
+
 @end
 
 @implementation PCScrollingPageViewController (VideoOnElements)
 
-- (void) showVideoWebViewForActiveZone:(PCPageElementActiveZone*)activeZone
+- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone
 {
     if([activeZone.pageElement.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
     {
-        NSString* videoWebViewURL = activeZone.URL;
-        
         CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
         videoWebViewRect = [_paneScrollView convertRect:videoWebViewRect fromView:self.mainScrollView];
-        
-        NSLog(@"URL playing : %@", videoWebViewURL);
-        
         [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:_paneScrollView];
-        
-        [webBrowserViewController presentURL:videoWebViewURL];
     }
     else
     {
-        [super showVideoWebViewForActiveZone:activeZone];
+        [super createWebBrowserViewForActiveZone:activeZone];
+        [self changeVideoLayout:NO];
     }
 }
 
@@ -76,10 +75,6 @@
                     rect.origin.y *= scale;
                     rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
                     
-                    UIView* testView = [[UIView alloc] initWithFrame:rect];
-                    testView.backgroundColor = [UIColor redColor];
-                    [self.mainScrollView addSubview:testView];
-                    
                     if (CGRectContainsPoint(rect, point))
                     {
                         [activeZones addObject:pdfActiveZone];
@@ -91,7 +86,7 @@
     return [self sortActiveZonesByPriority:activeZones];
 }
 
-- (NSArray*) sortActiveZonesByPriority:(NSArray*)array
+- (NSArray*) sortActiveZonesByPriority:(NSArray*)array //scrolling pane zones go to the beginning of array
 {
     return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         
@@ -138,9 +133,6 @@
                 rect.origin.x *= scale;
                 rect.origin.y *= scale;
                 rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
-                UIView* testView = [[UIView alloc] initWithFrame:rect];
-                testView.backgroundColor = [UIColor redColor];
-                [_paneContentViewController.view addSubview:testView];
                 
                 CGPoint pointInPane = [_paneContentViewController.view convertPoint:point fromView:self.mainScrollView];
                 
@@ -189,6 +181,60 @@
         }
     }
     return CGRectZero;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    CGRect scrollPaneRect = [self activeZoneRectForType:PCPDFActiveZoneScroller];
+    
+    if (CGRectEqualToRect(scrollPaneRect, CGRectZero)) {
+        scrollPaneRect = [[self mainScrollView] bounds];
+    }
+    
+    _paneScrollView = [[PCScrollView alloc] initWithFrame:scrollPaneRect];
+    _paneScrollView.delegate = self;
+    _paneScrollView.contentSize = CGSizeZero;
+    _paneScrollView.showsVerticalScrollIndicator = NO;
+    _paneScrollView.showsHorizontalScrollIndicator = NO;
+    
+    PCPageElement* scrollingPaneElement = [page firstElementForType:PCPageElementTypeScrollingPane];
+    if (scrollingPaneElement != nil)
+    {
+        NSString *fullResource = [page.revision.contentDirectory stringByAppendingPathComponent:scrollingPaneElement.resource];
+        
+        _paneContentViewController = [self createPaneContentViewControllerForResource:fullResource];
+        
+        [_paneScrollView addSubview:_paneContentViewController.view];
+        [_paneScrollView setContentSize:_paneContentViewController.view.frame.size];
+        [_paneScrollView setContentInset:UIEdgeInsetsMake(0, -_paneScrollView.frame.origin.x, 0, 0)];
+    }
+    
+    [_paneScrollView setUserInteractionEnabled:YES];
+    [self.mainScrollView addSubview: _paneScrollView];
+    [self.mainScrollView setContentSize: _paneScrollView.frame.size];
+    [self.mainScrollView bringSubviewToFront: _paneScrollView];
+    
+    if (_paneScrollView.frame.size.width > self.mainScrollView.frame.size.width)
+    {
+        CGRect scrollingPaneRect = _paneScrollView.frame;
+        scrollingPaneRect.size.width = self.mainScrollView.frame.size.width;
+        _paneScrollView.frame = scrollingPaneRect;
+    }
+    
+    if (_paneScrollView.contentSize.width > _paneScrollView.frame.size.width)
+    {
+        _paneScrollView.contentSize = CGSizeMake(_paneScrollView.frame.size.width, _paneScrollView.contentSize.height);
+    }
+    
+    [self initializeScrollButtons];
+    [self.mainScrollView bringSubviewToFront:HUD];
+}
+
+- (PCPageElementViewController*) createPaneContentViewControllerForResource:(NSString *)fullResource
+{
+    return [[PCPageElementViewController alloc] initWithResource:fullResource];
 }
 
 @end

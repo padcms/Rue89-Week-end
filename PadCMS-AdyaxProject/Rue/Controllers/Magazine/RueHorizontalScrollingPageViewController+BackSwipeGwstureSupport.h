@@ -1,12 +1,12 @@
 //
-//  PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h
+//  RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h
 //  Pad CMS
 //
 //  Created by Maksym Martyniuk on 11/19/13.
 //  Copyright (c) 2013 Adyax. All rights reserved.
 //
 
-#import "PCHorizontalScrollingPageViewController.h"
+#import "RueHorizontalScrollingPageViewController.h"
 
 @interface PCPageViewController (BackSwipeGwstureSupport)
 
@@ -14,6 +14,6 @@
 
 @end
 
-@interface PCHorizontalScrollingPageViewController (BackSwipeGwstureSupport)
+@interface RueHorizontalScrollingPageViewController (BackSwipeGwstureSupport)
 
 @end

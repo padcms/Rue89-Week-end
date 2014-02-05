@@ -196,7 +196,7 @@
 		2D995F54186051D500E2457F /* RuePageElementVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995ED5186051D400E2457F /* RuePageElementVideo.m */; };
 		2D995F55186051D500E2457F /* RueSQLiteKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995ED7186051D400E2457F /* RueSQLiteKeys.m */; };
 		2D995F56186051D500E2457F /* PCBrowserViewController+FulscreenSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995ED8186051D400E2457F /* PCBrowserViewController+FulscreenSupport.m */; };
-		2D995F57186051D500E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDA186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */; };
+		2D995F57186051D500E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDA186051D400E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */; };
 		2D995F58186051D500E2457F /* PCHtmlColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDC186051D400E2457F /* PCHtmlColumnViewController.m */; };
 		2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2D995F5A186051D500E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995EDE186051D400E2457F /* PCPageViewController+pdfActiveZoneActionAvanced.m */; };
@@ -266,6 +266,7 @@
 		2D9D73DC18786B73005C9EC6 /* RueResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73DB18786B73005C9EC6 /* RueResourceView.m */; };
 		2DA042F518A11D1B0070F8BD /* RueBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F418A11D1B0070F8BD /* RueBrowserViewController.m */; };
 		2DA042F918A11D560070F8BD /* CostomTouchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042F818A11D560070F8BD /* CostomTouchesView.m */; };
+		2DA042FD18A143550070F8BD /* RueHorizontalScrollingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA042FC18A143550070F8BD /* RueHorizontalScrollingPageViewController.m */; };
 		2DA6E518186C408A00CACB6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E517186C408A00CACB6C /* CoreData.framework */; };
 		2DA6E523186C461900CACB6C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA6E522186C461900CACB6C /* libGoogleAnalyticsServices.a */; };
 		2DA6E529186C53FE00CACB6C /* PCGoogleAnalytics+v3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA6E528186C53FE00CACB6C /* PCGoogleAnalytics+v3.m */; };
@@ -1486,8 +1487,8 @@
 		2D995ED6186051D400E2457F /* RueSQLiteKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueSQLiteKeys.h; sourceTree = "<group>"; };
 		2D995ED7186051D400E2457F /* RueSQLiteKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueSQLiteKeys.m; sourceTree = "<group>"; };
 		2D995ED8186051D400E2457F /* PCBrowserViewController+FulscreenSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCBrowserViewController+FulscreenSupport.m"; sourceTree = "<group>"; };
-		2D995ED9186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"; sourceTree = "<group>"; };
-		2D995EDA186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m"; sourceTree = "<group>"; };
+		2D995ED9186051D400E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"; sourceTree = "<group>"; };
+		2D995EDA186051D400E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m"; sourceTree = "<group>"; };
 		2D995EDB186051D400E2457F /* PCHtmlColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCHtmlColumnViewController.h; sourceTree = "<group>"; };
 		2D995EDC186051D400E2457F /* PCHtmlColumnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCHtmlColumnViewController.m; sourceTree = "<group>"; };
 		2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCMagazineViewControllersFactory+HtmlTemplateSupport.m"; sourceTree = "<group>"; };
@@ -1610,6 +1611,8 @@
 		2DA042F718A11D560070F8BD /* CostomTouchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomTouchesView.h; sourceTree = "<group>"; };
 		2DA042F818A11D560070F8BD /* CostomTouchesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostomTouchesView.m; sourceTree = "<group>"; };
 		2DA042FA18A126710070F8BD /* CostomTouchesViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CostomTouchesViewDelegate.h; sourceTree = "<group>"; };
+		2DA042FB18A143540070F8BD /* RueHorizontalScrollingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RueHorizontalScrollingPageViewController.h; sourceTree = "<group>"; };
+		2DA042FC18A143550070F8BD /* RueHorizontalScrollingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RueHorizontalScrollingPageViewController.m; sourceTree = "<group>"; };
 		2DA6E517186C408A00CACB6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2DA6E51A186C40B700CACB6C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
 		2DA6E51B186C40B700CACB6C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -2770,8 +2773,10 @@
 				2D995EB2186051D400E2457F /* FixedIllustrationTouchableColumnViewController.m */,
 				2D995EB3186051D400E2457F /* NewTemplates */,
 				2D995ED8186051D400E2457F /* PCBrowserViewController+FulscreenSupport.m */,
-				2D995ED9186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h */,
-				2D995EDA186051D400E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */,
+				2DA042FB18A143540070F8BD /* RueHorizontalScrollingPageViewController.h */,
+				2DA042FC18A143550070F8BD /* RueHorizontalScrollingPageViewController.m */,
+				2D995ED9186051D400E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h */,
+				2D995EDA186051D400E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m */,
 				2D995EDB186051D400E2457F /* PCHtmlColumnViewController.h */,
 				2D995EDC186051D400E2457F /* PCHtmlColumnViewController.m */,
 				2D995EDD186051D400E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m */,
@@ -5114,6 +5119,7 @@
 				60F0226E1590DEEC0046FA44 /* PCKioskGalleryControlElement.m in Sources */,
 				2D995F78186051D500E2457F /* PCLocalizationManager+AdditionalInitialization.m in Sources */,
 				2D995D2718604AE600E2457F /* PCRueRevisionViewController.m in Sources */,
+				2DA042FD18A143550070F8BD /* RueHorizontalScrollingPageViewController.m in Sources */,
 				2D995F931860555000E2457F /* PCRueAppDelegate.m in Sources */,
 				2D995F59186051D500E2457F /* PCMagazineViewControllersFactory+HtmlTemplateSupport.m in Sources */,
 				2D995E95186050FB00E2457F /* RTLabel+CustomFontAttributes.m in Sources */,
@@ -5135,7 +5141,7 @@
 				2D995F54186051D500E2457F /* RuePageElementVideo.m in Sources */,
 				2DB8B091189FD6A9009C5CC8 /* PCScrollingPageViewController+VideoOnElements.m in Sources */,
 				2D995F69186051D500E2457F /* RueSubscriptionManager+MKStoreManagerDataSource.m in Sources */,
-				2D995F57186051D500E2457F /* PCHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
+				2D995F57186051D500E2457F /* RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.m in Sources */,
 				2D995F83186051D500E2457F /* CLScoreServerRequest+UDID.m in Sources */,
 				2D995D1E18604AE600E2457F /* PCKioskControlElementDetailsView.m in Sources */,
 				2D995F62186051D500E2457F /* NSData+MKBase64.m in Sources */,
