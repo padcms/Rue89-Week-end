@@ -39,7 +39,7 @@
         PCPageElement* body = [self firstElementForType:PCPageElementTypeBody];
         if (body) [array addObject:body];
     }
-    else if (self.pageTemplate.identifier == PCBasicArticlePageTemplate || self.pageTemplate.identifier == PCBasicArticleWithGifsPageTemplate)
+    else if (self.pageTemplate.identifier == PCBasicArticlePageTemplate || self.pageTemplate.identifier == PCBasicArticleWithGifsPageTemplate || self.pageTemplate.identifier ==  PCBasicArticleWithPopupsPageTemplate)
     {
         PCPageElement* body = [self firstElementForType:PCPageElementTypeBody];
         if (body) [array addObject:body];
@@ -160,7 +160,7 @@
         NSArray* popupsElements = [self elementsForType:PCPageElementTypePopup];
         if (popupsElements) [array addObjectsFromArray:popupsElements];
     }
-    else if (self.pageTemplate.identifier == PCFixedIllustrationArticleTouchablePageTemplate)
+    else if (self.pageTemplate.identifier == PCFixedIllustrationArticleTouchablePageTemplate )
     {
         NSArray* galleryElements = [self elementsForType:PCPageElementTypeGallery];
         if (galleryElements) [array addObjectsFromArray:galleryElements];
@@ -176,6 +176,13 @@
     {
         
     }
+    else if (self.pageTemplate.identifier == PCBasicArticleWithPopupsPageTemplate)
+    {
+        NSArray* popupsElements = [self elementsForType:PCPageElementTypePopup];
+        if (popupsElements) [array addObjectsFromArray:popupsElements];
+    }
+    
+    // video ------------------------------------------------------------------------------------------------------
     
     NSMutableArray* videoElements = [NSMutableArray arrayWithArray:[self elementsForType:PCPageElementTypeVideo]];
     if (videoElements)
@@ -198,6 +205,8 @@
         [array addObjectsFromArray:videoElements];
         
     }
+    
+    // sound ------------------------------------------------------------------------------------------------------
     
     NSMutableArray* soundElements = [NSMutableArray arrayWithArray:[self elementsForType:PCPageElementTypeSound]];
     if (soundElements)

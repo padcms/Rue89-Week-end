@@ -10,6 +10,8 @@
 #import "RuePopupViewController.h"
 #import "PCSCrollView.h"
 #import "PCPageControllersManager.h"
+#import "PCPageElemetTypes.h"
+#import "PCPDFActiveZones.h"
 
 #define kHidePopupWhenHiReceiveTouch YES
 
@@ -27,7 +29,7 @@
 + (void) load
 {
     PCPageTemplate* newTemplate = [PCPageTemplate templateWithIdentifier:23
-                                                                   title:@"Scrolling Page With Popups"
+                                                                   title:@"Basic Article Page With Popups"
                                                              description:@""
                                                               connectors:PCTemplateAllConnectors
                                                            engineVersion:1];

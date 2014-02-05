@@ -8,7 +8,8 @@
 
 #import "PCPage.h"
 
-int PCBasicArticleWithGifsPageTemplate = 22;
+static int PCBasicArticleWithGifsPageTemplate = 22;
+static int PCBasicArticleWithPopupsPageTemplate = 23;
 
 @interface PCPage (NewTemplates)
 
