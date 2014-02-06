@@ -14,6 +14,9 @@
 
 + (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)scrollFrame onScrollView:(UIScrollView*)scrollView pageViewController:(PCPageViewController*)pageController;
 
+@property (nonatomic, strong) UIScrollView* scrollView;
+@property (nonatomic, strong) PCPageElement* pageElement;
+
 - (CGPoint) contentOffset;
 
 - (void) loadFullView;

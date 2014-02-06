@@ -23,6 +23,7 @@
 		2D926AA1180853A8003B2FA8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926A9F180826FF003B2FA8 /* AdSupport.framework */; };
 		2D926AA3180853CE003B2FA8 /* Boxcar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D926AA2180853CE003B2FA8 /* Boxcar.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		2D933AF118A3D1E700E1A5D4 /* AdvancedBoncesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D933AF018A3D1E700E1A5D4 /* AdvancedBoncesScrollView.m */; };
+		2D933AF518A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D933AF418A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.m */; };
 		2D93A37118859C770090A0E9 /* Helper+RetinaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93A37018859C770090A0E9 /* Helper+RetinaSupport.m */; };
 		2D93F8E51876F69D00162712 /* PCDownloadManager+OffAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */; };
 		2D995D1B18604AE600E2457F /* PCKioskAdvancedControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D995D0418604AE600E2457F /* PCKioskAdvancedControlElement.m */; };
@@ -1233,6 +1234,8 @@
 		2D926AA2180853CE003B2FA8 /* Boxcar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Boxcar.framework; sourceTree = "<group>"; };
 		2D933AEF18A3D1E700E1A5D4 /* AdvancedBoncesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBoncesScrollView.h; sourceTree = "<group>"; };
 		2D933AF018A3D1E700E1A5D4 /* AdvancedBoncesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBoncesScrollView.m; sourceTree = "<group>"; };
+		2D933AF318A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RueMultiScrollPageViewController+VideoInScrollSupport.h"; sourceTree = "<group>"; };
+		2D933AF418A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RueMultiScrollPageViewController+VideoInScrollSupport.m"; sourceTree = "<group>"; };
 		2D93A37018859C770090A0E9 /* Helper+RetinaSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Helper+RetinaSupport.m"; sourceTree = "<group>"; };
 		2D93F8E41876F69D00162712 /* PCDownloadManager+OffAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDownloadManager+OffAlert.m"; sourceTree = "<group>"; };
 		2D995D0318604AE600E2457F /* PCKioskAdvancedControlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKioskAdvancedControlElement.h; sourceTree = "<group>"; };
@@ -2869,6 +2872,8 @@
 			children = (
 				2D995EC7186051D400E2457F /* RueMultiScrollPageViewController.h */,
 				2D995EC8186051D400E2457F /* RueMultiScrollPageViewController.m */,
+				2D933AF318A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.h */,
+				2D933AF418A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.m */,
 				2D995EC9186051D400E2457F /* RueScrollingPaneViewController.h */,
 				2D995ECA186051D400E2457F /* RueScrollingPaneViewController.m */,
 				2D933AEF18A3D1E700E1A5D4 /* AdvancedBoncesScrollView.h */,
@@ -5187,6 +5192,7 @@
 				2D995F52186051D500E2457F /* PCPageElementManager+RuePageElementManager.m in Sources */,
 				2D995F6C186051D500E2457F /* SubscribeMenuPopuverController.m in Sources */,
 				2D995F43186051D500E2457F /* RueAccessManager.m in Sources */,
+				2D933AF518A3F39800E1A5D4 /* RueMultiScrollPageViewController+VideoInScrollSupport.m in Sources */,
 				2D995F70186051D500E2457F /* PCPageViewController+CoreChanges.m in Sources */,
 				2D995F56186051D500E2457F /* PCBrowserViewController+FulscreenSupport.m in Sources */,
 				2D995E6C186050FB00E2457F /* PCRevision+DataOfDownload.m in Sources */,

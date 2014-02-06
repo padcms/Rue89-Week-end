@@ -15,10 +15,9 @@
 
 @interface RueScrollingPaneViewController ()
 
-@property (nonatomic, strong) UIScrollView* scrollView;
 @property (nonatomic, strong) UIImageView* imageView;
 @property (nonatomic, weak) PCPageViewController* pageController;
-@property (nonatomic, strong) PCPageElement* pageElement;
+
 @property (nonatomic, assign) CGRect scrollFrame;
 
 @end
