@@ -10,10 +10,12 @@
 #import "PCPageControllersManager.h"
 #import "PCScrollView.h"
 #import "RueScrollingPaneViewController.h"
+#import "RuePDFActiveZones.h"
+#import "PCPageElemetTypes.h"
 
 @interface RueMultiScrollPageViewController ()
 
-@property (nonatomic, strong) NSArray* ScrollingPaneControllers;
+@property (nonatomic, strong) NSArray* scrollingPaneControllers;
 
 @end
 
@@ -22,7 +24,7 @@
 + (void) load
 {
     PCPageTemplate* newTemplate = [PCPageTemplate templateWithIdentifier:26
-                                                                   title:@"Multiscroll Page"
+                                                                   title:@"Multiscroll Page Template"
                                                              description:@""
                                                               connectors:PCTemplateAllConnectors
                                                            engineVersion:1];
@@ -35,27 +37,30 @@
 {
     [super viewDidLoad];
     
-    self.mainScrollView.scrollEnabled = NO;
+    self.mainScrollView.scrollEnabled = YES;
     
-    NSArray* scrollersActiveZones = [self scrollActiveZones];
-    NSArray* scrollElements = [self sortetByWeightPageElementsOfType:PCPageElementTypeScrollingPane];
-    NSMutableArray* scrollControllers = [[NSMutableArray alloc] initWithCapacity:scrollersActiveZones.count];
-    
-    for (int i = 0; i < scrollersActiveZones.count && i < scrollElements.count; ++i)
+    NSArray* scrollElements = [self sortetByWeightScrollingPaneElements];
+    NSMutableArray* scrollControllers = [[NSMutableArray alloc] initWithCapacity:scrollElements.count];
+
+    for (int i = 0; i < scrollElements.count; ++i)
     {
-        PCPageActiveZone* activeZone = scrollersActiveZones[i];
-        RueScrollingPaneViewController* scrollController = [RueScrollingPaneViewController controllerForElement:scrollElements[i] atZone:[self activeZoneRectForType:activeZone.URL]];
-        [scrollControllers addObject:scrollController];
-        [self.mainScrollView addSubview:scrollController.view];
+        CGRect scrollFrame = [self frameForScrollAtIndex:i];
+        if(CGRectEqualToRect(scrollFrame, CGRectZero) == NO)
+        {
+            PCPageElement* element = [scrollElements objectAtIndex:i];
+            RueScrollingPaneViewController* scrollController = [RueScrollingPaneViewController controllerForElement:element withFrame:scrollFrame onScrollView:self.mainScrollView pageViewController:self];
+            [scrollControllers addObject:scrollController];
+            [self.mainScrollView addSubview:scrollController.view];
+        }
     }
-    
-    self.ScrollingPaneControllers = [NSArray arrayWithArray:scrollControllers];
+
+    self.scrollingPaneControllers = [NSArray arrayWithArray:scrollControllers];
 }
 
 - (void) loadFullView
 {
     [super loadFullView];
-    for (RueScrollingPaneViewController* controller in self.ScrollingPaneControllers)
+    for (RueScrollingPaneViewController* controller in self.scrollingPaneControllers)
     {
         [controller loadFullView];
     }
@@ -63,42 +68,37 @@
 
 - (void) unloadFullView
 {
-    for (RueScrollingPaneViewController* controller in self.ScrollingPaneControllers)
+    for (RueScrollingPaneViewController* controller in self.scrollingPaneControllers)
     {
         [controller unloadFullView];
     }
     [super unloadFullView];
 }
 
-- (NSArray*) scrollActiveZones
+- (CGRect) frameForScrollAtIndex:(int)index
 {
-    NSMutableArray* activeZones = [[NSMutableArray alloc] init];
+    NSString* zoneType = [PCPDFActiveZoneScroller stringByAppendingFormat:@"%i", index + 1];
+    CGRect frame = [self activeZoneRectForType:zoneType];
     
-    for (PCPageElement* element in self.page.elements)
+    if (index == 0 && CGRectEqualToRect(frame, CGRectZero))
     {
-        for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-        {
-            if([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneScroller])
-            {
-                [activeZones addObject:pdfActiveZone];
-            }
-        }
+        frame = [self activeZoneRectForType:PCPDFActiveZoneScroller];
     }
-    return [activeZones sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"URL" ascending:YES]]];
+    
+    return frame;
 }
 
-- (NSArray*) sortetByWeightPageElementsOfType:(NSString*)elementType
+- (NSArray*) sortetByWeightScrollingPaneElements
 {
-    NSArray* elementsOfType = [page elementsForType:elementType];
-    elementsOfType = [elementsOfType sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES], nil]];
-    return elementsOfType;
+    NSArray* paneElements = [page elementsForType:PCPageElementTypeScrollingPane];
+    return [paneElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES], nil]];
 }
 
 - (BOOL) canSwipeBackWithGesture:(UIGestureRecognizer*)gesture
 {
     CGPoint gestureLocation = [gesture locationInView:self.mainScrollView];
     
-    for (RueScrollingPaneViewController* scrollController in self.ScrollingPaneControllers)
+    for (RueScrollingPaneViewController* scrollController in self.scrollingPaneControllers)
     {
         if (CGRectContainsPoint(scrollController.view.frame, gestureLocation))
         {

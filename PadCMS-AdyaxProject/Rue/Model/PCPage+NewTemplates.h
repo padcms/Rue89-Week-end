@@ -10,6 +10,7 @@
 
 static int PCBasicArticleWithGifsPageTemplate = 22;
 static int PCBasicArticleWithPopupsPageTemplate = 23;
+static int PCMultiScrollPageTemplate = 26;
 
 @interface PCPage (NewTemplates)
 

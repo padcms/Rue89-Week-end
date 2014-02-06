@@ -111,6 +111,13 @@
             [array addObject:graphics];
         }
     }
+    else if(self.pageTemplate.identifier == PCMultiScrollPageTemplate)
+    {
+        PCPageElement* body = [self firstElementForType:PCPageElementTypeBody];
+        if (body) [array addObject:body];
+        NSArray* scrollingPanes = [self elementsForType:PCPageElementTypeScrollingPane];
+        if (scrollingPanes) [array addObjectsFromArray:scrollingPanes];
+    }
 	
     _primaryElements = [[NSArray alloc] initWithArray:array];
     
