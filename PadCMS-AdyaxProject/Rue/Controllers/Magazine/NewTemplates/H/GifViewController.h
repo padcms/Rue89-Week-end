@@ -12,7 +12,7 @@
 
 @interface GifViewController : UIViewController
 
-+ (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)frame inPageViewController:(PCPageViewController*)pageController;
++ (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)frame onScrollView:(UIScrollView*)scrollView;
 
 - (void) startShowing;
 - (void) stopShowing;

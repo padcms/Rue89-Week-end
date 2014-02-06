@@ -51,7 +51,7 @@
             
             if(CGRectEqualToRect(elementFrame, CGRectZero) == NO)
             {
-                GifViewController* gifController = [GifViewController controllerForElement:element withFrame:elementFrame inPageViewController:self];
+                GifViewController* gifController = [GifViewController controllerForElement:element withFrame:elementFrame onScrollView:self.mainScrollView];
                 [gifViewsArray addObject:gifController];
                 [self.mainScrollView addSubview:gifController.view];
             }

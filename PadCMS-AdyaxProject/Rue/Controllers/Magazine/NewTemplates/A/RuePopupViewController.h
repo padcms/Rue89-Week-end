@@ -12,8 +12,13 @@
 
 @interface RuePopupViewController : UIViewController
 
-+ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element;
+//+ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element;
+
++ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element withFrame:(CGRect)frame onScrollView:(UIScrollView*)scroll;
 
 - (BOOL) isPresented;
+
+- (void) load;
+- (void) unload;
 
 @end

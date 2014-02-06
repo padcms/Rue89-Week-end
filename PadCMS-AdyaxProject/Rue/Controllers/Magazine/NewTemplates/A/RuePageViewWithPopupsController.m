@@ -11,9 +11,9 @@
 #import "PCSCrollView.h"
 #import "PCPageControllersManager.h"
 #import "PCPageElemetTypes.h"
-#import "PCPDFActiveZones.h"
+#import "RuePDFActiveZones.h"
 
-#define kHidePopupWhenHiReceiveTouch YES
+#define kHidePopupWhenItReceivesTouch YES
 
 @interface RuePageViewWithPopupsController ()
 {
@@ -41,26 +41,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //--------------- place button in active zones for debugging ------------
-//    for (PCPageElement* element in self.page.elements)
-//    {
-//        for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-//        {
-//            CGRect rect = pdfActiveZone.rect;
-//            if (!CGRectEqualToRect(rect, CGRectZero))
-//            {
-//                UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//                [btn setTitle:[pdfActiveZone.URL lastPathComponent] forState:UIControlStateNormal];
-//                btn.frame = rect;
-//                btn.backgroundColor = [UIColor yellowColor];
-//                btn.userInteractionEnabled = NO;
-//                [self.mainScrollView addSubview:btn];
-//            }
-//        }
-//    }
-    //------------------------------------------------------------------------
-    
     [self createPopups];
 }
 
@@ -68,6 +48,26 @@
 {
     [super loadFullView];
     self.mainScrollView.scrollEnabled = YES;
+    
+    for (RuePopupViewController* popupViewController in self.popupViewControllers)
+    {
+        if(popupViewController.isPresented == NO)
+        {
+            [popupViewController load];
+        }
+    }
+}
+
+- (void) unloadFullView
+{
+    for (RuePopupViewController* popupViewController in self.popupViewControllers)
+    {
+//        if(popupViewController.isPresented == NO)
+//        {
+            [popupViewController unload];
+//        }
+    }
+    [super unloadFullView];
 }
 
 - (void) tapAction:(UIGestureRecognizer *)gestureRecognizer
@@ -80,7 +80,7 @@
 
 - (BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if(kHidePopupWhenHiReceiveTouch && _transiting == NO)
+    if(kHidePopupWhenItReceivesTouch && _transiting == NO)
     {
         CGPoint touchPoint = [gestureRecognizer locationInView:self.mainScrollView];
         RuePopupViewController* popup = [self presentedPopupAtPoint:touchPoint];
@@ -90,7 +90,6 @@
             return NO;
         }
     }
-    
     return [super gestureRecognizerShouldBegin:gestureRecognizer];
 }
 
@@ -131,27 +130,6 @@
     {
         return nil;
     }
-}
-
-- (NSArray*) activeZonesAtPoint:(CGPoint)point
-{
-    NSMutableArray* activeZones = [[NSMutableArray alloc] init];
-
-    for (PCPageElement* element in self.page.elements)
-    {
-        for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-        {
-            CGRect rect = pdfActiveZone.rect;
-            if (!CGRectEqualToRect(rect, CGRectZero))
-            {
-                if (CGRectContainsPoint(rect, point))
-                {
-                    [activeZones addObject:pdfActiveZone];
-                }
-            }
-        }
-    }
-    return activeZones;
 }
 
 - (BOOL) pdfActiveZoneAction:(PCPageActiveZone*)activeZone
@@ -222,10 +200,15 @@
 
 - (int) popupIndexForActiveZone:(PCPageActiveZone*)activeZone
 {
-    if ([activeZone.URL hasPrefix:PCPDFActiveZoneActionButton])
+    if ([activeZone.URL hasPrefix:PCPDFActiveZoneActionPopup])
     {
-        NSString* additional = [activeZone.URL lastPathComponent];
-        return [additional intValue] - 1;
+        NSString* additional = [activeZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionPopup withString:@""];
+        int suffixValue = [additional intValue];
+        if(suffixValue == 0)
+        {
+            return 0;
+        }
+        return suffixValue - 1;
     }
     else
     {
@@ -235,23 +218,54 @@
 
 - (void) createPopups
 {
-    NSArray* popupsElements = [self.page elementsForType:PCPageElementTypePopup];
-    
-    popupsElements = [popupsElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES], nil]];
+    NSArray* popupsElements = [self sortedByWeightPopupElements];
     
     NSMutableArray* popups = [[NSMutableArray alloc]initWithCapacity:popupsElements.count];
     
     for (int i = 0; i < popupsElements.count; ++i)
     {
-        PCPageElement* element = [popupsElements objectAtIndex:i];
-        
-        RuePopupViewController* popup = [RuePopupViewController popupControllerWithIndex:i forElement:element];
-        [popups addObject:popup];
-        [self.mainScrollView addSubview:popup.view];
+        CGRect popupFrame = [self frameForPopupAtIndex:i];
+        if(CGRectEqualToRect(popupFrame, CGRectZero) == NO)
+        {
+            PCPageElement* element = [popupsElements objectAtIndex:i];
+            RuePopupViewController* popup = [RuePopupViewController popupControllerWithIndex:i forElement:element withFrame:popupFrame onScrollView:self.mainScrollView];
+            [popups addObject:popup];
+            [self.mainScrollView addSubview:popup.view];
+        }
     }
     
     self.popupViewControllers = [NSArray arrayWithArray:popups];
 }
 
+- (CGRect) frameForPopupAtIndex:(int)index
+{
+    NSString* zoneType = [PCPDFActiveZonePopup stringByAppendingFormat:@"%i", index + 1];
+    CGRect frame = [self activeZoneRectForType:zoneType];
+    
+    if (CGRectEqualToRect(frame, CGRectZero))
+    {
+        if(index == 0)
+        {
+            frame = [self activeZoneRectForType:PCPDFActiveZonePopup];
+        }
+        if(CGRectEqualToRect(frame, CGRectZero))
+        {
+            zoneType = [PCPDFActiveZoneActionPopup stringByAppendingFormat:@"%i", index + 1];
+            frame = [self activeZoneRectForType:zoneType];
+            if(index == 0 && CGRectEqualToRect(frame, CGRectZero))
+            {
+                frame = [self activeZoneRectForType:PCPDFActiveZoneActionPopup];
+            }
+        }
+    }
+    
+    return frame;
+}
+
+- (NSArray*) sortedByWeightPopupElements
+{
+    NSArray* popupsElements = [self.page elementsForType:PCPageElementTypePopup];
+    return [popupsElements sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES], nil]];
+}
 
 @end

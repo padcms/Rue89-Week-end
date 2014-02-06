@@ -11,3 +11,4 @@
 NSString* PCPDFActiveZoneSound              = @"local://sound";
 NSString* PCPDFActiveZoneActionSound        = @"local://action/sound";
 NSString* PCPDFActiveZoneGif                = @"local://gif";
+NSString* PCPDFActiveZoneActionPopup        = @"local://action/popup";

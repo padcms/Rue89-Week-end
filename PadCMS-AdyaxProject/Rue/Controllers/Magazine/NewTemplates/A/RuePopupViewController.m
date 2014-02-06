@@ -10,21 +10,24 @@
 #import "PCPageElement.h"
 #import "PCPage.h"
 #import "PCPageActiveZone.h"
+#import "RuePDFActiveZones.h"
 
 @interface RuePopupViewController ()
 
 @property (nonatomic, strong) PCPageElement* pageElement;
-@property (nonatomic, strong) UIImageView* imageView;
-
 @property (nonatomic, assign) int index;
+@property (nonatomic, assign) CGRect popupRect;
+
+@property (nonatomic, strong) UIImageView* imageView;
 
 @end
 
 @implementation RuePopupViewController
 
-+ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element
++ (id) popupControllerWithIndex:(int)index forElement:(PCPageElement*)element withFrame:(CGRect)frame onScrollView:(UIScrollView*)scroll
 {
     RuePopupViewController* controller = [[self alloc]initWithElement:element index:index];
+    controller.popupRect = frame;
     return controller;
 }
 
@@ -43,14 +46,12 @@
 {
     [super viewDidLoad];
     
-    CGRect elementRect = [self frameForPopupElement:self.pageElement];
-    
-    self.view.frame = elementRect;
+    self.view.frame = self.popupRect;
     
     self.view.backgroundColor = [UIColor clearColor];
     
     self.imageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    self.imageView.backgroundColor = [UIColor blueColor];
+    //self.imageView.backgroundColor = [UIColor blueColor];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:self.imageView];
@@ -75,34 +76,24 @@
     return (! self.view.hidden);
 }
 
-- (CGRect) frameForPopupElement:(PCPageElement*)element
+- (void) load
 {
-    if(element.dataRects.count > 0)
-    {
-        NSArray* keys = element.dataRects.allKeys;
-        NSString* rectString = [element.dataRects valueForKey:keys.lastObject];
-        return CGRectFromString(rectString);
-    }
-    else
-    {
-        for (PCPageElement* element in self.pageElement.page.elements)
-        {
-            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-            {
-                if ([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneActionButton])
-                {
-                    NSString* additional = [pdfActiveZone.URL lastPathComponent];
-                    int zoneIndex = [additional intValue];
-                    if(zoneIndex == self.index + 1)
-                    {
-                        return pdfActiveZone.rect;
-                    }
-                    
-                }
-            }
-        }
-    }
-    return CGRectZero;
+    
+}
+
+- (void) unload
+{
+    
+}
+
+- (void) loadImage
+{
+    
+}
+
+- (void) unloadImage
+{
+    
 }
 
 @end

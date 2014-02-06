@@ -17,18 +17,16 @@
 
 @property (nonatomic, strong) PCPageElement* pageElement;
 @property (nonatomic, assign) CGRect gifRect;
-@property (nonatomic, weak) PCPageViewController* pageController;
 
 @end
 
 @implementation GifViewController
 
-+ (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)frame inPageViewController:(PCPageViewController*)pageController
++ (id) controllerForElement:(PCPageElement*)element withFrame:(CGRect)frame onScrollView:(UIScrollView*)scrollView
 {
     GifViewController* controller = [[self alloc]init];
     controller.pageElement = element;
     controller.gifRect = frame;
-    controller.pageController = pageController;
     return controller;
 }
 
