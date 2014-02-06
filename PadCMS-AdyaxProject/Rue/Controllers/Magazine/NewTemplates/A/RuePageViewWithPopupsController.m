@@ -51,10 +51,7 @@
     
     for (RuePopupViewController* popupViewController in self.popupViewControllers)
     {
-        if(popupViewController.isPresented == NO)
-        {
-            [popupViewController load];
-        }
+        [popupViewController load];
     }
 }
 
@@ -62,10 +59,7 @@
 {
     for (RuePopupViewController* popupViewController in self.popupViewControllers)
     {
-//        if(popupViewController.isPresented == NO)
-//        {
-            [popupViewController unload];
-//        }
+        [popupViewController unload];
     }
     [super unloadFullView];
 }

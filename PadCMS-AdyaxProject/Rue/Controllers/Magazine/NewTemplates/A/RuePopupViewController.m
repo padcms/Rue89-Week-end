@@ -56,15 +56,7 @@
     
     [self.view addSubview:self.imageView];
     
-    NSString *fullResourcePath = [self.pageElement.page.revision.contentDirectory stringByAppendingPathComponent:self.pageElement.resource];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        UIImage *image = [UIImage imageWithContentsOfFile:fullResourcePath];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.imageView setImage:image];
-        });
-        
-        
-    });
+    [self loadImage];
     
     self.view.userInteractionEnabled = NO;
     
@@ -78,22 +70,28 @@
 
 - (void) load
 {
-    
+    [self loadImage];
 }
 
 - (void) unload
 {
-    
+    [self unloadImage];
 }
 
 - (void) loadImage
 {
-    
+    NSString *fullResourcePath = [self.pageElement.page.revision.contentDirectory stringByAppendingPathComponent:self.pageElement.resource];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        UIImage *image = [UIImage imageWithContentsOfFile:fullResourcePath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.imageView setImage:image];
+        });
+    });
 }
 
 - (void) unloadImage
 {
-    
+    self.imageView.image = nil;
 }
 
 @end
