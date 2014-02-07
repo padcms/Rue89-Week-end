@@ -118,6 +118,11 @@
         NSArray* scrollingPanes = [self elementsForType:PCPageElementTypeScrollingPane];
         if (scrollingPanes) [array addObjectsFromArray:scrollingPanes];
     }
+    else if (self.pageTemplate.identifier == PCScrollingGalleryWithFixedMenuPageTemplate)
+    {
+        PCPageElement* background = [self firstElementForType:PCPageElementTypeBackground];
+        if (background) [array addObject:background];
+    }
 	
     _primaryElements = [[NSArray alloc] initWithArray:array];
     
@@ -187,6 +192,11 @@
     {
         NSArray* popupsElements = [self elementsForType:PCPageElementTypePopup];
         if (popupsElements) [array addObjectsFromArray:popupsElements];
+    }
+    else if (self.pageTemplate.identifier == PCScrollingGalleryWithFixedMenuPageTemplate)
+    {
+        NSArray* galleryElements = [self elementsForType:PCPageElementTypeGallery];
+        if (galleryElements) [array addObjectsFromArray:galleryElements];
     }
     
     // video ------------------------------------------------------------------------------------------------------
