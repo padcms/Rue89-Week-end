@@ -76,4 +76,22 @@
     [self.pageElementViewController unloadView];
 }
 
+- (CGRect) activeZoneRectForType:(NSString*)zoneType
+{
+    CGRect rect = [self.pageElement rectForElementType:zoneType];
+    if (!CGRectEqualToRect(rect, CGRectZero))
+    {
+        CGSize pageSize = self.mainScrollView.frame.size;
+        float scale = pageSize.width/self.pageElement.size.width;
+        rect.size.width *= scale;
+        rect.size.height *= scale;
+        rect.origin.x *= scale;
+        rect.origin.y *= scale;
+        rect.origin.y = self.pageElement.size.height*scale - rect.origin.y - rect.size.height;
+        
+        return rect;
+    }
+    return CGRectZero;
+}
+
 @end

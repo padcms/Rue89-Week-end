@@ -13,10 +13,20 @@
 #import "PCPageElemetTypes.h"
 #import "RuePDFActiveZones.h"
 #import "RuePageElementBackground.h"
+#import "PCPageElementActiveZone.h"
+#import "ScrollingArticleViewController.h"
+
+@interface PCPageViewController ()
+
+- (void) hideVideoWebView;
+- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone;
+- (void) createWebBrowserViewWithFrame:(CGRect)frame onScrollView:(UIScrollView*)scrollView;
+
+@end
 
 @interface RuePageWithMenuViewController ()
 
-@property (nonatomic, strong) RueMultiScrollingAticlesViewController* multiArticlesController;
+@property (nonatomic, strong) RueMultiScrollingAticlesViewController* scrollingArticlesController;
 
 @end
 
@@ -40,9 +50,9 @@
     
     NSArray* galleryElements = [self sortetByWeightGalleryElements];
     
-    self.multiArticlesController = [[RueMultiScrollingAticlesViewController alloc]initWithElements:galleryElements];
+    self.scrollingArticlesController = [[RueMultiScrollingAticlesViewController alloc]initWithElements:galleryElements];
     
-    [self.mainScrollView insertSubview:self.multiArticlesController.view belowSubview:self.backgroundViewController.view];
+    [self.mainScrollView insertSubview:self.scrollingArticlesController.view belowSubview:self.backgroundViewController.view];
     
     self.backgroundViewController.view.userInteractionEnabled = NO;
     
@@ -51,30 +61,35 @@
     if(backgroundElement.showOnTop)
     {
         [self setCurrentArticleIndex:0];
-        [self.multiArticlesController setCurrentArticleIndexTo:0 animated:NO withCompletion:nil];
+        [self.scrollingArticlesController setCurrentArticleIndexTo:0 animated:NO withCompletion:nil];
     }
 }
 
 - (void) loadFullView
 {
     [super loadFullView];
-    [self.multiArticlesController loadFullView];
+    [self.scrollingArticlesController loadFullView];
 }
 
 - (void) unloadFullView
 {
-    [self.multiArticlesController unloadFullView];
+    [self.scrollingArticlesController unloadFullView];
     [super unloadFullView];
 }
 
 - (void) setCurrentArticleIndex:(int)index
 {
     if(index >= 0
-       && index < self.multiArticlesController.contentViewControllers.count
-       && self.multiArticlesController.isChangingArticles == NO
-       && self.multiArticlesController.currentArticleIndex != index)
+       && index < self.scrollingArticlesController.contentViewControllers.count
+       && self.scrollingArticlesController.isChangingArticles == NO
+       && self.scrollingArticlesController.currentArticleIndex != index)
     {
-        [self.multiArticlesController setCurrentArticleIndexTo:index animated:YES withCompletion:nil];
+        [self.scrollingArticlesController setCurrentArticleIndexTo:index animated:YES withCompletion:nil];
+        if(self.scrollingArticlesController.hasVideoBrowserOn)
+        {
+            [self hideVideoWebView];
+            self.scrollingArticlesController.hasVideoBrowserOn = NO;
+        }
     }
 }
 
@@ -115,161 +130,85 @@
 
 #pragma mark - Video Support
 
-/*- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone
+- (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone
 {
-    if([activeZone.pageElement.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
+    if([activeZone.pageElement.fieldTypeName isEqualToString:PCPageElementTypeGallery])
     {
-        RueScrollingPaneViewController* scrollController = [self scrollControllerForElement:activeZone.pageElement];
-        if(scrollController)
+        ScrollingArticleViewController* articleController = [self.scrollingArticlesController currentArticleController];
+        
+        if(articleController && self.scrollingArticlesController.isChangingArticles == NO && activeZone.pageElement == articleController.pageElement)
         {
-            CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
-            videoWebViewRect = [scrollController.scrollView convertRect:videoWebViewRect fromView:self.mainScrollView];
-            [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:scrollController.scrollView];
-            
+            CGRect videoWebViewRect = [articleController activeZoneRectForType:activeZone.URL];
+            [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:articleController.mainScrollView];
+            self.scrollingArticlesController.hasVideoBrowserOn = YES;
             return;
         }
     }
+    else
+    {
+        [super createWebBrowserViewForActiveZone:activeZone];
+    }
+}
+
+- (NSArray*) activeZonesAtPoint:(CGPoint)point
+{
+    NSMutableArray* activeZones = [[NSMutableArray alloc] init];
     
-    [super createWebBrowserViewForActiveZone:activeZone];
-    [self changeVideoLayout:NO];
-}*/
+    for (PCPageElement* element in self.page.elements)
+    {
+        if([element.fieldTypeName isEqualToString:PCPageElementTypeGallery])
+        {
+            [activeZones addObjectsFromArray:[self.scrollingArticlesController activeZonesForGalleryElement:element atPoint:point inPageController:self]];
+        }
+        else
+        {
+            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+            {
+                CGRect rect = pdfActiveZone.rect;
+                if (!CGRectEqualToRect(rect, CGRectZero))
+                {
+                    CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
+                    float scale = pageSize.width/element.size.width;
+                    rect.size.width *= scale;
+                    rect.size.height *= scale;
+                    rect.origin.x *= scale;
+                    rect.origin.y *= scale;
+                    rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+                    
+                    if (CGRectContainsPoint(rect, point))
+                    {
+                        [activeZones addObject:pdfActiveZone];
+                    }
+                }
+            }
+        }
+    }
+    return activeZones;
+}
 
-//- (NSArray*) activeZonesAtPoint:(CGPoint)point
-//{
-//    NSMutableArray* activeZones = [[NSMutableArray alloc] init];
-//    
-//    for (PCPageElement* element in self.page.elements)
-//    {
-//        if([element.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
-//        {
-//            [activeZones addObjectsFromArray:[self activeZonesInScrollingPaneElement:element atPoint:point]];
-//        }
-//        else
-//        {
-//            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-//            {
-//                CGRect rect = pdfActiveZone.rect;
-//                if (!CGRectEqualToRect(rect, CGRectZero))
-//                {
-//                    //                    CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
-//                    //                    float scale = pageSize.width/element.size.width;
-//                    //                    rect.size.width *= scale;
-//                    //                    rect.size.height *= scale;
-//                    //                    rect.origin.x *= scale;
-//                    //                    rect.origin.y *= scale;
-//                    rect.origin.y = element.size.height/**scale*/ - rect.origin.y - rect.size.height;
-//                    
-//                    if (CGRectContainsPoint(rect, point))
-//                    {
-//                        [activeZones addObject:pdfActiveZone];
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    return [self sortActiveZonesByPriority:activeZones];
-//}
-
-//- (NSArray*) sortActiveZonesByPriority:(NSArray*)array //scrolling pane zones go to the beginning of array
-//{
-//    return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        
-//        PCPageElementActiveZone* activeZone1 = obj1;
-//        PCPageElementActiveZone* activeZone2 = obj2;
-//        
-//        if([activeZone1.pageElement.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
-//        {
-//            if([activeZone2.pageElement.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
-//            {
-//                return NSOrderedSame;
-//            }
-//            else
-//            {
-//                return NSOrderedAscending;
-//            }
-//        }
-//        else if([activeZone2.pageElement.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
-//        {
-//            return NSOrderedDescending;
-//        }
-//        else
-//        {
-//            return NSOrderedSame;
-//        }
-//    }];
-//}
-
-//- (NSArray*) activeZonesInScrollingPaneElement:(PCPageElement*)element atPoint:(CGPoint)point
-//{
-//    NSMutableArray* activeZones = [[NSMutableArray alloc]init];
-//    
-//    for (RueScrollingPaneViewController* controller in self.scrollingPaneControllers)
-//    {
-//        if(CGRectContainsPoint(controller.scrollView.frame, point))
-//        {
-//            for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-//            {
-//                CGRect rect = pdfActiveZone.rect;
-//                if (!CGRectEqualToRect(rect, CGRectZero))
-//                {
-//                    //                    CGSize pageSize = _paneContentViewController.view.frame.size;//[self.columnViewController pageSizeForViewController:self];
-//                    //                    float scale = pageSize.width/element.size.width;
-//                    //                    rect.size.width *= scale;
-//                    //                    rect.size.height *= scale;
-//                    //                    rect.origin.x *= scale;
-//                    //                    rect.origin.y *= scale;
-//                    rect.origin.y = element.size.height/**scale*/ - rect.origin.y - rect.size.height;
-//                    
-//                    CGPoint pointInPane = [controller.scrollView convertPoint:point fromView:self.mainScrollView];
-//                    
-//                    if (CGRectContainsPoint(rect, pointInPane))
-//                    {
-//                        [activeZones addObject:pdfActiveZone];
-//                    }
-//                }
-//            }
-//        }
-//        break;
-//    }
-//    
-//    return activeZones;
-//}
-
-//- (CGRect) activeZoneRectForType:(NSString*)zoneType
-//{
-//    for (PCPageElement* element in self.page.elements)
-//    {
-//        CGRect rect = [element rectForElementType:zoneType];
-//        if (!CGRectEqualToRect(rect, CGRectZero))
-//        {
-//            if([element.fieldTypeName isEqualToString:PCPageElementTypeScrollingPane])
-//            {
-//                //                CGSize pageSize = _paneContentViewController.view.frame.size;
-//                //                float scale = pageSize.width/element.size.width;
-//                //                rect.size.width *= scale;
-//                //                rect.size.height *= scale;
-//                //                rect.origin.x *= scale;
-//                //                rect.origin.y *= scale;
-//                rect.origin.y = element.size.height/**scale*/ - rect.origin.y - rect.size.height;
-//                
-//                rect = [self.mainScrollView convertRect:rect fromView:[self scrollControllerForElement:element].view];
-//                
-//                return rect;
-//            }
-//            else
-//            {
-//                CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
-//                float scale = pageSize.width/element.size.width;
-//                rect.size.width *= scale;
-//                rect.size.height *= scale;
-//                rect.origin.x *= scale;
-//                rect.origin.y *= scale;
-//                rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
-//                return rect;
-//            }
-//        }
-//    }
-//    return CGRectZero;
-//}
+- (CGRect) activeZoneRectForType:(NSString*)zoneType
+{
+    for (PCPageElement* element in self.page.elements)
+    {
+        CGRect rect = [element rectForElementType:zoneType];
+        if (!CGRectEqualToRect(rect, CGRectZero))
+        {
+            CGSize pageSize = [self.columnViewController pageSizeForViewController:self];
+            float scale = pageSize.width/element.size.width;
+            rect.size.width *= scale;
+            rect.size.height *= scale;
+            rect.origin.x *= scale;
+            rect.origin.y *= scale;
+            rect.origin.y = element.size.height*scale - rect.origin.y - rect.size.height;
+            
+            if([element.fieldTypeName isEqualToString:PCPageElementTypeGallery])
+            {
+                rect = [self.mainScrollView convertRect:rect fromView:self.scrollingArticlesController.currentArticleController.mainScrollView];
+            }
+            return rect;
+        }
+    }
+    return CGRectZero;
+}
 
 @end

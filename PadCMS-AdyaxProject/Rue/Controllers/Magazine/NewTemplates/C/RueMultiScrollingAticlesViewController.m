@@ -8,6 +8,10 @@
 
 #import "RueMultiScrollingAticlesViewController.h"
 #import "ScrollingArticleViewController.h"
+#import "PCPageActiveZone.h"
+#import "PCPageElement.h"
+#import "PCPageViewController.h"
+#import "PCScrollView.h"
 
 @interface RueMultiScrollingAticlesViewController ()
 {
@@ -72,11 +76,7 @@
     {
         if(index >= 0 && self.contentViewControllers.count > index)
         {
-            ScrollingArticleViewController* previousController = nil;
-            if(_currentArticleIndex >= 0)
-            {
-                previousController = [self.contentViewControllers objectAtIndex:_currentArticleIndex];
-            }
+            ScrollingArticleViewController* previousController = [self currentArticleController];
             
             _isTransiting = YES;
             ScrollingArticleViewController* controller = [self.contentViewControllers objectAtIndex:index];
@@ -120,14 +120,62 @@
     }
 }
 
+- (ScrollingArticleViewController*) currentArticleController
+{
+    if(_currentArticleIndex >= 0 && _currentArticleIndex < self.contentViewControllers.count)
+    {
+        return [self.contentViewControllers objectAtIndex:_currentArticleIndex];
+    }
+    return nil;
+}
+
 - (void) loadFullView
 {
-    
+    [[self currentArticleController] loadFullView];
 }
 
 - (void) unloadFullView
 {
+    for (ScrollingArticleViewController* contr in self.contentViewControllers)
+    {
+        [contr unloadFullView];
+    }
+}
+
+- (NSArray*) activeZonesForGalleryElement:(PCPageElement*)galleryElement atPoint:(CGPoint)point inPageController:(PCPageViewController*)pageViewController
+{
+    NSMutableArray* activeZones = [[NSMutableArray alloc]init];
     
+    if(_isTransiting) return activeZones;
+    
+    ScrollingArticleViewController* currentArticleController = [self currentArticleController];
+    
+    if(currentArticleController && currentArticleController.pageElement == galleryElement)
+    {
+        for (PCPageActiveZone* pdfActiveZone in galleryElement.activeZones)
+        {
+            CGRect rect = pdfActiveZone.rect;
+            if (!CGRectEqualToRect(rect, CGRectZero))
+            {
+                CGSize pageSize = [pageViewController.columnViewController pageSizeForViewController:pageViewController];
+                float scale = pageSize.width/galleryElement.size.width;
+                rect.size.width *= scale;
+                rect.size.height *= scale;
+                rect.origin.x *= scale;
+                rect.origin.y *= scale;
+                rect.origin.y = galleryElement.size.height*scale - rect.origin.y - rect.size.height;
+                
+                CGPoint pointInArticle = [currentArticleController.mainScrollView convertPoint:point fromView:pageViewController.mainScrollView];
+                
+                if (CGRectContainsPoint(rect, pointInArticle))
+                {
+                    [activeZones addObject:pdfActiveZone];
+                }
+            }
+        }
+    }
+    
+    return activeZones;
 }
 
 @end

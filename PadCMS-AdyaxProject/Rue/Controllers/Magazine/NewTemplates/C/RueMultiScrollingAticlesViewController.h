@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class PCPageViewController, PCPageElement, ScrollingArticleViewController;
+
 @interface RueMultiScrollingAticlesViewController : UIViewController
 
 @property (nonatomic, strong, readonly) NSArray* contentViewControllers;
+@property (nonatomic, assign) BOOL hasVideoBrowserOn;
 
 - (id) initWithElements:(NSArray*)elements;
 
@@ -18,10 +21,14 @@
 
 - (int) currentArticleIndex;
 
+- (ScrollingArticleViewController*) currentArticleController;
+
 - (void) setCurrentArticleIndexTo:(int)index animated:(BOOL)animaten withCompletion:(void(^)())completion;
 
 - (void) loadFullView;
 
 - (void) unloadFullView;
+
+- (NSArray*) activeZonesForGalleryElement:(PCPageElement*)galleryElement atPoint:(CGPoint)point inPageController:(PCPageViewController*)pageViewController;
 
 @end

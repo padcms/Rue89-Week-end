@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class PCPageElement;
+@class PCPageElement, PCScrollView;
 
 @interface ScrollingArticleViewController : UIViewController
+
+@property (nonatomic, strong, readonly) PCPageElement* pageElement;
+@property (nonatomic, strong, readonly) PCScrollView* mainScrollView;
 
 - (id) initWithElement:(PCPageElement*)element;
 
 - (void) loadFullView;
 
 - (void) unloadFullView;
+
+- (CGRect) activeZoneRectForType:(NSString*)zoneType;
 
 @end
