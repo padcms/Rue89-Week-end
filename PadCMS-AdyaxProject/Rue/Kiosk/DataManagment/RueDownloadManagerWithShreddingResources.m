@@ -13,6 +13,7 @@
 #import "PCPageElementMiniArticle.h"
 #import "PCPageElementGallery.h"
 #import "PCDownloadOperation.h"
+#import "PCPage+NewTemplates.h"
 
 @class PCDownloadOperation;
 
@@ -67,7 +68,12 @@
     
     //*************************************************************************************************************************************
     BOOL needShredResource = NO;
-    if([element.fieldTypeName isEqualToString:PCPageElementTypeBody] && element.size.height > [RueResourceShredder heightNoNeededToShred])
+    
+    BOOL elementIsBody = [element.fieldTypeName isEqualToString:PCPageElementTypeBody];
+    BOOL elementIsScrollArticleFromGallery = [element.fieldTypeName isEqualToString:PCPageElementTypeGallery] && page.pageTemplate.identifier == PCScrollingGalleryWithFixedMenuPageTemplate;
+    BOOL elementIsTooBig = element.size.height > [RueResourceShredder heightNoNeededToShred];
+    
+    if((elementIsBody || elementIsScrollArticleFromGallery) && elementIsTooBig)
     {
         needShredResource = YES;
         [self addShredOperationForElement:element];

@@ -17,6 +17,7 @@
 #import "PCPageElementMiniArticle.h"
 #import "PCTocItem.h"
 #import "RueResourceShredder.h"
+#import "PCPage+NewTemplates.h"
 
 #define PCRevisionCoverImagePlaceholderName @"application-cover-placeholder.jpg"
 #define PCRevisionCoverImageFileName @"cover.jpg"
@@ -307,13 +308,28 @@
     {
         for (PCPage* page in column.pages)
         {
-            NSArray* bodyElements = [page elementsForType:PCPageElementTypeBody];
-            
-            for (PCPageElement* element in bodyElements)
+            if(page.pageTemplate.identifier == PCScrollingGalleryWithFixedMenuPageTemplate)
             {
-                if(element.size.height > [RueResourceShredder heightNoNeededToShred])
+                NSArray* galleryElements = [page elementsForType:PCPageElementTypeGallery];
+                
+                for (PCPageElement* element in galleryElements)
                 {
-                    [shreddingResources addObject:[self.contentDirectory stringByAppendingPathComponent:element.resource]];
+                    if(element.size.height > [RueResourceShredder heightNoNeededToShred])
+                    {
+                        [shreddingResources addObject:[self.contentDirectory stringByAppendingPathComponent:element.resource]];
+                    }
+                }
+            }
+            else
+            {
+                NSArray* bodyElements = [page elementsForType:PCPageElementTypeBody];
+                
+                for (PCPageElement* element in bodyElements)
+                {
+                    if(element.size.height > [RueResourceShredder heightNoNeededToShred])
+                    {
+                        [shreddingResources addObject:[self.contentDirectory stringByAppendingPathComponent:element.resource]];
+                    }
                 }
             }
         }

@@ -10,6 +10,11 @@
 #import "PCPageTemplatesPool.h"
 #import "PCPageElemetTypes.h"
 
+int PCBasicArticleWithGifsPageTemplate = 22;
+int PCBasicArticleWithPopupsPageTemplate = 23;
+int PCScrollingGalleryWithFixedMenuPageTemplate = 24;
+int PCMultiScrollPageTemplate = 26;
+
 @interface PCPage ()
 {
     NSArray* _primaryElements;

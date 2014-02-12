@@ -8,10 +8,10 @@
 
 #import "PCPage.h"
 
-static int PCBasicArticleWithGifsPageTemplate = 22;
-static int PCBasicArticleWithPopupsPageTemplate = 23;
-static int PCScrollingGalleryWithFixedMenuPageTemplate = 24;
-static int PCMultiScrollPageTemplate = 26;
+extern int PCBasicArticleWithGifsPageTemplate;
+extern int PCBasicArticleWithPopupsPageTemplate;
+extern int PCScrollingGalleryWithFixedMenuPageTemplate;
+extern int PCMultiScrollPageTemplate;
 
 @interface PCPage (NewTemplates)
 

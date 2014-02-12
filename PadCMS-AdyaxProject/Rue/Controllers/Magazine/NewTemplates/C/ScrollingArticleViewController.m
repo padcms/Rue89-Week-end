@@ -10,8 +10,10 @@
 #import "PCScrollView.h"
 #import "PCPageElementViewController.h"
 #import "PCPage.h"
+#import "Helper.h"
+#import "RueLongPageElementViewController.h"
 
-@interface ScrollingArticleViewController ()
+@interface ScrollingArticleViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) PCScrollView* mainScrollView;
 @property (nonatomic, strong) PCPageElement* pageElement;
@@ -54,7 +56,20 @@
     [self.view addSubview:self.mainScrollView];
     
     NSString *fullResource = [self.pageElement.page.revision.contentDirectory stringByAppendingPathComponent:self.pageElement.resource];
-    PCPageElementViewController* articleContentViewController = [[PCPageElementViewController alloc] initWithResource:fullResource];
+    
+    PCPageElementViewController* articleContentViewController = nil;
+    
+    CGSize imageSize = [Helper getSizeForImage:fullResource];
+    if(imageSize.height > 1024 * 3)
+    {
+        articleContentViewController = [[RueLongPageElementViewController alloc] initWithResource:fullResource];
+        self.mainScrollView.delegate = self;
+    }
+    else
+    {
+        articleContentViewController = [[PCPageElementViewController alloc] initWithResource:fullResource];
+    }
+    
     [articleContentViewController setTargetWidth:self.mainScrollView.bounds.size.width];
     CGFloat backgroundWidth = articleContentViewController.view.frame.size.width;
     CGFloat backgroundHeight = articleContentViewController.view.frame.size.height;
@@ -92,6 +107,14 @@
         return rect;
     }
     return CGRectZero;
+}
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if([self.pageElementViewController isKindOfClass:[RueLongPageElementViewController class]])
+    {
+        [(RueLongPageElementViewController*)self.pageElementViewController setYOffset:scrollView.contentOffset.y];
+    }
 }
 
 @end
