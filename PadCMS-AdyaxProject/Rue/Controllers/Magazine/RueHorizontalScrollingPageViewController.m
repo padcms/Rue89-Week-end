@@ -188,28 +188,21 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == _paneScrollView) {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
         if (scrollView.decelerating) {
             return;
         }
         
         if (scrollView.contentOffset.x < 0) {
-            _paneScrollView.scrollEnabled = NO;
             [self.magazineViewController showPrevColumn];
             return;
         }
         
         if (scrollView.contentOffset.x > scrollView.contentSize.width - scrollView.frame.size.width) {
-            _paneScrollView.scrollEnabled = NO;
             [self.magazineViewController showNextColumn];
             return;
         }
-        
         [self updateScrollButtons];
-    }
 }
 
 @end
