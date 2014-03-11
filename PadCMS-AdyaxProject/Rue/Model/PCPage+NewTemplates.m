@@ -13,6 +13,7 @@
 int PCBasicArticleWithGifsPageTemplate = 22;
 int PCBasicArticleWithPopupsPageTemplate = 23;
 int PCScrollingGalleryWithFixedMenuPageTemplate = 24;
+int PCDiaporamaInLongArticlePageTemplate = 25;
 int PCMultiScrollPageTemplate = 26;
 
 @interface PCPage ()
@@ -128,6 +129,11 @@ int PCMultiScrollPageTemplate = 26;
         PCPageElement* background = [self firstElementForType:PCPageElementTypeBackground];
         if (background) [array addObject:background];
     }
+    else if (self.pageTemplate.identifier == PCDiaporamaInLongArticlePageTemplate)
+    {
+        PCPageElement* body = [self firstElementForType:PCPageElementTypeBody];
+        if (body) [array addObject:body];
+    }
 	
     _primaryElements = [[NSArray alloc] initWithArray:array];
     
@@ -202,6 +208,13 @@ int PCMultiScrollPageTemplate = 26;
     {
         NSArray* galleryElements = [self elementsForType:PCPageElementTypeGallery];
         if (galleryElements) [array addObjectsFromArray:galleryElements];
+    }
+    else if (self.pageTemplate.identifier == PCDiaporamaInLongArticlePageTemplate)
+    {
+        NSArray* miniArticles = [self elementsForType:PCPageElementTypeMiniArticle];
+        if (miniArticles) [array addObjectsFromArray:miniArticles];
+        NSArray* slides = [self elementsForType:PCPageElementTypeSlide];
+        if ([slides count]) [array addObjectsFromArray:slides];
     }
     
     // video ------------------------------------------------------------------------------------------------------

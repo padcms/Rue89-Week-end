@@ -12,6 +12,7 @@ extern int PCBasicArticleWithGifsPageTemplate;
 extern int PCBasicArticleWithPopupsPageTemplate;
 extern int PCScrollingGalleryWithFixedMenuPageTemplate;
 extern int PCMultiScrollPageTemplate;
+extern int PCDiaporamaInLongArticlePageTemplate;
 
 @interface PCPage (NewTemplates)
 

@@ -10,6 +10,8 @@
 #import "PCScrollView.h"
 #import "PCPageControllersManager.h"
 #import "RueSlideViewController.h"
+#import "PCPDFActiveZones.h"
+#import "PCPageElemetTypes.h"
 
 @interface RueDiaporamaInLongArticleViewController ()
 
@@ -75,20 +77,7 @@
     NSArray* slideElements = [self sortetByWeightPageElementsOfType:PCPageElementTypeSlide];
     self.slideViewControllers = [self createSlideViewControllersForElements:slideElements];
     
-    self.slidersView.backgroundColor = [UIColor blueColor];
-}
-
-- (CGRect)activeZoneRectForType:(NSString*)zoneType
-{
-    for (PCPageElement* element in self.page.elements)
-    {
-        CGRect rect = [element rectForElementType:zoneType];
-        if (!CGRectEqualToRect(rect, CGRectZero))
-        {
-            return rect;
-        }
-    }
-    return CGRectZero;
+    self.slidersView.backgroundColor = [UIColor clearColor];
 }
 
 - (void) loadFullView
