@@ -1099,8 +1099,9 @@ BOOL stringExists(NSString* str)
     if ([self getApplication].contactEmail)
     {
         contactEmail = [self getApplication].contactEmail;
+        [emailParams setObject:contactEmail forKey:PCApplicationNotificationEmailKey];
     }
-    [self.emailController.emailViewController setToRecipients:@[contactEmail]];
+//    [self.emailController.emailViewController setToRecipients:@[contactEmail]];
     
     self.emailController.delegate = self;
     [self.emailController emailShow];
