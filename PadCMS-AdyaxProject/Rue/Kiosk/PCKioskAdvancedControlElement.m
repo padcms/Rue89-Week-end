@@ -451,7 +451,7 @@ typedef enum {
         case ElementsStateFree:
             
             downloadButton.hidden = NO;
-            [downloadButton setTitle:@"GRATUIT" forState:UIControlStateNormal];
+            [downloadButton setTitle:@"GRADUITE" forState:UIControlStateNormal];
             
             break;
             

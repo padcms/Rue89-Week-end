@@ -68,7 +68,7 @@
         
         PCTag * tag3 = [[PCTag alloc] init];
         tag3.tagId = TAG_ID_FREE;
-        tag3.tagTitle = @"GRATUIT";
+        tag3.tagTitle = @"GRADUITE";
         
         _staticTags = @[tag1, tag2, tag3];
     }
@@ -160,7 +160,7 @@
 
 - (void)initButtons {
     
-    //NSArray * buttonNames = @[@"TOUT", @"ARCHIVÉS", @"GRATUIT", @"PHOTO", @"BD", @"VIDÉO", @"COURT", @"REPORTAGES"];
+    //NSArray * buttonNames = @[@"TOUT", @"ARCHIVÉS", @"GRADUITE", @"PHOTO", @"BD", @"VIDÉO", @"COURT", @"REPORTAGES"];
    
     
     self.allTags = [[self staticTags] arrayByAddingObjectsFromArray:self.tags];
