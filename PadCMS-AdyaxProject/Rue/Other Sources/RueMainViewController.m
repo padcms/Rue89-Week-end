@@ -1083,26 +1083,29 @@ BOOL stringExists(NSString* str)
 
 - (void)contactUsButtonTapped
 {
-    NSMutableDictionary * emailParams = [NSMutableDictionary new];
+//    NSMutableDictionary * emailParams = [NSMutableDictionary new];
     
-    if ([self getApplication].contactEmailSubject) {
-        [emailParams setObject:[self getApplication].contactEmailSubject forKey:PCApplicationNotificationTitleKey];
-    }
+//    if ([self getApplication].contactEmailSubject) {
+//        [emailParams setObject:[self getApplication].contactEmailSubject forKey:PCApplicationNotificationTitleKey];
+//    }
+//    
+//    if ([self getApplication].contactEmailText) {
+//        [emailParams setObject:[self getApplication].contactEmailText forKey:PCApplicationNotificationMessageKey];
+//    }
     
-    if ([self getApplication].contactEmailText) {
-        [emailParams setObject:[self getApplication].contactEmailText forKey:PCApplicationNotificationMessageKey];
-    }
     
-    self.emailController = [[PCEmailController alloc] initWithMessage:emailParams];
+//    NSString * contactEmail = @"";
+//    if ([self getApplication].contactEmail)
+//    {
+//        contactEmail = [self getApplication].contactEmail;
+//        [emailParams setObject:contactEmail forKey:PCApplicationNotificationEmailKey];
+//    }
     
-    NSString * contactEmail = @"";
-    if ([self getApplication].contactEmail)
-    {
-        contactEmail = [self getApplication].contactEmail;
-        [emailParams setObject:contactEmail forKey:PCApplicationNotificationEmailKey];
-    }
-//    [self.emailController.emailViewController setToRecipients:@[contactEmail]];
-    
+    self.emailController = [[PCEmailController alloc] init];
+    self.emailController.emailContact = [self getApplication].contactEmail;
+    self.emailController.emailShareTittle = [self getApplication].contactEmailSubject;
+    self.emailController.emailShareMessage = [self getApplication].contactEmailText;
+
     self.emailController.delegate = self;
     [self.emailController emailShow];
     
@@ -1230,7 +1233,9 @@ BOOL stringExists(NSString* str)
 - (void)shareButtonTapped
 {
     PCKioskSharePopupView * sharePopup = [[PCKioskSharePopupView alloc] initWithSize:CGSizeMake(640, 375) viewToShowIn:self.view];
-    sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
+//    sharePopup.emailMessage = [currentApplication.notifications objectForKey:PCEmailNotificationType];
+    sharePopup.emailShareMessage = [self getApplication].emailShareMessage;
+    sharePopup.emailShareTittle = [self getApplication].emailShareTitle;
     sharePopup.facebookMessage = [self getApplication].shareMessage;//currentApplication.notifications[PCFacebookNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.twitterMessage = [self getApplication].shareMessage;//currentApplication.notifications[PCTwitterNotificationType][PCApplicationNotificationMessageKey];
     sharePopup.googleMessage = [self getApplication].shareMessage;//currentApplication.notifications[PCGoogleNotificationType][PCApplicationNotificationMessageKey];

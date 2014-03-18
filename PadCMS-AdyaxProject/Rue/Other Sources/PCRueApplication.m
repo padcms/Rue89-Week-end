@@ -81,6 +81,8 @@
                                                    emailKey, PCApplicationNotificationMessageKey,
                                                    emailTitle, PCApplicationNotificationTitleKey,
                                                    nil];
+            self.emailShareMessage = emailKey;
+            self.emailShareTitle = emailTitle;
             
             [self.notifications setObject:emailNotificationType forKey:PCEmailNotificationType];
         }

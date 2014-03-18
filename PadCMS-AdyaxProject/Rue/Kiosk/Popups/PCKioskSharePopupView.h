@@ -16,7 +16,9 @@
 
 @interface PCKioskSharePopupView : PCKioskTitledPopupView
 
-@property (nonatomic, copy) NSDictionary * emailMessage;
+//@property (nonatomic, copy) NSDictionary * emailMessage;
+@property (nonatomic, strong) NSString *emailShareMessage;
+@property (nonatomic, strong) NSString *emailShareTittle;
 @property (nonatomic, copy) NSString * twitterMessage;
 @property (nonatomic, copy) NSString * facebookMessage;
 @property (nonatomic, copy) NSString * googleMessage;

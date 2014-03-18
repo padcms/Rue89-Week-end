@@ -143,7 +143,10 @@
     if (!self.emailController)
     {
         //NSDictionary *emailMessage = [self.revision.issue.application.notifications objectForKey:PCEmailNotificationType];
-        self.emailController = [[PCEmailController alloc] initWithMessage:self.emailMessage];
+//        self.emailController = [[PCEmailController alloc] initWithMessage:self.emailMessage];
+        self.emailController = [[PCEmailController alloc] init];
+        self.emailController.emailShareMessage = self.emailShareMessage;
+        self.emailController.emailShareTittle = self.emailShareTittle;
     }
     self.emailController.delegate = self.delegate;
     [self.emailController emailShow];

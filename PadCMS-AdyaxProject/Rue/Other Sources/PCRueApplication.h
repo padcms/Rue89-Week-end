@@ -35,4 +35,7 @@
 /// @brief Message that will appear on sharing popup
 @property (nonatomic, retain) NSString * shareMessage;
 
+@property (nonatomic, strong) NSString *emailShareMessage;
+@property (nonatomic, strong) NSString *emailShareTitle;
+
 @end
