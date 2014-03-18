@@ -13,27 +13,27 @@
 
 @interface PCRueApplication : PCApplication
 
-@property (nonatomic, copy) NSString* shareUrl;
+@property (nonatomic, strong) NSString  *shareUrl;
 
-@property (nonatomic, copy) NSString* subscribeButtonTitle;
-@property (nonatomic, copy) NSString* subscriptionsListTitle;
+@property (nonatomic, strong) NSString *subscribeButtonTitle;
+@property (nonatomic, strong) NSString *subscriptionsListTitle;
 
-@property (nonatomic, readonly) NSArray* subscriptionsSchemes;
+@property (nonatomic, strong, readonly) NSArray *subscriptionsSchemes;
 
-@property (nonatomic, copy) NSString* wellcomeMessage;
-@property (nonatomic, copy) NSString * welcomeMessageUnderButton;
+@property (nonatomic, strong) NSString *wellcomeMessage;
+@property (nonatomic, strong) NSString *welcomeMessageUnderButton;
 
-@property (nonatomic, retain) NSString * contactEmail;
-@property (nonatomic, copy) NSString * contactEmailText;
-@property (nonatomic, copy) NSString * contactEmailSubject;
+@property (nonatomic, strong) NSString *contactEmail;
+@property (nonatomic, strong) NSString *contactEmailText;
+@property (nonatomic, strong) NSString *contactEmailSubject;
 
 /// @brief All tags collected from all issues
-@property (nonatomic, retain) NSMutableArray * tags;
+@property (nonatomic, strong) NSMutableArray *tags;
 
 /// @brief Message that appears in bottom popup
-@property (nonatomic, retain) NSString * messageForReaders;
+@property (nonatomic, strong) NSString *messageForReaders;
 /// @brief Message that will appear on sharing popup
-@property (nonatomic, retain) NSString * shareMessage;
+@property (nonatomic, strong) NSString *shareMessage;
 
 @property (nonatomic, strong) NSString *emailShareMessage;
 @property (nonatomic, strong) NSString *emailShareTitle;

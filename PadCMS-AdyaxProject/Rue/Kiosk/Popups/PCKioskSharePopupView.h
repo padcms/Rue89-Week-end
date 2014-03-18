@@ -19,10 +19,10 @@
 //@property (nonatomic, copy) NSDictionary * emailMessage;
 @property (nonatomic, strong) NSString *emailShareMessage;
 @property (nonatomic, strong) NSString *emailShareTittle;
-@property (nonatomic, copy) NSString * twitterMessage;
-@property (nonatomic, copy) NSString * facebookMessage;
-@property (nonatomic, copy) NSString * googleMessage;
-@property (nonatomic, copy) NSString * postUrl;
+@property (nonatomic, strong) NSString *twitterMessage;
+@property (nonatomic, strong) NSString *facebookMessage;
+@property (nonatomic, strong) NSString *googleMessage;
+@property (nonatomic, strong) NSString *postUrl;
 @property (nonatomic, weak) id<PCKioskSharePopupViewDelegate> delegate;
 
 @end

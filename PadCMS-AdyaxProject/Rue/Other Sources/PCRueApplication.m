@@ -60,12 +60,12 @@
         
         self.identifier = [identifierString integerValue];
         
-        self.title = [[parameters objectForKey:PCJSONApplicationTitleKey] copy];
-        self.applicationDescription = [[parameters objectForKey:PCJSONApplicationDescriptionKey] copy];
-        self.productIdentifier = [[parameters objectForKey:PCJSONApplicationProductIDKey] copy];
-        self.messageForReaders = [[parameters objectForKey:PCJSONApplicationMessageForReadersKey] copy];
-        self.shareMessage = [[parameters objectForKey:PCJSONApplicationShareMessageKey] copy];
-        self.contactEmail = [[parameters objectForKey:PCJSONApplicationContactEmailKey] copy];
+        self.title = [parameters objectForKey:PCJSONApplicationTitleKey];
+        self.applicationDescription = [parameters objectForKey:PCJSONApplicationDescriptionKey];
+        self.productIdentifier = [parameters objectForKey:PCJSONApplicationProductIDKey];
+        self.messageForReaders = [NSString stringWithFormat:@"%@", [parameters objectForKey:PCJSONApplicationMessageForReadersKey]];
+        self.shareMessage = [NSString stringWithFormat:@"%@", [parameters objectForKey:PCJSONApplicationShareMessageKey]];
+        self.contactEmail = [NSString stringWithFormat:@"%@", [parameters objectForKey:PCJSONApplicationContactEmailKey]];
         // Set up notifications
         if(self.notifications == nil)
         {
@@ -87,25 +87,25 @@
             [self.notifications setObject:emailNotificationType forKey:PCEmailNotificationType];
         }
         
-        if ([parameters objectForKey:PCJSONApplicationNotificationTwitterKey])
-        {
-            NSString *twitterKey = [parameters objectForKey:PCJSONApplicationNotificationTwitterKey];
-            NSDictionary *twitterNotificationType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                     twitterKey, PCApplicationNotificationMessageKey,
-                                                     nil];
-            
-            [self.notifications setObject:twitterNotificationType forKey:PCTwitterNotificationType];
-        }
-        
-        if ([parameters objectForKey:PCJSONApplicationNotificationFacebookKey])
-        {
-            NSString *facebookKey = [parameters objectForKey:PCJSONApplicationNotificationFacebookKey];
-            NSDictionary *facebookNotificationType = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                      facebookKey, PCApplicationNotificationMessageKey,
-                                                      nil] ;
-            
-            [self.notifications setObject:facebookNotificationType forKey:PCFacebookNotificationType];
-        }
+//        if ([parameters objectForKey:PCJSONApplicationNotificationTwitterKey])
+//        {
+//            NSString *twitterKey = [parameters objectForKey:PCJSONApplicationNotificationTwitterKey];
+//            NSDictionary *twitterNotificationType = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                                     twitterKey, PCApplicationNotificationMessageKey,
+//                                                     nil];
+//            
+//            [self.notifications setObject:twitterNotificationType forKey:PCTwitterNotificationType];
+//        }
+//        
+//        if ([parameters objectForKey:PCJSONApplicationNotificationFacebookKey])
+//        {
+//            NSString *facebookKey = [parameters objectForKey:PCJSONApplicationNotificationFacebookKey];
+//            NSDictionary *facebookNotificationType = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                                      facebookKey, PCApplicationNotificationMessageKey,
+//                                                      nil] ;
+//            
+//            [self.notifications setObject:facebookNotificationType forKey:PCFacebookNotificationType];
+//        }
         
         id previewObject = [parameters objectForKey:PCJSONApplicationPreviewKey];
         if (previewObject != nil)
@@ -228,7 +228,7 @@
             self.shareUrl = @"http://weekend.rue89.com";
         }
         
-        self.messageForReaders = [[[parameters objectForKey:PCJSONApplicationMessageForReadersKey]stringByDecodingHTMLEntities] copy];
+        self.messageForReaders = [[parameters objectForKey:PCJSONApplicationMessageForReadersKey]stringByDecodingHTMLEntities];
         
         NSString* subscribeByttonTitle = [[parameters objectForKey:kApplicationSubscribeButtonKey]stringByDecodingHTMLEntities];
         if(subscribeByttonTitle && [subscribeByttonTitle isKindOfClass:[NSString class]] && subscribeByttonTitle.length)
