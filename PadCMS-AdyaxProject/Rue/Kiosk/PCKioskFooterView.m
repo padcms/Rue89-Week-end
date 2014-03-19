@@ -68,7 +68,7 @@
         
         PCTag * tag3 = [[PCTag alloc] init];
         tag3.tagId = TAG_ID_FREE;
-        tag3.tagTitle = @"GRADUITE";
+        tag3.tagTitle = @"GRATUIT";
         
         _staticTags = @[tag1, tag2, tag3];
     }
