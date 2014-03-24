@@ -357,14 +357,14 @@ typedef enum{
     if(_currentWebViewPresentationState == WebViewPresentationStateFullscreen)
     {
         [self unmakeWebViewFullScreenCompletion:^{
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PCRueBrowserVideoDidExitFullScreen" object:nil];
             sender.enabled = YES;
         }];
     }
     else if(_currentWebViewPresentationState == WebViewPresentationStateWindow)
     {
         [self makeWebViewFullScreenCompletion:^{
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PCRueBrowserVideoDidEnterFullScreen" object:nil];
             _currentWebViewOrientation = [self defaultOrientation];
             [self checkForOrientation];
             sender.enabled = YES;

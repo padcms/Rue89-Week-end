@@ -15,6 +15,9 @@
 #import "PCPageViewController+IsPresented.h"
 #import "RueHorizontalScrollingPageViewController+BackSwipeGwstureSupport.h"
 
+NSString *const PCRueBrowserVideoDidExitFullScreen  = @"PCRueBrowserVideoDidExitFullScreen";
+NSString *const PCRueBrowserVideoDidEnterFullScreen = @"PCRueBrowserVideoDidEnterFullScreen";
+
 @interface PCRevisionViewController ()
 
 - (NSInteger) currentColumnIndex;
@@ -120,6 +123,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidEnterFullScreen)
+                                                 name:PCRueBrowserVideoDidEnterFullScreen
+                                               object:Nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(videoDidExitFullScreen)
+                                                 name:PCRueBrowserVideoDidExitFullScreen
+                                               object:Nil];
+    
 	NSLog(@"issue %i", self.revision.issue.identifier);
     [self addLeftSwipeToBackGesture];
 }
@@ -135,6 +148,18 @@
     
     [self destroyHUDView];
 }
+
+#pragma mark PCRueBrowserVideo Observer Methods
+
+- (void)videoDidEnterFullScreen {
+    mainScrollView.scrollEnabled = NO;
+}
+
+- (void)videoDidExitFullScreen {
+    mainScrollView.scrollEnabled = YES;
+}
+
+#pragma mark Private Methods
 
 - (void) fadeInViewWithDuration:(NSTimeInterval)duration completion:(void(^)())complBlock
 {
