@@ -41,7 +41,7 @@
     {
         _view = view;
         
-        _stepsCount = (float)duration / kTimerStep;
+        _stepsCount = 1;
         
         if(CGRectEqualToRect(view.frame, toFrame) == NO)
         {
@@ -49,7 +49,10 @@
             _animatingFrame = YES;
             _toFrame = toFrame;
             
-            _frameStep = CGRectMake((toFrame.origin.x - view.frame.origin.x) / _stepsCount, (toFrame.origin.y - view.frame.origin.y) / _stepsCount, (toFrame.size.width - view.frame.size.width) / _stepsCount, (toFrame.size.height - view.frame.size.height) / _stepsCount);
+            _frameStep = CGRectMake((toFrame.origin.x - view.frame.origin.x) / _stepsCount,
+                                    (toFrame.origin.y - view.frame.origin.y) / _stepsCount,
+                                    (toFrame.size.width - view.frame.size.width) / _stepsCount,
+                                    (toFrame.size.height - view.frame.size.height) / _stepsCount);
         }
         
 //        if(CGAffineTransformEqualToTransform(view.transform, toTransform) == NO)
