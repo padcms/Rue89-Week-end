@@ -382,52 +382,7 @@
     
     [self.mainScrollView setContentSize:bodySize];
     
-    
-    //------------------------------------ Autoplaying video ----------------------------------------------------------
-    if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo])
-    {
-        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
-        {
-            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
-            PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
-            
-            if (videoElement.stream || videoElement.resource)
-            {
-                [self showVideoElement:videoElement inRect:videoRect];
-            }
-        }
-        else
-        {
-            for (PCPageElement* element in self.page.elements)
-            {
-                for (PCPageActiveZone* pdfActiveZone in element.activeZones)
-                {
-                    if ([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneVideo] && [pdfActiveZone.URL hasSuffix:@"/autoplay"])
-                    {
-                        NSString* indexStr = [[pdfActiveZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneVideo withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""];
-                        int videoElementIndex = [indexStr intValue] - 1;
-                        if(videoElementIndex >= 0)
-                        {
-                            NSArray* videoElementsArray = [page elementsForType:PCPageElementTypeVideo];
-                            videoElementsArray = [videoElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
-                            
-                            if(videoElementIndex < videoElementsArray.count)
-                            {
-                                CGRect videoRect = [self activeZoneRectForType:pdfActiveZone.URL];
-                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
-                                {
-                                    PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:videoElementIndex];
-                                    [self showVideoElement:videoElement inRect:videoRect];
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    else
+    if ([self checkForAutoplayingVideo] == NO)
     {
         [self checkForAutoplayingSound];
     }
@@ -466,7 +421,56 @@
 #endif
 }
 
-- (void) checkForAutoplayingSound
+- (BOOL) checkForAutoplayingVideo
+{
+    if (self.isPresentedPage && ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneVideo] || [self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo]))
+    {
+        if ([self.page hasPageActiveZonesOfType:PCPDFActiveZoneActionVideo] == NO)
+        {
+            CGRect videoRect = [self activeZoneRectForType:PCPDFActiveZoneVideo];
+            PCPageElementVideo *videoElement = (PCPageElementVideo*)[self.page firstElementForType:PCPageElementTypeVideo];
+            
+            if (videoElement.stream || videoElement.resource)
+            {
+                [self showVideoElement:videoElement inRect:videoRect];
+                return YES;
+            }
+        }
+        else
+        {
+            for (PCPageElement* element in self.page.elements)
+            {
+                for (PCPageActiveZone* pdfActiveZone in element.activeZones)
+                {
+                    if (([pdfActiveZone.URL hasPrefix:PCPDFActiveZoneVideo] || [pdfActiveZone.URL hasPrefix:PCPDFActiveZoneActionVideo]) && [pdfActiveZone.URL hasSuffix:@"/autoplay"])
+                    {
+                        NSString* indexStr = [[[pdfActiveZone.URL stringByReplacingOccurrencesOfString:PCPDFActiveZoneVideo withString:@""]stringByReplacingOccurrencesOfString:@"/autoplay" withString:@""] stringByReplacingOccurrencesOfString:PCPDFActiveZoneActionVideo withString:@""];
+                        int videoElementIndex = [indexStr intValue] - 1;
+                        if(videoElementIndex >= 0)
+                        {
+                            NSArray* videoElementsArray = [page elementsForType:PCPageElementTypeVideo];
+                            videoElementsArray = [videoElementsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES],nil]];
+                            
+                            if(videoElementIndex < videoElementsArray.count)
+                            {
+                                CGRect videoRect = [self activeZoneRectForType:pdfActiveZone.URL];
+                                if(CGRectEqualToRect(videoRect, CGRectZero) == NO)
+                                {
+                                    PCPageElementVideo *videoElement = (PCPageElementVideo*)[videoElementsArray objectAtIndex:videoElementIndex];
+                                    [self showVideoElement:videoElement inRect:videoRect];
+                                    return YES;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return NO;
+}
+
+- (BOOL) checkForAutoplayingSound
 {
     if (self.isPresentedPage && [self.page hasPageActiveZonesOfType:PCPDFActiveZoneSound])
     {
@@ -493,8 +497,8 @@
                         RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
                         
                         [self playSoundElement:soundElement fromRect:soundRect allowPause:soundElement.userInteractionEnabled];
+                        return YES;
                     }
-                    return;
                 }
             }
         }
@@ -525,12 +529,13 @@
                         RuePageElementSound* soundElement = (RuePageElementSound*)[soundElementsArray objectAtIndex:soundElementIndex];
                         
                         [self playSoundElement:soundElement fromRect:soundRect allowPause:soundElement.userInteractionEnabled];
+                        return YES;
                     }
-                    return;
                 }
             }
         }
     }
+    return NO;
 }
 
 @end
