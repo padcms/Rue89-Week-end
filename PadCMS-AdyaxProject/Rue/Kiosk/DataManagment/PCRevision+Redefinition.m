@@ -35,9 +35,13 @@
     Method oldIsDownloadedMethod = class_getInstanceMethod([PCRevision class], @selector(isDownloaded));
     Method newIsDownloadedMethod = class_getInstanceMethod([PCRevision class], @selector(isDownloadedAdvanced));
     
+    Method downlStartVideo = class_getInstanceMethod([PCRevision class], @selector(downloadStartVideo:failed:canceled:progress:));
+    Method downlStartVideoNew = class_getInstanceMethod([PCRevision class], @selector(downloadStartVideoRedefined:failed:canceled:progress:));
+    
     method_exchangeImplementations(oldUpdateColumnsMethod, newUpdateColumnsMethod);
     method_exchangeImplementations(oldInitWithParameters, newInitWithParameters);
     method_exchangeImplementations(oldIsDownloadedMethod, newIsDownloadedMethod);
+    method_exchangeImplementations(downlStartVideo, downlStartVideoNew);
 }
 
 - (id)initWithParametersAdvanced:(NSDictionary *)parameters
@@ -61,6 +65,12 @@
     }
     
     return self;
+}
+
+- (void)downloadStartVideoRedefined:(PCRevisionDownloadSuccessBlock)successCallback failed:(PCRevisionDownloadFailedBlock)failedCallback canceled:(PCRevisionDownloadCanceledBlock) canceledCallback progress:(PCRevisionDownloadProgressBlock)progressCallback;
+{
+    self.startVideo = nil;
+    [self downloadStartVideoRedefined:successCallback failed:failedCallback canceled:canceledCallback progress:progressCallback];
 }
 
 - (void)updateColumnsRedefined

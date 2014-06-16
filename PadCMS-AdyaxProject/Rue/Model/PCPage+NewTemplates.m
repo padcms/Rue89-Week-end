@@ -222,23 +222,7 @@ int PCMultiScrollPageTemplate = 26;
     NSMutableArray* videoElements = [NSMutableArray arrayWithArray:[self elementsForType:PCPageElementTypeVideo]];
     if (videoElements)
     {
-        NSString* startVideoResource = self.revision.startVideo;
-        if (startVideoResource && ![startVideoResource isEqualToString:@""])
-        {
-            for (int i = 0; i < videoElements.count; ++i)
-            {
-                PCPageElement* element = [videoElements objectAtIndex:i];
-                
-                if(element.resource && [element.resource isEqualToString:startVideoResource])
-                {
-                    [videoElements removeObjectAtIndex:i];
-                    break;
-                }
-            }
-        }
-        
         [array addObjectsFromArray:videoElements];
-        
     }
     
     // sound ------------------------------------------------------------------------------------------------------
