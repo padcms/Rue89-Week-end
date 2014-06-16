@@ -237,7 +237,6 @@ typedef enum{
     [pauseSoundButton addTarget:self action:@selector(pauseSoundButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     
     [pauseSoundButton setFrame:[self defaultVideoRect]];
-    //pauseSoundButton.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.4];
     
     self.pauseSoundButton = pauseSoundButton;
     [self.view addSubview:pauseSoundButton];
@@ -383,6 +382,13 @@ typedef enum{
     newWebRect.origin.x -= self.mainScrollView.contentOffset.x - self.mainScrollView.frameX;
     newWebRect.origin.y -= self.mainScrollView.contentOffset.y - self.mainScrollView.frameY;
     
+    BOOL stopAtCompletion = NO;
+    if(CGRectEqualToRect(self.videoRect, [UIScreen mainScreen].bounds))
+    {
+        newWebRect = CGRectZero;
+        stopAtCompletion = YES;
+    }
+    
     _currentPlayerView.frame = newWebRect;
     
     [self.pageView addSubview:self.view];
@@ -393,6 +399,11 @@ typedef enum{
         self.view.backgroundColor = [UIColor blackColor];
         if(completion)
         {
+            if(stopAtCompletion)
+            {
+                [self stop];
+                [self.view removeFromSuperview];
+            }
             completion();
         }
     }];
@@ -591,6 +602,10 @@ void setAngleFromOrientationToOrientation(float * angle, UIDeviceOrientation fro
     if(_currentPlayerView)
     {
         return CGRectContainsPoint(_currentPlayerView.frame, point);
+    }
+    else if(self.pauseSoundButton)
+    {
+        return CGRectContainsPoint(_pauseSoundButton.frame, point);
     }
     else
     {
