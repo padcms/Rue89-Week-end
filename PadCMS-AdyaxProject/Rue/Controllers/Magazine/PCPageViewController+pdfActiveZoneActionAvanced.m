@@ -41,8 +41,53 @@
     Method prevMethod2 = class_getInstanceMethod([PCPageViewController class], @selector(loadFullView));
     Method newMethod2 = class_getInstanceMethod([PCPageViewController class], @selector(loadFullViewAdvanced));
     
+    Method prevMethod3 = class_getInstanceMethod([PCPageViewController class], @selector(galleryViewControllerWillDismiss));
+    Method newMethod3 = class_getInstanceMethod([PCPageViewController class], @selector(galleryViewControllerWillDismissAdvanced));
+    
+    Method oldActiveZonesMethod = class_getInstanceMethod([PCPageViewController class], @selector(activeZonesInElement:atPoint:));
+    Method newActiveZonesMethod = class_getInstanceMethod([PCPageViewController class], @selector(activeZonesInElementAdvanced:atPoint:));
+    
     method_exchangeImplementations(prevMethod, newMethod);
     method_exchangeImplementations(prevMethod2, newMethod2);
+    method_exchangeImplementations(prevMethod3, newMethod3);
+    method_exchangeImplementations(oldActiveZonesMethod, newActiveZonesMethod);
+}
+
+- (void) galleryViewControllerWillDismissAdvanced
+{
+    [self hideVideoWebView];
+    [self galleryViewControllerWillDismissAdvanced];
+}
+
+- (void) galleryViewController:(PCGalleryViewController*)galleryController didChangeCurrentPage:(NSInteger)currentPage
+{
+    [self hideVideoWebView];
+}
+
+- (NSArray*) activeZonesInElementAdvanced:(PCPageElement*)element atPoint:(CGPoint)point
+{
+    if(_isGalleryPresented)
+    {
+        if([element.fieldTypeName isEqualToString:PCPageElementTypeGallery])
+        {
+            return [self.galleryViewController activeZonesForElement:(PCPageElementGallery*)element atPoint:[self.mainScrollView convertPoint:point toView:self.galleryViewController.view]];
+        }
+        else
+        {
+            return nil;
+        }
+    }
+    else
+    {
+        if([element.fieldTypeName isEqualToString:PCPageElementTypeGallery])
+        {
+            return nil;
+        }
+        else
+        {
+            return [self activeZonesInElementAdvanced:element atPoint:point];
+        }
+    }
 }
 
 - (BOOL) pdfActiveZoneActionAdvanced:(PCPageActiveZone*)activeZone
@@ -294,9 +339,35 @@
 
 - (void) createWebBrowserViewForActiveZone:(PCPageElementActiveZone*)activeZone
 {
-    CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
-    
-    [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:self.mainScrollView];
+    if(_isGalleryPresented && [activeZone.pageElement.fieldTypeName isEqualToString:PCPageElementTypeGallery])
+    {
+        NSInteger galleryElementIndex = [galleryViewController.images indexOfObject:activeZone.pageElement];
+        if(galleryElementIndex != NSNotFound && galleryViewController.imageViews.count > galleryElementIndex)
+        {
+            CGRect rect = [activeZone.pageElement rectForElementType:activeZone.URL];
+            if (!CGRectEqualToRect(rect, CGRectZero))
+            {
+                CGSize pageSize = self.galleryViewController.mainScrollView.frame.size;
+                float scale = pageSize.width/activeZone.pageElement.size.width;
+                rect.size.width *= scale;
+                rect.size.height *= scale;
+                rect.origin.x *= scale;
+                rect.origin.y *= scale;
+                rect.origin.y = activeZone.pageElement.size.height*scale - rect.origin.y - rect.size.height;
+                
+                UIImageView* elementImageView = [galleryViewController.imageViews objectAtIndex:galleryElementIndex];
+                
+                CGRect videoWebViewRect = [self.galleryViewController.mainScrollView convertRect:rect fromView:elementImageView];
+                [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:galleryViewController.mainScrollView];
+            }
+        }
+    }
+    else
+    {
+        CGRect videoWebViewRect = [self activeZoneRectForType:activeZone.URL];
+        
+        [self createWebBrowserViewWithFrame:videoWebViewRect onScrollView:self.mainScrollView];
+    }
 }
 
 - (void) createWebBrowserViewWithFrame:(CGRect)frame /// delete
@@ -321,7 +392,7 @@
     ((RueBrowserViewController*)webBrowserViewController).pageView = self.view;
     
     [scrollView addSubview:webBrowserViewController.view];
-    
+    webBrowserViewController.view.backgroundColor = [UIColor yellowColor];
     if (self.page.pageTemplate ==
         [[PCPageTemplatesPool templatesPool] templateForId:PCFixedIllustrationArticleTouchablePageTemplate] || self.page.pageTemplate.identifier == PCBasicArticlePageTemplate)
     {
@@ -419,6 +490,11 @@
         }];
     }
 #endif
+}
+
+- (void) didBecamePresented
+{
+    
 }
 
 - (BOOL) checkForAutoplayingVideo

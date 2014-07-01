@@ -29,6 +29,13 @@ NSString *const PCRueBrowserVideoDidEnterFullScreen = @"PCRueBrowserVideoDidEnte
 
 @end
 
+@interface PCPageViewController ()
+
+- (void) didBecamePresented;
+- (void) hideSubviews;
+
+@end
+
 @interface PCRueRevisionViewController () <PCRevisionSummaryPopupDelegate, UIGestureRecognizerDelegate>
 
 
@@ -78,7 +85,9 @@ NSString *const PCRueBrowserVideoDidEnterFullScreen = @"PCRueBrowserVideoDidEnte
                 else
                 {
                     PCColumnViewController* columnController = [columnsViewControllers objectAtIndex:i];
-                    [columnController.currentPageViewController didBecamePresented];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [columnController.currentPageViewController didBecamePresented];
+                    });
                 }
 			}
 		}

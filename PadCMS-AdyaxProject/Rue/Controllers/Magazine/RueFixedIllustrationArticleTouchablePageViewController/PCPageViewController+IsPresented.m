@@ -11,6 +11,7 @@
 
 @interface PCPageViewController ()
 
+- (void) didBecamePresented;
 - (void) hideSubviews;
 
 @end
@@ -34,11 +35,6 @@
     }
     return NO;
     //return ([self magazineViewController] && [[self magazineViewController]navigationController] && self.columnViewController == self.magazineViewController.currentColumnViewController && self == self.columnViewController.currentPageViewController);
-}
-
-- (void) didBecamePresented
-{
-    
 }
 
 - (void) didStopToBePresented
@@ -81,9 +77,9 @@
             {
                 [self loadFullPageAtIndex:i];
                 PCPageViewController *currentPage = [pageViewControllers objectAtIndex:i];
-//                dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
                     [currentPage didBecamePresented];
-//                });
+                });
             }
         }
     }

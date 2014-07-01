@@ -12,8 +12,6 @@
 
 - (BOOL) isPresentedPage;
 
-- (void) didBecamePresented;
-
 - (void) didStopToBePresented;
 
 @end
